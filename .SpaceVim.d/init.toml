@@ -28,6 +28,8 @@
     expand_tab = true
     filemanager = "defx"
     autocomplete_method = "coc"
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
 
 [[custom_plugins]]
 repo = "ghifarit53/tokyonight-vim"
