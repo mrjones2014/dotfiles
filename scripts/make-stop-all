@@ -1,0 +1,11 @@
+#! /usr/local/bin/fish
+
+function make-local-stop -d 'run make local-stop'
+    make local-stop >/dev/null
+end
+
+for dir in ./*/
+    cd $dir
+    make-local-stop
+    cd ..
+end
