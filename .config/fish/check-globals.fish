@@ -48,7 +48,7 @@ if ! type tsc >/dev/null
     echo 'Install Typescript globally for vim integration: yarn global add typescript'
 end
 
-if ! type neovim >/dev/null
+if ! type neovim-node-host >/dev/null
     echo 'Install neovim helper globally: yarn global add neovim'
 end
 

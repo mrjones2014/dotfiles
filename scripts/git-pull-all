@@ -6,14 +6,18 @@ function update -d 'Update git repo'
   git stash apply --quiet 2>/dev/null
 end
 
+pushd $HOME/git/
 for dir in ./*/
   cd $dir
   git status -sb 2>/dev/null
   if [ $status -eq 0 ]
     set_color red
-    echo "Updating $dir..."
+    echo "
+    Updating $dir...
+    "
     set_color normal
     update
   end
   cd ..
 end
+popd
