@@ -24,7 +24,7 @@ function fopen
     set -l local_fzf_dir_open (ffind)
     if test -n "$local_fzf_dir_open"
         cd $local_fzf_dir_open
-        nvim .
+        nvim
     end
 end
 
