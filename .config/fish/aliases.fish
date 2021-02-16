@@ -1,7 +1,7 @@
-alias fishconfig="vim ~/.config/fish/config.fish"
-alias sourcefish="source ~/.config/fish/config.fish"
+alias fishconfig="vim ~/.config/fish/config.fish && sourcefish"
+alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
 alias docker-login-local="docker login registry.1password.io -u local-registry"
-alias aliases="vim ~/.config/fish/aliases.fish"
+alias aliases="vim ~/.config/fish/aliases.fish && sourcefish"
 
 alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
