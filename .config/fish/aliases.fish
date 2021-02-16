@@ -29,7 +29,6 @@ function fopen
     end
 end
 
-# Custom public functions
 # nvminstall
 # usage:
 # `nvminstall {node_version_to_install} {node_version_to_uninstall}`
@@ -41,9 +40,9 @@ function nvminstall
         nvm install "$1" && nvm alias default "$1" && nvm reinstall-packages "$2" && nvm uninstall "$2" && npm install -g npm
     else
         echo "
-    Usage:
-      nvminstall {node_version_to_install} {node_version_to_uninstall}
-
-      Example: \n nvminstall 8.1.0 8.0.0"
+        Usage:
+          nvminstall {node_version_to_install} {node_version_to_uninstall}
+         
+          Example: \n nvminstall 8.1.0 8.0.0"
     end
 end
