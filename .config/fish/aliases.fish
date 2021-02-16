@@ -15,14 +15,18 @@ end
 # fzf find a directory and cd to it
 function f
     set -l local_fzf_dir_cd (sed '1d' $HOME/.cache/neomru/directory | fzf --query="$1" --select-1 --exit-0)
-    cd $local_fzf_dir_cd
+    if test -n "$local_fzf_dir_cd"
+        cd $local_fzf_dir_cd
+    end
 end
 
 # fzf find a directory, cd to it, and open it in nvim
 function fopen
     set -l local_fzf_dir_open (ffind)
-    cd $local_fzf_dir_open
-    nvim .
+    if test -n "$local_fzf_dir_open"
+        cd $local_fzf_dir_open
+        nvim .
+    end
 end
 
 # Custom public functions
