@@ -22,7 +22,7 @@ if ! type fzf >/dev/null
     echo 'Install fzf: https://github.com/junegunn/fzf'
 end
 
-if ! type fd >/dev/null
+if ! type ag >/dev/null
     echo 'Install the Silver Searcher: https://github.com/ggreer/the_silver_searcher'
 end
 
