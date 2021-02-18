@@ -4,7 +4,9 @@ alias docker-login-local="docker login registry.1password.io -u local-registry"
 
 alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-alias vim="nvim" # alias vim to always open neovim instead
+# alias vi and vim to open nvim instead
+alias vim="nvim"
+alias vi="nvim"
 
 # fzf find a directory and return the selected value
 function ffind
