@@ -4,7 +4,7 @@ endfunction
 
 function myspacevim#after() abort
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
-    highlight RedundantSpaces ctermbg=red guibg=red 
-    match RedundantSpaces /\s\+$/
+    " highlight redundant trailing whitespace with colorscheme's error color
+    match Error /\s\+$/
 endfunction
 
