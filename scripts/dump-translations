@@ -7,7 +7,7 @@ if [[ "$#" -ne 2 ]]; then
     exit 1
 fi
 
-SOURCE_DIR="" 
+SOURCE_DIR=""
 pushd "$1"
 SOURCE_DIR="$(pwd)"
 popd
@@ -26,7 +26,7 @@ do
     LANG=""
 
     if [[ "$LOCAL_DIR_NAME" == *"/de/"* ]]; then
-        LANG="de" 
+        LANG="de"
     elif [[ "$LOCAL_DIR_NAME" == *"/es-ES/"* ]]; then
         LANG="es"
     elif [[ "$LOCAL_DIR_NAME" == *"/fr/"* ]]; then
@@ -42,9 +42,9 @@ do
     elif [[ "$LOCAL_DIR_NAME" == *"/ru/"* ]]; then
         LANG="ru"
     elif [[ "$LOCAL_DIR_NAME" == *"/zh-CN/"* ]]; then
-        LANG="zn-cn"
+        LANG="zh-cn"
     elif [[ "$LOCAL_DIR_NAME" == *"/zh-TW/"* ]]; then
-        LANG="zn-tw"
+        LANG="zh-tw"
     fi
 
     FILE_EXTENSION="${FILENAME##*.}"
