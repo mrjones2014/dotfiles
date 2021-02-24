@@ -32,6 +32,10 @@ merged = 0
 repo = "sheerun/vim-polyglot"
 merged = 0
 
+[[custom_plugins]]
+repo = "tpope/vim-sleuth"
+merged = 0
+
 [[layers]]
 name = "ui"
 enable_scrollbar = true
