@@ -8,13 +8,8 @@
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
     enable_guicolors = true
-    # Disable statusline separator, if you want to use other value, please
-    # install nerd fonts
-    statusline_separator = "arrow"
-    statusline_iseparator = "arrow"
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
-    enable_statusline_mode = true
     relativenumber = false
     default_indent = 4
     expand_tab = true
@@ -23,6 +18,12 @@
     lint_engine = "ale"
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    enable_statusline_mode = true
+    statusline_separator = "arrow"
+    statusline_iseparator = "arrow"
+    enable_statusline_bfpath = true
 
 [[custom_plugins]]
 repo = "mrjones2014/space-vim-theme"
