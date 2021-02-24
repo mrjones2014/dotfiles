@@ -33,6 +33,11 @@ repo = "sheerun/vim-polyglot"
 merged = 0
 
 [[layers]]
+name = "ui"
+enable_scrollbar = true
+enable_indentline = true
+
+[[layers]]
 name = "lsp"
 filetypes = [
     "javascript",
