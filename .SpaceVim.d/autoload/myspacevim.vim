@@ -5,6 +5,14 @@ function DetectGoHtmlTmpl()
     endif
 endfunction
 
+function StripTrailingWhitespace()
+    " dont strip on these filetypes
+    if &ft =~ 'vim'
+        return
+    endif
+    %s/\s\+$//e
+endfunction
+
 function RemapCustomKeys()
     " F2 to refactor rename symbol
     nmap <F2> <Plug>(coc-rename)
@@ -41,7 +49,10 @@ function AddCustomVimConfig()
     set scrolloff=15
 
     " highlight redundant trailing whitespace with colorscheme's error color
-    match Error /\s\+$/
+    match Error /\s\+$/ 
+
+    " strip trailing whitespace on save
+    autocmd BufWritePre * call StripTrailingWhitespace()
 endfunction
 
 function myspacevim#before() abort
