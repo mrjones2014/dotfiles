@@ -16,6 +16,9 @@ endfunction
 function RemapCustomKeys()
     " F2 to refactor rename symbol
     nmap <F2> <Plug>(coc-rename)
+
+    " ctrl+/ to toggle comment
+    map <C-_> :Commentary<CR>
 endfunction
 
 function AddCustomCommands()
@@ -49,7 +52,7 @@ function AddCustomVimConfig()
     set scrolloff=15
 
     " highlight redundant trailing whitespace with colorscheme's error color
-    match Error /\s\+$/ 
+    match Error /\s\+$/
 
     " strip trailing whitespace on save
     autocmd BufWritePre * call StripTrailingWhitespace()
@@ -59,7 +62,6 @@ function myspacevim#before() abort
 endfunction
 
 function myspacevim#after() abort
-    let g:coc_config_home = '~/.SpaceVim.d/'
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
     call AddCustomCommands()
     call AddCustomFiletypeDetection()
