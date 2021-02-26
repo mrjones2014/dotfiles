@@ -9,6 +9,5 @@
     "html",
     "gohtmltmpl",
     "json"
-  ],
-  "coc.preferences.hyphenAsKeyword": true
+  ]
 }

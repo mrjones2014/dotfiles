@@ -21,8 +21,6 @@ function AddCustomFiletypeDetection()
 endfunction
 
 function AddTabIndentGuides()
-    " highlight redundant trailing whitespace with colorscheme's error color
-    match Error /\s\+$/
     set listchars=tab:\|\ 
     set list
 endfunction
@@ -38,6 +36,14 @@ function AddCustomCocConfig()
     \]
 endfunction
 
+function AddCustomVimConfig()
+    " ensure 15 line buffer above and below cursor
+    set scrolloff=15
+
+    " highlight redundant trailing whitespace with colorscheme's error color
+    match Error /\s\+$/
+endfunction
+
 function myspacevim#before() abort
 endfunction
 
@@ -47,5 +53,7 @@ function myspacevim#after() abort
     call AddCustomCommands()
     call AddCustomFiletypeDetection()
     call RemapCustomKeys()
+    call AddTabIndentGuides()
+    call AddCustomVimConfig()
 endfunction
 
