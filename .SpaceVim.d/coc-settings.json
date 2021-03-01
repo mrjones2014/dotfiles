@@ -2,12 +2,13 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "scss",
-    "Markdown",
+    "markdown",
     "typescript",
     "typescriptreact",
     "javascript",
     "html",
     "gohtmltmpl",
     "json"
-  ]
+  ],
+  "prettier.formatterPriority": 1
 }

@@ -37,7 +37,6 @@ function AddTabIndentGuides()
 endfunction
 
 function AddCustomCocConfig()
-    let g:coc_config_home = '~/.SpaceVim.d/'
     let g:coc_global_extensions = [
         \'coc-tsserver',
         \'coc-prettier',
@@ -59,11 +58,13 @@ function AddCustomVimConfig()
 endfunction
 
 function myspacevim#before() abort
+    let g:coc_config_home = '~/.SpaceVim.d/'
+    AddCustomCocConfig()
 endfunction
 
 function myspacevim#after() abort
+    let g:coc_config_home = '~/.SpaceVim.d/'
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
-    call AddCustomCocConfig()
     call AddCustomCommands()
     call AddCustomFiletypeDetection()
     call RemapCustomKeys()
