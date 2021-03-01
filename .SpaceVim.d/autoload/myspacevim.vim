@@ -63,6 +63,7 @@ endfunction
 
 function myspacevim#after() abort
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
+    call AddCustomCocConfig()
     call AddCustomCommands()
     call AddCustomFiletypeDetection()
     call RemapCustomKeys()
