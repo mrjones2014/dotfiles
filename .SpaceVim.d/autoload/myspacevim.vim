@@ -22,7 +22,14 @@ function RemapCustomKeys()
 endfunction
 
 function AddCustomCommands()
+    " :Prettier => :CocCommand prettier.formatFile
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+    " :Jest => Run jest for current project
+    command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+
+    " :JestCurrent => Run jest for current file
+    command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 endfunction
 
 function AddCustomFiletypeDetection()
@@ -34,16 +41,6 @@ endfunction
 function AddTabIndentGuides()
     set listchars=tab:\|\ 
     set list
-endfunction
-
-function AddCustomCocConfig()
-    let g:coc_global_extensions = [
-        \'coc-tsserver',
-        \'coc-prettier',
-        \'coc-json',
-        \'coc-html',
-        \'coc-css',
-    \]
 endfunction
 
 function AddCustomVimConfig()
@@ -59,7 +56,14 @@ endfunction
 
 function myspacevim#before() abort
     let g:coc_config_home = '~/.SpaceVim.d/'
-    AddCustomCocConfig()
+    let g:coc_global_extensions = [
+        \'coc-tsserver',
+        \'coc-prettier',
+        \'coc-json',
+        \'coc-html',
+        \'coc-css',
+        \'coc-jest',
+    \]
 endfunction
 
 function myspacevim#after() abort
