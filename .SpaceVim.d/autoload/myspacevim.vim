@@ -73,6 +73,7 @@ function myspacevim#before() abort
     \]
     let g:blamer_enabled = 1
     let g:blamer_delay = 200
+    let g:blamer_show_in_insert_modes = 0
 endfunction
 
 function myspacevim#after() abort
