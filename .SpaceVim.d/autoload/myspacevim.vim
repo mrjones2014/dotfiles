@@ -52,9 +52,16 @@ function AddCustomVimConfig()
 
     " strip trailing whitespace on save
     autocmd BufWritePre * call StripTrailingWhitespace()
+
+    " add hyphen as keyword for full SCSS support
+    set iskeyword+=@-@
+    set iskeyword+=-
 endfunction
 
 function myspacevim#before() abort
+    " for some reason these COC configs have to go here
+    " and don't work if you move them to a function
+    " and call the function ¯\_(ツ)_/¯
     let g:coc_config_home = '~/.SpaceVim.d/'
     let g:coc_global_extensions = [
         \'coc-tsserver',
@@ -64,10 +71,13 @@ function myspacevim#before() abort
         \'coc-css',
         \'coc-jest',
     \]
+    let g:blamer_enabled = 1
+    let g:blamer_delay = 1
 endfunction
 
 function myspacevim#after() abort
     let g:coc_config_home = '~/.SpaceVim.d/'
+    highlight Blamer guifg=grey
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
     call AddCustomCommands()
     call AddCustomFiletypeDetection()
