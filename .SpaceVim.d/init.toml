@@ -45,6 +45,10 @@ merged = 0
 repo = "APZelos/blamer.nvim"
 merged = 0
 
+[[custom_plugins]]
+repo = "blueyed/vim-diminactive"
+merged = 0
+
 [[layers]]
 name = "ui"
 enable_scrollbar = true
