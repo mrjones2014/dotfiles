@@ -1,12 +1,22 @@
-alias fishconfig="vim ~/.config/fish/ && sourcefish"
+alias fishconfig="pushd ~/.config/fish && vim && popd && sourcefish"
 alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
 alias docker-login-local="docker login registry.1password.io -u local-registry"
 
+# Alias for dotfiles management
 alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 # alias vi and vim to open nvim instead
 alias vim="nvim"
 alias vi="nvim"
+
+function nuke-docker
+    set -l docker_container_names (docker ps --format "{{.Names}}")
+    if test -n "$docker_container_names"
+        docker kill "$docker_container_names"
+    else
+        echo "No docker containers running."
+    end
+end
 
 # fzf find a directory and return the selected value
 function ffind
@@ -43,7 +53,7 @@ function nvminstall
         echo "
         Usage:
           nvminstall {node_version_to_install} {node_version_to_uninstall}
-         
+
           Example: \n nvminstall 8.1.0 8.0.0"
     end
 end

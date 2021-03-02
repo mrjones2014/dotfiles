@@ -72,7 +72,7 @@ function myspacevim#before() abort
         \'coc-jest',
     \]
     let g:blamer_enabled = 1
-    let g:blamer_delay = 1
+    let g:blamer_delay = 200
 endfunction
 
 function myspacevim#after() abort
