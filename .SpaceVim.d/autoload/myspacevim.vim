@@ -19,6 +19,11 @@ function RemapCustomKeys()
 
     " ctrl+/ to toggle comment
     map <C-_> :Commentary<CR>
+
+    " ctrl+j to move line up
+    map <C-j> :m -2<CR>
+    " ctrl+k to move line down
+    map <C-k> :m +1<CR>
 endfunction
 
 function AddCustomCommands()

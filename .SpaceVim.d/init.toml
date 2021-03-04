@@ -10,6 +10,7 @@
     enable_guicolors = true
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
+    enable_vimfiler_filetypeicon = true
     relativenumber = false
     default_indent = 4
     expand_tab = true
@@ -89,6 +90,7 @@ name = "VersionControl"
 
 [[layers]]
 name = "git"
+git-plugin="fugitive"
 
 [[layers]]
 name = "lang#typescript"
