@@ -9,6 +9,8 @@ alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias vim="nvim"
 alias vi="nvim"
 
+alias emptytrash="sudo rm -rf ~/.Trash/*"
+
 function nuke-docker
     set -l docker_container_names (docker ps --format "{{.Names}}")
     if test -n "$docker_container_names"
@@ -57,3 +59,4 @@ function nvminstall
           Example: \n nvminstall 8.1.0 8.0.0"
     end
 end
+
