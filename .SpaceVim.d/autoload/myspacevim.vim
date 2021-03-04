@@ -50,7 +50,7 @@ endfunction
 
 function AddCustomVimConfig()
     " ensure 15 line buffer above and below cursor
-    set scrolloff=15
+    set scrolloff=8
 
     " highlight redundant trailing whitespace with colorscheme's error color
     match Error /\s\+$/
