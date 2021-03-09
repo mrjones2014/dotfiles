@@ -61,6 +61,11 @@ function AddCustomVimConfig()
     " add hyphen as keyword for full SCSS support
     set iskeyword+=@-@
     set iskeyword+=-
+
+    " set tab width
+    " shiftwidth=0 makes it default to same as tabstop
+    set shiftwidth=0
+    set tabstop=2
 endfunction
 
 function myspacevim#before() abort
