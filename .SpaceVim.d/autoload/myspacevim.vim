@@ -66,6 +66,9 @@ function AddCustomVimConfig()
     " shiftwidth=0 makes it default to same as tabstop
     set shiftwidth=0
     set tabstop=2
+
+    " enable line wrapping with left and right cursor movement
+    set whichwrap+=<,>,h,l,[,]
 endfunction
 
 function myspacevim#before() abort
