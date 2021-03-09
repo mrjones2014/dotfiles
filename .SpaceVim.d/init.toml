@@ -52,7 +52,6 @@ merged = 0
 
 [[layers]]
 name = "ui"
-enable_scrollbar = true
 enable_indentline = true
 
 [[layers]]
