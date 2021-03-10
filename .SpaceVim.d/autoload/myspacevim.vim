@@ -69,6 +69,10 @@ function AddCustomVimConfig()
 
     " enable line wrapping with left and right cursor movement
     set whichwrap+=<,>,h,l,[,]
+
+    " show the sign column always so the layout doesn't shift when signs are
+    " added
+    set signcolumn=yes
 endfunction
 
 function myspacevim#before() abort
