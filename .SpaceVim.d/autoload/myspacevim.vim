@@ -17,6 +17,10 @@ function StripTrailingWhitespace()
     %s/\s\+$//e
 endfunction
 
+function! s:defx_mappings() abort
+    setlocal cursorline
+endfunction
+
 "
 " CONFIG
 "
@@ -59,6 +63,14 @@ endfunction
 function AddTabIndentGuides()
     set listchars=tab:\|\ 
     set list
+endfunction
+
+function AddDefxConfig()
+  augroup user_plugin_defx
+    autocmd!
+    autocmd FileType defx call <SID>defx_mappings()
+    autocmd BufNewFile,BufEnter * Defx `getcwd()` -no-focus -no-toggle -search=`expand('%:p')`
+  augroup END
 endfunction
 
 function AddCustomVimConfig()
@@ -114,6 +126,7 @@ function myspacevim#after() abort
     call AddCustomFiletypeDetection()
     call RemapCustomKeys()
     call AddTabIndentGuides()
+    call AddDefxConfig()
     call AddCustomVimConfig()
 endfunction
 
