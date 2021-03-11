@@ -1,3 +1,7 @@
+"
+" UTILS
+"
+
 " Found on: https://discourse.gohugo.io/t/vim-syntax-highlighting-for-hugo-html-templates/19398/8
 function DetectGoHtmlTmpl()
     if expand('%:e') == "html" && search("{{") != 0
@@ -12,6 +16,10 @@ function StripTrailingWhitespace()
     endif
     %s/\s\+$//e
 endfunction
+
+"
+" CONFIG
+"
 
 function RemapCustomKeys()
     " F2 to refactor rename symbol
