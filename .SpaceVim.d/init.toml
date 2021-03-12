@@ -50,14 +50,6 @@ merged = 0
 repo = "blueyed/vim-diminactive"
 merged = 0
 
-[[custom_plugins]]
-repo = "xolox/vim-misc"
-merged = 0
-
-[[custom_plugins]]
-repo = "xolox/vim-session"
-merged = 0
-
 [[layers]]
 name = "ui"
 enable_indentline = true
