@@ -14,7 +14,7 @@
     relativenumber = false
     default_indent = 4
     expand_tab = true
-    filemanager = "defx"
+    filemanager = "nerdtree"
     autocomplete_method = "coc"
     lint_engine = "ale"
     bootstrap_before = "myspacevim#before"
@@ -48,6 +48,14 @@ merged = 0
 
 [[custom_plugins]]
 repo = "blueyed/vim-diminactive"
+merged = 0
+
+[[custom_plugins]]
+repo = "xolox/vim-misc"
+merged = 0
+
+[[custom_plugins]]
+repo = "xolox/vim-session"
 merged = 0
 
 [[layers]]
