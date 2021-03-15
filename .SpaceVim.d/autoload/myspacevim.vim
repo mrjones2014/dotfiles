@@ -50,6 +50,12 @@ function RemapCustomKeys()
     map <C-j> :m -2<CR>
     " ctrl+k to move line down
     map <C-k> :m +1<CR>
+
+    " ctrl+s to save all
+    map <C-s> :wa<CR>
+
+    " ctrl+q to close all
+    map <C-q> :qa<CR>
 endfunction
 
 function AddCustomCommands()
