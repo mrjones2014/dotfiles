@@ -138,6 +138,7 @@ endfunction
 
 function myspacevim#after() abort
     let g:coc_config_home = '~/.SpaceVim.d/'
+    let g:NERDTreeCascadeSingleChildDir = 0
     highlight Blamer guifg=grey
     let $FZF_DEFAULT_COMMAND ='ag --hidden --ignore .git -g ""'
     call AddCustomCommands()

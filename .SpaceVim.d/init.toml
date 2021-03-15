@@ -10,7 +10,6 @@
     enable_guicolors = true
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
-    enable_vimfiler_filetypeicon = true
     relativenumber = false
     default_indent = 4
     expand_tab = true
@@ -48,6 +47,10 @@ merged = 0
 
 [[custom_plugins]]
 repo = "blueyed/vim-diminactive"
+merged = 0
+
+[[custom_plugins]]
+repo = "ryanoasis/vim-devicons"
 merged = 0
 
 [[layers]]
