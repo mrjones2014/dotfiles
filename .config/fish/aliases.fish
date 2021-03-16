@@ -22,6 +22,15 @@ function nuke-docker
     end
 end
 
+function groot
+  set -l git_repo_root_dir (git rev-parse --show-toplevel)
+  if test -n "$git_repo_root_dir"
+    cd "$git_repo_root_dir"
+  else
+    echo "Not a git repo"
+  end
+end
+
 # fzf find a directory and return the selected value
 function ffind
     echo (sed '1d' $HOME/.cache/neomru/directory | fzf --query="$1" --select-1 --exit-0)
