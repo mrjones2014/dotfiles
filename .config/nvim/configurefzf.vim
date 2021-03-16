@@ -6,3 +6,6 @@ command! SearchShit execute 'Files' vim_fzf_prj_root
 
 " ctrl+p to fzf
 nmap <C-P> :SearchShit<CR>
+
+" <leader>f to global fuzzy text search
+nmap <leader>f :Ag
