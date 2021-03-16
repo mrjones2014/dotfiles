@@ -9,7 +9,7 @@ alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias vim="nvim"
 alias vi="nvim"
 
-alias vimconfig="pushd ~/.SpaceVim.d/ && vim && popd"
+alias vimconfig="pushd ~/.config/nvim && vim && popd"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
