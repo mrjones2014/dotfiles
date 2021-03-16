@@ -72,3 +72,10 @@ vnoremap > >gv
 " persistent undo
 set undofile
 set undodir=~/.vim/undodir
+
+" theme
+colorscheme space_vim_theme
+hi Normal ctermbg=Black guibg=Black
+
+" command-line autocompletion
+set wildmenu
