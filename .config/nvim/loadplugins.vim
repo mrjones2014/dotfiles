@@ -24,6 +24,10 @@ Plug 'mhinz/vim-startify'
 
 Plug '/usr/local/opt/fzf'
 
+Plug 'Yggdroot/indentLine'
+
+Plug 'farmergreg/vim-lastplace'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
