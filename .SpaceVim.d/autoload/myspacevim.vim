@@ -136,6 +136,7 @@ function myspacevim#before() abort
         \'coc-html',
         \'coc-css',
         \'coc-jest',
+        \'coc-emmet',
     \]
     let g:blamer_enabled = 1
     let g:blamer_delay = 200
