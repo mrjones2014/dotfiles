@@ -51,9 +51,9 @@ set whichwrap+=<,>,h,l,[,]
 set signcolumn=yes
 
 " Hugo template filetype detection
-augroup filetypedetect
-	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-augroup END
+" augroup filetypedetect
+" 	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+" augroup END
 
 " Possibility to have more than one unsaved buffers.
 set hidden
