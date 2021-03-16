@@ -25,5 +25,6 @@ Plug 'mhinz/vim-startify'
 Plug 'kien/ctrlp.vim'
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
