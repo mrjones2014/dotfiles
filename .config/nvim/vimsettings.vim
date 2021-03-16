@@ -50,10 +50,6 @@ set whichwrap+=<,>,h,l,[,]
 " added
 set signcolumn=yes
 
-" tab indent guides using | character
-set listchars=tab:\|\ 
-set list
-
 " Hugo template filetype detection
 augroup filetypedetect
 	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()

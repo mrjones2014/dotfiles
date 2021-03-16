@@ -9,3 +9,6 @@ let g:startify_lists = [
 	\ { 'type': 'files',     'header': ['Recent Files (Global)'] },
 	\ { 'type': 'sessions',  'header': ['Sessions'] },
 \ ]
+
+let g:indentLine_color_term = 59
+let g:indentLine_color_gui = '#5f5f5f'
