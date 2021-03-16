@@ -29,8 +29,5 @@ map <C-s> :wa<CR>
 " ctrl+q to close all
 map <C-q> :qa<CR>
 
-" remap ctrl+p to fzf
-nmap <C-P> :Files<CR>
-
 " <leader>q to close buffer
 map <leader>q :q<CR>
