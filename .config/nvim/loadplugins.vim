@@ -22,7 +22,7 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'mhinz/vim-startify'
 
-Plug 'kien/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
