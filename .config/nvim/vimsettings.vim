@@ -75,3 +75,6 @@ hi Normal ctermbg=Black guibg=Black
 
 " command-line autocompletion
 set wildmenu
+
+" disable line wrapping
+set nowrap
