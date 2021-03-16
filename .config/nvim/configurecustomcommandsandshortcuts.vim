@@ -30,7 +30,7 @@ map <C-s> :wa<CR>
 map <C-q> :qa<CR>
 
 " remap ctrl+p to fzf
-nmap <C-P> :FZF<CR>
+nmap <C-P> :Files<CR>
 
 " <leader>q to close buffer
 map <leader>q :q<CR>
