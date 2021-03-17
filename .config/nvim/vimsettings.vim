@@ -64,10 +64,6 @@ set hidden
 " show line numbers
 set number
 
-" keep visual selection after indenting
-vnoremap < <gv
-vnoremap > >gv
-
 " persistent undo
 set undofile
 set undodir=~/.vim/undodir
