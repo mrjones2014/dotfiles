@@ -35,3 +35,8 @@ nmap <leader>q :qa<CR>
 
 " <leader>s to save all
 nmap <leader>s :wa<CR>
+
+" in insert mode, escape should do the following:
+" - if a coc popup is visible, just close the popup and remain in Insert mode
+" - otherwise, act normal (go to Normal mode)
+inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'

@@ -25,7 +25,6 @@ let g:airline#extensions#tabline#tab_nr_type= 2
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffers_label = 'BUFFERS'
 let g:airline#extensions#tabline#tabs_label = 'TABS'
-let g:airline_section_c = '%F'
 
 function! WindowNumber(...)
     let builder = a:1
