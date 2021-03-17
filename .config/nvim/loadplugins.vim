@@ -1,6 +1,6 @@
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'mrjones2014/space-vim-theme'
+Plug 'mrjones2014/vim-code-dark'
 
 Plug 'sheerun/vim-polyglot'
 

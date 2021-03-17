@@ -23,11 +23,11 @@ map <C-j> :m -2<CR>
 " ctrl+k to move line down
 map <C-k> :m +1<CR>
 
-" ctrl+s to save all
-map <C-s> :wa<CR>
+" space => q to close buffer
+nmap <Space>q :bp<CR>:bd #<CR>
 
-" ctrl+q to close all
-map <C-q> :qa<CR>
+" <leader>q to close all
+nmap <leader>q :qa<CR>
 
-" <leader>q to close buffer
-map <leader>q :q<CR>
+" <leader>s to save all
+nmap <leader>s :wa<CR>

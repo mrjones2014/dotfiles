@@ -69,9 +69,15 @@ vnoremap > >gv
 set undofile
 set undodir=~/.vim/undodir
 
+" use system clipboard
+set clipboard=unnamedplus
+
 " theme
-colorscheme space_vim_theme
-hi Normal ctermbg=Black guibg=Black
+syntax on
+set t_Co=256
+set t_ut=
+let g:codedark_term256=1
+colorscheme codedark
 
 " command-line autocompletion
 set wildmenu
