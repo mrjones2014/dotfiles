@@ -22,8 +22,6 @@ Plug 'dense-analysis/ale'
 
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'shmargum/vim-sass-colors'
-
 Plug 'mhinz/vim-startify'
 
 Plug 'Yggdroot/indentLine'
