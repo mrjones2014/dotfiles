@@ -31,9 +31,6 @@ set backspace=indent,eol,start
 " ensure 8 line buffer above and below cursor
 set scrolloff=8
 
-" highlight redundant trailing whitespace with colorscheme's error color
-match Error /\s\+$/
-
 " strip trailing whitespace on save
 autocmd BufWritePre * call StripTrailingWhitespace()
 
