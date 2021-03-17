@@ -10,6 +10,8 @@ Plug 'tpope/vim-commentary'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'tpope/vim-eunuch'
+
 Plug 'APZelos/blamer.nvim'
 
 Plug 'blueyed/vim-diminactive'
