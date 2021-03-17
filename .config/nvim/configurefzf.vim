@@ -8,4 +8,4 @@ command! SearchShit execute 'Files' vim_fzf_prj_root
 nmap <C-P> :SearchShit<CR>
 
 " <leader>f to global fuzzy text search
-nmap <leader>f :Ag
+nmap <leader>f :Ag<CR>
