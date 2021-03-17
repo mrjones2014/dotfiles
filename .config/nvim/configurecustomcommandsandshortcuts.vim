@@ -12,19 +12,16 @@ cnoreabbrev jest Jest
 command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 cnoreabbrev jc JestCurrent
 
-" F2 to refactor rename symbol
-nmap <F2> <Plug>(coc-rename)
-
 " ctrl+/ to toggle comment
 map <C-_> :Commentary<CR>
 
 " ctrl+j to move line up
-map <C-j> :m -2<CR>
+map <silent> <C-j> :m -2<CR>
 " ctrl+k to move line down
-map <C-k> :m +1<CR>
+map <silent> <C-k> :m +1<CR>
 
 " space => q to close buffer
-nmap <Space>q :bp<CR>:bd #<CR>
+nmap <silent> <Space>q :bp<CR>:bd #<CR>
 
 " <leader>q to close all
 nmap <leader>q :qa<CR>

@@ -1,4 +1,5 @@
 {
+	"diagnostic.displayByAle": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "scss",
@@ -10,5 +11,6 @@
     "gohtmltmpl",
     "json"
   ],
-  "prettier.formatterPriority": 1
+  "prettier.formatterPriority": 1,
+	"signature.preferShownAbove": false
 }

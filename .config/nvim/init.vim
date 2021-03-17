@@ -1,5 +1,8 @@
-source $HOME/.config/nvim/loadplugins.vim
+" vimsettings.vim has a couple things that need to be set before loading
+" plugins; keep this as first line
 source $HOME/.config/nvim/vimsettings.vim
+
+source $HOME/.config/nvim/loadplugins.vim
 source $HOME/.config/nvim/configurecoc.vim
 source $HOME/.config/nvim/configurenerdtree.vim
 source $HOME/.config/nvim/configureairline.vim
