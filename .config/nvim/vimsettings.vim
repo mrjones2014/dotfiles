@@ -75,13 +75,6 @@ set undodir=~/.vim/undodir
 " use system clipboard
 set clipboard=unnamedplus
 
-" theme
-syntax on
-set t_Co=256
-set t_ut=
-let g:codedark_term256=1
-colorscheme codedark
-
 " command-line autocompletion
 set wildmenu
 
