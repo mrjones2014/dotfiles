@@ -8,6 +8,8 @@ Plug 'tpope/vim-sleuth'
 
 Plug 'tpope/vim-commentary'
 
+Plug 'tpope/vim-fugitive'
+
 Plug 'APZelos/blamer.nvim'
 
 Plug 'blueyed/vim-diminactive'
@@ -16,9 +18,11 @@ Plug 'preservim/nerdtree'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'dense-analysis/ale'
+
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'tpope/vim-fugitive'
+Plug 'shmargum/vim-sass-colors'
 
 Plug 'mhinz/vim-startify'
 

@@ -13,6 +13,9 @@ function StripTrailingWhitespace()
     %s/\s\+$//e
 endfunction
 
+" disable ALE LSP because we're using coc
+let g:ale_disable_lsp = 1
+
 " leader key
 let mapleader = "\\"
 
