@@ -12,8 +12,15 @@ cnoreabbrev jest Jest
 command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 cnoreabbrev jc JestCurrent
 
+" keep visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+
 " ctrl+/ to toggle comment
 map <C-_> :Commentary<CR>
+
+" <leader>v to split pane vertically
+nmap <leader>v :vsplit<CR>
 
 " ctrl+j to move line up
 map <silent> <C-j> :m -2<CR>
