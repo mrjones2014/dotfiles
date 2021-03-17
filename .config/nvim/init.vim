@@ -1,8 +1,10 @@
 " vimsettings.vim has a couple things that need to be set before loading
 " plugins; keep this as first line
 source $HOME/.config/nvim/vimsettings.vim
-
+" then load plugins
 source $HOME/.config/nvim/loadplugins.vim
+"then everything else
+source $HOME/.config/nvim/configurecolorscheme.vim
 source $HOME/.config/nvim/configurecoc.vim
 source $HOME/.config/nvim/configurenerdtree.vim
 source $HOME/.config/nvim/configureairline.vim
