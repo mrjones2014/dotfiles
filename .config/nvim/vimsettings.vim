@@ -58,7 +58,7 @@ augroup filetypedetect
 	au! BufRead,BufNewFile,BufWritePost * call DetectGoHtmlTmpl()
 augroup END
 
-" Possibility to have more than one unsaved buffers.
+" Enable more than one unsaved buffer
 set hidden
 
 " show line numbers
