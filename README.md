@@ -15,5 +15,5 @@ To get the git config to work, add the following lines to your `~/.gitconfig`:
 [include]
   path = ~/.gitconfig.aliases
 [include]
-	path = ~/.gitconfig.common
+  path = ~/.gitconfig.common
 ```
