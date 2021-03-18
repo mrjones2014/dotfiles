@@ -3,8 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""
 
 " fix the fucking stupid yank/paste default behavior to be not stupid
-vnoremap <expr> p 'pgv"'.v:register.'y`>'
-vnoremap <expr> P 'Pgv"'.v:register.'y`>'
+xnoremap <silent> P p:call setreg('"', getreg('0'), getregtype('0'))<CR>
 
 " keep visual selection after indenting
 vnoremap < <gv
