@@ -13,6 +13,8 @@ function StripTrailingWhitespace()
     %s/\s\+$//e
 endfunction
 
+set nocompatible
+
 " leader key
 let mapleader = "\\"
 
@@ -53,7 +55,7 @@ set signcolumn=yes
 " for the Go templating syntax while also loading
 " the stuff that comes with the normal HTML filetype
 augroup filetypedetect
-	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+	au! BufRead,BufNewFile,BufWritePost * call DetectGoHtmlTmpl()
 augroup END
 
 " Possibility to have more than one unsaved buffers.
