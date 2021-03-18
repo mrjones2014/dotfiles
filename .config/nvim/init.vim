@@ -1,13 +1,15 @@
-" vimsettings.vim has a couple things that need to be set before loading
-" plugins; keep this as first line
-source $HOME/.config/nvim/vimsettings.vim
+" ALE has one setting that has to be set before loading the plugin, so keep it
+" up here
+source $HOME/.config/nvim/configureale.vim
 " then load plugins
 source $HOME/.config/nvim/loadplugins.vim
 "then everything else
+source $HOME/.config/nvim/vimsettings.vim
 source $HOME/.config/nvim/configurecolorscheme.vim
 source $HOME/.config/nvim/configurecoc.vim
 source $HOME/.config/nvim/configurenerdtree.vim
 source $HOME/.config/nvim/configureairline.vim
 source $HOME/.config/nvim/configurepluginsgeneric.vim
-source $HOME/.config/nvim/configurecustomcommandsandshortcuts.vim
+source $HOME/.config/nvim/configurecustomcommands.vim
+source $HOME/.config/nvim/configurekeymap.vim
 source $HOME/.config/nvim/configurefzf.vim

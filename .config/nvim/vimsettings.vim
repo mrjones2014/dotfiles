@@ -13,9 +13,6 @@ function StripTrailingWhitespace()
     %s/\s\+$//e
 endfunction
 
-" disable ALE LSP because we're using coc
-let g:ale_disable_lsp = 1
-
 " leader key
 let mapleader = "\\"
 
@@ -73,3 +70,11 @@ set wildmenu
 
 " disable line wrapping
 set nowrap
+
+" set default file encoding
+set enc=utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+
+" if using vimdiff, show vertically
+set diffopt=vertical
