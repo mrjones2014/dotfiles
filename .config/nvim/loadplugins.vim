@@ -38,4 +38,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" basically just using this for the Go HTML Template filetype niceties
+Plug 'fatih/vim-go'
+
 call plug#end()

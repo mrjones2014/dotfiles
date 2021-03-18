@@ -48,9 +48,13 @@ set whichwrap+=<,>,h,l,[,]
 set signcolumn=yes
 
 " Hugo template filetype detection
-" augroup filetypedetect
-" 	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-" augroup END
+" This is used with the vim-go plugin
+" which adds syntax highlighting and completion
+" for the Go templating syntax while also loading
+" the stuff that comes with the normal HTML filetype
+augroup filetypedetect
+	au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+augroup END
 
 " Possibility to have more than one unsaved buffers.
 set hidden
