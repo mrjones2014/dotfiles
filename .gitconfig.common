@@ -1,0 +1,10 @@
+[pull]
+	rebase = false
+
+[core]
+	editor = nvim
+
+[init]
+	defaultBranch = master
+
+; vi: ft=gitconfig
