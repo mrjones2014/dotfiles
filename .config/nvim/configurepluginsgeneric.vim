@@ -12,3 +12,6 @@ let g:startify_lists = [
 " indent guides color
 let g:indentLine_color_term = 59
 let g:indentLine_color_gui = '#5f5f5f'
+
+" set gohtmltmpl commentary string to html comments
+autocmd FileType gohtmltmpl setlocal commentstring=<\!--\ %s\ -->
