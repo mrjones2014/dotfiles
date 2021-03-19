@@ -13,3 +13,6 @@ source $HOME/.config/nvim/configurepluginsgeneric.vim
 source $HOME/.config/nvim/configurecustomcommands.vim
 source $HOME/.config/nvim/configurekeymap.vim
 source $HOME/.config/nvim/configurefzf.vim
+
+" turn this dumb shit off in case any plugins turned it on
+set noautochdir
