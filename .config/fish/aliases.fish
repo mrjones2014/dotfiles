@@ -45,7 +45,7 @@ function f
 end
 
 # fzf find a directory, cd to it, and open it in nvim
-function fopen
+function fo
     set -l local_fzf_dir_open (ffind)
     if test -n "$local_fzf_dir_open"
         cd $local_fzf_dir_open
