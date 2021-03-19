@@ -41,9 +41,13 @@ set iskeyword+=-
 " shiftwidth=0 makes it default to same as tabstop
 set shiftwidth=0
 set tabstop=2
-set expandtab
+set expandtab "this gets overridden by vim sleuth when necessary, but use spaces by default
+" indent guides for when using tabs -- the indentLine plugin only works for
+" spaces
+set listchars=tab:\|\ 
+set list
 
-" enable line wrapping with left and right cursor movement
+"enable line wrapping with left and right cursor movement
 set whichwrap+=<,>,h,l,[,]
 
 " show the sign column always so the layout doesn't shift when signs are
