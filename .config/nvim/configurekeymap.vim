@@ -9,8 +9,9 @@ xnoremap <silent> P p:call setreg('"', getreg('0'), getregtype('0'))<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" <leader>v to split pane vertically
-nmap <leader>v :vsplit<CR>
+" <leader>v to split pane vertically, switch to new pane, open fzf to put new
+" file into new pane
+nmap <leader>v :vsplit<CR>:Files<CR>
 
 " ctrl+j to move line up
 map <silent> <C-j> :m -2<CR>

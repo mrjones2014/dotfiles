@@ -47,6 +47,10 @@ set expandtab "this gets overridden by vim sleuth when necessary, but use spaces
 set listchars=tab:\|\ 
 set list
 
+" when splitting panes, put new one on the right/bottom, instead of left/top
+set splitbelow
+set splitright
+
 "enable line wrapping with left and right cursor movement
 set whichwrap+=<,>,h,l,[,]
 
