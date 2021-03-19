@@ -38,7 +38,7 @@ inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""
 
 " ctrl+/ to toggle comment
-map <C-_> :Commentary<CR>
+map <silent> <C-_> :Commentary<CR>
 
 
 
@@ -47,12 +47,20 @@ map <C-_> :Commentary<CR>
 """""""""""""""""""""""""""""""""""""""""""""
 
 " <leader>f to global fuzzy text search
-nmap <leader>f :SearchForText<CR>
+nmap <silent> <leader>f :SearchForText<CR>
 
 " ctrl+p to fzf
-nmap <C-P> :Files<CR>
+nmap <silent> <C-P> :Files<CR>
 
 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""
+
+" F3 to toggle NERDTree
+nmap <silent> <F3> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
