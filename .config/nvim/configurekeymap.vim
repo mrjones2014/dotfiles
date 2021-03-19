@@ -50,7 +50,7 @@ map <C-_> :Commentary<CR>
 nmap <leader>f :SearchForText<CR>
 
 " ctrl+p to fzf
-nmap <C-P> :SearchForFiles<CR>
+nmap <C-P> :Files<CR>
 
 
 
