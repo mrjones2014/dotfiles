@@ -12,5 +12,6 @@
     "json"
   ],
   "prettier.formatterPriority": 1,
-	"signature.preferShownAbove": false
+	"signature.preferShownAbove": false,
+	"emmet.includeLanguages": {"gohtmltmpl": "html"}
 }
