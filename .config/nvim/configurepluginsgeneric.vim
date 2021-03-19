@@ -12,6 +12,3 @@ let g:startify_lists = [
 " indent guides color
 let g:indentLine_color_term = 59
 let g:indentLine_color_gui = '#5f5f5f'
-
-" turn off dumb startify autochdir
-let g:startify_change_to_dir = 0
