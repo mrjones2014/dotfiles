@@ -1,6 +1,7 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'mrjones2014/vim-code-dark'
+Plug 'mrjones2014/vim-make.vim'
 
 Plug 'sheerun/vim-polyglot'
 

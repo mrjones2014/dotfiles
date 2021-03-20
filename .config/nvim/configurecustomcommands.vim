@@ -11,3 +11,6 @@ cnoreabbrev jest Jest
 " :JestCurrent => Run jest for current file
 command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 cnoreabbrev jc JestCurrent
+
+" alias :make to :Make from my custom vim-make.vim plugin
+cnoreabbrev make Make
