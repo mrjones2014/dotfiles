@@ -15,3 +15,8 @@ let g:indentLine_color_gui = '#5f5f5f'
 
 " set gohtmltmpl commentary string to html comments
 autocmd FileType gohtmltmpl setlocal commentstring=<\!--\ %s\ -->
+
+" vim-make.vim config
+let g:VimMake_win_pos = 'right'
+let g:VimMake_win_size = '40'
+let g:VimMake_aliases = { 'watch': 'local-watch', 'stop': 'local-stop' }
