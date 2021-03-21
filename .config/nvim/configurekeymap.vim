@@ -54,8 +54,6 @@ nmap <silent> <leader>f :SearchForText<CR>
 nmap <silent> <C-P> :Files<CR>
 
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """""""""""""""""""""""""""""""""""""""""""""
