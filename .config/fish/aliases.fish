@@ -32,7 +32,7 @@ function groot
 end
 
 function find_projects
-  echo (ls -1A ~/git/ | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
+  echo (ls -1Ad ~/git/* | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
 end
 
 # fzf find a directory and cd to it
