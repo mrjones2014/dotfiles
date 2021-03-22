@@ -31,14 +31,13 @@ function groot
   end
 end
 
-# fzf find a directory and return the selected value
-function ffind
-    echo (sed '1d' $HOME/.cache/neomru/directory | fzf --query="$1" --select-1 --exit-0)
+function find_projects
+  echo (ls -1A ~/git/ | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
 end
 
 # fzf find a directory and cd to it
 function f
-    set -l local_fzf_dir_cd (sed '1d' $HOME/.cache/neomru/directory | fzf --query="$1" --select-1 --exit-0)
+    set -l local_fzf_dir_cd (find_projects)
     if test -n "$local_fzf_dir_cd"
         cd $local_fzf_dir_cd
     end
@@ -46,7 +45,7 @@ end
 
 # fzf find a directory, cd to it, and open it in nvim
 function fo
-    set -l local_fzf_dir_open (ffind)
+    set -l local_fzf_dir_open (find_projects)
     if test -n "$local_fzf_dir_open"
         cd $local_fzf_dir_open
         nvim
