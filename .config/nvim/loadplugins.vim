@@ -1,7 +1,8 @@
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'mrjones2014/vim-code-dark'
 Plug 'mrjones2014/vim-make.vim'
+
+Plug 'joshdick/onedark.vim'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -34,7 +35,6 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ap/vim-css-color'
 

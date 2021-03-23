@@ -2,10 +2,17 @@
 syntax on
 set t_Co=256
 set t_ut=
-let g:codedark_term256=1
-colorscheme codedark
+" use 24-bit colors
+set termguicolors
+colorscheme onedark
 
-" this has to come after color scheme is set up
+" this has to come after color scheme is set up because its overriding theme
+" colors
+
+" override background color to black
+highlight Normal guibg=black ctermbg=black
+highlight NonText guibg=black ctermbg=black
+
 " highlight redundant trailing whitespace with colorscheme's error color
 highlight TrailingWhitespace ctermbg=red guibg=red
 match TrailingWhitespace /\s\+$/

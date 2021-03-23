@@ -18,9 +18,6 @@ set nocompatible
 " leader key
 let mapleader = "\\"
 
-" use 24-bit colors
-set termguicolors
-
 " enable mouse cursor movement
 set mouse=a
 
