@@ -34,25 +34,3 @@ endfunction
 
 call airline#add_statusline_func('WindowNumber')
 call airline#add_inactive_statusline_func('WindowNumber')
-
-" Go to tab by number
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
-" Go to window by number
-nmap <Space>1 :1 wincmd w<CR>
-nmap <Space>2 :2 wincmd w<CR>
-nmap <Space>3 :3 wincmd w<CR>
-nmap <Space>4 :4 wincmd w<CR>
-nmap <Space>5 :5 wincmd w<CR>
-nmap <Space>6 :6 wincmd w<CR>
-nmap <Space>7 :7 wincmd w<CR>
-nmap <Space>8 :8 wincmd w<CR>
-nmap <Space>9 :9 wincmd w<CR>

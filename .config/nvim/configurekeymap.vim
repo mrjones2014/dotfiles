@@ -11,7 +11,7 @@ vnoremap > >gv
 
 " <leader>v to split pane vertically, switch to new pane, open fzf to put new
 " file into new pane
-nmap <leader>v :vnew<CR>:Files<CR>
+nmap <silent> <leader>v :vnew<CR>:Files<CR>
 
 " ctrl+j to move line up
 map <silent> <C-j> :m -2<CR>
@@ -95,3 +95,31 @@ function! s:show_documentation()
   endif
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" airline/window management
+"""""""""""""""""""""""""""""""""""""""""""""
+
+" Go to tab by number
+nmap <silent> <leader>1 <Plug>AirlineSelectTab1
+nmap <silent> <leader>2 <Plug>AirlineSelectTab2
+nmap <silent> <leader>3 <Plug>AirlineSelectTab3
+nmap <silent> <leader>4 <Plug>AirlineSelectTab4
+nmap <silent> <leader>5 <Plug>AirlineSelectTab5
+nmap <silent> <leader>6 <Plug>AirlineSelectTab6
+nmap <silent> <leader>7 <Plug>AirlineSelectTab7
+nmap <silent> <leader>8 <Plug>AirlineSelectTab8
+nmap <silent> <leader>9 <Plug>AirlineSelectTab9
+
+" Go to window by number
+nmap <Space>1 :1 wincmd w<CR>
+nmap <Space>2 :2 wincmd w<CR>
+nmap <Space>3 :3 wincmd w<CR>
+nmap <Space>4 :4 wincmd w<CR>
+nmap <Space>5 :5 wincmd w<CR>
+nmap <Space>6 :6 wincmd w<CR>
+nmap <Space>7 :7 wincmd w<CR>
+nmap <Space>8 :8 wincmd w<CR>
+nmap <Space>9 :9 wincmd w<CR>
