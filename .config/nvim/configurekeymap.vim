@@ -11,7 +11,7 @@ vnoremap > >gv
 
 " <leader>v to split pane vertically, switch to new pane, open fzf to put new
 " file into new pane
-nmap <leader>v :vsplit<CR>:Files<CR>
+nmap <leader>v :vnew<CR>:Files<CR>
 
 " ctrl+j to move line up
 map <silent> <C-j> :m -2<CR>
