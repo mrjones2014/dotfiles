@@ -36,7 +36,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'vim-airline/vim-airline'
 
-Plug 'ap/vim-css-color'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
