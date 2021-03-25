@@ -46,11 +46,6 @@ set expandtab "this gets overridden by vim sleuth when necessary, but use spaces
 " make sure we be sleuthin when we open files
 autocmd BufReadPost * Sleuth
 
-" indent guides for when using tabs -- the indentLine plugin only works for
-" spaces
-set listchars=tab:\|\ 
-set list
-
 " when splitting panes, put new one on the right/bottom, instead of left/top
 set splitbelow
 set splitright

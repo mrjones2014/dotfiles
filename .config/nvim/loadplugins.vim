@@ -28,7 +28,7 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'mhinz/vim-startify'
 
-Plug 'Yggdroot/indentLine'
+Plug 'thaerkh/vim-indentguides'
 
 Plug 'farmergreg/vim-lastplace'
 
