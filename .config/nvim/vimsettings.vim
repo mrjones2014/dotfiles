@@ -42,6 +42,10 @@ set iskeyword+=-
 set shiftwidth=0
 set tabstop=2
 set expandtab "this gets overridden by vim sleuth when necessary, but use spaces by default
+
+" make sure we be sleuthin when we open files
+autocmd BufReadPost * Sleuth
+
 " indent guides for when using tabs -- the indentLine plugin only works for
 " spaces
 set listchars=tab:\|\ 
