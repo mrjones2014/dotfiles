@@ -43,9 +43,6 @@ set shiftwidth=0
 set tabstop=2
 set expandtab "this gets overridden by vim sleuth when necessary, but use spaces by default
 
-" make sure we be sleuthin when we open files
-autocmd BufReadPost * Sleuth
-
 " when splitting panes, put new one on the right/bottom, instead of left/top
 set splitbelow
 set splitright
