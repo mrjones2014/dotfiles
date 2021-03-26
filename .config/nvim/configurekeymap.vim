@@ -14,9 +14,9 @@ vnoremap > >gv
 nmap <silent> <leader>v :vnew<CR>:Files<CR>
 
 " ctrl+j to move line up
-map <silent> <C-j> :m -2<CR>
+map <silent> <C-k> :m -2<CR>
 " ctrl+k to move line down
-map <silent> <C-k> :m +1<CR>
+map <silent> <C-j> :m +1<CR>
 
 " space => q to close buffer
 nmap <silent> <Space>q :bp<CR>:bd #<CR>
