@@ -1,8 +1,8 @@
 " theme
 syntax on
 set termguicolors
-let ayucolor = "dark"
-colorscheme ayu
+let g:onedark_termcolors=256
+colorscheme onedark
 
 " this has to come after color scheme is set up because its overriding theme
 " colors
