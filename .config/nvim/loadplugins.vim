@@ -7,21 +7,10 @@ endif
 call plug#begin(stdpath('data') . '/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" UI/tools
+" themes etc.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'ayu-theme/ayu-vim'
-Plug 'mrjones2014/vim-make.vim'
-Plug 'APZelos/blamer.nvim'
-Plug 'blueyed/vim-diminactive'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
-Plug 'thaerkh/vim-indentguides'
-Plug 'farmergreg/vim-lastplace'
-Plug 'vim-airline/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'joshdick/onedark.vim'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tim Pope gets his own section
@@ -38,7 +27,25 @@ Plug 'tpope/vim-eunuch'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-Plug 'fatih/vim-go' " basically just using this for the Go HTML Template filetype niceties
+" basically just using this for the Go HTML Template filetype niceties
+Plug 'fatih/vim-go'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UI/tools
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'mrjones2014/vim-make.vim'
+Plug 'APZelos/blamer.nvim'
+Plug 'blueyed/vim-diminactive'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
+Plug 'thaerkh/vim-indentguides'
+Plug 'farmergreg/vim-lastplace'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
