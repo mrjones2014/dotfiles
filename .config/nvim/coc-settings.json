@@ -13,5 +13,7 @@
   ],
   "prettier.formatterPriority": 1,
   "signature.preferShownAbove": false,
-  "emmet.includeLanguages": { "gohtmltmpl": "html" }
+  "emmet.includeLanguages": { "gohtmltmpl": "html" },
+  "html.filetypes": ["html", "gohtmltmpl", "handlebars", "htmldjango", "blade"],
+  "html.autoClosingTags": true
 }
