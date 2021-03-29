@@ -1,7 +1,7 @@
 " disable ALE LSP because we're using coc
 let g:ale_disable_lsp = 1
 
-" only lint on save for performance reasons
+" lint on type and save
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_save = 1
 
