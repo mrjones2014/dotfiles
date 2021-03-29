@@ -1,5 +1,5 @@
 {
-	"diagnostic.displayByAle": true,
+  "diagnostic.displayByAle": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "scss",
@@ -12,6 +12,6 @@
     "json"
   ],
   "prettier.formatterPriority": 1,
-	"signature.preferShownAbove": false,
-	"emmet.includeLanguages": {"gohtmltmpl": "html"}
+  "signature.preferShownAbove": false,
+  "emmet.includeLanguages": { "gohtmltmpl": "html" }
 }

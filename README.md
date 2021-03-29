@@ -6,6 +6,11 @@ You can run the following to get these dotfiles installed on your system. It wil
 wget https://raw.githubusercontent.com/mrjones2014/dotfiles/master/scripts/config-init | bash
 ```
 
+## Neovim Config
+
+The Neovim configuration is using Treesitter for syntax highlighting, which means you need
+Neovim with Lua support (0.5+).
+
 ## Git Config
 
 The git configs are in separate files so that my email address doesn't need to be in this repo.
