@@ -24,8 +24,9 @@ nmap <silent> <Space>q :bp<CR>:bd #<CR>
 " <leader>q to close all
 nmap <leader>q :qa<CR>
 
-" <leader>s to save all
+" <leader>s or <leader>w to save all
 nmap <leader>s :wa<CR>
+nmap <leader>w :wa<CR>
 
 " in insert mode, escape should do the following:
 " - if a coc popup is visible, just close the popup and remain in Insert mode
@@ -41,6 +42,13 @@ inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'
 " ctrl+/ to toggle comment
 map <silent> <C-_> :Commentary<CR>
 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" vim-obsession
+"""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <leader><leader> :Obsession<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
