@@ -34,7 +34,6 @@ nmap <leader>w :wa<CR>
 inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""
 " vim-commentary
 """""""""""""""""""""""""""""""""""""""""""""
@@ -55,17 +54,24 @@ nmap <leader><leader> :Obsession<CR>
 " telescope.nvim
 """""""""""""""""""""""""""""""""""""""""""""
 
-" ff to search for files
-nnoremap ff <cmd>Telescope find_files<CR>
+" ff or ctrl+p to search for files
+nnoremap ff :Telescope find_files<CR>
+nnoremap <C-p> :Telescope find_files<CR>
 
 " ft to search for text
-nnoremap ft <cmd>Telescope live_grep<CR>
+nnoremap ft :Telescope live_grep<CR>
 
 " fb to search buffers
-nnoremap fb <cmd>Telescope buffers<CR>
+nnoremap fb :Telescope buffers<CR>
 
 " fh to search help tags
-nnoremap fh <cmd>Telescope help_tags<CR>
+nnoremap fh :Telescope help_tags<CR>
+
+" fc to search commands
+nnoremap fc :Telescope commands<CR>
+
+" ctrl+f to fuzzy find in current buffer
+nnoremap <C-f> :Telescope current_buffer_fuzzy_find<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
