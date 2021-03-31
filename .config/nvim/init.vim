@@ -12,10 +12,10 @@ source $HOME/.config/nvim/configureairline.vim
 source $HOME/.config/nvim/configurepluginsgeneric.vim
 source $HOME/.config/nvim/configurecustomcommands.vim
 source $HOME/.config/nvim/configurekeymap.vim
-source $HOME/.config/nvim/configurefzf.vim
 source $HOME/.config/nvim/configurestartify.vim
 
 lua require'configure-treesitter'
+lua require'configure-telescope'
 
 " turn this dumb shit off in case any plugins turned it on
 set noautochdir

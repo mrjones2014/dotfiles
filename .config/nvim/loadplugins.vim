@@ -7,7 +7,7 @@ endif
 call plug#begin(stdpath('data') . '/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" themes etc.
+" themes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'joshdick/onedark.vim'
 
@@ -34,9 +34,17 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" UI/tools
+" Tools & Utils
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mrjones2014/vim-make.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'APZelos/blamer.nvim'
 Plug 'blueyed/vim-diminactive'
 Plug 'preservim/nerdtree'
@@ -46,7 +54,5 @@ Plug 'thaerkh/vim-indentguides'
 Plug 'farmergreg/vim-lastplace'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 call plug#end()
