@@ -52,14 +52,20 @@ nmap <leader><leader> :Obsession<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" fzf.vim
+" telescope.nvim
 """""""""""""""""""""""""""""""""""""""""""""
 
-" <leader>f to global fuzzy text search
-nmap <silent> <leader>f :SearchForText<CR>
+" ff to search for files
+nnoremap ff <cmd>Telescope find_files<CR>
 
-" ctrl+p to fzf
-nmap <silent> <C-P> :Files<CR>
+" ft to search for text
+nnoremap ft <cmd>Telescope live_grep<CR>
+
+" fb to search buffers
+nnoremap fb <cmd>Telescope buffers<CR>
+
+" fh to search help tags
+nnoremap fh <cmd>Telescope help_tags<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
