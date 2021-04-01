@@ -55,8 +55,8 @@ nmap <leader><leader> :Obsession<CR>
 """""""""""""""""""""""""""""""""""""""""""""
 
 " ff or ctrl+p to search for files
-nnoremap ff :Telescope find_files<CR>
-nnoremap <C-p> :Telescope find_files<CR>
+nnoremap ff :lua require'telescope.builtin'.find_files{hidden = true}<CR>
+nnoremap <C-p> :lua require'telescope.builtin'.find_files{hidden = true}<CR>
 
 " ft to search for text
 nnoremap ft :Telescope live_grep<CR>
