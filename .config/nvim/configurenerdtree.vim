@@ -30,3 +30,6 @@ let g:NERDTreeWinPos = "right"
 
 " Don't collapse single-child nodes
 let g:NERDTreeCascadeSingleChildDir = 0
+
+" show hidden files
+let g:NERDTreeShowHidden = 1
