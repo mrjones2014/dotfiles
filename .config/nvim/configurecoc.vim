@@ -7,6 +7,7 @@ let g:coc_global_extensions = [
   \'coc-jest',
   \'coc-emmet',
   \'coc-vimlsp',
+  \'coc-sh',
 \]
 
 " Highlight the symbol and its references when holding the cursor.
