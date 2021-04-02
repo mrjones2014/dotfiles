@@ -9,9 +9,13 @@ xnoremap <silent> P p:call setreg('"', getreg('0'), getregtype('0'))<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" <leader>v to split pane vertically, switch to new pane, open fzf to put new
+" <leader>v to split pane vertically, switch to new pane, open file search to put new
 " file into new pane
-nmap <silent> <leader>v :vnew<CR>:Files<CR>
+nmap <silent> <leader>v :vnew<CR>:FindFiles<CR>
+
+" <leader>b to split pane vertically, switch to new pane, and search already
+" opened buffers and put the selected buffer into the new pane
+nmap <silent> <leader>b :vnew<CR>:Telescope buffers<CR>
 
 " ctrl+j to move line up
 map <silent> <C-k> :m -2<CR>
@@ -55,8 +59,7 @@ nmap <leader><leader> :Obsession<CR>
 """""""""""""""""""""""""""""""""""""""""""""
 
 " ff or ctrl+p to search for files
-nnoremap ff :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
-nnoremap <C-p> :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap ff :FindFiles<CR>
 
 " ft to search for text
 nnoremap ft :Telescope live_grep<CR>
