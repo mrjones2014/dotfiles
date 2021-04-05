@@ -1,6 +1,6 @@
 font:
   normal:
-    family: FiraCode Nerd Font
+    family: SauceCodePro Nerd Font
   size: 14
 import:
   - ~/.config/alacritty/alacritty-monokai-soda-theme.yml
