@@ -18,6 +18,9 @@ set nocompatible
 " leader key
 let mapleader = "\\"
 
+" ignore .DS_Store and shit like that
+set wildignore+=*.DS_Store
+
 " enable mouse cursor movement
 set mouse=a
 
