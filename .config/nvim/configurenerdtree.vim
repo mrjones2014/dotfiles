@@ -33,3 +33,6 @@ let g:NERDTreeCascadeSingleChildDir = 0
 
 " show hidden files
 let g:NERDTreeShowHidden = 1
+
+" but also respect wildignore
+let g:NERDTreeRespectWildIgnore = 1
