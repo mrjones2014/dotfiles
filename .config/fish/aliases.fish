@@ -11,6 +11,8 @@ alias vi="nvim"
 
 alias vimconfig="pushd ~/.config/nvim && vim && popd"
 
+alias scripts="pushd ~/scripts && vim && popd"
+
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
 function nuke-docker

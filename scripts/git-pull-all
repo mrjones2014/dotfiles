@@ -1,23 +1,22 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-function update -d 'Update git repo'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+function update {
   git stash --quiet 2>/dev/null
   git pull 2>/dev/null
   git stash apply --quiet 2>/dev/null
-end
+}
 
 pushd $HOME/git/
-for dir in ./*/
-  cd $dir
+for dir in ./*/; do
+  cd "$dir"
   git status -sb 2>/dev/null
-  if [ $status -eq 0 ]
-    set_color red
-    echo "
-    Updating $dir...
-    "
-    set_color normal
+  if [[ $status -eq 0 ]]; then
+    printf "\n${RED}Updating $dir...${NC}"
     update
-  end
+  fi
   cd ..
-end
+done
 popd

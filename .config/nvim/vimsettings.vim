@@ -1,10 +1,3 @@
-" Found on: https://discourse.gohugo.io/t/vim-syntax-highlighting-for-hugo-html-templates/19398/8
-function DetectGoHtmlTmpl()
-    if expand('%:e') == "html" && search("{{") != 0
-        set filetype=gohtmltmpl
-    endif
-endfunction
-
 function StripTrailingWhitespace()
     " dont strip on these filetypes
     if &ft =~ 'vim'
@@ -56,15 +49,6 @@ set whichwrap+=<,>,h,l,[,]
 " show the sign column always so the layout doesn't shift when signs are
 " added
 set signcolumn=yes
-
-" Hugo template filetype detection
-" This is used with the vim-go plugin
-" which adds syntax highlighting and completion
-" for the Go templating syntax while also loading
-" the stuff that comes with the normal HTML filetype
-augroup filetypedetect
-	au! BufRead,BufNewFile,BufWritePost * call DetectGoHtmlTmpl()
-augroup END
 
 " Enable more than one unsaved buffer
 set hidden
