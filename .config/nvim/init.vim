@@ -13,6 +13,7 @@ source $HOME/.config/nvim/configurepluginsgeneric.vim
 source $HOME/.config/nvim/configurecustomcommands.vim
 source $HOME/.config/nvim/configurekeymap.vim
 source $HOME/.config/nvim/configurestartify.vim
+source $HOME/.config/nvim/configurefiletypedetection.vim
 
 lua require'configure-treesitter'
 lua require'configure-telescope'

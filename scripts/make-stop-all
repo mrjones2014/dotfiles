@@ -1,13 +1,13 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-function make-local-stop -d 'run make local-stop'
+function make-local-stop {
     make local-stop >/dev/null
-end
+}
 
 pushd $HOME/git/
-for dir in ./*/
+for dir in ./*/; do
     cd $dir
     make-local-stop
     cd ..
-end
+done
 popd
