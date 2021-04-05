@@ -1,4 +1,4 @@
-#! /usr/local/bin/fish
+#!/usr/bin/env fish
 
 function make-local-stop -d 'run make local-stop'
     make local-stop >/dev/null
