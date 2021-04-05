@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 cat _index.md > _index.es.md
 cat _index.md >  _index.de.md
