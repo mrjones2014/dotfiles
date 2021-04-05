@@ -62,7 +62,7 @@ nmap <leader><leader> :Obsession<CR>
 nnoremap ff :FindFiles<CR>
 
 " ft to search for text
-nnoremap ft :Telescope live_grep<CR>
+nnoremap ft :lua require'telescope'.extensions.fzf_writer.grep()<CR>
 
 " fb to search buffers
 nnoremap fb :Telescope buffers<CR>
