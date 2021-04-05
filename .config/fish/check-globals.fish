@@ -24,6 +24,10 @@ if ! type ag >/dev/null
     echo 'Install the Silver Searcher: https://github.com/ggreer/the_silver_searcher'
 end
 
+if ! type rg >/dev/null
+    echo 'Install RipGrep: https://github.com/BurntSushi/ripgrep'
+end
+
 if ! type nvm >/dev/null
     echo 'Install nvm.fish: https://github.com/jorgebucaran/nvm.fish'
 end
@@ -40,16 +44,8 @@ if ! type prettier >/dev/null
     echo 'Install prettier globally for vim integration: yarn global add prettier'
 end
 
-if ! type typescript-language-server >/dev/null
-    echo 'Install typescript-language-server globally for vim integration: yarn global add typescript-language-server'
-end
-
-if ! type tsc >/dev/null
-    echo 'Install Typescript globally for vim integration: yarn global add typescript'
-end
-
-if ! type neovim-node-host >/dev/null
-    echo 'Install neovim helper globally: yarn global add neovim'
+if ! type tsserver >/dev/null
+    echo 'Install tsserver globally for vim integration: yarn global add typescript'
 end
 
 if ! type eslint >/dev/null
