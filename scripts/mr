@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PROJECT_PATH=`git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g'`
 
