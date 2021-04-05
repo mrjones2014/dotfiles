@@ -1,9 +1,5 @@
-highlight Blamer ctermfg=grey guifg=grey
-let g:blamer_enabled = 1
-let g:blamer_delay = 200
-let g:blamer_show_in_insert_modes = 0
-let g:blamer_show_in_visual_modes = 0
-let g:blamer_prefix = "       "
+let g:gitblame_message_template = '  •  <date> • <author> • <summary>'
+let g:gitblame_date_format = '%x'
 
 let g:startify_lists = [
 	\ { 'type': 'dir',       'header': ['Recent Files in '. getcwd()] },
