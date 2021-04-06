@@ -19,7 +19,7 @@ function conf
     pushd ~/.config/tmux && nvim && popd
   else if [ $argv[1] = "scripts" ]
     pushd ~/scripts && nvim && popd
-  else if [ $argv[1] = "term" || $argv[1] == "alacritty" ]
+  else if [ $argv[1] = "term" ]
     pushd ~/.config/alacritty && nvim && popd
   else
     echo "conf ($argv[1]) is not set up"
