@@ -1,4 +1,3 @@
-alias fishconfig="pushd ~/.config/fish && vim && popd && sourcefish"
 alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
 alias docker-login-local="docker login registry.1password.io -u local-registry"
 
@@ -9,11 +8,23 @@ alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias vim="nvim"
 alias vi="nvim"
 
-alias vimconfig="pushd ~/.config/nvim && vim && popd"
-
-alias scripts="pushd ~/scripts && vim && popd"
-
 alias emptytrash="sudo rm -rf ~/.Trash/*"
+
+function conf
+  if [ $argv[1] = "vim" ]
+    pushd ~/.config/nvim && nvim && popd
+  else if [ $argv[1] = "fish" ]
+    pushd ~/.config/fish && nvim && popd && sourcefish
+  else if [ $argv[1] = "tmux" ]
+    pushd ~/.config/tmux && nvim && popd
+  else if [ $argv[1] = "scripts" ]
+    pushd ~/scripts && nvim && popd
+  else if [ $argv[1] = "term" || $argv[1] == "alacritty" ]
+    pushd ~/.config/alacritty && nvim && popd
+  else
+    echo "conf ($argv[1]) is not set up"
+  end
+end
 
 function nuke-docker
     set -l docker_container_names (docker ps --format "{{.Names}}")

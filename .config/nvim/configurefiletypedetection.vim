@@ -32,4 +32,6 @@ endfunction
 augroup filetypedetect
     au! BufRead,BufNewFile,BufWritePost * call <SID>DetectGoHtmlTmpl()
     au! BufRead,BufNewFile,BufWritePost * call <SID>DetectFiletypeFromShebangLine()
+
+    au! FileType fish compiler fish
 augroup END
