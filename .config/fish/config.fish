@@ -12,6 +12,10 @@ source $HOME/.config/fish/aliases.fish
 if ! type starship >/dev/null
     echo 'Install starship: https://github.com/starship/starship'
 else
-    # MUST BE LAST LINE
     starship init fish | source
+end
+
+# start tmux session by default
+if [ "$TERM" != "screen" ]
+    exec tmux
 end
