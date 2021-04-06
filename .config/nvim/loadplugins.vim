@@ -30,6 +30,7 @@ Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
+Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 
