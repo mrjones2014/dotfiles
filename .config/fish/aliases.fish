@@ -22,7 +22,7 @@ function conf
   else if [ $argv[1] = "term" ]
     pushd ~/.config/alacritty && nvim && popd
   else
-    echo "conf ($argv[1]) is not set up"
+    echo "conf $argv[1] is not set up"
   end
 end
 
