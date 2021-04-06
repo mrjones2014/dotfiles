@@ -5,5 +5,7 @@ font:
 window:
   padding:
     x: 5
+mouse:
+  hide_when_typing: true
 import:
   - ~/.config/alacritty/alacritty-monokai-soda-theme.yml
