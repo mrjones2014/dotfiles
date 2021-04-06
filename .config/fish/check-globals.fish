@@ -56,3 +56,6 @@ if ! type tslint >/dev/null
     echo 'Install tslint globally for vim integration: yarn global add tslint'
 end
 
+if ! type reattach-to-user-namespace >/dev/null
+    echo 'Install reattach-to-user-namespace for tmux compatibility: brew install reattach-to-user-namespace'
+end
