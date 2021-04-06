@@ -37,7 +37,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tools & Utils
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'mrjones2014/vim-make.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
