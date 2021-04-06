@@ -23,3 +23,6 @@ let g:VimMake_win_size = '40'
 
 " automatically sleuth indent styles
 let g:sleuth_automatic = 1
+
+" add gohtmltmpl to filetypes for tagalong
+let g:tagalong_additional_filetypes = ['gohtmltmpl']
