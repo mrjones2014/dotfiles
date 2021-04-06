@@ -19,3 +19,5 @@ end
 if [ "$TERM" != "screen" ]
     exec tmux
 end
+
+check_globals || echo "Some required global packages are not installed. Check output above."
