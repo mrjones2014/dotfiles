@@ -1,26 +1,25 @@
 " Found on: https://discourse.gohugo.io/t/vim-syntax-highlighting-for-hugo-html-templates/19398/8
-function! s:DetectGoHtmlTmpl()
+function! s:DetectCustomFiletype()
     if expand('%:e') == "html" && search("{{") != 0
         set filetype=gohtmltmpl
+        return
     endif
-endfunction
 
-function! s:DetectFiletypeFromShebangLine()
     " if the first line is not a shebang, do nothing
     if getline(1) !~ "#!/"
         return
     endif
 
     if getline(1) =~ "zsh"
-        setfiletype zsh
+        set filetype=zsh
     endif
 
     if getline(1) =~ "bash"
-        setfiletype bash
+        set filetype=bash
     endif
 
     if getline(0) =~ "fish"
-        setfiletype fish
+        set filetype=fish
     endif
 endfunction
 
@@ -30,8 +29,6 @@ endfunction
 " for the Go templating syntax while also loading
 " the stuff that comes with the normal HTML filetype
 augroup filetypedetect
-    au! BufRead,BufNewFile,BufWritePost * call <SID>DetectGoHtmlTmpl()
-    au! BufRead,BufNewFile,BufWritePost * call <SID>DetectFiletypeFromShebangLine()
-
+    au! BufRead,BufNewFile,BufWritePost * call <SID>DetectCustomFiletype()
     au! FileType fish compiler fish
 augroup END
