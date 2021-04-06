@@ -2,5 +2,8 @@ font:
   normal:
     family: SauceCodePro Nerd Font
   size: 14
+window:
+  padding:
+    x: 5
 import:
   - ~/.config/alacritty/alacritty-monokai-soda-theme.yml

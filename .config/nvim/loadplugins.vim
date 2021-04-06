@@ -28,7 +28,7 @@ Plug 'tpope/vim-obsession'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-" basically just using this for the Go HTML Template filetype niceties
+Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
