@@ -29,9 +29,10 @@ set scrolloff=8
 " strip trailing whitespace on save
 autocmd BufWritePre * call StripTrailingWhitespace()
 
-" add hyphen as keyword for full SCSS support
+" add @, -, and $ as keywords for full SCSS support
 set iskeyword+=@-@
 set iskeyword+=-
+set iskeyword+=$
 
 " set tab width
 " shiftwidth=0 makes it default to same as tabstop
