@@ -17,6 +17,7 @@ source $HOME/.config/nvim/configurefiletypedetection.vim
 
 lua require'configure-treesitter'
 lua require'configure-telescope'
+lua require'configure-autopairs'
 
 " turn this dumb shit off in case any plugins turned it on
 set noautochdir

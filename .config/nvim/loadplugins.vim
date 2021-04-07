@@ -27,7 +27,7 @@ Plug 'tpope/vim-obsession'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
 Plug 'AndrewRadev/tagalong.vim'
