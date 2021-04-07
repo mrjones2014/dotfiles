@@ -12,8 +12,5 @@ cnoreabbrev jest Jest
 command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 cnoreabbrev jc JestCurrent
 
-" alias :make to :Make from my custom vim-make.vim plugin
-cnoreabbrev make Make
-
 " aliases for Telescope search for files
 command! -nargs=0 FindFiles :Telescope find_files find_command=rg,--ignore,--hidden,--files
