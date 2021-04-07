@@ -42,8 +42,8 @@ inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'
 " vim-commentary
 """""""""""""""""""""""""""""""""""""""""""""
 
-" ctrl+/ to toggle comment
-map <silent> <C-_> :Commentary<CR>
+" <leader>c to toggle comment
+map <silent> <leader>c :Commentary<CR>
 
 
 
