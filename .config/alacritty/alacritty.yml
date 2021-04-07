@@ -1,10 +1,11 @@
 font:
   normal:
     family: SauceCodePro Nerd Font
-  size: 14
+  size: 13
 window:
   padding:
     x: 5
+    y: 0
 mouse:
   hide_when_typing: true
 import:
