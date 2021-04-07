@@ -3,10 +3,11 @@ font:
     family: SauceCodePro Nerd Font
   size: 13
 window:
+  title: ""
   padding:
     x: 5
     y: 0
 mouse:
   hide_when_typing: true
 import:
-  - ~/.config/alacritty/alacritty-monokai-soda-theme.yml
+  - ~/.config/alacritty/alacritty-one-dark-theme.yml
