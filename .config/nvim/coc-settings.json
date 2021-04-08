@@ -15,5 +15,32 @@
   "signature.preferShownAbove": false,
   "emmet.includeLanguages": { "gohtmltmpl": "html" },
   "html.filetypes": ["html", "gohtmltmpl", "handlebars", "htmldjango", "blade"],
-  "html.autoClosingTags": true
+  "html.autoClosingTags": true,
+  "suggest.completionItemKindLabels": {
+    "function": "",
+    "method": "",
+    "variable": "",
+    "constant": "",
+    "struct": "",
+    "class": "",
+    "interface": "",
+    "text": "",
+    "enum": "",
+    "enumMember": "",
+    "module": "",
+    "color": "",
+    "property": "",
+    "field": "",
+    "unit": "",
+    "file": "",
+    "value": "",
+    "event": "",
+    "folder": "",
+    "keyword": "",
+    "snippet": "",
+    "operator": "",
+    "reference": "",
+    "typeParameter": "",
+    "default": ""
+  }
 }
