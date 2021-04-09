@@ -1,3 +1,4 @@
 Session.vim
 .DS_Store
 .git/
+*.txt
