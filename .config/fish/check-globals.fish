@@ -57,6 +57,10 @@ function check_globals
         echo 'Install tslint globally for vim integration: yarn global add tslint'
     end
 
+    if ! type bash-language-server >/dev/null
+        echo 'Install bash-language-server: yarn global add bash-language-server'
+    end
+
     #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
