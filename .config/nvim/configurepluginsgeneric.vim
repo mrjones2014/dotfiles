@@ -1,6 +1,3 @@
-let g:gitblame_message_template = '  •  <date> • <author> • <summary>'
-let g:gitblame_date_format = '%x'
-
 let g:startify_lists = [
 	\ { 'type': 'dir',       'header': ['Recent Files in '. getcwd()] },
 	\ { 'type': 'files',     'header': ['Recent Files (Global)'] },

@@ -46,7 +46,6 @@ Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'f-person/git-blame.nvim'
 Plug 'blueyed/vim-diminactive'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
