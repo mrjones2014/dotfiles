@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone --bare git@github.com:mrjones2014/mrjones2014.github.io.git $HOME/.cfg
+git clone --bare git@github.com:mrjones2014/dotfiles.git $HOME/.cfg
 function config {
    git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
