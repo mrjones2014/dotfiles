@@ -31,4 +31,5 @@ endfunction
 augroup filetypedetect
     au! BufRead,BufNewFile,BufWritePost * call <SID>DetectCustomFiletype()
     au! FileType fish compiler fish
+    au! FileType json set conceallevel=0
 augroup END

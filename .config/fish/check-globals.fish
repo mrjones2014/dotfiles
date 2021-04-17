@@ -61,6 +61,10 @@ function check_globals
         echo 'Install bash-language-server: yarn global add bash-language-server'
     end
 
+    if ! type neovim-node-host >/dev/null
+        echo 'Install neovim helper: yarn global add neovim'
+    end
+
     #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
