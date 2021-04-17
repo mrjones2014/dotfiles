@@ -24,3 +24,4 @@ if [ "$TERM" != "screen" ]
 end
 
 check_globals || echo "Some required global packages are not installed. Check output above."
+source $HOME/.config/fish/check-architecture.fish
