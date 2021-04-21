@@ -4,12 +4,9 @@ let g:startify_lists = [
 	\ { 'type': 'sessions',  'header': ['Sessions'] },
 \ ]
 
-" indent guides color
-let g:indentLine_color_term = 59
-let g:indentLine_color_gui = '#5f5f5f'
 " disable indentLine in markdown cause its glitchy when trying to write
 " code-fences
-let g:indentguides_ignorelist = ['markdown']
+let g:indentguides_ignorelist = ['markdown', 'json']
 
 " set gohtmltmpl commentary string to html comments
 autocmd FileType gohtmltmpl setlocal commentstring=<\!--\ %s\ -->
