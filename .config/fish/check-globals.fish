@@ -65,6 +65,14 @@ function check_globals
         echo 'Install neovim helper: yarn global add neovim'
     end
 
+    if ! type cargo >/dev/null
+        echo 'Install rustup: curl --proto \'=https\' --tlsv1.2 -sSf https://sh.rustup.rs | sh'
+    end
+
+    if ! type rustup >/dev/null
+        echo 'Install rustup fish plugin: omf install rustup'
+    end
+
     #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
