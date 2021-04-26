@@ -1,4 +1,5 @@
 export GPG_TTY=(tty)
+export EDITOR="nvim"
 
 source $HOME/.config/fish/check-globals.fish
 
