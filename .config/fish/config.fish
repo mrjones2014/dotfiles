@@ -2,8 +2,6 @@ export GPG_TTY=(tty)
 
 source $HOME/.config/fish/check-globals.fish
 
-eval (/opt/homebrew/bin/brew shellenv)
-
 if test -f "/opt/homebrew/bin/brew"
     eval (/opt/homebrew/bin/brew shellenv)
 end
