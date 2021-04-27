@@ -1,16 +1,5 @@
 {
   "diagnostic.displayByAle": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "scss",
-    "markdown",
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "html",
-    "gohtmltmpl",
-    "json"
-  ],
   "prettier.formatterPriority": 1,
   "signature.preferShownAbove": false,
   "emmet.includeLanguages": { "gohtmltmpl": "html" },
