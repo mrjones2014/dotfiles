@@ -12,3 +12,28 @@ let g:coc_global_extensions = [
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+let s:format_on_save_filetypes = [
+  \'css',
+  \'scss',
+  \'markdown',
+  \'typescript',
+  \'typescriptreact',
+  \'javascript',
+  \'javascriptreact',
+  \'html',
+  \'gohtmltmpl',
+  \'json'
+\]
+
+function s:FormatOnSave()
+  if (index(s:format_on_save_filetypes, &ft) < 0)
+    return
+  endif
+
+  call CocAction('runCommand', 'editor.action.organizeImport')
+  sleep 100m
+  call CocAction('format')
+endfunction
+
+autocmd BufWritePre * silent call <SID>FormatOnSave()
