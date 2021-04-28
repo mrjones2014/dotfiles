@@ -89,6 +89,12 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 " coc.nvim
 """""""""""""""""""""""""""""""""""""""""""""
 
+" Quick fix
+nmap F <Plug>(coc-fix-current)
+
+" Code Actions
+nmap ca <Plug>(coc-codeaction)
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
