@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 cat _index.md > _index.es.md
-cat _index.md >  _index.de.md
-cat _index.md >  _index.fr.md
+cat _index.md > _index.de.md
+cat _index.md > _index.fr.md
 cat _index.md > _index.jp.md
 cat _index.md > _index.ru.md
 cat _index.md > _index.it.md
