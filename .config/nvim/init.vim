@@ -8,7 +8,6 @@ source $HOME/.config/nvim/vimsettings.vim
 source $HOME/.config/nvim/configurecolorscheme.vim
 source $HOME/.config/nvim/configurecoc.vim
 source $HOME/.config/nvim/configurenerdtree.vim
-source $HOME/.config/nvim/configureminimap.vim
 source $HOME/.config/nvim/configureairline.vim
 source $HOME/.config/nvim/configurepluginsgeneric.vim
 source $HOME/.config/nvim/configurecustomcommands.vim
