@@ -17,3 +17,6 @@ let g:VimMake_win_size = '40'
 
 " automatically sleuth indent styles
 let g:sleuth_automatic = 1
+
+" change vim-move controls to use ctrl instead of alt/option
+let g:move_key_modifier = 'C'
