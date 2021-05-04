@@ -21,6 +21,8 @@ function conf
     pushd ~/scripts && nvim && popd
   else if [ $argv[1] = "term" ]
     pushd ~/.config/alacritty && nvim && popd
+  else if [ $argv[1] = "hammerspoon" ]
+    pushd ~/.hammerspoon && nvim && popd
   else
     echo "conf $argv[1] is not set up"
   end
