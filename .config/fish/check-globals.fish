@@ -73,6 +73,10 @@ function check_globals
         echo 'Install rustup fish plugin: omf install rustup'
     end
 
+    if [ -z (ls /Applications/ | grep -i hammerspoon) ]
+        echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
+    end
+
     #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
