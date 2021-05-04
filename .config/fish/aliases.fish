@@ -81,7 +81,9 @@ function nvminstall
         Usage:
           nvminstall {node_version_to_install} {node_version_to_uninstall}
 
-          Example: \n nvminstall 8.1.0 8.0.0"
+        Example:
+          nvminstall 8.1.0 8.0.0
+        "
     end
 end
 
