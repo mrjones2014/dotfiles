@@ -10,6 +10,8 @@ alias vi="nvim"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
+alias h="history | fzf"
+
 function conf
   if [ $argv[1] = "vim" ]
     pushd ~/.config/nvim && nvim && popd
