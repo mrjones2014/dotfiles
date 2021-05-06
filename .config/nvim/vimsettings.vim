@@ -13,6 +13,9 @@ set nocompatible
 " leader key
 let mapleader = "\\"
 
+" extra room for lint messages
+set cmdheight=2
+
 " auto reload file contents when they change on disk
 set autoread
 
