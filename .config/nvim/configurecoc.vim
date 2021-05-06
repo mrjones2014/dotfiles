@@ -31,9 +31,11 @@ function s:FormatOnSave()
     return
   endif
 
+  let save_cursor = getpos(".")
   call CocAction('runCommand', 'editor.action.organizeImport')
   sleep 100m
   call CocAction('format')
+  call setpos(".", save_cursor)
 endfunction
 
 autocmd BufWritePre * silent call <SID>FormatOnSave()
