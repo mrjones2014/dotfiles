@@ -1,0 +1,7 @@
+vim: .config/nvim/
+fish: .config/fish/
+tmux: .config/tmux/
+scripts: scripts/
+term: .config/alacritty/
+hammerspoon: .hammerspoon/
+git: .config/git/
