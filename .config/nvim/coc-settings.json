@@ -5,6 +5,7 @@
   "emmet.includeLanguages": { "gohtmltmpl": "html" },
   "html.filetypes": ["html", "gohtmltmpl", "handlebars", "htmldjango", "blade"],
   "html.autoClosingTags": true,
+  "coc.preferences.useQuickfixForLocations": true,
   "suggest.completionItemKindLabels": {
     "function": "",
     "method": "",
