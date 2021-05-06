@@ -14,22 +14,17 @@ alias emptytrash="sudo rm -rf ~/.Trash/*"
 alias h="history | fzf"
 
 function conf
-  if [ $argv[1] = "vim" ]
-    pushd ~/.config/nvim && nvim && popd
-  else if [ $argv[1] = "fish" ]
-    pushd ~/.config/fish && nvim && popd && sourcefish
-  else if [ $argv[1] = "tmux" ]
-    pushd ~/.config/tmux && nvim && popd
-  else if [ $argv[1] = "scripts" ]
-    pushd ~/scripts && nvim && popd
-  else if [ $argv[1] = "term" ]
-    pushd ~/.config/alacritty && nvim && popd
-  else if [ $argv[1] = "hammerspoon" ]
-    pushd ~/.hammerspoon && nvim && popd
-  else if [ $argv[1] = "git" ]
-    pushd ~/.config/git && nvim && popd
+  set -l SUBJECT_NAME $argv[1]
+  set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config-paths.yml | head -n1 | awk '{ print $2 }')
+  if [ -z "$CONFIG_PATH" ]
+    echo "$SUBJECT_NAME not configured in ~/.config-paths.yml"
+    return
+  end
+
+  if [ "$SUBJECT_NAME" = "fish" ]
+    pushd "$HOME/$CONFIG_PATH" && nvim && popd && sourcefish
   else
-    echo "conf $argv[1] is not set up"
+    pushd "$HOME/$CONFIG_PATH" && nvim && popd
   end
 end
 
