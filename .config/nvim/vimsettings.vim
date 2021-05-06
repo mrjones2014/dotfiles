@@ -3,7 +3,9 @@ function StripTrailingWhitespace()
     if &ft =~ 'vim'
         return
     endif
+    let save_cursor = getpos(".")
     %s/\s\+$//e
+    call setpos(".", save_cursor)
 endfunction
 
 set nocompatible
