@@ -7,6 +7,7 @@ alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 # alias vi and vim to open nvim instead
 alias vim="nvim"
 alias vi="nvim"
+alias v="nvim"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
@@ -25,6 +26,8 @@ function conf
     pushd ~/.config/alacritty && nvim && popd
   else if [ $argv[1] = "hammerspoon" ]
     pushd ~/.hammerspoon && nvim && popd
+  else if [ $argv[1] = "git" ]
+    pushd ~/.config/git && nvim && popd
   else
     echo "conf $argv[1] is not set up"
   end
