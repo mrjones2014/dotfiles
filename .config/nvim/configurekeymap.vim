@@ -5,6 +5,9 @@
 " fix the fucking stupid yank/paste default behavior to be not stupid
 xnoremap <silent> P p:call setreg('"', getreg('0'), getregtype('0'))<CR>
 
+" jk as second mapping to <ESC>
+imap jk <Esc>
+
 " keep visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
