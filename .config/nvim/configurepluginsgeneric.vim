@@ -22,3 +22,5 @@ let g:sleuth_automatic = 1
 let g:move_key_modifier = 'C'
 
 let g:vimade = {}
+let g:vimade.enabletreesitter = 1
+let g:vimade.fadelevel = 0.75
