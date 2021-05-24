@@ -2,7 +2,7 @@ alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile 
 alias docker-login-local="docker login registry.1password.io -u local-registry"
 
 # Alias for dotfiles management
-alias config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # alias vi and vim to open nvim instead
 alias vim="nvim"
