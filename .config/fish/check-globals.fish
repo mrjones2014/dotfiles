@@ -73,6 +73,10 @@ function check_globals
         echo 'Install rustup fish plugin: omf install rustup'
     end
 
+    if [ -z (pip3 list | grep -F pynvim) ]
+        echo "Install pynvim: pip3 install pynvim"
+    end
+
     if [ -z (ls /Applications/ | grep -i hammerspoon) ]
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
     end
