@@ -10,6 +10,8 @@ endfunction
 
 set nocompatible
 
+set cursorline
+
 " leader key
 let mapleader = "\\"
 
