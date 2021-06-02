@@ -36,3 +36,6 @@ let g:NERDTreeShowHidden = 1
 
 " but also respect wildignore
 let g:NERDTreeRespectWildIgnore = 1
+
+" and ignore node_modules
+let g:NERDTreeIgnore = ['^node_modules$']
