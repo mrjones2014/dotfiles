@@ -30,3 +30,11 @@ end
 
 check_globals || echo "Some required global packages are not installed. Check output above."
 source $HOME/.config/fish/check-architecture.fish
+
+###-begin-yaclt-completions-###
+#
+# yargs command completion script
+#
+# Installation: yaclt completion-fish >> ~/.config/fish/config.fish
+complete --no-files --command yaclt --arguments "(yaclt --get-yargs-completions (commandline -cp))"
+
