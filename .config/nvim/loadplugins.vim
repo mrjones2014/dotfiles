@@ -30,10 +30,10 @@ Plug 'dense-analysis/ale'
 Plug 'windwp/nvim-autopairs'
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
+Plug 'neoclide/jsonc.vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'matze/vim-move'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
