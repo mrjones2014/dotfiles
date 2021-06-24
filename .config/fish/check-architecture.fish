@@ -12,4 +12,3 @@ function check_architecture
       echo "Unknown architecture: $arch_name"
   end
 end
-check_architecture
