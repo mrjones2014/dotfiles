@@ -11,7 +11,7 @@ alias v="nvim"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
-alias h="history | fzf"
+alias h="history | fzf --select-1 --exit-0 | pbcopy"
 
 function conf
   set -l SUBJECT_NAME $argv[1]
