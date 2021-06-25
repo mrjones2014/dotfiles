@@ -58,26 +58,20 @@ nmap <leader><leader> :Obsession<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" telescope.nvim
+" fzf
 """""""""""""""""""""""""""""""""""""""""""""
 
 " ff or ctrl+p to search for files
-nnoremap ff :FindFiles<CR>
+nnoremap ff :Files<CR>
 
 " ft to search for text
-nnoremap ft :lua require'telescope'.extensions.fzf_writer.grep()<CR>
+nnoremap ft :Rg<CR>
 
 " fb to search buffers
-nnoremap fb :Telescope buffers<CR>
-
-" fh to search help tags
-nnoremap fh :Telescope help_tags<CR>
-
-" fc to search commands
-nnoremap fc :Telescope commands<CR>
+nnoremap fb :Buffers<CR>
 
 " ctrl+f to fuzzy find in current buffer
-nnoremap <C-f> :Telescope current_buffer_fuzzy_find<CR>
+nnoremap <C-f> :BLines<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""

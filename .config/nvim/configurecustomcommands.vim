@@ -12,5 +12,5 @@ cnoreabbrev jest Jest
 command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 cnoreabbrev jc JestCurrent
 
-" aliases for Telescope search for files
-command! -nargs=0 FindFiles :Telescope find_files find_command=rg,--ignore,--hidden,--files
+" override :Rg command
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
