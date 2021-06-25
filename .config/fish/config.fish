@@ -1,3 +1,8 @@
+# start tmux session by default
+if [ -z "$TMUX" ]
+    exec tmux new-session -A -s $USER
+end
+
 export GPG_TTY=(tty)
 export EDITOR="nvim"
 
@@ -16,6 +21,7 @@ set PATH $PATH "$HOME/scripts"
 set PATH $PATH "$HOME/git/webbook/scripts"
 
 source $HOME/.config/fish/aliases.fish
+source $HOME/.config/fish/check-architecture.fish
 
 if ! type starship >/dev/null
     echo 'Install starship: https://github.com/starship/starship'
@@ -23,18 +29,14 @@ else
     starship init fish | source
 end
 
-# start tmux session by default
-if [ "$TERM" != "screen" ]
-    exec tmux
-end
-
-check_globals || echo "Some required global packages are not installed. Check output above."
-source $HOME/.config/fish/check-architecture.fish
-
 ###-begin-yaclt-completions-###
 #
 # yargs command completion script
 #
 # Installation: yaclt completion-fish >> ~/.config/fish/config.fish
 complete --no-files --command yaclt --arguments "(yaclt --get-yargs-completions (commandline -cp))"
+
+
+check_globals || echo "Some required global packages are not installed. Check output above."
+
 
