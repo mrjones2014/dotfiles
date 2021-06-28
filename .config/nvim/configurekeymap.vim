@@ -18,7 +18,7 @@ nmap <silent> <leader>v :vnew<CR>:Files<CR>
 
 " <leader>b to split pane vertically, switch to new pane, and search already
 " opened buffers and put the selected buffer into the new pane
-nmap <silent> <leader>b :vnew<CR>:Telescope buffers<CR>
+nmap <silent> <leader>b :vnew<CR>:Buffers<CR>
 
 " ctrl+j to move line up
 " map <silent> <C-k> :m -2<CR>
