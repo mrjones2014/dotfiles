@@ -14,7 +14,7 @@ vnoremap > >gv
 
 " <leader>v to split pane vertically, switch to new pane, open file search to put new
 " file into new pane
-nmap <silent> <leader>v :vnew<CR>:FindFiles<CR>
+nmap <silent> <leader>v :vnew<CR>:Files<CR>
 
 " <leader>b to split pane vertically, switch to new pane, and search already
 " opened buffers and put the selected buffer into the new pane
