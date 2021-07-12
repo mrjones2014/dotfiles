@@ -51,6 +51,9 @@ nnoremap ft :Rg<CR>
 " fb to search buffers
 nnoremap fb :Buffers<CR>
 
+" fh to search recents
+nnoremap fh :History<CR>
+
 " ctrl+f to fuzzy find in current buffer
 nnoremap <C-f> :BLines<CR>
 
