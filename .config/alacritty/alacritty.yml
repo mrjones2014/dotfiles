@@ -15,4 +15,4 @@ key_bindings:
   - { key: H, mods: Alt, chars: "\x1bh" }
   - { key: L, mods: Alt, chars: "\x1bl" }
 import:
-  - ~/.config/alacritty/alacritty-one-dark-theme.yml
+  - ~/.config/alacritty/theme.yml
