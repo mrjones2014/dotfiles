@@ -8,10 +8,18 @@ let g:dashboard_custom_header = [
 \]
 
 let g:dashboard_custom_section={
-  \ 'buffer_list': {
-      \ 'description': ['  Load Last Session'],
+  \ 'session': {
+      \ 'description': ['  Load Last Session    sl'],
       \ 'command': 'SessionLoad'
-    \}
+    \},
+  \ 'recents': {
+    \ 'description': ['  Search Recent Files    fh'],
+    \ 'command': 'History'
+  \ },
+  \ 'files': {
+    \ 'description': ['  Search Files           ff'],
+    \ 'command': 'Files'
+  \ }
 \ }
 
 let g:dashboard_custom_footer = { }

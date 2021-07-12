@@ -1,1 +1,5 @@
-require("bufferline").setup{}
+require("bufferline").setup({
+  options = {
+    max_name_length = 24
+  }
+})
