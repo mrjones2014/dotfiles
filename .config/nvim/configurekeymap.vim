@@ -38,14 +38,6 @@ inoremap <expr> <Esc> pumvisible() ? '<c-y>' : '<Esc>'
 map <silent> <leader>c :Commentary<CR>
 
 
-
-"""""""""""""""""""""""""""""""""""""""""""""
-" vim-obsession
-"""""""""""""""""""""""""""""""""""""""""""""
-
-nmap <leader><leader> :Obsession<CR>
-
-
 """""""""""""""""""""""""""""""""""""""""""""
 " fzf
 """""""""""""""""""""""""""""""""""""""""""""
@@ -123,6 +115,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" lualine/window management
+" Dashboard Session
 """""""""""""""""""""""""""""""""""""""""""""
 
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
