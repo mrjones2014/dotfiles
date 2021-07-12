@@ -50,12 +50,12 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'TaDaa/vimade'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'thaerkh/vim-indentguides'
 Plug 'farmergreg/vim-lastplace'
-Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 
 call plug#end()
