@@ -120,3 +120,12 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" Window/pane movement
+"""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap H <C-w>h
+nnoremap J <C-w>j
+nnoremap K <C-w>k
+nnoremap L <C-w>l
