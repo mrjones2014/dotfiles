@@ -19,7 +19,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-obsession'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
