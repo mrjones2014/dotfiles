@@ -2,9 +2,6 @@
 " Generic
 """""""""""""""""""""""""""""""""""""""""""""
 
-" fix the fucking stupid yank/paste default behavior to be not stupid
-xnoremap <silent> P p:call setreg('"', getreg('0'), getregtype('0'))<CR>
-
 " jk as second mapping to <ESC>
 imap jk <Esc>
 
@@ -14,19 +11,11 @@ vnoremap > >gv
 
 " <leader>v to split pane vertically, switch to new pane, open file search to put new
 " file into new pane
-nmap <silent> <leader>v :vnew<CR>:Files<CR>
+nmap <silent> <leader>v :vsplit<CR>:Files<CR>
 
 " <leader>b to split pane vertically, switch to new pane, and search already
 " opened buffers and put the selected buffer into the new pane
-nmap <silent> <leader>b :vnew<CR>:Buffers<CR>
-
-" ctrl+j to move line up
-" map <silent> <C-k> :m -2<CR>
-" ctrl+k to move line down
-" map <silent> <C-j> :m +1<CR>
-
-" space => q to close buffer
-nmap <silent> <Space>q :bp<CR>:bd #<CR>
+nmap <silent> <leader>b :vsplit<CR>:Buffers<CR>
 
 " <leader>q to close all
 nmap <leader>q :qa<CR>
@@ -75,11 +64,20 @@ nnoremap <C-f> :BLines<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
+" nvim-tree
 """""""""""""""""""""""""""""""""""""""""""""
 
-" F3 to toggle NERDTree
-nmap <silent> <F3> :NERDTreeToggle<CR>
+" F3 to toggle tree
+nmap <silent> <F3> :NvimTreeToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" nvim-bufferline window movement
+"""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <silent>bl :BufferLineCycleNext<CR>
+nnoremap <silent>bh :BufferLineCyclePrev<CR>
+nnoremap <silent>bd :bdelete<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -125,27 +123,6 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" airline/window management
+" lualine/window management
 """""""""""""""""""""""""""""""""""""""""""""
 
-" Go to tab by number
-nmap <silent> <leader>1 <Plug>AirlineSelectTab1
-nmap <silent> <leader>2 <Plug>AirlineSelectTab2
-nmap <silent> <leader>3 <Plug>AirlineSelectTab3
-nmap <silent> <leader>4 <Plug>AirlineSelectTab4
-nmap <silent> <leader>5 <Plug>AirlineSelectTab5
-nmap <silent> <leader>6 <Plug>AirlineSelectTab6
-nmap <silent> <leader>7 <Plug>AirlineSelectTab7
-nmap <silent> <leader>8 <Plug>AirlineSelectTab8
-nmap <silent> <leader>9 <Plug>AirlineSelectTab9
-
-" Go to window by number
-nmap <Space>1 :1 wincmd w<CR>
-nmap <Space>2 :2 wincmd w<CR>
-nmap <Space>3 :3 wincmd w<CR>
-nmap <Space>4 :4 wincmd w<CR>
-nmap <Space>5 :5 wincmd w<CR>
-nmap <Space>6 :6 wincmd w<CR>
-nmap <Space>7 :7 wincmd w<CR>
-nmap <Space>8 :8 wincmd w<CR>
-nmap <Space>9 :9 wincmd w<CR>
