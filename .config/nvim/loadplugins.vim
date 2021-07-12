@@ -9,7 +9,7 @@ call plug#begin(stdpath('data') . '/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " themes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'joshdick/onedark.vim'
+Plug 'projekt0n/github-nvim-theme'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
