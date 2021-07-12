@@ -1,8 +1,10 @@
 " theme
 syntax on
 set termguicolors
-let g:onedark_termcolors=256
-colorscheme onedark
+
+lua require('github-theme').setup()
+
+colorscheme github
 
 " this has to come after color scheme is set up because its overriding theme
 " colors
