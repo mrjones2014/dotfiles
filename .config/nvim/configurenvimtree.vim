@@ -1,0 +1,10 @@
+let g:nvim_tree_side = "right"
+let g:nvim_tree_width = 40
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_indent_markets = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_ignore = [ ".git", "node_modules", ".cache", ".DS_Store", ".netrwhist" ]
+let g:nvim_tree_special_files = {}

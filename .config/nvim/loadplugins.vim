@@ -57,5 +57,6 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'airblade/vim-gitgutter'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
+Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
