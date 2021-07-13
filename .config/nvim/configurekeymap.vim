@@ -67,15 +67,6 @@ nmap <silent> <F3> :NvimTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-" nvim-bufferline window movement
-"""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <silent>K :BufferLineCycleNext<CR>
-nnoremap <silent>J :BufferLineCyclePrev<CR>
-nnoremap <silent><C-w> :exec 'bdelete ' . bufname()<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""
 " coc.nvim
 """""""""""""""""""""""""""""""""""""""""""""
 
@@ -123,6 +114,17 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" nvim-bufferline window movement
+"""""""""""""""""""""""""""""""""""""""""""""
+
+" ctrl+tab and shift+tab for cycling buffer tabs
+nnoremap <silent><C-i> :BufferLineCycleNext<CR>
+nnoremap <silent><S-tab> :BufferLineCyclePrev<CR>
+nnoremap <silent>W :exec 'bdelete ' . bufname()<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Window/pane movement

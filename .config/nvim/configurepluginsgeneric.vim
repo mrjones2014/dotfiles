@@ -1,9 +1,3 @@
-let g:startify_lists = [
-	\ { 'type': 'dir',       'header': ['Recent Files in '. getcwd()] },
-	\ { 'type': 'files',     'header': ['Recent Files (Global)'] },
-	\ { 'type': 'sessions',  'header': ['Sessions'] },
-\ ]
-
 " disable indentLine in markdown cause its glitchy when trying to write
 " code-fences
 let g:indentguides_ignorelist = ['markdown', 'json']
