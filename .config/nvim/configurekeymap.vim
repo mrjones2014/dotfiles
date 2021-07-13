@@ -70,8 +70,8 @@ nmap <silent> <F3> :NvimTreeToggle<CR>
 " nvim-bufferline window movement
 """""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <silent><C-l> :BufferLineCycleNext<CR>
-nnoremap <silent><C-h> :BufferLineCyclePrev<CR>
+nnoremap <silent>K :BufferLineCycleNext<CR>
+nnoremap <silent>J :BufferLineCyclePrev<CR>
 nnoremap <silent><C-w> :exec 'bdelete ' . bufname()<CR>
 
 
