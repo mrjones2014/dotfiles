@@ -27,6 +27,10 @@ colors:
     cyan:    '0x29b7da'
     white:   '0xd1d5da'
 
+  cursor:
+    text: '#000000'
+    cursor: '#528bff'
+
   indexed_colors:
     - { index: 16, color: '0xd18616' }
     - { index: 17, color: '0xf14c4c' }
