@@ -23,6 +23,8 @@ function conf
 
   if [ "$SUBJECT_NAME" = "fish" ]
     pushd "$HOME/$CONFIG_PATH" && nvim && popd && sourcefish
+  else if [ "$SUBJECT_NAME" = "bat" ]
+    nvim "$HOME/$CONFIG_PATH" # bat config is a single file
   else
     pushd "$HOME/$CONFIG_PATH" && nvim && popd
   end
