@@ -31,7 +31,7 @@ Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
 Plug 'neoclide/jsonc.vim'
 Plug 'AndrewRadev/tagalong.vim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'sheerun/vim-polyglot'
 Plug 'matze/vim-move'
 
 
