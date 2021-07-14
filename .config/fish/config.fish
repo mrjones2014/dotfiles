@@ -1,5 +1,5 @@
 # start tmux session by default
-if [ -z "$TMUX" ]
+if [ -z "$TMUX" ] && [ "$START_TMUX_PLEASE" = 1 ]
     exec tmux new-session -A -s $USER
 end
 
