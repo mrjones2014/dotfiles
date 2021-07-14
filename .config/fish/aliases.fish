@@ -13,7 +13,11 @@ alias emptytrash="sudo rm -rf ~/.Trash/*"
 
 alias h="history | fzf --select-1 --exit-0 | pbcopy"
 
-alias ls="exa --icons --color=always"
+alias ls="exa --icons --color=always -s type -F"
+alias la="ls -a"
+alias ll="ls -l --git"
+alias l="ls -laH"
+alias lg="ls -lG"
 
 function conf
   set -l SUBJECT_NAME $argv[1]
