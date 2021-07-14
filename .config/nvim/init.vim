@@ -13,7 +13,6 @@ source $HOME/.config/nvim/configurefiletypedetection.vim
 source $HOME/.config/nvim/configurenvimtree.vim
 source $HOME/.config/nvim/configuredashboard.vim
 
-lua require'configure-treesitter'
 lua require'configure-autopairs'
 lua require'configure-lualine'
 lua require'configure-tabline'
