@@ -1,0 +1,4 @@
+*.txt
+spg.js
+.git/
+yarn.lock
