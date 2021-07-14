@@ -121,8 +121,8 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 """""""""""""""""""""""""""""""""""""""""""""
 
 " ctrl+tab and shift+tab for cycling buffer tabs
-nnoremap <silent><C-tab> :BufferLineCycleNext<CR>
-nnoremap <silent><S-tab> :BufferLineCyclePrev<CR>
+nnoremap <silent><C-i> :BufferLineCycleNext<CR>
+nnoremap <silent><S-i> :BufferLineCyclePrev<CR>
 nnoremap <silent>W :exec 'bdelete ' . bufname()<CR>
 
 
