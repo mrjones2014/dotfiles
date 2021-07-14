@@ -28,7 +28,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'windwp/nvim-autopairs'
 Plug 'dag/vim-fish'
-Plug 'fatih/vim-go'
 Plug 'neoclide/jsonc.vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'sheerun/vim-polyglot'
