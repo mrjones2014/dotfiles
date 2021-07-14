@@ -5,3 +5,4 @@ scripts: scripts/
 term: .config/alacritty/
 hammerspoon: .hammerspoon/
 git: .config/git/
+bat: .config/bat/config

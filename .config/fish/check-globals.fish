@@ -73,6 +73,10 @@ function check_globals
         echo 'Install rustup fish plugin: omf install rustup'
     end
 
+    if ! type bat >/dev/null
+        echo 'Install bat: brew install bat'
+    end
+
     if [ -z (pip3 list | grep -F pynvim) ]
         echo "Install pynvim: pip3 install pynvim"
     end
