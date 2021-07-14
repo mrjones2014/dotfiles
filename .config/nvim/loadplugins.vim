@@ -48,7 +48,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'TaDaa/vimade'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'thaerkh/vim-indentguides'
