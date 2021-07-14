@@ -2,7 +2,8 @@ vim: .config/nvim/
 fish: .config/fish/
 tmux: .config/tmux/
 scripts: scripts/
-term: .config/alacritty/
+kitty: .config/kitty/
+alacritty: .config/alacritty/
 hammerspoon: .hammerspoon/
 git: .config/git/
 bat: .config/bat/config
