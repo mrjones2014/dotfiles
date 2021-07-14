@@ -13,6 +13,8 @@ alias emptytrash="sudo rm -rf ~/.Trash/*"
 
 alias h="history | fzf --select-1 --exit-0 | pbcopy"
 
+alias ls="exa --icons --color=always"
+
 function conf
   set -l SUBJECT_NAME $argv[1]
   set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config-paths.yml | head -n1 | awk '{ print $2 }')

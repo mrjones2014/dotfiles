@@ -77,6 +77,10 @@ function check_globals
         echo 'Install bat: brew install bat'
     end
 
+    if ! type exa >/dev/null
+        echo 'Install exa: brew install exa'
+    end
+
     if [ -z (pip3 list | grep -F pynvim) ]
         echo "Install pynvim: pip3 install pynvim"
     end
