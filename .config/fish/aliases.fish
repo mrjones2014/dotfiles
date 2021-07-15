@@ -60,7 +60,9 @@ end
 
 function find_projects
   set -l local_fzf_dir_find (exa -1 --all --level=1 ~/git/ | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
-  echo "$HOME/git/$local_fzf_dir_find"
+  if test -n "$local_fzf_dir_find"
+    echo "$HOME/git/$local_fzf_dir_find"
+  end
 end
 
 # fzf find a directory and cd to it
