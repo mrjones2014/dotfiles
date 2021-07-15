@@ -14,11 +14,10 @@ end
 
 thefuck --alias | source
 
-set FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git --ignore .DS_Store -g ""'
-
 set PATH $PATH "$HOME/scripts"
 set PATH $PATH "$HOME/git/webbook/scripts"
 
+source $HOME/.config/fish/fzf-config.fish
 source $HOME/.config/fish/aliases.fish
 source $HOME/.config/fish/check-architecture.fish
 
