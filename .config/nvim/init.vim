@@ -1,25 +1,22 @@
 " ALE has one setting that has to be set before loading the plugin, so keep it
 " up here
-source $HOME/.config/nvim/configureale.vim
+" source $HOME/.config/nvim/configureale.vim
 " then load plugins
-lua require'plugins'
+lua require('plugins')
 "then everything else
-source $HOME/.config/nvim/vimsettings.vim
-source $HOME/.config/nvim/configurecoc.vim
-source $HOME/.config/nvim/configurepluginsgeneric.vim
-source $HOME/.config/nvim/configurecustomcommands.vim
-source $HOME/.config/nvim/configurekeymap.vim
-source $HOME/.config/nvim/configurefiletypedetection.vim
-source $HOME/.config/nvim/configurenvimtree.vim
-source $HOME/.config/nvim/configuredashboard.vim
-
-lua require'configure-autopairs'
-lua require'configure-lualine'
-lua require'configure-tabline'
+lua require('settings')
+" source $HOME/.config/nvim/configurecoc.vim
+lua require('lsp-init')
+lua require('configure-plugins-generic')
+lua require('custom-commands')
+lua require('keybinds')
+lua require('custom-filetypes')
+lua require('configure-nvimtree')
+lua require('configure-dashboard')
+lua require('configure-autopairs')
+lua require('configure-lualine')
+lua require('configure-tabline')
 
 " colorscheme config has to be loaded after lualine to load dynamic lualine
 " theme
-source $HOME/.config/nvim/configurecolorscheme.vim
-
-" turn this dumb shit off in case any plugins turned it on
-set noautochdir
+lua require('configure-theme')

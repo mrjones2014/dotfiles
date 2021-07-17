@@ -2,14 +2,11 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Theme
-  use 'projekt0n/github-nvim-theme'
-
   -- Editing enhancements and tools
   use 'windwp/nvim-autopairs'
   use 'AndrewRadev/tagalong.vim'
   use 'matze/vim-move'
-  use 'junegunn/fzf'
+  use {'junegunn/fzf', cmd = "fzf#install()"}
   use 'junegunn/fzf.vim'
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = "MarkdownPreview"}
 
@@ -20,8 +17,7 @@ return require('packer').startup(function()
   use 'tpope/vim-eunuch'
 
   -- LSP + syntax
-  use {'neoclide/coc.nvim', branch = 'release' }
-  use 'dense-analysis/ale'
+  use 'neovim/nvim-lspconfig'
   use 'dag/vim-fish'
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'
@@ -37,4 +33,7 @@ return require('packer').startup(function()
   use 'hoob3rt/lualine.nvim'
   use 'akinsho/nvim-bufferline.lua'
   use 'glepnir/dashboard-nvim'
+
+  -- Theme
+  use 'projekt0n/github-nvim-theme'
 end)
