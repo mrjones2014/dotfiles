@@ -1,3 +1,8 @@
+# ensure brew stuff is on PATH
+if test -f "/opt/homebrew/bin/brew"
+    eval (/opt/homebrew/bin/brew shellenv)
+end
+
 # start tmux session by default
 if [ -z "$TMUX" ] && [ "$START_TMUX_PLEASE" = 1 ]
     exec tmux new-session -A -s $USER
@@ -7,10 +12,6 @@ export GPG_TTY=(tty)
 export EDITOR="nvim"
 
 source $HOME/.config/fish/check-globals.fish
-
-if test -f "/opt/homebrew/bin/brew"
-    eval (/opt/homebrew/bin/brew shellenv)
-end
 
 thefuck --alias | source
 
