@@ -16,6 +16,7 @@ lua require('configure-dashboard')
 lua require('configure-autopairs')
 lua require('configure-lualine')
 lua require('configure-tabline')
+lua require('configure-compe')
 
 " colorscheme config has to be loaded after lualine to load dynamic lualine
 " theme
