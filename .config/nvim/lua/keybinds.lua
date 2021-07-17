@@ -16,7 +16,7 @@ end
 -- WINDOW STUFF
 ------------------
 -- jk as alias to <Esc>
-map('i', 'jk', t'<Esc>', { noremap = true })
+map('i', 'jk', t'<Esc>', {})
 
 -- keep selection when using < and > for indenting in visual mode
 map('v', '<', '<gv', { noremap = true })
@@ -26,11 +26,6 @@ map('v', '>', '>gv', { noremap = true })
 map('n', '<leader>q', t':qa<CR>', { noremap = true, silent = true })
 -- <leader>s to save all
 map('n', '<leader>s', t':wa<CR>', { noremap = true })
-
--- in insert mode, escape should do the following:
--- - if a coc popup is visible, just close the popup and remain in Insert mode
--- - otherwise, act normal (go to Normal mode)
-map('i', '<Esc>', t'pumvisible() ? \'<c-y>\' : \'<Esc>\'', { noremap = true, expr = true, silent = true })
 
 -- toggle nvim-tree with <F3>
 map('n', '<F3>', t':NvimTreeToggle<CR>', { noremap = true, silent = true })
@@ -89,26 +84,42 @@ local check_back_space = function()
 end
 
 -- Use (s-)tab to:
---- move to prev/next item in completion menuone
+--- move to prev/next item in completion menu
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
+    return t '<C-n>'
   elseif check_back_space() then
-    return t "<Tab>"
+    return t'<Tab>'
   else
     return vim.fn['compe#complete']()
   end
 end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
+    return t'<C-p>'
   else
-    return t "<S-Tab>"
+    return t'<S-Tab>'
   end
 end
 
-map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+
+-- Use enter to accept completion if pumvisible(),
+-- otherwise default behavior
+map('i', '<CR>', 'compe#confirm({ \'keys\': \'<CR>\', \'select\': v:true })', { expr = true })
+
+-- In insert mode, if pumvisible(), then <ESC> should just close the menu,
+-- otherwise exit insert mode
+_G.esc_close_menu = function()
+  if vim.fn.pumvisible() == 1 then
+    return vim.fn['compe#close']();
+  end
+
+  return t'<Esc>'
+end
+
+map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true })

@@ -15,6 +15,7 @@ vim.opt.wildmenu = true
 vim.opt.wrap = false
 vim.opt.autochdir = false
 vim.opt.diffopt ='vertical'
+vim.opt.cmdheight = 2
 
 -- required for nvim-compe
 vim.o.completeopt = "menuone,noselect"
