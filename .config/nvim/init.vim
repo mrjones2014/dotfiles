@@ -2,7 +2,7 @@
 " up here
 source $HOME/.config/nvim/configureale.vim
 " then load plugins
-source $HOME/.config/nvim/loadplugins.vim
+lua require'plugins'
 "then everything else
 source $HOME/.config/nvim/vimsettings.vim
 source $HOME/.config/nvim/configurecoc.vim

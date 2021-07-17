@@ -94,5 +94,9 @@ function check_globals
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
     end
 
+    if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]
+        echo "Install vim packer: https://github.com/wbthomason/packer.nvim#quickstart"
+    end
+
     return 0
 end
