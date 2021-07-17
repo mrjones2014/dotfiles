@@ -6,7 +6,7 @@ return require('packer').startup(function()
   use 'windwp/nvim-autopairs'
   use 'AndrewRadev/tagalong.vim'
   use 'matze/vim-move'
-  use {'junegunn/fzf', cmd = "fzf#install()"}
+  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'junegunn/fzf.vim'
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = "MarkdownPreview"}
 
@@ -18,6 +18,7 @@ return require('packer').startup(function()
 
   -- LSP + syntax
   use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-compe'
   use 'dag/vim-fish'
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'

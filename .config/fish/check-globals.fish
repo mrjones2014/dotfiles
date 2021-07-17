@@ -45,8 +45,12 @@ function check_globals
         echo 'Install prettier globally for vim integration: yarn global add prettier'
     end
 
-    if ! type tsserver >/dev/null
-        echo 'Install tsserver globally for vim integration: yarn global add typescript'
+    if ! type typescript-language-server >/dev/null
+        echo 'Install tsserver globally for vim integration: yarn global add typescript typescript-language-server'
+    end
+
+    if ! type vscode-css-language-server >/dev/null
+        echo 'Install tsserver globally for vim integration: yarn global add vscode-langservers-extracted'
     end
 
     if ! type eslint >/dev/null
