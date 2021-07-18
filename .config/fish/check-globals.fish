@@ -45,8 +45,12 @@ function check_globals
         echo 'Install prettier globally for vim integration: yarn global add prettier'
     end
 
-    if ! type tsserver >/dev/null
-        echo 'Install tsserver globally for vim integration: yarn global add typescript'
+    if ! type typescript-language-server >/dev/null
+        echo 'Install tsserver globally for vim integration: yarn global add typescript typescript-language-server'
+    end
+
+    if ! type vscode-css-language-server >/dev/null
+        echo 'Install tsserver globally for vim integration: yarn global add vscode-langservers-extracted'
     end
 
     if ! type eslint >/dev/null
@@ -92,6 +96,10 @@ function check_globals
     #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
+    end
+
+    if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]
+        echo "Install vim packer: https://github.com/wbthomason/packer.nvim#quickstart"
     end
 
     return 0
