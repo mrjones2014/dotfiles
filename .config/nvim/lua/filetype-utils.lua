@@ -6,7 +6,7 @@ function fileTypeUtils.buffer_to_string()
 end
 
 function fileTypeUtils.detect_filetypes()
-  if vim.bo.filetype == "html" and string.find(buffer_to_string(), "{{") then
+  if vim.bo.filetype == "html" and string.find(fileTypeUtils.buffer_to_string(), "{{") then
     vim.bo.filetype = "gohtmltmpl"
     return
   end
