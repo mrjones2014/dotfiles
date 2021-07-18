@@ -109,8 +109,15 @@ map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 
 -- Use enter to accept completion if pumvisible(),
--- otherwise default behavior
-map('i', '<CR>', 'compe#confirm({ \'keys\': \'<CR>\', \'select\': v:true })', { expr = true })
+-- otherwise default behavior.
+local npairs = require('nvim-autopairs')
+_G.nvim_autopairs_compe_integration_cr = function()
+  if vim.fn.pumvisible() then
+    vim.fn['compe#confirm']({ keys = t'<CR>', select = true });
+  end
+  return npairs.autopairs_cr()
+end
+map('i', '<CR>', 'v:lua.nvim_autopairs_compe_integration_cr()', { expr = true })
 
 -- In insert mode, if pumvisible(), then <ESC> should just close the menu,
 -- otherwise exit insert mode

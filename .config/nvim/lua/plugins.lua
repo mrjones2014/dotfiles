@@ -22,6 +22,7 @@ return require('packer').startup(function()
   use 'dag/vim-fish'
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'
+  use 'mattn/emmet-vim'
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
