@@ -16,7 +16,7 @@ See [here](https://stackoverflow.com/questions/64882584/how-to-run-the-homebrew-
 
 ### Packages
 
-There are some global installations that are required for some of the shell and nvim CoC configuration. The `check-globals.fish` script should output help text
+There are some global installations that are required for some of the shell and nvim LSP configuration. The `check-globals.fish` script should output help text
 for installing them if they're missing.
 
 ### Shell
@@ -25,7 +25,7 @@ You'll need to install [Fish Shell](https://github.com/fish-shell/fish-shell) be
 
 ## Neovim Config
 
-The Neovim configuration is using some Lua-based plugins, like TreeSitter for syntax highlighting, Telescope for file finding and live grep,
+The Neovim configuration is written in Lua and is using mostly Lua-based plugins, like built-in LSP, `fzf` for file finding and live grep,
 which means you need Neovim with Lua support (0.5+).
 
 ## Git Config
