@@ -25,6 +25,7 @@ return require('packer').startup(function()
   use 'mattn/emmet-vim'
   use 'sbdchd/neoformat'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  use 'folke/trouble.nvim'
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
