@@ -23,6 +23,8 @@ return require('packer').startup(function()
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'
   use 'mattn/emmet-vim'
+  use 'sbdchd/neoformat'
+  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
