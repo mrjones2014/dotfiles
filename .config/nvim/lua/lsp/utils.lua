@@ -43,7 +43,6 @@ function lspUtils.on_attach(client, bufnr)
       augroup END
     ]])
   end
-
 end
 
 return lspUtils
