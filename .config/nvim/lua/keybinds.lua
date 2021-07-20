@@ -70,6 +70,7 @@ map('n', '<leader>sl', t'<C-u>SessionLoad', { noremap = true })
 ------------------------
 -- <leader>c to toggle comment
 map('n', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
+map('v', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
 
 -----------------------
 -- nvim-compe
