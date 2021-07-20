@@ -114,7 +114,7 @@ map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 local npairs = require('nvim-autopairs')
 _G.nvim_autopairs_compe_integration_cr = function()
   if vim.fn.pumvisible() then
-    vim.fn['compe#confirm']({ keys = t'<CR>', select = true });
+    return vim.fn['compe#confirm']({ keys = t'<CR>', select = true });
   end
   return npairs.autopairs_cr()
 end
