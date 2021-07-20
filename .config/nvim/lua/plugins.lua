@@ -19,6 +19,7 @@ return require('packer').startup(function()
   -- LSP + syntax
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
+  use 'onsails/lspkind-nvim'
   use 'dag/vim-fish'
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'
