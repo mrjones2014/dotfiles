@@ -16,6 +16,7 @@ vim.opt.wrap = false
 vim.opt.autochdir = false
 vim.opt.diffopt ='vertical'
 vim.opt.cmdheight = 2
+vim.opt.smartcase = true
 
 -- required for nvim-compe
 vim.o.completeopt = "menuone,noselect"
