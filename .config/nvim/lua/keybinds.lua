@@ -65,13 +65,6 @@ map('n', '<leader>ss', t'<C-u>SessionSave', { noremap = true })
 -- <leader>sl to load session
 map('n', '<leader>sl', t'<C-u>SessionLoad', { noremap = true })
 
-------------------------
--- Editing
-------------------------
--- <leader>c to toggle comment
-map('n', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
-map('v', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
-
 -----------------------
 -- nvim-compe
 -----------------------
@@ -131,3 +124,15 @@ _G.esc_close_menu = function()
 end
 
 map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true })
+
+------------------------
+-- trouble.nvim
+------------------------
+map('n', '<leader>t', t':TroubleToggle<CR>', { noremap = true, silent = true })
+
+------------------------
+-- Editing
+------------------------
+-- <leader>c to toggle comment
+map('n', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
+map('v', '<leader>c', t':Commentary<CR>', { noremap = true, silent = true })
