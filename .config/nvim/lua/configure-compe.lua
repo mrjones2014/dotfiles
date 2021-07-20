@@ -14,7 +14,6 @@ require('compe').setup({
 
   source = {
     path = { kind = "   (Path)" },
-    buffer = { kind = "   (Buffer)" },
     -- vsnip = {kind = "   (Snippet)"}, -- enable when I get to adding vsnip
     nvim_lsp = { kind = "   (LSP)" },
     nvim_lua = { kind = " {} (nvim Lua)" },
