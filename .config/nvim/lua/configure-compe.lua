@@ -13,8 +13,11 @@ require('compe').setup({
   documentation = true;
 
   source = {
-    path = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-  };
+    path = { kind = "   (Path)" },
+    buffer = { kind = "   (Buffer)" },
+    -- vsnip = {kind = "   (Snippet)"}, -- enable when I get to adding vsnip
+    nvim_lsp = { kind = "   (LSP)" },
+    nvim_lua = { kind = " {} (nvim Lua)" },
+    spell = { kind = "   (Spell)" },
+  }
 })
