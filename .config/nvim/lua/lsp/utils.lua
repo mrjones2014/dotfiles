@@ -29,7 +29,7 @@ function lspUtils.on_attach(client, bufnr)
     vim.cmd([[
       augroup fmt
         autocmd!
-        autocmd BufWritePre * undojoin | Neoformat | TSLspOrganizeSync
+        autocmd BufWritePre * undojoin | TSLspOrganizeSync | Neoformat
       augroup END
     ]])
   else
