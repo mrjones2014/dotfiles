@@ -2,6 +2,9 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- This is used by lots of other lua plugins so load this up here
+  use 'nvim-lua/plenary.nvim'
+
   -- Editing enhancements and tools
   use 'windwp/nvim-autopairs'
   use 'AndrewRadev/tagalong.vim'
@@ -25,12 +28,10 @@ return require('packer').startup(function()
   use 'sheerun/vim-polyglot'
   use 'mattn/emmet-vim'
   use 'sbdchd/neoformat'
-  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'folke/trouble.nvim'
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
   use 'thaerkh/vim-indentguides'

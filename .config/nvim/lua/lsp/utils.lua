@@ -26,17 +26,18 @@ function lspUtils.on_attach(client, bufnr)
 
   local ft = vim.bo.filetype
   if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+    -- OrganizeImports command is defined in lua/lsp/typescript.lua
     vim.cmd([[
       augroup fmt
         autocmd!
-        autocmd BufWritePre * undojoin | TSLspOrganizeSync | Neoformat
+        autocmd BufWritePre * OrganizeImports | Neoformat
       augroup END
     ]])
   else
     vim.cmd([[
       augroup fmt
         autocmd!
-        autocmd BufWritePre * undojoin | Neoformat
+        autocmd BufWritePre * Neoformat
       augroup END
     ]])
   end
