@@ -30,7 +30,7 @@ function lspUtils.on_attach(client, bufnr)
     vim.cmd([[
       augroup fmt
         autocmd!
-        autocmd BufWritePre * OrganizeImports | Neoformat
+        autocmd BufWritePre * OrganizeAndFormat
       augroup END
     ]])
   else
