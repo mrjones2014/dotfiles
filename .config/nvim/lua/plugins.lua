@@ -11,7 +11,7 @@ return require('packer').startup(function()
   use 'matze/vim-move'
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'junegunn/fzf.vim'
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = "MarkdownPreview"}
+  use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install'}
 
   -- Tim Pope plugins
   use 'tpope/vim-sleuth'
