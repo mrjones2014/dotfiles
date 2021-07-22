@@ -14,7 +14,7 @@ alias emptytrash="sudo rm -rf ~/.Trash/*"
 alias h="history | fzf --select-1 --exit-0 | pbcopy"
 
 # alias ls to exa with compatibility aliases
-alias ls="exa --icons --color=always -s type -F"
+alias ls="exa -a --icons --color=always -s type -F"
 alias la="ls -a"
 alias ll="ls -l --git"
 alias l="ls -laH"
