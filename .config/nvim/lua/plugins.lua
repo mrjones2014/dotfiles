@@ -27,7 +27,7 @@ return require('packer').startup(function()
   use 'neoclide/jsonc.vim'
   use 'sheerun/vim-polyglot'
   use 'mattn/emmet-vim'
-  use 'sbdchd/neoformat'
+  use {'prettier/vim-prettier', run = 'yarn install'}
   use 'folke/trouble.nvim'
 
   -- UI + utils

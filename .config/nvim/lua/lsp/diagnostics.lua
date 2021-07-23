@@ -1,4 +1,7 @@
+local utils = require('lspconfig/util')
+
 require('lspconfig').diagnosticls.setup({
+  root_dir = utils.root_pattern('.git'),
   filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
   init_options = {
     filetypes = {
