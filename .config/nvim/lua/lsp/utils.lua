@@ -37,7 +37,7 @@ function lspUtils.on_attach(client, bufnr)
     vim.cmd([[
       augroup fmt
         autocmd!
-        autocmd BufWritePre * Neoformat
+        autocmd BufWritePre * Prettier
       augroup END
     ]])
   end
