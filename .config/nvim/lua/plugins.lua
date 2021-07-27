@@ -33,6 +33,7 @@ return require('packer').startup(function()
   -- UI + utils
   use 'nvim-lua/popup.nvim'
   use 'kyazdani42/nvim-web-devicons'
+  use {'yamatsum/nvim-nonicons', requires = {'kyazdani42/nvim-web-devicons'}}
   use 'kyazdani42/nvim-tree.lua'
   use 'thaerkh/vim-indentguides'
   use 'farmergreg/vim-lastplace'

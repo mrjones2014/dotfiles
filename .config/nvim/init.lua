@@ -1,4 +1,5 @@
 -- Configuring Neovim
+require('disable-builtins')
 require('plugins')
 require('settings')
 require('lsp-init')
@@ -13,6 +14,7 @@ require('configure-dashboard')
 require('configure-autopairs')
 require('configure-lualine')
 require('configure-tabline')
+require('configure-lspkind')
 require('configure-compe')
 require('configure-trouble')
 require('configure-theme')
