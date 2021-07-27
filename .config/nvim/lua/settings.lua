@@ -23,14 +23,15 @@ vim.opt.ignorecase = true
 vim.o.completeopt = "menuone,noselect"
 
 -- setting to 0 makes it default to value of tabstop
-vim.opt.shiftwidth=0
-vim.opt.tabstop=2
+vim.opt.shiftwidth = 0
+vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 vim.opt.wildignore:append({'*.DS_Store'})
 -- enable line-wrapping with left and right cursor movement
-vim.opt.whichwrap:append({'<', '>', 'h', 'l', '[', ']'})
+print(vim.inspect(vim.opt.whichwrap))
+vim.opt.whichwrap:append({['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true})
 -- add @, -, and $ as keywords for full SCSS support
 vim.opt.iskeyword:append({'@-@', '-', '$'})
