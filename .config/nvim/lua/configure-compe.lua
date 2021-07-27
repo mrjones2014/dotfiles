@@ -20,5 +20,3 @@ require('compe').setup({
     spell = { kind = "   (Spell)" },
   }
 })
-
-require('lspkind').init({})
