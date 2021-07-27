@@ -1,9 +1,9 @@
 vim.opt.compatible = false
 vim.opt.cursorline = true
 vim.opt.autoread = true
-vim.opt.mouse ='a'
+vim.opt.mouse = 'a'
 vim.opt.autoindent = true
-vim.opt.backspace ='indent,eol,start'
+vim.opt.backspace = 'indent,eol,start'
 vim.opt.scrolloff = 4
 vim.opt.signcolumn='yes:2'
 vim.opt.hidden = true
@@ -29,10 +29,8 @@ vim.opt.expandtab = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.cmd('set wildignore+=*.DS_Store')
+vim.opt.wildignore:append({'*.DS_Store'})
 -- enable line-wrapping with left and right cursor movement
-vim.cmd('set whichwrap+=<,>,h,l,[,]')
+vim.opt.whichwrap:append({'<', '>', 'h', 'l', '[', ']'})
 -- add @, -, and $ as keywords for full SCSS support
-vim.cmd('set iskeyword+=@-@')
-vim.cmd('set iskeyword+=-')
-vim.cmd('set iskeyword+=$')
+vim.opt.iskeyword:append({'@-@', '-', '$'})
