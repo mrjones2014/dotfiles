@@ -11,22 +11,16 @@ end
 export GPG_TTY=(tty)
 export EDITOR="nvim"
 
-source $HOME/.config/fish/check-globals.fish
-
-thefuck --alias | source
-
 set PATH $PATH "$HOME/scripts"
 set PATH $PATH "$HOME/git/webbook/scripts"
 
+source $HOME/.config/fish/check-globals.fish
 source $HOME/.config/fish/fzf-config.fish
 source $HOME/.config/fish/aliases.fish
 source $HOME/.config/fish/check-architecture.fish
 
-if ! type starship >/dev/null
-    echo 'Install starship: https://github.com/starship/starship'
-else
-    starship init fish | source
-end
+thefuck --alias | source
+starship init fish | source
 
 ###-begin-yaclt-completions-###
 #
@@ -34,8 +28,3 @@ end
 #
 # Installation: yaclt completion-fish >> ~/.config/fish/config.fish
 complete --no-files --command yaclt --arguments "(yaclt --get-yargs-completions (commandline -cp))"
-
-
-check_globals || echo "Some required global packages are not installed. Check output above."
-
-

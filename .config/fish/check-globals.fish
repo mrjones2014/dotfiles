@@ -1,8 +1,18 @@
 function check_globals
+    if test -z "(ls ~/Library/Fonts | grep 'Fira Code')"
+        echo 'Install Fira Code NerdFont: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode'
+    end
+
+    if test -z "(ls ~/Library/Fonts | grep nonicons)"
+        echo 'Install nonicons font: https://github.com/yamatsum/nonicons'
+    end
+
     if ! type thefuck >/dev/null
         echo 'Install thefuck: https://github.com/nvbn/thefuck'
-    else
-        thefuck --alias | source
+    end
+
+    if ! type starship >/dev/null
+        echo 'Install starship: https://github.com/starship/starship'
     end
 
     if ! type omf >/dev/null
