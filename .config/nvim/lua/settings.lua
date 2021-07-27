@@ -31,7 +31,6 @@ vim.opt.splitright = true
 
 vim.opt.wildignore:append({'*.DS_Store'})
 -- enable line-wrapping with left and right cursor movement
-print(vim.inspect(vim.opt.whichwrap))
 vim.opt.whichwrap:append({['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true})
 -- add @, -, and $ as keywords for full SCSS support
 vim.opt.iskeyword:append({'@-@', '-', '$'})
