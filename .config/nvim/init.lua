@@ -9,6 +9,7 @@ require('custom-filetypes')
 
 -- Configuring Plugins
 require('configure-plugins-generic')
+require('configure-colorizer')
 require('configure-nvimtree')
 require('configure-dashboard')
 require('configure-autopairs')
