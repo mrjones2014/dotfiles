@@ -40,6 +40,7 @@ return require('packer').startup(function()
   use 'airblade/vim-gitgutter'
   use 'hoob3rt/lualine.nvim'
   use 'akinsho/nvim-bufferline.lua'
+  use 'norcalli/nvim-colorizer.lua'
   use 'glepnir/dashboard-nvim'
 
   -- Theme
