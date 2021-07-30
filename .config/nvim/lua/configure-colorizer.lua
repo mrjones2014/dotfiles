@@ -1,1 +1,9 @@
-require('colorizer').setup()
+require('colorizer').setup({
+  'css',
+  'scss',
+  'javascript',
+  'javascriptreact',
+  'typescript',
+  'typescriptreact',
+  'html',
+})
