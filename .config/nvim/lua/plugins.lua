@@ -28,7 +28,7 @@ return require('packer').startup(function()
   use 'mattn/emmet-vim'
   use {'prettier/vim-prettier', run = 'yarn install'}
   use 'folke/trouble.nvim'
-  use 'sheerun/vim-polyglot'
+  use 'fatih/vim-go'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- UI + utils
