@@ -20,3 +20,6 @@ require('configure-compe')
 require('configure-trouble')
 require('configure-treesitter')
 require('configure-theme')
+
+-- Custom whitespace handling -- must be loaded after colorscheme
+require('configure-trailing-whitespace')
