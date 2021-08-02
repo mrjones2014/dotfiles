@@ -25,10 +25,11 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim'
   use 'dag/vim-fish'
   use 'neoclide/jsonc.vim'
-  use 'sheerun/vim-polyglot'
   use 'mattn/emmet-vim'
   use {'prettier/vim-prettier', run = 'yarn install'}
   use 'folke/trouble.nvim'
+  use 'sheerun/vim-polyglot'
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'

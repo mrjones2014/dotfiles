@@ -2,6 +2,7 @@
 vim.cmd([[
   function SetGoHtmlOpts()
     setlocal syntax=gohtmltmpl
+    setlocal filetype=gohtmltmpl
     setlocal commentstring={{/*\ %s\ */}}
   endfunction
   augroup CustomFileTypeDetection
