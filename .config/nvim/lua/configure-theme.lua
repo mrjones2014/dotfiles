@@ -9,6 +9,4 @@ require('github-theme').setup({
 vim.cmd([[
   filetype plugin on
   colorscheme github
-  highlight TrailingWhitespace ctermbg=red guibg=red
-  match TrailingWhitespace /\s\+$/
 ]])
