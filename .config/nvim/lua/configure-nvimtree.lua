@@ -22,4 +22,5 @@ g.nvim_tree_bindings = {
   { key = "a",                            cb = tree_cb("create") },
   { key = "d",                            cb = tree_cb("remove") },
   { key = "r",                            cb = tree_cb("rename") },
+  { key = ".",                            cb = tree_cb("cd") },
 }
