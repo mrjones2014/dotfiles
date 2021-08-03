@@ -3,7 +3,7 @@ local api = vim.api
 
 require('github-theme').setup({
   themeStyle = 'dark',
-  sidebars = {'packer', 'NvimTree', 'term', 'terminal'},
+  sidebars = {'packer', 'NvimTree', 'term', 'terminal', 'fzf'},
 })
 
 vim.cmd([[

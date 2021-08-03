@@ -6,15 +6,15 @@ local function filepath()
   return path
 end
 
-require('lualine').setup {
+require('lualine').setup({
   options = {
-    theme = "github",
+    theme = 'github',
   },
   sections = {
-    lualine_a = {{"mode", lower = false}},
-    lualine_b = {"branch"},
+    lualine_a = {{'mode', lower = false}},
+    lualine_b = {'branch'},
     lualine_c = {filepath},
-    lualine_d = {"location"}
+    lualine_d = {'location'}
   },
-  extensions = {"nvim-tree"}
-}
+  extensions = {'nvim-tree'}
+})

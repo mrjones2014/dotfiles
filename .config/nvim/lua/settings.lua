@@ -22,7 +22,7 @@ vim.opt.termguicolors = true
 vim.opt.syntax = 'on'
 
 -- required for nvim-compe
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = 'menuone,noselect'
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
