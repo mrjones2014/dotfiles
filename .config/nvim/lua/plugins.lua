@@ -45,5 +45,5 @@ return require('packer').startup(function()
   use 'glepnir/dashboard-nvim'
 
   -- Theme
-  use 'projekt0n/github-nvim-theme'
+  use 'folke/tokyonight.nvim'
 end)
