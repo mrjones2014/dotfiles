@@ -17,6 +17,8 @@ end
 ------------------
 -- jk as alias to <Esc>
 map('i', 'jk', t'<Esc>', {})
+-- map kj as alias to jk
+map('i', 'kj', t'jk', {})
 
 -- keep selection when using < and > for indenting in visual mode
 map('v', '<', '<gv', { noremap = true })
