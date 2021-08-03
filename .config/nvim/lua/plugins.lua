@@ -30,6 +30,7 @@ return require('packer').startup(function()
   use 'folke/trouble.nvim'
   use 'fatih/vim-go'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use 'nvim-treesitter/playground'
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
