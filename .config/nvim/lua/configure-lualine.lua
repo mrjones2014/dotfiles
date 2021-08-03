@@ -8,7 +8,7 @@ end
 
 require('lualine').setup({
   options = {
-    theme = 'github',
+    theme = 'tokyonight',
   },
   sections = {
     lualine_a = {{'mode', lower = false}},
