@@ -23,21 +23,20 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
   use 'onsails/lspkind-nvim'
-  use 'dag/vim-fish'
+  use {'dag/vim-fish', ft = 'fish'}
   use 'neoclide/jsonc.vim'
   use 'mattn/emmet-vim'
   use {'prettier/vim-prettier', run = 'yarn install'}
   use 'folke/trouble.nvim'
   use 'fatih/vim-go'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-  use 'nvim-treesitter/playground'
+  use {'nvim-treesitter/playground', cmd = {'TSPlaygroundToggle'}}
 
   -- UI + utils
   use 'nvim-lua/popup.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use {'yamatsum/nvim-nonicons', requires = {'kyazdani42/nvim-web-devicons'}}
   use 'kyazdani42/nvim-tree.lua'
-  -- use 'thaerkh/vim-indentguides'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'farmergreg/vim-lastplace'
   use 'airblade/vim-gitgutter'
