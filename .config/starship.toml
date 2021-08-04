@@ -1,9 +1,14 @@
 format = """
  $directory$git_branch$git_status$git_state
- [=>](bold green)  """
+ $character """
+
+[character]
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[](bold green)"
 
 [git_branch]
-symbol = " "
+symbol = " "
 style = "bold #f74e27"
 
 [directory]
