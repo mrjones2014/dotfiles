@@ -7,3 +7,4 @@ alacritty: .config/alacritty/
 hammerspoon: .hammerspoon/
 git: .config/git/
 bat: .config/bat/config
+starship: .config/starship.toml
