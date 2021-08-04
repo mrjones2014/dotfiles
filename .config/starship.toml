@@ -4,6 +4,7 @@ format = """
 
 [git_branch]
 symbol = " "
+style = "bold green"
 
 [directory]
 read_only = " "
