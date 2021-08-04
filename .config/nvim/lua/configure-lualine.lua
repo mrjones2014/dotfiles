@@ -36,8 +36,8 @@ local modeIcons = {
   ['r']    = icons.get('vim-replace-mode'),
   ['rm']   = icons.get('vim-replace-mode'),
   ['r?']   = icons.get('vim-replace-mode'),
-  ['!']    = icons.get('vim-terminal-mode'),
-  ['t']    = icons.get('vim-terminal-mode'),
+  ['!']    = icons.get('terminal'),
+  ['t']    = icons.get('terminal'),
 }
 
 local function getMode()
