@@ -56,7 +56,7 @@ require('lualine').setup({
   },
   sections = {
     lualine_a = {getMode},
-    lualine_b = {'branch'},
+    lualine_b = {{'branch', icon = icons.get("git-branch")}},
     lualine_c = {{'diagnostics', sources = {'nvim_lsp'}, sections = {'error', 'warn', 'info', 'hint'}}, filepath},
     lualine_x = {'filetype'},
     lualine_y = {'progress'},
@@ -64,7 +64,7 @@ require('lualine').setup({
   },
   inactive_sections = {
     lualine_a = {getMode},
-    lualine_b = {'branch'},
+    lualine_b = {{'branch', icon = icons.get("git-branch")}},
     lualine_c = {{'diagnostics', sources = {'nvim_lsp'}, sections = {'error', 'warn', 'info', 'hint'}}, filepath},
     lualine_x = {'filetype'},
     lualine_y = {'progress'},
