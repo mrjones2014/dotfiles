@@ -1,3 +1,5 @@
+local icons = require('nvim-nonicons')
+
 require('compe').setup({
   enabled = true;
   autocomplete = true;
@@ -13,10 +15,11 @@ require('compe').setup({
   documentation = true;
 
   source = {
-    path = { kind = '   (Path)' },
+    nvim_lsp = { kind = ' ' .. icons.get('code') .. '  (LSP)' },
     -- vsnip = {kind = '   (Snippet)'}, -- enable when I get to adding vsnip
-    nvim_lsp = { kind = '   (LSP)' },
-    nvim_lua = { kind = ' {} (nvim Lua)' },
-    spell = { kind = '   (Spell)' },
+    nvim_lua = { kind = ' ' .. icons.get('lua') .. '  (nvim Lua)' },
+    path = { kind = ' ' .. icons.get('ellipsis') .. '  (Path)' },
+    buffer = { kind = ' ' .. icons.get('file') .. '  (Buffer)' },
+    spell = { kind = ' ' .. icons.get('pencil') .. '  (Spell)' },
   }
 })
