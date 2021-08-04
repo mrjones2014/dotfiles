@@ -11,6 +11,7 @@ end
 require('lualine').setup({
   options = {
     theme = 'tokyonight',
+    disabled_filetypes = {'NvimTree', 'term', 'terminal', 'fzf'},
   },
   sections = {
     lualine_a = {{'mode', lower = false}},
@@ -18,5 +19,5 @@ require('lualine').setup({
     lualine_c = {{'diagnostics', sources = {'nvim_lsp'}, sections = {'error', 'warn', 'info', 'hint'}}, filepath},
     lualine_x = {'location'}
   },
-  extensions = {'nvim-tree'}
+  extensions = {'nvim-tree'},
 })
