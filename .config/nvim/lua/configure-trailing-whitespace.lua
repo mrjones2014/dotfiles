@@ -10,6 +10,8 @@ vim.cmd([[
     match TrailingWhitespace /\s\+$/
   endfunction
 
-  autocmd VimEnter * :call SetupTrailingWhitespaceHighlight()
-  autocmd BufWritePre * :call TrimWhitespace()
+  augroup WhitespaceHandling
+    autocmd VimEnter * :call SetupTrailingWhitespaceHighlight()
+    autocmd BufWritePre * :call TrimWhitespace()
+  augroup END
 ]])
