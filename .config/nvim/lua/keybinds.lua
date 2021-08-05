@@ -16,7 +16,7 @@ end
 -- WINDOW STUFF
 ------------------
 -- jk as alias to <Esc>
-map('i', 'jk', t'<Esc>', {})
+map('i', 'jk', t'<Esc>', { silent = true })
 
 -- keep selection when using < and > for indenting in visual mode
 map('v', '<', '<gv', { noremap = true })
@@ -97,10 +97,10 @@ _G.s_tab_complete = function()
   end
 end
 
-map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true, silent = true })
+map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true, silent = true })
+map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true, silent = true })
+map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true, silent = true })
 
 -- Use enter to accept completion if pumvisible(),
 -- otherwise default behavior.
@@ -111,7 +111,7 @@ _G.nvim_autopairs_compe_integration_cr = function()
   end
   return npairs.autopairs_cr()
 end
-map('i', '<CR>', 'v:lua.nvim_autopairs_compe_integration_cr()', { expr = true })
+map('i', '<CR>', 'v:lua.nvim_autopairs_compe_integration_cr()', { expr = true, silent = true })
 
 -- In insert mode, if pumvisible(), then <ESC> should just close the menu,
 -- otherwise exit insert mode
@@ -123,7 +123,7 @@ _G.esc_close_menu = function()
   return t'<Esc>'
 end
 
-map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true })
+map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true, silent = true })
 
 ------------------------
 -- trouble.nvim
