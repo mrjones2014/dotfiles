@@ -41,21 +41,19 @@ map('n', 'J', t'<C-w>j', { noremap = true, silent = true })
 map('n', 'K', t'<C-w>k', { noremap = true, silent = true })
 map('n', 'L', t'<C-w>l', { noremap = true, silent = true })
 
-------------------
--- FZF
-------------------
--- ff for :Files
-map('n', 'ff', t':Files<CR>', { noremap = true, silent = true })
--- fb for :Buffers
-map('n', 'fb', t':Buffers<CR>', { noremap = true, silent = true })
--- fh for :History
-map('n', 'fh', t':History<CR>', { noremap = true, silent = true })
--- ft for :Rg
-map('n', 'ft', t':Rg<CR>', { noremap = true, silent = true })
--- leader+v to find file and open in vsplit
-map('n', '<leader>v', t':vsplit<CR>:Files<CR>', { noremap = true, silent = true })
--- leader b for the same but with currently open buffers
-map('n', '<leader>b', t':vsplit<CR>:Buffers<CR>', { noremap = true, silent = true })
+-----------------
+-- Telescope
+-----------------
+-- ff find files
+map('n', 'ff', t':lua require("telescope.builtin").find_files()<CR>', { silent = true })
+-- fb find buffers
+map('n', 'fb', t':lua require("telescope.builtin").buffers()<CR>', { silent = true })
+-- ft find text (ripgrep)
+map('n', 'ft', t':lua require("telescope.builtin").live_grep()<CR>', { silent = true })
+-- <leader>v to vert split, then find a file for the new pane
+map('n', '<leader>v', t':vsplit<CR>:lua require("telescope.builtin").find_files()<CR>', { silent = true })
+-- <leader>b to vert split, then find open buffers to put in the new pane
+map('n', '<leader>b', t':vsplit<CR>:lua require("telescope.builtin").buffers()<CR>', { silent = true })
 
 ----------------------------
 -- nvim-dashboard Sessions
