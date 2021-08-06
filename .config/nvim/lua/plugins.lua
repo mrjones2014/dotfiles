@@ -2,15 +2,15 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- This is used by lots of other lua plugins so load this up here
+  -- Dependencies of other plugins
   use 'nvim-lua/plenary.nvim'
+  use 'nvim-lua/popup.nvim'
 
   -- Editing enhancements and tools
   use 'windwp/nvim-autopairs'
   use 'AndrewRadev/tagalong.vim'
   use 'matze/vim-move'
-  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
-  use 'junegunn/fzf.vim'
+  use 'nvim-telescope/telescope.nvim'
   use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install'}
 
   -- Tim Pope plugins
@@ -33,7 +33,6 @@ return require('packer').startup(function()
   use {'nvim-treesitter/playground', cmd = {'TSPlaygroundToggle'}}
 
   -- UI + utils
-  use 'nvim-lua/popup.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use {'yamatsum/nvim-nonicons', requires = {'kyazdani42/nvim-web-devicons'}}
   use 'kyazdani42/nvim-tree.lua'
