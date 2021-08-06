@@ -19,6 +19,11 @@ source $HOME/.config/fish/fzf-config.fish
 source $HOME/.config/fish/aliases.fish
 source $HOME/.config/fish/check-architecture.fish
 
+# for local-only, non-sync'd stuff
+if test -e $HOME/.config/fish/local.fish
+    source $HOME/.config/fish/local.fish
+end
+
 thefuck --alias | source
 starship init fish | source
 
