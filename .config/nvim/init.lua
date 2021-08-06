@@ -10,6 +10,7 @@ require('custom-filetypes')
 -- Configuring Plugins
 require('configure-plugins-generic')
 require('configure-indent-blankline')
+require('configure-telescope')
 require('configure-colorizer')
 require('configure-nvimtree')
 require('configure-dashboard')
