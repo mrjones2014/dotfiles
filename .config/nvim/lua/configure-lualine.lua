@@ -52,7 +52,7 @@ end
 require('lualine').setup({
   options = {
     theme = 'tokyonight',
-    disabled_filetypes = {'NvimTree', 'term', 'terminal', 'fzf'},
+    disabled_filetypes = {'NvimTree', 'term', 'terminal', 'TelescopePrompt'},
   },
   sections = {
     lualine_a = {getMode},

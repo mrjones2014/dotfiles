@@ -13,7 +13,7 @@ g.nvim_tree_add_trailing = 1
 g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' }
 g.nvim_tree_special_files = {}
 g.nvim_tree_lsp_diagnostics = 1
-g.nvim_tree_auto_ignore_ft = { 'fzf', 'term', 'terminal' }
+g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
 g.nvim_tree_disable_default_keybindings = 1
 g.nvim_tree_bindings = {
   { key = {'<CR>', 'o', '<2-LeftMouse>'}, cb = tree_cb('edit') },
