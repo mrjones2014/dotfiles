@@ -10,6 +10,12 @@ require('lspconfig').diagnosticls.setup({
       javascriptreact = 'eslint',
       typescriptreact = 'eslint',
     },
+    formatFiletypes = {
+      typescript = 'prettier',
+      typescriptreact = 'prettier',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
+    },
     linters = {
       eslint = {
         sourceName = 'eslint',
@@ -35,8 +41,14 @@ require('lspconfig').diagnosticls.setup({
         securities = {
           [2] = 'error',
           [1] = 'warning'
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+    formatters = {
+      prettier = {
+        command = "./node_modules/.bin/prettier",
+        args = {'--stdin-filepath', '%filepath'},
+      },
+    },
+  },
 })
