@@ -13,7 +13,7 @@ local function t(str)
 end
 
 ------------------
--- WINDOW STUFF
+-- Native nvim stuff
 ------------------
 -- jk as alias to <Esc>
 map('i', 'jk', t'<Esc>', { silent = true })
@@ -26,13 +26,7 @@ map('v', '>', '>gv', { noremap = true })
 map('n', '<leader>q', t':qa<CR>', { noremap = true, silent = true })
 -- <leader>s to save all
 map('n', '<leader>s', t':wa<CR>', { noremap = true })
-
--- toggle nvim-tree with <F3>
-map('n', '<F3>', t':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
--- Cycle through nvim-bufferline with ctrl+tab and shift+tab
-map('n', '<C-i>', t':BufferLineCycleNext<CR>', { noremap = true, silent = true })
-map('n', '<S-tab>', t':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+-- shift+w to close tab
 map('n', 'W', t':exec \'bdelete \' . bufname()<CR>', { noremap = true, silent = true })
 
 -- shift+h/j/k/l for moving around panes
@@ -40,6 +34,27 @@ map('n', 'H', t'<C-w>h', { noremap = true, silent = true })
 map('n', 'J', t'<C-w>j', { noremap = true, silent = true })
 map('n', 'K', t'<C-w>k', { noremap = true, silent = true })
 map('n', 'L', t'<C-w>l', { noremap = true, silent = true })
+
+-- make <Esc> work normally in terminal mode
+map('t', '<Esc>', t'<C-\\><C-n>', { noremap = true, silent = true })
+
+----------------
+-- BufferLine
+----------------
+-- Cycle through nvim-bufferline with ctrl+tab and shift+tab
+map('n', '<C-i>', t':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+map('n', '<S-tab>', t':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+
+----------------
+-- nvim-tree
+----------------
+-- toggle nvim-tree with <F3>
+map('n', '<F3>', t':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-----------------
+-- FTerm
+-----------------
+map('n', '<leader>t', t':lua require("FTerm").toggle()<CR>', { noremap = true, silent = true })
 
 -----------------
 -- Telescope
@@ -132,7 +147,7 @@ map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true, silent = true })
 ------------------------
 -- trouble.nvim
 ------------------------
-map('n', '<leader>t', t':TroubleToggle<CR>', { noremap = true, silent = true })
+map('n', '<leader>d', t':TroubleToggle<CR>', { noremap = true, silent = true })
 
 ------------------------
 -- Editing

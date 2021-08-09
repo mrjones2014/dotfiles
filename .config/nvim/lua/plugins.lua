@@ -11,6 +11,7 @@ return require('packer').startup(function()
   use 'AndrewRadev/tagalong.vim'
   use 'matze/vim-move'
   use 'nvim-telescope/telescope.nvim'
+  use 'numtostr/FTerm.nvim'
   use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install'}
 
   -- Tim Pope plugins
