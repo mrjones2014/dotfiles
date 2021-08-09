@@ -10,7 +10,7 @@ require('lspconfig').diagnosticls.setup({
       javascriptreact = 'eslint',
       typescriptreact = 'eslint',
     },
-    linter = {
+    linters = {
       eslint = {
         sourceName = 'eslint',
         command = './node_modules/.bin/eslint',
