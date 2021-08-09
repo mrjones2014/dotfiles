@@ -31,14 +31,16 @@ function conf
     return
   end
 
+  set -l CONFIG_FULL_PATH "$HOME/$CONFIG_PATH"
+
   if [ "$SUBJECT_NAME" = "fish" ]
-    pushd "$HOME/$CONFIG_PATH" && nvim && popd && sourcefish
-  else if [ "$SUBJECT_NAME" = "bat" ]
-    nvim "$HOME/$CONFIG_PATH" # bat config is a single file
-  else if [ "$SUBJECT_NAME" = "starship" ]
-    nvim "$HOME/$CONFIG_PATH" # starship is also a single config file
+    pushd "$HOME/$CONFIG_PATH" && nvim && popd && sourcefish # if fish, also reload fish profile
+  else if test -f "$CONFIG_FULL_PATH"
+    nvim "$CONFIG_FULL_PATH" # if path is a file, not a directory, don't pushd, just nvim
+  else if test -d "$CONFIG_FULL_PATH"
+    pushd "$CONFIG_FULL_PATH" && nvim && popd
   else
-    pushd "$HOME/$CONFIG_PATH" && nvim && popd
+    echo "Path given is not a file or directory."
   end
 end
 
