@@ -47,7 +47,7 @@ require('lspconfig').diagnosticls.setup({
           [1] = 'warning'
         },
       },
-      {
+      stylelint = {
         command = './node_modules/.bin/stylelint',
         rootPatterns = { '.git' },
         debounce = 100,
@@ -63,8 +63,8 @@ require('lspconfig').diagnosticls.setup({
         securities = {
           error = 'error',
           warning = 'warning'
-        }
-      }
+        },
+      },
     },
     formatters = {
       prettier = {
