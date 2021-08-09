@@ -9,6 +9,8 @@ require('lspconfig').diagnosticls.setup({
       typescript = 'eslint',
       javascriptreact = 'eslint',
       typescriptreact = 'eslint',
+      scss = 'stylelint',
+      css = 'stylelint',
     },
     formatFiletypes = {
       typescript = 'prettier',
@@ -45,10 +47,28 @@ require('lspconfig').diagnosticls.setup({
           [1] = 'warning'
         },
       },
+      {
+        command = './node_modules/.bin/stylelint',
+        rootPatterns = { '.git' },
+        debounce = 100,
+        args = { '--formatter', 'json', '--stdin-filename', '%filepath' },
+        sourceName = 'stylelint',
+        parseJson = {
+          errorsRoot = '[0].warnings',
+          line = 'line',
+          column = 'column',
+          message = '${text}',
+          security = 'severity'
+        },
+        securities = {
+          error = 'error',
+          warning = 'warning'
+        }
+      }
     },
     formatters = {
       prettier = {
-        command = "./node_modules/.bin/prettier",
+        command = './node_modules/.bin/prettier',
         args = {'--stdin-filepath', '%filepath'},
       },
     },
