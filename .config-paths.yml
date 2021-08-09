@@ -8,3 +8,5 @@ hammerspoon: .hammerspoon/
 git: .config/git/
 bat: .config/bat/config
 starship: .config/starship.toml
+paths: .config-paths.yml
+ignore: .config/.ignore
