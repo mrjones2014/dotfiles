@@ -2,7 +2,7 @@ local utils = require('lspconfig/util')
 
 require('lspconfig').diagnosticls.setup({
   root_dir = utils.root_pattern('.git'),
-  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css', },
   init_options = {
     filetypes = {
       javascript = 'eslint',
@@ -15,6 +15,8 @@ require('lspconfig').diagnosticls.setup({
       typescriptreact = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',
+      css = 'prettier',
+      scss = 'prettier',
     },
     linters = {
       eslint = {
