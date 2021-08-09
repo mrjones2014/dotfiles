@@ -15,11 +15,11 @@ require('compe').setup({
   documentation = true;
 
   source = {
-    nvim_lsp = { kind = ' ' .. icons.get('code') .. '  (LSP)' },
-    -- vsnip = {kind = '   (Snippet)'}, -- enable when I get to adding vsnip
-    nvim_lua = { kind = ' ' .. icons.get('lua') .. '  (nvim Lua)' },
-    path = { kind = ' ' .. icons.get('ellipsis') .. '  (Path)' },
-    buffer = { kind = ' ' .. icons.get('file') .. '  (Buffer)' },
-    spell = { kind = ' ' .. icons.get('pencil') .. '  (Spell)' },
-  }
+    -- vsnip = {kind = '   (Snippet)', priority = 6}, -- enable when I get to adding vsnip
+    nvim_lsp = {kind = ' ' .. icons.get('code') .. '  (LSP)', priority = 5},
+    nvim_lua = {kind = ' ' .. icons.get('lua') .. '  (nvim Lua)', priority = 4},
+    path = {kind = ' ' .. icons.get('ellipsis') .. '  (Path)', priority = 3},
+    buffer = {kind = ' ' .. icons.get('file') .. '  (Buffer)', priority = 2},
+    spell = {kind = ' ' .. icons.get('pencil') .. '  (Spell)', priority = 1},
+ }
 })
