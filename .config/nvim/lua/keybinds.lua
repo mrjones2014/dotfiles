@@ -17,6 +17,9 @@ end
 ------------------
 -- jk as alias to <Esc>
 map('i', 'jk', t'<Esc>', { silent = true })
+-- make <Esc> and jk work normally in terminal mode
+map('t', '<Esc>', t'<C-\\><C-n>', { noremap = true, silent = true })
+map('t', 'jk', t'<C-\\><C-n>', { noremap = true, silent = true })
 
 -- keep selection when using < and > for indenting in visual mode
 map('v', '<', '<gv', { noremap = true })
@@ -34,9 +37,6 @@ map('n', 'H', t'<C-w>h', { noremap = true, silent = true })
 map('n', 'J', t'<C-w>j', { noremap = true, silent = true })
 map('n', 'K', t'<C-w>k', { noremap = true, silent = true })
 map('n', 'L', t'<C-w>l', { noremap = true, silent = true })
-
--- make <Esc> work normally in terminal mode
-map('t', '<Esc>', t'<C-\\><C-n>', { noremap = true, silent = true })
 
 ----------------
 -- BufferLine

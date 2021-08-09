@@ -1,9 +1,10 @@
 local g = vim.g
 
 local sidebarColor = '#15181b'
+local backgroundColor = '#24292e'
 g.tokyonight_style = 'night'
 g.tokyonight_sidebars = {'packer', 'NvimTree', 'term', 'terminal', 'FTerm'}
-g.tokyonight_colors = {bg = '#24292e', bg_dark = '#24292e', bg_sidebar = sidebarColor}
+g.tokyonight_colors = {bg = backgroundColor, bg_dark = backgroundColor, bg_sidebar = sidebarColor, bg_float = sidebarColor}
 
 vim.cmd('colorscheme tokyonight')
 
