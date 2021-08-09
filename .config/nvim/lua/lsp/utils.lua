@@ -1,5 +1,17 @@
 local lspUtils = {}
 
+_G.__organize_imports_and_format = function()
+  local ft = vim.bo.filetype
+  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+    local params = {
+      command = '_typescript.organizeImports',
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = '',
+    }
+    vim.lsp.buf_request_sync(vim.api.nvim_get_current_buf(), 'workspace/executeCommand', params, 1500)
+  end
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function lspUtils.on_attach(client, bufnr)
@@ -26,21 +38,36 @@ function lspUtils.on_attach(client, bufnr)
 
   local ft = vim.bo.filetype
   if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+    -- Disable formatting via tsserver because we're handling formatting via diagnosticls
+    client.resolved_capabilities.document_formatting = false
     -- OrganizeImports command is defined in lua/lsp/typescript.lua
-    vim.cmd([[
-      augroup fmt
-        autocmd!
-        autocmd BufWritePre * OrganizeAndFormat
-      augroup END
-    ]])
-  else
-    vim.cmd([[
-      augroup fmt
-        autocmd!
-        autocmd BufWritePre * Prettier
-      augroup END
-    ]])
+    -- vim.cmd([[
+    --   augroup fmt
+    --     autocmd!
+    --     autocmd BufWritePre * OrganizeImports | lua vim.lsp.buf.formatting_sync(nil, 1500)
+    --   augroup END
+    -- ]])
+  -- else
   end
+  vim.cmd([[
+    augroup fmt
+      autocmd!
+      autocmd BufWritePre * lua require('lsp/utils').formatDocument()
+    augroup END
+  ]])
+end
+
+function lspUtils.formatDocument()
+  local ft = vim.bo.filetype
+  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+    local params = {
+      command = '_typescript.organizeImports',
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = '',
+    }
+    vim.lsp.buf_request_sync(vim.api.nvim_get_current_buf(), 'workspace/executeCommand', params, 1500)
+  end
+  vim.lsp.buf.formatting_sync(nil, 1500);
 end
 
 return lspUtils
