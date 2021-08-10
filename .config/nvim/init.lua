@@ -3,7 +3,6 @@ require('disable-builtins')
 require('plugins')
 require('settings')
 require('lsp-init')
-require('custom-commands')
 require('keybinds')
 require('custom-filetypes')
 
