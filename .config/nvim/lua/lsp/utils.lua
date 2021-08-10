@@ -26,7 +26,7 @@ function lspUtils.on_attach(client, bufnr)
   buf_set_keymap('n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
   local ft = vim.bo.filetype
-  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' or ft == 'json' or ft == 'jsonc' then
     -- Disable formatting via tsserver because we're handling formatting via diagnosticls
     client.resolved_capabilities.document_formatting = false
   end
