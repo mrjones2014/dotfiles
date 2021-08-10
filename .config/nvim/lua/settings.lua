@@ -20,6 +20,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 vim.opt.termguicolors = true
 vim.opt.syntax = 'on'
+vim.opt.modeline = false
 
 -- required for nvim-compe
 vim.o.completeopt = 'menuone,noselect'
