@@ -18,7 +18,6 @@ return require('packer').startup(function()
   -- Tim Pope plugins
   use 'tpope/vim-sleuth'
   use 'tpope/vim-commentary'
-  use 'tpope/vim-fugitive'
   use 'tpope/vim-eunuch'
 
   -- LSP + syntax
