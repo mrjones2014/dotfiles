@@ -25,12 +25,11 @@ return require('packer').startup(function()
   use 'hrsh7th/nvim-compe'
   use 'onsails/lspkind-nvim'
   use {'dag/vim-fish', ft = 'fish'}
-  use 'neoclide/jsonc.vim'
   use 'mattn/emmet-vim'
   use 'folke/trouble.nvim'
-  use 'fatih/vim-go'
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use 'fatih/vim-go' -- just used for gohtmltmpl syntax highlighting
   use 'p00f/nvim-ts-rainbow'
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use {'nvim-treesitter/playground', cmd = {'TSPlaygroundToggle'}}
 
   -- UI + utils
