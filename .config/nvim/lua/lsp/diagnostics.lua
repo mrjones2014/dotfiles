@@ -2,7 +2,7 @@ local utils = require('lspconfig/util')
 
 require('lspconfig').diagnosticls.setup({
   root_dir = utils.root_pattern('.git'),
-  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css', },
+  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css' },
   init_options = {
     filetypes = {
       javascript = 'eslint',
@@ -44,7 +44,7 @@ require('lspconfig').diagnosticls.setup({
         },
         securities = {
           [2] = 'error',
-          [1] = 'warning'
+          [1] = 'warning',
         },
       },
       stylelint = {
@@ -58,18 +58,18 @@ require('lspconfig').diagnosticls.setup({
           line = 'line',
           column = 'column',
           message = '${text}',
-          security = 'severity'
+          security = 'severity',
         },
         securities = {
           error = 'error',
-          warning = 'warning'
+          warning = 'warning',
         },
       },
     },
     formatters = {
       prettier = {
         command = './node_modules/.bin/prettier',
-        args = {'--stdin-filepath', '%filepath'},
+        args = { '--stdin-filepath', '%filepath' },
       },
     },
   },
