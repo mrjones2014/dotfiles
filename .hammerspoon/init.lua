@@ -14,8 +14,8 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl", "shift" }, "S", function()
 	hs.caffeinate.systemSleep()
 end)
 
--- bind shift+ctrl+option+command+l to lock screen
-hs.hotkey.bind({ "cmd", "alt", "ctrl", "shift" }, "L", function()
+-- bind shift+ctrl+option+l to lock screen
+hs.hotkey.bind({ "alt", "ctrl", "shift" }, "L", function()
 	hs.caffeinate.lockScreen()
 end)
 
