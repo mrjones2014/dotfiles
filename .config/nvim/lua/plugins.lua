@@ -22,6 +22,7 @@ return require('packer').startup(function()
 
   -- LSP + syntax
   use 'neovim/nvim-lspconfig'
+  use 'ray-x/lsp_signature.nvim'
   use 'hrsh7th/nvim-compe'
   use 'onsails/lspkind-nvim'
   use {'dag/vim-fish', ft = 'fish'}
@@ -43,6 +44,9 @@ return require('packer').startup(function()
   use 'akinsho/nvim-bufferline.lua'
   use 'norcalli/nvim-colorizer.lua'
   use 'glepnir/dashboard-nvim'
+
+  -- yaclt
+  use '~/git/yaclt.nvim'
 
   -- Theme
   use 'folke/tokyonight.nvim'
