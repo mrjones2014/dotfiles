@@ -3,7 +3,7 @@ local colors = require('tokyonight.colors').setup()
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = {'gohtmltmpl'}
+    additional_vim_regex_highlighting = { 'gohtmltmpl' },
   },
   playground = {
     enable = true,
@@ -23,6 +23,6 @@ require('nvim-treesitter.configs').setup({
       colors.orange,
       colors.cyan,
       colors.green,
-    }
+    },
   },
 })

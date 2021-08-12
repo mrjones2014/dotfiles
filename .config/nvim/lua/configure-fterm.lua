@@ -4,5 +4,5 @@ require('FTerm').setup({
     width = 0.5,
     x = 0,
   },
-  border = 'rounded'
+  border = 'rounded',
 })

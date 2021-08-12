@@ -18,9 +18,9 @@ require('telescope').setup({
     file_sorter = require('telescope.sorters').get_fuzzy_file,
     dynamic_preview_title = true,
     mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
-    }
+      i = { ['<c-t>'] = trouble.open_with_trouble },
+      n = { ['<c-t>'] = trouble.open_with_trouble },
+    },
   },
   pickers = {
     find_files = {
@@ -35,7 +35,7 @@ require('telescope').setup({
         '--ignore-file',
         '~/.config/.ignore',
         '--iglob',
-        '!.git'
+        '!.git',
       },
     },
   },

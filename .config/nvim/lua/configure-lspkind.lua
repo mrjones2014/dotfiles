@@ -47,5 +47,5 @@ require('lspkind').init({
     EnumMember = EnumMember,
     Constant = Constant,
     Struct = Struct,
-  }
+  },
 })

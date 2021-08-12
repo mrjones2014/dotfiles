@@ -16,11 +16,11 @@ g.nvim_tree_lsp_diagnostics = 1
 g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
 g.nvim_tree_disable_default_keybindings = 1
 g.nvim_tree_bindings = {
-  { key = {'<CR>', 'o', '<2-LeftMouse>'}, cb = tree_cb('edit') },
-  { key = '<C-v>',                        cb = tree_cb('vsplit') },
-  { key = 'R',                            cb = tree_cb('refresh') },
-  { key = 'a',                            cb = tree_cb('create') },
-  { key = 'd',                            cb = tree_cb('remove') },
-  { key = 'r',                            cb = tree_cb('rename') },
-  { key = '.',                            cb = tree_cb('cd') },
+  { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
+  { key = '<C-v>', cb = tree_cb('vsplit') },
+  { key = 'R', cb = tree_cb('refresh') },
+  { key = 'a', cb = tree_cb('create') },
+  { key = 'd', cb = tree_cb('remove') },
+  { key = 'r', cb = tree_cb('rename') },
+  { key = '.', cb = tree_cb('cd') },
 }

@@ -1,7 +1,7 @@
 local g = vim.g
 -- disable indentLine in markdown cause its glitchy when trying to write
 -- code-fences
-g.indentguides_ignorelist = {'markdown', 'json'}
+g.indentguides_ignorelist = { 'markdown', 'json' }
 
 -- automatically sleuth indent styles
 g.sleuth_automatic = 1

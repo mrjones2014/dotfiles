@@ -7,5 +7,5 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require('lspconfig').cssls.setup({
   on_attach = require('lsp/utils').on_attach,
   capabilities = capabilities,
-  root_dir = utils.root_pattern('.git')
+  root_dir = utils.root_pattern('.git'),
 })

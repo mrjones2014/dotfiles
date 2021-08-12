@@ -99,6 +99,10 @@ function check_globals
         echo 'Install exa: brew install exa'
     end
 
+    if ! type stylua >/dev/null
+        echo 'Install stylua: cargo install stylua --features lua52'
+    end
+
     if [ -z (pip3 list | grep -F pynvim) ]
         echo "Install pynvim: pip3 install pynvim"
     end
