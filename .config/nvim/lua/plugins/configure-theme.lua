@@ -14,4 +14,4 @@ g.tokyonight_colors = {
 vim.cmd('colorscheme tokyonight')
 
 -- has to be required after theme is set up for highlighting
-require('configure-trailing-whitespace')
+require('plugins.configure-trailing-whitespace')

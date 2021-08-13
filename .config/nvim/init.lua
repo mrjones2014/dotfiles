@@ -1,24 +1,5 @@
--- Configuring Neovim
-require('disable-builtins')
-require('plugins')
-require('settings')
-require('lsp-init')
-require('keybinds')
-require('custom-filetypes')
+local requireAll = require('lib.require-all').requireAllRelative
+local luaPath = os.getenv('HOME') .. '/.config/nvim/lua/'
 
--- Configuring Plugins
-require('configure-plugins-generic')
-require('configure-indent-blankline')
-require('configure-telescope')
-require('configure-colorizer')
-require('configure-nvimtree')
-require('configure-dashboard')
-require('configure-autopairs')
-require('configure-lualine')
-require('configure-tabline')
-require('configure-lspkind')
-require('configure-compe')
-require('configure-trouble')
-require('configure-treesitter')
-require('configure-fterm')
-require('configure-theme')
+requireAll(luaPath)
+requireAll(luaPath .. 'plugins')
