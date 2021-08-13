@@ -1,12 +1,9 @@
+local requireAll = require('lib.require-all').requireAllRelative
 local lsp = require('lspconfig')
 
-require('lsp/typescript')
-require('lsp/html')
-require('lsp/css')
-require('lsp/json')
-require('lsp/diagnostics')
+requireAll(os.getenv('HOME') .. '/.config/nvim/lua/lsp')
 
-vim.cmd('command! Format :lua require("lsp/utils").formatDocument()')
+vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
 vim.cmd([[
   augroup fmt
     autocmd!
