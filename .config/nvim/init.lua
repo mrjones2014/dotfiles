@@ -1,5 +1,5 @@
-local requireAll = require('lib.require-all').requireAllRelative
+local loadAll = require('load-all')
 local luaPath = os.getenv('HOME') .. '/.config/nvim/lua/'
 
-requireAll(luaPath)
-requireAll(luaPath .. 'plugins')
+loadAll(luaPath)
+loadAll(luaPath .. 'plugins')
