@@ -6,7 +6,7 @@ return require('packer').startup(function()
   use('nvim-lua/plenary.nvim')
   use('nvim-lua/popup.nvim')
 
-  -- My utility to load an entire filder of Lua files
+  -- My utility to load an entire folder of Lua files
   use('mrjones2014/load-all.nvim')
 
   -- Editing enhancements and tools
@@ -48,6 +48,7 @@ return require('packer').startup(function()
   use('akinsho/nvim-bufferline.lua')
   use('norcalli/nvim-colorizer.lua')
   use('glepnir/dashboard-nvim')
+  use('f-person/git-blame.nvim')
 
   -- yaclt
   use('~/git/yaclt.nvim')
