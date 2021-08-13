@@ -1,7 +1,6 @@
-local requireAll = require('lib.require-all').requireAllRelative
 local lsp = require('lspconfig')
 
-requireAll(os.getenv('HOME') .. '/.config/nvim/lua/lsp')
+require('load-all')(os.getenv('HOME') .. '/.config/nvim/lua/lsp')
 
 vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
 vim.cmd([[
