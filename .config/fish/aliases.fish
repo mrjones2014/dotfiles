@@ -58,7 +58,7 @@ function groot
   if test -n "$git_repo_root_dir"
     cd "$git_repo_root_dir"
   else
-    echo "Not a git repo"
+    echo "I am Groot (translation: not a git repo)"
   end
 end
 
