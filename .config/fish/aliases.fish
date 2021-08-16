@@ -54,7 +54,7 @@ function nuke-docker
 end
 
 function groot
-  set -l git_repo_root_dir (git rev-parse --show-toplevel)
+  set -l git_repo_root_dir (git rev-parse --show-toplevel &> /dev/null)
   if test -n "$git_repo_root_dir"
     cd "$git_repo_root_dir"
   else
