@@ -1,6 +1,8 @@
 local g = vim.g
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
+local lspIcons = require('lsp/icons')
+
 g.nvim_tree_side = 'right'
 g.nvim_tree_width = 40
 g.nvim_tree_auto_open = 1
@@ -23,4 +25,12 @@ g.nvim_tree_bindings = {
   { key = 'd', cb = tree_cb('remove') },
   { key = 'r', cb = tree_cb('rename') },
   { key = '.', cb = tree_cb('cd') },
+}
+g.nvim_tree_icons = {
+  lsp = {
+    hint = lspIcons.Hint,
+    info = lspIcons.Information,
+    warning = lspIcons.Warning,
+    error = lspIcons.Error,
+  },
 }
