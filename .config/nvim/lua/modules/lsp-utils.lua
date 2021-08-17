@@ -3,7 +3,7 @@ local lspUtils = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function lspUtils.on_attach(client, bufnr)
-  vim.cmd('command! Format :lua require("lsp/utils").formatDocument()')
+  vim.cmd('command! Format :lua require("modules.lsp-utils").formatDocument()')
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
