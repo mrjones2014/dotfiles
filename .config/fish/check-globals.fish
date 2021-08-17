@@ -51,8 +51,8 @@ function check_globals
         echo 'Install yarn: npm i -g yarn'
     end
 
-    if ! type prettier &> /dev/null
-        echo 'Install prettier globally for vim integration: yarn global add prettier'
+    if ! type eslint_d &> /dev/null
+        echo 'Install eslint globally for Neovim integration: yarn global add eslint_d'
     end
 
     if ! type typescript-language-server &> /dev/null
@@ -67,13 +67,6 @@ function check_globals
         echo 'Install diagnostic-languageserver: yarn global add diagnostic-languageserver'
     end
 
-    if ! type eslint &> /dev/null
-        echo 'Install eslint globally for vim integration: yarn global add eslint'
-    end
-
-    if ! type tslint &> /dev/null
-        echo 'Install tslint globally for vim integration: yarn global add tslint'
-    end
 
     if ! type bash-language-server &> /dev/null
         echo 'Install bash-language-server: yarn global add bash-language-server'
