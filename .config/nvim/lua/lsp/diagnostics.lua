@@ -68,6 +68,7 @@ require('lspconfig').diagnosticls.setup({
     },
     formatters = {
       prettier = {
+        rootPatterns = { '.git' },
         command = './node_modules/.bin/prettier',
         args = { '--stdin-filepath', '%filepath' },
       },
