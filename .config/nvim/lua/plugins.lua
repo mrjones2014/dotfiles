@@ -49,7 +49,7 @@ return require('packer').startup(function()
   use('norcalli/nvim-colorizer.lua')
   use('glepnir/dashboard-nvim')
   use('f-person/git-blame.nvim')
-
+  use('folke/todo-comments.nvim')
   -- yaclt
   use('~/git/yaclt.nvim')
 

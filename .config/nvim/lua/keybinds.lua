@@ -1,7 +1,7 @@
-----------------------------------------------------------------
--- NOTE: some additional LSP keybinds live in modules/lsp-utils.lua    --
--- because they only get bound on LSP attach                  --
-----------------------------------------------------------------
+----------------------------------------------------------------------
+-- NOTE: some additional LSP keybinds live in modules/lsp-utils.lua --
+-- because they only get bound on LSP attach                        --
+----------------------------------------------------------------------
 
 -- shortcut for vim.api.nvim_set_keymap
 local map = vim.api.nvim_set_keymap
