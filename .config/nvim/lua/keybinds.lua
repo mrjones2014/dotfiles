@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
--- NOTE: some additional LSP keybinds live in lsp/utils.lua    --
+-- NOTE: some additional LSP keybinds live in modules/lsp-utils.lua    --
 -- because they only get bound on LSP attach                  --
 ----------------------------------------------------------------
 

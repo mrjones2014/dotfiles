@@ -3,6 +3,6 @@
 	newbranch = "!git checkout -b"
 	commit-amend = "commit --amend --no-edit"
 	prune-branches = "!git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
-  ch = "!git checkout \"$(git branch | fzf | tr -d '[:space:]')\""
+  ch = "!git checkout $(git branch -a --format=\"%(refname:short)\" --sort=\"-authordate\" | fzf | sed 's|origin/||g')"
 
 ; vi: ft=gitconfig

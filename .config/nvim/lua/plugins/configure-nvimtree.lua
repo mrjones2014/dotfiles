@@ -1,7 +1,7 @@
 local g = vim.g
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
-local lspIcons = require('lsp/icons')
+local lspIcons = require('modules.icons')
 
 g.nvim_tree_side = 'right'
 g.nvim_tree_width = 40

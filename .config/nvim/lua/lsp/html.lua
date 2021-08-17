@@ -5,7 +5,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspconfig').html.setup({
-  on_attach = require('lsp/utils').on_attach,
+  on_attach = require('modules.lsp-utils').on_attach,
   capabilities = capabilities,
   root_dir = utils.root_pattern('.git'),
 })
