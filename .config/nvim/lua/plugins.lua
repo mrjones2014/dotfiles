@@ -6,9 +6,6 @@ return require('packer').startup(function()
   use('nvim-lua/plenary.nvim')
   use('nvim-lua/popup.nvim')
 
-  -- My utility to load an entire folder of Lua files
-  use('mrjones2014/load-all.nvim')
-
   -- Editing enhancements and tools
   use('windwp/nvim-autopairs')
   use('AndrewRadev/tagalong.vim')
