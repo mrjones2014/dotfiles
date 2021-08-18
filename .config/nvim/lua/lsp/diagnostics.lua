@@ -1,8 +1,11 @@
 local utils = require('lspconfig/util')
 
 require('lspconfig').diagnosticls.setup({
-  root_dir = utils.root_pattern('.git'),
-  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css' },
+  root_dir = utils.root_pattern('.git', '.lua-format'),
+  filetypes = {
+    'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss',
+    'css', 'lua',
+  },
   init_options = {
     filetypes = {
       javascript = 'eslint',
@@ -19,6 +22,7 @@ require('lspconfig').diagnosticls.setup({
       javascriptreact = 'prettier',
       css = 'prettier',
       scss = 'prettier',
+      lua = 'lua_format',
     },
     linters = {
       eslint = {
@@ -26,13 +30,7 @@ require('lspconfig').diagnosticls.setup({
         command = 'eslint_d',
         rootPatterns = { '.git' },
         debounce = 100,
-        args = {
-          '--stdin',
-          '--stdin-filename',
-          '%filepath',
-          '--format',
-          'json',
-        },
+        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
         parseJson = {
           errorsRoot = '[0].messages',
           line = 'line',
@@ -42,10 +40,7 @@ require('lspconfig').diagnosticls.setup({
           message = '${message} [${ruleId}]',
           security = 'severity',
         },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning',
-        },
+        securities = { [2] = 'error', [1] = 'warning' },
       },
       stylelint = {
         command = './node_modules/.bin/stylelint',
@@ -60,17 +55,21 @@ require('lspconfig').diagnosticls.setup({
           message = '${text}',
           security = 'severity',
         },
-        securities = {
-          error = 'error',
-          warning = 'warning',
-        },
+        securities = { error = 'error', warning = 'warning' },
       },
     },
     formatters = {
       prettier = {
+        sourceName = 'prettier',
         rootPatterns = { '.git' },
         command = './node_modules/.bin/prettier',
         args = { '--stdin-filepath', '%filepath' },
+      },
+      lua_format = {
+        sourceName = 'lua_format',
+        rootPatterns = { '.lua-format' },
+        command = 'lua-format',
+        args = { '%filepath' },
       },
     },
   },
