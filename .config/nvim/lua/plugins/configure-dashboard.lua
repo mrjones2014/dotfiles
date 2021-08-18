@@ -1,6 +1,4 @@
-local g = vim.g
-
-g.dashboard_custom_header = {
+vim.g.dashboard_custom_header = {
   ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
   ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
   ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
@@ -8,7 +6,7 @@ g.dashboard_custom_header = {
   ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
   ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 }
-g.dashboard_custom_section = {
+vim.g.dashboard_custom_section = {
   session = {
     description = { '  Load Last Session   <leader>sl' },
     command = 'SessionLoad',
