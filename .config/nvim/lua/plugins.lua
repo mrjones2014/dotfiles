@@ -53,6 +53,7 @@ return require('packer').startup(function()
   -- yaclt
   use('~/git/yaclt.nvim')
 
-  -- Theme
+  -- Themes
   use('folke/tokyonight.nvim')
+  use('EdenEast/nightfox.nvim')
 end)
