@@ -55,5 +55,4 @@ return require('packer').startup(function()
 
   -- Themes
   use('folke/tokyonight.nvim')
-  use('EdenEast/nightfox.nvim')
 end)
