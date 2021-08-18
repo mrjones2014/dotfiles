@@ -56,16 +56,18 @@ end
 
 function lspUtils.formatDocument()
   local ft = vim.bo.filetype
-  if ft == 'lua' then
-    require('stylua-nvim').format_file()
-    return
-  end
 
   -- check if LSP is attached
   if (#vim.lsp.buf_get_clients()) < 1 then
     return
   end
 
+  -- if JS or TS, organize imports before formatting
+  -- must be done in this order because organize imports removes
+  -- spaces between import name and brackets, e.g.
+  -- import { Something } from "something";
+  -- becomes
+  -- import {Something} from "something";
   if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
     local params = {
       command = '_typescript.organizeImports',
@@ -74,6 +76,7 @@ function lspUtils.formatDocument()
     }
     vim.lsp.buf_request_sync(vim.api.nvim_get_current_buf(), 'workspace/executeCommand', params, 1500)
   end
+
   vim.lsp.buf.formatting_sync(nil, 1500)
 end
 
