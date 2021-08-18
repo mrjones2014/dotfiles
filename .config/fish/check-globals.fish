@@ -92,8 +92,8 @@ function check_globals
         echo 'Install exa: brew install exa'
     end
 
-    if ! type lua-format &> /dev/null
-        echo 'Install lua-format: luarocks install --server=https://luarocks.org/dev luaformatter'
+    if ! type stylua &> /dev/null
+        echo 'Install stylua: cargo install stylua --features lua52'
     end
 
     if [ -z (pip3 list | grep -F pynvim) ]
