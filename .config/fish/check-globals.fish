@@ -15,10 +15,6 @@ function check_globals
         echo 'Install starship: https://github.com/starship/starship'
     end
 
-    if ! type omf &> /dev/null
-        echo 'Install oh-my-fish: https://github.com/oh-my-fish/oh-my-fish'
-    end
-
     if ! type fisher &> /dev/null
         echo 'Install fisher: https://github.com/jorgebucaran/fisher'
     end

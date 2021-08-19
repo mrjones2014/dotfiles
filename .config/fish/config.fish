@@ -13,6 +13,7 @@ export EDITOR="nvim"
 
 set PATH $PATH "$HOME/scripts"
 set PATH $PATH "$HOME/git/webbook/scripts"
+set PATH $PATH "$HOME/.cargo/bin"
 
 source $HOME/.config/fish/check-globals.fish
 source $HOME/.config/fish/fzf-config.fish
