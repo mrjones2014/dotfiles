@@ -6,6 +6,10 @@ You can run the following to get these dotfiles installed on your system. It wil
 curl https://raw.githubusercontent.com/mrjones2014/dotfiles/master/scripts/config-init | bash
 ```
 
+## Caveats
+
+I use macOS. I have no plan to support Linux, but feel free to modify anything you'd like from this repo to support Linux on your own machine.
+
 ## Manual Config
 
 ### Package Manamement
