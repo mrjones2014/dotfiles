@@ -52,4 +52,5 @@ return require('packer').startup(function()
 
   -- Themes
   use('folke/tokyonight.nvim')
+  use('Pocco81/Catppuccino.nvim')
 end)
