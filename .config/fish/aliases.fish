@@ -68,7 +68,23 @@ function groot
   end
 end
 
-function find_projects
+# Send a single command to all panes without
+# having to toggle on and off the
+# synchronize-panes option manually
+function tmux-send-all-panes
+  set -l current_pane (tmux display-message -p '#P')
+  for pane in (tmux list-panes -F '#P')
+    if [ "$pane" = "$current_pane" ]
+      tmux send-keys -t $pane "$argv" "Enter"
+    else
+      # I only want to send nvim command to current pane
+      set -l cmd (string replace nvim "" "$argv")
+      tmux send-keys -t $pane "$cmd" "Enter"
+    end
+  end
+end
+
+function find-projects
   set -l local_fzf_dir_find (exa -1 --all --level=1 ~/git/ | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
   if test -n "$local_fzf_dir_find"
     echo "$HOME/git/$local_fzf_dir_find"
@@ -77,38 +93,25 @@ end
 
 # fzf find a directory and cd to it
 function f
-    set -l local_fzf_dir_cd (find_projects)
-    if test -n "$local_fzf_dir_cd"
-        cd $local_fzf_dir_cd
+  set -l local_fzf_dir_cd (find-projects)
+  if test -n "$local_fzf_dir_cd"
+    if test -z "$TMUX"
+      cd "$local_fzf_dir_cd"
+    else
+      tmux-send-all-panes "cd $local_fzf_dir_cd; clear"
     end
+  end
 end
 
 # fzf find a directory, cd to it, and open it in nvim
 function fo
-    set -l local_fzf_dir_open (find_projects)
-    if test -n "$local_fzf_dir_open"
-        cd $local_fzf_dir_open
-        nvim
-    end
-end
-
-# nvminstall
-# usage:
-# `nvminstall {node_version_to_install} {node_version_to_uninstall}`
-# example:
-# `nvminstall 8.1.0 8.0.0`
-function nvminstall
-    set -l nvminstall_num_args (count $argv)
-    if test $nvminstall_num_args -eq 2
-        nvm install "$1" && nvm alias default "$1" && nvm reinstall-packages "$2" && nvm uninstall "$2" && npm install -g npm
+  set -l local_fzf_dir_open (find-projects)
+  if test -n "$local_fzf_dir_open"
+    if test -z "$TMUX"
+      cd "$local_fzf_dir_open"
+      nvim
     else
-        echo "
-        Usage:
-          nvminstall {node_version_to_install} {node_version_to_uninstall}
-
-        Example:
-          nvminstall 8.1.0 8.0.0
-        "
+      tmux-send-all-panes "cd $local_fzf_dir_open; clear; nvim"
     end
+  end
 end
-
