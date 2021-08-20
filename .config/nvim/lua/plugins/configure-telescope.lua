@@ -33,7 +33,7 @@ require('telescope').setup({
         '--column',
         '--smart-case',
         '--ignore-file',
-        '~/.config/.ignore',
+        (os.getenv('HOME') .. '/.config/.ignore'),
         '--iglob',
         '!.git',
       },
