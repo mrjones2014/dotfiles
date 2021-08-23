@@ -41,7 +41,7 @@ map('n', 'L', t('<C-w>l'), { noremap = true, silent = true })
 -----------------------------------------------
 -- treesitter-unit, Treesitter-based selection
 -----------------------------------------------
-map('v', 'n', t(':lua require("treesitter-unit").select()<CR>'), { noremap = true, silent = true })
+map('v', 'u', t(':lua require("treesitter-unit").select()<CR>'), { noremap = true, silent = true })
 
 ----------------
 -- BufferLine
