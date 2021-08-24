@@ -1,5 +1,6 @@
 return {
   'numtostr/FTerm.nvim',
+  module_pattern = 'FTerm',
   config = function()
     require('FTerm').setup({
       dimensions = {
