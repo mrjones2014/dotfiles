@@ -16,7 +16,8 @@ function M.tokyonight()
 end
 
 function M.catppuccino()
-  require('catppuccino').setup({
+  local catppuccino = require('catppuccino')
+  catppuccino.setup({
     integrations = {
       native_lsp = {
         enabled = true,
@@ -30,7 +31,8 @@ function M.catppuccino()
       indent_blankline = true,
     },
   })
-  vim.cmd('colorscheme catppuccino')
+  catppuccino.load()
+  -- vim.cmd('colorscheme catppuccino')
 end
 
 function M.pickThemeWithTelescope()
