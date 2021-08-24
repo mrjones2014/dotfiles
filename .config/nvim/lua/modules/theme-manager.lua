@@ -32,7 +32,6 @@ function M.catppuccino()
     },
   })
   catppuccino.load()
-  -- vim.cmd('colorscheme catppuccino')
 end
 
 function M.pickThemeWithTelescope()

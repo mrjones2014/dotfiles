@@ -1,5 +1,6 @@
 return {
   'akinsho/nvim-bufferline.lua',
+  event = 'BufEnter',
   config = function()
     require('bufferline').setup({
       options = {

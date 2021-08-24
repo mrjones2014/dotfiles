@@ -3,8 +3,8 @@ return require('packer').startup(function()
   use('wbthomason/packer.nvim')
 
   -- Themes
-  use('folke/tokyonight.nvim')
-  use('Pocco81/Catppuccino.nvim')
+  -- use(require('plugins.configure-tokyonight'))
+  use(require('plugins.configure-catppuccino'))
 
   -- Dependencies of other plugins
   use('nvim-lua/plenary.nvim')

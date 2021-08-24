@@ -10,6 +10,6 @@ vim.cmd([[
   augroup CustomFileTypeDetection
     au! BufEnter *.html :call SetGoHtmlOpts()
     au! FileType html :call SetGoHtmlOpts()
-    au! FileType json set conceallevel=0
+    au! FileType json :set conceallevel=0
   augroup END
 ]])
