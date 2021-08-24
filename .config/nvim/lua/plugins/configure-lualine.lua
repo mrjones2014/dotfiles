@@ -51,7 +51,7 @@ end
 
 require('lualine').setup({
   options = {
-    theme = 'catppuccino',
+    theme = 'tokyonight',
     disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
   },
   sections = {
