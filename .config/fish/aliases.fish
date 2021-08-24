@@ -60,11 +60,9 @@ function nuke-from-orbit
 end
 
 function groot
-  set -l git_repo_root_dir (git rev-parse --show-toplevel &> /dev/null)
+  set -l git_repo_root_dir (git rev-parse --show-toplevel)
   if test -n "$git_repo_root_dir"
     cd "$git_repo_root_dir"
-  else
-    echo "I am Groot (translation: not a git repo)"
   end
 end
 
