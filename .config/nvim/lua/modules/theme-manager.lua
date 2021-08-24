@@ -18,6 +18,9 @@ end
 function M.catppuccino()
   require('catppuccino').setup({
     integrations = {
+      native_lsp = {
+        enabled = true,
+      },
       nvimtree = true,
       telescope = true,
       dashboard = true,
