@@ -3,7 +3,6 @@ return require('packer').startup(function()
   use('wbthomason/packer.nvim')
 
   -- Themes
-  -- use(require('plugins.configure-tokyonight'))
   use(require('plugins.configure-catppuccino'))
 
   -- Dependencies of other plugins
