@@ -2,12 +2,12 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
-  -- Themes
-  use(require('configure.catppuccino'))
-
   -- Dependencies of other plugins
   use('nvim-lua/plenary.nvim')
   use('nvim-lua/popup.nvim')
+
+  -- Themes
+  use(require('configure.catppuccino'))
 
   -- Editing enhancements and tools
   use('matze/vim-move')
@@ -19,14 +19,14 @@ return require('packer').startup(function()
   use(require('configure.markdown-preview'))
 
   -- Tim Pope plugins
+  -- TODO replace these with lua plugins and lazy load them?
   use('tpope/vim-sleuth')
   use('tpope/vim-commentary')
   use('tpope/vim-eunuch')
 
   -- LSP + syntax
-  use('neovim/nvim-lspconfig')
-  use('ray-x/lsp_signature.nvim')
-  use('ckipp01/stylua-nvim')
+  use(require('configure.lspconfig'))
+  use(require('configure.stylua'))
   use(require('configure.emmet'))
   use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
   use(require('configure.compe'))
@@ -37,8 +37,7 @@ return require('packer').startup(function()
   use(require('configure.treesitter-playground'))
 
   -- UI + utils
-  use('farmergreg/vim-lastplace')
-  use('airblade/vim-gitgutter')
+  use(require('configure.gitgutter'))
   use(require('configure.nonicons'))
   use(require('configure.nvimtree'))
   use(require('configure.indent-blankline'))

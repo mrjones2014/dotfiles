@@ -1,4 +1,8 @@
-local loadAll = require('modules.load-all')
-local luaPath = os.getenv('HOME') .. '/.config/nvim/lua/'
-
-loadAll(luaPath)
+require('disable-builtins')
+require('settings')
+require('keybinds')
+require('custom-filetypes')
+require('configure-trailing-whitespace')
+require('configure-plugins-generic')
+require('lsp-init')
+require('plugins')

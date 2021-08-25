@@ -1,6 +1,6 @@
 return {
   'windwp/nvim-autopairs',
-  event = 'BufEnter',
+  event = 'BufLeave', -- when leaving dashboard buffer
   config = function()
     require('nvim-autopairs').setup({})
   end,

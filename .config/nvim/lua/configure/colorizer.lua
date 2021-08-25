@@ -1,6 +1,6 @@
 return {
   'norcalli/nvim-colorizer.lua',
-  event = 'BufEnter',
+  event = 'BufLeave', -- when leaving dashboard buffer
   config = function()
     require('colorizer').setup({
       'css',

@@ -1,6 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
-  event = 'BufEnter',
+  event = 'BufLeave', -- when leaving dashboard buffer
   config = function()
     require('indent_blankline').setup({
       buftype_exclude = { 'NvimTree', 'terminal', 'term', 'packer', 'dashboard', 'gitcommit', 'fugitive' },
