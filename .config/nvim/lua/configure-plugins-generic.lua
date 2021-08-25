@@ -9,3 +9,8 @@ vim.g.sleuth_automatic = 1
 vim.g.move_key_modifier = 'C'
 
 vim.cmd('let $FZF_DEFAULT_COMMAND = system("echo $FZF_DEFAULT_COMMAND")')
+
+-- jump to last cursor position in file
+vim.cmd([[
+  autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif
+]])

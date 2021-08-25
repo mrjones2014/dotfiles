@@ -1,6 +1,6 @@
 return {
   'akinsho/nvim-bufferline.lua',
-  event = 'BufEnter',
+  event = 'BufLeave', -- when leaving dashboard buffer
   config = function()
     require('bufferline').setup({
       options = {
