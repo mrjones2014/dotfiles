@@ -2,8 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   run = ':TSUpdate',
   config = function()
-    local colors = require('tokyonight.colors').setup()
-
+    local colors = require('catppuccino.color_schemes.catppuccino')
     require('nvim-treesitter.configs').setup({
       highlight = {
         enable = true,

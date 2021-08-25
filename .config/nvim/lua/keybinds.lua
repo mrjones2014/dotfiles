@@ -128,12 +128,11 @@ map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true, silent = true })
 
 -- Use enter to accept completion if pumvisible(),
 -- otherwise default behavior.
-local npairs = require('nvim-autopairs')
 _G.nvim_autopairs_compe_integration_cr = function()
   if vim.fn.pumvisible() == 1 then
     return vim.fn['compe#confirm']({ keys = t('<CR>'), select = true })
   end
-  return npairs.autopairs_cr()
+  return require('nvim-autopairs').autopairs_cr()
 end
 map('i', '<CR>', 'v:lua.nvim_autopairs_compe_integration_cr()', { expr = true, silent = true })
 
