@@ -3,21 +3,20 @@ return require('packer').startup(function()
   use('wbthomason/packer.nvim')
 
   -- Themes
-  use(require('plugins.configure-catppuccino'))
+  use(require('configure.catppuccino'))
 
   -- Dependencies of other plugins
   use('nvim-lua/plenary.nvim')
   use('nvim-lua/popup.nvim')
 
   -- Editing enhancements and tools
-  use(require('plugins.configure-autopairs'))
-  use({ 'AndrewRadev/tagalong.vim', ft = { 'html', 'gohtmltmpl' } })
   use('matze/vim-move')
-  use(require('plugins.configure-telescope'))
-  use(require('plugins.configure-telescope-fzf-native'))
-  use('nvim-telescope/telescope-symbols.nvim')
-  use(require('plugins.configure-fterm'))
-  use({ 'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install' })
+  use(require('configure.telescope'))
+  use(require('configure.telescope-fzf-native'))
+  use(require('configure.autopairs'))
+  use(require('configure.tagalong'))
+  use(require('configure.fterm'))
+  use(require('configure.markdown-preview'))
 
   -- Tim Pope plugins
   use('tpope/vim-sleuth')
@@ -27,30 +26,29 @@ return require('packer').startup(function()
   -- LSP + syntax
   use('neovim/nvim-lspconfig')
   use('ray-x/lsp_signature.nvim')
-  use(require('plugins.configure-compe'))
-  use(require('plugins.configure-lspkind'))
   use('ckipp01/stylua-nvim')
-  use({ 'dag/vim-fish', ft = 'fish' })
-  use('mattn/emmet-vim')
-  use(require('plugins.configure-trouble'))
-  use('fatih/vim-go') -- just used for gohtmltmpl syntax highlighting
-  use('p00f/nvim-ts-rainbow')
-  use(require('plugins.configure-treesitter'))
-  use({ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle' } })
+  use(require('configure.emmet'))
+  use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
+  use(require('configure.compe'))
+  use(require('configure.lspkind'))
+  use(require('configure.vim-fish'))
+  use(require('configure.trouble'))
+  use(require('configure.treesitter'))
+  use(require('configure.treesitter-playground'))
 
   -- UI + utils
-  use('kyazdani42/nvim-web-devicons')
-  use({ 'yamatsum/nvim-nonicons', requires = { 'kyazdani42/nvim-web-devicons' } })
-  use(require('plugins.configure-nvimtree'))
-  use(require('plugins.configure-indent-blankline'))
   use('farmergreg/vim-lastplace')
   use('airblade/vim-gitgutter')
-  use(require('plugins.configure-lualine'))
-  use(require('plugins.configure-bufferline'))
-  use(require('plugins.configure-colorizer'))
-  use(require('plugins.configure-dashboard'))
-  use(require('plugins.configure-git-blame'))
-  use(require('plugins.configure-todo-comments'))
+  use(require('configure.nonicons'))
+  use(require('configure.nvimtree'))
+  use(require('configure.indent-blankline'))
+  use(require('configure.lualine'))
+  use(require('configure.bufferline'))
+  use(require('configure.colorizer'))
+  use(require('configure.dashboard'))
+  use(require('configure.git-blame'))
+  use(require('configure.todo-comments'))
+
   -- yaclt
   use('~/git/yaclt.nvim')
 end)

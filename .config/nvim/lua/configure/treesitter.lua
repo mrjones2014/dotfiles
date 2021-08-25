@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  requires = { 'p00f/nvim-ts-rainbow' },
   run = ':TSUpdate',
   config = function()
     local colors = require('catppuccino.color_schemes.catppuccino')

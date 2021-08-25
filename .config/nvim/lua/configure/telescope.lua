@@ -1,5 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
+  requires = { 'nvim-telescope/telescope-symbols.nvim' },
   config = function()
     local actions = require('telescope.actions')
     local trouble = require('trouble.providers.telescope')
