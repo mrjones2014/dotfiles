@@ -2,14 +2,14 @@ format = """
  $directory$git_branch$git_status$git_state
  $character """
 
-[character]
-success_symbol = "[](bold green)"
-error_symbol = "[](bold red)"
-vicmd_symbol = "[](bold green)"
+[character] # colors from ~/.config/kitty/catppuccino-theme.conf
+success_symbol = "[](bold #58cd8b)"
+error_symbol = "[](bold #e06c75)"
+vicmd_symbol = "[](bold #58cd8b)"
 
 [git_branch]
 symbol = " "
-style = "bold #f74e27"
+style = "bold #f74e27" # git brand color
 
 [directory]
 read_only = " "
