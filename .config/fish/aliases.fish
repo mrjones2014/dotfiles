@@ -23,6 +23,26 @@ alias lg="ls -lG"
 # since I can never find the site easily
 alias kitty-docs="open https://sw.kovidgoyal.net/kitty/"
 
+# sed -e 's/.*:[^:\/\/]/=/g;s/$//g;s/ *=//g' .config-paths.yml
+
+complete --no-files --command conf --arguments "(getConfCompletions (commandline -cp))"
+function getConfCompletions
+  set -l currentPath (string trim (string replace "conf " "" $argv[1]))
+  set -l allPaths (sed -e 's/:[^:\/\/].*/=/g;s/$//g;s/ *=//g' $HOME/.config-paths.yml)
+  set -l matchingPaths ""
+  for path in $allPaths
+    if string match -q -- "*$currentPath*" "$path"
+      # if first match, don't add newline
+      if test -z "$matchingPaths"
+        set matchingPaths "$path"
+      else
+        set matchingPaths "$matchingPaths"\n"$path"
+      end
+    end
+  end
+  echo $matchingPaths
+end
+
 function conf
   set -l SUBJECT_NAME $argv[1]
   set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config-paths.yml | head -n1 | awk '{ print $2 }')
