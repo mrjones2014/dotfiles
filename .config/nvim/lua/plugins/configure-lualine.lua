@@ -9,7 +9,9 @@ return {
       if vim.fn.winwidth(0) <= 84 then
         path = vim.fn.pathshorten(path)
       end
-      return icons.get('file') .. '  ' .. path
+
+      local icon = icons.get(vim.bo.filetype) or icons.get('file')
+      return icon .. '  ' .. path
     end
 
     local modeIcons = {
