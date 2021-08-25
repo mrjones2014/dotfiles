@@ -19,7 +19,6 @@ return require('packer').startup(function()
   use('nvim-telescope/telescope-symbols.nvim')
   use(require('plugins.configure-fterm'))
   use({ 'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install' })
-  use('David-Kunz/treesitter-unit')
 
   -- Tim Pope plugins
   use('tpope/vim-sleuth')
