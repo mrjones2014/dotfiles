@@ -23,8 +23,6 @@ alias lg="ls -lG"
 # since I can never find the site easily
 alias kitty-docs="open https://sw.kovidgoyal.net/kitty/"
 
-# sed -e 's/.*:[^:\/\/]/=/g;s/$//g;s/ *=//g' .config-paths.yml
-
 complete --no-files --command conf --arguments "(getConfCompletions (commandline -cp))"
 function getConfCompletions
   set -l currentPath (string trim (string replace "conf " "" $argv[1]))
