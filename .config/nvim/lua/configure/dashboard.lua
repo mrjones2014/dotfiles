@@ -16,11 +16,11 @@ return {
       },
       recents = {
         description = { '  Search Recent Files         fh' },
-        command = 'History',
+        command = 'lua require("telescope.builtin").oldfiles()',
       },
       files = {
         description = { '  Search Files                ff' },
-        command = 'Files',
+        command = 'lua require("telescope.builtin").find_files()',
       },
     }
   end,
