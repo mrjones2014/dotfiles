@@ -10,7 +10,7 @@ return require('packer').startup(function()
   use(require('configure.catppuccino'))
 
   -- Editing enhancements and tools
-  use('matze/vim-move')
+  use(require('configure.vim-move'))
   use(require('configure.telescope'))
   use(require('configure.telescope-fzf-native'))
   use(require('configure.autopairs'))
