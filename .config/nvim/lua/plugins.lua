@@ -17,11 +17,11 @@ return require('packer').startup(function()
   use(require('configure.tagalong'))
   use(require('configure.fterm'))
   use(require('configure.markdown-preview'))
+  use(require('configure.kommentary'))
 
   -- Tim Pope plugins
   -- TODO replace these with lua plugins and lazy load them?
   use('tpope/vim-sleuth')
-  use('tpope/vim-commentary')
   use('tpope/vim-eunuch')
 
   -- LSP + syntax
