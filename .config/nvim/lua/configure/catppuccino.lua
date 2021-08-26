@@ -7,7 +7,10 @@ return {
         native_lsp = {
           enabled = true,
         },
-        nvimtree = true,
+        nvimtree = {
+          enabled = true,
+          show_root = true,
+        },
         telescope = true,
         dashboard = true,
         bufferline = true,
