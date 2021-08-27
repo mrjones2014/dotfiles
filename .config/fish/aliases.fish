@@ -1,5 +1,4 @@
 alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
-alias docker-login-local="docker login registry.1password.io -u local-registry"
 
 # Alias for dotfiles management
 alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
