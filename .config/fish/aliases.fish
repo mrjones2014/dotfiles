@@ -95,7 +95,7 @@ function tmux-send-all-panes
       tmux send-keys -t $pane "$argv" "Enter"
     else
       # I only want to send nvim command to current pane
-      set -l cmd (string replace nvim "" "$argv")
+      set -l cmd (string replace " nvim" "" "$argv")
       tmux send-keys -t $pane "$cmd" "Enter"
     end
   end
