@@ -1,3 +1,4 @@
+-- if packer isn't already installed, install it
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -17,6 +18,7 @@ return require('packer').startup(function()
   use(require('configure.catppuccino'))
 
   -- Editing enhancements and tools
+  use(require('configure.vim-tmux-navigator'))
   use(require('configure.vim-move'))
   use(require('configure.telescope'))
   use(require('configure.telescope-fzf-native'))
@@ -27,9 +29,8 @@ return require('packer').startup(function()
   use(require('configure.kommentary'))
 
   -- Tim Pope plugins
-  -- TODO replace these with lua plugins and lazy load them?
-  use('tpope/vim-sleuth')
-  use('tpope/vim-eunuch')
+  use(require('configure.vim-sleuth'))
+  use(require('configure.vim-eunuch'))
 
   -- LSP + syntax
   use(require('configure.lspconfig'))
@@ -55,6 +56,8 @@ return require('packer').startup(function()
   use(require('configure.git-blame'))
   use(require('configure.todo-comments'))
 
-  -- yaclt
-  use('~/git/yaclt.nvim')
+  if vim.fn.isdirectory('~/git/yaclt.nvim') then
+    -- yaclt
+    use('~/git/yaclt.nvim')
+  end
 end)
