@@ -1,6 +1,5 @@
 return {
   'b3nj5m1n/kommentary',
-  event = 'BufLeave', -- when leaving dashboard buffer
   setup = function()
     vim.g.kommentary_create_default_mappings = false
   end,
