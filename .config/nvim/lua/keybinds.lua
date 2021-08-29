@@ -32,12 +32,6 @@ map('n', '<leader>s', t(':wa<CR>'), { noremap = true })
 -- shift+w to close tab
 map('n', 'W', t(":exec 'bdelete ' . bufname()<CR>"), { noremap = true, silent = true })
 
--- shift+h/j/k/l for moving around panes
-map('n', 'H', t('<C-w>h'), { noremap = true, silent = true })
-map('n', 'J', t('<C-w>j'), { noremap = true, silent = true })
-map('n', 'K', t('<C-w>k'), { noremap = true, silent = true })
-map('n', 'L', t('<C-w>l'), { noremap = true, silent = true })
-
 ----------------
 -- BufferLine
 ----------------
