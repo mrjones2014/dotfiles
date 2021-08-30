@@ -55,17 +55,12 @@ function lspUtils.on_attach(client, bufnr)
 end
 
 function lspUtils.formatDocument()
-  local ft = vim.bo.filetype
-  if ft == 'lua' then
-    require('stylua-nvim').format_file()
-    return
-  end
-
   -- check if LSP is attached
   if (#vim.lsp.buf_get_clients()) < 1 then
     return
   end
 
+  local ft = vim.bo.filetype
   if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
     local params = {
       command = '_typescript.organizeImports',

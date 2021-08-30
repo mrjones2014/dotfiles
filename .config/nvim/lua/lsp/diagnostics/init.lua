@@ -34,6 +34,7 @@ require('lspconfig').diagnosticls.setup({
       javascriptreact = 'prettier',
       css = 'prettier',
       scss = 'prettier',
+      lua = 'stylua',
     },
     linters = {
       eslint = require('lsp.diagnostics.eslint'),
@@ -43,6 +44,7 @@ require('lspconfig').diagnosticls.setup({
     },
     formatters = {
       prettier = require('lsp.diagnostics.prettier'),
+      stylua = require('lsp.diagnostics.stylua')
     },
   },
 })
