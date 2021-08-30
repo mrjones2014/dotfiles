@@ -84,6 +84,10 @@ function check_globals
         echo 'Install shellcheck: brew install shellcheck'
     end
 
+    if ! type luacheck &> /dev/null
+        echo 'Install luacheck: luarocks install luacheck'
+    end
+
     if ! type bat &> /dev/null
         echo 'Install bat: brew install bat'
     end
