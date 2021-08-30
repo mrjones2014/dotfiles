@@ -80,6 +80,10 @@ function check_globals
         echo 'Install rustup fish plugin: omf install rustup'
     end
 
+    if ! type shellcheck &> /dev/null
+        echo 'Install shellcheck: brew install shellcheck'
+    end
+
     if ! type bat &> /dev/null
         echo 'Install bat: brew install bat'
     end

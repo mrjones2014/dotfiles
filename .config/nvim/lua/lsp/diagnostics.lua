@@ -2,7 +2,7 @@ local utils = require('lspconfig/util')
 
 require('lspconfig').diagnosticls.setup({
   root_dir = utils.root_pattern('.git'),
-  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css' },
+  filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'scss', 'css', 'bash', 'zsh', 'sh' },
   init_options = {
     filetypes = {
       javascript = 'eslint',
@@ -11,6 +11,9 @@ require('lspconfig').diagnosticls.setup({
       typescriptreact = 'eslint',
       scss = 'stylelint',
       css = 'stylelint',
+      bash = 'shellcheck',
+      zsh = 'shellcheck',
+      sh = 'shellcheck',
     },
     formatFiletypes = {
       typescript = 'prettier',
@@ -63,6 +66,26 @@ require('lspconfig').diagnosticls.setup({
         securities = {
           error = 'error',
           warning = 'warning',
+        },
+      },
+      shellcheck = {
+        command = 'shellcheck',
+        debounce = 100,
+        args = { '--format', 'json', '-' },
+        sourceName = 'shellcheck',
+        parseJson = {
+          line = 'line',
+          column = 'column',
+          endLine = 'endLine',
+          endColumn = 'endColumn',
+          message = '${message} [${code}]',
+          security = 'level',
+        },
+        securities = {
+          error = 'error',
+          warning = 'warning',
+          info = 'info',
+          style = 'hint',
         },
       },
     },
