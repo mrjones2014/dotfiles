@@ -3,7 +3,7 @@ return {
   requires = { 'p00f/nvim-ts-rainbow' },
   run = ':TSUpdate',
   config = function()
-    local colors = require('catppuccino.color_schemes.catppuccino')
+    local colors = require('catppuccino.color_schemes.dark_catppuccino')
     require('nvim-treesitter.configs').setup({
       highlight = {
         enable = true,
