@@ -2,7 +2,7 @@ return {
   sourceName = 'luacheck',
   command = 'luacheck',
   debounce = 100,
-  args = { '--codes', '--no-color', '--quiet', '%filepath' },
+  args = { '--codes', '--no-color', '--quiet', '-' },
   offsetLine = 0,
   offsetColumn = 0,
   formatLines = 1,
