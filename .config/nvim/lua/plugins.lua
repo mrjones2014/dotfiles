@@ -34,7 +34,6 @@ return require('packer').startup(function()
 
   -- LSP + syntax
   use(require('configure.lspconfig'))
-  use(require('configure.stylua'))
   use(require('configure.emmet'))
   use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
   use(require('configure.completion'))
