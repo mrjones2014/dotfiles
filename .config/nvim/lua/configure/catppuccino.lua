@@ -18,6 +18,9 @@ return {
         lsp_saga = true,
         indent_blankline = true,
       },
+    }, {
+      bg = '#212222',
+      bg_sidebar = '#2a2b2b',
     })
     catppuccino.load()
   end,
