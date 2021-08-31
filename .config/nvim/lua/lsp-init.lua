@@ -1,5 +1,3 @@
-local lsp = require('lspconfig')
-
 -- customize LSP icons
 local signs = require('modules.lsp-icons')
 for type, icon in pairs(signs) do
@@ -7,7 +5,11 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
 
-require('modules.load-all')(os.getenv('HOME') .. '/.config/nvim/lua/lsp', 2)
+require('lsp.css')
+require('lsp.html')
+require('lsp.json')
+require('lsp.typescript')
+require('lsp.diagnostics')
 
 vim.cmd('command! Format :lua require("modules.lsp-utils").formatDocument()')
 vim.cmd([[
