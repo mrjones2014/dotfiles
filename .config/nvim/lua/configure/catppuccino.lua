@@ -3,6 +3,7 @@ return {
   config = function()
     local catppuccino = require('catppuccino')
     catppuccino.setup({
+      colorscheme = 'soft_manilo',
       integrations = {
         native_lsp = {
           enabled = true,
@@ -18,9 +19,6 @@ return {
         lsp_saga = true,
         indent_blankline = true,
       },
-    }, {
-      bg = '#212222',
-      bg_sidebar = '#2a2b2b',
     })
     catppuccino.load()
   end,
