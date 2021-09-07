@@ -17,7 +17,10 @@ return {
         bufferline = true,
         lsp_trouble = true,
         lsp_saga = true,
-        indent_blankline = true,
+        indent_blankline = {
+          enabled = true,
+          colored_indent_levels = true,
+        },
       },
     })
     catppuccino.load()
