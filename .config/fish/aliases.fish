@@ -92,7 +92,7 @@ function tmux-send-all-panes
   set -l current_pane (tmux display-message -p '#P')
   for pane in (tmux list-panes -F '#P')
     if [ "$pane" = "$current_pane" ]
-      tmux send-keys -t $pane "$argv" "Enter"
+      eval $argv
     else
       # I only want to send nvim command to current pane
       set -l cmd (string replace " nvim" "" "$argv")
@@ -128,7 +128,8 @@ function fo
       cd "$local_fzf_dir_open"
       nvim
     else
-      tmux-send-all-panes "cd $local_fzf_dir_open; clear; nvim"
+      tmux-send-all-panes "cd $local_fzf_dir_open; clear"
+      nvim
     end
   end
 end
