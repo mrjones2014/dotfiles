@@ -1,0 +1,29 @@
+[user]
+  name = Mat Jones
+[commit]
+  gpgsign = true
+[include]
+  path = ~/.config/git/gitconfig.aliases
+[include]
+  path = ~/.config/git/gitconfig.common
+
+[includeIf "gitdir:~/git/work/"]
+  path = ~/.config/git/gitconfig.work
+[includeIf "gitdir:~/.dotfiles"]
+  path = ~/.config/git/gitconfig.personal
+[includeIf "gitdir:~/git/personal/"]
+  path = ~/.config/git/gitconfig.personal
+
+[diff]
+  tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[merge]
+  tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+[mergetool]
+  prompt = false

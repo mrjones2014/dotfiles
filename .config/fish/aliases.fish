@@ -102,9 +102,15 @@ function tmux-send-all-panes
 end
 
 function find-projects
-  set -l local_fzf_dir_find (exa -1 --all --level=1 ~/git/ | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
+  set -l work_projects (exa -1 ~/git/work)
+  set -l personal_projects (exa -1 ~/git/personal)
+  set -l local_fzf_dir_find (string join \n $work_projects $personal_projects | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
   if test -n "$local_fzf_dir_find"
-    echo "$HOME/git/$local_fzf_dir_find"
+    if string match $local_fzf_dir_find $work_projects &>/dev/null
+      echo "~/git/work/$local_fzf_dir_find"
+    else if string match $local_fzf_dir_find $personal_projects &>/dev/null
+      echo "~/git/personal/$local_fzf_dir_find"
+    end
   end
 end
 
