@@ -1,6 +1,9 @@
 [pull]
 	rebase = false
 
+[commit]
+	gpgsign = true
+
 [core]
 	editor = nvim
 
