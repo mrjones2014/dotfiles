@@ -34,12 +34,4 @@ which means you need Neovim with Lua support (0.5+).
 
 ## Git Config
 
-The git configs are in separate files so that my email address doesn't need to be in this repo.
-To get the git config to work, add the following lines to your `~/.gitconfig`:
-
-```
-[include]
-  path = ~/.config/git/gitconfig.aliases
-[include]
-  path = ~/.config/git/gitconfig.common
-```
+In order to keep my email addresses and signing key IDs out of version control, I `includeIf` them from separate configs for work vs. personal development. Set `user.email` and `user.signingkey` in `~/.config/git/gitconfig.work` and `~/.config/git/gitconfig.personal` (which are not tracked in git).
