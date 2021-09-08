@@ -1,5 +1,5 @@
 function check_globals
-    if test -z "(ls ~/Library/Fonts | grep "Fira Code")"
+    if test -z "(ls ~/Library/Fonts | grep Fira\ Code)"
         echo "Install Fira Code NerdFont: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode"
     end
 
