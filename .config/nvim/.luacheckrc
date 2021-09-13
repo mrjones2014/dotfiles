@@ -1,3 +1,3 @@
-globals = { 'vim', 'use' }
+globals = { 'vim' }
 
 -- vim: ft=lua
