@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
   use(require('configure.trouble'))
   use(require('configure.treesitter'))
   use(require('configure.treesitter-playground'))
+  use(require('configure.vim-illuminate'))
 
   -- UI + utils
   use(require('configure.gitgutter'))
@@ -55,8 +56,8 @@ return require('packer').startup(function(use)
   use(require('configure.git-blame'))
   use(require('configure.todo-comments'))
 
-  if vim.fn.isdirectory('~/git/yaclt.nvim') then
+  if vim.fn.isdirectory('~/git/personal/yaclt.nvim') then
     -- yaclt
-    use('~/git/yaclt.nvim')
+    use('~/git/personal/yaclt.nvim')
   end
 end)
