@@ -42,7 +42,6 @@ return require('packer').startup(function(use)
   use(require('configure.trouble'))
   use(require('configure.treesitter'))
   use(require('configure.treesitter-playground'))
-  use(require('configure.vim-illuminate'))
 
   -- UI + utils
   use(require('configure.gitgutter'))
