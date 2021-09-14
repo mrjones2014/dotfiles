@@ -1,7 +1,7 @@
 alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
 
 # Alias for dotfiles management
-alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # alias vi and vim to open nvim instead
 alias vim="nvim"
