@@ -11,8 +11,6 @@ function lspUtils.on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
 
-  require('illuminate').on_attach(client)
-
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
