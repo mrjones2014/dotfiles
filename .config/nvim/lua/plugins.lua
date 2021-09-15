@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
   use(require('configure.catppuccino'))
 
   -- Editing enhancements and tools
-  use(require('configure.vim-tmux-navigator'))
+  use(require('configure.tmux-navigator'))
   use(require('configure.vim-move'))
   use(require('configure.telescope'))
   use(require('configure.telescope-fzf-native'))
