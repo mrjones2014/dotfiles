@@ -32,6 +32,15 @@ map('n', '<leader>s', t(':wa<CR>'), { noremap = true })
 -- shift+w to close tab
 map('n', 'W', t(":exec 'bdelete ' . bufname()<CR>"), { noremap = true, silent = true })
 
+--------------------
+-- Navigator (tmux)
+--------------------
+map('n', '<C-h>', t(":lua require('Navigator').left()<CR>"), { noremap = true, silent = true })
+map('n', '<C-j>', t(":lua require('Navigator').down()<CR>"), { noremap = true, silent = true })
+map('n', '<C-k>', t(":lua require('Navigator').up()<CR>"), { noremap = true, silent = true })
+map('n', '<C-l>', t(":lua require('Navigator').right()<CR>"), { noremap = true, silent = true })
+map('n', '<C-p>', t(":lua require('Navigator').previous()<CR>"), { noremap = true, silent = true })
+
 ----------------
 -- BufferLine
 ----------------
