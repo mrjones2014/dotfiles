@@ -1,5 +1,6 @@
 *.txt
 spg.js
+xplatform-spg.js
 .git/
 yarn.lock
 package-lock.json
