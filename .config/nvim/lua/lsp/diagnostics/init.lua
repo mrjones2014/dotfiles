@@ -14,6 +14,11 @@ require('lspconfig').diagnosticls.setup({
     'zsh',
     'sh',
   },
+  handlers = {
+    ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      update_in_insert = true,
+    }),
+  },
   init_options = {
     filetypes = {
       javascript = 'eslint',
@@ -44,7 +49,7 @@ require('lspconfig').diagnosticls.setup({
     },
     formatters = {
       prettier = require('lsp.diagnostics.prettier'),
-      stylua = require('lsp.diagnostics.stylua')
+      stylua = require('lsp.diagnostics.stylua'),
     },
   },
 })
