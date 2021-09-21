@@ -19,6 +19,14 @@ function check_globals
         echo "Install fisher: https://github.com/jorgebucaran/fisher"
     end
 
+    if ! fisher list | grep nvm.fish &> /dev/null
+        echo "Install nvim.fish: fisher install jorgebucaran/nvm.fish"
+    end
+
+    if ! fisher list | grep pisces &> /dev/null
+        echo "Install pisces: fisher install laughedelic/pisces"
+    end
+
     if ! type nvim &> /dev/null
         echo "Install neovim: https://github.com/neovim/neovim"
     end
@@ -100,8 +108,8 @@ function check_globals
         echo "Install stylua: cargo install stylua --features lua52"
     end
 
-    if [ -z (pip3 list | grep -F pynvim) ]
-        echo "Install pynvim: pip3 install pynvim"
+    if [ -z (python3 -m pip list | grep -F pynvim) ]
+        echo "Install pynvim: python3 -m pip install pynvim"
     end
 
     if [ -z (ls /Applications/ | grep -i hammerspoon) ]

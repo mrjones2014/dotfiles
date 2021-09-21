@@ -45,8 +45,8 @@ map('n', '<C-p>', t(":lua require('Navigator').previous()<CR>"), { noremap = tru
 -- BufferLine
 ----------------
 -- Cycle through nvim-bufferline with ctrl+tab and shift+tab
-map('n', '<C-i>', t(':BufferLineCycleNext<CR>'), { noremap = true, silent = true })
-map('n', '<S-tab>', t(':BufferLineCyclePrev<CR>'), { noremap = true, silent = true })
+map('n', '<C-w>n', t(':BufferLineCycleNext<CR>'), { noremap = true, silent = true })
+map('n', '<C-w>p', t(':BufferLineCyclePrev<CR>'), { noremap = true, silent = true })
 
 ----------------
 -- nvim-tree
