@@ -1,6 +1,5 @@
 return {
   'hoob3rt/lualine.nvim',
-  after = 'Catppuccino.nvim',
   config = function()
     local icons = require('nvim-nonicons')
 
@@ -57,7 +56,7 @@ return {
 
     require('lualine').setup({
       options = {
-        theme = 'catppuccino',
+        theme = 'github',
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = {

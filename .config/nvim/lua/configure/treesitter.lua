@@ -3,7 +3,6 @@ return {
   requires = { 'p00f/nvim-ts-rainbow' },
   run = ':TSUpdate',
   config = function()
-    local colors = require('catppuccino.color_schemes.dark_catppuccino')
     require('nvim-treesitter.configs').setup({
       highlight = {
         enable = true,
@@ -28,15 +27,6 @@ return {
         enable = true,
         extended_mode = true,
         max_file_lines = 1500,
-        colors = {
-          colors.blue,
-          colors.yellow,
-          colors.magenta,
-          colors.red,
-          colors.orange,
-          colors.cyan,
-          colors.green,
-        },
       },
     })
   end,
