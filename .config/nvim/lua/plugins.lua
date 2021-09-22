@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
   use('nvim-lua/popup.nvim')
 
   -- Themes
-  use(require('configure.catppuccino'))
+  use(require('configure.theme'))
 
   -- Editing enhancements and tools
   use(require('configure.tmux-navigator'))
