@@ -79,14 +79,6 @@ map('n', '<leader>v', t(':vsplit<CR>:lua require("telescope.builtin").find_files
 -- <leader>b to vert split, then find open buffers to put in the new pane
 map('n', '<leader>b', t(':vsplit<CR>:lua require("telescope.builtin").buffers()<CR>'), { silent = true })
 
-----------------------------
--- nvim-dashboard Sessions
-----------------------------
--- <leader>ss to save session
-map('n', '<leader>ss', t('<C-u>SessionSave'), { noremap = true })
--- <leader>sl to load session
-map('n', '<leader>sl', t('<C-u>SessionLoad'), { noremap = true })
-
 -----------------------
 -- nvim-compe
 -----------------------
