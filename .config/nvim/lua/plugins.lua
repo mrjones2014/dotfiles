@@ -59,4 +59,9 @@ return require('packer').startup(function(use)
     -- yaclt
     use('~/git/personal/yaclt.nvim')
   end
+
+  if vim.fn.isdirectory('~/git/personal/dash.nvim') then
+    -- dash plugin I'm working on
+    use({ '~/git/personal/dash.nvim' })
+  end
 end)
