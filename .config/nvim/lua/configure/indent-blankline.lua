@@ -25,8 +25,5 @@ return {
       show_current_context = true,
       show_trailing_blankline_indent = false,
     })
-
-    -- because lazy load indent-blankline so need readd this autocmd
-    vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
   end,
 }
