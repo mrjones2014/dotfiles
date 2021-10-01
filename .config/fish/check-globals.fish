@@ -56,7 +56,11 @@ function check_globals
     end
 
     if ! type eslint_d &> /dev/null
-        echo "Install eslint globally for Neovim integration: yarn global add eslint_d"
+        echo "Install eslint_d globally for Neovim integration: yarn global add eslint_d"
+    end
+
+    if ! type prettierd &> /dev/null
+        echo "Install prettierd globally for Neovim integration: yarn global add @jsouza/prettierd"
     end
 
     if ! type typescript-language-server &> /dev/null
