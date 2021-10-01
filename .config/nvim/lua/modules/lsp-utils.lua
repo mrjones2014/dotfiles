@@ -4,6 +4,12 @@ local lspUtils = {}
 -- after the language server attaches to the current buffer
 function lspUtils.on_attach(client, bufnr)
   vim.cmd('command! Format :lua require("modules.lsp-utils").formatDocument()')
+  vim.cmd([[
+    augroup fmt
+      autocmd!
+      autocmd BufWritePre * Format
+    augroup END
+  ]])
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end

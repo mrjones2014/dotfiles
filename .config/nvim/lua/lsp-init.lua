@@ -9,12 +9,4 @@ require('lsp.css')
 require('lsp.html')
 require('lsp.json')
 require('lsp.typescript')
-require('lsp.diagnostics')
-
-vim.cmd('command! Format :lua require("modules.lsp-utils").formatDocument()')
-vim.cmd([[
-  augroup fmt
-    autocmd!
-    autocmd BufWritePre * Format
-  augroup END
-]])
+require('lsp.null-ls')
