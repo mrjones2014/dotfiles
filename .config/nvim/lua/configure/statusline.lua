@@ -32,5 +32,7 @@ return {
         defaultStatusLine,
       },
     })
+
+    vim.cmd('autocmd VimEnter * :WindLineFloatToggle')
   end,
 }
