@@ -2,8 +2,28 @@ return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     require('indent_blankline').setup({
-      buftype_exclude = { 'NvimTree', 'terminal', 'term', 'packer', 'dashboard', 'gitcommit', 'fugitive' },
-      filetype_exclude = { 'NvimTree', 'terminal', 'term', 'packer', 'dashboard', 'gitcommit', 'fugitive' },
+      buftype_exclude = {
+        'NvimTree',
+        'terminal',
+        'term',
+        'packer',
+        'dashboard',
+        'gitcommit',
+        'fugitive',
+        'nofile',
+        'floatline',
+      },
+      filetype_exclude = {
+        'NvimTree',
+        'terminal',
+        'term',
+        'packer',
+        'dashboard',
+        'gitcommit',
+        'fugitive',
+        'nofile',
+        'floatline',
+      },
       context_patterns = {
         'class',
         'function',

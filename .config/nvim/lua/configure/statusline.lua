@@ -33,6 +33,6 @@ return {
       },
     })
 
-    vim.cmd('autocmd VimEnter * :WindLineFloatToggle')
+    vim.cmd('WindLineFloatToggle')
   end,
 }
