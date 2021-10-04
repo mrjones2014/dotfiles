@@ -1,7 +1,11 @@
 return {
-  'hoob3rt/lualine.nvim',
+  'mrjones2014/lualine.nvim',
   config = function()
     local icons = require('nvim-nonicons')
+
+    local function isFileOpen()
+      return #(vim.fn.expand('%')) > 0
+    end
 
     local function filepath()
       local path = vim.fn.expand('%')
@@ -63,8 +67,13 @@ return {
         lualine_a = { getMode },
         lualine_b = { { 'branch', icon = icons.get('git-branch') } },
         lualine_c = {
-          { 'diagnostics', sources = { 'nvim_lsp' }, sections = { 'error', 'warn', 'info', 'hint' } },
           filepath,
+          {
+            'diagnostics',
+            sources = { 'nvim_lsp' },
+            sections = { 'error', 'warn', 'info', 'hint' },
+            visible = isFileOpen,
+          },
         },
         lualine_x = { 'filetype' },
         lualine_y = { 'progress' },

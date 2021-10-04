@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
 
   -- UI + utils
   use(require('configure.gitgutter'))
-  use(require('configure.nonicons'))
+  use(require('configure.icons'))
   use(require('configure.nvim-tree'))
   use(require('configure.indent-blankline'))
   use(require('configure.lualine'))
