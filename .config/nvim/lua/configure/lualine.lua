@@ -13,7 +13,7 @@ return {
         path = vim.fn.pathshorten(path)
       end
 
-      local icon = icons.get(vim.bo.filetype) or icons.get('file')
+      local icon = require('nvim-web-devicons').get_icon(path)
       return icon .. '  ' .. path
     end
 

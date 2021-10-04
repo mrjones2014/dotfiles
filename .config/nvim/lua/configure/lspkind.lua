@@ -29,6 +29,10 @@ return {
 
     require('lspkind').init({
       symbol_map = {
+        Event = Event,
+        Operator = Operator,
+        Reference = Reference,
+        TypeParameter = TypeParameter,
         Text = Text,
         Method = Method,
         Function = Function,
