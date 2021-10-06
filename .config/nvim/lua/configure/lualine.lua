@@ -1,6 +1,8 @@
 return {
   'mrjones2014/lualine.nvim',
   config = function()
+    local lualineTheme = 'github'
+
     local icons = require('nvim-nonicons')
 
     local function isFileOpen()
@@ -64,7 +66,7 @@ return {
 
     require('lualine').setup({
       options = {
-        theme = 'github',
+        theme = lualineTheme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = {
