@@ -96,10 +96,6 @@ function check_globals
         echo 'Install shellcheck: brew install shellcheck'
     end
 
-    if ! type luacheck &> /dev/null
-        echo 'Install luacheck: luarocks install luacheck'
-    end
-
     if ! type bat &> /dev/null
         echo "Install bat: brew install bat"
     end
@@ -108,8 +104,16 @@ function check_globals
         echo "Install exa: brew install exa"
     end
 
+    if ! type luacheck &> /dev/null
+        echo 'Install luacheck: luarocks install luacheck'
+    end
+
     if ! type stylua &> /dev/null
         echo "Install stylua: cargo install stylua --features lua52"
+    end
+
+    if ! type lua-language-server &> /dev/null
+        echo "Install lua-language-server: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)"
     end
 
     if [ -z (python3 -m pip list | grep -F pynvim) ]
