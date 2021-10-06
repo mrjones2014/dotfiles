@@ -39,5 +39,6 @@ null_ls.config({
 })
 
 require('lspconfig')['null-ls'].setup({
+  autostart = true,
   on_attach = require('modules.lsp-utils').on_attach,
 })
