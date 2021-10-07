@@ -55,7 +55,7 @@ function lspUtils.on_attach(client, bufnr)
     or ft == 'json'
     or ft == 'jsonc'
   then
-    -- Disable formatting via tsserver because we're handling formatting via diagnosticls
+    -- Disable formatting via tsserver because we're handling formatting via null-ls
     client.resolved_capabilities.document_formatting = false
   end
 end

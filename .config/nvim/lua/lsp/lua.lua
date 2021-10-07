@@ -7,6 +7,7 @@ table.insert(runtime_path, 'lua/?/init.lua')
 require('lspconfig').sumneko_lua.setup({
   cmd = { binRoot .. 'lua-language-server', '-E', binRoot .. 'main.lua' },
   on_attach = require('modules.lsp-utils').on_attach,
+  root_dir = require('lspconfig/util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
     Lua = {
       runtime = {

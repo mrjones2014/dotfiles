@@ -1,6 +1,5 @@
 return {
   'mrjones2014/lualine.nvim',
-  -- requires = 'windwp/floatline.nvim',
   config = function()
     local lualineTheme = 'github'
 
@@ -89,6 +88,5 @@ return {
       inactive_sections = {},
       extensions = { 'nvim-tree' },
     })
-    -- require('floatline').setup()
   end,
 }
