@@ -44,7 +44,7 @@ return require('packer').startup(function(use)
   use(require('configure.treesitter-playground'))
 
   -- UI + utils
-  use(require('configure.gitgutter'))
+  use(require('configure.gitsigns'))
   use(require('configure.icons'))
   use(require('configure.nvim-tree'))
   use(require('configure.indent-blankline'))
@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
   use(require('configure.bufferline'))
   use(require('configure.colorizer'))
   use(require('configure.dashboard'))
-  use(require('configure.git-blame'))
   use(require('configure.todo-comments'))
 
   if vim.fn.isdirectory('~/git/personal/yaclt.nvim') then
