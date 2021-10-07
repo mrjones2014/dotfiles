@@ -1,11 +1,12 @@
-local binRoot = os.getenv('HOME') .. '/git/personal/lua-language-server/bin/macOS/'
+local baseRoot = os.getenv('HOME') .. '/git/personal/lua-language-server'
+local binRoot = baseRoot .. '/bin/macOS/'
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 require('lspconfig').sumneko_lua.setup({
-  cmd = { binRoot .. 'lua-language-server', '-E', binRoot .. 'main.lua' },
+  cmd = { binRoot .. 'lua-language-server', '-E', baseRoot .. '/main.lua' },
   on_attach = require('modules.lsp-utils').on_attach,
   root_dir = require('lspconfig/util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
