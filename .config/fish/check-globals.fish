@@ -96,6 +96,10 @@ function check_globals
         echo 'Install shellcheck: brew install shellcheck'
     end
 
+    if ! type shfmt &> /dev/null
+        echo 'Install shfmt: brew install shfmt'
+    end
+
     if ! type bat &> /dev/null
         echo "Install bat: brew install bat"
     end
