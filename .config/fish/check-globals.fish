@@ -92,6 +92,10 @@ function check_globals
         echo "Install rustup fish plugin: omf install rustup"
     end
 
+    if ! type stylua &> /dev/null
+        echo "Install stylua: cargo install stylua --features lua52"
+    end
+
     if ! type shellcheck &> /dev/null
         echo 'Install shellcheck: brew install shellcheck'
     end
@@ -112,11 +116,11 @@ function check_globals
         echo 'Install luacheck: luarocks install luacheck'
     end
 
-    if ! type stylua &> /dev/null
-        echo "Install stylua: cargo install stylua --features lua52"
+    if ! type rust-analyzer &> /dev/null
+        echo "Install rust-analyzer: brew install rust-analyzer"
     end
 
-    if ! type lua-language-server &> /dev/null
+    if test -z "(ls ~/git/personal/lua-language-server/bin/macOS | grep lua-language-server)"
         echo "Install lua-language-server: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)"
     end
 
