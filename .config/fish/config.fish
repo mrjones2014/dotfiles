@@ -17,8 +17,8 @@ bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind
 export GPG_TTY=(tty)
 export EDITOR="nvim"
 
-set PATH $PATH "$HOME/scripts"
-set PATH $PATH "$HOME/.cargo/bin"
+fish_add_path "$HOME/scripts"
+fish_add_path "$HOME/.cargo/bin"
 
 source $HOME/.config/fish/check-globals.fish
 source $HOME/.config/fish/fzf-config.fish
