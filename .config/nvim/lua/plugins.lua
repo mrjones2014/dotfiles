@@ -55,12 +55,12 @@ return require('packer').startup(function(use)
   use(require('configure.dashboard'))
   use(require('configure.todo-comments'))
 
-  if vim.fn.isdirectory('~/git/personal/yaclt.nvim') then
+  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') ~= 0 then
     -- yaclt
     use('~/git/personal/yaclt.nvim')
   end
 
-  if vim.fn.isdirectory('~/git/personal/dash.nvim') then
+  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') ~= 0 then
     -- dash plugin I'm working on
     use({ '~/git/personal/dash.nvim' })
   end

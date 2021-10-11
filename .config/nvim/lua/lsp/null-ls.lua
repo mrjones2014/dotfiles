@@ -26,7 +26,7 @@ local sources = {
   }),
 }
 
-if vim.fn.filereadable('./node_modules/.bin/stylelint') then
+if vim.fn.filereadable('./node_modules/.bin/stylelint') ~= 0 then
   table.insert(
     sources,
     b.formatting.stylelint.with({
