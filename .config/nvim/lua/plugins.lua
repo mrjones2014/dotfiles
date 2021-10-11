@@ -1,8 +1,7 @@
 -- if packer isn't already installed, install it
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
   vim.cmd('packadd packer.nvim')
 end
 
@@ -55,12 +54,12 @@ return require('packer').startup(function(use)
   use(require('configure.dashboard'))
   use(require('configure.todo-comments'))
 
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') ~= 0 then
+  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') > 0 then
     -- yaclt
     use('~/git/personal/yaclt.nvim')
   end
 
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') ~= 0 then
+  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') > 0 then
     -- dash plugin I'm working on
     use({ '~/git/personal/dash.nvim' })
   end
