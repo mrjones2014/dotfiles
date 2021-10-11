@@ -1,6 +1,7 @@
 # ensure brew stuff is on PATH
 if test -f "/opt/homebrew/bin/brew"
     eval (/opt/homebrew/bin/brew shellenv)
+    fish_add_path /opt/homebrew/bin
 end
 
 # start tmux session by default
