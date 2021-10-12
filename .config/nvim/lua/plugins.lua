@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
   use(require('configure.tagalong'))
   use(require('configure.fterm'))
   use(require('configure.markdown-preview'))
-  use(require('configure.kommentary'))
+  use(require('configure.comments'))
 
   -- Tim Pope plugins
   use(require('configure.vim-sleuth'))
