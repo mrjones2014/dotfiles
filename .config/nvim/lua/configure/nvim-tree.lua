@@ -22,8 +22,8 @@ return {
     }
   end,
   config = function()
+    local icons = require('modules.lsp-icons')
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
-
     require('nvim-tree').setup({
       view = {
         side = 'right',
@@ -47,7 +47,15 @@ return {
         update_cwd = false,
       },
       auto_close = true,
-      lsp_diagnostics = true,
+      diagnostics = {
+        enable = true,
+        icons = {
+          hint = icons.Hint,
+          info = icons.Info,
+          warning = icons.Warning,
+          error = icons.Error,
+        },
+      },
     })
   end,
 }
