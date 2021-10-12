@@ -142,3 +142,9 @@ map('i', '<Esc>', 'v:lua.esc_close_menu()', { expr = true, silent = true })
 -- trouble.nvim
 ------------------------
 map('n', '<leader>d', t(':LspTroubleToggle<CR>'), { noremap = true, silent = true })
+
+------------------------
+-- Comment.nvim
+------------------------
+map('n', '<leader>c', t(':lua require("Comment").toggle()<CR>'), { noremap = true, silent = true })
+map('v', '<leader>c', t(':lua require("Comment").toggle()<CR>'), { noremap = true, silent = true })
