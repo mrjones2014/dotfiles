@@ -14,6 +14,6 @@ return {
       },
     })
 
-    vim.cmd('highlight GitSignsCurrentLineBlame guifg=#4d5566')
+    vim.cmd('highlight GitSignsCurrentLineBlame guifg=#2d4144')
   end,
 }
