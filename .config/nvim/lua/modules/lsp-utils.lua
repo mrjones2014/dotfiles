@@ -1,8 +1,8 @@
-local lspUtils = {}
+local M = {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-function lspUtils.on_attach(client, bufnr)
+function M.on_attach(client, bufnr)
   vim.cmd('command! Format :lua require("modules.lsp-utils").formatDocument()')
   vim.cmd([[
     augroup fmt
@@ -60,7 +60,7 @@ function lspUtils.on_attach(client, bufnr)
   end
 end
 
-function lspUtils.formatDocument()
+function M.formatDocument()
   -- check if LSP is attached
   if (#vim.lsp.buf_get_clients()) < 1 then
     return
@@ -78,4 +78,4 @@ function lspUtils.formatDocument()
   vim.lsp.buf.formatting_sync(nil, 1500)
 end
 
-return lspUtils
+return M

@@ -1,11 +1,11 @@
 return {
   'mrjones2014/lualine.nvim',
   config = function()
-    local lualineTheme = 'github'
+    local lualine_theme = 'github'
 
     local icons = require('nvim-nonicons')
 
-    local function isFileOpen()
+    local function is_file_open()
       return #(vim.fn.expand('%')) > 0
     end
 
@@ -23,7 +23,7 @@ return {
       return icon .. '  ' .. path
     end
 
-    local modeIcons = {
+    local mode_icons = {
       ['n'] = icons.get('vim-normal-mode'),
       ['no'] = icons.get('vim-normal-mode'),
       ['nov'] = icons.get('vim-normal-mode'),
@@ -55,22 +55,22 @@ return {
       ['t'] = icons.get('terminal'),
     }
 
-    local function getMode()
+    local function get_mode()
       local mode = vim.api.nvim_get_mode().mode
-      if modeIcons[mode] == nil then
+      if mode_icons[mode] == nil then
         return mode
       end
 
-      return modeIcons[mode] .. ' '
+      return mode_icons[mode] .. ' '
     end
 
     require('lualine').setup({
       options = {
-        theme = lualineTheme,
+        theme = lualine_theme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = {
-        lualine_a = { getMode },
+        lualine_a = { get_mode },
         lualine_b = { { 'branch', icon = icons.get('git-branch') } },
         lualine_c = {
           filepath,
@@ -78,7 +78,7 @@ return {
             'diagnostics',
             sources = { 'nvim_lsp' },
             sections = { 'error', 'warn', 'info', 'hint' },
-            visible = isFileOpen,
+            visible = is_file_open,
           },
         },
         lualine_x = { 'filetype' },
