@@ -11,13 +11,13 @@ return {
     vim.g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
     vim.g.nvim_tree_special_files = {}
 
-    local lspIcons = require('modules.lsp-icons')
+    local lsp_icons = require('modules.lsp-icons')
     vim.g.nvim_tree_icons = {
       lsp = {
-        hint = lspIcons.Hint,
-        info = lspIcons.Information,
-        warning = lspIcons.Warning,
-        error = lspIcons.Error,
+        hint = lsp_icons.Hint,
+        info = lsp_icons.Information,
+        warning = lsp_icons.Warning,
+        error = lsp_icons.Error,
       },
     }
   end,
