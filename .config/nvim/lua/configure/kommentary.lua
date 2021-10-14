@@ -4,8 +4,6 @@ return {
     vim.g.kommentary_create_default_mappings = false
   end,
   config = function()
-    vim.api.nvim_set_keymap('n', '<leader>c', '<Plug>kommentary_line_default', {})
-    vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>kommentary_visual_default', {})
     local config = require('kommentary.config')
     config.configure_language('default', {
       use_consistent_indentation = true,
