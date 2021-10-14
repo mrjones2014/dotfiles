@@ -5,7 +5,6 @@ vim.cmd([[
 
 require('disable-builtins')
 require('settings')
-require('keybinds')
 require('custom-filetypes')
 require('configure-trailing-whitespace')
 require('plugins')

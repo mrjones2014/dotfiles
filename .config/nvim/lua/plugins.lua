@@ -26,6 +26,9 @@ return require('packer').startup(function(use)
     use(require('configure.theme'))
   end
 
+  -- keybind manager
+  use(require('configure.nest'))
+
   -- Editing enhancements and tools
   use(require('configure.tmux-navigator'))
   use(require('configure.vim-move'))
