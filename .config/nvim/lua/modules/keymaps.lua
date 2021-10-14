@@ -1,10 +1,5 @@
 local M = {}
 
--- shortcut for vim.api.nvim_replace_termcodes
-local function t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 local function check_back_space()
   local col = vim.fn.col('.') - 1
   if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
@@ -16,16 +11,16 @@ end
 
 local function compe_autopairs_cr()
   if vim.fn.pumvisible() == 1 then
-    return vim.fn['compe#confirm']({ keys = t('<CR>'), select = true })
+    return vim.fn['compe#confirm']({ keys = '<CR>', select = true })
   end
   return require('nvim-autopairs').autopairs_cr()
 end
 
 local function tab_complete()
   if vim.fn.pumvisible() == 1 then
-    return t('<C-n>')
+    return '<C-n>'
   elseif check_back_space() then
-    return t('<Tab>')
+    return '<Tab>'
   else
     return vim.fn['compe#complete']()
   end
@@ -33,9 +28,9 @@ end
 
 local function shift_tab_complete()
   if vim.fn.pumvisible() == 1 then
-    return t('<C-p>')
+    return '<C-p>'
   else
-    return t('<S-Tab>')
+    return '<S-Tab>'
   end
 end
 
@@ -44,7 +39,7 @@ local function esc_close_menu()
     return vim.fn['compe#close']()
   end
 
-  return t('<Esc>')
+  return '<Esc>'
 end
 
 M.default = {
