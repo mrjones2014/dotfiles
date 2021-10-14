@@ -1,7 +1,8 @@
 return {
   'mrjones2014/lualine.nvim',
+  after = 'lighthaus.nvim',
   config = function()
-    local lualine_theme = 'github'
+    local lualine_theme = 'lighthaus_dark'
 
     local icons = require('nvim-nonicons')
 
