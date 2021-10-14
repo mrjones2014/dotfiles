@@ -13,7 +13,5 @@ return {
         delay = 100,
       },
     })
-
-    vim.cmd('highlight GitSignsCurrentLineBlame guifg=#2d4144')
   end,
 }
