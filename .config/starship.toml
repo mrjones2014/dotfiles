@@ -2,10 +2,10 @@ format = """
  $directory$git_branch$git_status$git_state
  $character """
 
-[character] # colors from ~/.config/kitty/catppuccino-theme.conf
-success_symbol = "[](bold #58cd8b)"
-error_symbol = "[](bold #e06c75)"
-vicmd_symbol = "[](bold #58cd8b)"
+[character] # colors from ~/.config/kitty/lighthaus-theme.conf
+success_symbol = "[](bold #00BFA4)"
+error_symbol = "[](bold #FF5050)"
+vicmd_symbol = "[](bold #44B273)"
 
 [git_branch]
 symbol = " "
