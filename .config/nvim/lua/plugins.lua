@@ -11,7 +11,6 @@ return require('packer').startup(function(use)
 
   -- Dependencies of other plugins
   use('nvim-lua/plenary.nvim')
-  use('nvim-lua/popup.nvim')
 
   -- Themes
   -- use local version if its cloned
