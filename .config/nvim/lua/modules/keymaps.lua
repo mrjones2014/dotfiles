@@ -78,8 +78,8 @@ M.default = {
     -- normal mode for all nested maps
     mode = 'n',
     {
-      { '<C-w>n', ':BufferlineCycleNext<CR>' },
-      { '<C-w>p', ':BufferlineCyclePrev<CR>' },
+      { '<C-w>n', ':BufferLineCycleNext<CR>' },
+      { '<C-w>p', ':BufferLineCyclePrev<CR>' },
     },
   },
   ------------
@@ -115,38 +115,15 @@ M.default = {
       },
     },
   },
-  --------
-  -- compe
-  --------
-  {
-    -- insert mode and expr = true for all nested maps
-    mode = 'i',
-    options = { expr = true },
-    {
-      { '<Tab>', tab_complete },
-      { '<S-Tab>', shift_tab_complete },
-      { '<CR>', compe_autopairs_cr },
-      { '<Esc>', esc_close_menu },
-    },
-  },
-  {
-    -- select mode and expr = true for all nested maps
-    mode = 's',
-    options = { expr = true },
-    {
-      { '<Tab>', tab_complete },
-      { '<S-Tab>', shift_tab_complete },
-    },
-  },
   ---------------
   -- trouble.nvim
   ---------------
   { '<leader>d', ':LspTroubleToggle<CR>' },
   ----------------
-  -- Komkommentary
+  -- Comment.nvim
   ----------------
-  { '<leader>c', '<Plug>kommentary_line_default', mode = 'n' },
-  { '<leader>c', '<Plug>kommentary_visual_default', mode = 'v' },
+  { '<leader>c', ':lua require("Comment").toggle()<CR>', mode = 'n' },
+  { '<leader>c', ':lua require("Comment").toggle()<CR>', mode = 'v' },
 }
 
 M.lsp = {
