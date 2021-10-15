@@ -73,10 +73,10 @@ M.default = {
   ---------------
   { '<leader>d', ':LspTroubleToggle<CR>' },
   ----------------
-  -- Comment.nvim
+  -- nvim-comment
   ----------------
-  { '<leader>c', ':lua require("Comment").toggle()<CR>', mode = 'n' },
-  { '<leader>c', ':lua require("Comment").toggle()<CR>', mode = 'v' },
+  { '<leader>c', ':CommentToggle<CR>', mode = 'n' },
+  { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v' },
 }
 
 M.lsp = {

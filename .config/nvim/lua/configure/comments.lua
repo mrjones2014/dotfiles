@@ -1,11 +1,9 @@
 return {
-  'numToStr/Comment.nvim',
+  'terrortylor/nvim-comment',
   config = function()
-    require('Comment').setup({
-      mappings = {
-        basic = false,
-        extended = false,
-      },
+    require('nvim_comment').setup({
+      comment_empty = false,
+      create_mappings = false,
     })
   end,
 }
