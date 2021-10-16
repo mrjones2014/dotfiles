@@ -1,5 +1,5 @@
 vim.opt.compatible = false
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.autoread = true
 vim.opt.mouse = 'a'
 vim.opt.autoindent = true

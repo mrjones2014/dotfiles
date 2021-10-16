@@ -12,6 +12,9 @@ require('lspconfig').sumneko_lua.setup({
   root_dir = require('lspconfig/util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
     Lua = {
+      completion = {
+        autoRequire = false,
+      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
