@@ -23,10 +23,7 @@ return {
         ['<tab>'] = cmp.mapping.select_next_item(),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
+        -- <CR> binding defined below with autopairs
       },
       sources = {
         { name = 'nvim_lsp' },
@@ -44,6 +41,15 @@ return {
             buffer = icons.get('file') .. '[Buffer]',
           },
         }),
+      },
+    })
+    require('nvim-autopairs.completion.cmp').setup({
+      map_cr = true,
+      map_complete = true,
+      auto_select = true,
+      map_char = {
+        all = '(',
+        tex = '{',
       },
     })
   end,

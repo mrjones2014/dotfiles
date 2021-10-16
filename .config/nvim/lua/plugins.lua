@@ -74,4 +74,9 @@ return require('packer').startup(function(use)
     -- dash plugin I'm working on
     use({ '~/git/personal/dash.nvim' })
   end
+
+  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/tldr.nvim') > 0 then
+    -- dash plugin I'm working on
+    use({ '~/git/personal/tldr.nvim' })
+  end
 end)
