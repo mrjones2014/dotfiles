@@ -20,7 +20,10 @@ local sources = {
   }),
   b.formatting.stylua,
   b.diagnostics.luacheck,
-  b.formatting.shfmt,
+  b.formatting.shfmt.with({
+    filetypes = { 'sh', 'zsh', 'bash' },
+    args = { '-i', '2' },
+  }),
   b.diagnostics.shellcheck.with({
     diagnostics_format = '#{m} [#{s}] [#{c}]',
   }),
