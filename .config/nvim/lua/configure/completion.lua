@@ -18,9 +18,7 @@ return {
           require('luasnip').lsp_expand(args.body)
         end,
       },
-      mapping = {
-        require('modules.keymaps').get_cmp_mappings(),
-      },
+      mapping = require('modules.keymaps').get_cmp_mappings(),
       sources = {
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },

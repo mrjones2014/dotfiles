@@ -6,6 +6,7 @@
 
 [core]
 	editor = nvim
+	autocrlf = false
 
 [init]
 	defaultBranch = master
