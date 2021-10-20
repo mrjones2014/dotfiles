@@ -96,4 +96,23 @@ M.lsp = {
   },
 }
 
+function M.get_cmp_mappings()
+  require('nvim-autopairs.completion.cmp').setup({
+    map_cr = true,
+    map_complete = true,
+    auto_select = true,
+    map_char = {
+      all = '(',
+      tex = '{',
+    },
+  })
+
+  return {
+    ['<S-tab>'] = require('cmp').mapping.select_prev_item(),
+    ['<tab>'] = require('cmp').mapping.select_next_item(),
+    ['<C-d>'] = require('cmp').mapping.scroll_docs(-4),
+    ['<C-f>'] = require('cmp').mapping.scroll_docs(4),
+  }
+end
+
 return M
