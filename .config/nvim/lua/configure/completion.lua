@@ -8,7 +8,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
   },
-  after = { 'lspkind-nvim' },
+  after = { 'lspkind-nvim', 'nvim-autopairs' },
   config = function()
     local cmp = require('cmp')
     local icons = require('nvim-nonicons')
@@ -19,11 +19,7 @@ return {
         end,
       },
       mapping = {
-        ['<S-tab>'] = cmp.mapping.select_prev_item(),
-        ['<tab>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        -- <CR> binding defined below with autopairs
+        require('modules.keymaps').get_cmp_mappings(),
       },
       sources = {
         { name = 'nvim_lsp' },
@@ -41,15 +37,6 @@ return {
             buffer = icons.get('file') .. '[Buffer]',
           },
         }),
-      },
-    })
-    require('nvim-autopairs.completion.cmp').setup({
-      map_cr = true,
-      map_complete = true,
-      auto_select = true,
-      map_char = {
-        all = '(',
-        tex = '{',
       },
     })
   end,
