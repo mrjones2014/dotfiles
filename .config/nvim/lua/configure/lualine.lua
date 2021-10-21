@@ -80,6 +80,7 @@ return {
             sources = { 'nvim_lsp' },
             sections = { 'error', 'warn', 'info', 'hint' },
             visible = is_file_open,
+            update_in_insert = true,
           },
         },
         lualine_x = { 'filetype' },
