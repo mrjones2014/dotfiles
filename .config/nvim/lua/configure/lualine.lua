@@ -1,5 +1,5 @@
 return {
-  'mrjones2014/lualine.nvim',
+  'nvim-lualine/lualine.nvim',
   after = 'lighthaus.nvim',
   config = function()
     local lualine_theme = 'lighthaus_dark'
@@ -79,7 +79,7 @@ return {
             'diagnostics',
             sources = { 'nvim_lsp' },
             sections = { 'error', 'warn', 'info', 'hint' },
-            visible = is_file_open,
+            always_visible = is_file_open,
             update_in_insert = true,
           },
         },
