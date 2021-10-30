@@ -7,7 +7,6 @@ return {
     vim.g.nvim_tree_indent_markers = 1
     vim.g.nvim_tree_git_hl = 1
     vim.g.nvim_tree_add_trailing = 1
-    vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' }
     vim.g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
     vim.g.nvim_tree_special_files = {}
 
@@ -25,6 +24,9 @@ return {
     local icons = require('modules.lsp-icons')
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
     require('nvim-tree').setup({
+      filters = {
+        custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' },
+      },
       view = {
         side = 'right',
         width = 40,
