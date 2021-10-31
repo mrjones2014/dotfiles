@@ -72,7 +72,10 @@ return require('packer').startup(function(use)
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') > 0 then
     -- dash plugin I'm working on
-    use({ '~/git/personal/dash.nvim' })
+    use({
+      '~/git/personal/dash.nvim',
+      requires = { 'ibhagwan/fzf-lua', 'vijaymarupudi/nvim-fzf', 'kyazdani42/nvim-web-devicons' },
+    })
   end
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/tldr.nvim') > 0 then
