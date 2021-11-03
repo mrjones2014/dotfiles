@@ -10,7 +10,7 @@ return {
     vim.g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
     vim.g.nvim_tree_special_files = {}
 
-    local lsp_icons = require('modules.lsp-icons')
+    local lsp_icons = require('lsp.icons')
     vim.g.nvim_tree_icons = {
       lsp = {
         hint = lsp_icons.Hint,
@@ -21,7 +21,7 @@ return {
     }
   end,
   config = function()
-    local icons = require('modules.lsp-icons')
+    local icons = require('lsp.icons')
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
     require('nvim-tree').setup({
       filters = {
