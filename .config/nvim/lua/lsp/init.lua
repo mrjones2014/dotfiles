@@ -1,5 +1,5 @@
 -- customize LSP icons
-local signs = require('modules.lsp-icons')
+local signs = require('lsp.icons')
 for type, icon in pairs(signs) do
   local hl = 'LspDiagnosticsSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
