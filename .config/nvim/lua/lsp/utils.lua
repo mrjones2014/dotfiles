@@ -60,4 +60,88 @@ function M.formatDocument()
   vim.lsp.buf.formatting_sync(nil, 1500)
 end
 
+function M.rename()
+  local utils = require('modules.utils')
+  local prompt_str = ' ' .. require('nvim-nonicons').get('file-directory') .. ' '
+  local map_opts = { noremap = true, silent = true }
+  local opts = {
+    style = 'minimal',
+    border = 'single',
+    relative = 'cursor',
+    width = 25,
+    height = 1,
+    row = 1,
+    col = 1,
+  }
+  local buf, win = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+
+  vim.api.nvim_open_win(buf, true, opts)
+  vim.api.nvim_win_set_option(win, 'scrolloff', 0)
+  vim.api.nvim_win_set_option(win, 'sidescrolloff', 0)
+  vim.api.nvim_buf_set_option(buf, 'modifiable', true)
+  vim.api.nvim_buf_set_option(buf, 'buftype', 'prompt')
+
+  vim.api.nvim_buf_add_highlight(buf, -1, 'LspRenamePrompt', 0, 0, #prompt_str)
+  utils.highlight('LspRenamePrompt', 'None', 'Visual')
+
+  vim.fn.prompt_setprompt(buf, prompt_str)
+
+  vim.api.nvim_command('startinsert!')
+  vim.api.nvim_buf_set_keymap(buf, 'i', '<esc>', '<CMD>stopinsert <BAR> q!<CR>', map_opts)
+  vim.api.nvim_buf_set_keymap(
+    buf,
+    'i',
+    '<CR>',
+    "<CMD>stopinsert <BAR> lua require('lsp.utils')._rename()<CR>",
+    map_opts
+  )
+
+  local function handler(...)
+    local result
+    local method
+    local err = select(1, ...)
+    local is_new = not select(4, ...) or type(select(4, ...)) ~= 'number'
+    if is_new then
+      method = select(3, ...).method
+      result = select(2, ...)
+    else
+      method = select(2, ...)
+      result = select(3, ...)
+    end
+
+    if err then
+      vim.notify(("Error running LSP query '%s': %s"):format(method, err), vim.log.levels.ERROR)
+      return
+    end
+
+    -- echo the resulting changes
+    local new_word = ''
+    if result and result.changes then
+      local msg = ''
+      for f, c in pairs(result.changes) do
+        new_word = c[1].newText
+        msg = msg .. ('%d changes -> %s'):format(#c, utils.get_relative_path(f)) .. '\n'
+      end
+      local currName = vim.fn.expand('<cword>')
+      msg = msg:sub(1, #msg - 1)
+      vim.notify(msg, vim.log.levels.INFO, { title = ('Rename: %s -> %s'):format(currName, new_word) })
+    end
+
+    vim.lsp.handlers[method](...)
+  end
+
+  function M._rename()
+    local new_name = vim.trim(vim.fn.getline('.'):sub(5, -1))
+    vim.cmd([[q!]])
+    local params = vim.lsp.util.make_position_params()
+    local curr_name = vim.fn.expand('<cword>')
+    if not (new_name and #new_name > 0) or new_name == curr_name then
+      return
+    end
+    params.newName = new_name
+    vim.lsp.buf_request(0, 'textDocument/rename', params, handler)
+  end
+end
+
 return M
