@@ -71,11 +71,6 @@ function check_globals
         echo "Install tsserver globally for vim integration: yarn global add vscode-langservers-extracted"
     end
 
-    if ! type diagnostic-languageserver &> /dev/null
-        echo "Install diagnostic-languageserver: yarn global add diagnostic-languageserver"
-    end
-
-
     if ! type bash-language-server &> /dev/null
         echo "Install bash-language-server: yarn global add bash-language-server"
     end
