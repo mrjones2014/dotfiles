@@ -9,7 +9,7 @@ require('lspconfig').sumneko_lua.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   cmd = { bin_root .. 'lua-language-server', '-E', base_root .. '/main.lua' },
   on_attach = require('lsp.utils').on_attach,
-  root_dir = require('lspconfig/util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
+  root_dir = require('lspconfig.util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
     Lua = {
       completion = {

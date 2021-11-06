@@ -16,9 +16,11 @@ bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind
 
 export GPG_TTY=(tty)
 export EDITOR="nvim"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
+fish_add_path "$HOME/.dotnet/tools"
 
 source $HOME/.config/fish/check-globals.fish
 source $HOME/.config/fish/fzf-config.fish
