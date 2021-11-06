@@ -6,5 +6,5 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 require('lspconfig').cssls.setup({
   on_attach = require('lsp.utils').on_attach,
   capabilities = capabilities,
-  root_dir = require('lspconfig/util').root_pattern('.git'),
+  root_dir = require('lspconfig.util').root_pattern('.git'),
 })

@@ -99,6 +99,14 @@ function check_globals
         echo 'Install shfmt: brew install shfmt'
     end
 
+    if ! type dotnet &> /dev/null
+        echo 'Install dotnet: https://dotnet.microsoft.com/download/dotnet/5.0'
+    end
+
+    if ! type csharp-ls &> /dev/null
+        echo 'Install csharp-ls: dotnet tool install --global csharp-ls'
+    end
+
     if ! type bat &> /dev/null
         echo "Install bat: brew install bat"
     end
