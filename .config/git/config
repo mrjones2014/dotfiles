@@ -13,3 +13,5 @@
   path = ~/.config/git/gitconfig.personal
 [includeIf "gitdir:~/git/personal/"]
   path = ~/.config/git/gitconfig.personal
+
+; vi: ft=gitconfig
