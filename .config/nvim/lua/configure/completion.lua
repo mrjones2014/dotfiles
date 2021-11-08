@@ -1,6 +1,7 @@
 return {
   'hrsh7th/nvim-cmp',
   requires = {
+    'onsails/lspkind-nvim',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-buffer',
@@ -11,7 +12,6 @@ return {
   after = { 'lspkind-nvim', 'nvim-autopairs' },
   config = function()
     local cmp = require('cmp')
-    local icons = require('nvim-nonicons')
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -26,15 +26,7 @@ return {
         { name = 'buffer' },
       },
       formatting = {
-        format = require('lspkind').cmp_format({
-          with_text = true,
-          menu = {
-            nvim_lsp = icons.get('code') .. '[LSP]',
-            nvim_lua = icons.get('lua') .. '[Lua]',
-            path = icons.get('folder') .. '[Path]',
-            buffer = icons.get('file') .. '[Buffer]',
-          },
-        }),
+        format = require('lspkind').cmp_format({ with_text = true }),
       },
     })
   end,

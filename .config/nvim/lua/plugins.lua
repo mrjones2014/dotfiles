@@ -48,7 +48,6 @@ return require('packer').startup(function(use)
   use(require('configure.emmet'))
   use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
   use(require('configure.completion'))
-  use(require('configure.lspkind'))
   use(require('configure.vim-fish'))
   use(require('configure.trouble'))
   use(require('configure.treesitter'))
