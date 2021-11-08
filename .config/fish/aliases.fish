@@ -19,6 +19,8 @@ alias ll="ls -l --git"
 alias l="ls -laH"
 alias lg="ls -lG"
 
+alias gogit="cd ~/git"
+
 # since I can never find the site easily
 alias kitty-docs="open https://sw.kovidgoyal.net/kitty/"
 
