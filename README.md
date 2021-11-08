@@ -8,12 +8,12 @@ curl https://raw.githubusercontent.com/mrjones2014/dotfiles/master/scripts/confi
 
 ## Managing Dotfiles
 
-The `fish` config sets up an alias `dotfiles` which is an alias to `git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`. This means you can `dotfiles add ./path/to/file`
-and `dotfiles commit -m "Add some file"` from any directory, and it will be properly tracked in the repo at `~/.dotfiles`.
+The `fish` config sets up an alias `dots` which is an alias to `git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`. This means you can `dots add ./path/to/file`
+and `dots commit -m "Add some file"` from any directory, and it will be properly tracked in the repo at `~/.dotfiles`.
 
 ## Caveats
 
-I use macOS. I have no plan to support Linux, but feel free to modify anything you'd like from this repo to support Linux on your own machine.
+I use macOS. Some things in this repo won't work on Linux, but a lot of it will. Feel free to modify anything you'd like to support Linux.
 
 ## Manual Config
 
@@ -39,4 +39,5 @@ which means you need Neovim with Lua support (0.5+).
 
 ## Git Config
 
-In order to keep my email addresses and signing key IDs out of version control, I `includeIf` them from separate configs for work vs. personal development. Set `user.email` and `user.signingkey` in `~/.config/git/gitconfig.work` and `~/.config/git/gitconfig.personal` (which are not tracked in git).
+In order to keep my email addresses and signing key IDs out of version control, I `includeIf` them from separate configs for work vs. personal
+development. Set `user.email` and `user.signingkey` in `~/.config/git/gitconfig.work` and `~/.config/git/gitconfig.personal` (which are not tracked in git).
