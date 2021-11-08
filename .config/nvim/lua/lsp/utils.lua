@@ -25,7 +25,7 @@ function M.on_attach(client, bufnr)
     fix_pos = true,
     hint_enable = true,
     hint_prefix = '',
-    padding = ' ',
+    padding = '',
   })
 
   local ft = vim.bo.filetype

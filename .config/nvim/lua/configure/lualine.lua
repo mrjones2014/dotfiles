@@ -4,8 +4,6 @@ return {
   config = function()
     local lualine_theme = 'lighthaus_dark'
 
-    local icons = require('nvim-nonicons')
-
     local function is_file_open()
       return #(vim.fn.expand('%')) > 0
     end
@@ -24,55 +22,14 @@ return {
       return icon .. '  ' .. path
     end
 
-    local mode_icons = {
-      ['n'] = icons.get('vim-normal-mode'),
-      ['no'] = icons.get('vim-normal-mode'),
-      ['nov'] = icons.get('vim-normal-mode'),
-      ['noV'] = icons.get('vim-normal-mode'),
-      ['no'] = icons.get('vim-normal-mode'),
-      ['niI'] = icons.get('vim-normal-mode'),
-      ['niR'] = icons.get('vim-normal-mode'),
-      ['niV'] = icons.get('vim-normal-mode'),
-      ['v'] = icons.get('vim-visual-mode'),
-      ['V'] = icons.get('vim-visual-mode'),
-      [''] = icons.get('vim-visual-mode'),
-      ['s'] = icons.get('vim-select-mode'),
-      ['S'] = icons.get('vim-select-mode'),
-      [''] = icons.get('vim-select-mode'),
-      ['i'] = icons.get('vim-insert-mode'),
-      ['ic'] = icons.get('vim-insert-mode'),
-      ['ix'] = icons.get('vim-insert-mode'),
-      ['R'] = icons.get('vim-replace-mode'),
-      ['Rc'] = icons.get('vim-replace-mode'),
-      ['Rv'] = icons.get('vim-replace-mode'),
-      ['Rx'] = icons.get('vim-replace-mode'),
-      ['c'] = icons.get('vim-command-mode'),
-      ['cv'] = icons.get('vim-command-mode'),
-      ['ce'] = icons.get('vim-command-mode'),
-      ['r'] = icons.get('vim-replace-mode'),
-      ['rm'] = icons.get('vim-replace-mode'),
-      ['r?'] = icons.get('vim-replace-mode'),
-      ['!'] = icons.get('terminal'),
-      ['t'] = icons.get('terminal'),
-    }
-
-    local function get_mode()
-      local mode = vim.api.nvim_get_mode().mode
-      if mode_icons[mode] == nil then
-        return mode
-      end
-
-      return mode_icons[mode] .. ' '
-    end
-
     require('lualine').setup({
       options = {
         theme = lualine_theme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = {
-        lualine_a = { get_mode },
-        lualine_b = { { 'branch', icon = icons.get('git-branch') } },
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
         lualine_c = {
           filepath,
           {

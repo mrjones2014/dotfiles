@@ -3,10 +3,6 @@ function check_globals
         echo "Install Fira Code NerdFont: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode"
     end
 
-    if test -z "(ls ~/Library/Fonts | grep nonicons)"
-        echo "Install nonicons font: https://github.com/yamatsum/nonicons"
-    end
-
     if ! type thefuck &> /dev/null
         echo "Install thefuck: https://github.com/nvbn/thefuck"
     end
