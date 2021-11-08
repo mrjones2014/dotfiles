@@ -22,13 +22,54 @@ return {
       return icon .. '  ' .. path
     end
 
+    local mode_icons = {
+      ['n'] = '🄽',
+      ['no'] = '🄽',
+      ['nov'] = '🄽',
+      ['noV'] = '🄽',
+      ['no'] = '🄽',
+      ['niI'] = '🄽',
+      ['niR'] = '🄽',
+      ['niV'] = '🄽',
+      ['v'] = '🅅',
+      ['V'] = '🅅',
+      [''] = '🅅',
+      ['s'] = '🅂',
+      ['S'] = '🅂',
+      [''] = '🅂',
+      ['i'] = '🄸',
+      ['ic'] = '🄸',
+      ['ix'] = '🄸',
+      ['R'] = '🅁',
+      ['Rc'] = '🅁',
+      ['Rv'] = '🅁',
+      ['Rx'] = '🅁',
+      ['r'] = '🅁',
+      ['rm'] = '🅁',
+      ['r?'] = '🅁',
+      ['c'] = '🄲',
+      ['cv'] = '🄲',
+      ['ce'] = '🄲',
+      ['!'] = '🅃',
+      ['t'] = '🅃',
+    }
+
+    local function get_mode()
+      local mode = vim.api.nvim_get_mode().mode
+      if mode_icons[mode] == nil then
+        return mode
+      end
+
+      return mode_icons[mode] .. ' '
+    end
+
     require('lualine').setup({
       options = {
         theme = lualine_theme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = { get_mode },
         lualine_b = { 'branch' },
         lualine_c = {
           filepath,
