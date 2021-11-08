@@ -52,9 +52,6 @@ return {
           override_file_sorter = true,
           case_mode = 'smart_case',
         },
-        dash = {
-          dash_app_path = 'test',
-        },
       },
     })
 
