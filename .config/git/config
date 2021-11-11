@@ -1,7 +1,3 @@
-[user]
-  name = Mat Jones
-[commit]
-  gpgsign = true
 [include]
   path = ~/.config/git/gitconfig.aliases
 [include]
