@@ -5,9 +5,17 @@ local sources = {
   -- uncomment when this is resolved:
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/321#issuecomment-966306958
   -- b.code_actions.gitsigns,
+
+  -- diagnostics
   b.diagnostics.eslint.with({
     command = 'eslint_d',
   }),
+  b.diagnostics.luacheck,
+  b.diagnostics.shellcheck.with({
+    diagnostics_format = '#{m} [#{s}] [#{c}]',
+  }),
+
+  -- formatting
   b.formatting.prettierd.with({
     filetypes = {
       'html',
@@ -20,21 +28,25 @@ local sources = {
       'css',
     },
   }),
+  b.formatting.rustfmt,
   b.formatting.stylua,
-  b.diagnostics.luacheck,
   b.formatting.shfmt.with({
     filetypes = { 'sh', 'zsh', 'bash' },
     args = { '-i', '2' },
   }),
-  b.diagnostics.shellcheck.with({
-    diagnostics_format = '#{m} [#{s}] [#{c}]',
-  }),
+  b.formatting.fish_indent,
 }
 
 if vim.fn.filereadable('./node_modules/.bin/stylelint') > 0 then
   table.insert(
     sources,
     b.formatting.stylelint.with({
+      command = './node_modules/.bin/stylelint',
+    })
+  )
+  table.insert(
+    sources,
+    b.diagnostics.stylelint.with({
       command = './node_modules/.bin/stylelint',
     })
   )
