@@ -101,6 +101,8 @@ M.lsp = {
   },
 }
 
+-- this is a function so that 'cmp'
+-- doesn't get required until it's needed/loaded
 function M.get_cmp_mappings()
   return {
     ['<S-Tab>'] = require('cmp').mapping.select_prev_item(),

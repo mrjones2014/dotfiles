@@ -5,4 +5,8 @@ return {
     'jose-elias-alvarez/null-ls.nvim',
     'filipdutescu/renamer.nvim',
   },
+  config = function()
+    require('lsp')
+    require('renamer').setup()
+  end,
 }
