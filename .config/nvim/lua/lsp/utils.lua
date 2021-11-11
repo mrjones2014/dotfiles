@@ -3,6 +3,8 @@ local M = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
+  -- setup renamer.nvim
+  require('renamer').setup()
   vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
   vim.cmd([[
     augroup fmt

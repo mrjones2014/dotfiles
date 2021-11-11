@@ -92,7 +92,12 @@ M.lsp = {
     { 'F', ':Telescope lsp_code_actions<CR>' },
     { '[', vim.lsp.diagnostic.goto_prev },
     { ']', vim.lsp.diagnostic.goto_next },
-    { '<leader>rn', vim.lsp.buf.rename },
+    {
+      '<leader>rn',
+      function()
+        require('renamer').rename()
+      end,
+    },
   },
 }
 

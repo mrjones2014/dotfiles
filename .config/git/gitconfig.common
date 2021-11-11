@@ -1,17 +1,15 @@
+[user]
+  name = Mat Jones
 [pull]
-	rebase = false
-
+  rebase = false
 [commit]
-	gpgsign = true
-
+  gpgsign = true
 [core]
-	editor = nvim
-	autocrlf = false
-	mergeoptions = --no-edit
-
+  editor = nvim
+  autocrlf = false
+  mergeoptions = --no-edit
 [init]
-	defaultBranch = master
-
+  defaultBranch = master
 [diff]
   tool = Kaleidoscope
 [difftool "Kaleidoscope"]
