@@ -30,16 +30,8 @@ function M.on_attach(client, bufnr)
     padding = '',
   })
 
-  local ft = vim.bo.filetype
-  if
-    ft == 'javascript'
-    or ft == 'typescript'
-    or ft == 'javascriptreact'
-    or ft == 'typescriptreact'
-    or ft == 'json'
-    or ft == 'jsonc'
-  then
-    -- Disable formatting via tsserver because we're handling formatting via null-ls
+  -- Disable formatting with other LSPs because we're handling formatting via null-ls
+  if client.name ~= 'null-ls' then
     client.resolved_capabilities.document_formatting = false
   end
 end
