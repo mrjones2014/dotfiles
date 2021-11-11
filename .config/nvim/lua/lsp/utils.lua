@@ -3,8 +3,6 @@ local M = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
-  -- setup renamer.nvim
-  require('renamer').setup()
   vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
   vim.cmd([[
     augroup fmt
@@ -17,7 +15,7 @@ function M.on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- setup LSP-specific keymaps
-  require('nest').applyKeymaps(require('modules.keymaps').lsp)
+  require('nest').applyKeymaps(require('keymap').lsp)
 
   require('lsp_signature').on_attach({
     bind = true,
