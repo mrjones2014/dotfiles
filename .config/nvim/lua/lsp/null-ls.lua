@@ -2,7 +2,9 @@ local null_ls = require('null-ls')
 local b = null_ls.builtins
 
 local sources = {
-  b.code_actions.gitsigns,
+  -- uncomment when this is resolved:
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/321#issuecomment-966306958
+  -- b.code_actions.gitsigns,
   b.diagnostics.eslint.with({
     command = 'eslint_d',
   }),
