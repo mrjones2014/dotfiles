@@ -1,10 +1,10 @@
 local M = {}
 
 M.default = {
-  -- jk to escape, and make escape work in terminal mode
-  -- { 'jk', '<ESC>', mode = 'i' },
+  -- jk is mapped to escape by better-escape.nvim plugin
+  -- make escape work in terminal mode
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
-  -- { 'jk', '<C-\\><C-n>', mode = 't' },
+  { 'jk', '<C-\\><C-n>', mode = 't' },
   -- prefix all nested maps with <leader>
   { '<leader>', {
     { 'q', ':qa<CR>', mode = 'n' },
