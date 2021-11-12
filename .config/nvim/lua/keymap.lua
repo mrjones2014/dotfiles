@@ -2,9 +2,9 @@ local M = {}
 
 M.default = {
   -- jk to escape, and make escape work in terminal mode
-  { 'jk', '<ESC>', mode = 'i' },
+  -- { 'jk', '<ESC>', mode = 'i' },
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
-  { 'jk', '<C-\\><C-n>', mode = 't' },
+  -- { 'jk', '<C-\\><C-n>', mode = 't' },
   -- prefix all nested maps with <leader>
   { '<leader>', {
     { 'q', ':qa<CR>', mode = 'n' },

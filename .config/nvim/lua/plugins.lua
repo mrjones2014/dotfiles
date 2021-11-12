@@ -38,6 +38,7 @@ return require('packer').startup(function(use)
   use(require('configure.fterm'))
   use(require('configure.markdown-preview'))
   use(require('configure.comments'))
+  use(require('configure.better-escape'))
 
   -- Tim Pope plugins
   use(require('configure.vim-sleuth'))
