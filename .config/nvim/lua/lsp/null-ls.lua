@@ -6,15 +6,14 @@ local sources = {
   b.code_actions.gitsigns,
 
   -- diagnostics
-  b.diagnostics.eslint.with({
-    command = 'eslint_d',
-  }),
+  b.diagnostics.eslint_d,
   b.diagnostics.luacheck,
   b.diagnostics.shellcheck.with({
     diagnostics_format = '#{m} [#{s}] [#{c}]',
   }),
 
   -- formatting
+  b.formatting.eslint_d,
   b.formatting.prettierd.with({
     filetypes = {
       'html',
