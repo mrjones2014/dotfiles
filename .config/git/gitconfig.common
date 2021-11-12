@@ -8,6 +8,9 @@
   editor = nvim
   autocrlf = false
   mergeoptions = --no-edit
+  pager = "diff-so-fancy | less --tabs=4 -RFX"
+[interactive]
+  diffFilter = "diff-so-fancy --patch"
 [init]
   defaultBranch = master
 [diff]
@@ -23,5 +26,19 @@
   trustExitCode = true
 [mergetool]
   prompt = false
-
+[color]
+  ui = true
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+[color "diff"]
+  meta = 11
+  frag = magenta bold
+  func = 146 bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 ; vi: ft=gitconfig
