@@ -1,5 +1,5 @@
 # ensure brew stuff is on PATH
-if test -f "/opt/homebrew/bin/brew"
+if test -f /opt/homebrew/bin/brew
     eval (/opt/homebrew/bin/brew shellenv)
     fish_add_path /opt/homebrew/bin
 end
@@ -10,7 +10,8 @@ if [ -z "$TMUX" ] && [ "$START_TMUX_PLEASE" = 1 ]
 end
 
 # workaround for https://github.com/fish-shell/fish-shell/issues/3481
-function fish_vi_cursor; end
+function fish_vi_cursor
+end
 fish_vi_key_bindings
 bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
