@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone --bare git@github.com:mrjones2014/dotfiles.git $HOME/.cfg
+git clone --bare git@github.com:mrjones2014/dotfiles.git $HOME/.dotfiles
 function dots {
    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
