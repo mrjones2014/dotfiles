@@ -11,7 +11,7 @@ function M.on_attach(client, bufnr)
     augroup END
   ]])
 
-  --Enable completion triggered by <c-x><c-o>
+  -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- setup LSP-specific keymaps
