@@ -13,17 +13,7 @@ return require('packer').startup(function(use)
   use('nvim-lua/plenary.nvim')
 
   -- Themes
-  -- use local version if its cloned
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/lighthaus.nvim') > 0 then
-    use({
-      '~/git/personal/lighthaus.nvim',
-      config = function()
-        require('lighthaus').setup({ bg_dark = true })
-      end,
-    })
-  else
-    use(require('configure.theme'))
-  end
+  use(require('configure.theme'))
 
   -- keybind manager
   use(require('configure.nest'))
