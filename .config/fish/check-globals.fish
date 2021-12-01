@@ -1,6 +1,6 @@
 function check_globals
     if test -z "(ls ~/Library/Fonts | grep Fira\ Code)"
-        echo "Install Fira Code NerdFont: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode"
+        echo "Install Fira Code NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
     end
 
     if ! type diff-so-fancy &>/dev/null
