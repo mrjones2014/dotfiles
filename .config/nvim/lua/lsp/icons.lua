@@ -1,2 +1,9 @@
-local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
+local signs = {
+  Error = ' ',
+  Warning = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Information = ' ',
+  Info = ' ',
+}
 return signs
