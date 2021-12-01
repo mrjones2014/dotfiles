@@ -10,7 +10,7 @@ M.default = {
     { 'q', ':qa<CR>', mode = 'n' },
     { 's', ':wa<CR>', mode = 'n' },
   } },
-  { 'W', ':exec "bdelete " . bufname()<CR>', mode = 'n' },
+  { 'W', ':bw<CR>', mode = 'n' },
   -------------------------
   -- tmux-navigator
   -------------------------
