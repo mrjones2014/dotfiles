@@ -1,0 +1,62 @@
+colors:
+  # default colors
+  primary:
+    # or use #18191E for the other Lighthaus bg color
+    background:     "#000000"
+    foreground:     "#FFFADE"
+    dim_foreground: "#21252D"
+
+  # cursor colors
+  cursor:
+    text:           "#18191E"
+    cursor:         "#47A8A1"
+  vi_mode_cursor:
+    text:           "#18191E"
+    cursor:         "#5AD1AA"
+
+  # selection
+  selection:
+    text:           "#FF4D00"
+    background:     "#090B26"
+
+  # searching & matching
+  search:
+    matches:
+      foreground:   "#21252D"
+      background:   "#E25600"
+    bar:
+      background:   "#CCCCCC"
+      foreground:   "#21252D"
+
+  # normal term colors
+  normal:
+    black:          "#18191E"
+    red:            "#FC2929"
+    green:          "#44B273"
+    yellow:         "#E25600"
+    blue:           "#1D918B"
+    magenta:        "#D16BB7"
+    cyan:           "#00BFA4"
+    white:          "#CCCCCC"
+
+  # bright term colors
+  bright:
+    black:          "#8E8D8D"
+    red:            "#FF5050"
+    green:          "#50C16E"
+    yellow:         "#ED722E"
+    blue:           "#47A8A1"
+    magenta:        "#D68EB2"
+    cyan:           "#5AD1AA"
+    white:          "#FFFADE"
+
+  # dim term colors
+  dim:
+    black:          "#46474A"
+    red:            "#EC6565"
+    green:          "#72B890"
+    yellow:         "#DC7C45"
+    blue:           "#539D99"
+    magenta:        "#D291C1"
+    cyan:           "#42BDAB"
+    white:          "#D6D6D6"

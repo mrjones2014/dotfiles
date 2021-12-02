@@ -1,6 +1,6 @@
 font:
   normal:
-    family: SauceCodePro Nerd Font
+    family: FiraCode Nerd Font
   size: 13
 window:
   title: ""
@@ -15,4 +15,4 @@ key_bindings:
   - { key: H, mods: Alt, chars: "\x1bh" }
   - { key: L, mods: Alt, chars: "\x1bl" }
 import:
-  - ~/.config/alacritty/theme.yml
+  - ~/.config/alacritty/lighthaus-theme.yml
