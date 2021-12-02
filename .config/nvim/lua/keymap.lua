@@ -90,8 +90,8 @@ M.lsp = {
     { 'gs', vim.lsp.buf.signature_help },
     { 'gr', vim.lsp.buf.references },
     { 'F', ':Telescope lsp_code_actions<CR>' },
-    { '[', vim.lsp.diagnostic.goto_prev },
-    { ']', vim.lsp.diagnostic.goto_next },
+    { '[', vim.diagnostic.goto_prev },
+    { ']', vim.diagnostic.goto_next },
     {
       '<leader>rn',
       function()
