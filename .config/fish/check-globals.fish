@@ -91,6 +91,10 @@ function check_globals
         echo "Install stylua: cargo install stylua --features lua52"
     end
 
+    if ! type vale &>/dev/null
+        echo 'Install vale: brew install vale'
+    end
+
     if ! type shellcheck &>/dev/null
         echo 'Install shellcheck: brew install shellcheck'
     end
