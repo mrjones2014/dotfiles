@@ -89,15 +89,10 @@ M.lsp = {
     { 'gt', vim.lsp.buf.type_definition },
     { 'gs', vim.lsp.buf.signature_help },
     { 'gr', vim.lsp.buf.references },
+    { '<leader>rn', vim.lsp.buf.rename },
     { 'F', ':Telescope lsp_code_actions<CR>' },
     { '[', vim.diagnostic.goto_prev },
     { ']', vim.diagnostic.goto_next },
-    {
-      '<leader>rn',
-      function()
-        require('renamer').rename()
-      end,
-    },
   },
 }
 
