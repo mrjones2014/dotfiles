@@ -3,7 +3,6 @@ return {
   cmd = 'NvimTreeToggle',
   setup = function()
     -- TODO update these once they're implemented in the setup function
-    vim.g.nvim_tree_gitignore = 1
     vim.g.nvim_tree_indent_markers = 1
     vim.g.nvim_tree_git_hl = 1
     vim.g.nvim_tree_add_trailing = 1
@@ -26,6 +25,9 @@ return {
     require('nvim-tree').setup({
       filters = {
         custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' },
+      },
+      git = {
+        ignore = true,
       },
       view = {
         side = 'right',
