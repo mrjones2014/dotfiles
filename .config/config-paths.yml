@@ -8,6 +8,6 @@ vim: .config/nvim/
 git: .config/git/
 bat: .config/bat/config
 starship: .config/starship.toml
-paths: .config-paths.yml
+paths: .config/config-paths.yml
 ignore: .config/.ignore
 vale: .config/vale/
