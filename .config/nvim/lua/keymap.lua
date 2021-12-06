@@ -91,6 +91,7 @@ M.lsp = {
     { 'gr', vim.lsp.buf.references },
     { '<leader>rn', vim.lsp.buf.rename },
     { 'F', ':Telescope lsp_code_actions<CR>' },
+    { 'D', vim.diagnostic.open_float },
     { '[', vim.diagnostic.goto_prev },
     { ']', vim.diagnostic.goto_next },
   },
