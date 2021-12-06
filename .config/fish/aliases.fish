@@ -27,7 +27,7 @@ alias kitty-docs="open https://sw.kovidgoyal.net/kitty/"
 complete --no-files --command conf --arguments "(getConfCompletions (commandline -cp))"
 function getConfCompletions
     set -l currentPath (string trim (string replace "conf " "" $argv[1]))
-    set -l allPaths (sed -e 's/:[^:\/\/].*/=/g;s/$//g;s/ *=//g' $HOME/.config-paths.yml)
+    set -l allPaths (sed -e 's/:[^:\/\/].*/=/g;s/$//g;s/ *=//g' $HOME/.config/config-paths.yml)
     set -l matchingPaths ""
     for path in $allPaths
         if string match -q -- "*$currentPath*" "$path"
@@ -44,9 +44,9 @@ end
 
 function conf
     set -l SUBJECT_NAME $argv[1]
-    set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config-paths.yml | head -n1 | awk '{ print $2 }')
+    set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config/config-paths.yml | head -n1 | awk '{ print $2 }')
     if [ -z "$CONFIG_PATH" ]
-        echo "$SUBJECT_NAME not configured in ~/.config-paths.yml"
+        echo "$SUBJECT_NAME not configured in ~/.config/config-paths.yml"
         return
     end
 
