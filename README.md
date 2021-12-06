@@ -17,7 +17,7 @@ I use macOS. Some things in this repo won't work on Linux, but a lot of it will.
 
 ## Manual Config
 
-### Package Manamement
+### Package Management
 
 You'll need/want to install [Homebrew](https://brew.sh). For Apple Silicon Macs you'll need to run the `brew` install script
 as well as `brew` itself through Rosetta until Homebrew is updated to support Apple Silicon natively.
@@ -35,7 +35,7 @@ You'll need to install [Fish Shell](https://github.com/fish-shell/fish-shell) be
 ## Neovim Config
 
 The Neovim configuration is written in Lua and is using mostly Lua-based plugins, like built-in LSP, Telescope for file finding and live grep,
-which means you need Neovim with Lua support (0.5+).
+which means you need Neovim with Lua support (0.6.0+).
 
 ## Git Config
 
