@@ -1,1 +1,8 @@
 toolchain
+Lua
+config
+configs
+repo
+nvim
+Neovim
+dotfiles
