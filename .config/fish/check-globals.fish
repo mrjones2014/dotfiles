@@ -23,10 +23,6 @@ function check_globals
         echo "Install nvim.fish: fisher install jorgebucaran/nvm.fish"
     end
 
-    if ! fisher list | grep pisces &>/dev/null
-        echo "Install pisces: fisher install laughedelic/pisces"
-    end
-
     if ! type nvim &>/dev/null
         echo "Install neovim: https://github.com/neovim/neovim"
     end
