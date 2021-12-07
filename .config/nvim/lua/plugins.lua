@@ -36,7 +36,6 @@ return require('packer').startup(function(use)
 
   -- LSP + syntax
   use(require('configure.lspconfig'))
-  use(require('configure.emmet'))
   use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
   use(require('configure.completion'))
   use(require('configure.vim-fish'))
