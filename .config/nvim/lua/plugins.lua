@@ -52,7 +52,6 @@ return require('packer').startup(function(use)
   use(require('configure.lualine'))
   use(require('configure.bufferline'))
   use(require('configure.colorizer'))
-  use(require('configure.dashboard'))
   use(require('configure.todo-comments'))
   use(require('configure.nvim-notify'))
   use(require('configure.dressing'))
@@ -70,7 +69,8 @@ return require('packer').startup(function(use)
   end
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/tldr.nvim') > 0 then
-    -- dash plugin I'm working on
     use({ '~/git/personal/tldr.nvim' })
+  else
+    use({ 'mrjones2014/tldr.nvim' })
   end
 end)
