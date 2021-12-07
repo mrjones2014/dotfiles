@@ -89,7 +89,7 @@ M.lsp = {
     { 'gt', vim.lsp.buf.type_definition },
     { 'gs', vim.lsp.buf.signature_help },
     { 'gr', vim.lsp.buf.references },
-    { '<leader>rn', vim.lsp.buf.rename },
+    { 'rn', vim.lsp.buf.rename },
     { 'F', vim.lsp.buf.code_action },
     { 'D', vim.diagnostic.open_float },
     { '[', vim.diagnostic.goto_prev },
