@@ -3,6 +3,7 @@ return {
   requires = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
   },
   config = function()
     local trouble = require('trouble.providers.telescope')
