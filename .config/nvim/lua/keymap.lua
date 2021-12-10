@@ -67,7 +67,7 @@ M.default = {
   ---------------
   -- trouble.nvim
   ---------------
-  { '<leader>d', ':LspTroubleToggle<CR>' },
+  { '<leader>d', ':TroubleToggle<CR>' },
   ----------------
   -- nvim-comment
   ----------------
