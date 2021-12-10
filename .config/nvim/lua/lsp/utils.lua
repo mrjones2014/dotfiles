@@ -2,7 +2,7 @@ local M = {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-function M.on_attach(client, bufnr)
+function M.on_attach(client)
   vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
   vim.cmd([[
     augroup fmt
@@ -11,8 +11,8 @@ function M.on_attach(client, bufnr)
     augroup END
   ]])
 
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- show diagnostics on hover
+  vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})')
 
   -- setup LSP-specific keymaps
   require('nest').applyKeymaps(require('keymap').lsp)

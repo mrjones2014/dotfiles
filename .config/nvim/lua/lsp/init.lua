@@ -13,6 +13,8 @@ vim.diagnostic.config({
   update_in_insert = true,
 })
 
+require('lsp.ui-customization')
+
 require('lsp.css')
 require('lsp.html')
 require('lsp.json')
