@@ -21,6 +21,7 @@ vim.opt.ignorecase = true
 vim.opt.termguicolors = true
 vim.opt.syntax = 'on'
 vim.opt.modeline = true
+vim.opt.updatetime = 100
 
 -- required for nvim-compe
 vim.o.completeopt = 'menuone,noselect'
