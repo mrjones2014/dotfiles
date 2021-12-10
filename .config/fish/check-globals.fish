@@ -67,10 +67,6 @@ function check_globals
         echo "Install tsserver globally for vim integration: yarn global add vscode-langservers-extracted"
     end
 
-    if ! type bash-language-server &>/dev/null
-        echo "Install bash-language-server: yarn global add bash-language-server"
-    end
-
     if ! type neovim-node-host &>/dev/null
         echo "Install neovim helper: yarn global add neovim"
     end
@@ -141,7 +137,7 @@ function check_globals
     end
 
     if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]
-        echo "Install vim packer: https://github.com/wbthomason/packer.nvim#quickstart"
+        echo "Install neovim packer: https://github.com/wbthomason/packer.nvim#quickstart"
     end
 
     return 0
