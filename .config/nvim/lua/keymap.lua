@@ -39,10 +39,6 @@ M.default = {
   -- nvim-tree
   ------------
   { '<F3>', ':NvimTreeToggle<CR>', mode = 'n' },
-  --------
-  -- FTerm
-  --------
-  { '<leader>t', ':lua require("FTerm").toggle()<CR>' },
   ------------
   -- Telescope
   ------------
