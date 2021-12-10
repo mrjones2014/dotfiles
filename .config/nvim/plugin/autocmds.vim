@@ -2,7 +2,11 @@ autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~#
 
 autocmd FileType json :set conceallevel=0
 
-autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
+augroup TerminalBuffers
+  autocmd!
+  autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
+  autocmd TermClose * bw
+augroup END
 
 function! TrimWhitespace()
   let l:save = winsaveview()
