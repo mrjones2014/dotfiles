@@ -2,6 +2,8 @@ autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~#
 
 autocmd FileType json :set conceallevel=0
 
+autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
+
 function! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
