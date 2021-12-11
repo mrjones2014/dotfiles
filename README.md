@@ -35,7 +35,8 @@ You'll need to install [Fish Shell](https://github.com/fish-shell/fish-shell) be
 ## Neovim Config
 
 The Neovim configuration is written in Lua and is using mostly Lua-based plugins, like built-in LSP, Telescope for file finding and live grep,
-which means you need Neovim with Lua support (0.6.0+).
+which means you need Neovim with Lua support. I'm also using the `vim.ui` and `vim.diagnostic` Lua modules. Therefore, this config requires
+Neovim 0.6.0+.
 
 ## Git Config
 
