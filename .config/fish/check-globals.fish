@@ -31,10 +31,6 @@ function check_globals
         echo "Install fzf: https://github.com/junegunn/fzf"
     end
 
-    if ! type ag &>/dev/null
-        echo "Install the Silver Searcher: https://github.com/ggreer/the_silver_searcher"
-    end
-
     if ! type rg &>/dev/null
         echo "Install RipGrep: https://github.com/BurntSushi/ripgrep"
     end
