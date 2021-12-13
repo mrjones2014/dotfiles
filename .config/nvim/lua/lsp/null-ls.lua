@@ -64,10 +64,8 @@ if vim.fn.filereadable('./node_modules/.bin/stylelint') > 0 then
   )
 end
 
-null_ls.config({
+null_ls.setup({
   sources = sources,
-})
-
-require('lspconfig')['null-ls'].setup({
   on_attach = require('lsp.utils').on_attach,
+  update_on_insert = true,
 })
