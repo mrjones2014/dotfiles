@@ -87,7 +87,6 @@ M.lsp = {
     { 'gr', vim.lsp.buf.references },
     { 'rn', vim.lsp.buf.rename },
     { 'F', vim.lsp.buf.code_action },
-    { 'D', vim.diagnostic.open_float },
     { '[', vim.diagnostic.goto_prev },
     { ']', vim.diagnostic.goto_next },
   },

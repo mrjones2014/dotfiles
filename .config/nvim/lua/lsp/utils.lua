@@ -12,7 +12,7 @@ function M.on_attach(client)
   ]])
 
   -- show diagnostics on hover
-  vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})')
+  vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
 
   -- setup LSP-specific keymaps
   require('nest').applyKeymaps(require('keymap').lsp)
