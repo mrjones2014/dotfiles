@@ -10,7 +10,7 @@ alias v="nvim"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 
-alias h="history | fzf --select-1 --exit-0 | pbcopy"
+alias h="_atuin_search"
 
 # alias ls to exa with compatibility aliases
 alias ls="exa -a --icons --color=always -s type -F"
