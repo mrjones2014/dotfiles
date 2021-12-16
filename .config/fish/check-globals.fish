@@ -71,8 +71,8 @@ function check_globals
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
 
-    if ! type rustup &>/dev/null
-        echo "Install rustup fish plugin: omf install rustup"
+    if ! type atuin &>/dev/null
+        echo "Install atuin: cd ~/git/personal && git@github.com:ellie/atuin.git && cd atuin && cargo install --path ."
     end
 
     if ! type stylua &>/dev/null
