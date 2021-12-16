@@ -23,9 +23,6 @@ vim.opt.syntax = 'on'
 vim.opt.modeline = true
 vim.opt.updatetime = 100
 
--- required for nvim-compe
-vim.o.completeopt = 'menuone,noselect'
-
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
 vim.opt.tabstop = 2
