@@ -19,6 +19,9 @@ return {
           require('luasnip').lsp_expand(args.body)
         end,
       },
+      completion = {
+        completeopt = 'menu,menuone,noinsert',
+      },
       mapping = require('keymap').get_cmp_mappings(),
       sources = {
         { name = 'nvim_lsp' },
