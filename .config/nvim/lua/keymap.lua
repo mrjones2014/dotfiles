@@ -52,7 +52,7 @@ M.default = {
         { 'f', ':Telescope find_files<CR>' },
         { 'b', ':Telescope buffers<CR>' },
         { 't', ':Telescope live_grep<CR>' },
-        { 'h', ':Telescope oldfiles<CR>' },
+        { 'h', ':Telescope oldfiles only_cwd=true<CR>' },
       },
     },
     {
