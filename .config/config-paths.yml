@@ -11,3 +11,4 @@ starship: .config/starship.toml
 paths: .config/config-paths.yml
 ignore: .config/.ignore
 vale: .config/vale/
+atuin: .config/atuin/config.toml
