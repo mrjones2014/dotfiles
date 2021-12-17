@@ -103,10 +103,28 @@ function tmux-send-all-panes
     end
 end
 
+function _preview-project
+    set -l proj_name "$argv"
+    echo $proj_name
+    if test -d "$HOME/git/work/$proj_name/"
+        if test -f "$HOME/git/work/$proj_name/README.md"
+            bat --style=plain --color=always "$HOME/git/work/$proj_name/README.md"
+        else
+            ls "$HOME/git/work/$proj_name/"
+        end
+    else if test -d "$HOME/git/personal/$proj_name/"
+        if test -f "$HOME/git/personal/$proj_name/README.md"
+            bat --style=plain --color=always "$HOME/git/personal/$proj_name/README.md"
+        else
+            ls "$HOME/git/personal/$proj_name/"
+        end
+    end
+end
+
 function find-projects
     set -l work_projects (exa -1 ~/git/work)
     set -l personal_projects (exa -1 ~/git/personal)
-    set -l local_fzf_dir_find (string join \n $work_projects $personal_projects | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0)
+    set -l local_fzf_dir_find (string join \n $work_projects $personal_projects | grep -v .DS_Store | fzf --query="$1" --select-1 --exit-0 --preview "_preview-project {}")
     if test -n "$local_fzf_dir_find"
         if string match $local_fzf_dir_find $work_projects &>/dev/null
             echo "~/git/work/$local_fzf_dir_find"
