@@ -1,0 +1,8 @@
+search_dirs:
+  - ~/git/personal/*
+  # - ~/git/work/*
+preview_files:
+  - README.*
+  - resume.md
+preview: true
+preview_with_bat: true

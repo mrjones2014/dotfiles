@@ -30,6 +30,7 @@ if status is-interactive
     thefuck --alias | source
     starship init fish | source
     atuin init fish | source
+    set CTRLG_TMUX true
     ctrlg init fish | source
 
     # start tmux session by default
