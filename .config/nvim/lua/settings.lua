@@ -15,7 +15,6 @@ vim.opt.wildmenu = true
 vim.opt.wrap = false
 vim.opt.autochdir = false
 vim.opt.diffopt = 'vertical'
-vim.opt.cmdheight = 2
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
 vim.opt.termguicolors = true
