@@ -1,4 +1,4 @@
-function check_globals
+function check-globals
     if test -z "(ls ~/Library/Fonts | grep Fira\ Code)"
         echo "Install Fira Code NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
     end
@@ -72,7 +72,11 @@ function check_globals
     end
 
     if ! type atuin &>/dev/null
-        echo "Install atuin: cd ~/git/personal && git@github.com:ellie/atuin.git && cd atuin && cargo install --path ."
+        echo "Install atuin: cd ~/git/personal && git clone git@github.com:ellie/atuin.git && cd atuin && cargo install --path ."
+    end
+
+    if ! type ctrlg &>/dev/null
+        echo "Install ctrlg: cd ~/git/personal && git clone git@github.com:mrjones2014/ctrlg.git && cd ctrlg && cargo install --path ."
     end
 
     if ! type stylua &>/dev/null

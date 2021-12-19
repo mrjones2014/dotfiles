@@ -1,4 +1,4 @@
-function check_architecture
+function check-architecture
     if [ (uname -m) = x86_64 ]
         if [ "(sysctl -in sysctl.proc_translated)" = 1 ]
             echo "Running on Rosetta 2"
