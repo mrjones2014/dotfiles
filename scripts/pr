@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+GIT_BRANCH=$(git branch --show-current || echo "")
+
+if test -z "$GIT_BRANCH"; then
+  echo "Error: not a git repository"
+else
+  open "https://github.com/mrjones2014/ctrlg/compare/master...$GIT_BRANCH"
+fi
