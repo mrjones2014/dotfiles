@@ -4,5 +4,3 @@ search_dirs:
 preview_files:
   - README.*
   - resume.md
-preview: true
-preview_with_bat: true
