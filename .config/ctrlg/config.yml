@@ -4,3 +4,4 @@ search_dirs:
 preview_files:
   - README.*
   - resume.md
+use_nerd_font: true
