@@ -1,5 +1,5 @@
 format = """
- $directory$git_branch$git_status$git_state
+ $directory$git_branch$git_status
  $character """
 
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
