@@ -10,9 +10,9 @@ for arg in (echo $FZF_DEFAULT_OPTS | tr " " "\n")
 end
 
 set FZF_DEFAULT_OPTS "$FZF_NON_COLOR_OPTS\
---color=fg:#CCCCCC,bg:#18191E,hl:#FFFF00\
---color=fg+:#FFEE79,bg+:#21252D,hl+:#ED722E\
---color=info:#D68EB2,prompt:#50C16E,pointer:#FFFF00\
+--color=fg:#CCCCCC,bg:#000000,hl:#FFFF00 \
+--color=fg+:#FFEE79,bg+:#21252D,hl+:#ED722E \
+--color=info:#D68EB2,prompt:#50C16E,pointer:#FFFF00 \
 --color=marker:#FC2929,spinner:#FF4D00,header:#1D918B"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"
 
