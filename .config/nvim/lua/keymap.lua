@@ -1,84 +1,78 @@
 local M = {}
 
-M.default = {
-  -- jk is mapped to escape by better-escape.nvim plugin
-  -- make escape work in terminal mode
-  { '<ESC>', '<C-\\><C-n>', mode = 't' },
-  { 'jk', '<C-\\><C-n>', mode = 't' },
-  -- prefix all nested maps with <leader>
-  { '<leader>', {
-    { 'q', ':qa<CR>', mode = 'n' },
-    { 's', ':wa<CR>', mode = 'n' },
-  } },
-  { 'W', ':bw<CR>', mode = 'n' },
-  -------------------------
-  -- tmux-navigator
-  -------------------------
-  {
-    -- normal mode for all nested maps
-    mode = 'n',
-    {
-      { '<C-h>', ':lua require("Navigator").left()<CR>' },
-      { '<C-j>', ':lua require("Navigator").down()<CR>' },
-      { '<C-k>', ':lua require("Navigator").up()<CR>' },
-      { '<C-l>', ':lua require("Navigator").right()<CR>' },
-    },
-  },
-  -------------
-  -- Bufferline
-  -------------
-  {
-    -- normal mode for all nested maps
-    mode = 'n',
-    {
-      { '<C-w>n', ':BufferLineCycleNext<CR>' },
-      { '<C-w>p', ':BufferLineCyclePrev<CR>' },
-    },
-  },
-  ------------
-  -- nvim-tree
-  ------------
-  { '<F3>', ':NvimTreeToggle<CR>', mode = 'n' },
-  ------------
-  -- Telescope
-  ------------
-  {
-    -- normal mode for all nested maps
-    mode = 'n',
-    {
-      -- prefix all nested maps with 'f'
-      'f',
-      {
-        { 'f', ':Telescope find_files<CR>' },
-        { 'b', ':Telescope buffers<CR>' },
-        { 't', ':Telescope live_grep<CR>' },
-        { 'h', ':Telescope oldfiles only_cwd=true<CR>' },
-      },
-    },
-    {
-      -- prefix all nested maps with <leader>
-      '<leader>',
-      {
-        { 'v', ':vsplit<CR>:Telescope find_files<CR>' },
-        { 'b', ':vsplit<CR>:Telescope buffers<CR>' },
-      },
-    },
-  },
-  ---------------
-  -- trouble.nvim
-  ---------------
-  { '<leader>d', ':TroubleToggle<CR>' },
-  ----------------
-  -- nvim-comment
-  ----------------
-  { '<leader>c', ':CommentToggle<CR>', mode = 'n' },
-  { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v' },
-}
+local function bind(keymaps)
+  for _, keymap in pairs(keymaps) do
+    local opts = keymap.opts or {}
+    if opts.silent == nil then
+      opts.silent = true
+    end
+    vim.keymap.set(keymap.mode or 'n', keymap[1], keymap[2], opts)
+  end
+end
 
-M.lsp = {
-  -- normal mode for all LSP keymaps
-  mode = 'n',
-  {
+-- wrapper to not `require` telescope until needed
+local function telescope_lazy(builtin_name, args, vert_split)
+  return function()
+    if vert_split then
+      vim.cmd('vsp')
+    end
+    require('telescope.builtin')[builtin_name](args)
+  end
+end
+
+-- wrapper to not `require` Navigator.nvim until needed
+local function navigator_lazy(direction)
+  return function()
+    require('Navigator')[direction]()
+  end
+end
+
+function M.apply_default_keymaps()
+  bind({
+    -- jk is mapped to escape by better-escape.nvim plugin
+    -- make escape work in terminal mode
+    { '<ESC>', '<C-\\><C-n>', mode = 't' },
+    { 'jk', '<C-\\><C-n>', mode = 't' },
+
+    -- leader+q to quit, leader+s to save all
+    { '<leader>q', ':qa<cr>' },
+    { '<leader>s', ':wa<cr>' },
+
+    -- shift+w to close buffer
+    { 'W', ':bw<cr>' },
+
+    -- Navigator.nvim
+    { '<C-h>', navigator_lazy('left') },
+    { '<C-j>', navigator_lazy('down') },
+    { '<C-k>', navigator_lazy('up') },
+    { '<C-l>', navigator_lazy('right') },
+
+    -- Bufferline
+    { '<C-w>n', ':BufferLineCycleNext<CR>' },
+    { '<C-w>p', ':BufferLineCyclePrev<CR>' },
+
+    -- NvimTree
+    { '<F3>', ':NvimTreeToggle<CR>' },
+
+    -- Telescope
+    { 'ff', telescope_lazy('find_files') },
+    { 'fb', telescope_lazy('buffers') },
+    { 'ft', telescope_lazy('live_grep') },
+    { 'fh', telescope_lazy('oldfiles', { only_cwd = true }) },
+    { '<leader>v', telescope_lazy('find_files', _, true) },
+    { '<leader>b', telescope_lazy('buffers', _, true) },
+
+    -- Trouble
+    { '<leader>d', ':TroubleToggle<CR>' },
+
+    -- nvim-comment
+    { '<leader>c', ':CommentToggle<CR>' },
+    { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v' },
+  })
+end
+
+function M.apply_lsp_keymaps()
+  bind({
     { 'gd', vim.lsp.buf.definition },
     { 'gh', vim.lsp.buf.hover },
     { 'gi', vim.lsp.buf.implementation },
@@ -89,11 +83,9 @@ M.lsp = {
     { 'F', vim.lsp.buf.code_action },
     { '[', vim.diagnostic.goto_prev },
     { ']', vim.diagnostic.goto_next },
-  },
-}
+  })
+end
 
--- this is a function so that 'cmp'
--- doesn't get required until it's needed/loaded
 function M.get_cmp_mappings()
   return {
     ['<S-Tab>'] = require('cmp').mapping.select_prev_item(),

@@ -3,10 +3,13 @@ local M = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client)
-  vim.cmd('command! Format :lua require("lsp.utils").formatDocument()')
+  vim.api.nvim_add_user_command(
+    'Format',
+    M.formatDocument,
+    { desc = 'Format the document using the formatter configured in null-ls config' }
+  )
   vim.cmd([[
     augroup fmt
-      autocmd!
       autocmd BufWritePre * Format
     augroup END
   ]])
@@ -15,7 +18,7 @@ function M.on_attach(client)
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
 
   -- setup LSP-specific keymaps
-  require('nest').applyKeymaps(require('keymap').lsp)
+  require('keymap').apply_lsp_keymaps()
 
   require('lsp_signature').on_attach({
     bind = true,
