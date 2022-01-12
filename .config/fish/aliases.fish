@@ -1,4 +1,4 @@
-alias sourcefish="source ~/.config/fish/config.fish && echo 'Fish shell profile reloaded.'"
+alias sourcefish="source ~/.config/fish/config.fish && fish_logo"
 
 # Alias for dotfiles management
 alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
