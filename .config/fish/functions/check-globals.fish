@@ -48,23 +48,23 @@ function check-globals
     end
 
     if ! type eslint_d &>/dev/null
-        echo "Install eslint_d globally for Neovim integration: yarn global add eslint_d"
+        echo "Install eslint_d globally for Neovim integration: npm i -g eslint_d"
     end
 
     if ! type prettierd &>/dev/null
-        echo "Install prettierd globally for Neovim integration: yarn global add @jsouza/prettierd"
+        echo "Install prettierd globally for Neovim integration: npm i -g @fsouza/prettierd"
     end
 
     if ! type typescript-language-server &>/dev/null
-        echo "Install tsserver globally for vim integration: yarn global add typescript typescript-language-server"
+        echo "Install tsserver globally for vim integration: npm i -g typescript typescript-language-server"
     end
 
     if ! type vscode-css-language-server &>/dev/null
-        echo "Install tsserver globally for vim integration: yarn global add vscode-langservers-extracted"
+        echo "Install tsserver globally for vim integration: npm i -g vscode-langservers-extracted"
     end
 
     if ! type neovim-node-host &>/dev/null
-        echo "Install neovim helper: yarn global add neovim"
+        echo "Install neovim helper: npm i -g neovim"
     end
 
     if ! type cargo &>/dev/null
