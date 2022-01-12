@@ -27,6 +27,26 @@ local function navigator_lazy(direction)
   end
 end
 
+local function resize_split(plus_or_minus)
+  return function()
+    -- full height window height is screen height minus 3 for bufferline, status line, and command line
+    local is_vert_split = vim.fn.winheight(vim.fn.winnr()) + 3 == vim.o.lines
+    if is_vert_split then
+      if plus_or_minus == 'plus' then
+        vim.cmd('vertical resize +3')
+      else
+        vim.cmd('vertical resize -3')
+      end
+    else
+      if plus_or_minus == 'plus' then
+        vim.cmd('resize +3')
+      else
+        vim.cmd('resize -3')
+      end
+    end
+  end
+end
+
 function M.apply_default_keymaps()
   bind({
     -- jk is mapped to escape by better-escape.nvim plugin
@@ -40,6 +60,10 @@ function M.apply_default_keymaps()
 
     -- shift+w to close buffer
     { 'W', ':bw<cr>' },
+
+    -- ctrl+y and ctrl+u to resize splits
+    { '<C-y>', resize_split('plus') },
+    { '<C-u>', resize_split('minus') },
 
     -- Navigator.nvim
     { '<C-h>', navigator_lazy('left') },
