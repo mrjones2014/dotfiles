@@ -5,9 +5,15 @@ local M = {}
 function M.on_attach(client)
   vim.api.nvim_add_user_command(
     'Format',
-    M.formatDocument,
+    M.format_document,
     { desc = 'Format the document using the formatter configured in null-ls config' }
   )
+
+  local ft = vim.bo.filetype
+  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
+    vim.api.nvim_add_user_command('OrganizeImports', M.organize_imports, { desc = 'Organize imports via tsserver' })
+  end
+
   vim.cmd([[
     augroup fmt
       autocmd BufWritePre * Format
@@ -37,13 +43,27 @@ function M.on_attach(client)
   end
 end
 
-function M.formatDocument()
+function M.format_document()
   -- check if LSP is attached
   if (#vim.lsp.buf_get_clients()) < 1 then
     return
   end
 
   vim.lsp.buf.formatting_sync(nil, 1500)
+end
+
+function M.organize_imports()
+  -- check if LSP is attached
+  if (#vim.lsp.buf_get_clients()) < 1 then
+    return
+  end
+
+  local params = {
+    command = '_typescript.organizeImports',
+    arguments = { vim.api.nvim_buf_get_name(0) },
+    title = '',
+  }
+  vim.lsp.buf_request_sync(vim.api.nvim_get_current_buf(), 'workspace/executeCommand', params, 1500)
 end
 
 return M
