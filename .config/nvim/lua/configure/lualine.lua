@@ -10,6 +10,8 @@ return {
 
     local function filepath()
       local path = vim.fn.expand('%')
+      -- ensure path is relative to cwd
+      path = path:gsub(vim.fn.getcwd() .. '/', '')
       if vim.fn.winwidth(0) <= 84 then
         path = vim.fn.pathshorten(path)
       end
