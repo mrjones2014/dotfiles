@@ -32,6 +32,7 @@ if status is-interactive
     atuin init fish | source
     set CTRLG_TMUX true
     ctrlg init fish | source
+    nvm use $nvm_default_version >/dev/null
 
     # start tmux session by default
     if [ -z "$TMUX" ] && [ "$START_TMUX_PLEASE" = 1 ]
