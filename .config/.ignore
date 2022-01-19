@@ -1,9 +1,7 @@
-*.txt
-spg.js
-xplatform-spg.js
 .git/
 yarn.lock
 package-lock.json
 packer_compiled.lua
 .DS_Store
 .netrwhist
+dist/
