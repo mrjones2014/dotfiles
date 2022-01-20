@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+fifo="${TMPDIR:-/tmp/}_popup-fifo"
+
+cleanup() {
+  rm -f "$fifo"
+  if [[ $# -gt 0 ]]; then
+    trap - EXIT
+    exit 130
+  fi
+}
+
+trap 'cleanup 1' SIGUSR1
+trap 'cleanup' EXIT
+
+mkfifo "$fifo"
+tmux popup -E "$* > $fifo" &
+cat "$fifo"
+rm -f "$fifo"
