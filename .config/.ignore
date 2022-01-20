@@ -5,3 +5,4 @@ packer_compiled.lua
 .DS_Store
 .netrwhist
 dist/
+vendor/
