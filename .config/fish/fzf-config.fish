@@ -17,4 +17,4 @@ set FZF_DEFAULT_OPTS "$FZF_NON_COLOR_OPTS\
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"
 
 # now my custom configs
-set FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git --ignore .DS_Store -g ""'
+set FZF_DEFAULT_COMMAND 'rg --hidden --ignore .git --ignore .DS_Store -g ""'
