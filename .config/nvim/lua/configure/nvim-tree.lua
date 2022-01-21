@@ -29,22 +29,22 @@ return {
       git = {
         ignore = true,
       },
+      mappings = {
+        custom_only = true,
+        list = {
+          { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
+          { key = '<C-v>', cb = tree_cb('vsplit') },
+          { key = 'R', cb = tree_cb('refresh') },
+          { key = 'a', cb = tree_cb('create') },
+          { key = 'd', cb = tree_cb('remove') },
+          { key = 'r', cb = tree_cb('rename') },
+          { key = '.', cb = tree_cb('cd') },
+        },
+      },
       view = {
         side = 'right',
         width = 40,
         auto_resize = false,
-        mappings = {
-          custom_only = true,
-          list = {
-            { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
-            { key = '<C-v>', cb = tree_cb('vsplit') },
-            { key = 'R', cb = tree_cb('refresh') },
-            { key = 'a', cb = tree_cb('create') },
-            { key = 'd', cb = tree_cb('remove') },
-            { key = 'r', cb = tree_cb('rename') },
-            { key = '.', cb = tree_cb('cd') },
-          },
-        },
       },
       update_focused_file = {
         enable = true,
