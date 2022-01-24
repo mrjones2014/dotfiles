@@ -6,3 +6,5 @@ packer_compiled.lua
 .netrwhist
 dist/
 vendor/
+node_modules/
+**/node_modules/
