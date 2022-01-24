@@ -52,11 +52,15 @@ function check-globals
     end
 
     if ! type typescript-language-server &>/dev/null
-        echo "Install tsserver globally for vim integration: npm i -g typescript typescript-language-server"
+        echo "Install tsserver globally for Neovim integration: npm i -g typescript typescript-language-server"
     end
 
     if ! type vscode-css-language-server &>/dev/null
-        echo "Install tsserver globally for vim integration: npm i -g vscode-langservers-extracted"
+        echo "Install tsserver globally for Neovim integration: npm i -g vscode-langservers-extracted"
+    end
+
+    if ! type svelte-language-server &>/dev/null
+        echo "Install svelte-language-server globally for Neovim integration: npm i -g svelte-language-server"
     end
 
     if ! type cargo &>/dev/null
