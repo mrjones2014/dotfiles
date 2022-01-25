@@ -6,6 +6,8 @@ local home = os.getenv('HOME')
 local sources = {
   -- code actions
   b.code_actions.gitsigns,
+  b.code_actions.eslint_d,
+  b.code_actions.shellcheck,
 
   -- diagnostics
   b.diagnostics.eslint_d,
