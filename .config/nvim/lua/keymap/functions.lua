@@ -43,7 +43,7 @@ function M.open_url_under_cursor()
   elseif vim.fn.has('unix') == 1 then
     vim.cmd('call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})')
   else
-    print('Error: gx is not supported on this OS!')
+    vim.notify('Error: gx is not supported on this OS!')
   end
 end
 

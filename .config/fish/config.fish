@@ -33,7 +33,7 @@ if status is-interactive
     atuin init fish | source
     set CTRLG_TMUX true
     set CTRLG_TMUX_POPUP true
-    set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 5
+    set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 10
     ctrlg init fish | source
     nvm use $nvm_default_version >/dev/null
 
