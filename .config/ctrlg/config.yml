@@ -1,9 +1,8 @@
+include:
+  - ~/.config/ctrlg/extra_paths.yml
 search_dirs:
   - ~/git/personal/*
   - ~/git/work/*
-  - ~/git/work/core/js/*
-  - ~/git/work/core/*/Cargo.toml
-  - ~/git/work/core/*/*/Cargo.toml
 preview_files:
   - README.*
   - resume.md
