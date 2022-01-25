@@ -12,4 +12,4 @@ paths: .config/config-paths.yml
 ignore: .config/.ignore
 vale: .config/vale/
 atuin: .config/atuin/config.toml
-ctrlg: .config/ctrlg/config.yml
+ctrlg: .config/ctrlg/
