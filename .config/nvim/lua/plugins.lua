@@ -50,7 +50,7 @@ return require('packer').startup(function(use)
   use(require('configure.todo-comments'))
   use(require('configure.nvim-notify'))
   use(require('configure.dressing'))
-  use(require('configure.fidget'))
+  -- use(require('configure.fidget'))
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') > 0 then
     -- yaclt
