@@ -59,7 +59,7 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install CSS language server globally for Neovim integration: npm i -g vscode-langservers-extracted"
     end
 
-    if ! type svelte-language-server &>/dev/null
+    if ! type svelteserver &>/dev/null
         echo "Install svelte-language-server globally for Neovim integration: npm i -g svelte-language-server"
     end
 
