@@ -1,4 +1,4 @@
-function check-architecture
+function check-architecture --description "Check if the shell is running natively on ARM, natively on x86, or through Rosetta 2"
     if [ (uname -m) = x86_64 ]
         if [ "(sysctl -in sysctl.proc_translated)" = 1 ]
             echo "Running on Rosetta 2"
