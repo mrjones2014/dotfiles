@@ -51,10 +51,6 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install prettierd globally for Neovim integration: npm i -g @fsouza/prettierd"
     end
 
-    if ! type typescript-language-server &>/dev/null
-        echo "Install tsserver globally for Neovim integration: npm i -g typescript typescript-language-server"
-    end
-
     if ! type vscode-css-language-server &>/dev/null
         echo "Install tsserver globally for Neovim integration: npm i -g vscode-langservers-extracted"
     end
