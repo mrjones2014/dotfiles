@@ -31,7 +31,6 @@ return require('packer').startup(function(use)
 
   -- LSP + syntax
   use(require('configure.lspconfig'))
-  use(require('configure.vim-go')) -- just used for gohtmltmpl syntax highlighting
   use(require('configure.completion'))
   use(require('configure.vim-fish'))
   use(require('configure.trouble'))
@@ -50,6 +49,7 @@ return require('packer').startup(function(use)
   use(require('configure.todo-comments'))
   use(require('configure.nvim-notify'))
   use(require('configure.dressing'))
+  use(require('configure.fidget'))
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') > 0 then
     -- yaclt
