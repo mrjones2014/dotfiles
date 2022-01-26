@@ -8,20 +8,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
 
-function nvim
-    set -l NVIM (which nvim)
-    if test (count $argv) -lt 1
-        "$NVIM"
-        return
-    end
-
-    if test -d $argv[1]
-        pushd $argv[1] && "$NVIM" && popd
-        return
-    end
-
-    "$NVIM" $argv
-end
+alias update-nvim-plugins="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
 

@@ -1,4 +1,4 @@
-function update-globals
+function update-globals --description "Update brew packages, npm global packages, and sumneko/lua-language-server"
     # update homebrew packages
     brew update
     brew upgrade --fetch-HEAD
@@ -14,7 +14,7 @@ function update-globals
     popd
 
     # update neovim plugins
-    nvim --headless +PackerSync +qall!
+    update-nvim-plugins
 
     # update npm packages in all node versions
     # save to variable so we can reset to this version after updating packages

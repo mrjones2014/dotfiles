@@ -1,4 +1,4 @@
-function check-globals
+function check-globals --description "Check for missing command line tools and print instructions on how to install them"
     if test -z "(ls ~/Library/Fonts | grep Fira\ Code)"
         echo "Install Fira Code NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
     end
@@ -127,7 +127,6 @@ function check-globals
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
     end
 
-    #  ~/.tmux/plugins/tpm
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
     end
