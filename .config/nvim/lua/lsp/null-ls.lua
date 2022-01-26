@@ -15,18 +15,6 @@ local sources = {
   b.diagnostics.shellcheck.with({
     diagnostics_format = '#{m} [#{s}] [#{c}]',
   }),
-  b.diagnostics.vale.with({
-    args = function(params)
-      return {
-        '--config=' .. home .. '/.config/vale/vale.ini',
-        '--no-exit',
-        '--output',
-        'JSON',
-        '--ext',
-        '.' .. vim.fn.fnamemodify(params.bufname, ':e'),
-      }
-    end,
-  }),
 
   -- formatting
   b.formatting.eslint_d,
