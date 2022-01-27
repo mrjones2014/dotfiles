@@ -103,6 +103,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install exa: brew install exa"
     end
 
+    if ! type codespell &>/dev/null
+        echo "Install codespell: brew install codespell"
+    end
+
     if ! type luacheck &>/dev/null
         echo 'Install luacheck: luarocks install luacheck'
     end
