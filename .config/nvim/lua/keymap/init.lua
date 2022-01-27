@@ -19,8 +19,7 @@ function M.apply_default_keymaps()
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
     { 'jk', '<C-\\><C-n>', mode = 't' },
 
-    -- leader+q to quit, leader+s to save all
-    { '<leader>q', ':qa<cr>' },
+    -- leader+s to save all
     { '<leader>s', ':wa<cr>' },
 
     -- shift+w to close buffer
