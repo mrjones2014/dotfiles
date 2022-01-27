@@ -1,8 +1,6 @@
 local null_ls = require('null-ls')
 local b = null_ls.builtins
 
-local home = os.getenv('HOME')
-
 local sources = {
   -- code actions
   b.code_actions.gitsigns,
@@ -14,6 +12,12 @@ local sources = {
   b.diagnostics.luacheck,
   b.diagnostics.shellcheck.with({
     diagnostics_format = '#{m} [#{s}] [#{c}]',
+  }),
+  b.diagnostics.codespell.with({
+    filetypes = {
+      'markdown',
+      'text',
+    },
   }),
 
   -- formatting
