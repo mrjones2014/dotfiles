@@ -15,6 +15,11 @@ return {
         return '%' .. c
       end)
       path = path:gsub(cwd_pattern, '')
+      -- replace $HOME with ~
+      local home_pattern = (os.getenv('HOME') .. '/'):gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
+        return '%' .. c
+      end)
+      path = path:gsub(home_pattern, '')
       if vim.fn.winwidth(0) <= 84 then
         path = vim.fn.pathshorten(path)
       end
