@@ -23,7 +23,7 @@ function M.apply_default_keymaps()
     { '<leader>s', ':wa<cr>' },
 
     -- shift+w to close buffer
-    { 'W', ':bw<cr>' },
+    { 'W', ':Bdelete<cr>' },
 
     -- ctrl+y and ctrl+u to resize splits
     { '<C-y>', functions.resize_split('plus') },
