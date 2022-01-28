@@ -1,0 +1,3814 @@
+#!/usr/bin/env bash
+read -r -d '' ALL_ICONS <<EOM
+c                                        
+cpp                                      
+electron                                 
+elixir                                   
+elm                                      
+folder                                   
+folder config                            
+folder git                               
+folder git branch                        
+folder github                            
+folder npm                               
+folder open                              
+go                                       
+msdos                                    
+vim                                      
+windows                                  
+android                                  
+angular                                  
+appcelerator                             
+apple                                    
+appstore                                 
+aptana                                   
+asterisk                                 
+atlassian                                
+atom                                     
+aws                                      
+backbone                                 
+bing small                               
+bintray                                  
+bitbucket                                
+blackberry                               
+bootstrap                                
+bower                                    
+brackets                                 
+bugsense                                 
+celluloid                                
+chart                                    
+chrome                                   
+cisco                                    
+clojure                                  
+clojure alt                              
+cloud9                                   
+coda                                     
+code                                     
+code badge                               
+codeigniter                              
+codepen                                  
+codrops                                  
+coffeescript                             
+compass                                  
+composer                                 
+creativecommons                          
+creativecommons badge                    
+css3                                     
+css3 full                                
+css tricks                               
+cssdeck                                  
+dart                                     
+database                                 
+debian                                   
+digital ocean                            
+django                                   
+dlang                                    
+docker                                   
+doctrine                                 
+dojo                                     
+dotnet                                   
+dreamweaver                              
+dropbox                                  
+drupal                                   
+eclipse                                  
+ember                                    
+envato                                   
+erlang                                   
+extjs                                    
+firebase                                 
+firefox                                  
+fsharp                                   
+ghost                                    
+ghost small                              
+git                                      
+git branch                               
+git commit                               
+git compare                              
+git merge                                
+git pull request                         
+github                                   
+github alt                               
+github badge                             
+github full                              
+gnu                                      
+go                                       
+google cloud platform                    
+google drive                             
+grails                                   
+groovy                                   
+grunt                                    
+gulp                                     
+hackernews                               
+haskell                                  
+heroku                                   
+html5                                    
+html5 3d effects                         
+html5 connectivity                       
+html5 device access                      
+html5 multimedia                         
+ie                                       
+illustrator                              
+intellij                                 
+ionic                                    
+java                                     
+javascript                               
+javascript badge                         
+javascript shield                        
+jekyll small                             
+jenkins                                  
+jira                                     
+joomla                                   
+jquery                                   
+jquery ui                                
+komodo                                   
+krakenjs                                 
+krakenjs badge                           
+laravel                                  
+less                                     
+linux                                    
+magento                                  
+mailchimp                                
+markdown                                 
+materializecss                           
+meteor                                   
+meteorfull                               
+mitlicence                               
+modernizr                                
+mongodb                                  
+mootools                                 
+mootools badge                           
+mozilla                                  
+msql server                              
+mysql                                    
+nancy                                    
+netbeans                                 
+netmagazine                              
+nginx                                    
+nodejs                                   
+nodejs small                             
+npm                                      
+onedrive                                 
+openshift                                
+opensource                               
+opera                                    
+perl                                     
+phonegap                                 
+photoshop                                
+php                                      
+postgresql                               
+prolog                                   
+python                                   
+rackspace                                
+raphael                                  
+rasberry pi                              
+react                                    
+redhat                                   
+redis                                    
+requirejs                                
+responsive                               
+ruby                                     
+ruby on rails                            
+ruby rough                               
+rust                                     
+safari                                   
+sass                                     
+scala                                    
+scriptcs                                 
+scrum                                    
+senchatouch                              
+sizzlejs                                 
+smashing magazine                        
+snap svg                                 
+sqllite                                  
+stackoverflow                            
+streamline                               
+stylus                                   
+sublime                                  
+swift                                    
+symfony                                  
+symfony badge                            
+techcrunch                               
+terminal                                 
+terminal badge                           
+travis                                   
+trello                                   
+typo3                                    
+ubuntu                                   
+uikit                                    
+unity small                              
+vim                                      
+visualstudio                             
+w3c                                      
+webplatform                              
+windows                                  
+wordpress                                
+yahoo                                    
+yahoo small                              
+yeoman                                   
+yii                                      
+zend                                     
+500px                                    
+address book                             
+address book o                           
+address card                             
+address card o                           
+adjust                                   
+adn                                      
+align center                             
+align justify                            
+align left                               
+align right                              
+amazon                                   
+ambulance                                
+american sign language interpreting      
+anchor                                   
+android                                  
+angellist                                
+angle double down                        
+angle double left                        
+angle double right                       
+angle double up                          
+angle down                               
+angle left                               
+angle right                              
+angle up                                 
+apple                                    
+archive                                  
+area chart                               
+arrow circle down                        
+arrow circle left                        
+arrow circle o down                      
+arrow circle o left                      
+arrow circle o right                     
+arrow circle o up                        
+arrow circle right                       
+arrow circle up                          
+arrow down                               
+arrow left                               
+arrow right                              
+arrow up                                 
+arrows                                   
+arrows alt                               
+arrows h                                 
+arrows v                                 
+asl interpreting                         
+assistive listening systems              
+asterisk                                 
+at                                       
+audio description                        
+automobile                               
+backward                                 
+balance scale                            
+ban                                      
+bandcamp                                 
+bank                                     
+bar chart                                
+bar chart o                              
+barcode                                  
+bars                                     
+bath                                     
+bathtub                                  
+battery                                  
+battery 0                                
+battery 1                                
+battery 2                                
+battery 3                                
+battery 4                                
+battery empty                            
+battery full                             
+battery half                             
+battery quarter                          
+battery three quarters                   
+bed                                      
+beer                                     
+behance                                  
+behance square                           
+bell                                     
+bell o                                   
+bell slash                               
+bell slash o                             
+bicycle                                  
+binoculars                               
+birthday cake                            
+bitbucket                                
+bitbucket square                         
+bitcoin                                  
+black tie                                
+blind                                    
+bluetooth                                
+bluetooth b                              
+bold                                     
+bolt                                     
+bomb                                     
+book                                     
+bookmark                                 
+bookmark o                               
+braille                                  
+briefcase                                
+btc                                      
+bug                                      
+building                                 
+building o                               
+bullhorn                                 
+bullseye                                 
+bus                                      
+buysellads                               
+cab                                      
+calculator                               
+calendar                                 
+calendar check o                         
+calendar minus o                         
+calendar o                               
+calendar plus o                          
+calendar times o                         
+camera                                   
+camera retro                             
+car                                      
+caret down                               
+caret left                               
+caret right                              
+caret square o down                      
+caret square o left                      
+caret square o right                     
+caret square o up                        
+caret up                                 
+cart arrow down                          
+cart plus                                
+cc                                       
+cc amex                                  
+cc diners club                           
+cc discover                              
+cc jcb                                   
+cc mastercard                            
+cc paypal                                
+cc stripe                                
+cc visa                                  
+certificate                              
+chain                                    
+chain broken                             
+check                                    
+check circle                             
+check circle o                           
+check square                             
+check square o                           
+chevron circle down                      
+chevron circle left                      
+chevron circle right                     
+chevron circle up                        
+chevron down                             
+chevron left                             
+chevron right                            
+chevron up                               
+child                                    
+chrome                                   
+circle                                   
+circle o                                 
+circle o notch                           
+circle thin                              
+clipboard                                
+clock o                                  
+clone                                    
+close                                    
+cloud                                    
+cloud download                           
+cloud upload                             
+cny                                      
+code                                     
+code fork                                
+codepen                                  
+codiepie                                 
+coffee                                   
+cog                                      
+cogs                                     
+columns                                  
+comment                                  
+comment o                                
+commenting                               
+commenting o                             
+comments                                 
+comments o                               
+compass                                  
+compress                                 
+connectdevelop                           
+contao                                   
+copy                                     
+copyright                                
+creative commons                         
+credit card                              
+credit card alt                          
+crop                                     
+crosshairs                               
+css3                                     
+cube                                     
+cubes                                    
+cut                                      
+cutlery                                  
+dashboard                                
+dashcube                                 
+database                                 
+deaf                                     
+deafness                                 
+dedent                                   
+delicious                                
+desktop                                  
+deviantart                               
+diamond                                  
+digg                                     
+dollar                                   
+dot circle o                             
+download                                 
+dribbble                                 
+drivers license                          
+drivers license o                        
+dropbox                                  
+drupal                                   
+edge                                     
+edit                                     
+eercast                                  
+eject                                    
+ellipsis h                               
+ellipsis v                               
+empire                                   
+envelope                                 
+envelope o                               
+envelope open                            
+envelope open o                          
+envelope square                          
+envira                                   
+eraser                                   
+etsy                                     
+eur                                      
+euro                                     
+exchange                                 
+exclamation                              
+exclamation circle                       
+exclamation triangle                     
+expand                                   
+expeditedssl                             
+external link                            
+external link square                     
+eye                                      
+eye slash                                
+eyedropper                               
+fa                                       
+facebook                                 
+facebook f                               
+facebook official                        
+facebook square                          
+fast backward                            
+fast forward                             
+fax                                      
+feed                                     
+female                                   
+fighter jet                              
+file                                     
+file archive o                           
+file audio o                             
+file code o                              
+file excel o                             
+file image o                             
+file movie o                             
+file o                                   
+file pdf o                               
+file photo o                             
+file picture o                           
+file powerpoint o                        
+file sound o                             
+file text                                
+file text o                              
+file video o                             
+file word o                              
+file zip o                               
+files o                                  
+film                                     
+filter                                   
+fire                                     
+fire extinguisher                        
+firefox                                  
+first order                              
+flag                                     
+flag checkered                           
+flag o                                   
+flash                                    
+flask                                    
+flickr                                   
+floppy o                                 
+folder                                   
+folder o                                 
+folder open                              
+folder open o                            
+font                                     
+font awesome                             
+fonticons                                
+fort awesome                             
+forumbee                                 
+forward                                  
+foursquare                               
+free code camp                           
+frown o                                  
+futbol o                                 
+gamepad                                  
+gavel                                    
+gbp                                      
+ge                                       
+gear                                     
+gears                                    
+genderless                               
+get pocket                               
+gg                                       
+gg circle                                
+gift                                     
+git                                      
+git square                               
+github                                   
+github alt                               
+github square                            
+gitlab                                   
+gittip                                   
+glass                                    
+glide                                    
+glide g                                  
+globe                                    
+google                                   
+google plus                              
+google plus circle                       
+google plus official                     
+google plus square                       
+google wallet                            
+graduation cap                           
+gratipay                                 
+grav                                     
+group                                    
+h square                                 
+hacker news                              
+hand grab o                              
+hand lizard o                            
+hand o down                              
+hand o left                              
+hand o right                             
+hand o up                                
+hand paper o                             
+hand peace o                             
+hand pointer o                           
+hand rock o                              
+hand scissors o                          
+hand spock o                             
+hand stop o                              
+handshake o                              
+hard of hearing                          
+hashtag                                  
+hdd o                                    
+header                                   
+headphones                               
+heart                                    
+heart o                                  
+heartbeat                                
+history                                  
+home                                     
+hospital o                               
+hotel                                    
+hourglass                                
+hourglass 1                              
+hourglass 2                              
+hourglass 3                              
+hourglass end                            
+hourglass half                           
+hourglass o                              
+hourglass start                          
+houzz                                    
+html5                                    
+i cursor                                 
+id badge                                 
+id card                                  
+id card o                                
+ils                                      
+image                                    
+imdb                                     
+inbox                                    
+indent                                   
+industry                                 
+info                                     
+info circle                              
+inr                                      
+instagram                                
+institution                              
+internet explorer                        
+intersex                                 
+ioxhost                                  
+italic                                   
+joomla                                   
+jpy                                      
+jsfiddle                                 
+key                                      
+keyboard o                               
+krw                                      
+language                                 
+laptop                                   
+lastfm                                   
+lastfm square                            
+leaf                                     
+leanpub                                  
+legal                                    
+lemon o                                  
+level down                               
+level up                                 
+life bouy                                
+life buoy                                
+life ring                                
+life saver                               
+lightbulb o                              
+line chart                               
+link                                     
+linkedin                                 
+linkedin square                          
+linode                                   
+linux                                    
+list                                     
+list alt                                 
+list ol                                  
+list ul                                  
+location arrow                           
+lock                                     
+long arrow down                          
+long arrow left                          
+long arrow right                         
+long arrow up                            
+low vision                               
+magic                                    
+magnet                                   
+mail forward                             
+mail reply                               
+mail reply all                           
+male                                     
+map                                      
+map marker                               
+map o                                    
+map pin                                  
+map signs                                
+mars                                     
+mars double                              
+mars stroke                              
+mars stroke h                            
+mars stroke v                            
+maxcdn                                   
+meanpath                                 
+medium                                   
+medkit                                   
+meetup                                   
+meh o                                    
+mercury                                  
+microchip                                
+microphone                               
+microphone slash                         
+minus                                    
+minus circle                             
+minus square                             
+minus square o                           
+mixcloud                                 
+mobile                                   
+mobile phone                             
+modx                                     
+money                                    
+moon o                                   
+mortar board                             
+motorcycle                               
+mouse pointer                            
+music                                    
+navicon                                  
+neuter                                   
+newspaper o                              
+object group                             
+object ungroup                           
+odnoklassniki                            
+odnoklassniki square                     
+opencart                                 
+openid                                   
+opera                                    
+optin monster                            
+outdent                                  
+pagelines                                
+paint brush                              
+paper plane                              
+paper plane o                            
+paperclip                                
+paragraph                                
+paste                                    
+pause                                    
+pause circle                             
+pause circle o                           
+paw                                      
+paypal                                   
+pencil                                   
+pencil square                            
+pencil square o                          
+percent                                  
+phone                                    
+phone square                             
+photo                                    
+picture o                                
+pie chart                                
+pied piper                               
+pied piper alt                           
+pied piper pp                            
+pinterest                                
+pinterest p                              
+pinterest square                         
+plane                                    
+play                                     
+play circle                              
+play circle o                            
+plug                                     
+plus                                     
+plus circle                              
+plus square                              
+plus square o                            
+podcast                                  
+power off                                
+print                                    
+product hunt                             
+puzzle piece                             
+qq                                       
+qrcode                                   
+question                                 
+question circle                          
+question circle o                        
+quora                                    
+quote left                               
+quote right                              
+ra                                       
+random                                   
+ravelry                                  
+rebel                                    
+recycle                                  
+reddit                                   
+reddit alien                             
+reddit square                            
+refresh                                  
+registered                               
+remove                                   
+renren                                   
+reorder                                  
+repeat                                   
+reply                                    
+reply all                                
+resistance                               
+retweet                                  
+rmb                                      
+road                                     
+rocket                                   
+rotate left                              
+rotate right                             
+rouble                                   
+rss                                      
+rss square                               
+rub                                      
+ruble                                    
+rupee                                    
+s15                                      
+safari                                   
+save                                     
+scissors                                 
+scribd                                   
+search                                   
+search minus                             
+search plus                              
+sellsy                                   
+send                                     
+send o                                   
+server                                   
+share                                    
+share alt                                
+share alt square                         
+share square                             
+share square o                           
+shekel                                   
+sheqel                                   
+shield                                   
+ship                                     
+shirtsinbulk                             
+shopping bag                             
+shopping basket                          
+shopping cart                            
+shower                                   
+sign in                                  
+sign language                            
+sign out                                 
+signal                                   
+signing                                  
+simplybuilt                              
+sitemap                                  
+skyatlas                                 
+skype                                    
+slack                                    
+sliders                                  
+slideshare                               
+smile o                                  
+snapchat                                 
+snapchat ghost                           
+snapchat square                          
+snowflake o                              
+soccer ball o                            
+sort                                     
+sort alpha asc                           
+sort alpha desc                          
+sort amount asc                          
+sort amount desc                         
+sort asc                                 
+sort desc                                
+sort down                                
+sort numeric asc                         
+sort numeric desc                        
+sort up                                  
+soundcloud                               
+space shuttle                            
+spinner                                  
+spoon                                    
+spotify                                  
+square                                   
+square o                                 
+stack exchange                           
+stack overflow                           
+star                                     
+star half                                
+star half empty                          
+star half full                           
+star half o                              
+star o                                   
+steam                                    
+steam square                             
+step backward                            
+step forward                             
+stethoscope                              
+sticky note                              
+sticky note o                            
+stop                                     
+stop circle                              
+stop circle o                            
+street view                              
+strikethrough                            
+stumbleupon                              
+stumbleupon circle                       
+subscript                                
+subway                                   
+suitcase                                 
+sun o                                    
+superpowers                              
+superscript                              
+support                                  
+table                                    
+tablet                                   
+tachometer                               
+tag                                      
+tags                                     
+tasks                                    
+taxi                                     
+telegram                                 
+television                               
+tencent weibo                            
+terminal                                 
+text height                              
+text width                               
+th                                       
+th large                                 
+th list                                  
+themeisle                                
+thermometer                              
+thermometer 0                            
+thermometer 1                            
+thermometer 2                            
+thermometer 3                            
+thermometer 4                            
+thermometer empty                        
+thermometer full                         
+thermometer half                         
+thermometer quarter                      
+thermometer three quarters               
+thumb tack                               
+thumbs down                              
+thumbs o down                            
+thumbs o up                              
+thumbs up                                
+ticket                                   
+times                                    
+times circle                             
+times circle o                           
+times rectangle                          
+times rectangle o                        
+tint                                     
+toggle down                              
+toggle left                              
+toggle off                               
+toggle on                                
+toggle right                             
+toggle up                                
+trademark                                
+train                                    
+transgender                              
+transgender alt                          
+trash                                    
+trash o                                  
+tree                                     
+trello                                   
+tripadvisor                              
+trophy                                   
+truck                                    
+try                                      
+tty                                      
+tumblr                                   
+tumblr square                            
+turkish lira                             
+tv                                       
+twitch                                   
+twitter                                  
+twitter square                           
+umbrella                                 
+underline                                
+undo                                     
+universal access                         
+university                               
+unlink                                   
+unlock                                   
+unlock alt                               
+unsorted                                 
+upload                                   
+usb                                      
+usd                                      
+user                                     
+user circle                              
+user circle o                            
+user md                                  
+user o                                   
+user plus                                
+user secret                              
+user times                               
+users                                    
+vcard                                    
+vcard o                                  
+venus                                    
+venus double                             
+venus mars                               
+viacoin                                  
+viadeo                                   
+viadeo square                            
+video camera                             
+vimeo                                    
+vimeo square                             
+vine                                     
+vk                                       
+volume control phone                     
+volume down                              
+volume off                               
+volume up                                
+warning                                  
+wechat                                   
+weibo                                    
+weixin                                   
+whatsapp                                 
+wheelchair                               
+wheelchair alt                           
+wifi                                     
+wikipedia w                              
+window close                             
+window close o                           
+window maximize                          
+window minimize                          
+window restore                           
+windows                                  
+won                                      
+wordpress                                
+wpbeginner                               
+wpexplorer                               
+wpforms                                  
+wrench                                   
+xing                                     
+xing square                              
+y combinator                             
+y combinator square                      
+yahoo                                    
+yc                                       
+yc square                                
+yelp                                     
+yen                                      
+yoast                                    
+youtube                                  
+youtube play                             
+youtube square                           
+apple fruit                              
+atom                                     
+bacteria                                 
+banana                                   
+bath                                     
+bed                                      
+benzene                                  
+bigger                                   
+biohazard                                
+blogger circle                           
+blogger square                           
+bones                                    
+book open                                
+book open o                              
+brain                                    
+bread                                    
+butterfly                                
+carot                                    
+cc by                                    
+cc cc                                    
+cc nc                                    
+cc nc eu                                 
+cc nc jp                                 
+cc nd                                    
+cc remix                                 
+cc sa                                    
+cc share                                 
+cc zero                                  
+checklist o                              
+cherry                                   
+chess bishop                             
+chess horse                              
+chess king                               
+chess pawn                               
+chess queen                              
+chess tower                              
+cheese                                   
+chicken thigh                            
+chilli                                   
+chip                                     
+cicling                                  
+cloud                                    
+cockroach                                
+coffe beans                              
+coins                                    
+comb                                     
+comet                                    
+crown                                    
+cup coffe                                
+dice                                     
+disco                                    
+dna                                      
+donut                                    
+dress                                    
+drop                                     
+ello                                     
+envelope open                            
+envelope open o                          
+equal                                    
+equal bigger                             
+feedly                                   
+file export                              
+file import                              
+fingerprint                              
+floppy                                   
+footprint                                
+freecodecamp                             
+galaxy                                   
+galery                                   
+gift card                                
+glass                                    
+google drive                             
+google play                              
+gps                                      
+grav                                     
+guitar                                   
+gut                                      
+halter                                   
+hamburger                                
+hat                                      
+hexagon                                  
+high heel                                
+hotdog                                   
+ice cream                                
+id card                                  
+imdb                                     
+infinity                                 
+injection                                
+isle                                     
+java                                     
+layers                                   
+lips                                     
+lipstick                                 
+liver                                    
+lollipop                                 
+loyalty card                             
+lung                                     
+makeup brushes                           
+maximize                                 
+meat                                     
+medicine                                 
+microscope                               
+milk bottle                              
+minimize                                 
+molecule                                 
+moon cloud                               
+mountains                                
+mushroom                                 
+mustache                                 
+mysql                                    
+nintendo                                 
+orange                                   
+palette color                            
+peach                                    
+pear                                     
+pi                                       
+pizza                                    
+planet                                   
+plant                                    
+playstation                              
+poison                                   
+popcorn                                  
+popsicle                                 
+pulse                                    
+python                                   
+quora circle                             
+quora square                             
+radioactive                              
+raining                                  
+real heart                               
+refrigerator                             
+restore                                  
+ring                                     
+ruby                                     
+ruby o                                   
+ruler                                    
+shirt                                    
+slash                                    
+smaller                                  
+snowing                                  
+soda                                     
+sofa                                     
+soup                                     
+spermatozoon                             
+spin double                              
+stomach                                  
+storm                                    
+sun cloud                                
+sushi                                    
+tacos                                    
+telegram                                 
+telegram circle                          
+telescope                                
+thermometer                              
+thermometer high                         
+thermometer low                          
+thin close                               
+toilet                                   
+tools                                    
+tooth                                    
+tree                                     
+triangle ruler                           
+umbrella                                 
+uterus                                   
+virus                                    
+w3c                                      
+walking                                  
+wallet                                   
+wind                                     
+xbox                                     
+iec power                                ⏻
+iec power off                            ⭘
+iec power on                             ⏽
+iec sleep mode                           ⏾
+iec toggle power                         ⏼
+indent dotted guide                      
+indent line                              
+indentation line                         
+linux alpine                             
+linux aosc                               
+linux apple                              
+linux archlinux                          
+linux centos                             
+linux coreos                             
+linux debian                             
+linux devuan                             
+linux docker                             
+linux elementary                         
+linux fedora                             
+linux fedora inverse                     
+linux freebsd                            
+linux gentoo                             
+linux linuxmint                          
+linux linuxmint inverse                  
+linux mageia                             
+linux mandriva                           
+linux manjaro                            
+linux nixos                              
+linux opensuse                           
+linux raspberry pi                       
+linux redhat                             
+linux sabayon                            
+linux slackware                          
+linux slackware inverse                  
+linux tux                                
+linux ubuntu                             
+linux ubuntu inverse                     
+access point                             
+access point network                     
+account                                  
+account alert                            
+account box                              
+account box outline                      
+account card details                     𣏕
+account check                            
+account circle                           
+account convert                          
+account edit                             ﮺
+account key                              
+account location                         
+account minus                            
+account multiple                         
+account multiple minus                   㮝
+account multiple outline                 
+account multiple plus                    
+account multiple plus outline            ﳾ
+account network                          
+account off                              
+account outline                          
+account plus                             
+account plus outline                     ﳿ
+account remove                           
+account search                           
+account settings                         אָ
+account settings variant                 אּ
+account star                             
+account switch                           
+adjust                                   
+air conditioner                          
+airballoon                               
+airplane                                 
+airplane landing                         䀘
+airplane off                             
+airplane takeoff                         䀹
+airplay                                  
+alarm                                    
+alarm bell                               ﲌ
+alarm check                              
+alarm light                              ﲍ
+alarm multiple                           
+alarm off                                
+alarm plus                               
+alarm snooze                             ﮌ
+album                                    
+alert                                    
+alert box                                
+alert circle                             
+alert circle outline                     𥉉
+alert decagram                           ﮻
+alert octagon                            
+alert octagram                           ﱥ
+alert outline                            
+all inclusive                            ﮼
+allo                                     ﴀ
+alpha                                    
+alphabetical                             
+altimeter                                𥳐
+amazon                                   
+amazon clouddrive                        
+ambulance                                
+amplifier                                
+anchor                                   
+android                                  
+android debug bridge                     
+android head                             ﲎ
+android studio                           
+angular                                  ﮰ
+angularjs                                ﮽
+animation                                𧻓
+apple                                    
+apple finder                             
+apple ios                                
+apple keyboard caps                      בּ
+apple keyboard command                   גּ
+apple keyboard control                   דּ
+apple keyboard option                    הּ
+apple keyboard shift                     וּ
+apple mobileme                           
+apple safari                             
+application                              ﬓ
+approval                                 ﲏ
+apps                                     
+archive                                  
+arrange bring forward                    
+arrange bring to front                   
+arrange send backward                    
+arrange send to back                     
+arrow all                                
+arrow bottom left                        
+arrow bottom right                       
+arrow collapse                           ﬔ
+arrow collapse all                       
+arrow collapse down                      ﲐ
+arrow collapse left                      ﲑ
+arrow collapse right                     ﲒ
+arrow collapse up                        ﲓ
+arrow down                               
+arrow down bold                          ﰬ
+arrow down bold box                      ﰭ
+arrow down bold box outline              ﰮ
+arrow down bold circle                   
+arrow down bold circle outline           
+arrow down bold hexagon outline          
+arrow down box                           ﮾
+arrow down drop circle                   
+arrow down drop circle outline           
+arrow down thick                         
+arrow expand                             ﬕ
+arrow expand all                         
+arrow expand down                        ﲔ
+arrow expand left                        ﲕ
+arrow expand right                       ﲖ
+arrow expand up                          ﲗ
+arrow left                               
+arrow left bold                          ﰯ
+arrow left bold box                      ﰰ
+arrow left bold box outline              ﰱ
+arrow left bold circle                   
+arrow left bold circle outline           
+arrow left bold hexagon outline          
+arrow left box                           ﮿
+arrow left drop circle                   
+arrow left drop circle outline           
+arrow left thick                         
+arrow right                              
+arrow right bold                         ﰲ
+arrow right bold box                     ﰳ
+arrow right bold box outline             ﰴ
+arrow right bold circle                  
+arrow right bold circle outline          
+arrow right bold hexagon outline         
+arrow right box                          ﯀
+arrow right drop circle                  
+arrow right drop circle outline          
+arrow right thick                        
+arrow top left                           
+arrow top right                          
+arrow up                                 
+arrow up bold                            ﰵ
+arrow up bold box                        ﰶ
+arrow up bold box outline                ﰷ
+arrow up bold circle                     
+arrow up bold circle outline             
+arrow up bold hexagon outline            
+arrow up box                             ﯁
+arrow up drop circle                     
+arrow up drop circle outline             
+arrow up thick                           
+artist                                   ﴁ
+assistant                                
+asterisk                                 ﯂
+at                                       
+atlassian                                ﴂ
+atom                                     ﱦ
+attachment                               
+audiobook                                
+auto fix                                 
+auto upload                              
+autorenew                                
+av timer                                 
+azure                                    ﴃ
+baby                                     
+baby buggy                               ﮍ
+backburger                               
+backspace                                
+backup restore                           
+bandcamp                                 ﭳ
+bank                                     
+barcode                                  
+barcode scan                             
+barley                                   
+barrel                                   
+basecamp                                 
+basket                                   
+basket fill                              
+basket unfill                            
+basketball                               ﴄ
+battery                                  
+battery 10                               
+battery 20                               
+battery 30                               
+battery 40                               
+battery 50                               
+battery 60                               
+battery 70                               
+battery 80                               
+battery 90                               
+battery alert                            
+battery charging                         
+battery charging 100                     
+battery charging 20                      
+battery charging 30                      
+battery charging 40                      
+battery charging 60                      
+battery charging 80                      
+battery charging 90                      
+battery charging wireless                ﴅ
+battery charging wireless 10             ﴆ
+battery charging wireless 20             ﴇ
+battery charging wireless 30             ﴈ
+battery charging wireless 40             ﴉ
+battery charging wireless 50             ﴊ
+battery charging wireless 60             ﴋ
+battery charging wireless 70             ﴌ
+battery charging wireless 80             ﴍ
+battery charging wireless 90             ﴎ
+battery charging wireless alert          ﴏ
+battery charging wireless outline        ﴐ
+battery minus                            
+battery negative                         
+battery outline                          
+battery plus                             
+battery positive                         
+battery unknown                          
+beach                                    
+beaker                                   ﮎ
+beats                                    
+beer                                     
+behance                                  
+bell                                     
+bell off                                 
+bell outline                             
+bell plus                                
+bell ring                                
+bell ring outline                        
+bell sleep                               
+beta                                     
+bible                                    
+bike                                     
+bing                                     
+binoculars                               
+bio                                      
+biohazard                                
+bitbucket                                
+bitcoin                                  ﴑ
+black mesa                               
+blackberry                               
+blender                                  
+blinds                                   
+block helper                             
+blogger                                  
+bluetooth                                
+bluetooth audio                          
+bluetooth connect                        
+bluetooth off                            
+bluetooth settings                       
+bluetooth transfer                       
+blur                                     
+blur linear                              
+blur off                                 
+blur radial                              
+bomb                                     ﮏ
+bomb off                                 ﯃
+bone                                     
+book                                     
+book minus                               齃
+book multiple                            
+book multiple variant                    
+book open                                
+book open page variant                   龎
+book open variant                        
+book plus                                﫚
+book secure                              ﲘ
+book unsecure                            ﲙ
+book variant                             
+bookmark                                 
+bookmark check                           
+bookmark music                           
+bookmark outline                         
+bookmark plus                            
+bookmark plus outline                    
+bookmark remove                          
+boombox                                  﫛
+bootstrap                                ﯄
+border all                               
+border bottom                            
+border color                             
+border horizontal                        
+border inside                            
+border left                              
+border none                              
+border outside                           
+border right                             
+border style                             
+border top                               
+border vertical                          
+bow tie                                  ﭶ
+bowl                                     ﬖ
+bowling                                  
+box                                      
+box cutter                               
+box shadow                               זּ
+bridge                                   ﬗ
+briefcase                                
+briefcase check                          
+briefcase download                       
+briefcase outline                        ﴒ
+briefcase upload                         
+brightness 1                             
+brightness 2                             
+brightness 3                             
+brightness 4                             
+brightness 5                             
+brightness 6                             
+brightness 7                             
+brightness auto                          
+broom                                    
+brush                                    
+buffer                                   ﬘
+bug                                      
+bulletin board                           
+bullhorn                                 
+bullseye                                 﫜
+bus                                      
+bus articulated end                      ﲚ
+bus articulated front                    ﲛ
+bus double decker                        ﲜ
+bus school                               ﲝ
+bus side                                 ﲞ
+cached                                   
+cake                                     
+cake layered                             
+cake variant                             
+calculator                               
+calendar                                 
+calendar blank                           
+calendar check                           
+calendar clock                           
+calendar multiple                        
+calendar multiple check                  
+calendar plus                            
+calendar question                        ﮐ
+calendar range                           ﭷ
+calendar remove                          
+calendar text                            
+calendar today                           
+call made                                
+call merge                               
+call missed                              
+call received                            
+call split                               
+camcorder                                
+camcorder box                            
+camcorder box off                        
+camcorder off                            
+camera                                   
+camera burst                             ﮑ
+camera enhance                           
+camera front                             
+camera front variant                     
+camera gopro                             ﲟ
+camera iris                              
+camera metering center                   ﲠ
+camera metering matrix                   ﲡ
+camera metering partial                  ﲢ
+camera metering spot                     ﲣ
+camera off                               﫞
+camera party mode                        
+camera rear                              
+camera rear variant                      
+camera switch                            
+camera timer                             
+cancel                                   ﰸ
+candle                                   﫡
+candycane                                
+cannabis                                 ﲤ
+car                                      
+car battery                              
+car connected                            
+car convertible                          ﲥ
+car estate                               ﲦ
+car hatchback                            ﲧ
+car pickup                               ﲨ
+car side                                 ﲩ
+car sports                               ﲪ
+car wash                                 
+caravan                                  ﲫ
+cards                                    ﬷
+cards outline                            טּ
+cards playing outline                    יּ
+cards variant                            ﯅
+carrot                                   
+cart                                     
+cart off                                 ﭪ
+cart outline                             
+cart plus                                
+case sensitive alt                       
+cash                                     
+cash 100                                 
+cash multiple                            
+cash usd                                 
+cast                                     
+cast connected                           
+cast off                                 ﲈ
+castle                                   
+cat                                      
+cctv                                     ﲬ
+ceiling light                            ﱧ
+cellphone                                
+cellphone android                        
+cellphone basic                          
+cellphone dock                           
+cellphone iphone                         
+cellphone link                           
+cellphone link off                       
+cellphone settings                       
+cellphone wireless                       ﴓ
+certificate                              
+chair school                             
+chart arc                                
+chart areaspline                         
+chart bar                                
+chart bar stacked                        ﱨ
+chart bubble                             﫢
+chart donut                              ﲭ
+chart donut variant                      ﲮ
+chart gantt                              ﭫ
+chart histogram                          
+chart line                               
+chart line stacked                       ﱩ
+chart line variant                       ﲯ
+chart pie                                
+chart scatterplot hexbin                 ﭬ
+chart timeline                           ﭭ
+check                                    
+check all                                
+check circle                             﫟
+check circle outline                     﫠
+checkbox blank                           
+checkbox blank circle                    
+checkbox blank circle outline            
+checkbox blank outline                   
+checkbox marked                          
+checkbox marked circle                   
+checkbox marked circle outline           
+checkbox marked outline                  
+checkbox multiple blank                  
+checkbox multiple blank circle           ךּ
+checkbox multiple blank circle outline   כּ
+checkbox multiple blank outline          
+checkbox multiple marked                 
+checkbox multiple marked circle          לּ
+checkbox multiple marked circle outline  ﬽
+checkbox multiple marked outline         
+checkerboard                             
+chemical weapon                          
+chevron double down                      
+chevron double left                      
+chevron double right                     
+chevron double up                        
+chevron down                             
+chevron left                             
+chevron right                            
+chevron up                               
+chili hot                                ﲰ
+chili medium                             ﲱ
+chili mild                               ﲲ
+chip                                     ﬙
+church                                   
+circle                                   ﱣ
+circle outline                           ﱤ
+cisco webex                              
+city                                     
+clipboard                                
+clipboard account                        
+clipboard alert                          
+clipboard arrow down                     
+clipboard arrow left                     
+clipboard check                          
+clipboard flow                           ﯆
+clipboard outline                        
+clipboard plus                           ﱏ
+clipboard text                           
+clippy                                   
+clock                                    
+clock alert                              鬒
+clock end                                
+clock fast                               
+clock in                                 
+clock out                                
+clock start                              
+close                                    
+close box                                
+close box outline                        
+close circle                             
+close circle outline                     
+close network                            
+close octagon                            
+close octagon outline                    
+close outline                            ﯇
+closed caption                           
+cloud                                    
+cloud braces                             ﲳ
+cloud check                              
+cloud circle                             
+cloud download                           
+cloud off outline                        
+cloud outline                            
+cloud print                              
+cloud print outline                      
+cloud sync                               מּ
+cloud tags                               ﲴ
+cloud upload                             
+clover                                   ﴔ
+code array                               
+code braces                              
+code brackets                            
+code equal                               
+code greater than                        
+code greater than or equal               
+code less than                           
+code less than or equal                  
+code not equal                           
+code not equal variant                   
+code parentheses                         
+code string                              
+code tags                                
+code tags check                          ﮒ
+codepen                                  
+coffee                                   
+coffee outline                           ﯈
+coffee to go                             
+coin                                     
+coins                                    ﮓ
+collage                                  ﬿
+color helper                             
+comment                                  
+comment account                          
+comment account outline                  
+comment alert                            
+comment alert outline                    
+comment check                            
+comment check outline                    
+comment multiple outline                 
+comment outline                          
+comment plus outline                     
+comment processing                       
+comment processing outline               
+comment question                         ﴕ
+comment question outline                 
+comment remove                           﫝
+comment remove outline                   
+comment text                             
+comment text outline                     
+compare                                  
+compass                                  
+compass outline                          
+console                                  
+console line                             ﲵ
+contact mail                             
+contacts                                 ﯉
+content copy                             
+content cut                              
+content duplicate                        
+content paste                            
+content save                             
+content save all                         
+content save outline                     ﴖ
+content save settings                    ﬚
+contrast                                 
+contrast box                             
+contrast circle                          
+cookie                                   
+copyright                                﫥
+corn                                     ﲶ
+counter                                  
+cow                                      
+creation                                 
+credit card                              
+credit card multiple                     
+credit card off                          﫣
+credit card plus                         ﭴ
+credit card scan                         
+crop                                     
+crop free                                
+crop landscape                           
+crop portrait                            
+crop rotate                              ﮔ
+crop square                              
+crosshairs                               
+crosshairs gps                           
+crown                                    
+cube                                     
+cube outline                             
+cube send                                
+cube unfolded                            
+cup                                      
+cup off                                  﫤
+cup water                                
+currency btc                             
+currency chf                             ﲷ
+currency cny                             ﲸ
+currency eth                             ﲹ
+currency eur                             
+currency gbp                             
+currency inr                             
+currency jpy                             ﲺ
+currency krw                             ﲻ
+currency ngn                             
+currency rub                             
+currency sign                            ﲼ
+currency try                             
+currency twd                             ﲽ
+currency usd                             
+currency usd off                         ﭸ
+cursor default                           
+cursor default outline                   
+cursor move                              
+cursor pointer                           
+cursor text                              﫦
+database                                 
+database minus                           
+database plus                            
+debug step into                          
+debug step out                           
+debug step over                          
+decagram                                 ﱪ
+decagram outline                         ﱫ
+decimal decrease                         
+decimal increase                         
+delete                                   
+delete circle                            ﮁ
+delete empty                             ﯊
+delete forever                           﫧
+delete restore                           ﴗ
+delete sweep                             﫨
+delete variant                           
+delta                                    
+deskphone                                
+desktop classic                          ﲾ
+desktop mac                              
+desktop tower                            
+details                                  
+developer board                          ﮕ
+deviantart                               
+dialpad                                  ﬛
+diamond                                  
+dice 1                                   
+dice 2                                   
+dice 3                                   
+dice 4                                   
+dice 5                                   
+dice 6                                   
+dice d10                                 ﱭ
+dice d20                                 﫩
+dice d4                                  﫪
+dice d6                                  﫫
+dice d8                                  﫬
+dice multiple                            ﱬ
+dictionary                               ﬜
+dip switch                               ﲿ
+directions                               
+directions fork                          נּ
+discord                                  ﭮ
+disk                                     﫭
+disk alert                               
+disqus                                   
+disqus outline                           
+division                                 
+division box                             
+dna                                      ﮂ
+dns                                      
+do not disturb                           ﮖ
+do not disturb off                       ﮗ
+dolby                                    ﮱ
+domain                                   
+donkey                                   ﳀ
+door                                     ﴘ
+door closed                              ﴙ
+door open                                ﴚ
+dots horizontal                          
+dots horizontal circle                   ﳁ
+dots vertical                            
+dots vertical circle                     ﳂ
+douban                                   ﮘ
+download                                 
+download network                         ﯲ
+drag                                     
+drag horizontal                          
+drag vertical                            
+drawing                                  
+drawing box                              
+dribbble                                 
+dribbble box                             
+drone                                    
+dropbox                                  
+drupal                                   
+duck                                     
+dumbbell                                 
+ear hearing                              ﳃ
+earth                                    
+earth box                                ﯋
+earth box off                            ﯌
+earth off                                
+edge                                     
+eject                                    
+elephant                                 ﳄ
+elevation decline                        
+elevation rise                           
+elevator                                 
+email                                    
+email alert                              ﯍
+email open                               
+email open outline                       﫮
+email outline                            
+email secure                             
+email variant                            﫯
+emby                                     ﮲
+emoticon                                 
+emoticon cool                            
+emoticon dead                            ﮙ
+emoticon devil                           
+emoticon excited                         ﮚ
+emoticon happy                           
+emoticon neutral                         
+emoticon poop                            
+emoticon sad                             
+emoticon tongue                          
+engine                                   
+engine outline                           
+equal                                    
+equal box                                
+eraser                                   
+eraser variant                           סּ
+escalator                                
+ethernet                                 
+ethernet cable                           
+ethernet cable off                       
+etsy                                     
+ev station                               﫰
+eventbrite                               ﳅ
+evernote                                 
+exclamation                              
+exit to app                              
+export                                   
+eye                                      
+eye off                                  
+eye off outline                          ﯏
+eye outline                              ﯎
+eyedropper                               
+eyedropper variant                       
+face                                     ﭂
+face profile                             ףּ
+facebook                                 
+facebook box                             
+facebook messenger                       
+factory                                  
+fan                                      
+fan off                                  ﴛ
+fast forward                             
+fast forward outline                     ﯐
+fax                                      
+feather                                  ﯑
+ferry                                    
+file                                     
+file account                             ﰹ
+file chart                               
+file check                               
+file cloud                               
+file delimited                           
+file document                            
+file document box                        
+file excel                               
+file excel box                           
+file export                              
+file find                                
+file hidden                              ﬒
+file image                               
+file import                              
+file lock                                
+file multiple                            
+file music                               
+file outline                             
+file pdf                                 
+file pdf box                             
+file percent                             ﴜ
+file plus                                ﱐ
+file powerpoint                          
+file powerpoint box                      
+file presentation box                    
+file restore                             ﭯ
+file send                                
+file tree                                פּ
+file video                               
+file word                                
+file word box                            
+file xml                                 
+film                                     
+filmstrip                                
+filmstrip off                            
+filter                                   
+filter outline                           
+filter remove                            
+filter remove outline                    
+filter variant                           
+finance                                  ﴝ
+find replace                             ﯒
+fingerprint                              
+fire                                     
+firefox                                  
+fish                                     
+flag                                     
+flag checkered                           
+flag outline                             
+flag triangle                            
+flag variant                             
+flag variant outline                     
+flash                                    
+flash auto                               
+flash circle                             ﴞ
+flash off                                
+flash outline                            ﯓ
+flash red eye                            ﭹ
+flashlight                               
+flashlight off                           
+flask                                    
+flask empty                              
+flask empty outline                      
+flask outline                            
+flattr                                   
+flip to back                             
+flip to front                            
+floor plan                               ﴟ
+floppy                                   
+flower                                   
+folder                                   
+folder account                           
+folder download                          
+folder google drive                      
+folder image                             
+folder lock                              
+folder lock open                         
+folder move                              
+folder multiple                          
+folder multiple image                    
+folder multiple outline                  
+folder open                              ﱮ
+folder outline                           
+folder plus                              
+folder remove                            
+folder star                              ﮛ
+folder upload                            
+font awesome                             
+food                                     
+food apple                               
+food croissant                           ﳆ
+food fork drink                          﫱
+food off                                 﫲
+food variant                             
+football                                 
+football australian                      
+football helmet                          
+forklift                                 ﳇ
+format align bottom                      ﱑ
+format align center                      
+format align justify                     
+format align left                        
+format align middle                      ﱒ
+format align right                       
+format align top                         ﱓ
+format annotation plus                   ﭅
+format bold                              
+format clear                             
+format color fill                        
+format color text                        ﮜ
+format float center                      
+format float left                        
+format float none                        
+format float right                       
+format font                              ﯔ
+format header 1                          
+format header 2                          
+format header 3                          
+format header 4                          
+format header 5                          
+format header 6                          
+format header decrease                   
+format header equal                      
+format header increase                   
+format header pound                      
+format horizontal align center           יִ
+format horizontal align left
+format horizontal align right            ײַ
+format indent decrease                   
+format indent increase                   
+format italic                            
+format line spacing                      
+format line style                        難
+format line weight                       靖
+format list bulleted                     
+format list bulleted type                
+format list checks                       ﱔ
+format list numbers                      
+format page break                        ﯕ
+format paint                             
+format paragraph                         
+format pilcrow                           ﯖ
+format quote close                       
+format quote open                        ﱕ
+format rotate 90                         ﮨ
+format section                           ﮝ
+format size                              
+format strikethrough                     
+format strikethrough variant             
+format subscript                         
+format superscript                       
+format text                              
+format textdirection l to r              
+format textdirection r to l              
+format title                             﫳
+format underline                         
+format vertical align bottom             ﬠ
+format vertical align center             ﬡ
+format vertical align top                ﬢ
+format wrap inline                       
+format wrap square                       
+format wrap tight                        
+format wrap top bottom                   
+forum                                    
+forum outline                            ﴠ
+forward                                  
+foursquare                               
+fridge                                   
+fridge filled                            
+fridge filled bottom                     
+fridge filled top                        
+fuel                                     ﳈ
+fullscreen                               
+fullscreen exit                          
+function                                 
+gamepad                                  
+gamepad variant                          
+garage                                   ﯗ
+garage open                              ﯘ
+gas cylinder                             צּ
+gas station                              
+gate                                     
+gauge                                    
+gavel                                    
+gender female                            
+gender male                              
+gender male female                       
+gender transgender                       
+gesture                                  ﳉ
+gesture double tap                       ﰺ
+gesture swipe down                       ﰻ
+gesture swipe left                       ﰼ
+gesture swipe right                      ﰽ
+gesture swipe up                         ﰾ
+gesture tap                              ﰿ
+gesture two double tap                   ﱀ
+gesture two tap                          ﱁ
+ghost                                    
+gift                                     
+git                                      
+github box                               
+github circle                            
+github face                              ﯙ
+glass flute                              
+glass mug                                
+glass stange                             
+glass tulip                              
+glassdoor                                
+glasses                                  
+gmail                                    
+gnome                                    
+golf                                     ﴡ
+gondola                                  ﮄ
+google                                   
+google analytics                         ﳊ
+google assistant                         ﳋ
+google cardboard                         
+google chrome                            
+google circles                           
+google circles communities               
+google circles extended                  
+google circles group                     
+google controller                        
+google controller off                    
+google drive                             
+google earth                             
+google glass                             
+google home                              ﴢ
+google keep                              ﯚ
+google maps                              﫴
+google nearby                            
+google pages                             
+google photos                            ﯛ
+google physical web                      
+google play                              
+google plus                              
+google plus box                          
+google translate                         
+google wallet                            
+gradient                                 ﮞ
+grease pencil                            קּ
+grid                                     
+grid large                               ﱖ
+grid off                                 
+group                                    
+guitar acoustic                          ﱯ
+guitar electric                          
+guitar pick                              
+guitar pick outline                      
+guy fawkes mask                          ﴣ
+hackernews                               ﬣ
+hamburger                                ﮃ
+hand pointing right                      
+hanger                                   
+hangouts                                 
+harddisk                                 
+headphones                               
+headphones box                           
+headphones off                           ﳌ
+headphones settings                      
+headset                                  
+headset dock                             
+headset off                              
+heart                                    
+heart box                                
+heart box outline                        
+heart broken                             
+heart half                               ﯝ
+heart half full                          ﯜ
+heart half outline                       ﯞ
+heart off                                ﱗ
+heart outline                            
+heart pulse                              﫵
+help                                     
+help box                                 ﲉ
+help circle                              
+help circle outline                      ﬤ
+help network                             ﯳ
+hexagon                                  
+hexagon multiple                         ﯟ
+hexagon outline                          
+high definition                          ﳍ
+highway                                  﫶
+history                                  
+hololens                                 
+home                                     
+home account                             ﴤ
+home assistant                           ﳎ
+home automation                          ﳏ
+home circle                              ﳐ
+home heart                               ﴥ
+home map marker                          﫷
+home modern                              
+home outline                             ﮟ
+home variant                             
+hook                                     ﯠ
+hook off                                 ﯡ
+hops                                     
+hospital                                 
+hospital building                        
+hospital marker                          
+hot tub                                  ﴦ
+hotel                                    
+houzz                                    
+houzz box                                
+hulu                                     ﴧ
+human                                    
+human child                              
+human female                             רּ
+human greeting                           שּ
+human handsdown                          תּ
+human handsup                            וֹ
+human male                               בֿ
+human male female                        
+human pregnant                           龜
+humble bundle                            ﱂ
+ice cream                                ﴨ
+image                                    
+image album                              
+image area                               
+image area close                         
+image broken                             
+image broken variant                     
+image filter                             
+image filter black white                 
+image filter center focus                
+image filter center focus weak           
+image filter drama                       
+image filter frames                      
+image filter hdr                         
+image filter none                        
+image filter tilt shift                  
+image filter vintage                     
+image multiple                           
+image off                                ﴩ
+import                                   
+inbox                                    ﮅ
+inbox arrow down                         
+inbox arrow up                           
+incognito                                﫸
+infinity                                 ﯢ
+information                              
+information outline                      
+information variant                      כֿ
+instagram                                
+instapaper                               
+internet explorer                        
+invert colors                            
+itunes                                   ﭵ
+jeepney                                  
+jira                                     
+jsfiddle                                 
+json                                     ﬥ
+karate                                   ﴪ
+keg                                      
+kettle                                   﫹
+key                                      
+key change                               
+key minus                                
+key plus                                 
+key remove                               
+key variant                              
+keyboard                                 
+keyboard backspace                       
+keyboard caps                            
+keyboard close                           
+keyboard off                             
+keyboard return                          
+keyboard tab                             
+keyboard variant                         
+kickstarter                              ﱃ
+kodi                                     
+label                                    
+label outline                            
+ladybug                                  ﴫ
+lambda                                   ﬦ
+lamp                                     ﮳
+lan                                      
+lan connect                              
+lan disconnect                           
+lan pending                              
+language c                               ﭰ
+language cpp                             ﭱ
+language csharp                          
+language css3                            
+language go                              ﳑ
+language html5                           
+language javascript                      
+language php                             
+language python                          
+language python text                     
+language r                               ﳒ
+language swift                           ﯣ
+language typescript                      ﯤ
+laptop                                   
+laptop chromebook                        
+laptop mac                               
+laptop off                               ﯥ
+laptop windows                           
+lastfm                                   
+lastpass                                 聾
+launch                                   
+lava lamp                                ﳓ
+layers                                   
+layers off                               
+lead pencil                              פֿ
+leaf                                     
+led off                                  
+led on                                   
+led outline                              
+led strip                                ﳔ
+led variant off                          
+led variant on                           
+led variant outline                      
+library                                  
+library books                            
+library music                            
+library plus                             
+lightbulb                                
+lightbulb on                             ﯦ
+lightbulb on outline                     ﯧ
+lightbulb outline                        
+link                                     
+link off                                 
+link variant                             
+link variant off                         
+linkedin                                 
+linkedin box                             
+linux                                    
+loading                                  ﱰ
+lock                                     
+lock open                                
+lock open outline                        
+lock outline                             
+lock pattern                             ﯨ
+lock plus                                﫺
+lock reset                               ﱱ
+locker                                   ﳕ
+locker multiple                          ﳖ
+login                                    
+login variant                            﫻
+logout                                   
+logout variant                           﫼
+looks                                    
+loop                                     ﯩ
+loupe                                    
+lumx                                     
+magnet                                   
+magnet on                                
+magnify                                  
+magnify minus                            
+magnify minus outline                    ﯪ
+magnify plus                             
+magnify plus outline                     ﯫ
+mail ru                                  
+mailbox                                  ﯬ
+map                                      
+map marker                               
+map marker circle                        
+map marker minus                         ﭏ
+map marker multiple                      
+map marker off                           
+map marker outline                       ﳗ
+map marker plus                          ﭐ
+map marker radius                        
+margin                                   
+markdown                                 
+marker                                   ﭑ
+marker check                             
+martini                                  
+material ui                              
+math compass                             
+matrix                                   ﬧ
+maxcdn                                   
+medical bag                              ﯭ
+medium                                   
+memory                                   
+menu                                     
+menu down                                
+menu down outline                        ﮴
+menu left                                
+menu right                               
+menu up                                  
+menu up outline                          ﮵
+message                                  
+message alert                            
+message bulleted                         ﮠ
+message bulleted off                     ﮡ
+message draw                             
+message image                            
+message outline                          
+message plus                             ﭒ
+message processing                       
+message reply                            
+message reply text                       
+message settings                         ﯮ
+message settings variant                 ﯯ
+message text                             
+message text outline                     
+message video                            
+meteor                                   ﬨ
+metronome                                ﳘ
+metronome tick                           ﳙ
+micro sd                                 ﳚ
+microphone                               
+microphone off                           
+microphone outline                       
+microphone settings                      
+microphone variant                       
+microphone variant off                   
+microscope                               ﭓ
+microsoft                                
+minecraft                                
+minus                                    
+minus box                                
+minus box outline                        ﯰ
+minus circle                             
+minus circle outline                     
+minus network                            
+mixcloud                                 ﬩
+mixer                                    ﳛ
+monitor                                  
+monitor multiple                         
+more                                     
+motorbike                                
+mouse                                    
+mouse off                                
+mouse variant                            
+mouse variant off                        
+move resize                              ﭔ
+move resize variant                      ﭕ
+movie                                    
+movie roll                               ﳜ
+multiplication                           
+multiplication box                       
+mushroom                                 ﳝ
+mushroom outline                         ﳞ
+music                                    ﱘ
+music box                                
+music box outline                        
+music circle                             
+music note                               
+music note bluetooth                     﫽
+music note bluetooth off                 﫾
+music note eighth                        
+music note half                          
+music note off                           
+music note quarter                       
+music note sixteenth                     
+music note whole                         
+music off                                ﱙ
+nature                                   
+nature people                            
+navigation                               
+near me                                  頻
+needle                                   
+nest protect                             
+nest thermostat                          
+netflix                                  ﱄ
+network                                  ﯱ
+new box                                  
+newspaper                                
+nfc                                      
+nfc tap                                  
+nfc variant                              
+ninja                                    ﱲ
+nintendo switch                          ﳟ
+nodejs                                   
+note                                     
+note multiple                            ﮶
+note multiple outline                    ﮷
+note outline                             
+note plus                                
+note plus outline                        
+note text                                
+notebook                                 ﴬ
+notification clear all                   
+npm                                      ﯵ
+nuke                                     ﮢ
+null                                     ﳠ
+numeric                                  
+numeric 0 box                            
+numeric 0 box multiple outline           
+numeric 0 box outline                    
+numeric 1 box                            
+numeric 1 box multiple outline           
+numeric 1 box outline                    
+numeric 2 box                            
+numeric 2 box multiple outline           
+numeric 2 box outline                    
+numeric 3 box                            
+numeric 3 box multiple outline           
+numeric 3 box outline                    
+numeric 4 box                            
+numeric 4 box multiple outline           
+numeric 4 box outline                    
+numeric 5 box                            
+numeric 5 box multiple outline           
+numeric 5 box outline                    
+numeric 6 box                            
+numeric 6 box multiple outline           
+numeric 6 box outline                    
+numeric 7 box                            
+numeric 7 box multiple outline           
+numeric 7 box outline                    
+numeric 8 box                            
+numeric 8 box multiple outline           
+numeric 8 box outline                    
+numeric 9 box                            
+numeric 9 box multiple outline           
+numeric 9 box outline                    
+numeric 9 plus box                       
+numeric 9 plus box multiple outline      
+numeric 9 plus box outline               
+nut                                      ﯶ
+nutrition                                
+oar                                      ﭺ
+octagon                                  
+octagon outline                          
+octagram                                 ﯷ
+octagram outline                         ﱳ
+odnoklassniki                            
+office                                   
+oil                                      
+oil temperature                          
+omega                                    
+onedrive                                 
+onenote                                  ﱅ
+opacity                                  頋
+open in app                              
+open in new                              
+openid                                   
+opera                                    
+orbit                                    
+ornament                                 
+ornament variant                         
+owl                                      
+package                                  
+package down                             
+package up                               
+package variant                          
+package variant closed                   
+page first                               﫿
+page last                                ﬀ
+page layout body                         ﯸ
+page layout footer                       ﯹ
+page layout header                       ﯺ
+page layout sidebar left                 ﯻ
+page layout sidebar right                ﯼ
+palette                                  
+palette advanced                         
+panda                                    
+pandora                                  
+panorama                                 
+panorama fisheye                         
+panorama horizontal                      
+panorama vertical                        
+panorama wide angle                      
+paper cut vertical                       
+paperclip                                
+parking                                  
+passport                                 ﳡ
+pause                                    
+pause circle                             
+pause circle outline                     
+pause octagon                            
+pause octagon outline                    
+paw                                      
+paw off                                  ﭖ
+pen                                      
+pencil                                   
+pencil box                               
+pencil box outline                       
+pencil circle                            ﯽ
+pencil circle outline                    ﱴ
+pencil lock                              
+pencil off                               
+pentagon                                 ﯾ
+pentagon outline                         ﯿ
+percent                                  
+periodic table co2                       ﳢ
+periscope                                ﱆ
+pharmacy                                 
+phone                                    
+phone bluetooth                          
+phone classic                            ﬁ
+phone forward                            
+phone hangup                             
+phone in talk                            
+phone incoming                           
+phone locked                             
+phone log                                
+phone minus                              ﭗ
+phone missed                             
+phone outgoing                           
+phone paused                             
+phone plus                               ﭘ
+phone return                             ﴭ
+phone settings                           
+phone voip                               
+pi                                       
+pi box                                   
+piano                                    ﭻ
+pig                                      豈
+pill                                     更
+pillar                                   ﰀ
+pin                                      車
+pin off                                  賈
+pine tree                                滑
+pine tree box                            串
+pinterest                                句
+pinterest box                            龜
+pipe                                     ﳣ
+pipe disconnected                        ﳤ
+pistol                                   ﰁ
+pizza                                    龜
+plane shield                             ﮹
+play                                     契
+play box outline                         金
+play circle                              喇
+play circle outline                      奈
+play pause                               懶
+play protected content                   癩
+playlist check                           陼
+playlist minus                           羅
+playlist play                            蘿
+playlist plus                            螺
+playlist remove                          裸
+playstation                              邏
+plex                                     ﮸
+plus                                     樂
+plus box                                 洛
+plus box outline                         ﰂ
+plus circle                              烙
+plus circle multiple outline             珞
+plus circle outline                      落
+plus network                             酪
+plus one                                 駱
+plus outline                             ﰃ
+pocket                                   亂
+pokeball                                 卵
+poker chip                               ﴮ
+polaroid                                 欄
+poll                                     爛
+poll box                                 蘭
+polymer                                  鸞
+pool                                     ﬅ
+popcorn                                  嵐
+pot                                      ﭙ
+pot mix                                  ﭚ
+pound                                    濫
+pound box                                藍
+power                                    襤
+power plug                               ﮣ
+power plug off                           ﮤ
+power settings                           拉
+power socket                             臘
+power socket eu                          ﳥ
+power socket uk                          ﳦ
+power socket us                          ﳧ
+prescription                             ﰄ
+presentation                             蠟
+presentation play                        廊
+printer                                  朗
+printer 3d                               浪
+printer alert                            狼
+printer settings                         ﰅ
+priority high                            ﬂ
+priority low                             ﬃ
+professional hexagon                     郎
+projector                                來
+projector screen                         冷
+publish                                  ﮥ
+pulse                                    勞
+puzzle                                   擄
+qqchat                                   ﬄ
+qrcode                                   櫓
+qrcode scan                              爐
+quadcopter                               盧
+quality high                             老
+quicktime                                蘆
+radar                                    虜
+radiator                                 路
+radio                                    露
+radio handheld                           魯
+radio tower                              鷺
+radioactive                              碌
+radiobox blank                           祿
+radiobox marked                          綠
+raspberrypi                              菉
+ray end                                  錄
+ray end arrow                            鹿
+ray start                                論
+ray start arrow                          壟
+ray start end                            弄
+ray vertex                               籠
+react                                    ﰆ
+read                                     牢
+receipt                                  賂
+record                                   雷
+record rec                               壘
+recycle                                  屢
+reddit                                   樓
+redo                                     淚
+redo variant                             漏
+refresh                                  累
+regex                                    縷
+relative scale                           陋
+reload                                   勒
+remote                                   肋
+rename box                               凜
+reorder horizontal                       ﮆ
+reorder vertical                         ﮇ
+repeat                                   凌
+repeat off                               稜
+repeat once                              綾
+replay                                   菱
+reply                                    陵
+reply all                                讀
+reproduction                             拏
+resize bottom right                      樂
+responsive                               諾
+restart                                  ﰇ
+restore                                  ﮦ
+rewind                                   丹
+rewind outline                           ﰈ
+rhombus                                  ﰉ
+rhombus outline                          ﰊ
+ribbon                                   寧
+rice                                     ﳨ
+ring                                     ﳩ
+road                                     怒
+road variant                             率
+robot                                    ﮧ
+rocket                                   異
+roomba                                   ﰋ
+rotate 3d                                北
+rotate left                              磻
+rotate left variant                      便
+rotate right                             復
+rotate right variant                     不
+rounded corner                           ﬆ
+router wireless                          泌
+routes                                   數
+rowing                                   ﬇
+rss                                      索
+rss box                                  參
+ruler                                    塞
+run                                      ﰌ
+run fast                                 省
+sale                                     葉
+sass                                     ﳪ
+satellite                                說
+satellite variant                        殺
+saxophone                                ﬈
+scale                                    辰
+scale balance                            𢡄
+scale bathroom                           沈
+scanner                                  ﮩ
+school                                   拾
+screen rotation                          若
+screen rotation lock                     掠
+screwdriver                              略
+script                                   亮
+sd                                       兩
+seal                                     凉
+search web                               ﰍ
+seat flat                                梁
+seat flat angled                         糧
+seat individual suite                    良
+seat legroom extra                       諒
+seat legroom normal                      量
+seat legroom reduced                     勵
+seat recline extra                       呂
+seat recline normal                      女
+security                                 廬
+security home                            ﮈ
+security network                         旅
+select                                   濾
+select all                               礪
+select inverse                           閭
+select off                               驪
+selection                                麗
+selection off                            ﱵ
+send                                     黎
+send secure                              ﳫ
+serial port                              ﭛ
+server                                   力
+server minus                             曆
+server network                           歷
+server network off                       轢
+server off                               年
+server plus                              憐
+server remove                            戀
+server security                          撚
+set all                                  ﱶ
+set center                               ﱷ
+set center right                         ﱸ
+set left                                 ﱹ
+set left center                          ﱺ
+set left right                           ﱻ
+set none                                 ﱼ
+set right                                ﱽ
+settings                                 漣
+settings box                             煉
+shape                                    ﴯ
+shape circle plus                        ﭜ
+shape outline                            ﴰ
+shape plus                               璉
+shape polygon plus                       ﭝ
+shape rectangle plus                     ﭞ
+shape square plus                        ﭟ
+share                                    秊
+share variant                            練
+shield                                   聯
+shield half full                         ﱾ
+shield outline                           輦
+ship wheel                               ﴱ
+shopping                                 蓮
+shopping music                           連
+shovel                                   ﰎ
+shovel off                               ﰏ
+shredder                                 鍊
+shuffle                                  列
+shuffle disabled                         劣
+shuffle variant                          咽
+sigma                                    烈
+sigma lower                              שׁ
+sign caution                             裂
+sign direction                           ﱿ
+sign text                                ﲀ
+signal                                   說
+signal 2g                                ﰐ
+signal 3g                                ﰑ
+signal 4g                                ﰒ
+signal hspa                              ﰓ
+signal hspa plus                         ﰔ
+signal off                               ﲁ
+signal variant                           ﬉
+silverware                               廉
+silverware fork                          念
+silverware spoon                         捻
+silverware variant                       殮
+sim                                      簾
+sim alert                                獵
+sim off                                  令
+sitemap                                  囹
+skip backward                            寧
+skip forward                             嶺
+skip next                                怜
+skip next circle                         ﭠ
+skip next circle outline                 ﭡ
+skip previous                            玲
+skip previous circle                     ﭢ
+skip previous circle outline             ﭣ
+skull                                    ﮊ
+skype                                    瑩
+skype business                           羚
+slack                                    聆
+sleep                                    鈴
+sleep off                                零
+smoking                                  靈
+smoking off                              領
+snapchat                                 例
+snowflake                                ﰕ
+snowman                                  禮
+soccer                                   醴
+soccer field                             ﴲ
+sofa                                     隸
+solid                                    ﮋ
+sort                                     惡
+sort alphabetical                        了
+sort ascending                           僚
+sort descending                          寮
+sort numeric                             尿
+sort variant                             料
+soundcloud                               樂
+source branch                            שׂ
+source commit                            ﰖ
+source commit end                        ﰗ
+source commit end local                  ﰘ
+source commit local                      ﰙ
+source commit next local                 ﰚ
+source commit start                      ﰛ
+source commit start next local           ﰜ
+source fork                              燎
+source merge                             שּׁ
+source pull                              療
+soy sauce                                ﳬ
+speaker                                  蓼
+speaker off                              遼
+speaker wireless                         ﰝ
+speedometer                              龍
+spellcheck                               暈
+spotify                                  阮
+spotlight                                劉
+spotlight beam                           杻
+spray                                    ﭤ
+square                                   ﱢ
+square inc                               柳
+square inc cash                          流
+square outline                           ﱡ
+square root                              ﲂ
+stack overflow                           溜
+stackexchange                            ﬊
+stadium                                  ﰞ
+stairs                                   琉
+standard definition                      ﳭ
+star                                     留
+star circle                              硫
+star half                                紐
+star off                                 類
+star outline                             六
+steam                                    戮
+steering                                 陸
+step backward                            倫
+step backward 2                          崙
+step forward                             淪
+step forward 2                           輪
+stethoscope                              律
+sticker                                  𢡊
+sticker emoji                            ﲃ
+stocking                                 慄
+stop                                     栗
+stop circle                              ﭥ
+stop circle outline                      ﭦ
+store                                    率
+store 24 hour                            隆
+stove                                    利
+subdirectory arrow left                  ﬋
+subdirectory arrow right                 ﬌
+subway                                   ﮪ
+subway variant                           吏
+summit                                   ﲄ
+sunglasses                               履
+surround sound                           醙
+surround sound 2 0                       ﳮ
+surround sound 3 1                       ﳯ
+surround sound 5 1                       ﳰ
+surround sound 7 1                       ﳱ
+svg                                      ﰟ
+swap horizontal                          易
+swap vertical                            李
+swim                                     梨
+switch                                   泥
+sword                                    理
+sword cross                              ﲅ
+sync                                     痢
+sync alert                               罹
+sync off                                 裏
+tab                                      裡
+tab plus                                 ﱚ
+tab unselected                           里
+table                                    離
+table column                             ﴳ
+table column plus after                  匿
+table column plus before                 溺
+table column remove                      吝
+table column width                       燐
+table edit                               璘
+table large                              藺
+table of contents                        ﴴ
+table row                                ﴵ
+table row height                         隣
+table row plus after                     鱗
+table row plus before                    麟
+table row remove                         林
+table settings                           ﴶ
+tablet                                   淋
+tablet android                           臨
+tablet ipad                              立
+taco                                     ﱠ
+tag                                      笠
+tag faces                                粒
+tag heart                                ﮉ
+tag multiple                             狀
+tag outline                              炙
+tag plus                                 ﰠ
+tag remove                               ﰡ
+tag text outline                         識
+target                                   什
+taxi                                     茶
+teamviewer                               刺
+telegram                                 切
+television                               度
+television box                           ﴷ
+television classic                       ﳲ
+television classic off                   ﴸ
+television guide                         拓
+television off                           ﴹ
+temperature celsius                      糖
+temperature fahrenheit                   宅
+temperature kelvin                       洞
+tennis                                   暴
+tent                                     輻
+terrain                                  行
+test tube                                ﭧ
+text shadow                              ﭨ
+text to speech                           降
+text to speech off                       見
+textbox                                  ﬍
+textbox password                         ﳳ
+texture                                  廓
+theater                                  兀
+theme light dark                         嗀
+thermometer                              﨎
+thermometer lines                        﨏
+thought bubble                           ﳴ
+thought bubble outline                   ﳵ
+thumb down                               塚
+thumb down outline                       﨑
+thumb up                                 晴
+thumb up outline                         﨓
+thumbs up down                           﨔
+ticket                                   凞
+ticket account                           猪
+ticket confirmation                      益
+ticket percent                           ﰢ
+tie                                      礼
+tilde                                    ﰣ
+timelapse                                神
+timer                                    祥
+timer 10                                 福
+timer 3                                  靖
+timer off                                精
+timer sand                               羽
+timer sand empty                         ﮫ
+timer sand full                          ﲊ
+timetable                                﨟
+toggle switch                            蘒
+toggle switch off                        﨡
+tooltip                                  諸
+tooltip edit                             﨣
+tooltip image                            﨤
+tooltip outline                          逸
+tooltip outline plus                     都
+tooltip text                             﨧
+tooth                                    﨨
+tor                                      﨩
+tower beach                              ﭿ
+tower fire                               ﮀ
+towing                                   ﴺ
+trackpad                                 ﳶ
+traffic light                            飯
+train                                    飼
+tram                                     館
+transcribe                               鶴
+transcribe close                         郞
+transfer                                 隷
+transit transfer                         ﮬ
+translate                                韛
+treasure chest                           ﰤ
+tree                                     侮
+trello                                   僧
+trending down                            免
+trending neutral                         勉
+trending up                              勤
+triangle                                 卑
+triangle outline                         喝
+trophy                                   嘆
+trophy award                             器
+trophy outline                           塀
+trophy variant                           墨
+trophy variant outline                   層
+truck                                    屮
+truck delivery                           悔
+truck fast                               ﲆ
+truck trailer                            ﰥ
+tshirt crew                              慨
+tshirt v                                 憎
+tumblr                                   懲
+tumblr reblog                            敏
+tune                                     שּׂ
+tune vertical                            ﭩ
+twitch                                   既
+twitter                                  暑
+twitter box                              梅
+twitter circle                           海
+twitter retweet                          渚
+uber                                     ﱇ
+ubuntu                                   漢
+ultra high definition                    ﳷ
+umbraco                                  煮
+umbrella                                 爫
+umbrella outline                         琢
+undo                                     碑
+undo variant                             社
+unfold less horizontal                   祉
+unfold less vertical                     ﱞ
+unfold more horizontal                   祈
+unfold more vertical                     ﱟ
+ungroup                                  祐
+unity                                    ﮭ
+untappd                                  祖
+update                                   ﮮ
+upload                                   祝
+upload multiple                          ﴻ
+upload network                           ﯴ
+usb                                      禍
+van passenger                            ﳸ
+van utility                              ﳹ
+vanish                                   ﳺ
+vector arrange above                     禎
+vector arrange below                     穀
+vector circle                            突
+vector circle variant                    節
+vector combine                           練
+vector curve                             縉
+vector difference                        繁
+vector difference ab                     署
+vector difference ba                     者
+vector intersection                      臭
+vector line                              艹
+vector point                             艹
+vector polygon                           著
+vector polyline                          褐
+vector radius                            ﱈ
+vector rectangle                         鉶
+vector selection                         視
+vector square                            
+vector triangle                          謁
+vector union                             謹
+venmo                                    勺
+verified                                 賓
+vibrate                                  贈
+video                                    辶
+video 3d                                 ﳻ
+video 4k box                             ﴼ
+video input antenna                      ﴽ
+video input component                    ﴾
+video input hdmi                         ﴿
+video input svideo                       ﵀
+video off                                逸
+video switch                             難
+view agenda                              響
+view array                               頻
+view carousel                            恵
+view column                              𤋮
+view dashboard                           舘
+view dashboard variant                   ﵁
+view day                                 﩮
+view grid                                﩯
+view headline                            並
+view list                                况
+view module                              全
+view parallel                            ﰦ
+view quilt                               侀
+view sequential                          ﰧ
+view stream                              充
+view week                                冀
+vimeo                                    勇
+violin                                   ﬎
+visualstudio                             ﬏
+vk                                       喝
+vk box                                   啕
+vk circle                                喙
+vlc                                      嗢
+voice                                    響
+voicemail                                塚
+volume high                              墳
+volume low                               奄
+volume medium                            奔
+volume minus                             ﱜ
+volume mute                              ﱝ
+volume off                               婢
+volume plus                              ﱛ
+vpn                                      嬨
+vuejs                                    ﵂
+walk                                     廒
+wall                                     ﳼ
+wallet                                   廙
+wallet giftcard                          彩
+wallet membership                        徭
+wallet travel                            惘
+wan                                      慎
+washing machine                          ﰨ
+watch                                    愈
+watch export                             憎
+watch import                             慠
+watch vibrate                            ﮯ
+water                                    懲
+water off                                戴
+water percent                            揄
+water pump                               搜
+watermark                                ﬑
+waves                                    ﲋ
+weather cloudy                           摒
+weather fog                              敖
+weather hail                             晴
+weather lightning                        朗
+weather lightning rainy                  ﭼ
+weather night                            望
+weather partlycloudy                     杖
+weather pouring                          歹
+weather rainy                            殺
+weather snowy                            流
+weather snowy rainy                      ﭽ
+weather sunny                            滛
+weather sunset                           滋
+weather sunset down                      漢
+weather sunset up                        瀞
+weather windy                            煮
+weather windy variant                    瞧
+web                                      爵
+webcam                                   犯
+webhook                                  אַ
+webpack                                  ﰩ
+wechat                                   ﬐
+weight                                   猪
+weight kilogram                          瑱
+whatsapp                                 甆
+wheelchair accessibility                 画
+white balance auto                       瘝
+white balance incandescent               瘟
+white balance iridescent                 益
+white balance sunny                      盛
+widgets                                  ﰪ
+wifi                                     直
+wifi off                                 睊
+wii                                      着
+wiiu                                     ﰫ
+wikipedia                                磌
+window close                             窱
+window closed                            節
+window maximize                          类
+window minimize                          絛
+window open                              練
+window restore                           缾
+windows                                  者
+wordpress                                荒
+worker                                   華
+wrap                                     蝹
+wrench                                   襁
+wunderlist                               覆
+xamarin                                  ﵃
+xamarin outline                          ﵄
+xaml                                     ﭲ
+xbox                                     視
+xbox controller                          調
+xbox controller battery alert            ﱉ
+xbox controller battery empty            ﱊ
+xbox controller battery full             ﱋ
+xbox controller battery low              ﱌ
+xbox controller battery medium           ﱍ
+xbox controller battery unknown          ﱎ
+xbox controller off                      諸
+xda                                      請
+xing                                     謁
+xing box                                 諾
+xing circle                              諭
+xml                                      謹
+xmpp                                     ﳽ
+yammer                                   ﲇ
+yeast                                    變
+yelp                                     贈
+yin yang                                 ﭾ
+youtube creator studio                   ﵅
+youtube gaming                           ﵆
+youtube play                             輸
+youtube tv                               磊
+zip box                                  遲
+oct alert                                
+oct arrow down                           
+oct arrow left                           
+oct arrow right                          
+oct arrow small down                     
+oct arrow small left                     
+oct arrow small right                    
+oct arrow small up                       
+oct arrow up                             
+oct beaker                               
+oct bell                                 
+oct bold                                 
+oct book                                 
+oct bookmark                             
+oct briefcase                            
+oct broadcast                            
+oct browser                              
+oct bug                                  
+oct calendar                             
+oct check                                
+oct checklist                            
+oct chevron down                         
+oct chevron left                         
+oct chevron right                        
+oct chevron up                           
+oct circle slash                         
+oct circuit board                        
+oct clippy                               
+oct clock                                
+oct cloud download                       
+oct cloud upload                         
+oct code                                 
+oct comment                              
+oct comment discussion                   
+oct credit card                          
+oct dash                                 
+oct dashboard                            
+oct database                             
+oct desktop download                     
+oct device camera                        
+oct device camera video                  
+oct device desktop                       
+oct device mobile                        
+oct diff                                 
+oct diff added                           
+oct diff ignored                         
+oct diff modified                        
+oct diff removed                         
+oct diff renamed                         
+oct ellipses                             
+oct ellipsis                             
+oct eye                                  
+oct file                                 
+oct file binary                          
+oct file code                            
+oct file directory                       
+oct file media                           
+oct file pdf                             
+oct file submodule                       
+oct file symlink directory               
+oct file symlink file                    
+oct file text                            
+oct file zip                             
+oct flame                                
+oct fold                                 
+oct gear                                 
+oct gift                                 
+oct gist                                 
+oct gist secret                          
+oct git branch                           
+oct git commit                           
+oct git compare                          
+oct git merge                            
+oct git pull request                     
+oct globe                                
+oct grabber                              
+oct graph                                
+oct heart                                ♥
+oct history                              
+oct home                                 
+oct horizontal rule                      
+oct hubot                                
+oct inbox                                
+oct info                                 
+oct issue closed                         
+oct issue opened                         
+oct issue reopened                       
+oct italic                               
+oct jersey                               
+oct key                                  
+oct keyboard                             
+oct law                                  
+oct light bulb                           
+oct link                                 
+oct link external                        
+oct list ordered                         
+oct list unordered                       
+oct location                             
+oct lock                                 
+oct logo gist                            
+oct logo github                          
+oct mail                                 
+oct mail read                            
+oct mail reply                           
+oct mark github                          
+oct markdown                             
+oct megaphone                            
+oct mention                              
+oct milestone                            
+oct mirror                               
+oct mortar board                         
+oct mute                                 
+oct no newline                           
+oct octoface                             
+oct organization                         
+oct package                              
+oct paintcan                             
+oct pencil                               
+oct person                               
+oct pin                                  
+oct plug                                 
+oct plus                                 
+oct plus small                           
+oct primitive dot                        
+oct primitive square                     
+oct pulse                                
+oct question                             
+oct quote                                
+oct radio tower                          
+oct reply                                
+oct repo                                 
+oct repo clone                           
+oct repo force push                      
+oct repo forked                          
+oct repo pull                            
+oct repo push                            
+oct rocket                               
+oct rss                                  
+oct ruby                                 
+oct search                               
+oct server                               
+oct settings                             
+oct shield                               
+oct sign in                              
+oct sign out                             
+oct smiley                               
+oct squirrel                             
+oct star                                 
+oct stop                                 
+oct sync                                 
+oct tag                                  
+oct tasklist                             
+oct telescope                            
+oct terminal                             
+oct text size                            
+oct three bars                           
+oct thumbsdown                           
+oct thumbsup                             
+oct tools                                
+oct trashcan                             
+oct triangle down                        
+oct triangle left                        
+oct triangle right                       
+oct triangle up                          
+oct unfold                               
+oct unmute                               
+oct unverified                           
+oct verified                             
+oct versions                             
+oct watch                                
+oct x                                    
+oct zap                                  ⚡
+pl branch                                
+pl current line                          
+pl hostname                              
+pl left hard divider                     
+pl left soft divider                     
+pl line number                           
+pl readonly                              
+pl right hard divider                    
+pl right soft divider                    
+ple backslash separator                  
+ple backslash separator redundant        
+ple column number                        
+ple current column                       
+ple flame thick                          
+ple flame thick mirrored                 
+ple flame thin                           
+ple flame thin mirrored                  
+ple forwardslash separator               
+ple forwardslash separator redundant     
+ple honeycomb                            
+ple honeycomb outline                    
+ple ice waveform                         
+ple ice waveform mirrored                
+ple left half circle thick               
+ple left half circle thin                
+ple lego block facing                    
+ple lego block sideways                  
+ple lego separator                       
+ple lego separator thin                  
+ple lower left triangle                  
+ple lower right triangle                 
+ple pixelated squares big                
+ple pixelated squares big mirrored       
+ple pixelated squares small              
+ple pixelated squares small mirrored     
+ple right half circle thick              
+ple right half circle thin               
+ple trapezoid top bottom                 
+ple trapezoid top bottom mirrored        
+ple upper left triangle                  
+ple upper right triangle                 
+pom away                                 
+pom clean code                           
+pom external interruption                
+pom internal interruption                
+pom long pause                           
+pom pair programming                     
+pom pomodoro done                        
+pom pomodoro estimated                   
+pom pomodoro squashed                    
+pom pomodoro ticking                     
+pom short pause                          
+seti bower                               
+seti cjsx                                
+seti coffee                              
+seti config                              
+seti css                                 
+seti default                             
+seti ejs                                 
+seti favicon                             
+seti folder                              
+seti go                                  
+seti grunt                               
+seti gulp                                
+seti haskell                             
+seti heroku                              
+seti home                                
+seti html                                
+seti image                               
+seti javascript                          
+seti json                                
+seti julia                               
+seti karma                               
+seti less                                
+seti license                             
+seti lua                                 
+seti markdown                            
+seti mustache                            
+seti npm                                 
+seti php                                 
+seti play arrow                          
+seti project                             
+seti python                              
+seti rails                               
+seti react                               
+seti ruby                                
+seti sass                                
+seti stylus                              
+seti text                                
+seti twig                                
+seti typescript                          
+seti xml                                 
+weather alien                            
+weather aliens                           
+weather barometer                        
+weather celsius                          
+weather cloud                            
+weather cloud down                       
+weather cloud refresh                    
+weather cloud up                         
+weather cloudy                           
+weather cloudy gusts                     
+weather cloudy windy                     
+weather day cloudy                       
+weather day cloudy gusts                 
+weather day cloudy high                  
+weather day cloudy windy                 
+weather day fog                          
+weather day hail                         
+weather day haze                         
+weather day light wind                   
+weather day lightning                    
+weather day rain                         
+weather day rain mix                     
+weather day rain wind                    
+weather day showers                      
+weather day sleet                        
+weather day sleet storm                  
+weather day snow                         
+weather day snow thunderstorm            
+weather day snow wind                    
+weather day sprinkle                     
+weather day storm showers                
+weather day sunny                        
+weather day sunny overcast               
+weather day thunderstorm                 
+weather day windy                        
+weather degrees                          
+weather direction down                   
+weather direction down left              
+weather direction down right             
+weather direction left                   
+weather direction right                  
+weather direction up                     
+weather direction up left                
+weather direction up right               
+weather dust                             
+weather earthquake                       
+weather fahrenheit                       
+weather fire                             
+weather flood                            
+weather fog                              
+weather gale warning                     
+weather hail                             
+weather horizon                          
+weather horizon alt                      
+weather hot                              
+weather humidity                         
+weather hurricane                        
+weather hurricane warning                
+weather lightning                        
+weather lunar eclipse                    
+weather meteor                           
+weather moon alt first quarter           
+weather moon alt full                    
+weather moon alt new                     
+weather moon alt third quarter           
+weather moon alt waning crescent 1       
+weather moon alt waning crescent 2       
+weather moon alt waning crescent 3       
+weather moon alt waning crescent 4       
+weather moon alt waning crescent 5       
+weather moon alt waning crescent 6       
+weather moon alt waning gibbous 1        
+weather moon alt waning gibbous 2        
+weather moon alt waning gibbous 3        
+weather moon alt waning gibbous 4        
+weather moon alt waning gibbous 5        
+weather moon alt waning gibbous 6        
+weather moon alt waxing crescent 1       
+weather moon alt waxing crescent 2       
+weather moon alt waxing crescent 3       
+weather moon alt waxing crescent 4       
+weather moon alt waxing crescent 5       
+weather moon alt waxing crescent 6       
+weather moon alt waxing gibbous 1        
+weather moon alt waxing gibbous 2        
+weather moon alt waxing gibbous 3        
+weather moon alt waxing gibbous 4        
+weather moon alt waxing gibbous 5        
+weather moon alt waxing gibbous 6        
+weather moon first quarter               
+weather moon full                        
+weather moon new                         
+weather moon third quarter               
+weather moon waning crescent 1           
+weather moon waning crescent 2           
+weather moon waning crescent 3           
+weather moon waning crescent 4           
+weather moon waning crescent 5           
+weather moon waning crescent 6           
+weather moon waning gibbous 1            
+weather moon waning gibbous 2            
+weather moon waning gibbous 3            
+weather moon waning gibbous 4            
+weather moon waning gibbous 5            
+weather moon waning gibbous 6            
+weather moon waxing crescent 1           
+weather moon waxing crescent 2           
+weather moon waxing crescent 3           
+weather moon waxing crescent 4           
+weather moon waxing crescent 5           
+weather moon waxing crescent 6           
+weather moon waxing gibbous 1            
+weather moon waxing gibbous 2            
+weather moon waxing gibbous 3            
+weather moon waxing gibbous 4            
+weather moon waxing gibbous 5            
+weather moon waxing gibbous 6            
+weather moonrise                         
+weather moonset                          
+weather na                               
+weather night alt cloudy                 
+weather night alt cloudy gusts           
+weather night alt cloudy high            
+weather night alt cloudy windy           
+weather night alt hail                   
+weather night alt lightning              
+weather night alt partly cloudy          
+weather night alt rain                   
+weather night alt rain mix               
+weather night alt rain wind              
+weather night alt sleet                  
+weather night alt sleet storm            
+weather night alt snow                   
+weather night alt snow thunderstorm      
+weather night alt snow wind              
+weather night alt sprinkle               
+weather night alt storm showers          
+weather night alt thunderstorm           
+weather night clear                      
+weather night cloudy                     
+weather night cloudy gusts               
+weather night cloudy high                
+weather night cloudy windy               
+weather night fog                        
+weather night hail                       
+weather night lightning                  
+weather night partly cloudy              
+weather night rain                       
+weather night rain mix                   
+weather night rain wind                  
+weather night showers                    
+weather night sleet                      
+weather night sleet storm                
+weather night snow                       
+weather night snow thunderstorm          
+weather night snow wind                  
+weather night sprinkle                   
+weather night storm showers              
+weather night thunderstorm               
+weather rain                             
+weather rain mix                         
+weather rain wind                        
+weather raindrop                         
+weather raindrops                        
+weather refresh                          
+weather refresh alt                      
+weather sandstorm                        
+weather showers                          
+weather sleet                            
+weather small craft advisory             
+weather smog                             
+weather smoke                            
+weather snow                             
+weather snow wind                        
+weather snowflake cold                   
+weather solar eclipse                    
+weather sprinkle                         
+weather stars                            
+weather storm showers                    
+weather storm warning                    
+weather strong wind                      
+weather sunrise                          
+weather sunset                           
+weather thermometer                      
+weather thermometer exterior             
+weather thermometer internal             
+weather thunderstorm                     
+weather time 1                           
+weather time 10                          
+weather time 11                          
+weather time 12                          
+weather time 2                           
+weather time 3                           
+weather time 4                           
+weather time 5                           
+weather time 6                           
+weather time 7                           
+weather time 8                           
+weather time 9                           
+weather tornado                          
+weather train                            
+weather tsunami                          
+weather umbrella                         
+weather volcano                          
+weather wind beaufort 0                  
+weather wind beaufort 1                  
+weather wind beaufort 10                 
+weather wind beaufort 11                 
+weather wind beaufort 12                 
+weather wind beaufort 2                  
+weather wind beaufort 3                  
+weather wind beaufort 4                  
+weather wind beaufort 5                  
+weather wind beaufort 6                  
+weather wind beaufort 7                  
+weather wind beaufort 8                  
+weather wind beaufort 9                  
+weather wind direction                   
+weather wind east                        
+weather wind north                       
+weather wind north east                  
+weather wind north west                  
+weather wind south                       
+weather wind south east                  
+weather wind south west                  
+weather wind west                        
+weather windy                            
+EOM
+printf "%s" "$ALL_ICONS" | fzf
