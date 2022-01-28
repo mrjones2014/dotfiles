@@ -119,20 +119,12 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install lua-language-server: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)"
     end
 
-    if [ -z (python3 -m pip list | grep -F pynvim) ]
-        echo "Install pynvim: python3 -m pip install pynvim"
-    end
-
     if [ -z (ls /Applications/ | grep -i hammerspoon) ]
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
     end
 
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
-    end
-
-    if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]
-        echo "Install neovim packer: https://github.com/wbthomason/packer.nvim#quickstart"
     end
 
     return 0
