@@ -28,8 +28,7 @@ return {
         return ''
       end
 
-      local icon = require('nvim-web-devicons').get_icon(path)
-      return icon .. '  ' .. path
+      return path
     end
 
     local mode_icons = {
