@@ -52,11 +52,6 @@ return require('packer').startup(function(use)
   use(require('configure.dressing'))
   use(require('configure.fidget'))
 
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/yaclt.nvim') > 0 then
-    -- yaclt
-    use('~/git/personal/yaclt.nvim')
-  end
-
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') > 0 then
     -- dash plugin I'm working on
     use({ '~/git/personal/dash.nvim' })
@@ -65,9 +60,19 @@ return require('packer').startup(function(use)
   end
 
   if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/tldr.nvim') > 0 then
-    use({ '~/git/personal/tldr.nvim' })
+    use({
+      '~/git/personal/tldr.nvim',
+      config = function()
+        require('tldr').setup({ tldr_args = { '--color=always' } })
+      end,
+    })
   else
-    use({ 'mrjones2014/tldr.nvim' })
+    use({
+      'mrjones2014/tldr.nvim',
+      config = function()
+        require('tldr').setup({ tldr_args = { '--color=always' } })
+      end,
+    })
   end
 
   -- Automatically set up config if we just bootstrapped packer by git cloning it
