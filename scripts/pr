@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+PROJECT_PATH=$(git config --get remote.origin.url)
+PROJECT_PATH=${PROJECT_PATH/"git@github.com:"/}
+PROJECT_PATH=${PROJECT_PATH/".git"/}
 GIT_BRANCH=$(git branch --show-current || echo "")
 
 if test -z "$GIT_BRANCH"; then
   echo "Error: not a git repository"
 else
-  open "https://github.com/mrjones2014/ctrlg/compare/master...$GIT_BRANCH"
+  open "https://github.com/$PROJECT_PATH/compare/master...$GIT_BRANCH"
 fi
