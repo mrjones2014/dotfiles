@@ -5,5 +5,5 @@ autocmd FileType json :set conceallevel=0
 augroup TerminalBuffers
   autocmd!
   autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
-  autocmd TermClose * Bdelete
+  autocmd TermClose * Bdelete!
 augroup END
