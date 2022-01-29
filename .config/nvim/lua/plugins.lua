@@ -63,14 +63,14 @@ return require('packer').startup(function(use)
     use({
       '~/git/personal/tldr.nvim',
       config = function()
-        require('tldr').setup({ tldr_args = { '--color=always' } })
+        require('tldr').setup({ tldr_args = '--color always' })
       end,
     })
   else
     use({
       'mrjones2014/tldr.nvim',
       config = function()
-        require('tldr').setup({ tldr_args = { '--color=always' } })
+        require('tldr').setup({ tldr_args = '--color=always' })
       end,
     })
   end
