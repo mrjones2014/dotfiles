@@ -39,8 +39,8 @@ function M.apply_default_keymaps()
     { '<C-l>', functions.navigator_lazy('right') },
 
     -- Bufferline
-    { '<C-w>n', ':BufferLineCycleNext<CR>' },
-    { '<C-w>p', ':BufferLineCyclePrev<CR>' },
+    { '<S-Right>', ':BufferLineCycleNext<CR>' },
+    { '<S-Left>', ':BufferLineCyclePrev<CR>' },
 
     -- NvimTree
     { '<F3>', ':NvimTreeToggle<CR>' },
