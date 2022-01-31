@@ -52,28 +52,10 @@ return require('packer').startup(function(use)
   use(require('configure.dressing'))
   use(require('configure.fidget'))
 
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/dash.nvim') > 0 then
-    -- dash plugin I'm working on
-    use({ '~/git/personal/dash.nvim' })
-    -- use({ 'ibhagwan/fzf-lua', requires = { 'vijaymarupudi/nvim-fzf' } })
-    -- use({ 'camspiers/snap' })
-  end
-
-  if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/tldr.nvim') > 0 then
-    use({
-      '~/git/personal/tldr.nvim',
-      config = function()
-        require('tldr').setup({ tldr_args = '--color always' })
-      end,
-    })
-  else
-    use({
-      'mrjones2014/tldr.nvim',
-      config = function()
-        require('tldr').setup({ tldr_args = '--color=always' })
-      end,
-    })
-  end
+  -- Plugins I develop
+  use(require('configure.mine.dash'))
+  use(require('configure.mine.tldr'))
+  use(require('configure.mine.quit-confirm'))
 
   -- Automatically set up config if we just bootstrapped packer by git cloning it
   if packer_bootstrap then
