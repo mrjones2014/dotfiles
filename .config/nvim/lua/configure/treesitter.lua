@@ -1,7 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   requires = { 'p00f/nvim-ts-rainbow' },
-  run = ':TSUpdate',
+  run = ':TSUpdateSync',
   config = function()
     require('nvim-treesitter.configs').setup({
       highlight = {
