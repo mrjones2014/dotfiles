@@ -24,7 +24,7 @@ function M.on_attach(client)
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
 
   -- setup LSP-specific keymaps
-  require('keymap').apply_lsp_keymaps()
+  require('legendary').bind(require('keymap').lsp_keymaps)
 
   require('lsp_signature').on_attach({
     bind = true,

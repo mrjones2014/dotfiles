@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
   -- Plugins I develop
   use(require('configure.mine.dash'))
   use(require('configure.mine.tldr'))
+  use(require('configure.mine.legendary'))
 
   -- Automatically set up config if we just bootstrapped packer by git cloning it
   if packer_bootstrap then

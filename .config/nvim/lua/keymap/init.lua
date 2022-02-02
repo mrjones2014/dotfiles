@@ -2,80 +2,68 @@ local M = {}
 
 local functions = require('keymap.functions')
 
-local function bind(keymaps)
-  for _, keymap in pairs(keymaps) do
-    local opts = keymap.opts or {}
-    if opts.silent == nil then
-      opts.silent = true
-    end
-    vim.keymap.set(keymap.mode or 'n', keymap[1], keymap[2], opts)
-  end
-end
+M.default_keymaps = {
+  -- jk is mapped to escape by better-escape.nvim plugin
+  -- make escape work in terminal mode
+  { '<ESC>', '<C-\\><C-n>', mode = 't' },
+  { 'jk', '<C-\\><C-n>', mode = 't' },
 
-function M.apply_default_keymaps()
-  bind({
-    -- jk is mapped to escape by better-escape.nvim plugin
-    -- make escape work in terminal mode
-    { '<ESC>', '<C-\\><C-n>', mode = 't' },
-    { 'jk', '<C-\\><C-n>', mode = 't' },
+  { '<C-p>', ':lua require("legendary").find()<CR>', description = 'Search keybinds' },
 
-    -- leader+s to save all
-    { '<leader>s', ':wa<cr>' },
+  { '<leader>s', ':wa<cr>', description = 'Write all buffers' },
 
-    -- shift+w to close buffer
-    { 'W', ':Bdelete<cr>' },
+  { 'W', ':Bdelete<cr>', description = 'Close current buffer' },
 
-    -- ctrl+y and ctrl+u to resize splits
-    { '<C-y>', functions.resize_split('plus') },
-    { '<C-u>', functions.resize_split('minus') },
+  { '<C-y>', functions.resize_split('plus'), description = 'Resize split larger' },
+  { '<C-u>', functions.resize_split('minus'), description = 'Resize split smaller' },
 
-    -- remap gx to open url under cursor since I have netrw disabled
-    { 'gx', functions.open_url_under_cursor },
+  { 'gx', functions.open_url_under_cursor, description = 'Open URL under cursor' },
 
-    -- Navigator.nvim
-    { '<C-h>', functions.navigator_lazy('left') },
-    { '<C-j>', functions.navigator_lazy('down') },
-    { '<C-k>', functions.navigator_lazy('up') },
-    { '<C-l>', functions.navigator_lazy('right') },
+  { '<C-h>', functions.navigator_lazy('left'), description = 'Move to next split left' },
+  { '<C-j>', functions.navigator_lazy('down'), description = 'Move to next split down' },
+  { '<C-k>', functions.navigator_lazy('up'), description = 'Move to next split up' },
+  { '<C-l>', functions.navigator_lazy('right'), description = 'Move to next split right' },
 
-    -- Bufferline
-    { '<S-Right>', ':BufferLineCycleNext<CR>' },
-    { '<S-Left>', ':BufferLineCyclePrev<CR>' },
+  { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
+  { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
-    -- NvimTree
-    { '<F3>', ':NvimTreeToggle<CR>' },
+  { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
 
-    -- Telescope
-    { 'ff', functions.telescope_lazy('find_files') },
-    { 'fb', functions.telescope_lazy('buffers') },
-    { 'ft', functions.telescope_lazy('live_grep') },
-    { 'fh', functions.telescope_lazy('oldfiles', { only_cwd = true }) },
-    { '<leader>v', functions.telescope_lazy('find_files', _, true) },
-    { '<leader>b', functions.telescope_lazy('buffers', _, true) },
+  { 'ff', functions.telescope_lazy('find_files'), description = 'Find files' },
+  { 'fb', functions.telescope_lazy('buffers'), description = 'Find open buffers' },
+  { 'ft', functions.telescope_lazy('live_grep'), description = 'Find pattern' },
+  { 'fh', functions.telescope_lazy('oldfiles', { only_cwd = true }), description = 'Find recent files' },
+  { '<leader>v', functions.telescope_lazy('find_files', _, true), description = 'Split vertically, then find files' },
+  {
+    '<leader>b',
+    functions.telescope_lazy('buffers', _, true),
+    description = 'Split vertically, then find open buffers',
+  },
+  {
+    '<leader>h',
+    functions.telescope_lazy('oldfiles', { only_cwd = true }, true),
+    description = 'Split vertically, then find recent files',
+  },
 
-    -- Trouble
-    { '<leader>d', ':TroubleToggle<CR>' },
+  { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
 
-    -- nvim-comment
-    { '<leader>c', ':CommentToggle<CR>' },
-    { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v' },
-  })
-end
+  { '<leader>c', ':CommentToggle<CR>', description = 'Toggle comment' },
+  { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
+}
 
-function M.apply_lsp_keymaps()
-  bind({
-    { 'gd', vim.lsp.buf.definition },
-    { 'gh', vim.lsp.buf.hover },
-    { 'gi', vim.lsp.buf.implementation },
-    { 'gt', vim.lsp.buf.type_definition },
-    { 'gs', vim.lsp.buf.signature_help },
-    { 'gr', vim.lsp.buf.references },
-    { 'rn', vim.lsp.buf.rename },
-    { 'F', vim.lsp.buf.code_action },
-    { '[', vim.diagnostic.goto_prev },
-    { ']', vim.diagnostic.goto_next },
-  })
-end
+M.lsp_keymaps = {
+  { 'gd', vim.lsp.buf.definition, description = 'Go to definition' },
+  { 'gh', vim.lsp.buf.hover, description = 'Show hover information' },
+  { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation' },
+  { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition' },
+  { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help' },
+  { 'gr', vim.lsp.buf.references, description = 'Find references' },
+  { 'rn', vim.lsp.buf.rename, description = 'Rename symbol' },
+  { 'F', vim.lsp.buf.code_action, description = 'Show code actions' },
+  { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item' },
+  { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item' },
+  { ':Format', description = 'Format the current document with LSP', nobind = true },
+}
 
 function M.get_cmp_mappings()
   return {
