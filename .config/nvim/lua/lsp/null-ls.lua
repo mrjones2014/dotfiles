@@ -32,6 +32,7 @@ local sources = {
       'typescriptreact',
       'scss',
       'css',
+      'markdown',
     },
   }),
   b.formatting.rustfmt,
