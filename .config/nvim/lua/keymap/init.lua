@@ -8,7 +8,7 @@ M.default_keymaps = {
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
   { 'jk', '<C-\\><C-n>', mode = 't' },
 
-  { '<C-p>', ':lua require("legendary").find()<CR>', description = 'Search keybinds' },
+  { '<C-p>', functions.legendary_lazy(), description = 'Search keybinds', mode = { 'n', 'i' } },
 
   { '<leader>s', ':wa<cr>', description = 'Write all buffers' },
 
@@ -51,8 +51,8 @@ M.default_keymaps = {
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
 
   -- extra commands
-  { ':lua vim.api.nvim_feedkeys("gg0vG$", "", true)', description = 'Select all in current buffer', nobind = true },
-  { ':qa', description = 'Quit all windows', nobind = true },
+  { ':lua vim.api.nvim_feedkeys("gg0vG$", "", true)<CR>', description = 'Select all in current buffer', nobind = true },
+  { ':qa<CR>', description = 'Quit all windows', nobind = true },
 }
 
 M.lsp_keymaps = {

@@ -1,5 +1,12 @@
 local M = {}
 
+-- wrapper to not `require` legendary.nvim until needed
+function M.legendary_lazy()
+  return function()
+    require('legendary').find()
+  end
+end
+
 -- wrapper to not `require` telescope until needed
 function M.telescope_lazy(builtin_name, args, vert_split)
   return function()
