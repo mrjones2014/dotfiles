@@ -8,11 +8,11 @@ M.default_keymaps = {
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
   { 'jk', '<C-\\><C-n>', mode = 't' },
 
-  { '<C-p>', functions.legendary_lazy(), description = 'Search keybinds', mode = { 'n', 'i' } },
+  { '<C-p>', ':Legendary<CR>', description = 'Search keybinds and commands', mode = { 'n', 'i' } },
 
-  { '<leader>s', ':wa<cr>', description = 'Write all buffers' },
+  { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
-  { 'W', ':Bdelete<cr>', description = 'Close current buffer' },
+  { 'W', ':Bdelete<CR>', description = 'Close current buffer' },
 
   { '<C-y>', functions.resize_split('plus'), description = 'Resize split larger' },
   { '<C-u>', functions.resize_split('minus'), description = 'Resize split smaller' },
@@ -51,7 +51,6 @@ M.default_keymaps = {
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
 
   -- extra commands
-  { ':lua vim.api.nvim_feedkeys("gg0vG$", "", true)<CR>', description = 'Select all in current buffer', nobind = true },
   { ':qa<CR>', description = 'Quit all windows', nobind = true },
 }
 
