@@ -8,7 +8,7 @@ M.default_keymaps = {
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
   { 'jk', '<C-\\><C-n>', mode = 't' },
 
-  { '<C-p>', ':Legendary<CR>', description = 'Search keybinds and commands', mode = { 'n', 'i' } },
+  { '<C-p>', functions.legendary_lazy(), description = 'Search keybinds and commands', mode = { 'n', 'i' } },
 
   { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
