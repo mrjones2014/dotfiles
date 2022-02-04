@@ -9,6 +9,9 @@ end
 return {
   path,
   config = function()
-    require('legendary').setup({ keymaps = require('keymap').default_keymaps })
+    require('legendary').setup({
+      keymaps = require('keymap').default_keymaps,
+      select_prompt = ' Legendary ',
+    })
   end,
 }
