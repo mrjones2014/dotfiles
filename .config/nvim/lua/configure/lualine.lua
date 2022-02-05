@@ -72,29 +72,31 @@ return {
       return mode_icons[mode] .. ' '
     end
 
+    local sections = {
+      lualine_a = { get_mode },
+      lualine_b = { 'branch' },
+      lualine_c = {
+        filepath,
+        {
+          'diagnostics',
+          sources = { 'nvim_diagnostic' },
+          sections = { 'error', 'warn', 'info', 'hint' },
+          always_visible = is_file_open,
+          update_in_insert = true,
+        },
+      },
+      lualine_x = { 'filetype' },
+      lualine_y = {},
+      lualine_z = { 'progress' },
+    }
+
     require('lualine').setup({
       options = {
         theme = lualine_theme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
       },
-      sections = {
-        lualine_a = { get_mode },
-        lualine_b = { 'branch' },
-        lualine_c = {
-          filepath,
-          {
-            'diagnostics',
-            sources = { 'nvim_diagnostic' },
-            sections = { 'error', 'warn', 'info', 'hint' },
-            always_visible = is_file_open,
-            update_in_insert = true,
-          },
-        },
-        lualine_x = { 'filetype' },
-        lualine_y = {},
-        lualine_z = { 'progress' },
-      },
-      inactive_sections = {},
+      sections = sections,
+      inactive_sections = sections,
       extensions = { 'nvim-tree' },
     })
   end,
