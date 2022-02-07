@@ -1,5 +1,3 @@
-include:
-  - ~/.config/ctrlg/extra_paths.yml
 search_dirs:
   - ~/git/personal/*
   - ~/git/work/*
