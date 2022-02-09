@@ -26,17 +26,6 @@ function M.on_attach(client)
   -- setup LSP-specific keymaps
   require('legendary').bind(require('keymap').lsp_keymaps)
 
-  require('lsp_signature').on_attach({
-    bind = true,
-    handler_opts = {
-      border = 'single',
-    },
-    fix_pos = true,
-    hint_enable = true,
-    hint_prefix = '',
-    padding = '',
-  })
-
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
     client.resolved_capabilities.document_formatting = false
