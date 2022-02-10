@@ -62,4 +62,11 @@ function M.copy_branch()
   require('utils').copy_to_clipboard(require('utils').git_branch())
 end
 
+function M.split_then(fn)
+  return function()
+    vim.cmd('vsp')
+    fn()
+  end
+end
+
 return M
