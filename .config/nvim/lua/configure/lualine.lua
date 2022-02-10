@@ -8,29 +8,6 @@ return {
       return #(vim.fn.expand('%')) > 0
     end
 
-    local function filepath()
-      local path = vim.fn.expand('%')
-      -- ensure path is relative to cwd
-      local cwd_pattern = (vim.fn.getcwd() .. '/'):gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
-        return '%' .. c
-      end)
-      path = path:gsub(cwd_pattern, '')
-      -- replace $HOME with ~
-      local home_pattern = (os.getenv('HOME') .. '/'):gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
-        return '%' .. c
-      end)
-      path = path:gsub(home_pattern, '')
-      if vim.fn.winwidth(0) <= 84 then
-        path = vim.fn.pathshorten(path)
-      end
-
-      if not path or #path == 0 then
-        return ''
-      end
-
-      return path
-    end
-
     local mode_icons = {
       ['n'] = '🄽',
       ['no'] = '🄽',
@@ -76,7 +53,7 @@ return {
       lualine_a = { get_mode },
       lualine_b = { 'branch' },
       lualine_c = {
-        filepath,
+        require('utils').relative_filepath,
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },

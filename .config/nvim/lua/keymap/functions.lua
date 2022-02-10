@@ -54,4 +54,12 @@ function M.open_url_under_cursor()
   end
 end
 
+function M.copy_rel_filepath()
+  require('utils').copy_to_clipboard(require('utils').relative_filepath())
+end
+
+function M.copy_branch()
+  require('utils').copy_to_clipboard(require('utils').git_branch())
+end
+
 return M

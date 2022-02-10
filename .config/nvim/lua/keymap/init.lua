@@ -51,6 +51,11 @@ M.default_keymaps = {
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
 }
 
+M.default_commands = {
+  { ':CopyBranch', functions.copy_branch, description = 'Copy current git branch name to clipboard' },
+  { ':CopyFilepath', functions.copy_rel_filepath, description = 'Copy current relative filepath to clipboard' },
+}
+
 M.lsp_keymaps = {
   { 'gd', vim.lsp.buf.definition, description = 'Go to definition' },
   { 'gh', vim.lsp.buf.hover, description = 'Show hover information' },
