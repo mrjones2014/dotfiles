@@ -18,7 +18,7 @@ function M.on_attach(client)
     or vim.bo.filetype == 'typescriptreact'
   then
     require('legendary').bind_command({
-      'OrganizeImports',
+      ':OrganizeImports',
       M.organize_imports,
       description = 'Organize imports via tsserver',
     })
