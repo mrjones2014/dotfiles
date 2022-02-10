@@ -27,7 +27,7 @@ M.default_keymaps = {
   { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
   { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
-  { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
+  { '<F3>', ':NeoTreeShowToggle<CR>', description = 'Toggle file tree' },
 
   { 'ff', functions.telescope_lazy('find_files'), description = 'Find files' },
   { 'fb', functions.telescope_lazy('buffers'), description = 'Find open buffers' },

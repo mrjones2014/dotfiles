@@ -70,7 +70,7 @@ return {
     require('lualine').setup({
       options = {
         theme = lualine_theme,
-        disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt' },
+        disabled_filetypes = { 'NvimTree', 'neo-tree', 'term', 'terminal', 'TelescopePrompt' },
       },
       sections = sections,
       inactive_sections = sections,

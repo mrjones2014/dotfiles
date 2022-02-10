@@ -1,9 +1,9 @@
 -- disable built-in plugins which I don't use to improve startup time
 local disabled_built_ins = {
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
+  -- 'netrw',
+  -- 'netrwPlugin',
+  -- 'netrwSettings',
+  -- 'netrwFileHandlers',
   'gzip',
   'zip',
   'zipPlugin',
