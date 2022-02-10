@@ -57,13 +57,16 @@ M.default_commands = {
 }
 
 M.lsp_keymaps = {
-  { 'gd', vim.lsp.buf.definition, description = 'Go to definition' },
   { 'gh', vim.lsp.buf.hover, description = 'Show hover information' },
-  { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation' },
-  { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition' },
   { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help' },
   { 'gr', vim.lsp.buf.references, description = 'Find references' },
   { 'rn', vim.lsp.buf.rename, description = 'Rename symbol' },
+  { 'gd', vim.lsp.buf.definition, description = 'Go to definition' },
+  { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation' },
+  { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition' },
+  { '<leader>gd', functions.split_then(vim.lsp.buf.definition), description = 'Go to definition in split' },
+  { '<leader>gi', functions.split_then(vim.lsp.buf.implementation), description = 'Go to implementation in split' },
+  { '<leader>gt', functions.split_then(vim.lsp.buf.type_definition), description = 'Go to type definition in split' },
   { 'F', vim.lsp.buf.code_action, description = 'Show code actions' },
   { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item' },
   { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item' },
