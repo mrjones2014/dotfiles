@@ -11,6 +11,7 @@ return {
   config = function()
     require('legendary').setup({
       keymaps = require('keymap').default_keymaps,
+      commands = require('keymap').default_commands,
       select_prompt = ' Legendary ',
     })
   end,
