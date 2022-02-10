@@ -1,6 +1,5 @@
 return {
   'kyazdani42/nvim-tree.lua',
-  cmd = 'NvimTreeToggle',
   setup = function()
     -- TODO update these once they're implemented in the setup function
     vim.g.nvim_tree_indent_markers = 1
