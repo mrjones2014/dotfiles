@@ -49,9 +49,6 @@ M.default_keymaps = {
 
   { '<leader>c', ':CommentToggle<CR>', description = 'Toggle comment' },
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
-
-  -- extra commands
-  { ':qa<CR>', description = 'Quit all windows', nobind = true },
 }
 
 M.lsp_keymaps = {
@@ -65,9 +62,6 @@ M.lsp_keymaps = {
   { 'F', vim.lsp.buf.code_action, description = 'Show code actions' },
   { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item' },
   { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item' },
-
-  -- extra LSP commands
-  { ':Format', description = 'Format the current document with LSP', nobind = true },
 }
 
 function M.get_cmp_mappings()
