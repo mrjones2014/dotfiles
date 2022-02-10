@@ -6,7 +6,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd('packadd packer.nvim')
 end
 
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
@@ -56,9 +56,9 @@ return require('packer').startup(function(use)
   use(require('configure.mine.dash'))
   use(require('configure.mine.tldr'))
   use(require('configure.mine.legendary'))
-
-  -- Automatically set up config if we just bootstrapped packer by git cloning it
-  if packer_bootstrap then
-    require('packer').sync()
-  end
 end)
+
+-- Automatically set up config if we just bootstrapped packer by git cloning it
+if packer_bootstrap then
+  require('packer').sync()
+end
