@@ -3,15 +3,25 @@ local M = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client)
-  vim.api.nvim_add_user_command(
-    'Format',
+  -- setup LSP-specific keymaps
+  require('legendary').bind_keymaps(require('keymap').lsp_keymaps)
+  require('legendary.bindings').bind_command({
+    ':Format',
     M.format_document,
-    { desc = 'Format the document using the formatter configured in null-ls config' }
-  )
+    description = 'Format the current document with LSP',
+  })
 
-  local ft = vim.bo.filetype
-  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
-    vim.api.nvim_add_user_command('OrganizeImports', M.organize_imports, { desc = 'Organize imports via tsserver' })
+  if
+    vim.bo.filetype == 'javascript'
+    or vim.bo.filetype == 'typescript'
+    or vim.bo.filetype == 'javascriptreact'
+    or vim.bo.filetype == 'typescriptreact'
+  then
+    require('legendary').bind_command({
+      'OrganizeImports',
+      M.organize_imports,
+      description = 'Organize imports via tsserver',
+    })
   end
 
   vim.cmd([[
@@ -22,9 +32,6 @@ function M.on_attach(client)
 
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
-
-  -- setup LSP-specific keymaps
-  require('legendary').bind(require('keymap').lsp_keymaps)
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
