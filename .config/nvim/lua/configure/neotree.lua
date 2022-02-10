@@ -30,6 +30,9 @@ return {
         },
         window = {
           position = 'right',
+          mappings = {
+            f = 'none',
+          },
         },
       },
     })
