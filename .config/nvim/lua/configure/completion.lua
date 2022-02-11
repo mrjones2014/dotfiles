@@ -12,12 +12,17 @@ return {
   },
   after = { 'nvim-autopairs' },
   config = function()
+    local luasnip = require('luasnip')
+    luasnip.config.setup({
+      history = true,
+      updateevents = 'TextChanged,TextChangedI',
+    })
     local cmp = require('cmp')
     cmp.setup({
       preselect = cmp.PreselectMode.None,
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       completion = {
@@ -25,6 +30,7 @@ return {
       },
       mapping = require('keymap').get_cmp_mappings(),
       sources = {
+        { name = 'luasnip' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
