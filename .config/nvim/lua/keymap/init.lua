@@ -14,9 +14,6 @@ M.default_keymaps = {
 
   { 'W', ':Bdelete<CR>', description = 'Close current buffer' },
 
-  { '<C-y>', functions.resize_split('plus'), description = 'Resize split larger' },
-  { '<C-u>', functions.resize_split('minus'), description = 'Resize split smaller' },
-
   { 'gx', functions.open_url_under_cursor, description = 'Open URL under cursor' },
 
   { '<C-h>', functions.navigator_lazy('left'), description = 'Move to next split left' },
@@ -49,6 +46,7 @@ M.default_keymaps = {
 
   { '<leader>c', ':CommentToggle<CR>', description = 'Toggle comment' },
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
+  { '<leader><leader>s', ':source ~/.config/nvim/after/plugin/luasnip.lua<CR>', description = 'Reload snippets' },
 }
 
 M.default_commands = {
@@ -73,12 +71,38 @@ M.lsp_keymaps = {
 }
 
 function M.get_cmp_mappings()
+  local cmp = require('cmp')
+  local luasnip = require('luasnip')
   return {
-    ['<S-Tab>'] = require('cmp').mapping.select_prev_item(),
-    ['<Tab>'] = require('cmp').mapping.select_next_item(),
-    ['<C-d>'] = require('cmp').mapping.scroll_docs(-4),
-    ['<C-f>'] = require('cmp').mapping.scroll_docs(4),
-    ['<CR>'] = require('cmp').mapping.confirm({ select = true }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+    }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif require('utils').has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+    }),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }
 end
 
