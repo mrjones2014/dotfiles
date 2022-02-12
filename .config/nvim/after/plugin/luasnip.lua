@@ -1,14 +1,11 @@
 local ls = require('luasnip')
-local fmt = require('luasnip.extras.fmt').fmt
-local rep = require('luasnip.extras').rep
-local s = ls.s
-local i = ls.insert_node
 local p = ls.parser.parse_snippet
 
 ls.snippets.lua = {
-  s('req', fmt("local {} = require('{}')", { i(1, 'default'), rep(1) })),
-  p('fn', 'function M.$1()\n  $0\nend'),
-  p('lfn', 'local function $1()\n  $0\nend'),
+  p('req', "local $1 = require('$2')"),
+  p('fn', 'function M.$1($2)\n  $0\nend'),
+  p('lfn', 'local function $1($2)\n  $0\nend'),
+  p('mod', 'local M = {}\n\n$0\n\nreturn M'),
 }
 
 ls.snippets.rust = {
