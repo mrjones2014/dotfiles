@@ -2,9 +2,9 @@ local M = {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-function M.on_attach(client)
+function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
-  require('legendary').bind_keymaps(require('keymap').lsp_keymaps)
+  require('legendary').bind_keymaps(require('keymap').get_lsp_keymaps(bufnr))
   require('legendary.bindings').bind_command({
     ':Format',
     M.format_document,
