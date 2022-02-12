@@ -54,21 +54,38 @@ M.default_commands = {
   { ':CopyFilepath', functions.copy_rel_filepath, description = 'Copy current relative filepath to clipboard' },
 }
 
-M.lsp_keymaps = {
-  { 'gh', vim.lsp.buf.hover, description = 'Show hover information' },
-  { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help' },
-  { 'gr', vim.lsp.buf.references, description = 'Find references' },
-  { 'rn', vim.lsp.buf.rename, description = 'Rename symbol' },
-  { 'gd', vim.lsp.buf.definition, description = 'Go to definition' },
-  { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation' },
-  { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition' },
-  { '<leader>gd', functions.split_then(vim.lsp.buf.definition), description = 'Go to definition in split' },
-  { '<leader>gi', functions.split_then(vim.lsp.buf.implementation), description = 'Go to implementation in split' },
-  { '<leader>gt', functions.split_then(vim.lsp.buf.type_definition), description = 'Go to type definition in split' },
-  { 'F', vim.lsp.buf.code_action, description = 'Show code actions' },
-  { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item' },
-  { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item' },
-}
+function M.get_lsp_keymaps(bufnr)
+  return {
+    { 'gh', vim.lsp.buf.hover, description = 'Show hover information', opts = { buffer = bufnr } },
+    { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
+    { 'gr', vim.lsp.buf.references, description = 'Find references', opts = { buffer = bufnr } },
+    { 'rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
+    { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
+    { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
+    { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
+    {
+      '<leader>gd',
+      functions.split_then(vim.lsp.buf.definition),
+      description = 'Go to definition in split',
+      opts = { buffer = bufnr },
+    },
+    {
+      '<leader>gi',
+      functions.split_then(vim.lsp.buf.implementation),
+      description = 'Go to implementation in split',
+      opts = { buffer = bufnr },
+    },
+    {
+      '<leader>gt',
+      functions.split_then(vim.lsp.buf.type_definition),
+      description = 'Go to type definition in split',
+      opts = { buffer = bufnr },
+    },
+    { 'F', vim.lsp.buf.code_action, description = 'Show code actions', opts = { buffer = bufnr } },
+    { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item', opts = { buffer = bufnr } },
+    { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
+  }
+end
 
 function M.get_cmp_mappings()
   local cmp = require('cmp')
