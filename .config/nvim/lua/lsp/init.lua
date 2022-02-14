@@ -1,4 +1,4 @@
-require('lsp.ui-customization')
+require('lsp.utils.ui-customization')
 
 require('lsp.css')
 require('lsp.html')
