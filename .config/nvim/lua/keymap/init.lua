@@ -26,6 +26,10 @@ M.default_keymaps = {
 
   { '<F3>', ':NeoTreeShowToggle<CR>', description = 'Toggle file tree' },
 
+  { 'gnn', functions.incremental_selection('init_selection'), description = 'Start selection with Treesitter' },
+  { 'grn', functions.incremental_selection('node_incremental'), description = 'Expand selection to next Treesitter node' },
+  { 'grm', functions.incremental_selection('node_decremental'), description = 'Shrink selection to next Treesitter node' },
+
   { 'ff', functions.telescope_lazy('find_files'), description = 'Find files' },
   { 'fb', functions.telescope_lazy('buffers'), description = 'Find open buffers' },
   { 'ft', functions.telescope_lazy('live_grep'), description = 'Find pattern' },

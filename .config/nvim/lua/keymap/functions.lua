@@ -1,5 +1,12 @@
 local M = {}
 
+-- wrapper to not `require` treesitter until needed
+function M.incremental_selection(method)
+  return function()
+    require('nvim-treesitter.incremental_selection')[method]()
+  end
+end
+
 -- wrapper to not `require` legendary.nvim until needed
 function M.legendary_lazy()
   return function()
