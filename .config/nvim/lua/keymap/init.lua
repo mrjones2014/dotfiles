@@ -63,6 +63,7 @@ function M.get_lsp_keymaps(bufnr)
     { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
     { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
     { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
+    { '<leader>p', require('lsp.utils.peek').peek_definition, description = 'Peek definition', opts = { buffer = bufnr } },
     {
       '<leader>gd',
       functions.split_then(vim.lsp.buf.definition),

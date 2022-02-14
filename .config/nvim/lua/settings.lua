@@ -1,3 +1,4 @@
+vim.g.mapleader = ' '
 vim.opt.compatible = false
 vim.opt.cursorline = false
 vim.opt.autoread = true

@@ -1,6 +1,17 @@
 local null_ls = require('null-ls')
 local b = null_ls.builtins
 
+local typescript_root_dir = nil
+-- prioritize workspace roots
+if
+  vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yaml') > 0
+  or vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yml') > 0
+then
+  typescript_root_dir = function()
+    return vim.loop.cwd()
+  end
+end
+
 local sources = {
   -- code actions
   b.code_actions.gitsigns,
@@ -59,8 +70,14 @@ if vim.fn.filereadable('./node_modules/.bin/stylelint') > 0 then
   )
 end
 
-null_ls.setup({
+local config = {
   sources = sources,
   on_attach = require('lsp.utils').on_attach,
   update_on_insert = true,
-})
+}
+
+if typescript_root_dir ~= nil then
+  config.root_dir = typescript_root_dir
+end
+
+null_ls.setup(config)
