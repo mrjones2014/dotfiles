@@ -1,7 +1,7 @@
 M = {}
 
 -- lines to show above and below definition
-local context_before = 3
+local context_before = 0
 local context_after = 10
 
 local function preview_location_callback(_, result)
@@ -11,7 +11,7 @@ local function preview_location_callback(_, result)
   local range = result[1].targetRange or result[1].range
   range.start.line = (range.start.line - context_before)
   range['end'].line = (range['end'].line + context_after)
-  vim.lsp.util.preview_location(result[1])
+  vim.lsp.util.preview_location(result[1], { style = 'numbered', border = 'rounded' })
 end
 
 function M.peek_definition()
