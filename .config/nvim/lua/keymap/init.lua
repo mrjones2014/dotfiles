@@ -77,7 +77,7 @@ function M.get_lsp_keymaps(bufnr)
     { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
     {
       '<leader>p',
-      require('lsp.utils.peek').peek_definition,
+      ':TSTextobjectPeekDefinitionCode @block.outer<CR>',
       description = 'Peek definition',
       opts = { buffer = bufnr },
     },

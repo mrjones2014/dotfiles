@@ -1,6 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  requires = { 'p00f/nvim-ts-rainbow' },
+  requires = { 'p00f/nvim-ts-rainbow', 'nvim-treesitter/nvim-treesitter-textobjects' },
   run = ':TSUpdateSync',
   config = function()
     require('nvim-treesitter.configs').setup({
@@ -22,6 +22,12 @@ return {
         enable = true,
         extended_mode = true,
         max_file_lines = 1500,
+      },
+      textobjects = {
+        lsp_interop = {
+          enable = true,
+          border = 'rounded',
+        },
       },
     })
   end,

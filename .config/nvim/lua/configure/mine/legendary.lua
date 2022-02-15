@@ -1,4 +1,4 @@
-local path = ''
+local path
 
 if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/legendary.nvim') > 0 then
   path = '~/git/personal/legendary.nvim'
