@@ -1,4 +1,5 @@
--- Modified from https://github.com/echasnovski/mini.nvim/blob/91969103413bb2e29e4b4d7841e68a8a65959ccd/lua/mini/trailspace.lua
+-- Modified from
+-- https://github.com/echasnovski/mini.nvim/blob/91969103413bb2e29e4b4d7841e68a8a65959ccd/lua/mini/trailspace.lua
 local M = {}
 
 local H = { window_matches = {} }
