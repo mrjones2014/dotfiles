@@ -10,7 +10,7 @@ return {
         'gitcommit',
         'fugitive',
         'nofile',
-        'floatline',
+        'Greeter',
       },
       filetype_exclude = {
         'NvimTree',
@@ -20,7 +20,7 @@ return {
         'gitcommit',
         'fugitive',
         'nofile',
-        'floatline',
+        'Greeter',
       },
       context_patterns = {
         'class',

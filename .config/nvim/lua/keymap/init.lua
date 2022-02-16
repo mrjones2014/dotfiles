@@ -24,7 +24,7 @@ M.default_keymaps = {
   { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
   { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
-  { '<F3>', ':NeoTreeShowToggle<CR>', description = 'Toggle file tree' },
+  { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
 
   { 'gnn', functions.incremental_selection('init_selection'), description = 'Start selection with Treesitter' },
   {
