@@ -32,6 +32,7 @@ require('packer').startup(function(use)
 
   -- LSP + syntax
   use(require('configure.lspconfig'))
+  use(require('configure.luasnip'))
   use(require('configure.completion'))
   use(require('configure.vim-fish'))
   use(require('configure.trouble'))

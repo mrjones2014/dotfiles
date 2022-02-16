@@ -58,7 +58,6 @@ M.default_keymaps = {
 
   { '<leader>c', ':CommentToggle<CR>', description = 'Toggle comment' },
   { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
-  { '<leader><leader>s', ':source ~/.config/nvim/after/plugin/luasnip.lua<CR>', description = 'Reload snippets' },
 }
 
 M.default_commands = {

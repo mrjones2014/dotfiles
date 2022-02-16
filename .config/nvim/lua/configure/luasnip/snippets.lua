@@ -10,6 +10,8 @@ ls.snippets.lua = {
 
 ls.snippets.rust = {
   p('fn', 'fn $1($2)$3 {\n  $0\n}'),
+  p('res', 'Result<$1, $2>$0'),
+  p('opt', 'Option<$1>$0'),
   p('const', 'const $1: $2 = $0;'),
   p('enum', '#[derive(Debug)]\nenum $1 {\n  $0\n}'),
   p('derive', '#[derive($0)]'),
