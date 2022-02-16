@@ -1,8 +1,8 @@
 return {
-  'goolord/alpha-nvim',
+  'startup-nvim/startup.nvim',
   config = function()
-    local dashboard = require('alpha.themes.dashboard')
-    dashboard.section.header.val = {
+    local settings = require('startup.themes.dashboard')
+    settings.header.content = {
       '╭──────────────────────────────────────────────────────────╮',
       '│                                                          │',
       '│    ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗    │',
@@ -14,14 +14,9 @@ return {
       '│                                                          │',
       '╰──────────────────────────────────────────────────────────╯',
     }
-
-    dashboard.section.buttons.val = {
-      dashboard.button('e', '  > New file', ':enew <BAR> startinsert <CR>'),
-      dashboard.button('q', '  > Quit', ':qa<CR>'),
-    }
-
-    dashboard.config.layout[1].val = 15
-
-    require('alpha').setup(dashboard.config)
+    settings.footer.content = { require('utils').relative_cwd() }
+    settings.parts = { 'header', 'footer' }
+    settings.options.paddings[1] = 10
+    require('startup').setup()
   end,
 }

@@ -36,8 +36,3 @@ vim.opt.wildignore:append({ '*.DS_Store' })
 vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
 -- add @, -, and $ as keywords for full SCSS support
 vim.opt.iskeyword:append({ '@-@', '-', '$' })
-
--- netrw
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3 -- tree
-vim.g.netrw_altv = 2
