@@ -39,7 +39,6 @@ require('packer').startup(function(use)
   use(require('configure.treesitter-playground'))
 
   -- UI + utils
-  use(require('configure.greeter'))
   use(require('configure.gitsigns'))
   use(require('configure.icons'))
   use(require('configure.nvim-tree'))
