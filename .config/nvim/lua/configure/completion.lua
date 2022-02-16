@@ -2,7 +2,6 @@ return {
   'hrsh7th/nvim-cmp',
   requires = {
     'onsails/lspkind-nvim',
-    'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
@@ -10,7 +9,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
   },
-  after = { 'nvim-autopairs' },
+  after = { 'nvim-autopairs', 'LuaSnip' },
   config = function()
     local luasnip = require('luasnip')
     luasnip.config.setup({
