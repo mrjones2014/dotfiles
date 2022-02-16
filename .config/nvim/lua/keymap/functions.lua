@@ -1,5 +1,9 @@
 local M = {}
 
+function M.peek()
+  require('nvim-treesitter.textobjects.lsp_interop').peek_definition_code('@block.outer')
+end
+
 -- wrapper to not `require` treesitter until needed
 function M.incremental_selection(method)
   return function()
@@ -8,10 +12,8 @@ function M.incremental_selection(method)
 end
 
 -- wrapper to not `require` legendary.nvim until needed
-function M.legendary_lazy()
-  return function()
-    require('legendary').find()
-  end
+function M.legendary()
+  require('legendary').find()
 end
 
 -- wrapper to not `require` telescope until needed

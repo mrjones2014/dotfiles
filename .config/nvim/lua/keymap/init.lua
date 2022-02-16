@@ -8,7 +8,7 @@ M.default_keymaps = {
   { '<ESC>', '<C-\\><C-n>', mode = 't' },
   { 'jk', '<C-\\><C-n>', mode = 't' },
 
-  { '<C-p>', functions.legendary_lazy(), description = 'Search keybinds and commands', mode = { 'n', 'i' } },
+  { '<C-p>', functions.legendary, description = 'Search keybinds and commands', mode = { 'n', 'i' } },
 
   { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
@@ -77,7 +77,7 @@ function M.get_lsp_keymaps(bufnr)
     { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
     {
       '<leader>p',
-      ':TSTextobjectPeekDefinitionCode @block.outer<CR>',
+      functions.peek,
       description = 'Peek definition',
       opts = { buffer = bufnr },
     },
