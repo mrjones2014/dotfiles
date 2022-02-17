@@ -7,3 +7,6 @@ augroup TerminalBuffers
   autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
   autocmd TermClose * Bdelete!
 augroup END
+
+" Wrap lines in markdown files
+autocmd FileType markdown :setlocal wrap linebreak
