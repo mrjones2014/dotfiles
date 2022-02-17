@@ -49,11 +49,15 @@ return {
       return mode_icons[mode] .. ' '
     end
 
+    local function filepath()
+      return require('utils').relative_filepath()
+    end
+
     local sections = {
       lualine_a = { get_mode },
       lualine_b = { 'branch' },
       lualine_c = {
-        require('utils').relative_filepath,
+        filepath,
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
