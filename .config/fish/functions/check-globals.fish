@@ -1,6 +1,10 @@
 function check-globals --description "Check for missing command line tools and print instructions on how to install them"
-    if test -z "(ls ~/Library/Fonts | grep Fira\ Code)"
-        echo "Install Fira Code NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
+    if test -z "(ls ~/Library/Fonts | grep JetBrains | echo '')"
+        echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
+    end
+
+    if test -z "(ls ~/Library/Fonts | grep Fira\ Code | echo '')"
+        echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
     end
 
     if ! type diff-so-fancy &>/dev/null
@@ -65,10 +69,6 @@ function check-globals --description "Check for missing command line tools and p
 
     if ! type cargo &>/dev/null
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-    end
-
-    if ! cargo help install-update &>/dev/null
-        echo "Install cargo-update: cargo install cargo-update"
     end
 
     if ! type atuin &>/dev/null

@@ -13,9 +13,6 @@ require('packer').startup(function(use)
   -- Dependencies of other plugins
   use('nvim-lua/plenary.nvim')
 
-  -- Themes
-  use(require('configure.theme'))
-
   -- Editing enhancements and tools
   use(require('configure.tmux-navigator'))
   use(require('configure.vim-move'))
@@ -52,7 +49,8 @@ require('packer').startup(function(use)
   use(require('configure.dressing'))
   use(require('configure.fidget'))
 
-  -- Plugins I develop (plus configure.theme [lighthaus.nvim])
+  -- Plugins I develop
+  use(require('configure.mine.lighthaus'))
   use(require('configure.mine.dash'))
   use(require('configure.mine.tldr'))
   use(require('configure.mine.legendary'))

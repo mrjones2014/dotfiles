@@ -4,7 +4,7 @@ if vim.fn.isdirectory(paths.join(paths.home, 'git/personal/lighthaus.nvim')) > 0
   return {
     '~/git/personal/lighthaus.nvim',
     config = function()
-      require('lighthaus').setup({ bg_dark = true })
+      require('lighthaus').setup({ bg_dark = true, italic_comments = true })
     end,
   }
 end
@@ -12,6 +12,6 @@ end
 return {
   'mrjones2014/lighthaus.nvim',
   config = function()
-    require('lighthaus').setup({ bg_dark = true })
+    require('lighthaus').setup({ bg_dark = true, italic_comments = true })
   end,
 }
