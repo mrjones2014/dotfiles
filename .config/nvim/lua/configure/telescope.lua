@@ -7,6 +7,7 @@ return {
   },
   config = function()
     local trouble = require('trouble.providers.telescope')
+    local paths = require('paths')
 
     require('telescope').setup({
       defaults = {
@@ -19,7 +20,7 @@ return {
           '--column',
           '--smart-case',
           '--ignore-file',
-          (os.getenv('HOME') .. '/.config/.ignore'),
+          (paths.join(paths.config, '.ignore')),
         },
         prompt_prefix = '   ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
@@ -40,7 +41,7 @@ return {
             '--column',
             '--smart-case',
             '--ignore-file',
-            (os.getenv('HOME') .. '/.config/.ignore'),
+            (paths.join(paths.config, '.ignore')),
             '--iglob',
             '!.git',
           },
