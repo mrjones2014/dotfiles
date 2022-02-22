@@ -42,7 +42,7 @@ M.default_keymaps = {
   { 'fb', functions.telescope_lazy('buffers'), description = 'Find open buffers' },
   { 'ft', functions.telescope_lazy('live_grep'), description = 'Find pattern' },
   { 'fh', functions.telescope_lazy('oldfiles', { only_cwd = true }), description = 'Find recent files' },
-  { '<leader>v', functions.telescope_lazy('find_files', nil, true), description = 'Split vertically, then find files' },
+  { '<leader>f', functions.telescope_lazy('find_files', nil, true), description = 'Split vertically, then find files' },
   {
     '<leader>b',
     functions.telescope_lazy('buffers', nil, true),
@@ -52,6 +52,11 @@ M.default_keymaps = {
     '<leader>h',
     functions.telescope_lazy('oldfiles', { only_cwd = true }, true),
     description = 'Split vertically, then find recent files',
+  },
+  {
+    '<leader>t',
+    functions.telescope_lazy('live_grep', nil, true),
+    description = 'Split vertically, then find file via live grep',
   },
 
   { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
@@ -70,10 +75,10 @@ function M.get_lsp_keymaps(bufnr)
     { 'gh', vim.lsp.buf.hover, description = 'Show hover information', opts = { buffer = bufnr } },
     { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
     { 'gr', vim.lsp.buf.references, description = 'Find references', opts = { buffer = bufnr } },
-    { 'rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
     { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
     { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
     { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
+    { '<leader>rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
     {
       '<leader>p',
       functions.peek,
