@@ -67,6 +67,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
 
+    if ! cargo help install-update &>/dev/null
+        echo "Install cargo-update: cargo install cargo-update"
+    end
+
     if ! type atuin &>/dev/null
         echo "Install atuin: cargo install atuin"
     end
@@ -115,8 +119,8 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install rust-analyzer: brew install rust-analyzer"
     end
 
-    if test -z "(ls ~/git/personal/lua-language-server/bin/macOS | grep lua-language-server)"
-        echo "Install lua-language-server: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)"
+    if ! type lua-language-server &>/dev/null
+        echo "Install lua-language-server: brew install lua-language-server"
     end
 
     if [ -z (ls /Applications/ | grep -i hammerspoon) ]
