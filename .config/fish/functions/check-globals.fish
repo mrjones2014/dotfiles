@@ -68,11 +68,11 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type atuin &>/dev/null
-        echo "Install atuin: cd ~/git/personal && git clone git@github.com:ellie/atuin.git && cd atuin && cargo install --path ."
+        echo "Install atuin: cargo install atuin"
     end
 
     if ! type ctrlg &>/dev/null
-        echo "Install ctrlg: cd ~/git/personal && git clone git@github.com:mrjones2014/ctrlg.git && cd ctrlg && cargo install --path ."
+        echo "Install ctrlg: cargo install ctrlg"
     end
 
     if ! type stylua &>/dev/null
