@@ -1,5 +1,5 @@
 function check-globals --description "Check for missing command line tools and print instructions on how to install them"
-    if test -z "(ls ~/Library/Fonts | grep JetBrains | echo '')"
+    if ! test -z "(ls ~/Library/Fonts | grep VictorMono | echo '')"
         echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
     end
 
