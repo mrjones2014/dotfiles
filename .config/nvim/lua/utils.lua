@@ -20,18 +20,12 @@ end
 function M.relative_filepath(path, replace_home_with_tilde)
   path = path or vim.fn.expand('%')
   -- ensure path is relative to cwd
-  local cwd_pattern = (vim.fn.getcwd() .. '/'):gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
-    return '%' .. c
-  end)
-  path = path:gsub(cwd_pattern, '')
+  path = path:gsub(M.pattern_to_literal(vim.loop.cwd()), '')
   -- replace $HOME with ~
-  local home_pattern = (os.getenv('HOME') .. '/'):gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
-    return '%' .. c
-  end)
   if replace_home_with_tilde then
-    path = path:gsub(home_pattern, '~/')
+    path = path:gsub(M.pattern_to_literal(require('paths').home), '~/')
   else
-    path = path:gsub(home_pattern, '')
+    path = path:gsub(M.pattern_to_literal(require('paths').home), '')
   end
   if vim.fn.winwidth(0) <= 84 then
     path = vim.fn.pathshorten(path)
@@ -42,6 +36,12 @@ function M.relative_filepath(path, replace_home_with_tilde)
   end
 
   return path
+end
+
+function M.pattern_to_literal(pat)
+  return pat:gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
+    return '%' .. c
+  end)
 end
 
 return M

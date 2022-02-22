@@ -1,5 +1,6 @@
 -- use local theme repo if it's cloned
-if vim.fn.isdirectory(os.getenv('HOME') .. '/git/personal/lighthaus.nvim') > 0 then
+local paths = require('paths')
+if vim.fn.isdirectory(paths.join(paths.home, 'git/personal/lighthaus.nvim')) > 0 then
   return {
     '~/git/personal/lighthaus.nvim',
     config = function()

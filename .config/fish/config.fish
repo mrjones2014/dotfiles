@@ -8,7 +8,6 @@ end
 export GPG_TTY=(tty)
 export EDITOR="nvim"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export LUA_LANGUAGE_SERVER_VERSION=(brew list lua-language-server | head -1 | grep -o "[0-9]*\.[0-9]*\.[0-9]*")
 
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
