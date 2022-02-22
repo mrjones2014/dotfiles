@@ -1,17 +1,14 @@
-function update-globals --description "Update brew packages, npm global packages, and sumneko/lua-language-server"
+function update-globals --description "Update brew packages, some cargo packages, and npm global packages"
     # update homebrew packages
     brew update
     brew upgrade --fetch-HEAD
 
-    # update sumneko lua-language-server via git and build from source
-    pushd ~/git/personal/lua-language-server/
-    git fetch
-    set -l updates (git log HEAD..origin/master --oneline)
-    if test -n "$updates"
-        git merge && git submodule update --recursive
-        pushd 3rd/luamake && compile/install.sh && popd && ./3rd/luamake/luamake rebuild
-    end
-    popd
+    # update cargo packages
+    cargo install atuin
+    cargo install caniuse-rs
+    cargo install mdbook
+    cargo install stylua
+    cargo install tealdeer
 
     # update neovim plugins
     update-nvim-plugins
