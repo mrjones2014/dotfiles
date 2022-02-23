@@ -35,8 +35,13 @@ local function handle_app_event(app_name, event_type, app_obj)
 
   -- no, Zoom, I don't want you to spy on my mic in the background
   if
-    (event_type == hs.application.watcher.hidden or event_type == hs.application.watcher.terminated)
+    (
+      event_type == hs.application.watcher.hidden
+      or event_type == hs.application.watcher.terminated
+      or event_type == hs.application.watcher.deactivated
+    )
     and app_name == 'zoom.us'
+    and #app_obj:allWindows() == 0
   then
     -- make Zoom kill itself when I leave a meeting
     app_obj:kill()
