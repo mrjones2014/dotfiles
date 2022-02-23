@@ -10,55 +10,64 @@ end
 
 local packer = require('packer')
 
-packer.startup(function(use)
-  -- Packer can manage itself
-  use('wbthomason/packer.nvim')
+packer.startup({
+  function(use)
+    -- Packer can manage itself
+    use('wbthomason/packer.nvim')
 
-  -- Dependencies of other plugins
-  use('nvim-lua/plenary.nvim')
+    -- Dependencies of other plugins
+    use('nvim-lua/plenary.nvim')
 
-  -- Editing enhancements and tools
-  use(require('configure.tmux-navigator'))
-  use(require('configure.vim-move'))
-  use(require('configure.telescope'))
-  use(require('configure.autopairs'))
-  use(require('configure.tagalong'))
-  use(require('configure.markdown-preview'))
-  use(require('configure.comments'))
-  use(require('configure.better-escape'))
+    -- Editing enhancements and tools
+    use(require('configure.tmux-navigator'))
+    use(require('configure.vim-move'))
+    use(require('configure.telescope'))
+    use(require('configure.autopairs'))
+    use(require('configure.tagalong'))
+    use(require('configure.markdown-preview'))
+    use(require('configure.comments'))
+    use(require('configure.better-escape'))
 
-  -- Tim Pope plugins
-  use(require('configure.vim-sleuth'))
-  use(require('configure.vim-eunuch'))
+    -- Tim Pope plugins
+    use(require('configure.vim-sleuth'))
+    use(require('configure.vim-eunuch'))
 
-  -- LSP + syntax
-  use(require('configure.lspconfig'))
-  use(require('configure.luasnip'))
-  use(require('configure.completion'))
-  use(require('configure.vim-fish'))
-  use(require('configure.trouble'))
-  use(require('configure.treesitter'))
-  use(require('configure.treesitter-playground'))
+    -- LSP + syntax
+    use(require('configure.lspconfig'))
+    use(require('configure.luasnip'))
+    use(require('configure.completion'))
+    use(require('configure.vim-fish'))
+    use(require('configure.trouble'))
+    use(require('configure.treesitter'))
+    use(require('configure.treesitter-playground'))
 
-  -- UI + utils
-  use(require('configure.gitsigns'))
-  use(require('configure.icons'))
-  use(require('configure.nvim-tree'))
-  use(require('configure.indent-blankline'))
-  use(require('configure.lualine'))
-  use(require('configure.bufferline'))
-  use(require('configure.colorizer'))
-  use(require('configure.todo-comments'))
-  use(require('configure.nvim-notify'))
-  use(require('configure.dressing'))
-  use(require('configure.fidget'))
+    -- UI + utils
+    use(require('configure.gitsigns'))
+    use(require('configure.icons'))
+    use(require('configure.nvim-tree'))
+    use(require('configure.indent-blankline'))
+    use(require('configure.lualine'))
+    use(require('configure.bufferline'))
+    use(require('configure.colorizer'))
+    use(require('configure.todo-comments'))
+    use(require('configure.nvim-notify'))
+    use(require('configure.dressing'))
+    use(require('configure.fidget'))
+    use(require('configure.startuptime'))
 
-  -- Plugins I develop
-  use(require('configure.mine.lighthaus'))
-  use(require('configure.mine.dash'))
-  use(require('configure.mine.tldr'))
-  use(require('configure.mine.legendary'))
-end)
+    -- Plugins I develop
+    use(require('configure.mine.lighthaus'))
+    use(require('configure.mine.dash'))
+    use(require('configure.mine.tldr'))
+    use(require('configure.mine.legendary'))
+  end,
+  config = {
+    profile = {
+      enable = true,
+      threshold = 1,
+    },
+  },
+})
 
 -- Automatically set up config if we just bootstrapped packer by git cloning it
 if packer_bootstrap then
