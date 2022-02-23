@@ -1,4 +1,4 @@
-local version = vim.fn.system('brew list lua-language-server | head -1 | grep -o "[0-9]*\\.[0-9]*\\.[0-9]*"'):gsub(
+local version = vim.fn.system('ls /opt/homebrew/Cellar/lua-language-server/ | head -1 | grep -o "[0-9]*\\.[0-9]*\\.[0-9]*"'):gsub(
   '\n',
   ''
 )
