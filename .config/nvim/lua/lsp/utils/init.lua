@@ -26,6 +26,7 @@ function M.on_attach(client, bufnr)
 
   vim.cmd([[
     augroup fmt
+      au!
       autocmd BufWritePre * Format
     augroup END
   ]])
