@@ -5,5 +5,6 @@
   prune-branches = "!git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune"
   ch = "!git branch -a --format=\"%(refname:short)\" | sed 's|origin/||g' | grep -v \"HEAD\" | sort | uniq | fzf-tmux -p -x 15 | xargs git checkout"
   add-ignore-whitespace = "!git diff --ignore-all-space | git apply --cached"
+  tmux-branch = "!_tmux_branch_fn() { local _tmux_branch=$(git branch --show-current 2> /dev/null); if [ \"$_tmux_branch\" != \"\" ]; then echo \"  $_tmux_branch\"; fi }; _tmux_branch_fn"
 
 ; vi: ft=gitconfig
