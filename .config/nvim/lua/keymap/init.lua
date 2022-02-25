@@ -42,20 +42,24 @@ M.default_keymaps = {
   { 'fb', functions.telescope_lazy('buffers'), description = 'Find open buffers' },
   { 'ft', functions.telescope_lazy('live_grep'), description = 'Find pattern' },
   { 'fh', functions.telescope_lazy('oldfiles', { only_cwd = true }), description = 'Find recent files' },
-  { '<leader>f', functions.telescope_lazy('find_files', nil, true), description = 'Split vertically, then find files' },
+  {
+    '<leader>f',
+    functions.split_then(functions.telescope_lazy('find_files')),
+    description = 'Split vertically, then find files',
+  },
   {
     '<leader>b',
-    functions.telescope_lazy('buffers', nil, true),
+    functions.split_then(functions.telescope_lazy('buffers')),
     description = 'Split vertically, then find open buffers',
   },
   {
     '<leader>h',
-    functions.telescope_lazy('oldfiles', { only_cwd = true }, true),
+    functions.split_then(functions.telescope_lazy('oldfiles', { only_cwd = true })),
     description = 'Split vertically, then find recent files',
   },
   {
     '<leader>t',
-    functions.telescope_lazy('live_grep', nil, true),
+    functions.split_then(functions.telescope_lazy('live_grep')),
     description = 'Split vertically, then find file via live grep',
   },
 
