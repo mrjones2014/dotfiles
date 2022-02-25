@@ -17,11 +17,8 @@ function M.legendary()
 end
 
 -- wrapper to not `require` telescope until needed
-function M.telescope_lazy(builtin_name, args, vert_split)
+function M.telescope_lazy(builtin_name, args)
   return function()
-    if vert_split then
-      vim.cmd('vsp')
-    end
     require('telescope.builtin')[builtin_name](args)
   end
 end
