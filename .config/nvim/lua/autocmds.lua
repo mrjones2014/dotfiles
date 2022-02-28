@@ -42,7 +42,7 @@ M.default_autocmds = {
       { 'BufRead', 'BufNewFile' },
       ':set filetype=jsonc',
       opts = {
-        pattern = { '*.json', 'tsconfig*.json' },
+        pattern = { '*.jsonc', 'tsconfig*.json' },
       },
     },
   },
