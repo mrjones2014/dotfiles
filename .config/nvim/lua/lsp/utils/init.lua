@@ -24,12 +24,7 @@ function M.on_attach(client, bufnr)
     })
   end
 
-  vim.cmd([[
-    augroup fmt
-      au! * <buffer>
-      autocmd BufWritePre <buffer> Format
-    augroup END
-  ]])
+  require('legendary').bind_augroup(require('autocmds').lsp_autocmds)
 
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
