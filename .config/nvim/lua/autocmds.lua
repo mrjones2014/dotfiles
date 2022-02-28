@@ -36,14 +36,33 @@ M.default_autocmds = {
       ':Bdelete',
     },
   },
+  {
+    name = 'JsoncFiletypeDetection',
+    {
+      {'BufRead','BufNewFile'},
+      ':set filetype=jsonc',
+      opts = {
+        pattern = { '*.json', 'tsconfig*.json' }
+      }
+    }
+  }
 }
 
 M.lsp_autocmds = {
-  name = 'LspFmt',
   {
-    'BufWritePre',
+    name = 'LspFmt',
+    {
+      'BufWritePre',
+      function()
+        require('lsp.utils').format_document()
+      end,
+      opts = { pattern = '<buffer>' },
+    },
+  },
+  {
+    'CursorHold',
     function()
-      require('lsp.utils').format_document()
+      vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor', border = 'rounded' })
     end,
     opts = { pattern = '<buffer>' },
   },
