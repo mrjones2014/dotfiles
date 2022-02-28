@@ -24,7 +24,7 @@ function M.on_attach(client, bufnr)
     })
   end
 
-  require('legendary').bind_au(require('autocmds').lsp_autocmds)
+  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds)
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then

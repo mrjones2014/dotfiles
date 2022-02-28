@@ -39,13 +39,13 @@ M.default_autocmds = {
   {
     name = 'JsoncFiletypeDetection',
     {
-      {'BufRead','BufNewFile'},
+      { 'BufRead', 'BufNewFile' },
       ':set filetype=jsonc',
       opts = {
-        pattern = { '*.json', 'tsconfig*.json' }
-      }
-    }
-  }
+        pattern = { '*.json', 'tsconfig*.json' },
+      },
+    },
+  },
 }
 
 M.lsp_autocmds = {
