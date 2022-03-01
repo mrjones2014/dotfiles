@@ -54,9 +54,7 @@ M.lsp_autocmds = {
     clear = false,
     {
       'BufWritePre',
-      function()
-        require('lsp.utils').format_document()
-      end,
+      require('lsp.utils').format_document,
       opts = { pattern = '<buffer>' },
     },
     {
