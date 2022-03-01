@@ -10,6 +10,7 @@ function M.on_attach(client, bufnr)
     M.format_document,
     description = 'Format the current document with LSP',
   })
+  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds)
 
   if
     vim.bo.filetype == 'javascript'
@@ -23,8 +24,6 @@ function M.on_attach(client, bufnr)
       description = 'Organize imports via tsserver',
     })
   end
-
-  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds)
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
