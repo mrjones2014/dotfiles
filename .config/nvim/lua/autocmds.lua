@@ -51,18 +51,16 @@ M.default_autocmds = {
 M.lsp_autocmds = {
   {
     name = 'LspOnAttachAutocmds',
-    clear = false,
+    clear = true,
     {
       'BufWritePre',
       require('lsp.utils').format_document,
-      opts = { pattern = '<buffer>' },
     },
     {
       'CursorHold',
       function()
         vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor', border = 'rounded' })
       end,
-      opts = { pattern = '<buffer>' },
     },
   },
 }
