@@ -41,18 +41,15 @@ function M.on_attach(client, bufnr)
       return
     end
 
-    print(vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick'))
-    print(vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick'))
     if
       vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick')
-         == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
+        == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
       or vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick')
-         == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick') - 1
+        == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick') - 1
     then
       local view = vim.fn.winsaveview()
       vim.lsp.util.apply_text_edits(result, ctx.bufnr, 'utf-16')
       vim.fn.winrestview(view)
-      print(ctx.bufnr == vim.api.nvim_get_current_buf())
       if ctx.bufnr == vim.api.nvim_get_current_buf() then
         vim.b.format_saving = true
         vim.cmd('update')
