@@ -53,7 +53,7 @@ M.lsp_autocmds = {
     name = 'LspOnAttachAutocmds',
     clear = true,
     {
-      'BufWritePre',
+      'BufWritePost',
       require('lsp.utils').format_document,
     },
     {
