@@ -29,6 +29,37 @@ function M.on_attach(client, bufnr)
   if client.name ~= 'null-ls' then
     client.resolved_capabilities.document_formatting = false
   end
+
+  -- format on save asynchronously
+  vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
+    if err ~= nil then
+      vim.api.nvim_err_write(err)
+      return
+    end
+
+    if result == nil then
+      return
+    end
+
+    print(vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick'))
+    print(vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick'))
+    if
+      vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick')
+         == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
+      or vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick')
+         == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick') - 1
+    then
+      local view = vim.fn.winsaveview()
+      vim.lsp.util.apply_text_edits(result, ctx.bufnr, 'utf-16')
+      vim.fn.winrestview(view)
+      print(ctx.bufnr == vim.api.nvim_get_current_buf())
+      if ctx.bufnr == vim.api.nvim_get_current_buf() then
+        vim.b.format_saving = true
+        vim.cmd('update')
+        vim.b.format_saving = false
+      end
+    end
+  end
 end
 
 function M.format_document()
@@ -37,7 +68,10 @@ function M.format_document()
     return
   end
 
-  vim.lsp.buf.formatting_sync(nil, 1500)
+  if not vim.b.format_saving then
+    vim.b.format_changedtick = vim.b.changedtick
+    vim.lsp.buf.formatting({})
+  end
 end
 
 function M.organize_imports()
