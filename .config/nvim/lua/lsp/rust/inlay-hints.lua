@@ -27,12 +27,7 @@ function M.request(opts, bufnr)
 end
 
 function M.get_callback(opts)
-  opts = opts
-    or {
-      prefix = '  ',
-      highlight = 'GitSignsCurrentLineBlame',
-      enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
-    }
+  opts = opts or {}
 
   local highlight = opts.highlight or 'Comment'
   local prefix = opts.prefix or ' > '
@@ -137,7 +132,12 @@ function M.clear()
 end
 
 function M.show(opts)
-  opts = opts or {}
+  opts = opts
+    or {
+      prefix = '  ',
+      highlight = 'GitSignsCurrentLineBlame',
+      enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
+    }
   vim.lsp.buf_request(0, 'rust-analyzer/inlayHints', M.get_params(), M.get_callback(opts))
 end
 

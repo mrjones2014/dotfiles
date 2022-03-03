@@ -64,9 +64,7 @@ M.lsp_autocmds = {
     },
     {
       { 'BufEnter', 'BufWinEnter', 'TabEnter', 'InsertLeave', 'CursorMoved', 'BufWritePost' },
-      function()
-        require('lsp.rust.inlay-hints').show()
-      end,
+      require('lsp.rust.inlay-hints').show,
       opts = { pattern = '*.rs' },
     },
   },
