@@ -50,7 +50,7 @@ return {
     end
 
     local function filepath()
-      return require('utils').relative_filepath()
+      return require('paths').relative_filepath()
     end
 
     local sections = {
