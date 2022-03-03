@@ -62,11 +62,6 @@ M.lsp_autocmds = {
         vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor', border = 'rounded' })
       end,
     },
-    {
-      { 'BufEnter', 'BufWinEnter', 'TabEnter', 'InsertLeave', 'CursorMoved', 'BufWritePost' },
-      require('lsp.rust.inlay-hints').show,
-      opts = { pattern = '*.rs' },
-    },
   },
 }
 
