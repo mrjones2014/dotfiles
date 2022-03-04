@@ -12,9 +12,9 @@ return {
   -- requires = '~/git/personal/which-key.nvim',
   config = function()
     require('legendary').setup({
-      keymaps = require('keymap').default_keymaps,
-      commands = require('keymap').default_commands,
-      autocmds = require('autocmds').default_autocmds,
+      keymaps = require('keymap').default_keymaps(),
+      commands = require('keymap').default_commands(),
+      autocmds = require('autocmds').default_autocmds(),
       select_prompt = ' Legendary ',
     })
 

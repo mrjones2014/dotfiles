@@ -27,7 +27,7 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
-      mapping = require('keymap').get_cmp_mappings(),
+      mapping = require('keymap').cmp_mappings(),
       sources = {
         { name = 'luasnip' },
         { name = 'nvim_lsp' },

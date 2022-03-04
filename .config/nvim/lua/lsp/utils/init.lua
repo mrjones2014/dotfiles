@@ -4,13 +4,13 @@ local M = {}
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
-  require('legendary').bind_keymaps(require('keymap').get_lsp_keymaps(bufnr))
+  require('legendary').bind_keymaps(require('keymap').lsp_keymaps(bufnr))
   require('legendary.bindings').bind_command({
     ':Format',
     M.format_document,
     description = 'Format the current document with LSP',
   })
-  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds)
+  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds())
 
   if
     vim.bo.filetype == 'javascript'
