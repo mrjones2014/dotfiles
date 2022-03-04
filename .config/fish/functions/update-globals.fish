@@ -21,4 +21,6 @@ function update-globals --description "Update brew packages, some cargo packages
         npm update -g
     end
     nvm use "$current_node_version"
+
+    pushd ~/.hammerspoon/Spoons/VimMode.spoon/ && git pull && popd
 end
