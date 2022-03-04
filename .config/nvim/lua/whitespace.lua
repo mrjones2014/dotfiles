@@ -82,4 +82,6 @@ function M.track_normal_buffer()
   end
 end
 
+M.setup()
+
 return M

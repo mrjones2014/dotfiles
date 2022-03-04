@@ -1,3 +1,4 @@
+require('disable-builtins')
 require('settings')
 require('plugins')
-require('whitespace').setup()
+require('whitespace')

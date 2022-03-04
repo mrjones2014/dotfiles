@@ -19,4 +19,14 @@ function M.pattern_to_literal(pat)
   end)
 end
 
+function M.open_url_under_cursor()
+  if vim.fn.has('mac') == 1 then
+    vim.cmd('call jobstart(["open", expand("<cfile>")], {"detach": v:true})')
+  elseif vim.fn.has('unix') == 1 then
+    vim.cmd('call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})')
+  else
+    vim.notify('Error: gx is not supported on this OS!')
+  end
+end
+
 return M

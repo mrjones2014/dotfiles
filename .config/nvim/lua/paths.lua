@@ -9,6 +9,9 @@ function M.relative_cwd()
 end
 
 function M.relative_filepath(path, replace_home_with_tilde)
+  if replace_home_with_tilde == nil then
+    replace_home_with_tilde = true
+  end
   path = path or vim.fn.expand('%')
   -- ensure path is relative to cwd
   local new_path = path:gsub(require('utils').pattern_to_literal(vim.loop.cwd()), '')
@@ -18,7 +21,6 @@ function M.relative_filepath(path, replace_home_with_tilde)
       new_path = new_path:sub(2)
     end
 
-    print(new_path)
     path = new_path
   end
 
