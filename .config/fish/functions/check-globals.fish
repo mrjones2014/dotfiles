@@ -1,5 +1,5 @@
 function check-globals --description "Check for missing command line tools and print instructions on how to install them"
-    if ! test -z "(ls ~/Library/Fonts | grep VictorMono | echo '')"
+    if test -z "(ls ~/Library/Fonts | grep VictorMono | echo '')"
         echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
     end
 
@@ -125,6 +125,10 @@ function check-globals --description "Check for missing command line tools and p
 
     if [ -z (ls /Applications/ | grep -i hammerspoon) ]
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
+    end
+
+    if test ! -d ~/.hammerspoon/Spoons/VimMode.spoon
+        echo "Install VimMode.spoon for Hammerspoon: mkdir -p ~/.hammerspoon/Spoons && git clone https://github.com/dbalatero/VimMode.spoon ~/.hammerspoon/Spoons/VimMode.spoon"
     end
 
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
