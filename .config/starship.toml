@@ -11,5 +11,9 @@ vicmd_symbol = "[](bold #44B273)"
 symbol = " "
 style = "bold #f74e27" # git brand color
 
+[git_status]
+ahead = ""
+behind = ""
+
 [directory]
 read_only = " "
