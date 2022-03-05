@@ -13,7 +13,7 @@ return {
   config = function()
     require('legendary').setup({
       keymaps = require('keymap').default_keymaps(),
-      commands = require('keymap').default_commands(),
+      commands = require('commands').default_commands(),
       autocmds = require('autocmds').default_autocmds(),
       select_prompt = ' Legendary ',
     })
