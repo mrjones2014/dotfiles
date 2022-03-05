@@ -5,11 +5,7 @@ local M = {}
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
   require('legendary').bind_keymaps(require('keymap').lsp_keymaps(bufnr))
-  require('legendary.bindings').bind_command({
-    ':Format',
-    M.format_document,
-    description = 'Format the current document with LSP',
-  })
+  require('legendary.bindings').bind_commands(require('commands').lsp_commands())
   require('legendary').bind_autocmds(require('autocmds').lsp_autocmds())
 
   if
@@ -40,23 +36,6 @@ function M.format_document()
   if not vim.b.format_saving then
     vim.b.format_changedtick = vim.b.changedtick
     vim.lsp.buf.formatting({})
-  end
-end
-
-function M.organize_imports()
-  -- check if LSP is attached
-  if (#vim.lsp.buf_get_clients()) < 1 then
-    return
-  end
-
-  local ft = vim.bo.filetype
-  if ft == 'javascript' or ft == 'typescript' or ft == 'javascriptreact' or ft == 'typescriptreact' then
-    local params = {
-      command = '_typescript.organizeImports',
-      arguments = { vim.api.nvim_buf_get_name(0) },
-      title = '',
-    }
-    vim.lsp.buf_request_sync(vim.api.nvim_get_current_buf(), 'workspace/executeCommand', params, 1500)
   end
 end
 
