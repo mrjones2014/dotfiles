@@ -3,14 +3,14 @@ local M = {}
 function M.default_commands()
   return {
     {
-      ':CopyBranch',
+      ':CopyFilepath',
       function()
         require('utils').copy_to_clipboard(require('paths').relative_filepath())
       end,
       description = 'Copy current git branch name to clipboard',
     },
     {
-      ':CopyFilepath',
+      ':CopyBranch',
       function()
         require('utils').copy_to_clipboard(require('utils').git_branch())
       end,
