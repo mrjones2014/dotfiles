@@ -7,14 +7,14 @@ function M.default_commands()
       function()
         require('utils').copy_to_clipboard(require('paths').relative_filepath())
       end,
-      description = 'Copy current git branch name to clipboard',
+      description = 'Copy current relative filepath to clipboard',
     },
     {
       ':CopyBranch',
       function()
         require('utils').copy_to_clipboard(require('utils').git_branch())
       end,
-      description = 'Copy current relative filepath to clipboard',
+      description = 'Copy current git branch name to clipboard',
     },
     {
       ':Uuid',
