@@ -1,6 +1,4 @@
-local version = vim.fn.system(
-  'ls /opt/homebrew/Cellar/lua-language-server/ | tail -1 | grep -o "[0-9]*\\.[0-9]*\\.[0-9]*"'
-):gsub('\n', '')
+local version = '2.6.6'
 local base_root = '/opt/homebrew/Cellar/lua-language-server/' .. version
 local bin_root = base_root .. '/bin/'
 
