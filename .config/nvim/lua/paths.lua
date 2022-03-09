@@ -45,4 +45,6 @@ M.home = os.getenv('HOME')
 
 M.config = M.join(M.home, '.config')
 
+M.plugin_install_path = M.join(vim.fn.stdpath('data'), 'site/pack/packer/start/packer.nvim')
+
 return M

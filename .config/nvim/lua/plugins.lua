@@ -1,10 +1,14 @@
 local paths = require('paths')
 
 -- if packer isn't already installed, install it
-local install_path = paths.join(vim.fn.stdpath('data'), 'site/pack/packer/start/packer.nvim')
 local packer_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
+if vim.fn.empty(vim.fn.glob(paths.plugin_install_path)) > 0 then
+  packer_bootstrap = vim.fn.system({
+    'git',
+    'clone',
+    'https://github.com/wbthomason/packer.nvim',
+    paths.plugin_install_path,
+  })
   vim.cmd('packadd packer.nvim')
 end
 
