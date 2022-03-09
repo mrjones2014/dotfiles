@@ -19,6 +19,20 @@ function M.pattern_to_literal(pat)
   end)
 end
 
+function M.split_to_lines(str)
+  local lines = {}
+
+  for s in str:gmatch('[^\r\n]+') do
+    table.insert(lines, s)
+  end
+
+  return lines
+end
+
+function M.trim_str(str)
+  return (string.gsub(str, '^%s*(.-)%s*$', '%1'))
+end
+
 function M.open_url_under_cursor()
   if vim.fn.has('mac') == 1 then
     vim.cmd('call jobstart(["open", expand("<cfile>")], {"detach": v:true})')
