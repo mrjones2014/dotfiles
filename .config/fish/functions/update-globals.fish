@@ -23,4 +23,8 @@ function update-globals --description "Update brew packages, some cargo packages
     nvm use "$current_node_version"
 
     pushd ~/.hammerspoon/Spoons/VimMode.spoon/ && git pull && popd
+
+    echo "You need to update LibreWolf manually if there are updates."
+    echo "  cd ~/git/personal/bsys5/ && make docker-macos-aarch64 macos-aarch64"
+    echo "Then install from the .dmg file that is built."
 end
