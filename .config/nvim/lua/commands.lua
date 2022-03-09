@@ -16,6 +16,15 @@ function M.default_commands()
       end,
       description = 'Copy current relative filepath to clipboard',
     },
+    {
+      ':Uuid',
+      function()
+        local uuid = vim.fn.system('uuidgen'):gsub('\n', ''):lower()
+        vim.cmd('startinsert')
+        vim.api.nvim_feedkeys(uuid, 't', true)
+      end,
+      description = 'Generate a UUID and insert it into the buffer',
+    },
   }
 end
 
