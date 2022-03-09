@@ -34,7 +34,7 @@ function M.lsp_commands()
   return {
     {
       ':Format',
-      M.format_document,
+      require('lsp.utils').format_document,
       description = 'Format the current document with LSP',
     },
     {

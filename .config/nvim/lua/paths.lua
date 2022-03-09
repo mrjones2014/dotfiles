@@ -41,7 +41,7 @@ function M.relative_filepath(path, replace_home_with_tilde)
   return path
 end
 
-M.home = os.getenv('HOME')
+M.home = vim.env.HOME
 
 M.config = M.join(M.home, '.config')
 

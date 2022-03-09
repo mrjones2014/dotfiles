@@ -1,4 +1,4 @@
-local version = '2.6.6'
+local version = vim.env.LUA_LSP_VERSION
 local base_root = '/opt/homebrew/Cellar/lua-language-server/' .. version
 local bin_root = base_root .. '/bin/'
 
