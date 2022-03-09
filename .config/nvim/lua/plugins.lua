@@ -16,6 +16,10 @@ local packer = require('packer')
 
 packer.startup({
   function(use)
+    -- impatient.nvim has to be loaded before anything else,
+    -- it's also required in init.lua
+    use('lewis6991/impatient.nvim')
+
     -- Packer can manage itself
     use('wbthomason/packer.nvim')
 
