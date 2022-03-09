@@ -123,12 +123,16 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install lua-language-server: brew install lua-language-server"
     end
 
-    if [ -z (ls /Applications/ | grep -i hammerspoon) ]
+    if test ! -d /Applications/Hammerspoon.app
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
     end
 
     if test ! -d ~/.hammerspoon/Spoons/VimMode.spoon
         echo "Install VimMode.spoon for Hammerspoon: mkdir -p ~/.hammerspoon/Spoons && git clone https://github.com/dbalatero/VimMode.spoon ~/.hammerspoon/Spoons/VimMode.spoon"
+    end
+
+    if test ! -d /Applications/LibreWolf.app
+        echo "Install LibreWolf browser: brew install --cask librewolf"
     end
 
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
