@@ -32,6 +32,15 @@ function M.default_autocmds()
         },
       },
     },
+    {
+      -- turn current line blame off in insert mode,
+      -- back on when leaving insert mode
+      name = 'GitSignsCurrentLineBlameInsertModeToggle',
+      {
+        { 'InsertLeave', 'InsertEnter' },
+        ':Gitsigns toggle_current_line_blame',
+      },
+    },
   }
 end
 
