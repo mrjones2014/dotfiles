@@ -132,7 +132,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if test ! -d /Applications/LibreWolf.app
-        echo "Install LibreWolf browser: https://gitlab.com/librewolf-community/browser/macos/-/blob/master/build_guide.md"
+        echo "Install LibreWolf browser: brew install --cask librewolf && xattr -d com.apple.quarantine /Applications/LibreWolf.app"
     end
 
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]

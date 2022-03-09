@@ -1,5 +1,7 @@
 return {
   'nvim-telescope/telescope.nvim',
+  event = 'VimEnter',
+  before = 'trouble.nvim',
   requires = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',

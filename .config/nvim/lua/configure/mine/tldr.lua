@@ -9,6 +9,7 @@ end
 
 return {
   path,
+  cmd = 'Tldr',
   config = function()
     require('tldr').setup({ tldr_args = '--color always' })
   end,

@@ -9,6 +9,7 @@ end
 
 return {
   path,
+  cmd = 'Dash',
   -- requires = {
   --   'ibhagwan/fzf-lua',
   --   'vijaymarupudi/nvim-fzf',

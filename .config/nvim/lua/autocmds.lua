@@ -23,21 +23,6 @@ function M.default_autocmds()
       },
     },
     {
-      name = 'TerminalBuffers',
-      {
-        'TermOpen',
-        function()
-          vim.wo.number = false
-          vim.wo.relativenumber = false
-          vim.cmd('startinsert')
-        end,
-      },
-      {
-        'TermClose',
-        ':Bdelete',
-      },
-    },
-    {
       name = 'JsoncFiletypeDetection',
       {
         { 'BufRead', 'BufNewFile' },
