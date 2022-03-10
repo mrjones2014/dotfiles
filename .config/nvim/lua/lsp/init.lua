@@ -25,12 +25,32 @@ vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
   end
 end
 
-require('lsp.css')
-require('lsp.html')
-require('lsp.json')
-require('lsp.typescript')
-require('lsp.lua')
-require('lsp.rust')
-require('lsp.csharp')
-require('lsp.svelte')
+-- always load null-ls
 require('lsp.null-ls')
+-- lazy-load the rest of the configs with
+-- an autocommand that runs only once
+-- for each lsp config
+local lsp_configs = {
+  ['css'] = { '*.css', '*.scss' },
+  ['html'] = { '*.html' },
+  ['json'] = { '*.json', '*.jsonc' },
+  ['typescript'] = { '*.ts', '*.tsx', '*.js', '*.jsx' },
+  ['lua'] = { '*.lua' },
+  ['rust'] = { '*.rs' },
+  ['csharp'] = { '*.cs' },
+  ['svelte'] = { '*.svelte' },
+}
+
+local legendary = require('legendary')
+for lsp_name, filetypes in pairs(lsp_configs) do
+  legendary.bind_autocmds({
+    'BufReadPre',
+    function()
+      require('lsp.' .. lsp_name)
+    end,
+    opts = {
+      pattern = filetypes,
+      once = true,
+    },
+  })
+end

@@ -26,6 +26,12 @@ packer.startup({
     -- Dependencies of other plugins
     use('nvim-lua/plenary.nvim')
 
+    -- Plugins I develop
+    use(require('configure.mine.legendary'))
+    use(require('configure.mine.lighthaus'))
+    use(require('configure.mine.dash'))
+    use(require('configure.mine.tldr'))
+
     -- Editing enhancements and tools
     use(require('configure.tmux-navigator'))
     use(require('configure.vim-move'))
@@ -62,12 +68,6 @@ packer.startup({
     use(require('configure.dressing'))
     use(require('configure.fidget'))
     use(require('configure.startuptime'))
-
-    -- Plugins I develop
-    use(require('configure.mine.lighthaus'))
-    use(require('configure.mine.dash'))
-    use(require('configure.mine.tldr'))
-    use(require('configure.mine.legendary'))
   end,
   config = {
     profile = {
