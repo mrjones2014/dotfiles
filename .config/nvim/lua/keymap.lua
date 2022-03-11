@@ -8,7 +8,7 @@ function M.default_keymaps()
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
     { 'jk', '<C-\\><C-n>', mode = 't' },
 
-    { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i' } },
+    { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'v' } },
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
@@ -73,8 +73,18 @@ function M.default_keymaps()
 
     { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
 
-    { '<leader>c', ':CommentToggle<CR>', description = 'Toggle comment' },
-    { '<leader>c', ":'<,'>CommentToggle<CR>", mode = 'v', description = 'Toggle comment' },
+    {
+      '<leader>c',
+      function(visual_selection)
+        if visual_selection then
+          vim.cmd(":'<,'>CommentToggle")
+        else
+          vim.cmd(':CommentToggle')
+        end
+      end,
+      description = 'Toggle comment',
+      mode = { 'n', 'v' },
+    },
   }
 end
 
