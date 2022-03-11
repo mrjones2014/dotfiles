@@ -7,7 +7,7 @@ require('lspconfig').rust_analyzer.setup({
         command = 'clippy',
       },
       files = {
-        excludeDirs = { './js/' },
+        excludeDirs = { './js/', './node_modules/' },
       },
     },
   },
