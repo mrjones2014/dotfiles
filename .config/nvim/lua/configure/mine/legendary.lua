@@ -15,7 +15,14 @@ return {
       keymaps = require('keymap').default_keymaps(),
       commands = require('commands').default_commands(),
       autocmds = require('autocmds').default_autocmds(),
-      select_prompt = ' Legendary ',
+      select_prompt = function(kind)
+        if kind == 'legendary.items' then
+          return ' Legendary '
+        end
+
+        -- Convert kind to Title Case (e.g. legendary.keymaps => Legendary Keymaps)
+        return ' ' .. string.gsub(' ' .. kind:gsub('%.', ' '), '%W%l', string.upper):sub(2) .. ' '
+      end,
     })
 
     -- require('which-key').setup({
