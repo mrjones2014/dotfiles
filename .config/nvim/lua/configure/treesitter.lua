@@ -1,7 +1,13 @@
+local update_cmd = ':TSUpdate'
+-- Run TSUpdateSync if running headless
+if #vim.api.nvim_list_uis() == 0 then
+  update_cmd = ':TSUpdateSync'
+end
+
 return {
   'nvim-treesitter/nvim-treesitter',
   requires = { 'p00f/nvim-ts-rainbow', 'nvim-treesitter/nvim-treesitter-textobjects' },
-  run = ':TSUpdateSync',
+  run = update_cmd,
   config = function()
     require('nvim-treesitter.configs').setup({
       highlight = {
