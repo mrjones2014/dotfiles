@@ -91,7 +91,23 @@ end
 function M.lsp_keymaps(bufnr)
   local h = require('legendary.helpers')
   return {
-    { 'gh', vim.lsp.buf.hover, description = 'Show hover information', opts = { buffer = bufnr } },
+    {
+      'gh',
+      function()
+        -- I have diagnostics float on CursorHold,
+        -- disable that if I've manually shown the hover window
+        -- see autocmds.lua, lsp_autocmds()
+        vim.cmd('set eventignore=CursorHold')
+        vim.lsp.buf.hover()
+        require('legendary').bind_autocmds({
+          'CursorMoved',
+          ':set eventignore=""',
+          opts = { pattern = '<buffer>', once = true },
+        })
+      end,
+      description = 'Show hover information',
+      opts = { buffer = bufnr },
+    },
     { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
     {
       'gr',
