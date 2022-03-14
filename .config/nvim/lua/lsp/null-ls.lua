@@ -26,8 +26,17 @@ local sources = {
   }),
   b.diagnostics.codespell.with({
     filetypes = {
+      'javascript',
+      'typescript',
+      'javascriptreact',
+      'typescriptreact',
       'markdown',
       'text',
+      'json',
+      'jsonc',
+      'css',
+      'rust',
+      'html',
     },
   }),
 
@@ -35,12 +44,13 @@ local sources = {
   b.formatting.eslint_d,
   b.formatting.prettierd.with({
     filetypes = {
-      'html',
-      'json',
       'javascript',
       'typescript',
       'javascriptreact',
       'typescriptreact',
+      'html',
+      'json',
+      'jsonc',
       'scss',
       'css',
       'markdown',
