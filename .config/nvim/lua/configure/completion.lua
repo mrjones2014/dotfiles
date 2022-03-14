@@ -9,6 +9,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
   },
+  branch = 'dev',
   after = { 'nvim-autopairs', 'LuaSnip' },
   config = function()
     local luasnip = require('luasnip')
@@ -18,6 +19,14 @@ return {
     })
     local cmp = require('cmp')
     cmp.setup({
+      window = {
+        completion = {
+          border = 'rounded',
+        },
+        documentation = {
+          border = 'rounded',
+        },
+      },
       preselect = cmp.PreselectMode.None,
       snippet = {
         expand = function(args)
