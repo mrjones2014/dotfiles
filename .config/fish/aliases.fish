@@ -7,6 +7,8 @@ alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+# lol, sometimes I'm stupid
+alias :q="exit"
 
 alias update-nvim-plugins="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 
