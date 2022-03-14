@@ -20,6 +20,6 @@ local disabled_built_ins = {
   'matchit',
 }
 
-for _, plugin in pairs(disabled_built_ins) do
+vim.tbl_map(function(plugin)
   vim.g['loaded_' .. plugin] = 1
-end
+end, disabled_built_ins)
