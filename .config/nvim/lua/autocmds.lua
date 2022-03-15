@@ -44,16 +44,11 @@ function M.default_autocmds()
   }
 end
 
-function M.lsp_autocmds(bufnr)
-  return {
+function M.lsp_autocmds(bufnr, server_name)
+  local augroup = {
     {
       name = 'LspOnAttachAutocmds',
-      clear = true,
-      {
-        'BufWritePost',
-        require('lsp.utils').format_document,
-        opts = { buffer = bufnr },
-      },
+      clear = false,
       {
         'CursorHold',
         function()
@@ -63,6 +58,16 @@ function M.lsp_autocmds(bufnr)
       },
     },
   }
+
+  if server_name == 'null-ls' then
+    table.insert(augroup, {
+      'BufWritePost',
+      require('lsp.utils').format_document,
+      opts = { buffer = bufnr },
+    })
+  end
+
+  return augroup
 end
 
 return M
