@@ -123,6 +123,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install lua-language-server: brew install lua-language-server"
     end
 
+    if ! type op &>/dev/null
+        echo "Install 1Password CLI: brew install --cask 1password/tap/1password-cli"
+    end
+
     if test ! -d /Applications/Hammerspoon.app
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest"
     end
