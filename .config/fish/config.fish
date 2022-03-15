@@ -28,6 +28,7 @@ if status is-interactive
     fish_vi_key_bindings
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
+    op completion fish | source
     thefuck --alias | source
     starship init fish | source
     atuin init fish | source
