@@ -1,5 +1,7 @@
 local M = {}
 
+local lsp_keymaps_bound_bufnrs = {}
+
 function M.default_keymaps()
   local h = require('legendary.helpers')
   return {
@@ -89,6 +91,11 @@ function M.default_keymaps()
 end
 
 function M.lsp_keymaps(bufnr)
+  if vim.tbl_contains(lsp_keymaps_bound_bufnrs, bufnr) then
+    return {}
+  end
+
+  table.insert(lsp_keymaps_bound_bufnrs, bufnr)
   local h = require('legendary.helpers')
   return {
     {

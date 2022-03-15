@@ -46,14 +46,8 @@ function M.default_commands()
   }
 end
 
-function M.lsp_commands(bufnr)
-  return {
-    {
-      ':Format',
-      require('lsp.utils').format_document,
-      description = 'Format the current document with LSP',
-      opts = { buffer = bufnr },
-    },
+function M.lsp_commands(bufnr, server_name)
+  local commands = {
     {
       ':LspRestart',
       description = 'Restart any attached LSP clients',
@@ -70,6 +64,17 @@ function M.lsp_commands(bufnr)
       opts = { buffer = bufnr },
     },
   }
+
+  if server_name == 'null-ls' then
+    table.insert(commands, 1, {
+      ':Format',
+      require('lsp.utils').format_document,
+      description = 'Format the current document with LSP',
+      opts = { buffer = bufnr },
+    })
+  end
+
+  return commands
 end
 
 return M
