@@ -5,8 +5,8 @@ local M = {}
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
   require('legendary').bind_keymaps(require('keymap').lsp_keymaps(bufnr))
-  require('legendary').bind_commands(require('commands').lsp_commands())
-  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds())
+  require('legendary').bind_commands(require('commands').lsp_commands(bufnr))
+  require('legendary').bind_autocmds(require('autocmds').lsp_autocmds(bufnr))
 
   if
     vim.bo.filetype == 'javascript'

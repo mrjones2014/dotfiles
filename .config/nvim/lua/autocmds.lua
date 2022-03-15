@@ -44,7 +44,7 @@ function M.default_autocmds()
   }
 end
 
-function M.lsp_autocmds()
+function M.lsp_autocmds(bufnr)
   return {
     {
       name = 'LspOnAttachAutocmds',
@@ -52,12 +52,14 @@ function M.lsp_autocmds()
       {
         'BufWritePost',
         require('lsp.utils').format_document,
+        opts = { buffer = bufnr },
       },
       {
         'CursorHold',
         function()
           vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor', border = 'rounded' })
         end,
+        opts = { buffer = bufnr },
       },
     },
   }
