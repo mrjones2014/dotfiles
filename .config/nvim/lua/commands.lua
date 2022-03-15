@@ -46,24 +46,28 @@ function M.default_commands()
   }
 end
 
-function M.lsp_commands()
+function M.lsp_commands(bufnr)
   return {
     {
       ':Format',
       require('lsp.utils').format_document,
       description = 'Format the current document with LSP',
+      opts = { buffer = bufnr },
     },
     {
       ':LspRestart',
       description = 'Restart any attached LSP clients',
+      opts = { buffer = bufnr },
     },
     {
       ':LspStart',
       description = 'Start the LSP client manually',
+      opts = { buffer = bufnr },
     },
     {
       ':LspInfo',
       description = 'Show attached LSP clients',
+      opts = { buffer = bufnr },
     },
   }
 end

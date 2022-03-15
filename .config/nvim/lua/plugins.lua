@@ -34,7 +34,7 @@ packer.startup({
 
     -- Editing enhancements and tools
     use(require('configure.tmux-navigator'))
-    use(require('configure.vim-move'))
+    use(require('configure.text-moving'))
     use(require('configure.telescope'))
     use(require('configure.autopairs'))
     use(require('configure.tagalong'))
