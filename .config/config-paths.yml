@@ -12,3 +12,4 @@ paths: .config/config-paths.yml
 ignore: .config/.ignore
 atuin: .config/atuin/config.toml
 ctrlg: .config/ctrlg/
+codespell: .config/codespell/custom_dict.txt

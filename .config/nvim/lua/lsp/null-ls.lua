@@ -1,3 +1,4 @@
+local paths = require('paths')
 local null_ls = require('null-ls')
 local b = null_ls.builtins
 
@@ -25,6 +26,7 @@ local sources = {
     diagnostics_format = '#{m} [#{s}] [#{c}]',
   }),
   b.diagnostics.codespell.with({
+    args = { '-I', paths.join(paths.config, 'codespell/custom_dict.txt'), '-' },
     filetypes = {
       'javascript',
       'typescript',

@@ -26,7 +26,7 @@ function M.relative_filepath(path, replace_home_with_tilde)
 
   -- replace $HOME with ~
   if replace_home_with_tilde then
-    path = path:gsub(vim.pesc(require('paths').home), '~/')
+    path = path:gsub(vim.pesc(require('paths').home), '~/'):gsub('//', '/')
   else
     path = path:gsub(vim.pesc(require('paths').home), '')
   end
