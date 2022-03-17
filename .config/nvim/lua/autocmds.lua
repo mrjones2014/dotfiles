@@ -51,10 +51,21 @@ function M.lsp_autocmds(bufnr, server_name)
       clear = false,
       {
         'CursorHold',
-        function()
-          vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor', border = 'rounded' })
-        end,
+        require('legendary.helpers').lazy(
+          vim.diagnostic.open_float,
+          nil,
+          { focus = false, scope = 'cursor', border = 'rounded' }
+        ),
         opts = { buffer = bufnr },
+      },
+      {
+        { 'CursorHold', 'CursorHoldI' },
+        require('legendary.helpers').lazy_required_fn('lsp_extensions', 'inlay_hints', {
+          highlight = 'RustInlayHint',
+          prefix = ' ',
+          enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
+        }),
+        opts = { pattern = '*.rs' },
       },
     },
   }
