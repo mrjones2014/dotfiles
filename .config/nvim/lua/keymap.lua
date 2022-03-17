@@ -87,6 +87,11 @@ function M.default_keymaps()
       description = 'Toggle comment',
       mode = { 'n', 'v' },
     },
+    {
+      '<leader>w',
+      [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
+      description = 'Replace all instances of word under cursor in current buffer',
+    },
   }
 end
 
