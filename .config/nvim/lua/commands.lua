@@ -28,12 +28,6 @@ function M.default_commands()
       description = 'Generate a UUID and insert it into the buffer',
     },
     {
-      ':ReplaceCursorWord',
-      [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
-      description = 'Replace all instances of word under cursor in current buffer',
-      unfinished = true,
-    },
-    {
       ':LegendaryScratch',
       description = 'Open a Lua scratchpad buffer',
     },
