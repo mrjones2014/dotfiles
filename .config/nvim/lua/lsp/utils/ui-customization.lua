@@ -7,16 +7,25 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(legacy_highlight, { text = icon, texthl = legacy_highlight, numhl = legacy_highlight })
 end
 
+local icons = require('lsp.icons')
+local icon_map = {
+  [vim.diagnostic.severity.ERROR] = icons.Error,
+  [vim.diagnostic.severity.WARN] = icons.Warn,
+  [vim.diagnostic.severity.INFO] = icons.Info,
+  [vim.diagnostic.severity.HINT] = icons.Hint,
+}
+
 local function diagnostic_format(diagnostic)
   if diagnostic.source == 'eslint' or diagnostic.source == 'eslint_d' then
-    return string.format('%s (%s)', diagnostic.message, diagnostic.code)
+    return string.format('%s %s (%s)', icon_map[diagnostic.severity], diagnostic.message, diagnostic.code)
   end
 
-  return diagnostic.message
+  return string.format('%s %s', icon_map[diagnostic.severity], diagnostic.message)
 end
 
 vim.diagnostic.config({
   virtual_text = {
+    prefix = '',
     format = diagnostic_format,
   },
   float = {
