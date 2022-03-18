@@ -93,6 +93,26 @@ function M.default_keymaps()
       description = 'Replace all instances of word under cursor in current buffer',
     },
     { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
+    {
+      '<A-h>',
+      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'h'),
+      description = 'Smart resize vertically',
+    },
+    {
+      '<A-l>',
+      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'l'),
+      description = 'Smart resize vertically',
+    },
+    {
+      '<A-j>',
+      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'j'),
+      description = 'Smart resize horizontally',
+    },
+    {
+      '<A-k>',
+      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'k'),
+      description = 'Smart resize horizontally',
+    },
   }
 end
 
