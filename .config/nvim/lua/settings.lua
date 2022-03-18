@@ -36,3 +36,13 @@ vim.opt.wildignore:append({ '*.DS_Store' })
 vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
 -- add @, -, and $ as keywords for full SCSS support
 vim.opt.iskeyword:append({ '@-@', '-', '$' })
+-- slightly thicker window separators
+vim.opt.fillchars = {
+  horiz = '━',
+  horizup = '┻',
+  horizdown = '┳',
+  vert = '┃',
+  vertleft = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
+}
