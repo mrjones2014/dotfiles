@@ -55,7 +55,7 @@ return {
 
     local sections = {
       lualine_a = { get_mode },
-      lualine_b = {},
+      lualine_b = { 'branch' },
       lualine_c = {
         filepath,
         {
@@ -73,6 +73,7 @@ return {
 
     require('lualine').setup({
       options = {
+        globalstatus = true,
         theme = lualine_theme,
         disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt', 'packer' },
       },

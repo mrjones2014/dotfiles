@@ -67,6 +67,7 @@ packer.startup({
     use(require('configure.nvim-notify'))
     use(require('configure.dressing'))
     use(require('configure.fidget'))
+    use(require('configure.shade'))
     use(require('configure.startuptime'))
   end,
   config = {
