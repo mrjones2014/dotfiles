@@ -27,22 +27,6 @@ function M.default_commands()
       end,
       description = 'Generate a UUID and insert it into the buffer',
     },
-    {
-      ':LegendaryScratch',
-      description = 'Open a Lua scratchpad buffer',
-    },
-    {
-      ':LegendaryEvalBuf',
-      description = 'Eval buffer as Lua',
-    },
-    {
-      ':LegendaryEvalLine',
-      description = 'Eval current line as Lua',
-    },
-    {
-      ':LegendaryEvalLines',
-      description = 'Eval selected lines as Lua',
-    },
   }
 end
 
