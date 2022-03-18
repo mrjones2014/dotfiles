@@ -92,6 +92,7 @@ function M.default_keymaps()
       [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
       description = 'Replace all instances of word under cursor in current buffer',
     },
+    { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
   }
 end
 
