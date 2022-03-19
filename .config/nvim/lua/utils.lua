@@ -47,7 +47,7 @@ function M.smart_win_resize(key)
     local new_win_2 = vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(cur_win)
     -- top edge or middle of >2
-    if cur_win == new_win == new_win_2 then
+    if cur_win == new_win or new_win == new_win_2 then
       if key == 'j' then
         vim.cmd('resize +3')
       else
