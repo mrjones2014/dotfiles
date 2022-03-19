@@ -95,22 +95,30 @@ function M.default_keymaps()
     { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
     {
       '<A-h>',
-      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'h'),
+      function()
+        require('utils').smart_win_resize('h')
+      end,
       description = 'Smart resize vertically',
     },
     {
       '<A-l>',
-      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'l'),
+      function()
+        require('utils').smart_win_resize('l')
+      end,
       description = 'Smart resize vertically',
     },
     {
       '<A-j>',
-      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'j'),
+      function()
+        require('utils').smart_win_resize('j')
+      end,
       description = 'Smart resize horizontally',
     },
     {
       '<A-k>',
-      require('legendary.helpers').lazy_required_fn('utils', 'smart_win_resize', 'k'),
+      function()
+        require('utils').smart_win_resize('k')
+      end,
       description = 'Smart resize horizontally',
     },
   }
