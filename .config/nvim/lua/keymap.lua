@@ -95,30 +95,22 @@ function M.default_keymaps()
     { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
     {
       '<A-h>',
-      function()
-        require('utils').smart_win_resize('h')
-      end,
+      require('smart-resize').resize_left,
       description = 'Smart resize vertically',
     },
     {
       '<A-l>',
-      function()
-        require('utils').smart_win_resize('l')
-      end,
+      require('smart-resize').resize_right,
       description = 'Smart resize vertically',
     },
     {
       '<A-j>',
-      function()
-        require('utils').smart_win_resize('j')
-      end,
+      require('smart-resize').resize_down,
       description = 'Smart resize horizontally',
     },
     {
       '<A-k>',
-      function()
-        require('utils').smart_win_resize('k')
-      end,
+      require('smart-resize').resize_up,
       description = 'Smart resize horizontally',
     },
   }
