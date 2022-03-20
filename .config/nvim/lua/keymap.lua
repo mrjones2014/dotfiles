@@ -18,10 +18,10 @@ function M.default_keymaps()
 
     { 'gx', require('utils').open_url_under_cursor, description = 'Open URL under cursor' },
 
-    { '<C-h>', h.lazy_required_fn('Navigator', 'left'), description = 'Move to next split left' },
-    { '<C-j>', h.lazy_required_fn('Navigator', 'down'), description = 'Move to next split down' },
-    { '<C-k>', h.lazy_required_fn('Navigator', 'up'), description = 'Move to next split up' },
-    { '<C-l>', h.lazy_required_fn('Navigator', 'right'), description = 'Move to next split right' },
+    { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
+    { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
+    { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
+    { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
 
     { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
     { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
@@ -95,22 +95,22 @@ function M.default_keymaps()
     { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
     {
       '<A-h>',
-      require('smart-resize').resize_left,
+      require('smart-splits').resize_left,
       description = 'Smart resize vertically',
     },
     {
       '<A-l>',
-      require('smart-resize').resize_right,
+      require('smart-splits').resize_right,
       description = 'Smart resize vertically',
     },
     {
       '<A-j>',
-      require('smart-resize').resize_down,
+      require('smart-splits').resize_down,
       description = 'Smart resize horizontally',
     },
     {
       '<A-k>',
-      require('smart-resize').resize_up,
+      require('smart-splits').resize_up,
       description = 'Smart resize horizontally',
     },
   }

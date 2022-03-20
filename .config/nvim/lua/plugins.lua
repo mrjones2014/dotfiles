@@ -34,7 +34,6 @@ packer.startup({
     use(require('configure.mine.tldr'))
 
     -- Editing enhancements and tools
-    use(require('configure.tmux-navigator'))
     use(require('configure.text-moving'))
     use(require('configure.telescope'))
     use(require('configure.autopairs'))
