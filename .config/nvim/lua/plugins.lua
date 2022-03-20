@@ -29,7 +29,7 @@ packer.startup({
     -- Plugins I develop
     use(require('configure.mine.legendary'))
     use(require('configure.mine.lighthaus'))
-    use(require('configure.mine.smart-resize'))
+    use(require('configure.mine.smart-splits'))
     use(require('configure.mine.dash'))
     use(require('configure.mine.tldr'))
 
