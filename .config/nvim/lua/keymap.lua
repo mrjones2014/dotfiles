@@ -49,7 +49,7 @@ function M.default_keymaps()
     { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },
     {
       'fh',
-      h.lazy_required_fn('telescope.builtin', 'oldfiles', { only_cwd = true }),
+      h.lazy_required_fn('telescope.builtin', 'oldfiles'),
       description = 'Find recent files',
     },
     {
@@ -64,7 +64,7 @@ function M.default_keymaps()
     },
     {
       '<leader>h',
-      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'oldfiles', { only_cwd = true })),
+      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'oldfiles')),
       description = 'Split vertically, then find recent files',
     },
     {

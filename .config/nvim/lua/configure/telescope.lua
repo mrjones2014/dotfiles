@@ -48,6 +48,12 @@ return {
             '!.git',
           },
         },
+        oldfiles = {
+          only_cwd = true,
+          file_ignore_patterns = {
+            'COMMIT_EDITMSG',
+          },
+        },
       },
       extensions = {
         fzf = {
