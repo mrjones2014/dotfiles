@@ -10,4 +10,7 @@
 [includeIf "gitdir:~/git/personal/"]
   path = ~/.config/git/gitconfig.personal
 
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
 ; vi: ft=gitconfig
