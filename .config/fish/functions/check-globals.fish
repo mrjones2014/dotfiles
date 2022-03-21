@@ -3,6 +3,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install DankMono font: Download link stored in 1Password under 'DankMono Font'"
     end
 
+    if test -z "$(ls ~/Library/Fonts | grep JetBrains || echo '')"
+        echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
+    end
+
     if ! type diff-so-fancy &>/dev/null
         echo "Install diff-so-fancy and configure it as git's default diff handler: brew install diff-so-fancy, then see: https://github.com/so-fancy/diff-so-fancy#usage"
     end
