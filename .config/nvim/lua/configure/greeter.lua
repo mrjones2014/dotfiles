@@ -1,6 +1,7 @@
 return {
   'startup-nvim/startup.nvim',
   config = function()
+    print(require('paths').relative_cwd())
     require('startup').setup({
       section_1 = {
         type = 'text',
@@ -9,7 +10,7 @@ return {
         highlight = 'LspDiagnosticsDefaultInformation',
         align = 'center',
         content = {
-          '',
+          require('paths').relative_cwd(),
           '',
           '',
           '',
