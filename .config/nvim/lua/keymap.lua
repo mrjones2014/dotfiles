@@ -153,9 +153,15 @@ function M.lsp_keymaps(bufnr)
     { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
     { '<leader>rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
     {
-      '<leader>p',
-      h.lazy_required_fn('nvim-treesitter.textobjects.lsp_interop', 'peek_definition_code', '@block.outer'),
+      'gpd',
+      h.lazy_required_fn('goto-preview', 'goto_preview_definition'),
       description = 'Peek definition',
+      opts = { buffer = bufnr },
+    },
+    {
+      'gpi',
+      h.lazy_required_fn('goto-preview', 'goto_preview_implementation'),
+      description = 'Peek implementation',
       opts = { buffer = bufnr },
     },
     {
