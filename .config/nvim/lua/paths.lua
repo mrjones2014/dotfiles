@@ -5,7 +5,9 @@ function M.join(...)
 end
 
 function M.relative_cwd()
-  return M.relative_filepath(vim.loop.cwd(), true)
+  local path = vim.loop.cwd()
+  path = path:gsub(vim.pesc(require('paths').home), '~/'):gsub('//', '/')
+  return path
 end
 
 function M.relative_filepath(path, replace_home_with_tilde)
