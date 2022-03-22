@@ -3,7 +3,7 @@ tmux: .config/tmux/
 scripts: scripts/
 kitty: .config/kitty/
 alacritty: .config/alacritty/
-hammerspoon: .hammerspoon/
+hammerspoon: .config/hammerspoon/
 vim: .config/nvim/
 git: .config/git/
 bat: .config/bat/config
