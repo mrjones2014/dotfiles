@@ -1,3 +1,5 @@
+# Special Unicode Characters
+
 I can never find these characters to copy/paste so here they are.
 
 See also: [ShapeCatcher](https://shapecatcher.com)
