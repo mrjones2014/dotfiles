@@ -9,6 +9,11 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
+local globals = { 'vim' }
+if string.find(vim.loop.cwd(), 'hammerspoon') then
+  globals = { 'hs' }
+end
+
 require('lspconfig').sumneko_lua.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   cmd = { bin_root .. 'lua-language-server', '-E', base_root .. '/libexec/main.lua' },
@@ -26,8 +31,7 @@ require('lspconfig').sumneko_lua.setup({
         path = runtime_path,
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = globals,
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
