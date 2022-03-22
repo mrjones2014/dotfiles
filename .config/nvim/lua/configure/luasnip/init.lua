@@ -1,5 +1,6 @@
 return {
   'L3MON4D3/LuaSnip',
+  requires = { 'danymat/neogen' },
   config = function()
     require('luasnip').config.setup({
       ext_opts = {
@@ -12,5 +13,6 @@ return {
     })
 
     require('configure.luasnip.snippets')
+    require('neogen').setup({ snippet_engine = 'luasnip' })
   end,
 }
