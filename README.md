@@ -15,6 +15,9 @@ and `dots commit -m "Add some file"` from any directory, and it will be properly
 
 I use macOS. Some things in this repo won't work on Linux, but a lot of it will. Feel free to modify anything you'd like to support Linux.
 
+For Hammerspoon to find the config, you'll need to run `defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
+after installing Hammerspoon, then restart Hammerspoon.
+
 ## Manual Config
 
 ### Package Management
