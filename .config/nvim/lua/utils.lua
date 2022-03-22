@@ -5,10 +5,14 @@ function M.has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+--- Copy specified text to the clipboard.
+---@param str string text to copy
 function M.copy_to_clipboard(str)
   vim.cmd(string.format('call jobstart("echo %s | pbcopy")', str))
 end
 
+--- Returns the git branch, if `cwd` is a git repository
+---@return string
 function M.git_branch()
   return vim.g.gitsigns_head
 end
