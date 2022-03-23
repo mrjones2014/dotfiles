@@ -41,6 +41,16 @@ function M.default_autocmds()
         ':Gitsigns toggle_current_line_blame',
       },
     },
+    {
+      name = 'GitCommitFiletypeAutocmds',
+      {
+        'FileType',
+        ':startinsert',
+        opts = {
+          pattern = 'gitcommit',
+        },
+      },
+    },
   }
 end
 
