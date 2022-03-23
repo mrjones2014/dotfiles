@@ -7,8 +7,8 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
     end
 
-    if ! type diff-so-fancy &>/dev/null
-        echo "Install diff-so-fancy and configure it as git's default diff handler: brew install diff-so-fancy, then see: https://github.com/so-fancy/diff-so-fancy#usage"
+    if ! type delta &>/dev/null
+        echo "Install delta and configure it as git's default diff handler: brew install git-delta, then see: https://github.com/dandavison/delta#get-started"
     end
 
     if ! type thefuck &>/dev/null
@@ -131,7 +131,7 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest, then run `defaults write org.hammerspoon.Hammerspoon MJConfigFile '~/.config/hammerspoon/init.lua'`"
     end
 
-    if test ! -d ~/.hammerspoon/Spoons/VimMode.spoon
+    if test ! -d ~/.config/hammerspoon/Spoons/VimMode.spoon
         echo "Install VimMode.spoon for Hammerspoon: mkdir -p ~/.hammerspoon/Spoons && git clone https://github.com/dbalatero/VimMode.spoon ~/.config/hammerspoon/Spoons/VimMode.spoon"
     end
 

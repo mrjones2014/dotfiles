@@ -18,9 +18,9 @@
   editor = popup-nvim
   autocrlf = false
   mergeoptions = --no-edit
-  pager = "diff-so-fancy | less --tabs=4 -RFX"
+  pager = delta
 [interactive]
-  diffFilter = "diff-so-fancy --patch"
+  diffFilter = delta --color-only
 [init]
   defaultBranch = master
 [diff]
