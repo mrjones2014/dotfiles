@@ -68,18 +68,17 @@ return {
       },
       lualine_x = {},
       lualine_y = {},
-      lualine_z = { 'progress' },
+      lualine_z = { 'location', 'progress' },
     }
 
     require('lualine').setup({
       options = {
         globalstatus = true,
         theme = lualine_theme,
-        disabled_filetypes = { 'NvimTree', 'term', 'terminal', 'TelescopePrompt', 'packer' },
       },
       sections = sections,
       inactive_sections = sections,
-      extensions = { 'nvim-tree' },
+      extensions = { 'nvim-tree', 'quickfix' },
     })
   end,
 }
