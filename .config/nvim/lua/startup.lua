@@ -75,6 +75,8 @@ local function show_startup()
     vim.api.nvim_buf_add_highlight(buf_id, 0, 'LspDiagnosticsDefaultInformation', i, 0, -1)
   end
 
+  local augroup = vim.api.nvim_create_augroup('StartScreen', { clear = true })
+
   -- hide tabline on startup buffer
   vim.api.nvim_create_autocmd('BufEnter', {
     callback = function()
@@ -84,6 +86,7 @@ local function show_startup()
     end,
     buffer = buf_id,
     once = true,
+    group = augroup,
   })
 
   -- close the startup buffer when we go anywhere else
@@ -95,7 +98,18 @@ local function show_startup()
     end,
     buffer = buf_id,
     once = true,
+    group = augroup,
   })
+
+  vim.schedule(function()
+    vim.api.nvim_create_autocmd('BufEnter', {
+      callback = function()
+        vim.o.showtabline = 2
+      end,
+      once = true,
+      group = augroup,
+    })
+  end)
 end
 
 if #vim.fn.argv() == 0 then
