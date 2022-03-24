@@ -39,7 +39,11 @@ if status is-interactive
     nvm use $nvm_default_version >/dev/null
 
     # start tmux session by default
-    if [ -z "$TMUX" ] && [ "$START_TMUX_PLEASE" = 1 ]
-        exec tmux new-session -A -s $USER
+    if [ -z "$TMUX" ]
+        if [ "$START_TMUX_PLEASE" = 1 ]
+            exec tmux new-session -A -s $USER
+        else if [ "$SSH_CLIENT" != "" ]
+            exec tmux new-session -A -s ssh-user
+        end
     end
 end
