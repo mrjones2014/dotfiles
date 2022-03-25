@@ -32,7 +32,7 @@ function M.relative_filepath(path, replace_home_with_tilde)
   else
     path = path:gsub(vim.pesc(require('paths').home), '')
   end
-  if vim.fn.winwidth(0) <= 84 then
+  if (vim.o.laststatus < 3 and vim.fn.winwidth(0) <= 84) or (vim.o.laststatus == 3 and vim.o.columns <= 84) then
     path = vim.fn.pathshorten(path)
   end
 
