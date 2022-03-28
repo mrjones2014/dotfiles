@@ -5,7 +5,7 @@ local f = ls.function_node
 local fmt = require('luasnip.extras.fmt').fmt
 local p = ls.parser.parse_snippet
 
-ls.snippets.lua = {
+ls.add_snippets('lua', {
   s(
     'req',
     fmt("local {} = require('{}')", {
@@ -23,9 +23,9 @@ ls.snippets.lua = {
   p('mfn', 'function M.$1($2)\n  $0\nend'),
   p('lfn', 'local function $1($2)\n  $0\nend'),
   p('mod', 'local M = {}\n\n$0\n\nreturn M'),
-}
+})
 
-ls.snippets.rust = {
+ls.add_snippets('rust', {
   p('fn', 'fn $1($2)$3 {\n  $0\n}'),
   p('res', 'Result<$1, $2>$0'),
   p('opt', 'Option<$1>$0'),
@@ -36,4 +36,4 @@ ls.snippets.rust = {
   p('impl', 'impl $1 {\n  $0\n}'),
   p('for', 'for $1 in $2 {\n  $0\n}'),
   p('ifl', 'if let Some($1) = $1 {\n  $0\n}'),
-}
+})
