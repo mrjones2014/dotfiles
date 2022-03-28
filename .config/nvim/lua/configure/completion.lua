@@ -60,6 +60,7 @@ return {
         { name = 'buffer' },
       },
     }))
+
     cmp.setup.cmdline(':', vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'cmdline' } } }))
     cmp.setup.cmdline('/', vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'buffer' } } }))
   end,

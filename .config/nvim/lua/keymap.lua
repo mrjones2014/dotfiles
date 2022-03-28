@@ -223,6 +223,15 @@ function M.cmp_mappings()
     }),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping(function()
+      cmp.select_next_item()
+      vim.schedule(function()
+        cmp.select_prev_item()
+      end)
+    end, {
+      'i',
+      'c',
+    }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }
 end
