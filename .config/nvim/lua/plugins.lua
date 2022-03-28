@@ -57,6 +57,7 @@ packer.startup({
     use(require('configure.treesitter-playground'))
 
     -- UI + utils
+    use(require('configure.lightspeed'))
     use(require('configure.gitsigns'))
     use(require('configure.icons'))
     use(require('configure.nvim-tree'))
