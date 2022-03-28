@@ -60,7 +60,6 @@ return {
         enable = true,
         update_cwd = false,
       },
-      auto_close = true,
       diagnostics = {
         enable = true,
         icons = {
