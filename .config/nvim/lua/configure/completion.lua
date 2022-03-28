@@ -8,6 +8,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-cmdline',
   },
   branch = 'dev',
   after = { 'nvim-autopairs', 'LuaSnip' },
@@ -18,7 +19,7 @@ return {
       updateevents = 'TextChanged,TextChangedI',
     })
     local cmp = require('cmp')
-    cmp.setup({
+    local shared_config = {
       window = {
         completion = {
           border = 'rounded',
@@ -37,6 +38,19 @@ return {
         completeopt = 'menu,menuone,noinsert',
       },
       mapping = require('keymap').cmp_mappings(),
+      formatting = {
+        format = require('lspkind').cmp_format({ with_text = true }),
+      },
+      experimental = {
+        ghost_text = true,
+      },
+    }
+
+    -- diagnostics thinks `setup` isn't a function
+    -- because of how `setup.cmdline` is called as
+    -- a function below
+    ---@diagnostic disable-next-line: redundant-parameter
+    cmp.setup(vim.tbl_deep_extend('force', shared_config, {
       sources = {
         { name = 'luasnip' },
         { name = 'nvim_lsp' },
@@ -45,12 +59,8 @@ return {
         { name = 'path' },
         { name = 'buffer' },
       },
-      formatting = {
-        format = require('lspkind').cmp_format({ with_text = true }),
-      },
-      experimental = {
-        ghost_text = true,
-      },
-    })
+    }))
+    cmp.setup.cmdline(':', vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'cmdline' } } }))
+    cmp.setup.cmdline('/', vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'buffer' } } }))
   end,
 }
