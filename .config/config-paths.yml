@@ -1,5 +1,5 @@
 fish: .config/fish/
-tmux: .config/tmux/
+tmux: .config/tmux/tmux.conf
 scripts: scripts/
 kitty: .config/kitty/
 alacritty: .config/alacritty/

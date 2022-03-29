@@ -83,6 +83,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install stylua: cargo install stylua --features lua52"
     end
 
+    if ! type cargo-sweep &>/dev/null
+        echo "Install cargo-sweep: cargo install cargo-sweep"
+    end
+
     if ! type shellcheck &>/dev/null
         echo 'Install shellcheck: brew install shellcheck'
     end
