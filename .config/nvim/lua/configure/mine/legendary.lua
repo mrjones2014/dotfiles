@@ -9,7 +9,8 @@ end
 
 return {
   path,
-  -- requires = '~/git/personal/which-key.nvim',
+  -- bufdelete used in keymaps
+  requires = { 'famiu/bufdelete.nvim' },
   config = function()
     require('legendary').setup({
       keymaps = require('keymap').default_keymaps(),
@@ -24,27 +25,5 @@ return {
         return ' ' .. string.gsub(' ' .. kind:gsub('%.', ' '), '%W%l', string.upper):sub(2) .. ' '
       end,
     })
-
-    -- require('which-key').setup({
-    --   plugins = {
-    --     presets = {
-    --       operators = false,
-    --       motions = false,
-    --       text_objects = false,
-    --       windows = false,
-    --       nav = false,
-    --       z = false,
-    --       g = false,
-    --     },
-    --   },
-    -- })
-    -- require('which-key').register({
-    --   f = {
-    --     name = 'file', -- optional group name
-    --     f = { '<cmd>Telescope find_files<cr>', 'Find File' },
-    --   },
-    -- }, {
-    --   prefix = '<leader>',
-    -- })
   end,
 }
