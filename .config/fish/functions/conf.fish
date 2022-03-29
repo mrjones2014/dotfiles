@@ -28,8 +28,6 @@ function conf --description "Quickly open configuration files/directories in Neo
 
     if [ "$SUBJECT_NAME" = fish ]
         pushd "$HOME/$CONFIG_PATH" && nvim && popd && sourcefish # if fish, also reload fish profile
-    else if [ "$SUBJECT_NAME" = vim ]
-        pushd "$HOME/$CONFIG_PATH" && nvim && popd && update-nvim-plugins # if configuring nvim, recompile packer automatically
     else if test -f "$CONFIG_FULL_PATH"
         nvim "$CONFIG_FULL_PATH" # if path is a file, not a directory, don't pushd, just nvim
     else if test -d "$CONFIG_FULL_PATH"
