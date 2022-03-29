@@ -41,7 +41,7 @@ packer.startup({
     use(require('configure.comments'))
     use(require('configure.better-escape'))
     use(require('configure.lightspeed'))
-    use(require('configure.indent-detection'))
+    -- use(require('configure.indent-detection'))
 
     -- LSP + syntax
     use(require('configure.lspconfig'))
