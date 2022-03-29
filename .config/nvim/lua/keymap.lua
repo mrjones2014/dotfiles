@@ -224,15 +224,16 @@ function M.cmp_mappings()
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping({ c = cmp.mapping.confirm({ select = true }) }),
-    ['<Right>'] = cmp.mapping({
-      c = cmp.mapping.confirm({ select = true }),
-      i = function(fallback)
-        if cmp.visible() then
-          cmp.mapping.confirm({ select = true })()
-        else
-          fallback()
-        end
-      end,
+    ['<Right>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.mapping.confirm({ select = true })()
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+      'c',
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<ESC>'] = cmp.mapping(function(fallback)
