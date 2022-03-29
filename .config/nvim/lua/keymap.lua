@@ -231,8 +231,6 @@ function M.cmp_mappings()
         fallback()
       end
     end, {
-      'i',
-      's',
       'c',
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
