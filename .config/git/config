@@ -23,6 +23,8 @@
   diffFilter = delta --color-only
 [init]
   defaultBranch = master
+[delta]
+  line-numbers = true
 [diff]
   tool = Kaleidoscope
 [difftool "Kaleidoscope"]
