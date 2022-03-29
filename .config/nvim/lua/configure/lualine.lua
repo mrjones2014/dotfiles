@@ -49,15 +49,11 @@ return {
       return mode_icons[mode] .. ' '
     end
 
-    local function filepath()
-      return require('paths').relative_filepath()
-    end
-
     local sections = {
       lualine_a = { get_mode },
       lualine_b = { 'branch' },
       lualine_c = {
-        filepath,
+        { 'filename', shorting_target = 0, path = 1 },
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
@@ -71,13 +67,27 @@ return {
       lualine_z = { 'location', 'progress' },
     }
 
+    local buffer_line = {
+      lualine_a = {},
+      lualine_b = { 'buffers' },
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    }
+
+    -- currently using luailne for both tabline and statusline
+    -- until this PR is merged and I can have buffer list per-window
+    -- at the top: https://github.com/neovim/neovim/pull/17336
+    -- when that's merged we can use the global statusline again
     require('lualine').setup({
       options = {
-        globalstatus = true,
+        globalstatus = false,
         theme = lualine_theme,
       },
-      sections = sections,
-      inactive_sections = sections,
+      sections = buffer_line,
+      inactive_sections = buffer_line,
+      tabline = sections,
       extensions = { 'nvim-tree', 'quickfix' },
     })
   end,

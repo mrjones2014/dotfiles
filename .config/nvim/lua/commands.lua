@@ -28,7 +28,7 @@ function M.default_commands()
       description = 'Generate a UUID and insert it into the buffer',
     },
     {
-      'Delete',
+      ':Delete',
       function()
         local file = vim.fn.expand('%')
         vim.cmd('Bwipeout')
@@ -39,7 +39,7 @@ function M.default_commands()
       end,
     },
     {
-      'Rename',
+      ':Rename',
       function()
         local full_path = vim.fn.expand('%')
         vim.ui.input({ prompt = 'Rename to', default = vim.loop.cwd() .. '/' }, function(new_path)

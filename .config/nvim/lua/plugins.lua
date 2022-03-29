@@ -41,7 +41,6 @@ packer.startup({
     use(require('configure.comments'))
     use(require('configure.better-escape'))
     use(require('configure.lightspeed'))
-    -- use(require('configure.indent-detection'))
 
     -- LSP + syntax
     use(require('configure.lspconfig'))
@@ -59,7 +58,6 @@ packer.startup({
     use(require('configure.nvim-tree'))
     use(require('configure.indent-blankline'))
     use(require('configure.lualine'))
-    use(require('configure.bufferline'))
     use(require('configure.colorizer'))
     use(require('configure.todo-comments'))
     use(require('configure.nvim-notify'))
