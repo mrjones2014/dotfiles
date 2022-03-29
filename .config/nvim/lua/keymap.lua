@@ -10,7 +10,7 @@ function M.default_keymaps()
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
     { 'jk', '<C-\\><C-n>', mode = 't' },
 
-    { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'v' } },
+    { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'x' } },
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
@@ -85,7 +85,7 @@ function M.default_keymaps()
         end
       end,
       description = 'Toggle comment',
-      mode = { 'n', 'v' },
+      mode = { 'n', 'x' },
     },
     {
       '<leader>w',
