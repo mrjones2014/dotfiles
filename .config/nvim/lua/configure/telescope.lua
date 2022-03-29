@@ -47,6 +47,14 @@ return {
             '--iglob',
             '!.git',
           },
+          on_input_filter_cb = function(prompt)
+            local result = vim.split(prompt, ' ')
+            if #result == 2 then
+              return { prompt = result[2] .. '.' .. result[1] }
+            else
+              return { prompt = prompt }
+            end
+          end,
         },
         oldfiles = {
           only_cwd = true,
