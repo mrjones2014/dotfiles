@@ -40,9 +40,8 @@ packer.startup({
     use(require('configure.markdown-preview'))
     use(require('configure.comments'))
     use(require('configure.better-escape'))
-
-    -- Tim Pope plugins
-    use(require('configure.vim-sleuth'))
+    use(require('configure.lightspeed'))
+    use(require('configure.indent-detection'))
 
     -- LSP + syntax
     use(require('configure.lspconfig'))
@@ -55,7 +54,6 @@ packer.startup({
     use(require('configure.treesitter-playground'))
 
     -- UI + utils
-    use(require('configure.lightspeed'))
     use(require('configure.gitsigns'))
     use(require('configure.icons'))
     use(require('configure.nvim-tree'))
