@@ -32,7 +32,7 @@ function M.default_commands()
       function()
         local file = vim.fn.expand('%')
         vim.cmd('Bwipeout')
-        vim.fn.system(string.format('rm %s'), file)
+        vim.fn.system(string.format('rm %s', file))
         if vim.v.shell_error ~= 0 then
           vim.api.nvim_err_writeln('Failed to delete file on disk.')
         end
