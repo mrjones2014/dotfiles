@@ -37,14 +37,12 @@ packer.startup({
     use(require('configure.text-moving'))
     use(require('configure.telescope'))
     use(require('configure.autopairs'))
-    use(require('configure.tagalong'))
     use(require('configure.markdown-preview'))
     use(require('configure.comments'))
     use(require('configure.better-escape'))
 
     -- Tim Pope plugins
     use(require('configure.vim-sleuth'))
-    use(require('configure.vim-eunuch'))
 
     -- LSP + syntax
     use(require('configure.lspconfig'))

@@ -27,6 +27,42 @@ function M.default_commands()
       end,
       description = 'Generate a UUID and insert it into the buffer',
     },
+    {
+      'Delete',
+      function()
+        local file = vim.fn.expand('%')
+        vim.cmd('Bwipeout')
+        vim.fn.system(string.format('rm %s'), file)
+        if vim.v.shell_error ~= 0 then
+          vim.api.nvim_err_writeln('Failed to delete file on disk.')
+        end
+      end,
+    },
+    {
+      'Rename',
+      function()
+        local full_path = vim.fn.expand('%')
+        vim.ui.input({ prompt = 'Rename to', default = vim.loop.cwd() .. '/' }, function(new_path)
+          if not new_path then
+            return
+          end
+
+          if vim.fn.filereadable(new_path) > 0 then
+            vim.api.nvim_err_writeln('Cannot rename: file with specified name already exists.')
+            return
+          end
+          local success = vim.loop.fs_rename(full_path, new_path)
+          if not success then
+            vim.api.nvim_err_writeln('Could not rename ' .. full_path .. ' to ' .. new_path)
+            return
+          end
+
+          vim.api.nvim_out_write(full_path .. ' ➜ ' .. new_path)
+          require('utils').rename_loaded_buffers(full_path, new_path)
+          vim.cmd('NvimTreeRefresh')
+        end)
+      end,
+    },
   }
 end
 
