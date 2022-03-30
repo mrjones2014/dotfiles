@@ -13,7 +13,9 @@ if vim.fn.empty(vim.fn.glob(paths.plugin_install_path)) > 0 then
 end
 
 local packer = require('packer')
-packer.init({ compile_path = paths.join(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua') })
+packer.init({
+  compile_path = paths.join(vim.fn.stdpath('data'), 'site/pack/loader/start/packer.nvim/lua/packer_compiled.lua'),
+})
 packer.startup({
   function(use)
     -- impatient.nvim has to be loaded before anything else,
