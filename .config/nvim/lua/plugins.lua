@@ -13,7 +13,7 @@ if vim.fn.empty(vim.fn.glob(paths.plugin_install_path)) > 0 then
 end
 
 local packer = require('packer')
-
+packer.init({ compile_path = paths.join(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua') })
 packer.startup({
   function(use)
     -- impatient.nvim has to be loaded before anything else,
@@ -80,5 +80,7 @@ packer.startup({
 
 -- Automatically set up config if we just bootstrapped packer by git cloning it
 if packer_bootstrap then
-  require('packer').sync()
+  packer.sync()
 end
+
+pcall(require, 'packer_compiled')

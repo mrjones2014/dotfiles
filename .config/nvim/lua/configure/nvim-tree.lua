@@ -34,7 +34,7 @@ return {
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
     require('nvim-tree').setup({
       filters = {
-        custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' },
+        custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist', 'packer_compiled.lua' },
       },
       git = {
         ignore = true,
