@@ -6,7 +6,7 @@ end
 
 return {
   'nvim-treesitter/nvim-treesitter',
-  requires = { 'p00f/nvim-ts-rainbow' },
+  requires = { 'p00f/nvim-ts-rainbow', 'windwp/nvim-ts-autotag' },
   run = update_cmd,
   config = function()
     require('nvim-treesitter.configs').setup({
@@ -28,6 +28,9 @@ return {
         enable = true,
         extended_mode = true,
         max_file_lines = 1500,
+      },
+      autotag = {
+        enable = true,
       },
     })
   end,
