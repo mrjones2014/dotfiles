@@ -32,14 +32,18 @@ require('lsp.null-ls')
 -- an autocommand that runs only once
 -- for each lsp config
 local legendary = require('legendary')
-for lsp_name, filetypes in pairs(require('lsp.filetypes').filetype_patterns) do
+for filetype, file_patterns in pairs(require('lsp.filetypes').filetype_patterns) do
   legendary.bind_autocmds({
     'BufReadPre',
     function()
-      require('lsp.' .. lsp_name)
+      require('lsp.' .. filetype)
+      local snippets = require('lsp.snippets')[filetype]
+      if snippets then
+        snippets()
+      end
     end,
     opts = {
-      pattern = filetypes,
+      pattern = file_patterns,
       once = true,
     },
   })
