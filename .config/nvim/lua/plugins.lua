@@ -58,6 +58,7 @@ packer.startup({
     use(require('configure.nvim-tree'))
     use(require('configure.indent-blankline'))
     use(require('configure.lualine'))
+    use(require('configure.bufferline'))
     use(require('configure.colorizer'))
     use(require('configure.todo-comments'))
     use(require('configure.nvim-notify'))

@@ -23,8 +23,8 @@ function M.default_keymaps()
     { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
     { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
 
-    { '<S-Right>', ':bn<CR>', description = 'Move to next buffer' },
-    { '<S-Left>', ':bp<CR>', description = 'Move to previous buffer' },
+    { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
+    { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
     { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
 
