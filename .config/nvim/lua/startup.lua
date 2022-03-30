@@ -66,7 +66,8 @@ local header = center({
 })
 
 local function show_startup()
-  local buf_id = vim.api.nvim_win_get_buf(0)
+  local buf_id = vim.api.nvim_get_current_buf()
+  local win_id = vim.api.nvim_get_current_win()
   vim.api.nvim_buf_set_option(buf_id, 'buftype', 'nofile')
   vim.api.nvim_buf_set_name(buf_id, 'Neovim')
   vim.api.nvim_win_set_option(0, 'number', false)
@@ -90,23 +91,19 @@ local function show_startup()
   })
 
   -- close the startup buffer when we go anywhere else
-  vim.api.nvim_create_autocmd('BufLeave', {
-    callback = function()
-      vim.api.nvim_buf_delete(buf_id, { force = true })
-      vim.api.nvim_win_set_option(0, 'number', true)
-      vim.o.showtabline = 2
-    end,
-    buffer = buf_id,
-    once = true,
-    group = augroup,
-  })
-
   vim.schedule(function()
     vim.api.nvim_create_autocmd('BufEnter', {
       callback = function()
+        if vim.api.nvim_get_current_win() ~= win_id then
+          return
+        end
+
+        vim.api.nvim_buf_delete(buf_id, { force = true })
+        vim.api.nvim_win_set_option(0, 'number', true)
         vim.o.showtabline = 2
+        vim.api.nvim_del_augroup_by_id(augroup)
       end,
-      once = true,
+      once = false,
       group = augroup,
     })
   end)
