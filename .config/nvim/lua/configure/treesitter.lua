@@ -6,7 +6,11 @@ end
 
 return {
   'nvim-treesitter/nvim-treesitter',
-  requires = { 'p00f/nvim-ts-rainbow', 'windwp/nvim-ts-autotag' },
+  requires = {
+    'p00f/nvim-ts-rainbow',
+    'windwp/nvim-ts-autotag',
+    'JoosepAlviste/nvim-ts-context-commentstring',
+  },
   run = update_cmd,
   config = function()
     require('nvim-treesitter.configs').setup({
@@ -30,6 +34,9 @@ return {
         max_file_lines = 1500,
       },
       autotag = {
+        enable = true,
+      },
+      context_commentstring = {
         enable = true,
       },
     })
