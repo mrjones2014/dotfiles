@@ -35,9 +35,7 @@ packer.startup({
 
     -- Editing enhancements and tools
     use(require('configure.text-moving'))
-    use(require('configure.telescope'))
     use(require('configure.autopairs'))
-    use(require('configure.markdown-preview'))
     use(require('configure.comments'))
     use(require('configure.better-escape'))
     use(require('configure.lightspeed'))
@@ -46,13 +44,14 @@ packer.startup({
     use(require('configure.lspconfig'))
     use(require('configure.luasnip'))
     use(require('configure.completion'))
-    use(require('configure.vim-fish'))
     use(require('configure.trouble'))
     use(require('configure.goto-preview'))
     use(require('configure.treesitter'))
     use(require('configure.treesitter-playground'))
 
     -- UI + utils
+    use(require('configure.markdown-preview'))
+    use(require('configure.telescope'))
     use(require('configure.gitsigns'))
     use(require('configure.icons'))
     use(require('configure.nvim-tree'))

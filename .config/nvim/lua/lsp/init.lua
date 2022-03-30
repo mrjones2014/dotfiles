@@ -27,22 +27,12 @@ end
 
 -- always load null-ls
 require('lsp.null-ls')
+
 -- lazy-load the rest of the configs with
 -- an autocommand that runs only once
 -- for each lsp config
-local lsp_configs = {
-  ['css'] = { '*.css', '*.scss' },
-  ['html'] = { '*.html' },
-  ['json'] = { '*.json', '*.jsonc' },
-  ['typescript'] = { '*.ts', '*.tsx', '*.js', '*.jsx' },
-  ['lua'] = { '*.lua' },
-  ['rust'] = { '*.rs' },
-  ['csharp'] = { '*.cs' },
-  ['svelte'] = { '*.svelte' },
-}
-
 local legendary = require('legendary')
-for lsp_name, filetypes in pairs(lsp_configs) do
+for lsp_name, filetypes in pairs(require('lsp.filetypes').filetype_patterns) do
   legendary.bind_autocmds({
     'BufReadPre',
     function()
