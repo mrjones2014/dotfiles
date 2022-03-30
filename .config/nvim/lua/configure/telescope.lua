@@ -28,8 +28,13 @@ return {
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         dynamic_preview_title = true,
         mappings = {
-          i = { ['<c-t>'] = trouble.open_with_trouble },
-          n = { ['<c-t>'] = trouble.open_with_trouble },
+          i = {
+            ['<C-t>'] = trouble.open_with_trouble,
+            ['<C-u>'] = false, -- clear prompt with ctrl+u
+            ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
+            ['<C-f>'] = require('telescope.actions').preview_scrolling_up,
+          },
+          n = { ['<C-t>'] = trouble.open_with_trouble },
         },
       },
       pickers = {
