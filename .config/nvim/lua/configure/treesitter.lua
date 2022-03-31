@@ -10,8 +10,14 @@ return {
     'p00f/nvim-ts-rainbow',
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
+    'andymass/vim-matchup',
   },
   run = update_cmd,
+  setup = function()
+    vim.g.matchup_matchparen_offscreen = {
+      method = 'popup',
+    }
+  end,
   config = function()
     require('nvim-treesitter.configs').setup({
       highlight = {
@@ -37,6 +43,9 @@ return {
         enable = true,
       },
       context_commentstring = {
+        enable = true,
+      },
+      matchup = {
         enable = true,
       },
     })
