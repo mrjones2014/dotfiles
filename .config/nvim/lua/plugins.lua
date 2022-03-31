@@ -66,6 +66,7 @@ packer.startup({
     use(require('configure.dressing'))
     use(require('configure.fidget'))
     use(require('configure.startuptime'))
+    use('tpope/vim-eunuch')
   end,
   config = {
     profile = {
