@@ -14,6 +14,8 @@ and `dots commit -m "Add some file"` from any directory, and it will be properly
 ## Caveats
 
 I use macOS. Some things in this repo won't work on Linux, but a lot of it will. Feel free to modify anything you'd like to support Linux.
+It will almost certainly not work on Windows and I have zero interest in supporting Windows in this repo.
+[Microsoft Windows itself is malware/spyware](https://www.gnu.org/proprietary/malware-microsoft.html).
 
 For Hammerspoon to find the config, you'll need to run `defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
 after installing Hammerspoon, then restart Hammerspoon.
