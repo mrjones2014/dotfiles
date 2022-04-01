@@ -46,4 +46,9 @@ if status is-interactive
             exec tmux new-session -A -s ssh-user
         end
     end
+
+    # push prompt to bottom
+    for i in (seq 1 $LINES)
+        printf '\n'
+    end
 end
