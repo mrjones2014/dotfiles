@@ -38,11 +38,13 @@ return {
       ['ce'] = '🄲',
       ['!'] = '🅃',
       ['t'] = '🅃',
+      ['nt'] = '🅃',
     }
 
     local function get_mode()
       local mode = vim.api.nvim_get_mode().mode
       if mode_icons[mode] == nil then
+        print(mode)
         return mode
       end
 
