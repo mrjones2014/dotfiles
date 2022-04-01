@@ -8,7 +8,6 @@ require('lspconfig').rust_analyzer.setup({
       },
       files = {
         excludeDirs = {
-          './target/',
           './js/',
           './node_modules/',
           './assets/',
@@ -16,8 +15,8 @@ require('lspconfig').rust_analyzer.setup({
           './data/',
           './docs/',
           './store-metadata/',
-          './gitlab/',
-          './vscode/',
+          './.gitlab/',
+          './.vscode/',
           './.git/',
         },
       },
