@@ -12,7 +12,7 @@ return {
     { 'mtoohey31/cmp-fish', ft = 'fish' },
   },
   branch = 'dev',
-  after = { 'pears.nvim', 'LuaSnip' },
+  after = { 'nvim-autopairs', 'LuaSnip' },
   config = function()
     local luasnip = require('luasnip')
     luasnip.config.setup({
