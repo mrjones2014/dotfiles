@@ -143,6 +143,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install LibreWolf browser: brew install --cask librewolf && xattr -d com.apple.quarantine /Applications/LibreWolf.app"
     end
 
+    if ! type tmux
+        echo "Install tmux: brew install --HEAD tmux"
+    end
+
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]
         echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
     end
