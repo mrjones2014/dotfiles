@@ -6,9 +6,9 @@ function M.default_keymaps()
   local h = require('legendary.helpers')
   return {
     -- jk is mapped to escape by better-escape.nvim plugin
-    -- make escape work in terminal mode
+    -- make escape work in terminal mode,
+    -- jk will enter vi mode of the shell itself
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
-    { 'jk', '<C-\\><C-n>', mode = 't' },
 
     { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'x' } },
 

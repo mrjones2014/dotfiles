@@ -1,6 +1,6 @@
 return {
-  'windwp/nvim-autopairs',
+  'steelsojka/pears.nvim',
   config = function()
-    require('nvim-autopairs').setup({})
+    require('pears').setup()
   end,
 }
