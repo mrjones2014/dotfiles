@@ -33,7 +33,6 @@ packer.startup({
     use(require('configure.mine.lighthaus'))
     use(require('configure.mine.smart-splits'))
     use(require('configure.mine.dash'))
-    use(require('configure.mine.tldr'))
 
     -- Editing enhancements and tools
     use(require('configure.text-moving'))
