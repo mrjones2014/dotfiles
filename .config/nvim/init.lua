@@ -1,5 +1,9 @@
 -- impatient has to be loaded before anything else
-require('impatient')
+local present, impatient = pcall(require, 'impatient')
+if present then
+  impatient.enable_profile()
+end
+
 require('disable-builtins')
 require('settings')
 require('plugins')
