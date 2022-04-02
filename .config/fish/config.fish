@@ -38,8 +38,7 @@ if status is-interactive
     ctrlg init fish | source
     nvm use $nvm_default_version >/dev/null
 
-    # use nvim as man pager
-    set -x MANPAGER nvim
+    set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
     # start tmux session by default
     if [ -z "$TMUX" ]
