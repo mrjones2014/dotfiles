@@ -3,9 +3,9 @@ format = """
  $character """
 
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
-success_symbol = "[](bold #00BFA4)"
-error_symbol = "[](bold #FF5050)"
-vicmd_symbol = "[](bold #44B273)"
+success_symbol = "[ ](bold #00BFA4)"
+error_symbol = "[ ](bold #FF5050)"
+vicmd_symbol = "[ ](bold #44B273)"
 
 [git_branch]
 symbol = " "
