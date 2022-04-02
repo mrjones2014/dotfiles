@@ -5,9 +5,9 @@ if test -f /opt/homebrew/bin/brew
     fish_add_path /opt/homebrew/opt/llvm/bin
 end
 
-export GPG_TTY=(tty)
-export EDITOR="nvim"
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
+set -x GPG_TTY (tty)
+set -x EDITOR nvim
+set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
@@ -37,6 +37,9 @@ if status is-interactive
     set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 10
     ctrlg init fish | source
     nvm use $nvm_default_version >/dev/null
+
+    # use nvim as man pager
+    set -x MANPAGER nvim
 
     # start tmux session by default
     if [ -z "$TMUX" ]
