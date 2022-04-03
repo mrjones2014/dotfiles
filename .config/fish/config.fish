@@ -8,6 +8,7 @@ end
 set -x GPG_TTY (tty)
 set -x EDITOR nvim
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
+set -x CARGO_NET_GIT_FETCH_WITH_CLI true
 
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
