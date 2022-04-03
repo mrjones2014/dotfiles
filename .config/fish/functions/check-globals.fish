@@ -135,15 +135,15 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest, then run `defaults write org.hammerspoon.Hammerspoon MJConfigFile '~/.config/hammerspoon/init.lua'`"
     end
 
-    if test ! -d ~/.config/hammerspoon/Spoons/VimMode.spoon
-        echo "Install VimMode.spoon for Hammerspoon: mkdir -p ~/.hammerspoon/Spoons && git clone https://github.com/dbalatero/VimMode.spoon ~/.config/hammerspoon/Spoons/VimMode.spoon"
+    if test ! -d /Applications/kindaVim.app
+        echo "Install KindaVim: https://kindavim.app"
     end
 
     if test ! -d /Applications/LibreWolf.app
         echo "Install LibreWolf browser: brew install --cask librewolf && xattr -d com.apple.quarantine /Applications/LibreWolf.app"
     end
 
-    if ! type tmux
+    if ! type tmux &>/dev/null
         echo "Install tmux: brew install --HEAD tmux"
     end
 
