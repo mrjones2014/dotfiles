@@ -136,7 +136,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if test ! -d /Applications/kindaVim.app
-        echo "Install KindaVim: https://kindavim.app"
+        echo "Install KindaVim: https://kindavim.app, license is in 1Password"
     end
 
     if test ! -d /Applications/LibreWolf.app
