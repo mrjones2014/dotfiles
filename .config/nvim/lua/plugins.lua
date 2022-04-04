@@ -39,6 +39,8 @@ packer.startup({
     use(require('configure.comments'))
     use(require('configure.better-escape'))
     use(require('configure.lightspeed'))
+    use('tpope/vim-eunuch')
+    use('tpope/vim-sleuth')
 
     -- LSP + syntax
     use(require('configure.lspconfig'))
@@ -64,7 +66,6 @@ packer.startup({
     use(require('configure.dressing'))
     use(require('configure.fidget'))
     use(require('configure.startuptime'))
-    use('tpope/vim-eunuch')
   end,
   config = {
     profile = {
