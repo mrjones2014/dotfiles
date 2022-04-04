@@ -35,7 +35,6 @@ packer.startup({
     use(require('configure.mine.dash'))
 
     -- Editing enhancements and tools
-    use(require('configure.text-moving'))
     use(require('configure.autopairs'))
     use(require('configure.comments'))
     use(require('configure.better-escape'))
