@@ -18,11 +18,6 @@ function M.default_keymaps()
 
     { 'gx', require('utils').open_url_under_cursor, description = 'Open URL under cursor' },
 
-    { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
-    { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
-    { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
-    { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
-
     { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
     { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
@@ -77,13 +72,7 @@ function M.default_keymaps()
 
     {
       '<leader>c',
-      function(visual_selection)
-        if visual_selection then
-          vim.cmd(":'<,'>CommentToggle")
-        else
-          vim.cmd(':CommentToggle')
-        end
-      end,
+      ':CommentToggle<CR>',
       description = 'Toggle comment',
       mode = { 'n', 'x' },
     },
@@ -93,6 +82,34 @@ function M.default_keymaps()
       description = 'Replace all instances of word under cursor in current buffer',
     },
     { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
+
+    -- h/j/k/l mappings
+    { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
+    { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
+    { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
+    { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
+
+    {
+      '<S-h>',
+      { n = ':MoveHChar(-1)<CR>', x = ':MoveHBlock(-1)<CR>' },
+      description = 'Move text left',
+    },
+    {
+      '<S-j>',
+      { n = ':MoveLine(1)<CR>', x = ':MoveBlock(1)<CR>' },
+      description = 'Move text down',
+    },
+    {
+      '<S-k>',
+      { n = ':MoveLine(-1)<CR>', x = ':MoveBlock(-1)<CR>' },
+      description = 'Move text up',
+    },
+    {
+      '<S-l>',
+      { n = ':MoveHChar(1)<CR>', x = ':MoveHBlock(1)<CR>' },
+      description = 'Move text right',
+    },
+
     {
       '<A-h>',
       require('smart-splits').resize_left,

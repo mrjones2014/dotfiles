@@ -9,6 +9,8 @@ end
 
 return {
   path,
+  -- used by key mappings
+  requires = 'fedepujol/move.nvim',
   -- requires = '~/git/personal/which-key.nvim',
   config = function()
     require('legendary').setup({
