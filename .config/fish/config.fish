@@ -5,6 +5,8 @@ if test -f /opt/homebrew/bin/brew
     fish_add_path /opt/homebrew/opt/llvm/bin
 end
 
+set -g fish_prompt_pwd_dir_length 20
+
 set -x GPG_TTY (tty)
 set -x EDITOR nvim
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
