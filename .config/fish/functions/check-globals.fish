@@ -143,6 +143,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install LibreWolf browser: brew install --cask librewolf && xattr -d com.apple.quarantine /Applications/LibreWolf.app"
     end
 
+    if test ! -d /Applications/Raycast.app
+        echo "Install Raycast: brew install --cask raycast"
+    end
+
     if ! type tmux &>/dev/null
         echo "Install tmux: brew install --HEAD tmux"
     end
