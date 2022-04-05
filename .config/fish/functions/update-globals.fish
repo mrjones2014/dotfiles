@@ -1,9 +1,4 @@
 function update-globals --description "Update brew packages, some cargo packages, and npm global packages"
-    # update homebrew packages
-    brew update
-    brew upgrade --fetch-HEAD
-    xattr -d com.apple.quarantine /Applications/LibreWolf.app
-
     # update cargo packages
     cargo install atuin
     cargo install caniuse-rs
@@ -24,4 +19,9 @@ function update-globals --description "Update brew packages, some cargo packages
     nvm use "$current_node_version"
 
     pushd ~/.config/hammerspoon/Spoons/VimMode.spoon/ && git pull && popd
+
+    # update homebrew packages
+    brew update
+    brew upgrade --fetch-HEAD
+    xattr -d com.apple.quarantine /Applications/LibreWolf.app || echo ""
 end
