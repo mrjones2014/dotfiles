@@ -33,7 +33,7 @@ if status is-interactive
 
     op completion fish | source
     thefuck --alias | source
-    starship init fish | source
+    vifi init | source
     atuin init fish | source
     bind -M insert \e\[A _atuin_search
     set CTRLG_TMUX true
