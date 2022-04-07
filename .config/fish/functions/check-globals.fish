@@ -15,8 +15,8 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install thefuck: https://github.com/nvbn/thefuck"
     end
 
-    if ! type starship &>/dev/null
-        echo "Install starship: https://github.com/starship/starship"
+    if ! type vifi &>/dev/null
+        echo "Install vifi-prompt: cargo install vifi-prompt"
     end
 
     if ! type fisher &>/dev/null
