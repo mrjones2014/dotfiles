@@ -35,6 +35,7 @@ if status is-interactive
     thefuck --alias | source
     starship init fish | source
     atuin init fish | source
+    bind -M insert \e\[A _atuin_search
     set CTRLG_TMUX true
     set CTRLG_TMUX_POPUP true
     set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 10
