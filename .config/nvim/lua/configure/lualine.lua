@@ -57,7 +57,7 @@ return {
 
     local sections = {
       lualine_a = { get_mode },
-      lualine_b = { 'branch' },
+      lualine_b = { { 'branch', icon = '' } },
       lualine_c = {
         filepath,
         {
