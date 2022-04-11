@@ -1,10 +1,10 @@
 function update-globals --description "Update brew packages, some cargo packages, and npm global packages"
     # update cargo packages
-    cargo install atuin
-    cargo install caniuse-rs
-    cargo install mdbook
-    cargo install stylua
-    cargo install tealdeer
+    cargo install --force atuin
+    cargo install --force caniuse-rs
+    cargo install --force mdbook
+    cargo install --force stylua
+    cargo install --force tealdeer
 
     # update neovim plugins
     update-nvim-plugins
