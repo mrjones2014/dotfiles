@@ -27,6 +27,13 @@ function M.default_commands()
       end,
       description = 'Generate a UUID and insert it into the buffer',
     },
+    {
+      ':BindLspKeymaps',
+      function()
+        require('legendary').bind_keymaps(require('keymap').lsp_keymaps(0))
+      end,
+      description = "Manually bind LSP keymaps in case they didn't get bound",
+    },
   }
 end
 
