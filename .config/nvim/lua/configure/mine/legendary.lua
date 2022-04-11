@@ -9,9 +9,11 @@ end
 
 return {
   path,
-  -- used by key mappings
-  requires = 'fedepujol/move.nvim',
-  -- requires = '~/git/personal/which-key.nvim',
+  requires = {
+    -- used by key mappings
+    'fedepujol/move.nvim',
+    -- 'folke/which-key.nvim',
+  },
   config = function()
     require('legendary').setup({
       keymaps = require('keymap').default_keymaps(),
