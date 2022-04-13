@@ -10,6 +10,7 @@ M.filetype_patterns = {
   ['csharp'] = { '*.cs' },
   ['svelte'] = { '*.svelte' },
   ['teal'] = { '*.tl', '*.d.tl' },
+  ['go'] = { '*.go', 'go.mod' },
 }
 
 M.filetypes = vim.tbl_keys(M.filetype_patterns)
