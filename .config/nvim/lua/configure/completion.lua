@@ -11,7 +11,6 @@ return {
     'hrsh7th/cmp-cmdline',
     { 'mtoohey31/cmp-fish', ft = 'fish' },
   },
-  branch = 'dev',
   after = { 'nvim-autopairs', 'LuaSnip' },
   config = function()
     local luasnip = require('luasnip')
@@ -22,12 +21,8 @@ return {
     local cmp = require('cmp')
     local shared_config = {
       window = {
-        completion = {
-          border = 'rounded',
-        },
-        documentation = {
-          border = 'rounded',
-        },
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       preselect = cmp.PreselectMode.None,
       snippet = {

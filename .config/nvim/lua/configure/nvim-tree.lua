@@ -13,7 +13,6 @@ return {
   },
   setup = function()
     -- TODO update these once they're implemented in the setup function
-    vim.g.nvim_tree_indent_markers = 1
     vim.g.nvim_tree_git_hl = 1
     vim.g.nvim_tree_add_trailing = 1
     vim.g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
@@ -33,6 +32,7 @@ return {
     local icons = require('lsp.icons')
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
     require('nvim-tree').setup({
+      renderer = { indent_markers = { enable = true } },
       filters = {
         custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist', 'packer_compiled.lua' },
       },
