@@ -58,15 +58,6 @@ function M.lsp_autocmds(bufnr, server_name)
         ),
         opts = { buffer = bufnr },
       },
-      {
-        { 'CursorHold', 'CursorHoldI' },
-        require('legendary.helpers').lazy_required_fn('lsp_extensions', 'inlay_hints', {
-          highlight = 'RustInlayHint',
-          prefix = ' ',
-          enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' },
-        }),
-        opts = { pattern = '*.rs' },
-      },
     },
   }
 

@@ -91,7 +91,10 @@ function M.default_keymaps()
 
     {
       '<S-h>',
-      { n = ':MoveHChar(-1)<CR>', x = ':MoveHBlock(-1)<CR>' },
+      {
+        n = { ':MoveHChar(-1)<CR>', opts = { silent = false } },
+        x = { ':MoveHBlock(-1)<CR>', opts = { silent = false } },
+      },
       description = 'Move text left',
     },
     {
