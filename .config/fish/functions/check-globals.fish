@@ -127,6 +127,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install rust-analyzer: brew install rust-analyzer"
     end
 
+    if ! type gopls &>/dev/null
+        echo "Install gopls: brew install gopls"
+    end
+
     if ! type lua-language-server &>/dev/null
         echo "Install lua-language-server: brew install lua-language-server"
     end
