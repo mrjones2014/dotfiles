@@ -58,8 +58,8 @@ return {
     local sections = {
       lualine_a = { get_mode },
       lualine_b = { { 'branch', icon = '' } },
-      lualine_c = {
-        filepath,
+      lualine_c = { filepath },
+      lualine_x = {
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
@@ -68,7 +68,6 @@ return {
           update_in_insert = true,
         },
       },
-      lualine_x = {},
       lualine_y = {},
       lualine_z = { 'location', 'progress' },
     }
