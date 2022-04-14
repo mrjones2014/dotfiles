@@ -48,13 +48,13 @@ return {
     ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup(vim.tbl_deep_extend('force', shared_config, {
       sources = {
-        { name = 'luasnip' },
-        { name = 'nvim_lsp' },
+        { name = 'luasnip', priority = 100 },
+        { name = 'nvim_lsp', priority = 90 },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'nvim_lua' },
+        { name = 'nvim_lua', priority = 90 },
         { name = 'fish' },
-        { name = 'path' },
-        { name = 'buffer' },
+        { name = 'path', priority = 5 },
+        { name = 'buffer', priority = 1 },
       },
     }))
 
