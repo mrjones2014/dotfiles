@@ -133,6 +133,32 @@ function M.default_keymaps()
       require('smart-splits').resize_up,
       description = 'Smart resize horizontally',
     },
+    {
+      '<C-g>',
+      function()
+        require('legendary').bind_autocmds({
+          {
+            'TermClose',
+            function()
+              local output = vim.fn.getline(1, '$')
+              output = output and output[1]
+              if vim.fn.isdirectory(output) then
+                -- close all open buffers
+                vim.cmd('%bd')
+                -- cd to working directory
+                vim.cmd('cd ' .. output)
+                vim.schedule(function()
+                  -- show startup screen
+                  require('startup').show(true)
+                end)
+              end
+            end,
+            opts = { once = true },
+          },
+        })
+        vim.cmd('term ctrlg find')
+      end,
+    },
   }
 end
 

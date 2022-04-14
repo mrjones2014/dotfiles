@@ -41,6 +41,24 @@ function M.default_autocmds()
         ':Gitsigns toggle_current_line_blame',
       },
     },
+    {
+      name = 'TerminalBufferSettings',
+      {
+        'TermOpen',
+        function()
+          vim.cmd('setlocal nonumber')
+          vim.cmd('startinsert')
+        end,
+      },
+      {
+        'TermClose',
+        function()
+          vim.schedule(function()
+            vim.cmd('Bw')
+          end)
+        end,
+      },
+    },
   }
 end
 
