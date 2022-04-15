@@ -119,10 +119,6 @@ function check-globals --description "Check for missing command line tools and p
         echo 'Install luacheck: luarocks install luacheck'
     end
 
-    if ! type teal-language-server &>/dev/null
-        echo 'Install luacheck: luarocks install --dev teal-language-server'
-    end
-
     if ! type rust-analyzer &>/dev/null
         echo "Install rust-analyzer: brew install rust-analyzer"
     end
@@ -133,6 +129,10 @@ function check-globals --description "Check for missing command line tools and p
 
     if ! type lua-language-server &>/dev/null
         echo "Install lua-language-server: brew install lua-language-server"
+    end
+
+    if ! type teal-language-server &>/dev/null
+        echo 'Install teal-language-server: luarocks install --dev teal-language-server'
     end
 
     if ! type op &>/dev/null
