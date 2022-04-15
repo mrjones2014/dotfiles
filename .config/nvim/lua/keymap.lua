@@ -81,7 +81,6 @@ function M.default_keymaps()
       [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
       description = 'Replace all instances of word under cursor in current buffer',
     },
-    { '<C-e>', '<Plug>luasnip-next-choice', mode = { 'i', 's' } },
 
     -- h/j/k/l mappings
     { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
