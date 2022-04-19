@@ -1,3 +1,5 @@
+docs: docs/
+readme: README.md
 fish: .config/fish/
 tmux: .config/tmux/tmux.conf
 scripts: scripts/
