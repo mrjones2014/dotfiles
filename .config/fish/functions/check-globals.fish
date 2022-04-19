@@ -12,7 +12,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type thefuck &>/dev/null
-        echo "Install thefuck: https://github.com/nvbn/thefuck"
+        echo "Install thefuck: brew install thefuck"
     end
 
     if ! type vifi &>/dev/null
@@ -20,7 +20,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type fisher &>/dev/null
-        echo "Install fisher: https://github.com/jorgebucaran/fisher"
+        echo "Install fisher: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
     end
 
     if ! fisher list | grep nvm.fish &>/dev/null
@@ -28,19 +28,19 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type nvim &>/dev/null
-        echo "Install neovim: https://github.com/neovim/neovim"
+        echo "Install neovim: brew install neovim"
     end
 
     if ! type fzf &>/dev/null
-        echo "Install fzf: https://github.com/junegunn/fzf"
+        echo "Install fzf: brew install fzf"
     end
 
     if ! type rg &>/dev/null
-        echo "Install RipGrep: https://github.com/BurntSushi/ripgrep"
+        echo "Install RipGrep: brew install ripgrep"
     end
 
     if ! type nvm &>/dev/null
-        echo "Install nvm.fish: https://github.com/jorgebucaran/nvm.fish"
+        echo "Install nvm.fish: fisher install jorgebucaran/nvm.fish"
     end
 
     if ! type node &>/dev/null
