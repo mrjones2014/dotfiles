@@ -62,6 +62,37 @@ return {
             end
           end,
         },
+        live_grep = { -- TODO see https://github.com/nvim-telescope/telescope.nvim/issues/1865
+          on_input_filter_cb = function(prompt)
+            -- if prompt starts with escaped @ then treat it as a literal
+            if (prompt):sub(1, 2) == '\\@' then
+              return { prompt = prompt:sub(2) }
+            end
+            -- if prompt starts with, for example, @rs
+            -- only search files that end in *.rs
+            local result = string.match(prompt, '@%a*%s')
+            if not result then
+              return {}
+            end
+
+            local result_len = #result
+
+            result = result:sub(2)
+            result = result:gsub('%s+', '') -- trim
+
+            return {
+              prompt = prompt:sub(result_len + 1),
+              updated_finder = require('telescope.finders').new_job(function(new_prompt)
+                return vim.tbl_flatten({
+                  require('telescope.config').values.vimgrep_arguments,
+                  string.format('-g*.%s', result),
+                  '--',
+                  new_prompt,
+                })
+              end, require('telescope.make_entry').gen_from_vimgrep({}), nil, nil),
+            }
+          end,
+        },
         oldfiles = {
           only_cwd = true,
           file_ignore_patterns = {
