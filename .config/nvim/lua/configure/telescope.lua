@@ -72,7 +72,16 @@ return {
             -- only search files that end in *.rs
             local result = string.match(prompt, '@%a*%s')
             if not result then
-              return {}
+              return {
+                prompt = prompt,
+                updated_finder = require('telescope.finders').new_job(function(new_prompt)
+                  return vim.tbl_flatten({
+                    require('telescope.config').values.vimgrep_arguments,
+                    '--',
+                    new_prompt,
+                  })
+                end, require('telescope.make_entry').gen_from_vimgrep({}), nil, nil),
+              }
             end
 
             local result_len = #result
