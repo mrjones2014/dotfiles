@@ -253,7 +253,7 @@ function M.cmp_mappings()
       'c',
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<ESC>'] = cmp.mapping(function(fallback)
+    ['<C-e>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.mapping.close()()
       else
