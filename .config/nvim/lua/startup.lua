@@ -32,29 +32,21 @@ local header = center({
   '',
   '',
   '',
-  ' ⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇⌇         ',
-  '╭──────────────────────────────╮       ',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │──────╮',
-  '│                              │      │',
-  '│                              │      │',
-  '│                              │      │',
-  '│                              │      │',
-  '│       C  O  F  F  E  E       │      │',
-  '│                              │      │',
-  '│                              │      │',
-  '│                              │      │',
-  '│                              │      │',
-  '│                              │──────╯',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │       ',
-  '│                              │       ',
-  '╰──────────────────────────────╯       ',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+  ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+  ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+  ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+  ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+  ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 })
 
 local function show_startup()
@@ -62,8 +54,9 @@ local function show_startup()
   local win_id = vim.api.nvim_get_current_win()
   vim.api.nvim_buf_set_option(buf_id, 'buftype', 'nofile')
   vim.api.nvim_buf_set_name(buf_id, 'Neovim')
-  vim.api.nvim_win_set_option(0, 'number', false)
+  vim.api.nvim_win_set_option(win_id, 'number', false)
   vim.api.nvim_buf_set_lines(buf_id, 0, #header, false, header)
+  vim.api.nvim_buf_set_option(buf_id, 'modifiable', false)
   for i = 0, #header, 1 do
     vim.api.nvim_buf_add_highlight(buf_id, 0, 'LspDiagnosticsDefaultInformation', i, 0, -1)
   end
@@ -79,16 +72,6 @@ local function show_startup()
     end,
     buffer = buf_id,
     once = true,
-    group = augroup,
-  })
-
-  vim.api.nvim_create_autocmd('InsertEnter', {
-    callback = function()
-      vim.schedule(function()
-        vim.cmd('stopinsert')
-      end)
-    end,
-    buffer = buf_id,
     group = augroup,
   })
 
