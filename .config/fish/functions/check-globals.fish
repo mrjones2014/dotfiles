@@ -47,24 +47,28 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install node.js via nvm"
     end
 
+    if ! type pnpm &>/dev/null
+        echo "Install pnpm: brew install pnpm"
+    end
+
     if ! type eslint_d &>/dev/null
-        echo "Install eslint_d globally for Neovim integration: npm i -g eslint_d"
+        echo "Install eslint_d globally for Neovim integration: pnpm i -g eslint_d"
     end
 
     if ! type prettierd &>/dev/null
-        echo "Install prettierd globally for Neovim integration: npm i -g @fsouza/prettierd"
+        echo "Install prettierd globally for Neovim integration: pnpm i -g @fsouza/prettierd"
     end
 
     if ! type typescript-language-server &>/dev/null
-        echo "Install tsserver globally for Neovim integration: npm i -g typescript typescript-language-server"
+        echo "Install tsserver globally for Neovim integration: pnpm i -g typescript typescript-language-server"
     end
 
     if ! type vscode-css-language-server &>/dev/null
-        echo "Install CSS language server globally for Neovim integration: npm i -g vscode-langservers-extracted"
+        echo "Install CSS language server globally for Neovim integration: pnpm i -g vscode-langservers-extracted"
     end
 
     if ! type svelteserver &>/dev/null
-        echo "Install svelte-language-server globally for Neovim integration: npm i -g svelte-language-server"
+        echo "Install svelte-language-server globally for Neovim integration: pnpm i -g svelte-language-server"
     end
 
     if ! type cargo &>/dev/null
