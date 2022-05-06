@@ -19,14 +19,6 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install vifi-prompt: cargo install vifi-prompt"
     end
 
-    if ! type fisher &>/dev/null
-        echo "Install fisher: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
-    end
-
-    if ! fisher list | grep nvm.fish &>/dev/null
-        echo "Install nvim.fish: fisher install jorgebucaran/nvm.fish"
-    end
-
     if ! type nvim &>/dev/null
         echo "Install neovim: brew install neovim"
     end
@@ -37,10 +29,6 @@ function check-globals --description "Check for missing command line tools and p
 
     if ! type rg &>/dev/null
         echo "Install RipGrep: brew install ripgrep"
-    end
-
-    if ! type nvm &>/dev/null
-        echo "Install nvm.fish: fisher install jorgebucaran/nvm.fish"
     end
 
     if ! type node &>/dev/null
