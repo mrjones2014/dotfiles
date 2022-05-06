@@ -1,10 +1,3 @@
-# ensure brew stuff is on PATH
-if test -f /opt/homebrew/bin/brew
-    eval (/opt/homebrew/bin/brew shellenv)
-    fish_add_path /opt/homebrew/bin
-    fish_add_path /opt/homebrew/opt/llvm/bin
-end
-
 set -g fish_prompt_pwd_dir_length 20
 
 set -x GPG_TTY (tty)
