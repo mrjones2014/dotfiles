@@ -32,7 +32,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type node &>/dev/null
-        echo "Install node.js via nvm"
+        echo "Install node.js: brew install node"
     end
 
     if ! type pnpm &>/dev/null
