@@ -16,6 +16,8 @@ I wrote an [article describing this method](https://mjones.network/storing-dotfi
 
 ## Caveats
 
+Neovim configuration may require Neovim nightly depending on where Neovim's release cycle is at.
+
 I use macOS. Some things in this repo won't work on Linux, but a lot of it will. Feel free to modify anything you'd like to support Linux.
 It will almost certainly not work on Windows and I have zero interest in supporting Windows in this repo.
 [Microsoft Windows itself is malware/spyware](https://www.gnu.org/proprietary/malware-microsoft.html).

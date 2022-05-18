@@ -23,7 +23,7 @@ function M.on_attach(client, bufnr)
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 end
 
@@ -35,7 +35,7 @@ function M.format_document()
 
   if not vim.b.format_saving then
     vim.b.format_changedtick = vim.b.changedtick
-    vim.lsp.buf.formatting({})
+    vim.lsp.buf.format({ async = true })
   end
 end
 
