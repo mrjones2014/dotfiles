@@ -1,5 +1,5 @@
 return {
-  'akinsho/nvim-bufferline.lua',
+  'akinsho/bufferline.nvim',
   requires = { 'famiu/bufdelete.nvim' },
   after = 'lighthaus.nvim',
   config = function()
