@@ -23,6 +23,7 @@ vim.opt.syntax = 'on'
 vim.opt.modeline = true
 vim.opt.updatetime = 100
 vim.opt.confirm = true
+vim.opt.showtabline = 0
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0

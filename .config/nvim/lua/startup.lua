@@ -53,6 +53,7 @@ local function show_startup()
   local buf_id = vim.api.nvim_get_current_buf()
   local win_id = vim.api.nvim_get_current_win()
   vim.api.nvim_buf_set_option(buf_id, 'buftype', 'nofile')
+  vim.api.nvim_buf_set_option(buf_id, 'filetype', 'nofile')
   vim.api.nvim_buf_set_name(buf_id, 'Neovim')
   vim.api.nvim_win_set_option(win_id, 'number', false)
   vim.api.nvim_buf_set_lines(buf_id, 0, #header, false, header)
@@ -62,18 +63,6 @@ local function show_startup()
   end
 
   local augroup = vim.api.nvim_create_augroup('StartScreen', { clear = true })
-
-  -- hide tabline on startup buffer
-  vim.api.nvim_create_autocmd('BufEnter', {
-    callback = function()
-      vim.schedule(function()
-        vim.o.showtabline = 0
-      end)
-    end,
-    buffer = buf_id,
-    once = true,
-    group = augroup,
-  })
 
   -- close the startup buffer when we go anywhere else
   vim.schedule(function()
@@ -85,7 +74,6 @@ local function show_startup()
 
         vim.api.nvim_buf_delete(buf_id, { force = true })
         vim.api.nvim_win_set_option(0, 'number', true)
-        vim.o.showtabline = 2
         vim.api.nvim_del_augroup_by_id(augroup)
       end,
       once = false,
