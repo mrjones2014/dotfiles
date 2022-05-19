@@ -1,11 +1,12 @@
 return {
-  'akinsho/bufferline.nvim',
+  '~/git/personal/bufferline.nvim',
   requires = { 'famiu/bufdelete.nvim' },
   after = 'lighthaus.nvim',
   config = function()
     local colors = require('lighthaus.colors')
     require('bufferline').setup({
       options = {
+        mode = 'window',
         max_name_length = 24,
         close_command = 'Bdelete %d',
         separator_style = 'slant',
