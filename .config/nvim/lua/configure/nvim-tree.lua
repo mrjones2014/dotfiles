@@ -35,7 +35,6 @@ return {
     local icons = require('lsp.icons')
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
     require('nvim-tree').setup({
-      reload_on_bufenter = true,
       renderer = { indent_markers = { enable = true } },
       filters = {
         custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist', 'packer_compiled.lua' },
