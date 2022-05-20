@@ -33,6 +33,9 @@ packer.startup({
     use(require('configure.mine.lighthaus'))
     use(require('configure.mine.smart-splits'))
     use(require('configure.mine.dash'))
+    -- I use my own fork of bufferline.nvim
+    -- that supports using the winbar
+    use(require('configure.mine.bufferline'))
 
     -- Editing enhancements and tools
     use(require('configure.autopairs'))
@@ -59,7 +62,6 @@ packer.startup({
     use(require('configure.nvim-tree'))
     use(require('configure.indent-blankline'))
     use(require('configure.lualine'))
-    use(require('configure.bufferline'))
     use(require('configure.colorizer'))
     use(require('configure.todo-comments'))
     use(require('configure.nvim-notify'))
