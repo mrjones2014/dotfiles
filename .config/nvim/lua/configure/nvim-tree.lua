@@ -11,6 +11,9 @@ return {
     'NvimTreeResize',
     'NvimTreeToggle',
   },
+  -- nvim-tree keeps releasing breaking changes and it's pissing me off,
+  -- so just stop updating nvim-tree
+  commit = '9563a11',
   setup = function()
     -- TODO update these once they're implemented in the setup function
     vim.g.nvim_tree_git_hl = 1
