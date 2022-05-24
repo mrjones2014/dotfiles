@@ -1,7 +1,5 @@
 local M = {}
 
-local lsp_keymaps_bound_bufnrs = {}
-
 function M.default_keymaps()
   local h = require('legendary.helpers')
   return {
@@ -136,11 +134,15 @@ function M.default_keymaps()
 end
 
 function M.lsp_keymaps(bufnr)
-  if vim.tbl_contains(lsp_keymaps_bound_bufnrs, bufnr) then
+  -- if the buffer already has LSP keymaps bound, do nothing
+  if
+    #vim.tbl_filter(function(keymap)
+      return (keymap.desc or ''):lower() == 'rename symbol'
+    end, vim.api.nvim_buf_get_keymap(0, 'n')) > 0
+  then
     return {}
   end
 
-  table.insert(lsp_keymaps_bound_bufnrs, bufnr)
   local h = require('legendary.helpers')
   return {
     {

@@ -38,6 +38,7 @@ function M.default_commands()
 end
 
 function M.lsp_commands(bufnr, server_name)
+  -- don't need to gate these since we aren't creating the actual commands
   local commands = {
     {
       ':LspRestart',
@@ -56,7 +57,7 @@ function M.lsp_commands(bufnr, server_name)
     },
   }
 
-  if server_name == 'null-ls' then
+  if server_name == 'null-ls' and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
     table.insert(commands, 1, {
       ':Format',
       require('lsp.utils').format_document,
