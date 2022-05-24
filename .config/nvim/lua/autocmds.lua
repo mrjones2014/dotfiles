@@ -45,23 +45,36 @@ function M.default_autocmds()
 end
 
 function M.lsp_autocmds(bufnr, server_name)
+  local _, autocmds = pcall(vim.api.nvim_get_autocmds, { group = 'LspOnAttachAutocmds' })
+  autocmds = (type(autocmds) == 'table' and autocmds) or {}
   local augroup = {
-    {
-      name = 'LspOnAttachAutocmds',
-      clear = false,
-      {
-        'CursorHold',
-        require('legendary.helpers').lazy(
-          vim.diagnostic.open_float,
-          nil,
-          { focus = false, scope = 'cursor', border = 'rounded' }
-        ),
-        opts = { buffer = bufnr },
-      },
-    },
+    name = 'LspOnAttachAutocmds',
+    clear = false,
   }
 
-  if server_name == 'null-ls' then
+  if
+    #vim.tbl_filter(function(autocmd)
+      return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
+    end, autocmds) == 0
+  then
+    table.insert(augroup, {
+      'CursorHold',
+      require('legendary.helpers').lazy(
+        vim.diagnostic.open_float,
+        nil,
+        { focus = false, scope = 'cursor', border = 'rounded' }
+      ),
+      opts = { buffer = bufnr },
+    })
+  end
+
+  if
+    server_name == 'null-ls'
+    and #vim.tbl_filter(function(autocmd)
+        return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'BufWritePost'
+      end, autocmds)
+      == 0
+  then
     table.insert(augroup, {
       'BufWritePost',
       require('lsp.utils').format_document,
@@ -69,7 +82,11 @@ function M.lsp_autocmds(bufnr, server_name)
     })
   end
 
-  return augroup
+  if #augroup == 0 then
+    return {}
+  end
+
+  return { augroup }
 end
 
 return M
