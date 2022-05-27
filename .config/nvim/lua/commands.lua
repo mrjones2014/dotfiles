@@ -34,6 +34,11 @@ function M.default_commands()
       end,
       description = "Manually bind LSP keymaps in case they didn't get bound",
     },
+    {
+      ':OnlyBuffer',
+      ':%bd|e#|bd#',
+      description = 'Close all buffers except current',
+    },
   }
 end
 
