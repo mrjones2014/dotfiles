@@ -27,24 +27,4 @@ function M.open_url_under_cursor()
   end
 end
 
-function M.rename_loaded_buffers(old_path, new_path)
-  for _, buf in pairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(buf) then
-      local buf_name = vim.api.nvim_buf_get_name(buf)
-      local exact_match = buf_name == old_path
-      local child_match = (buf_name:sub(1, #old_path) == old_path and buf_name:sub(#old_path + 1, #old_path + 1) == '/')
-      if exact_match or child_match then
-        vim.api.nvim_buf_set_name(buf, new_path .. buf_name:sub(#old_path + 1))
-        -- to avoid the 'overwrite existing file' error message on write for
-        -- normal files
-        if vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
-          vim.api.nvim_buf_call(buf, function()
-            vim.cmd('silent! write!')
-          end)
-        end
-      end
-    end
-  end
-end
-
 return M
