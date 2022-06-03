@@ -80,12 +80,35 @@ function M.default_keymaps()
       description = 'Replace all instances of word under cursor in current buffer',
     },
 
-    -- h/j/k/l mappings
+    -- h/j/k/l mappings, split movement
     { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
     { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
     { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
     { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
 
+    -- h/j/k/l mappings, split resizing
+    {
+      '<A-h>',
+      require('smart-splits').resize_left,
+      description = 'Smart resize vertically',
+    },
+    {
+      '<A-l>',
+      require('smart-splits').resize_right,
+      description = 'Smart resize vertically',
+    },
+    {
+      '<A-j>',
+      require('smart-splits').resize_down,
+      description = 'Smart resize horizontally',
+    },
+    {
+      '<A-k>',
+      require('smart-splits').resize_up,
+      description = 'Smart resize horizontally',
+    },
+
+    -- h/j/k/l mappings, text moving
     {
       '<S-h>',
       {
@@ -108,27 +131,6 @@ function M.default_keymaps()
       '<S-l>',
       { n = ':MoveHChar(1)<CR>', x = ':MoveHBlock(1)<CR>' },
       description = 'Move text right',
-    },
-
-    {
-      '<A-h>',
-      require('smart-splits').resize_left,
-      description = 'Smart resize vertically',
-    },
-    {
-      '<A-l>',
-      require('smart-splits').resize_right,
-      description = 'Smart resize vertically',
-    },
-    {
-      '<A-j>',
-      require('smart-splits').resize_down,
-      description = 'Smart resize horizontally',
-    },
-    {
-      '<A-k>',
-      require('smart-splits').resize_up,
-      description = 'Smart resize horizontally',
     },
   }
 end
