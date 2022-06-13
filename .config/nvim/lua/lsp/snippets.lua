@@ -29,6 +29,31 @@ function M.lua()
   })
 end
 
+local ts_snippets_added = false
+function M.typescript()
+  if ts_snippets_added then
+    return
+  end
+
+  local ls = require('luasnip')
+  local p = ls.parser.parse_snippet
+
+  local snippets = {
+    p('fn', 'function $1($2)$3 {\n  $0\n}'),
+    p('afn', 'const $1 = ($2)$3 => {\n  $0\n}'),
+  }
+
+  ls.add_snippets('typescript', snippets)
+  ls.add_snippets('typescriptreact', snippets)
+  ls.add_snippets('javascript', snippets)
+  ls.add_snippets('javascriptreact', snippets)
+
+  ts_snippets_added = true
+end
+M.typescriptreact = M.typescript
+M.javascript = M.typescript
+M.javascriptreact = M.typescript
+
 function M.rust()
   local ls = require('luasnip')
   local p = ls.parser.parse_snippet

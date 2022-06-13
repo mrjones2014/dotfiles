@@ -244,8 +244,8 @@ function M.cmp_mappings()
       's',
       'c',
     }),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-d>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(-4) }),
+    ['<C-f>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(4) }),
     ['<C-Space>'] = cmp.mapping({ c = cmp.mapping.confirm({ select = true }) }),
     ['<Right>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
