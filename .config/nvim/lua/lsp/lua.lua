@@ -1,7 +1,4 @@
-local version = vim.fn.system('readlink (which lua-language-server) | grep -o "[0-9]\\+\\.[0-9]\\+\\.[0-9]\\+"'):gsub(
-  '\n',
-  ''
-)
+local version = vim.env.LUA_LSP_VERSION
 local base_root = '/opt/homebrew/Cellar/lua-language-server/' .. version
 local bin_root = base_root .. '/bin/'
 
