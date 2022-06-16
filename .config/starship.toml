@@ -3,13 +3,17 @@ format = """
  $character """
 
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
-success_symbol = "[ ](bold #00BFA4)"
-error_symbol = "[ ](bold #FF5050)"
-vicmd_symbol = "[ ](bold #44B273)"
+success_symbol = "[🅸](bold #00BFA4)"
+error_symbol = "[🅸](bold #FF5050)"
+vicmd_symbol = "[🅽](bold #44B273)"
+vimcmd_replace_one_symbol = "[🆁](bold #D16BB7)"
+vimcmd_replace_symbol = "[🆁](bold #D16BB7)"
+vimcmd_visual_symbol = "[🆅](bold #FFFF00)"
 
 [git_branch]
 symbol = " "
 style = "bold #f74e27" # git brand color
+format = "[$symbol$branch(:$remote_branch)]($style) "
 
 [directory]
 read_only = " "
