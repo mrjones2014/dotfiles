@@ -15,8 +15,8 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install thefuck: brew install thefuck"
     end
 
-    if ! type vifi &>/dev/null
-        echo "Install vifi-prompt: cargo install vifi-prompt"
+    if ! type starship &>/dev/null
+        echo "Install vifi-prompt: cargo install starship"
     end
 
     if ! type nvim &>/dev/null
