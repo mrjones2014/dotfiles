@@ -209,18 +209,50 @@ function M.lsp_keymaps(bufnr)
     { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item', opts = { buffer = bufnr } },
     { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
     { '<leader>a', h.lazy_required_fn('neogen', 'generate'), description = 'Generate doc comments' },
+
+    -- luasnip
+    {
+      '<C-l>',
+      function()
+        local ls = require('luasnip')
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end,
+      description = 'Jump to next snippet location',
+    },
+    {
+      '<C-h>',
+      function()
+        local ls = require('luasnip')
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end,
+      description = 'Jump to previous snippet location',
+    },
   }
 end
 
 function M.cmp_mappings()
   local cmp = require('cmp')
-  local luasnip = require('luasnip')
   return {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+      'c',
+    }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif require('utils').has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
@@ -243,21 +275,6 @@ function M.cmp_mappings()
         fallback()
       end
     end),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif require('utils').has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      's',
-      'c',
-    }),
     ['<C-d>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(-4) }),
     ['<C-f>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(4) }),
     ['<C-Space>'] = cmp.mapping({ c = cmp.mapping.confirm({ select = true }) }),
