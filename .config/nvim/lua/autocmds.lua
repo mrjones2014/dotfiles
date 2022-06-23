@@ -47,6 +47,15 @@ function M.default_autocmds()
         end,
       },
     },
+    {
+      name = 'LuasnipJumpsClearOnModeChange',
+      {
+        'InsertLeave',
+        function()
+          require('luasnip').unlink_current()
+        end,
+      },
+    },
   }
 end
 
