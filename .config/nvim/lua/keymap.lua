@@ -208,7 +208,6 @@ function M.lsp_keymaps(bufnr)
     { 'F', vim.lsp.buf.code_action, description = 'Show code actions', opts = { buffer = bufnr } },
     { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item', opts = { buffer = bufnr } },
     { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
-    { '<leader>a', h.lazy_required_fn('neogen', 'generate'), description = 'Generate doc comments' },
   }
 end
 
