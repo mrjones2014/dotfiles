@@ -2,6 +2,8 @@ format = """
  $directory$git_branch$git_status
  $character """
 
+right_format = "$cmd_duration"
+
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
 success_symbol = "[🅸](bold #00BFA4)"
 error_symbol = "[🅸](bold #FF5050)"
@@ -14,6 +16,10 @@ vimcmd_visual_symbol = "[🆅](bold #FFFF00)"
 symbol = " "
 style = "bold #f74e27" # git brand color
 format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[cmd_duration]
+format = "[ $duration]($style)"
+style = "bold #586068"
 
 [directory]
 read_only = " "
