@@ -24,10 +24,7 @@ local function diagnostic_format(diagnostic)
 end
 
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = '',
-    format = diagnostic_format,
-  },
+  virtual_text = false,
   float = {
     format = diagnostic_format,
   },
@@ -39,3 +36,5 @@ vim.diagnostic.config({
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+
+require('lsp_lines').setup()

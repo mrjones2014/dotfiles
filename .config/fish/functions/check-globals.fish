@@ -75,24 +75,12 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install stylua: cargo install stylua --features lua52"
     end
 
-    if ! type cargo-sweep &>/dev/null
-        echo "Install cargo-sweep: cargo install cargo-sweep"
-    end
-
     if ! type shellcheck &>/dev/null
         echo 'Install shellcheck: brew install shellcheck'
     end
 
     if ! type shfmt &>/dev/null
         echo 'Install shfmt: brew install shfmt'
-    end
-
-    if ! type dotnet &>/dev/null
-        echo 'Install dotnet: https://dotnet.microsoft.com/download/dotnet/5.0'
-    end
-
-    if ! type csharp-ls &>/dev/null
-        echo 'Install csharp-ls: dotnet tool install --global csharp-ls'
     end
 
     if ! type bat &>/dev/null
@@ -132,7 +120,11 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if test ! -d /Applications/Hammerspoon.app
-        echo "Install Hammerspoon: https://github.com/Hammerspoon/hammerspoon/releases/latest, then run `defaults write org.hammerspoon.Hammerspoon MJConfigFile '~/.config/hammerspoon/init.lua'`"
+        echo "Install Hammerspoon: brew install hammerspoon, then run `defaults write org.hammerspoon.Hammerspoon MJConfigFile '~/.config/hammerspoon/init.lua'`"
+    end
+
+    if test ! -d "/Applications/CleanShot X.app"
+        echo "Install Cleanshot X: info in 1Password"
     end
 
     if test ! -d /Applications/kindaVim.app
@@ -143,8 +135,8 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install LibreWolf browser: brew install --cask librewolf && xattr -d com.apple.quarantine /Applications/LibreWolf.app"
     end
 
-    if test ! -d "/Applications/Alfred 4.app"
-        echo "Install Raycast: brew install alfred"
+    if test ! -d "/Applications/Raycast.app"
+        echo "Install Raycast: brew install raycast"
     end
 
     if ! type tmux &>/dev/null
