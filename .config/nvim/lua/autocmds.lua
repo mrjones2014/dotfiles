@@ -67,21 +67,21 @@ function M.lsp_autocmds(bufnr, server_name)
     clear = false,
   }
 
-  if
-    #vim.tbl_filter(function(autocmd)
-      return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
-    end, autocmds) == 0
-  then
-    table.insert(augroup, {
-      'CursorHold',
-      require('legendary.helpers').lazy(
-        vim.diagnostic.open_float,
-        nil,
-        { focus = false, scope = 'cursor', border = 'rounded' }
-      ),
-      opts = { buffer = bufnr },
-    })
-  end
+  -- if
+  --   #vim.tbl_filter(function(autocmd)
+  --     return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
+  --   end, autocmds) == 0
+  -- then
+  --   table.insert(augroup, {
+  --     'CursorHold',
+  --     require('legendary.helpers').lazy(
+  --       vim.diagnostic.open_float,
+  --       nil,
+  --       { focus = false, scope = 'cursor', border = 'rounded' }
+  --     ),
+  --     opts = { buffer = bufnr },
+  --   })
+  -- end
 
   if
     server_name == 'null-ls'
