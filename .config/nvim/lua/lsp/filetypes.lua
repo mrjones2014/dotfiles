@@ -7,7 +7,6 @@ M.filetype_patterns = {
   ['typescript'] = { '*.ts', '*.tsx', '*.js', '*.jsx' },
   ['lua'] = { '*.lua' },
   ['rust'] = { '*.rs' },
-  ['csharp'] = { '*.cs' },
   ['svelte'] = { '*.svelte' },
   ['teal'] = { '*.tl', '*.d.tl' },
   ['go'] = { '*.go', 'go.mod' },

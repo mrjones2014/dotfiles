@@ -39,26 +39,6 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install pnpm: brew install pnpm"
     end
 
-    if ! type eslint_d &>/dev/null
-        echo "Install eslint_d globally for Neovim integration: pnpm i -g eslint_d"
-    end
-
-    if ! type prettierd &>/dev/null
-        echo "Install prettierd globally for Neovim integration: pnpm i -g @fsouza/prettierd"
-    end
-
-    if ! type typescript-language-server &>/dev/null
-        echo "Install tsserver globally for Neovim integration: pnpm i -g typescript typescript-language-server"
-    end
-
-    if ! type vscode-css-language-server &>/dev/null
-        echo "Install CSS language server globally for Neovim integration: pnpm i -g vscode-langservers-extracted"
-    end
-
-    if ! type svelteserver &>/dev/null
-        echo "Install svelte-language-server globally for Neovim integration: pnpm i -g svelte-language-server"
-    end
-
     if ! type cargo &>/dev/null
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
@@ -71,48 +51,12 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install ctrlg: cargo install ctrlg"
     end
 
-    if ! type stylua &>/dev/null
-        echo "Install stylua: cargo install stylua --features lua52"
-    end
-
-    if ! type shellcheck &>/dev/null
-        echo 'Install shellcheck: brew install shellcheck'
-    end
-
-    if ! type shfmt &>/dev/null
-        echo 'Install shfmt: brew install shfmt'
-    end
-
     if ! type bat &>/dev/null
         echo "Install bat: brew install bat"
     end
 
     if ! type exa &>/dev/null
         echo "Install exa: brew install exa"
-    end
-
-    if ! type codespell &>/dev/null
-        echo "Install codespell: brew install codespell"
-    end
-
-    if ! type luacheck &>/dev/null
-        echo 'Install luacheck: luarocks install luacheck'
-    end
-
-    if ! type rust-analyzer &>/dev/null
-        echo "Install rust-analyzer: brew install rust-analyzer"
-    end
-
-    if ! type gopls &>/dev/null
-        echo "Install gopls: brew install gopls"
-    end
-
-    if ! type lua-language-server &>/dev/null
-        echo "Install lua-language-server: brew install lua-language-server"
-    end
-
-    if ! type teal-language-server &>/dev/null
-        echo 'Install teal-language-server: luarocks install --dev teal-language-server'
     end
 
     if ! type op &>/dev/null
