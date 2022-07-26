@@ -19,6 +19,8 @@
   autocrlf = false
   mergeoptions = --no-edit
   pager = delta
+  fsmonitor = true
+  untrackedcache = true
 [interactive]
   diffFilter = delta --color-only
 [init]
