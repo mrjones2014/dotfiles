@@ -140,7 +140,7 @@ function M.lsp_keymaps(bufnr)
   if
     #vim.tbl_filter(function(keymap)
       return (keymap.desc or ''):lower() == 'rename symbol'
-    end, vim.api.nvim_buf_get_keymap(0, 'n')) > 0
+    end, vim.api.nvim_buf_get_keymap(bufnr, 'n')) > 0
   then
     return {}
   end
