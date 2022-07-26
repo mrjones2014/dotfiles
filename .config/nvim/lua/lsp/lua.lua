@@ -1,7 +1,3 @@
-local version = vim.env.LUA_LSP_VERSION
-local base_root = '/opt/homebrew/Cellar/lua-language-server/' .. version
-local bin_root = base_root .. '/bin/'
-
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -13,7 +9,6 @@ end
 
 require('lspconfig').sumneko_lua.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  cmd = { bin_root .. 'lua-language-server', '-E', base_root .. '/libexec/main.lua' },
   on_attach = require('lsp.utils').on_attach,
   root_dir = require('lspconfig.util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
