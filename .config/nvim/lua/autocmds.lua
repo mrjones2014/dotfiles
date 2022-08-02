@@ -56,6 +56,24 @@ function M.default_autocmds()
         end,
       },
     },
+    {
+      name = 'MkdirOnWrite',
+      {
+        'BufWritePre',
+        function()
+          local dir = vim.fn.expand('<afile>:p:h')
+          -- guard against URLs using netrw, :h netrw-transparent
+          if dir:find('%l+://') == 1 then
+            return
+          end
+
+          -- create potentially missing directories on write
+          if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, 'p')
+          end
+        end,
+      },
+    },
   }
 end
 

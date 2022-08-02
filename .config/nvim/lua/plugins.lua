@@ -29,6 +29,7 @@ packer.startup({
     use('nvim-lua/plenary.nvim')
 
     -- Plugins I develop
+    use(require('configure.mine.op'))
     use(require('configure.mine.legendary'))
     use(require('configure.mine.lighthaus'))
     use(require('configure.mine.smart-splits'))
