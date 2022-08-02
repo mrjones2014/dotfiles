@@ -8,8 +8,6 @@ function update-globals --description "Update brew packages, some cargo packages
 
     # update neovim plugins
     update-nvim-plugins
-    pnpm update -g
-    pushd ~/.config/hammerspoon/Spoons/VimMode.spoon/ && git pull && popd
 
     # update homebrew packages
     brew update
