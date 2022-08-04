@@ -7,9 +7,5 @@ end
 
 return {
   plugin_path,
-  config = function()
-    require('op').setup({
-      account_uuid = '3UBYV6PWJZAS7HTEKHDSQ7HPUA',
-    })
-  end,
+  run = 'make install',
 }
