@@ -60,6 +60,7 @@ return {
       lualine_b = { { 'branch', icon = '' } },
       lualine_c = { filepath },
       lualine_x = {
+        require('op.statusline').component,
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },

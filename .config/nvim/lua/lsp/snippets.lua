@@ -29,6 +29,8 @@ function M.lua()
   })
 end
 
+-- since these snippets are shared between 4 filetypes,
+-- ensure we're only registering them once
 local ts_snippets_added = false
 function M.typescript()
   if ts_snippets_added then
@@ -41,6 +43,7 @@ function M.typescript()
   local snippets = {
     p('fn', 'function $1($2)$3 {\n  $0\n}'),
     p('afn', 'const $1 = ($2)$3 => {\n  $0\n}'),
+    p('ifn', '($1)$2 => {\n  $0\n}'),
   }
 
   ls.add_snippets('typescript', snippets)
