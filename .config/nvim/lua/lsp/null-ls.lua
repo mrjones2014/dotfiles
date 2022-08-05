@@ -65,6 +65,7 @@ local sources = {
     args = { '-i', '2' },
   }),
   b.formatting.fish_indent,
+  b.formatting.gofmt,
 }
 
 if vim.fn.filereadable('./node_modules/.bin/stylelint') > 0 then
