@@ -50,6 +50,7 @@ return {
       },
       matchup = {
         enable = true,
+        include_match_words = true,
       },
     })
   end,
