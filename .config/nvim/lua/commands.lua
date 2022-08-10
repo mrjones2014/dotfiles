@@ -39,6 +39,35 @@ function M.default_commands()
       ':%bd|e#|bd#',
       description = 'Close all buffers except current',
     },
+    -- Neotest
+    {
+      ':Test',
+      function()
+        require('neotest').run.run()
+      end,
+      description = 'Run nearest test',
+    },
+    {
+      ':TestFile',
+      function()
+        require('neotest').run.run(vim.fn.expand('%'))
+      end,
+      description = 'Run all tests in current file',
+    },
+    {
+      ':TestStop',
+      function()
+        require('neotest').run.stop()
+      end,
+      description = 'Kill running tests',
+    },
+    {
+      ':TestOpen',
+      function()
+        require('neotest').output.open()
+      end,
+      description = 'Open test output',
+    },
   }
 end
 

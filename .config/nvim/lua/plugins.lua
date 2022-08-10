@@ -43,6 +43,7 @@ packer.startup({
     use(require('configure.comments'))
     use(require('configure.better-escape'))
     use(require('configure.lightspeed'))
+    use(require('configure.neotest'))
     use('tpope/vim-eunuch')
     use('tpope/vim-sleuth')
 
