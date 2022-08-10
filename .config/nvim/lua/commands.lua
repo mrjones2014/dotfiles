@@ -64,7 +64,7 @@ function M.default_commands()
     {
       ':TestOpen',
       function()
-        require('neotest').output.open()
+        require('neotest').output.open({ enter = true })
       end,
       description = 'Open test output',
     },
