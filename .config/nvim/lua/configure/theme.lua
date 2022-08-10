@@ -58,6 +58,7 @@ return {
       },
       styles = {
         comments = 'italic',
+        keywords = 'italic',
       },
     })
     vim.cmd('colorscheme onedarkpro')
