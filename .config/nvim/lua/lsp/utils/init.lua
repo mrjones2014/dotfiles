@@ -1,19 +1,5 @@
 local M = {}
 
-function M.typescript_root_dir()
-  local root_dir = require('lspconfig.util').root_pattern('pnpm-workspace.yaml', 'package.json')
-  -- prioritize workspace roots
-  if
-    vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yaml') > 0
-    or vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yml') > 0
-  then
-    root_dir = function()
-      return vim.loop.cwd()
-    end
-  end
-  return root_dir
-end
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)

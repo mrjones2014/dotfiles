@@ -12,9 +12,11 @@ return {
         require('neotest-plenary'),
         require('neotest-rust'),
         require('neotest-jest')({
-          jestCommand = 'pnpm jest',
+          -- jestCommand = 'pnpm jest',
           env = { CI = true },
-          cwd = require('lsp.utils').typescript_root_dir,
+          cwd = function(path)
+            return require('lspconfig.util').root_pattern('package.json', 'jest.config.js')(path)
+          end,
         }),
       },
     })
