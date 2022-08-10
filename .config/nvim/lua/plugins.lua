@@ -31,7 +31,7 @@ packer.startup({
     -- Plugins I develop
     use(require('configure.mine.op'))
     use(require('configure.mine.legendary'))
-    use(require('configure.mine.lighthaus'))
+    -- use(require('configure.mine.lighthaus'))
     use(require('configure.mine.smart-splits'))
     use(require('configure.mine.dash'))
     -- I use my own fork of bufferline.nvim
@@ -57,6 +57,7 @@ packer.startup({
     use(require('configure.treesitter-playground'))
 
     -- UI + utils
+    use(require('configure.theme'))
     use(require('configure.markdown-preview'))
     use(require('configure.telescope'))
     use(require('configure.gitsigns'))

@@ -25,7 +25,7 @@ return {
           '--ignore-file',
           (paths.join(paths.config, '.ignore')),
         },
-        prompt_prefix = '   ',
+        prompt_prefix = '  ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         dynamic_preview_title = true,
         mappings = {
@@ -36,6 +36,12 @@ return {
             ['<C-f>'] = require('telescope.actions').preview_scrolling_up,
           },
           n = { ['<C-t>'] = trouble.open_with_trouble },
+        },
+        layout_strategy = 'horizontal',
+        layout_config = {
+          horizontal = {
+            preview_width = 0.5,
+          },
         },
       },
       pickers = {
