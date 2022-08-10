@@ -5,12 +5,12 @@ format = """
 right_format = "$cmd_duration"
 
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
-success_symbol = "[🅸](bold #00BFA4)"
-error_symbol = "[🅸](bold #FF5050)"
-vicmd_symbol = "[🅽](bold #44B273)"
-vimcmd_replace_one_symbol = "[🆁](bold #D16BB7)"
-vimcmd_replace_symbol = "[🆁](bold #D16BB7)"
-vimcmd_visual_symbol = "[🆅](bold #FFFF00)"
+success_symbol = "[🅸](bold #89ca78)"
+error_symbol = "[🅸](bold #ef596f)"
+vicmd_symbol = "[🅽](bold #89ca78)"
+vimcmd_replace_one_symbol = "[🆁](bold #d55fde)"
+vimcmd_replace_symbol = "[🆁](bold #d55fde)"
+vimcmd_visual_symbol = "[🆅](bold #e5c07b)"
 
 [git_branch]
 symbol = " "
