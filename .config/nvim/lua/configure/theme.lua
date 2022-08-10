@@ -7,7 +7,7 @@ return {
       dark_theme = 'onedark_vivid',
       colors = {
         bg = '#000000',
-        color_column = utils.lighten('#000000', 0.25, '#313131'),
+        color_column = utils.lighten('#000000', 0.1, '#1b1b1b'),
         telescope_prompt = utils.lighten('#000000', 0.01, '#101010'),
         telescope_results = '#000000',
       },
