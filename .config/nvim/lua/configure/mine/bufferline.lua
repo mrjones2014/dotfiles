@@ -14,7 +14,9 @@ return {
   config = function()
     local colors = require('onedarkpro').get_colors('onedark_vibrant')
     local utils = require('onedarkpro.utils')
-    local gray = utils.lighten('#000000', 0.25, '#313131')
+    -- for some reason Lua LSP thinks this returns a table and not a string
+    -- so tostring() it to get rid of warnings
+    local gray = tostring(utils.lighten('#000000', 0.1, '#272727'))
     require('bufferline').setup({
       options = {
         mode = 'window',
