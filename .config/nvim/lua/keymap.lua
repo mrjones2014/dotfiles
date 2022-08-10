@@ -234,14 +234,22 @@ function M.cmp_mappings()
       else
         fallback()
       end
-    end),
+    end, {
+      'i',
+      's',
+      'c',
+    }),
     ['<C-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
         fallback()
       end
-    end),
+    end, {
+      'i',
+      's',
+      'c',
+    }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
