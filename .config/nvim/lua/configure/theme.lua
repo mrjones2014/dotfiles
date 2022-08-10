@@ -48,8 +48,7 @@ return {
         TelescopeSelection = { bg = '${telescope_prompt}' },
       },
       plugins = {
-        native_lsp = true,
-        treesitter = true,
+        all = true,
       },
       options = {
         bold = true,
