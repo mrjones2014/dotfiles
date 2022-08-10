@@ -49,6 +49,10 @@ local header = center({
   ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 })
 
+for _ = 1, vim.o.lines - #header, 1 do
+  table.insert(header, '')
+end
+
 local function show_startup()
   local buf_id = vim.api.nvim_get_current_buf()
   local win_id = vim.api.nvim_get_current_win()

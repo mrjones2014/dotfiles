@@ -10,9 +10,11 @@ end
 return {
   path,
   requires = { 'famiu/bufdelete.nvim' },
-  after = 'lighthaus.nvim',
+  after = 'onedarkpro.nvim',
   config = function()
-    local colors = require('lighthaus.colors')
+    local colors = require('onedarkpro').get_colors('onedark_vibrant')
+    local utils = require('onedarkpro.utils')
+    local gray = utils.lighten('#000000', 0.25, '#313131')
     require('bufferline').setup({
       options = {
         mode = 'window',
@@ -24,24 +26,24 @@ return {
       highlights = {
         buffer_selected = {
           guifg = colors.fg,
-          guibg = colors.bg_dark,
+          guibg = colors.bg,
           gui = 'italic',
         },
         fill = {
-          guifg = colors.blacker_than_black,
-          guibg = colors.blacker_than_black,
+          guifg = gray,
+          guibg = gray,
         },
         separator = {
-          guifg = colors.blacker_than_black,
-          guibg = colors.bg_dark,
+          guifg = gray,
+          guibg = '#000000',
         },
         separator_visible = {
-          guifg = colors.blacker_than_black,
-          guibg = colors.bg_dark,
+          guifg = gray,
+          guibg = '#000000',
         },
         separator_selected = {
-          guifg = colors.blacker_than_black,
-          guibg = colors.bg_dark,
+          guifg = gray,
+          guibg = '#000000',
         },
       },
     })

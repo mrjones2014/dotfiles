@@ -1,8 +1,8 @@
 return {
   'nvim-lualine/lualine.nvim',
-  after = 'lighthaus.nvim',
+  after = 'onedarkpro.nvim',
   config = function()
-    local lualine_theme = 'lighthaus_dark'
+    local lualine_theme = 'onedarkpro'
 
     local function is_file_open()
       return #(vim.fn.expand('%')) > 0
