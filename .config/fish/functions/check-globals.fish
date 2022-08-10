@@ -43,6 +43,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
 
+    if test -z "$(ls ~/.cargo/bin/ | grep cargo-nextest || echo '')"
+        echo "Install cargo-nextest: curl -LsSf https://get.nexte.st/latest/mac | tar zxf - -C ~/.cargo/bin"
+    end
+
     if ! type atuin &>/dev/null
         echo "Install atuin: cargo install atuin"
     end
