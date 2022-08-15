@@ -28,7 +28,7 @@ vim.diagnostic.config({
   float = {
     format = diagnostic_format,
   },
-  signs = true,
+  signs = { priority = 1000000 },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
