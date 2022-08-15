@@ -15,6 +15,10 @@ return {
       hlgroups = {
         LineNr = gray,
         SignColumn = gray,
+        Search = {
+          fg = '${black}',
+          bg = '${highlight}',
+        },
         TelescopeBorder = {
           fg = '${telescope_results}',
           bg = '${telescope_results}',
@@ -26,12 +30,12 @@ return {
         TelescopePromptCounter = { fg = '${fg}' },
         TelescopePromptNormal = { fg = '${fg}', bg = '${telescope_prompt}' },
         TelescopePromptPrefix = {
-          fg = '${purple}',
+          fg = '${green}',
           bg = '${telescope_prompt}',
         },
         TelescopePromptTitle = {
           fg = '${telescope_prompt}',
-          bg = '${purple}',
+          bg = '${green}',
         },
 
         TelescopePreviewTitle = {
@@ -43,7 +47,7 @@ return {
           bg = '${telescope_results}',
         },
 
-        TelescopeMatching = { fg = '${purple}' },
+        TelescopeMatching = { fg = '${green}' },
         TelescopeNormal = { bg = '${telescope_results}' },
         TelescopeSelection = { bg = '${telescope_prompt}' },
       },
