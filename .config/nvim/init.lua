@@ -4,8 +4,8 @@ if present then
   impatient.enable_profile()
 end
 
-require('disable-builtins')
-require('settings')
-require('plugins')
-require('whitespace')
-require('startup')
+require('my.disable-builtins')
+require('my.settings')
+require('my.plugins')
+require('my.whitespace')
+require('my.startup')
