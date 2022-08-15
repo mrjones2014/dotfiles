@@ -7,8 +7,8 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-cmdline',
+    { 'hrsh7th/cmp-nvim-lua', ft = 'lua' },
     { 'mtoohey31/cmp-fish', ft = 'fish' },
   },
   after = { 'nvim-autopairs', 'LuaSnip' },
@@ -42,10 +42,6 @@ return {
       },
     }
 
-    -- diagnostics thinks `setup` isn't a function
-    -- because of how `setup.cmdline` is called as
-    -- a function below
-    ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup(vim.tbl_deep_extend('force', shared_config, {
       sources = {
         { name = 'luasnip', priority = 100 },
