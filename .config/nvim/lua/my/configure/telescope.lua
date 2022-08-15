@@ -12,6 +12,23 @@ return {
     local trouble = require('trouble.providers.telescope')
     local paths = require('my.paths')
 
+    local function file_extension_filter(prompt)
+      -- if prompt starts with escaped @ then treat it as a literal
+      if (prompt):sub(1, 2) == '\\@' then
+        return { prompt = prompt:sub(2) }
+      end
+
+      local result = vim.split(prompt, ' ')
+      -- if prompt starts with, for example, @rs
+      -- then only search files ending in *.rs
+      if #result == 2 and result[1]:sub(1, 1) == '@' and (#result[1] == 2 or #result[1] == 3 or #result[1] == 4) then
+        print(result[2], result[1]:sub(2))
+        return { prompt = result[2] .. '.' .. result[1]:sub(2) }
+      else
+        return { prompt = prompt }
+      end
+    end
+
     require('telescope').setup({
       defaults = {
         vimgrep_arguments = {
@@ -59,26 +76,14 @@ return {
             '--iglob',
             '!.git',
           },
-          on_input_filter_cb = function(prompt)
-            -- if prompt starts with escaped @ then treat it as a literal
-            if (prompt):sub(1, 2) == '\\@' then
-              return { prompt = prompt:sub(2) }
-            end
-
-            local result = vim.split(prompt, ' ')
-            -- if prompt starts with, for example, @rs
-            -- then only search files ending in *.rs
-            if
-              #result == 2
-              and result[1]:sub(1, 1) == '@'
-              and (#result[1] == 2 or #result[1] == 3 or #result[1] == 4)
-            then
-              print(result[2], result[1]:sub(2))
-              return { prompt = result[2] .. '.' .. result[1]:sub(2) }
-            else
-              return { prompt = prompt }
-            end
-          end,
+          on_input_filter_cb = file_extension_filter,
+        },
+        oldfiles = {
+          only_cwd = true,
+          file_ignore_patterns = {
+            'COMMIT_EDITMSG',
+          },
+          on_input_filter_cb = file_extension_filter,
         },
         live_grep = { -- TODO see https://github.com/nvim-telescope/telescope.nvim/issues/1865
           on_input_filter_cb = function(prompt)
@@ -119,12 +124,6 @@ return {
               end, require('telescope.make_entry').gen_from_vimgrep({}), nil, nil),
             }
           end,
-        },
-        oldfiles = {
-          only_cwd = true,
-          file_ignore_patterns = {
-            'COMMIT_EDITMSG',
-          },
         },
       },
       extensions = {
