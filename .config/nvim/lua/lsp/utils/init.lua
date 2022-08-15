@@ -8,19 +8,6 @@ function M.on_attach(client, bufnr)
   require('legendary').bind_commands(require('commands').lsp_commands(bufnr, client.name))
   require('legendary').bind_autocmds(require('autocmds').lsp_autocmds(bufnr, client.name))
 
-  if
-    vim.bo.filetype == 'javascript'
-    or vim.bo.filetype == 'typescript'
-    or vim.bo.filetype == 'javascriptreact'
-    or vim.bo.filetype == 'typescriptreact'
-  then
-    require('legendary').bind_command({
-      ':OrganizeImports',
-      M.organize_imports,
-      description = 'Organize imports via tsserver',
-    })
-  end
-
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
     client.server_capabilities.documentFormattingProvider = false
