@@ -16,7 +16,11 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type starship &>/dev/null
-        echo "Install vifi-prompt: cargo install starship"
+        echo "Install starship: cargo install starship"
+    end
+
+    if ! type wget &>/dev/null
+        echo "Install wget: brew install wget"
     end
 
     if ! type nvim &>/dev/null
