@@ -23,6 +23,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install wget: brew install wget"
     end
 
+    if ! type topgrade &>/dev/null
+        echo "Install topgrade: brew install topgrade"
+    end
+
     if ! type nvim &>/dev/null
         echo "Install neovim: brew install neovim"
     end
@@ -49,6 +53,10 @@ function check-globals --description "Check for missing command line tools and p
 
     if test -z "$(ls ~/.cargo/bin/ | grep cargo-nextest || echo '')"
         echo "Install cargo-nextest: curl -LsSf https://get.nexte.st/latest/mac | tar zxf - -C ~/.cargo/bin"
+    end
+
+    if test -z "$(ls ~/.cargo/bin/ | grep cargo-update || echo '')"
+        echo "Install cargo-update: cargo install cargo-update"
     end
 
     if ! type atuin &>/dev/null

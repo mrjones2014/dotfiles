@@ -1,0 +1,8 @@
+assume_yes = true
+
+[pre_commands]
+"Update Neovim Plugins" = "update-nvim-plugins" # alias in fish config
+
+[commands]
+"Brew Cleanup" = "brew cleanup"
+"Unquarantine Librewolf" = "xattr -d com.apple.quarantine /Applications/LibreWolf.app"
