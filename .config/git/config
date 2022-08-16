@@ -57,8 +57,12 @@
   whitespace = red reverse
 
 ; Force GitHub to use SSH
-[url "ssh://git@github.com/"]
+[url "git@github.com:"]
   insteadOf = https://github.com/
+
+; Use HTTPS for cargo updates
+[url "https://github.com/rust-lang/crates.io-index"]
+  insteadOf = https://github.com/rust-lang/crates.io-index
 
 
 ; vi: ft=gitconfig
