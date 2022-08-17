@@ -8,7 +8,7 @@ end
 --- Copy specified text to the clipboard.
 ---@param str string text to copy
 function M.copy_to_clipboard(str)
-  vim.cmd(string.format('call jobstart("echo %s | pbcopy")', str))
+  vim.fn.jobstart(string.format('echo %s | pbcopy', str), { detach = true })
 end
 
 --- Returns the git branch, if `cwd` is a git repository
@@ -18,13 +18,7 @@ function M.git_branch()
 end
 
 function M.open_url_under_cursor()
-  if vim.fn.has('mac') == 1 then
-    vim.cmd('call jobstart(["open", expand("<cfile>")], {"detach": v:true})')
-  elseif vim.fn.has('unix') == 1 then
-    vim.cmd('call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})')
-  else
-    vim.notify('Error: gx is not supported on this OS!')
-  end
+  vim.fn.jobstart({ 'open', vim.fn.expand('<cfile>') }, { detach = true })
 end
 
 return M

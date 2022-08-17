@@ -42,7 +42,7 @@ function M.default_autocmds()
           local enabled = require('gitsigns.config').config.current_line_blame
           local mode = vim.fn.mode()
           if (mode == 'i' and enabled) or (mode ~= 'i' and not enabled) then
-            vim.cmd('Gitsigns toggle_current_line_blame')
+            vim.cmd.Gitsigns('toggle_current_line_blame')
           end
         end,
       },

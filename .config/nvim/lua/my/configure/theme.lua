@@ -65,6 +65,6 @@ return {
         keywords = 'italic',
       },
     })
-    vim.cmd('colorscheme onedarkpro')
+    vim.cmd.colorscheme('onedarkpro')
   end,
 }

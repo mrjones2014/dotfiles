@@ -153,7 +153,7 @@ function M.lsp_keymaps(bufnr)
         -- I have diagnostics float on CursorHold,
         -- disable that if I've manually shown the hover window
         -- see autocmds.lua, lsp_autocmds()
-        vim.cmd('set eventignore=CursorHold')
+        vim.cmd.set('eventignore=CursorHold')
         vim.lsp.buf.hover()
         require('legendary').bind_autocmds({
           'CursorMoved',
