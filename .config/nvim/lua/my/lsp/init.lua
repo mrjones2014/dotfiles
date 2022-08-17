@@ -19,7 +19,7 @@ vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
     vim.fn.winrestview(view)
     if ctx.bufnr == vim.api.nvim_get_current_buf() then
       vim.b.format_saving = true
-      vim.cmd('update')
+      vim.cmd.update()
       vim.b.format_saving = false
     end
   end
