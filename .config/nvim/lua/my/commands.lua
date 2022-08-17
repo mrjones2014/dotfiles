@@ -74,6 +74,12 @@ function M.default_commands()
       end,
       description = 'Open test output',
     },
+    {
+      ':TestSummary',
+      function()
+        require('neotest').summary.open()
+      end,
+    },
   }
 end
 
