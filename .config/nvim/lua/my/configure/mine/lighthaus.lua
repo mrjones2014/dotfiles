@@ -1,8 +1,8 @@
 -- use local theme repo if it's cloned
 local paths = require('my.paths')
 local plugin_path = 'mrjones2014/lighthaus.nvim'
-if vim.fn.isdirectory(paths.join(paths.home, 'git/personal/lighthaus.nvim')) > 0 then
-  plugin_path = '~/git/personal/lighthaus.nvim'
+if vim.fn.isdirectory(paths.join(paths.home, 'git/github/lighthaus.nvim')) > 0 then
+  plugin_path = '~/git/github/lighthaus.nvim'
 end
 
 return {

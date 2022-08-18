@@ -1,8 +1,8 @@
 local path
 
 local paths = require('my.paths')
-if vim.fn.isdirectory(paths.join(paths.home, 'git/personal/bufferline.nvim')) > 0 then
-  path = '~/git/personal/bufferline.nvim'
+if vim.fn.isdirectory(paths.join(paths.home, 'git/github/bufferline.nvim')) > 0 then
+  path = '~/git/github/bufferline.nvim'
 else
   path = 'mrjones2014/bufferline.nvim'
 end

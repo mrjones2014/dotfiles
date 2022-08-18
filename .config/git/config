@@ -1,12 +1,12 @@
 [include]
   path = ~/.config/git/gitconfig.aliases
 
-[includeIf "gitdir:~/git/work/"]
-  path = ~/.config/git/gitconfig.work
+[includeIf "gitdir:~/git/gitlab/"]
+  path = ~/.config/git/gitconfig.gitlab
 [includeIf "gitdir:~/.dotfiles"]
-  path = ~/.config/git/gitconfig.personal
-[includeIf "gitdir:~/git/personal/"]
-  path = ~/.config/git/gitconfig.personal
+  path = ~/.config/git/gitconfig.github
+[includeIf "gitdir:~/git/github/"]
+  path = ~/.config/git/gitconfig.github
 
 [user]
   name = Mat Jones
