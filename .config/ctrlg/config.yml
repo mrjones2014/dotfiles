@@ -1,6 +1,6 @@
 search_dirs:
-  - ~/git/personal/*
-  - ~/git/work/*
+  - ~/git/github/*
+  - ~/git/gitlab/*
 preview_files:
   - README.*
   - resume.md
