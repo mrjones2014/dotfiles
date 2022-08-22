@@ -19,7 +19,7 @@ return {
       disable_netrw = true,
       hijack_netrw = true,
       open_on_setup = false,
-      ignore_ft_on_setup = { 'alpha' },
+      ignore_ft_on_setup = { 'nofile' },
       hijack_cursor = true,
       hijack_unnamed_buffer_when_opening = false,
       update_cwd = true,
@@ -31,7 +31,16 @@ return {
         adaptive_size = true,
         side = 'right',
         width = 25,
-        hide_root_folder = true,
+        hide_root_folder = false,
+        mappings = {
+          custom_only = true,
+          list = {
+            { key = '<CR>', action = 'open_file' },
+            { key = 'd', action = 'remove' },
+            { key = 'a', action = 'create' },
+            { key = '<C-v>', action = 'vsplit' },
+          },
+        },
       },
       git = {
         enable = false,
@@ -60,71 +69,8 @@ return {
             folder_arrow = true,
             git = false,
           },
-
-          -- glyphs = {
-          --   default = '',
-          --   symlink = '',
-          --   folder = {
-          --     default = '',
-          --     empty = '',
-          --     empty_open = '',
-          --     open = '',
-          --     symlink = '',
-          --     symlink_open = '',
-          --     arrow_open = '',
-          --     arrow_closed = '',
-          --   },
-          --   git = {
-          --     unstaged = '✗',
-          --     staged = '✓',
-          --     unmerged = '',
-          --     renamed = '➜',
-          --     untracked = '★',
-          --     deleted = '',
-          --     ignored = '◌',
-          --   },
-          -- },
         },
       },
     })
-    -- require('nvim-tree').setup({
-    --   renderer = { indent_markers = { enable = true } },
-    --   filters = {
-    --     custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist', 'packer_compiled.lua' },
-    --   },
-    --   git = {
-    --     ignore = true,
-    --   },
-    --   view = {
-    --     mappings = {
-    --       custom_only = true,
-    --       list = {
-    --         { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
-    --         { key = '<C-v>', cb = tree_cb('vsplit') },
-    --         { key = 'R', cb = tree_cb('refresh') },
-    --         { key = 'a', cb = tree_cb('create') },
-    --         { key = 'd', cb = tree_cb('remove') },
-    --         { key = 'r', cb = tree_cb('rename') },
-    --         { key = '.', cb = tree_cb('cd') },
-    --       },
-    --     },
-    --     side = 'right',
-    --     width = 40,
-    --     auto_resize = false,
-    --   },
-    --   update_focused_file = {
-    --     enable = true,
-    --     update_cwd = false,
-    --   },
-    --   diagnostics = {
-    --     enable = true,
-    --     icons = {
-    --       hint = icons.Hint,
-    --       info = icons.Info,
-    --       warning = icons.Warning,
-    --       error = icons.Error,
-    --     },
-    --   },
-    -- })
   end,
 }
