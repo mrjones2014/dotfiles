@@ -12,7 +12,6 @@ return {
     'NvimTreeToggle',
   },
   config = function()
-    local icons = require('my.lsp.icons')
     require('nvim-tree').setup({
       filters = {
         dotfiles = false,

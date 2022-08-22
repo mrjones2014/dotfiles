@@ -28,10 +28,12 @@ packer.startup({
     -- Dependencies of other plugins
     use('nvim-lua/plenary.nvim')
 
+    -- Icons
+    use('kyazdani42/nvim-web-devicons')
+
     -- Plugins I develop
     use(require('my.configure.mine.op'))
     use(require('my.configure.mine.legendary'))
-    -- use(require('my.configure.mine.lighthaus'))
     use(require('my.configure.mine.smart-splits'))
     use(require('my.configure.mine.dash'))
     -- I use my own fork of bufferline.nvim
@@ -62,7 +64,6 @@ packer.startup({
     use(require('my.configure.markdown-preview'))
     use(require('my.configure.telescope'))
     use(require('my.configure.gitsigns'))
-    use(require('my.configure.icons'))
     use(require('my.configure.nvim-tree'))
     use(require('my.configure.indent-blankline'))
     use(require('my.configure.lualine'))
