@@ -1,5 +1,6 @@
 return {
   'nvim-neotest/neotest',
+  ft = require('my.lsp.filetypes').filetypes,
   requires = {
     'nvim-neotest/neotest-plenary',
     'haydenmeade/neotest-jest',
