@@ -1,12 +1,4 @@
-local filetypes = {
-  'css',
-  'scss',
-  'javascript',
-  'javascriptreact',
-  'typescript',
-  'typescriptreact',
-  'html',
-}
+local filetypes = require('my.lsp.filetypes').filetypes
 return {
   'norcalli/nvim-colorizer.lua',
   ft = filetypes,
