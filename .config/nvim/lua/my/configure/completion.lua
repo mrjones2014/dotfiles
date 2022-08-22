@@ -11,7 +11,7 @@ return {
     { 'hrsh7th/cmp-nvim-lua', ft = 'lua' },
     { 'mtoohey31/cmp-fish', ft = 'fish' },
   },
-  after = { 'nvim-autopairs', 'LuaSnip' },
+  after = { 'LuaSnip' },
   config = function()
     local luasnip = require('luasnip')
     luasnip.config.setup({
