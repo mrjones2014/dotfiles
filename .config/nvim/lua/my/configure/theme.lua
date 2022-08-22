@@ -12,7 +12,7 @@ return {
         telescope_prompt = utils.lighten('#000000', 0.01, '#101010'),
         telescope_results = '#000000',
       },
-      hlgroups = {
+      highlights = {
         LineNr = gray,
         SignColumn = gray,
         Search = {
@@ -58,7 +58,7 @@ return {
         bold = true,
         italic = true,
         undercurl = true,
-        window_unfocussed_color = true,
+        window_unfocused_color = true,
       },
       styles = {
         comments = 'italic',
