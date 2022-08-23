@@ -45,6 +45,13 @@ function M.default_commands()
       ':%bd|e#|bd#',
       description = 'Close all buffers except current',
     },
+    {
+      ':Icons',
+      function()
+        require('my.nerdfonticons').pick()
+      end,
+      description = 'Find NerdFont icons',
+    },
     -- Neotest
     {
       ':Test',
