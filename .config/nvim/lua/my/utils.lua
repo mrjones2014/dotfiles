@@ -17,8 +17,15 @@ function M.git_branch()
   return vim.g.gitsigns_head
 end
 
+--- Open the URL under the cursor, also handles plugin paths
+--- such as mrjones2014/op.nvim and opens them on https://github.com
 function M.open_url_under_cursor()
-  vim.fn.jobstart({ 'open', vim.fn.expand('<cfile>') }, { detach = true })
+  local url = vim.fn.expand('<cfile>')
+  -- plugin paths as interpreted by plugin manager, e.g. mrjones2014/op.nvim
+  if string.match(url, '[%w%p\\-]*/[%w%p\\-]*') then
+    url = string.format('https://github.com/%s', url)
+  end
+  vim.fn.jobstart({ 'open', url }, { detach = true })
 end
 
 return M
