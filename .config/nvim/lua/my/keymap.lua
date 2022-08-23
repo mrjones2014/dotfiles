@@ -8,6 +8,14 @@ function M.default_keymaps()
     -- jk will enter vi mode of the shell itself
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
 
+    -- <ESC> clears hlsearch highlighting in normal mode
+    { '<ESC>', ':noh<CR>', 'Clear hlsearch highlighting', mode = 'n' },
+
+    -- allow moving the cursor through wrapped lines using j and k,
+    -- note that I have line wrapping turned off but turned on only for Markdown
+    { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }, mode = { 'n', 'v' } },
+    { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }, mode = { 'n', 'v' } },
+
     { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'x' } },
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
@@ -206,8 +214,13 @@ function M.lsp_keymaps(bufnr)
       opts = { buffer = bufnr },
     },
     { 'F', vim.lsp.buf.code_action, description = 'Show code actions', opts = { buffer = bufnr } },
-    { '[', vim.diagnostic.goto_prev, description = 'Go to previous diagnostic item', opts = { buffer = bufnr } },
-    { ']', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
+    {
+      '<leader>p',
+      vim.diagnostic.goto_prev,
+      description = 'Go to previous diagnostic item',
+      opts = { buffer = bufnr },
+    },
+    { '<leader>n', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
   }
 end
 

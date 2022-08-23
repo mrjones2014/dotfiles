@@ -1,3 +1,5 @@
+local M = {}
+
 local function longest_line(strs)
   local longest = 0
   for _, str in pairs(strs) do
@@ -53,7 +55,7 @@ for _ = 1, vim.o.lines - #header, 1 do
   table.insert(header, '')
 end
 
-local function show_startup()
+function M.show()
   local buf_id = vim.api.nvim_get_current_buf()
   local win_id = vim.api.nvim_get_current_win()
   vim.api.nvim_buf_set_option(buf_id, 'buftype', 'nofile')
@@ -86,6 +88,4 @@ local function show_startup()
   end)
 end
 
-if #vim.fn.argv() == 0 then
-  show_startup()
-end
+return M
