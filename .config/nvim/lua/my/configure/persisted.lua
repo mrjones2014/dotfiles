@@ -3,8 +3,10 @@ return {
   config = function()
     local paths = require('my.paths')
     require('persisted').setup({
-      use_git_branch = true,
       autoload = true,
+      on_autoload_no_session = function()
+        require('my.startup').show()
+      end,
       allowed_dirs = { paths.join(paths.home, 'git'), paths.join(paths.home, '.config') },
       before_save = function()
         pcall(vim.cmd, 'NvimTreeClose')
