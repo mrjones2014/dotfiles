@@ -8,4 +8,6 @@ require('my.disable-builtins')
 require('my.settings')
 require('my.plugins')
 require('my.whitespace')
-require('my.startup').show()
+if #vim.fn.argv() == 0 then
+  require('my.startup').show()
+end
