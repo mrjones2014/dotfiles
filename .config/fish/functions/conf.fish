@@ -18,7 +18,16 @@ end
 
 function conf --description "Quickly open configuration files/directories in Neovim"
     set -l SUBJECT_NAME $argv[1]
-    set -l CONFIG_PATH (grep -A3 "$SUBJECT_NAME:" ~/.config/config-paths.yml | head -n1 | awk '{ print $2 }')
+    if test -z "$SUBJECT_NAME"
+        set -l SUBJECT_OPTIONS ()
+        set SUBJECT_NAME (grep ".*:" ~/.config/config-paths.yml | awk '{ sub(/:/,""); print $1 }' | fzf)
+    end
+
+    if test -z "$SUBJECT_NAME"
+        return
+    end
+
+    set -l CONFIG_PATH (grep "$SUBJECT_NAME:" ~/.config/config-paths.yml | awk '{ print $2 }')
     if [ -z "$CONFIG_PATH" ]
         echo "$SUBJECT_NAME not configured in ~/.config/config-paths.yml"
         return
