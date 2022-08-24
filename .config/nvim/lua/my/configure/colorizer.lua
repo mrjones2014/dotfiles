@@ -1,4 +1,4 @@
-local filetypes = require('my.lsp.filetypes').filetypes
+local filetypes = vim.list_extend(vim.deepcopy(require('my.lsp.filetypes').filetypes), { 'conf', 'tmux' })
 return {
   'norcalli/nvim-colorizer.lua',
   ft = filetypes,
