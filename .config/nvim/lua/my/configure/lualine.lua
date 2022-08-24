@@ -44,7 +44,6 @@ return {
     local function get_mode()
       local mode = vim.api.nvim_get_mode().mode
       if mode_icons[mode] == nil then
-        print(mode)
         return mode
       end
 
@@ -61,13 +60,6 @@ return {
       lualine_c = { filepath },
       lualine_x = {
         require('op.statusline').component,
-        function()
-          if vim.g.persisting then
-            return ' '
-          elseif vim.g.persisting == false then
-            return ' '
-          end
-        end,
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },

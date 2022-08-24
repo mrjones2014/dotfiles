@@ -47,7 +47,7 @@ function M.default_keymaps()
 
     {
       '<C-f>',
-      h.lazy_required_fn('telescope.builtin', 'current_buffer_fuzzy_find'),
+      h.lazy_required_fn('telescope.builtin', 'current_buffer_fuzzy_find', { previewer = false }),
       description = 'Find pattern in current buffer',
     },
     { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
