@@ -55,7 +55,7 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install cargo-nextest: curl -LsSf https://get.nexte.st/latest/mac | tar zxf - -C ~/.cargo/bin"
     end
 
-    if test -z "$(ls ~/.cargo/bin/ | grep cargo-update || echo '')"
+    if test -z "$(ls ~/.cargo/bin/ | grep cargo-install-update || echo '')"
         echo "Install cargo-update: cargo install cargo-update"
     end
 
