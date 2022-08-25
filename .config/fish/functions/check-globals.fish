@@ -47,6 +47,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install pnpm: brew install pnpm"
     end
 
+    if ! type lazygit &>/dev/null
+        echo "Install lazygit: brew install lazygit"
+    end
+
     if ! type cargo &>/dev/null
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
