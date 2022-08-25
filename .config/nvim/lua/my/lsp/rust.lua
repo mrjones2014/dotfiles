@@ -6,6 +6,9 @@ require('lspconfig').rust_analyzer.setup({
       checkOnSave = {
         command = 'clippy',
       },
+      diagnostics = {
+        disabled = { 'inactive-code' },
+      },
       files = {
         excludeDirs = {
           './js/',
