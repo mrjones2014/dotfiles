@@ -52,7 +52,10 @@ return {
             ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
             ['<C-f>'] = require('telescope.actions').preview_scrolling_up,
           },
-          n = { ['<C-t>'] = trouble.open_with_trouble },
+          n = {
+            ['<C-t>'] = trouble.open_with_trouble,
+            ['q'] = require('telescope.actions').close,
+          },
         },
         layout_strategy = 'horizontal',
         layout_config = {

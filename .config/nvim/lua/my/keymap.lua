@@ -45,6 +45,11 @@ function M.default_keymaps()
       description = 'Shrink selection to next Treesitter node',
     },
 
+    {
+      '<C-f>',
+      h.lazy_required_fn('telescope.builtin', 'current_buffer_fuzzy_find', { previewer = false }),
+      description = 'Find pattern in current buffer',
+    },
     { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
     { 'fb', h.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Find open buffers' },
     { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },

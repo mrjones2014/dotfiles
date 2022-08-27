@@ -46,9 +46,9 @@ packer.startup({
     use(require('my.configure.better-escape'))
     use(require('my.configure.lightspeed'))
     use(require('my.configure.neotest'))
-    use(require('my.configure.persisted'))
     use('tpope/vim-eunuch')
     use('tpope/vim-sleuth')
+    use('tpope/vim-fugitive')
 
     -- LSP + syntax
     use(require('my.configure.mason'))

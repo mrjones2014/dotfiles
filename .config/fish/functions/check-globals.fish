@@ -47,6 +47,14 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install pnpm: brew install pnpm"
     end
 
+    if ! type lazygit &>/dev/null
+        echo "Install lazygit: brew install lazygit"
+    end
+
+    if ! type jq &>/dev/null
+        echo "Install jq: brew install jq"
+    end
+
     if ! type cargo &>/dev/null
         echo "Install rustup: curl --proto \"=https\" --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     end
@@ -55,7 +63,7 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install cargo-nextest: curl -LsSf https://get.nexte.st/latest/mac | tar zxf - -C ~/.cargo/bin"
     end
 
-    if test -z "$(ls ~/.cargo/bin/ | grep cargo-update || echo '')"
+    if test -z "$(ls ~/.cargo/bin/ | grep cargo-install-update || echo '')"
         echo "Install cargo-update: cargo install cargo-update"
     end
 

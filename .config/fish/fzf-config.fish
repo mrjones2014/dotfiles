@@ -1,5 +1,4 @@
-# Lighthaus FZF Theme
-# https://github.com/lighthaus-theme/fzf
+# Theme based on onedarkpro.nvim
 
 set -l FZF_NON_COLOR_OPTS
 
@@ -10,10 +9,10 @@ for arg in (echo $FZF_DEFAULT_OPTS | tr " " "\n")
 end
 
 set -x FZF_DEFAULT_OPTS "$FZF_NON_COLOR_OPTS\
---color=fg:#CCCCCC,bg:#000000,hl:#FFFF00 \
---color=fg+:#FFEE79,bg+:#21252D,hl+:#ED722E \
---color=info:#D68EB2,prompt:#50C16E,pointer:#FFFF00 \
---color=marker:#FC2929,spinner:#FF4D00,header:#1D918B"
+    --color=fg:#abb2bf,bg:#000000,hl:#89ca78
+    --color=fg+:#cccccc,bg+:#282c34,hl+:#2bbac5
+    --color=info:#89ca78,prompt:#89ca78,pointer:#ef596f
+    --color=marker:#89ca78,spinner:#ef596f,header:#d55fde"
 
 # now my custom configs
 set -x FZF_DEFAULT_COMMAND 'rg --hidden --ignore .git --ignore .DS_Store -g ""'

@@ -1,4 +1,5 @@
 set -g fish_prompt_pwd_dir_length 20
+set -u fish_greeting ""
 
 set -x GPG_TTY (tty)
 set -x EDITOR nvim

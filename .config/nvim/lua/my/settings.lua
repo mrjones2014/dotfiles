@@ -25,7 +25,6 @@ vim.opt.updatetime = 100
 vim.opt.confirm = true
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 0
-
 vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
 
 -- setting to 0 makes it default to value of tabstop
@@ -35,6 +34,7 @@ vim.opt.expandtab = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+vim.opt.shortmess:append('I')
 vim.opt.wildignore:append({ '*.DS_Store' })
 -- enable line-wrapping with left and right cursor movement
 vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
