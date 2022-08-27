@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+OP_SETTINGS_PATH="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/Library/Application Support/1Password/Data/settings/settings.json"
+OP_SETTINGS_CONTENTS_DISABLED=$(jq '."sshAgent.enabled" = false' <"$OP_SETTINGS_PATH")
+OP_SETTINGS_CONTENTS_ENABLED=$(jq '."sshAgent.enabled" = true' <"$OP_SETTINGS_PATH")
+
+echo "$OP_SETTINGS_CONTENTS_DISABLED" >"$OP_SETTINGS_PATH"
+sleep 1
+echo "$OP_SETTINGS_CONTENTS_ENABLED" >"$OP_SETTINGS_PATH"
