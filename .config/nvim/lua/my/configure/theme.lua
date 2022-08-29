@@ -11,6 +11,18 @@ return {
         color_column = gray,
         telescope_prompt = utils.lighten('#000000', 0.01, '#101010'),
         telescope_results = '#000000',
+        comment = onedarkpro.get_colors('onedark_vivid').gray,
+      },
+      ft_highlights = {
+        markdown = {
+          TSTitle = { fg = '${red}', style = 'bold' },
+          TSPunctSpecial = { fg = '${red}' },
+          TSPunctDelimiter = { fg = '${comment}' },
+          TSTextReference = { fg = '${blue}' },
+          TSURI = { fg = '${comment}' },
+          TSLiteral = { fg = '${green}' },
+          TSParameter = { fg = '${fg}' },
+        },
       },
       highlights = {
         LineNr = gray,
