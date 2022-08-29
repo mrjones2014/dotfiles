@@ -22,7 +22,7 @@ end
 function M.open_url_under_cursor()
   local url = vim.fn.expand('<cfile>')
   -- plugin paths as interpreted by plugin manager, e.g. mrjones2014/op.nvim
-  if string.match(url, '[%w%p\\-]*/[%w%p\\-]*') then
+  if not string.match(url, '[a-z]*://[^ >,;]*') and string.match(url, '[%w%p\\-]*/[%w%p\\-]*') then
     url = string.format('https://github.com/%s', url)
   end
   vim.fn.jobstart({ 'open', url }, { detach = true })
