@@ -22,6 +22,12 @@ return {
         failed = '',
         unknown = '',
       },
+      summary = {
+        mappings = {
+          jumpto = '<CR>',
+          expand = { '<Space>', '<2-LeftMouse>' },
+        },
+      },
       adapters = {
         require('neotest-plenary'),
         require('neotest-rust'),
