@@ -138,6 +138,14 @@ return {
         globalstatus = true,
         theme = lualine_theme,
         component_separators = '',
+        disabled_filetypes = {
+          winbar = {
+            'Trouble',
+            'neotest-summary',
+            'help',
+            'NvimTree',
+          },
+        },
       },
       sections = sections,
       inactive_sections = sections,
