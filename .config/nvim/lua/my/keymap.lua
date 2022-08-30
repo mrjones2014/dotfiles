@@ -24,8 +24,8 @@ function M.default_keymaps()
 
     { 'gx', require('my.utils').open_url_under_cursor, description = 'Open URL under cursor' },
 
-    { '<S-Right>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
-    { '<S-Left>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
+    { '<Tab>', ':BufferLineCycleNext<CR>', description = 'Move to next buffer' },
+    { '<S-Tab>', ':BufferLineCyclePrev<CR>', description = 'Move to previous buffer' },
 
     { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
 
