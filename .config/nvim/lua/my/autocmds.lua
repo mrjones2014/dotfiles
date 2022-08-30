@@ -74,6 +74,22 @@ function M.default_autocmds()
         end,
       },
     },
+    {
+      name = 'NeotestOnSave',
+      {
+        'BufWritePost',
+        function()
+          local args = vim.fn.expand('%')
+          local neotest = require('neotest')
+          local test_tree = neotest.run.get_tree_from_args(args)
+          if not test_tree then
+            return
+          end
+
+          neotest.run.run(args)
+        end,
+      },
+    },
   }
 end
 
