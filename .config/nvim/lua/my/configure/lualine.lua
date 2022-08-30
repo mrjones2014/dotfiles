@@ -99,6 +99,36 @@ return {
       lualine_z = { 'location', sep_right, 'progress' },
     }
 
+    local winbar_inactive_color = require('onedarkpro.utils').lighten('#000000', 0.01, '#212021')
+    local winbar_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {
+        {
+          'buffers',
+          symbols = {
+            alternate_file = '',
+          },
+          section_separators = {
+            left = '│',
+            right = '│',
+          },
+          component_separators = {
+            left = '│',
+            right = '│',
+          },
+          buffers_color = {
+            active = { bg = '#000000' },
+            inactive = { bg = winbar_inactive_color },
+          },
+        },
+        { '%=', color = { bg = winbar_inactive_color } },
+      },
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    }
+
     require('lualine').setup({
       options = {
         globalstatus = true,
@@ -107,6 +137,8 @@ return {
       },
       sections = sections,
       inactive_sections = sections,
+      winbar = winbar_sections,
+      inactive_winbar = winbar_sections,
       extensions = { 'nvim-tree', 'quickfix' },
     })
   end,

@@ -36,9 +36,6 @@ packer.startup({
     use(require('my.configure.mine.legendary'))
     use(require('my.configure.mine.smart-splits'))
     use(require('my.configure.mine.dash'))
-    -- I use my own fork of bufferline.nvim
-    -- that supports using the winbar
-    use(require('my.configure.mine.bufferline'))
 
     -- Editing enhancements and tools
     use(require('my.configure.autopairs'))
