@@ -77,6 +77,10 @@ return {
     end
 
     local function sep_right()
+      if not is_file_open() then
+        return ''
+      end
+
       return ''
     end
 
@@ -96,7 +100,7 @@ return {
         },
       },
       lualine_y = {},
-      lualine_z = { 'location', sep_right, 'progress' },
+      lualine_z = {},
     }
 
     local winbar_inactive_color = require('onedarkpro.utils').lighten('#000000', 0.01, '#212021')
