@@ -72,7 +72,6 @@ packer.startup({
     use(require('my.configure.todo-comments'))
     use(require('my.configure.nvim-notify'))
     use(require('my.configure.dressing'))
-    use(require('my.configure.fidget'))
     use(require('my.configure.startuptime'))
   end,
   config = {
