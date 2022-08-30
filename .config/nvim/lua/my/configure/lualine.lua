@@ -110,6 +110,9 @@ return {
       lualine_c = {
         {
           'buffers',
+          max_length = function()
+            return vim.api.nvim_win_get_width(vim.api.nvim_get_current_win()) - 10
+          end,
           symbols = {
             alternate_file = '',
           },
