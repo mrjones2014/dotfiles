@@ -54,12 +54,39 @@ return {
       return require('my.paths').relative_filepath()
     end
 
+    local function lsp_progress()
+      if not rawget(vim, 'lsp') then
+        return ''
+      end
+
+      local lsp_progress_msg = vim.lsp.util.get_progress_messages()[1]
+
+      if vim.o.columns < 120 or not lsp_progress_msg then
+        return ''
+      end
+
+      local msg = lsp_progress_msg.message or ''
+      local percentage = lsp_progress_msg.percentage or 0
+      local title = lsp_progress_msg.title or ''
+      local spinners = { '', '' }
+      local ms = vim.loop.hrtime() / 1000000
+      local frame = math.floor(ms / 120) % #spinners
+      local content = string.format(' %%<%s %s %s (%s%%%%) ', spinners[frame + 1], title, msg, percentage)
+
+      return content or ''
+    end
+
+    local function sep_right()
+      return ''
+    end
+
     local sections = {
       lualine_a = { get_mode },
       lualine_b = { { 'branch', icon = '' } },
-      lualine_c = { filepath },
+      lualine_c = { filepath, '%=', lsp_progress },
       lualine_x = {
         require('op.statusline').component,
+        sep_right,
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
@@ -69,13 +96,14 @@ return {
         },
       },
       lualine_y = {},
-      lualine_z = { 'location', 'progress' },
+      lualine_z = { 'location', sep_right, 'progress' },
     }
 
     require('lualine').setup({
       options = {
         globalstatus = true,
         theme = lualine_theme,
+        component_separators = '',
       },
       sections = sections,
       inactive_sections = sections,
