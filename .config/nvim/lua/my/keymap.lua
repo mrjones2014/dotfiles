@@ -16,7 +16,12 @@ function M.default_keymaps()
     { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }, mode = { 'n', 'v' } },
     { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }, mode = { 'n', 'v' } },
 
-    { '<C-p>', require('legendary').find, description = 'Search keybinds and commands', mode = { 'n', 'i', 'x' } },
+    {
+      '<leader><leader>',
+      require('legendary').find,
+      description = 'Search keybinds and commands',
+      mode = { 'n', 'i', 'x' },
+    },
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
