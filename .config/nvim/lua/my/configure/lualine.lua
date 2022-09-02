@@ -84,7 +84,7 @@ return {
       return ''
     end
 
-    local sections = {
+    local statusline_sections = {
       lualine_a = { get_mode },
       lualine_b = { { 'branch', icon = '' } },
       lualine_c = { filepath, '%=', lsp_progress },
@@ -150,8 +150,7 @@ return {
           },
         },
       },
-      sections = sections,
-      inactive_sections = sections,
+      sections = statusline_sections,
       winbar = winbar_sections,
       inactive_winbar = winbar_sections,
       extensions = { 'nvim-tree', 'quickfix' },
