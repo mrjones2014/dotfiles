@@ -10,6 +10,9 @@ return {
   run = 'make install',
   config = function()
     require('op').setup({
+      sidebar = {
+        side = 'left',
+      },
       statusline_fmt = function(account)
         if not account or #account == 0 then
           return ' 1P: Signed Out'
