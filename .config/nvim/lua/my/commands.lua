@@ -18,7 +18,7 @@ function M.default_commands()
     {
       ':CopyBranch',
       function()
-        require('my.utils').copy_to_clipboard(require('utils').git_branch())
+        require('my.utils').copy_to_clipboard(require('my.utils').git_branch())
       end,
       description = 'Copy current git branch name to clipboard',
     },
