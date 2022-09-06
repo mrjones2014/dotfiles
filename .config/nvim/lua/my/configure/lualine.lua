@@ -125,6 +125,8 @@ return {
             'neotest-summary',
             'help',
             'NvimTree',
+            '1PasswordSidebar',
+            'qf',
           },
         },
       },
