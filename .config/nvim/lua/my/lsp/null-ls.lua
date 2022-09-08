@@ -13,6 +13,10 @@ then
   end
 end
 
+local function has_local_stylelint()
+  return vim.fn.filereadable('./node_modules/.bin/stylelint') ~= 0
+end
+
 local sources = {
   -- code actions
   b.code_actions.gitsigns,
@@ -21,6 +25,10 @@ local sources = {
 
   -- diagnostics
   b.diagnostics.eslint_d,
+  b.diagnostics.stylelint.with({
+    command = './node_modules/.bin/stylelint',
+    condition = has_local_stylelint,
+  }),
   b.diagnostics.luacheck,
   b.diagnostics.shellcheck.with({
     diagnostics_format = '#{m} [#{s}] [#{c}]',
@@ -44,6 +52,10 @@ local sources = {
 
   -- formatting
   b.formatting.eslint_d,
+  b.formatting.stylelint.with({
+    command = './node_modules/.bin/stylelint',
+    condition = has_local_stylelint,
+  }),
   b.formatting.prettierd.with({
     filetypes = {
       'javascript',
@@ -58,7 +70,24 @@ local sources = {
       'markdown',
     },
   }),
-  b.formatting.rustfmt,
+  b.formatting.rustfmt.with({
+    -- read Rust edition from Cargo.toml
+    extra_args = function(params)
+      local Path = require('plenary.path')
+      local cargo_toml = Path:new(params.root .. '/' .. 'Cargo.toml')
+
+      if cargo_toml:exists() and cargo_toml:is_file() then
+        for _, line in ipairs(cargo_toml:readlines()) do
+          local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
+          if edition then
+            return { '--edition=' .. edition }
+          end
+        end
+      end
+      -- default edition when we don't find `Cargo.toml` or the `edition` in it.
+      return { '--edition=2021' }
+    end,
+  }),
   b.formatting.stylua,
   b.formatting.shfmt.with({
     filetypes = { 'sh', 'zsh', 'bash' },
@@ -68,25 +97,12 @@ local sources = {
   b.formatting.gofmt,
 }
 
-if vim.fn.filereadable('./node_modules/.bin/stylelint') > 0 then
-  table.insert(
-    sources,
-    b.formatting.stylelint.with({
-      command = './node_modules/.bin/stylelint',
-    })
-  )
-  table.insert(
-    sources,
-    b.diagnostics.stylelint.with({
-      command = './node_modules/.bin/stylelint',
-    })
-  )
-end
-
 local config = {
   sources = sources,
   on_attach = require('my.lsp.utils').on_attach,
-  update_on_insert = true,
+  on_exit = function(...)
+    print(vim.inspect(...))
+  end,
 }
 
 if typescript_root_dir ~= nil then
