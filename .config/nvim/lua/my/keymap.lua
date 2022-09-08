@@ -17,7 +17,7 @@ function M.default_keymaps()
     { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }, mode = { 'n', 'v' } },
 
     {
-      '<M-p>',
+      '<C-p>',
       require('legendary').find,
       description = 'Search keybinds and commands',
       mode = { 'n', 'i', 'x' },

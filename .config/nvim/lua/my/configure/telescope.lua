@@ -51,10 +51,14 @@ return {
             ['<C-u>'] = false, -- clear prompt with ctrl+u
             ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
             ['<C-f>'] = require('telescope.actions').preview_scrolling_up,
+            ['<C-n>'] = require('telescope.actions').move_selection_next,
+            ['<C-p>'] = require('telescope.actions').move_selection_previous,
           },
           n = {
             ['<C-t>'] = trouble.open_with_trouble,
             ['q'] = require('telescope.actions').close,
+            ['<C-n>'] = require('telescope.actions').move_selection_next,
+            ['<C-p>'] = require('telescope.actions').move_selection_previous,
           },
         },
         layout_strategy = 'horizontal',
