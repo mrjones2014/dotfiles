@@ -5,4 +5,4 @@ assume_yes = true
 
 [commands]
 "Brew Cleanup" = "brew cleanup"
-"Unquarantine Librewolf" = "xattr -d com.apple.quarantine /Applications/LibreWolf.app"
+"Unquarantine Librewolf" = "xattr -d com.apple.quarantine /Applications/LibreWolf.app || echo 'Already done'"
