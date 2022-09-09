@@ -60,14 +60,7 @@ local function check_exit_code(exit_code, error_output)
   return exit_code == 0
 end
 
-local formatters = vim.tbl_map(function(source)
-  -- the below should work but doesn't seem to
-  source._opts.check_exit_code = check_exit_code
-  return source
-  -- return source.with({
-  --   check_exit_code = on_source_exit,
-  -- })
-end, {
+local formatters = {
   b.formatting.eslint_d,
   b.formatting.stylelint.with({
     command = './node_modules/.bin/stylelint',
@@ -112,7 +105,7 @@ end, {
   }),
   b.formatting.fish_indent,
   b.formatting.gofmt,
-})
+}
 
 local config = {
   sources = require('my.utils').join_lists(code_actions, diagnostics, formatters),
