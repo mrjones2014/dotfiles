@@ -17,13 +17,13 @@ local function has_local_stylelint()
   return vim.fn.filereadable('./node_modules/.bin/stylelint') ~= 0
 end
 
-local sources = {
-  -- code actions
+local code_actions = {
   b.code_actions.gitsigns,
   b.code_actions.eslint_d,
   b.code_actions.shellcheck,
+}
 
-  -- diagnostics
+local diagnostics = {
   b.diagnostics.eslint_d,
   b.diagnostics.stylelint.with({
     command = './node_modules/.bin/stylelint',
@@ -49,8 +49,25 @@ local sources = {
       'html',
     },
   }),
+}
 
-  -- formatting
+local function check_exit_code(exit_code, error_output)
+  if exit_code ~= 0 then
+    error_output = string.format('[null-ls] Formatter error:\n%s', error_output)
+    vim.notify(error_output)
+  end
+
+  return exit_code == 0
+end
+
+local formatters = vim.tbl_map(function(source)
+  -- the below should work but doesn't seem to
+  source._opts.check_exit_code = check_exit_code
+  return source
+  -- return source.with({
+  --   check_exit_code = on_source_exit,
+  -- })
+end, {
   b.formatting.eslint_d,
   b.formatting.stylelint.with({
     command = './node_modules/.bin/stylelint',
@@ -95,14 +112,11 @@ local sources = {
   }),
   b.formatting.fish_indent,
   b.formatting.gofmt,
-}
+})
 
 local config = {
-  sources = sources,
+  sources = require('my.utils').join_lists(code_actions, diagnostics, formatters),
   on_attach = require('my.lsp.utils').on_attach,
-  on_exit = function(...)
-    print(vim.inspect(...))
-  end,
 }
 
 if typescript_root_dir ~= nil then

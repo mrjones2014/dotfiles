@@ -28,4 +28,13 @@ function M.open_url_under_cursor()
   vim.fn.jobstart({ 'open', url }, { detach = true })
 end
 
+function M.join_lists(...)
+  local lists = {...}
+  local result = {}
+  for _, list in ipairs(lists) do
+    vim.list_extend(result, list)
+  end
+  return result
+end
+
 return M
