@@ -80,6 +80,7 @@ vim.cmd.hi('BufLineInactive guifg=#434852 guibg=#000000')
 
 return function()
   local bufs = get_buffers()
+  -- TODO figure out how to ensure current buffer is visible
   return table.concat(
     vim.tbl_map(function(buf_icon)
       return string.format(

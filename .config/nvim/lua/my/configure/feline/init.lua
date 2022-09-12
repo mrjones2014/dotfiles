@@ -159,9 +159,7 @@ return {
     }
 
     local buffers = {
-      provider = function()
-        return require('my.configure.feline.buffers')()
-      end,
+      provider = require('my.configure.feline.buffers'),
       hl = {
         bg = colors.bg_statusline,
         fg = colors.fg,
