@@ -114,10 +114,27 @@ return {
         },
         right_sep = 'right_rounded',
       },
+      op = {
+        left_sep = 'left_rounded',
+        provider = function()
+          return require('op.statusline').component()
+        end,
+        hl = {
+          bg = colors.blue,
+          fg = colors.gray,
+        },
+        right_sep = 'block',
+      },
       diagnostics = function(severity)
         local ui = diagnostics_ui[severity]
         return {
-          left_sep = severity == diagnostics_order[1] and 'left_rounded' or nil,
+          left_sep = severity == diagnostics_order[1] and {
+            str = 'left_rounded',
+            hl = {
+              bg = colors.blue,
+              fg = colors.bg_statusline,
+            },
+          } or nil,
           provider = function()
             return tostring(#vim.tbl_filter(function(diag)
               return diag.severity == severity
@@ -137,7 +154,7 @@ return {
       active = {
         { comps.mode, comps.branch, comps.file_info },
         {},
-        vim.tbl_map(comps.diagnostics, diagnostics_order),
+        vim.list_extend({ comps.op }, vim.tbl_map(comps.diagnostics, diagnostics_order)),
       },
     }
 
