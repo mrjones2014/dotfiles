@@ -36,6 +36,8 @@ packer.startup({
     use(require('my.configure.mine.legendary'))
     use(require('my.configure.mine.smart-splits'))
     use(require('my.configure.mine.dash'))
+    -- my fork of bufferline
+    use(require('my.configure.mine.bufferline'))
 
     -- Editing enhancements and tools
     use(require('my.configure.autopairs'))
@@ -64,7 +66,7 @@ packer.startup({
     use(require('my.configure.gitsigns'))
     use(require('my.configure.nvim-tree'))
     use(require('my.configure.indent-blankline'))
-    use(require('my.configure.lualine'))
+    use(require('my.configure.feline'))
     use(require('my.configure.colorizer'))
     use(require('my.configure.todo-comments'))
     use(require('my.configure.nvim-notify'))
