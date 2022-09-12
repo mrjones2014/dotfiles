@@ -37,7 +37,7 @@ packer.startup({
     use(require('my.configure.mine.smart-splits'))
     use(require('my.configure.mine.dash'))
     -- my fork of bufferline
-    use(require('my.configure.mine.bufferline'))
+    -- use(require('my.configure.mine.bufferline'))
 
     -- Editing enhancements and tools
     use(require('my.configure.autopairs'))

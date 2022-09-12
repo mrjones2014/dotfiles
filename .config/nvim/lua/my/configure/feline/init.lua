@@ -158,11 +158,38 @@ return {
       },
     }
 
+    local buffers = {
+      provider = function()
+        return require('my.configure.feline.buffers')()
+      end,
+      hl = {
+        bg = colors.bg_statusline,
+        fg = colors.fg,
+      },
+    }
+    local winbar_components = {
+      active = {
+        { buffers },
+        {},
+        {},
+      },
+      inactive = {
+        { buffers },
+        {},
+        {},
+      },
+    }
+
     require('feline').setup({
       default_bg = colors.bg_statusline,
       default_fg = colors.bg_statusline,
       components = components,
       vi_mode_colors = mode_colors,
+    })
+    require('feline').winbar.setup({
+      default_bg = colors.bg_statusline,
+      default_fg = colors.bg_statusline,
+      components = winbar_components,
     })
   end,
 }
