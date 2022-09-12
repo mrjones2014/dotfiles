@@ -17,3 +17,4 @@ ctrlg: .config/ctrlg/
 codespell: .config/codespell/custom_dict.txt
 topgrade: .config/topgrade.toml
 ssh: .ssh/config
+wezterm: .config/wezterm/
