@@ -1,3 +1,5 @@
+-- TODO this file can potentially go away pending https://github.com/romgrk/barbar.nvim/issues/286
+
 local ignored_ft = {
   'nofile',
   'TelescopePrompt',
@@ -6,6 +8,7 @@ local ignored_ft = {
   'qf',
   'Trouble',
   '1PasswordSidebar',
+  'help',
 }
 
 -- Get the names of all current listed buffers
@@ -98,10 +101,10 @@ return function()
       vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(tonumber(vim.g.statusline_winid or 0)), 'filetype')
     )
   then
-    return ''
+    return '%#Normal#'
   end
+
   local bufs = get_buffers()
-  -- TODO figure out how to ensure current buffer is visible
   local winbar = table.concat(
     vim.tbl_map(function(buf_icon)
       return string.format(

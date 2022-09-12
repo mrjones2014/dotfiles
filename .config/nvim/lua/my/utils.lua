@@ -29,7 +29,7 @@ function M.open_url_under_cursor()
 end
 
 function M.join_lists(...)
-  local lists = {...}
+  local lists = { ... }
   local result = {}
   for _, list in ipairs(lists) do
     vim.list_extend(result, list)
