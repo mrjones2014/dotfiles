@@ -23,7 +23,10 @@ local function diagnostic_format(diagnostic)
 end
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = {
+    format = diagnostic_format,
+    prefix = '',
+  },
   float = {
     format = diagnostic_format,
   },
