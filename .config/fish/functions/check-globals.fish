@@ -47,10 +47,6 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install pnpm: brew install pnpm"
     end
 
-    if ! type lazygit &>/dev/null
-        echo "Install lazygit: brew install lazygit"
-    end
-
     if ! type jq &>/dev/null
         echo "Install jq: brew install jq"
     end
