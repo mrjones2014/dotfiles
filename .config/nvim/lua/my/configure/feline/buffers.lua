@@ -9,6 +9,7 @@ local ignored_ft = {
   'Trouble',
   '1PasswordSidebar',
   'help',
+  'DiffviewFiles'
 }
 
 -- Get the names of all current listed buffers

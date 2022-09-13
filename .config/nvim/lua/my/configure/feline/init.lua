@@ -67,7 +67,7 @@ return {
       vim.diagnostic.severity.ERROR,
     }
 
-    local comps = {
+    local components = {
       mode = {
         left_sep = 'block',
         provider = function()
@@ -125,6 +125,13 @@ return {
         },
         right_sep = 'block',
       },
+      buffers = {
+        provider = require('my.configure.feline.buffers'),
+        hl = {
+          bg = colors.bg_statusline,
+          fg = colors.fg,
+        },
+      },
       diagnostics = function(severity)
         local ui = diagnostics_ui[severity]
         return {
@@ -150,44 +157,34 @@ return {
       end,
     }
 
-    local components = {
-      active = {
-        { comps.mode, comps.branch, comps.file_info },
-        {},
-        vim.list_extend({ comps.op }, vim.tbl_map(comps.diagnostics, diagnostics_order)),
-      },
+    local statusline_components = {
+      { components.mode, components.branch, components.file_info },
+      {},
+      vim.list_extend({ components.op }, vim.tbl_map(components.diagnostics, diagnostics_order)),
     }
 
-    local buffers = {
-      provider = require('my.configure.feline.buffers'),
-      hl = {
-        bg = colors.bg_statusline,
-        fg = colors.fg,
-      },
-    }
     local winbar_components = {
-      active = {
-        { buffers },
-        {},
-        {},
-      },
-      inactive = {
-        { buffers },
-        {},
-        {},
-      },
+      { components.buffers },
+      {},
+      {},
     }
 
     require('feline').setup({
       default_bg = colors.bg_statusline,
       default_fg = colors.bg_statusline,
-      components = components,
+      components = {
+        active = statusline_components,
+        inactive = statusline_components,
+      },
       vi_mode_colors = mode_colors,
     })
     require('feline').winbar.setup({
       default_bg = colors.bg_statusline,
       default_fg = colors.bg_statusline,
-      components = winbar_components,
+      components = {
+        active = winbar_components,
+        inactive = winbar_components,
+      },
     })
   end,
 }
