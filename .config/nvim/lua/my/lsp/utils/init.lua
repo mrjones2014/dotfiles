@@ -4,9 +4,9 @@ local M = {}
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
-  require('legendary').bind_keymaps(require('my.keymap').lsp_keymaps(bufnr))
-  require('legendary').bind_commands(require('my.commands').lsp_commands(bufnr, client.name))
-  require('legendary').bind_autocmds(require('my.autocmds').lsp_autocmds(bufnr, client.name))
+  require('legendary').bind_keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
+  require('legendary').bind_commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
+  require('legendary').bind_autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
