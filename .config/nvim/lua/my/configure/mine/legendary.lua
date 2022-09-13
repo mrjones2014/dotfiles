@@ -16,9 +16,10 @@ return {
   },
   config = function()
     require('legendary').setup({
-      keymaps = require('my.keymap').default_keymaps(),
-      commands = require('my.commands').default_commands(),
-      autocmds = require('my.autocmds').default_autocmds(),
+      keymaps = require('my.legendary.keymap').default_keymaps(),
+      commands = require('my.legendary.commands').default_commands(),
+      autocmds = require('my.legendary.autocmds').default_autocmds(),
+      functions = require('my.legendary.functions').default_functions(),
       select_prompt = function(kind)
         if kind == 'legendary.items' then
           return ' Legendary '

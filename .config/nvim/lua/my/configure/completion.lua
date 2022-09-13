@@ -33,7 +33,7 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
-      mapping = require('my.keymap').cmp_mappings(),
+      mapping = require('my.legendary.keymap').cmp_mappings(),
       formatting = {
         format = require('lspkind').cmp_format({ with_text = true }),
       },
