@@ -159,7 +159,7 @@ function M.default_keymaps()
       description = 'Split arrays/lists/etc. onto multiple lines',
     },
     {
-      '<leader>sc',
+      '<leader>si',
       h.lazy_required_fn('spread', 'combine'),
       description = 'Join arrays/lists/etc. onto a single line',
     },
