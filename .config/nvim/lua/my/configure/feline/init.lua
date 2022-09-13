@@ -76,8 +76,8 @@ return {
         end,
         hl = function()
           return {
-            fg = require('feline.providers.vi_mode').get_mode_color(),
-            bg = colors.bg_statusline,
+            fg = colors.bg_statusline,
+            bg = require('feline.providers.vi_mode').get_mode_color(),
             bold = true,
           }
         end,
@@ -86,7 +86,7 @@ return {
           hl = function()
             if vim.b.gitsigns_head then
               return {
-                fg = colors.bg_statusline,
+                fg = require('feline.providers.vi_mode').get_mode_color(),
                 bg = colors.fg_gutter,
               }
             end
