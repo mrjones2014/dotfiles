@@ -11,6 +11,12 @@ return {
         virt_text_pos = 'eol',
         delay = 100,
       },
+      worktrees = {
+        {
+          toplevel = vim.env.HOME,
+          gitdir = string.format('%s/.dotfiles', vim.env.HOME),
+        },
+      },
     })
   end,
 }

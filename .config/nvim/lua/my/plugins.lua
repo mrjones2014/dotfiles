@@ -27,8 +27,6 @@ packer.startup({
 
     -- Dependencies of other plugins
     use('nvim-lua/plenary.nvim')
-
-    -- Icons
     use('kyazdani42/nvim-web-devicons')
 
     -- Plugins I develop
@@ -36,8 +34,6 @@ packer.startup({
     use(require('my.configure.mine.legendary'))
     use(require('my.configure.mine.smart-splits'))
     use(require('my.configure.mine.dash'))
-    -- my fork of bufferline
-    -- use(require('my.configure.mine.bufferline'))
 
     -- Editing enhancements and tools
     use(require('my.configure.autopairs'))
