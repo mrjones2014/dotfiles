@@ -30,7 +30,7 @@
 [merge]
   tool = nvim
 [mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  cmd = nvim -f -c \"DiffviewOpen\"
 [mergetool]
   prompt = false
 [color]

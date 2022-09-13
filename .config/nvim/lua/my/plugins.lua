@@ -44,7 +44,6 @@ packer.startup({
     use(require('my.configure.diffview'))
     use('tpope/vim-eunuch')
     use('tpope/vim-sleuth')
-    use('tpope/vim-fugitive')
 
     -- LSP + syntax
     use(require('my.configure.mason'))
