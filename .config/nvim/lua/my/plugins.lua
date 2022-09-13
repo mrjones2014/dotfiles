@@ -41,6 +41,7 @@ packer.startup({
     use(require('my.configure.better-escape'))
     use(require('my.configure.lightspeed'))
     use(require('my.configure.neotest'))
+    use(require('my.configure.diffview'))
     use('tpope/vim-eunuch')
     use('tpope/vim-sleuth')
     use('tpope/vim-fugitive')
