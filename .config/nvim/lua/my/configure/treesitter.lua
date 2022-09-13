@@ -11,6 +11,7 @@ return {
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
+    'aarondiel/spread.nvim',
   },
   run = update_cmd,
   setup = function()
