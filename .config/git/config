@@ -12,6 +12,8 @@
   name = Mat Jones
 [pull]
   rebase = false
+[push]
+  autoSetupRemote = true
 [commit]
   gpgsign = true
 [core]
