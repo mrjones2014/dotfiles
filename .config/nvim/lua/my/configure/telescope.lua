@@ -6,6 +6,7 @@ return {
   requires = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
+    'smartpde/telescope-recent-files',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
   },
   config = function()
@@ -29,7 +30,9 @@ return {
       end
     end
 
-    require('telescope').setup({
+    local telescope = require('telescope')
+
+    telescope.setup({
       defaults = {
         vimgrep_arguments = {
           'rg',
@@ -144,9 +147,13 @@ return {
           override_file_sorter = true,
           case_mode = 'smart_case',
         },
+        recent_files = {
+          only_cwd = true,
+        },
       },
     })
 
-    require('telescope').load_extension('fzf')
+    telescope.load_extension('fzf')
+    telescope.load_extension('fzf')
   end,
 }
