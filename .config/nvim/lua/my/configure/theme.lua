@@ -59,6 +59,9 @@ return {
         TelescopeMatching = { fg = '${green}' },
         TelescopeNormal = { bg = '${telescope_results}' },
         TelescopeSelection = { bg = '${telescope_prompt}' },
+
+        -- barbar.nvim
+        BufferCurrent = { fg = 'Normal', style = 'bold,italic' }
       },
       plugins = {
         all = true,

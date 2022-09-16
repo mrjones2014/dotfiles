@@ -9,6 +9,6 @@ end
 return {
   plugin_path,
   config = function()
-    require('bufferline').setup({ use_winbar = true })
+    require('bufferline').setup({ use_winbar = true, maximum_padding = 1 })
   end,
 }
