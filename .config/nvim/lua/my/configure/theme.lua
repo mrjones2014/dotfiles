@@ -61,7 +61,8 @@ return {
         TelescopeSelection = { bg = '${telescope_prompt}' },
 
         -- barbar.nvim
-        BufferCurrent = { fg = 'Normal', style = 'bold,italic' }
+        BufferCurrent = { fg = 'Normal', style = 'bold,italic' },
+        BufferCurrentMod = { fg = 'Normal', style = 'bold,italic' },
       },
       plugins = {
         all = true,
