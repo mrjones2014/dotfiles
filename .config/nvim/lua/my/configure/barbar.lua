@@ -9,7 +9,19 @@ end
 return {
   plugin_path,
   config = function()
-    require('bufferline').setup({ use_winbar = true, maximum_padding = 1 })
+    require('bufferline').setup({
+      maximum_padding = 1,
+      no_name_title = '[No Name]',
+      use_winbar = true,
+      winbar_disabled_filetypes = {
+        'NvimTree',
+        'TelescopePrompt',
+        '1PasswordSidebar',
+        'help',
+        'Trouble',
+        'nofile'
+      },
+    })
     vim.api.nvim_create_autocmd('BufAdd', { command = 'BufferOrderByBufferNumber' })
   end,
 }
