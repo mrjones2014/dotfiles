@@ -1,6 +1,7 @@
 return {
   'feline-nvim/feline.nvim',
   after = 'onedarkpro.nvim',
+  requires = '~/git/github/barbar.nvim',
   config = function()
     local colors = require('onedarkpro').get_colors('onedark_dark')
     local mode_icons = {
@@ -125,13 +126,6 @@ return {
         },
         right_sep = 'block',
       },
-      buffers = {
-        provider = require('my.configure.feline.buffers'),
-        hl = {
-          bg = colors.bg_statusline,
-          fg = colors.fg,
-        },
-      },
       diagnostics = function(severity)
         local ui = diagnostics_ui[severity]
         return {
@@ -163,12 +157,6 @@ return {
       vim.list_extend({ components.op }, vim.tbl_map(components.diagnostics, diagnostics_order)),
     }
 
-    local winbar_components = {
-      { components.buffers },
-      {},
-      {},
-    }
-
     require('feline').setup({
       default_bg = colors.bg_statusline,
       default_fg = colors.bg_statusline,
@@ -177,14 +165,6 @@ return {
         inactive = statusline_components,
       },
       vi_mode_colors = mode_colors,
-    })
-    require('feline').winbar.setup({
-      default_bg = colors.bg_statusline,
-      default_fg = colors.bg_statusline,
-      components = {
-        active = winbar_components,
-        inactive = winbar_components,
-      },
     })
   end,
 }

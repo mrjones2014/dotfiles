@@ -63,6 +63,7 @@ packer.startup({
     use(require('my.configure.nvim-tree'))
     use(require('my.configure.indent-blankline'))
     use(require('my.configure.feline'))
+    use(require('my.configure.barbar'))
     use(require('my.configure.colorizer'))
     use(require('my.configure.todo-comments'))
     use(require('my.configure.nvim-notify'))
