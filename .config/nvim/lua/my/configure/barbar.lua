@@ -10,5 +10,6 @@ return {
   plugin_path,
   config = function()
     require('bufferline').setup({ use_winbar = true, maximum_padding = 1 })
+    vim.api.nvim_create_autocmd('BufAdd', { command = 'BufferOrderByBufferNumber' })
   end,
 }
