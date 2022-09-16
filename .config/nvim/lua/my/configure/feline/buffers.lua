@@ -9,7 +9,7 @@ local ignored_ft = {
   'Trouble',
   '1PasswordSidebar',
   'help',
-  'DiffviewFiles'
+  'DiffviewFiles',
 }
 
 -- Get the names of all current listed buffers
@@ -78,6 +78,7 @@ local function buf_with_icon(buf)
     icon = icon,
     icon_color = hl,
     is_active = tostring(buf) == tostring(vim.api.nvim_win_get_buf(tonumber(vim.g.statusline_winid or 0))),
+    is_modified = vim.api.nvim_buf_get_option(buf, 'modified'),
   }
 end
 
@@ -93,7 +94,7 @@ end
 
 vim.cmd.hi('BufLineActive guifg=#abb2bf guibg=#000000 gui=bold,italic')
 vim.cmd.hi('BufLineInactive guifg=#434852 guibg=#000000')
-vim.cmd.hi('BufLineBg guibg=#0D0D0D')
+vim.cmd.hi('BufLineBg guibg=#1f1f1f')
 
 return function()
   if
@@ -109,11 +110,12 @@ return function()
   local winbar = table.concat(
     vim.tbl_map(function(buf_icon)
       return string.format(
-        '%%#%s#%s %%#%s#%s',
+        '%%#%s#%s %%#%s#%s%s',
         buf_icon.icon_color,
         buf_icon.icon,
         buf_icon.is_active and 'BufLineActive' or 'BufLineInactive',
-        buf_icon.name
+        buf_icon.name,
+        buf_icon.is_modified and ' ●' or ''
       )
     end, bufs),
     ' │ '
