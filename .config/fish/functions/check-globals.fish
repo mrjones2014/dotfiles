@@ -60,7 +60,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if test -z "$(ls ~/.cargo/bin/ | grep cargo-install-update || echo '')"
-        echo "Install cargo-update: cargo install cargo-update"
+        echo "Install cargo-update: cargo install cargo-update --features vendored-openssl"
     end
 
     if ! type atuin &>/dev/null
