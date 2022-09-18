@@ -23,7 +23,6 @@ return {
       -- if prompt starts with, for example, @rs
       -- then only search files ending in *.rs
       if #result == 2 and result[1]:sub(1, 1) == '@' and (#result[1] == 2 or #result[1] == 3 or #result[1] == 4) then
-        print(result[2], result[1]:sub(2))
         return { prompt = result[2] .. '.' .. result[1]:sub(2) }
       else
         return { prompt = prompt }
