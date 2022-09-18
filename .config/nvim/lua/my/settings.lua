@@ -24,7 +24,7 @@ vim.opt.modeline = true
 vim.opt.updatetime = 100
 vim.opt.confirm = true
 vim.opt.showtabline = 0
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
 vim.opt.laststatus = 3
 
