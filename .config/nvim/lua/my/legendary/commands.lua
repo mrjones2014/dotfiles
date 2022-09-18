@@ -26,6 +26,14 @@ function M.default_commands()
       end,
       description = 'Find NerdFont icons',
     },
+    {
+      ':H',
+      function()
+        local cursor_word = vim.fn.expand('<cword>')
+        vim.cmd.help(cursor_word)
+      end,
+      description = 'Search help for word under cursor',
+    },
     -- Neotest
     {
       ':Test',
