@@ -2,6 +2,7 @@ return {
   'nvim-neotest/neotest',
   requires = {
     'nvim-neotest/neotest-plenary',
+    'nvim-neotest/neotest-go',
     'haydenmeade/neotest-jest',
     'rouge8/neotest-rust',
   },
@@ -30,6 +31,7 @@ return {
       },
       adapters = {
         require('neotest-plenary'),
+        require('neotest-go'),
         require('neotest-rust'),
         require('neotest-jest')({
           jestCommand = 'pnpm jest',
