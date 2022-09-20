@@ -153,6 +153,6 @@ return {
     })
 
     telescope.load_extension('fzf')
-    telescope.load_extension('fzf')
+    telescope.load_extension('recent_files')
   end,
 }
