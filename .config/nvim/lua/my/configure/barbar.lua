@@ -19,7 +19,8 @@ return {
         '1PasswordSidebar',
         'help',
         'Trouble',
-        'nofile'
+        'nofile',
+        'qf',
       },
     })
     vim.api.nvim_create_autocmd('BufAdd', { command = 'BufferOrderByBufferNumber' })
