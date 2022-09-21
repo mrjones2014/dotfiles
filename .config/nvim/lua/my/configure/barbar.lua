@@ -17,6 +17,7 @@ return {
         'NvimTree',
         'TelescopePrompt',
         '1PasswordSidebar',
+        'neotest-summary',
         'help',
         'Trouble',
         'nofile',
