@@ -6,6 +6,7 @@ set -x EDITOR nvim
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -x HOMEBREW_NO_ANALYTICS 1
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
+set -x GIT_MERGE_AUTOEDIT "no"
 
 fish_add_path /opt/homebrew/bin
 fish_add_path "$HOME/scripts"
