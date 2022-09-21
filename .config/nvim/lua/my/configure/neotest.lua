@@ -6,6 +6,7 @@ return {
     'haydenmeade/neotest-jest',
     'rouge8/neotest-rust',
   },
+  ft = require('my.lsp.filetypes').filetypes,
   config = function()
     require('neotest').setup({
       discovery = { enabled = false },
