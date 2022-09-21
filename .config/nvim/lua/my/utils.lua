@@ -37,4 +37,11 @@ function M.join_lists(...)
   return result
 end
 
+function M.insert_all(list, ...)
+  local items = { ... }
+  for _, item in ipairs(items) do
+    table.insert(list, item)
+  end
+end
+
 return M

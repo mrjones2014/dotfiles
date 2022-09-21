@@ -10,13 +10,22 @@ return {
     'hrsh7th/cmp-cmdline',
     { 'hrsh7th/cmp-nvim-lua', ft = 'lua' },
     { 'mtoohey31/cmp-fish', ft = 'fish' },
+    'L3MON4D3/LuaSnip',
   },
-  after = { 'LuaSnip' },
+  event = { 'InsertEnter' },
+  keys = { { 'v', ':' }, { 'n', ':' } },
   config = function()
     local luasnip = require('luasnip')
     luasnip.config.setup({
       history = true,
       updateevents = 'TextChanged,TextChangedI',
+      ext_opts = {
+        [require('luasnip.util.types').choiceNode] = {
+          active = {
+            virt_text = { { '●', 'LspDiagnosticsSignInformation' } },
+          },
+        },
+      },
     })
     local cmp = require('cmp')
     local shared_config = {

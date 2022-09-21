@@ -34,41 +34,6 @@ function M.default_commands()
       end,
       description = 'Search help for word under cursor',
     },
-    -- Neotest
-    {
-      ':Test',
-      function()
-        require('neotest').run.run()
-      end,
-      description = 'Run nearest test',
-    },
-    {
-      ':TestFile',
-      function()
-        require('neotest').run.run(vim.fn.expand('%'))
-      end,
-      description = 'Run all tests in current file',
-    },
-    {
-      ':TestStop',
-      function()
-        require('neotest').run.stop()
-      end,
-      description = 'Kill running tests',
-    },
-    {
-      ':TestOpen',
-      function()
-        require('neotest').output.open({ enter = true })
-      end,
-      description = 'Open test output',
-    },
-    {
-      ':TestSummary',
-      function()
-        require('neotest').summary.open()
-      end,
-    },
   }
 end
 
@@ -93,10 +58,49 @@ function M.lsp_commands(bufnr, server_name)
   }
 
   if server_name == 'null-ls' and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
-    table.insert(commands, 1, {
+    table.insert(commands, {
       ':Format',
       require('my.lsp.utils').format_document,
       description = 'Format the current document with LSP',
+      opts = { buffer = bufnr },
+    })
+  end
+
+  if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Test then
+    -- Neotest
+    require('my.utils').insert_all(commands, {
+      ':Test',
+      function()
+        require('neotest').run.run()
+      end,
+      description = 'Run nearest test',
+      opts = { buffer = bufnr },
+    }, {
+      ':TestFile',
+      function()
+        require('neotest').run.run(vim.fn.expand('%'))
+      end,
+      description = 'Run all tests in current file',
+      opts = { buffer = bufnr },
+    }, {
+      ':TestStop',
+      function()
+        require('neotest').run.stop()
+      end,
+      description = 'Kill running tests',
+      opts = { buffer = bufnr },
+    }, {
+      ':TestOpen',
+      function()
+        require('neotest').output.open({ enter = true })
+      end,
+      description = 'Open test output',
+      opts = { buffer = bufnr },
+    }, {
+      ':TestSummary',
+      function()
+        require('neotest').summary.open()
+      end,
       opts = { buffer = bufnr },
     })
   end

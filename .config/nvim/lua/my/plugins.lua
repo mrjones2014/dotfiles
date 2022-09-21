@@ -48,7 +48,6 @@ packer.startup({
     -- LSP + syntax
     use(require('my.configure.mason'))
     use(require('my.configure.lspconfig'))
-    use(require('my.configure.luasnip'))
     use(require('my.configure.completion'))
     use(require('my.configure.trouble'))
     use(require('my.configure.goto-preview'))
