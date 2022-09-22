@@ -8,8 +8,10 @@ return {
     'folke/trouble.nvim',
     'smartpde/telescope-recent-files',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    'stevearc/dressing.nvim',
   },
   config = function()
+    require('dressing').setup()
     local trouble = require('trouble.providers.telescope')
     local paths = require('my.paths')
 

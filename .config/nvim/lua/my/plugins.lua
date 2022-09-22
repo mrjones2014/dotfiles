@@ -66,7 +66,6 @@ packer.startup({
     use(require('my.configure.colorizer'))
     use(require('my.configure.todo-comments'))
     use(require('my.configure.nvim-notify'))
-    use(require('my.configure.dressing'))
     use(require('my.configure.startuptime'))
   end,
   config = {
