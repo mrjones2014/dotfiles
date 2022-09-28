@@ -29,13 +29,6 @@
 [delta]
   line-numbers = true
   navigate = true
-[merge]
-  tool = nvim
-[mergetool "nvim"]
-  cmd = nvim -f -c \"DiffviewOpen\"
-[mergetool]
-  prompt = false
-  keepBackup = false ; delete *.orig files after resolving
 [color]
   ui = true
 [color "diff-highlight"]
