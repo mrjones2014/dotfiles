@@ -50,6 +50,13 @@ function M.default_keymaps()
       description = 'Shrink selection to next Treesitter node',
     },
 
+    -- up arrow from command line to search command history
+    {
+      '<Up>',
+      h.lazy_required_fn('telescope.builtin', 'command_history'),
+      description = 'Search command history',
+      mode = 'c',
+    },
     {
       '<C-f>',
       h.lazy_required_fn('telescope.builtin', 'current_buffer_fuzzy_find', { previewer = false }),
