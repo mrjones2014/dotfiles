@@ -1,7 +1,6 @@
 return {
   'feline-nvim/feline.nvim',
   after = 'onedarkpro.nvim',
-  requires = '~/git/github/barbar.nvim',
   config = function()
     local colors = require('onedarkpro').get_colors('onedark_dark')
     local mode_icons = {

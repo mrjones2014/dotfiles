@@ -33,7 +33,6 @@ packer.startup({
     use(require('my.configure.mine.op'))
     use(require('my.configure.mine.legendary'))
     use(require('my.configure.mine.smart-splits'))
-    use(require('my.configure.mine.dash'))
 
     -- Editing enhancements and tools
     use(require('my.configure.autopairs'))
