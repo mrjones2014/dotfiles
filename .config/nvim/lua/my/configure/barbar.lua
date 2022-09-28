@@ -1,5 +1,4 @@
 -- use local while my PR is open
--- use local theme repo if it's cloned
 local paths = require('my.paths')
 local plugin_path = 'mrjones2014/barbar.nvim'
 if vim.fn.isdirectory(paths.join(paths.home, 'git/github/barbar.nvim')) > 0 then

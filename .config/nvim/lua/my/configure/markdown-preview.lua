@@ -1,5 +1,5 @@
 return {
   'iamcco/markdown-preview.nvim',
-  ft = 'markdown',
+  cmd = 'MarkdownPreview',
   run = 'cd app && npm install',
 }
