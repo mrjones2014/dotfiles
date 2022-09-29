@@ -105,11 +105,11 @@ function M.lsp_autocmds(bufnr, server_name)
     #vim.tbl_filter(function(autocmd)
       return autocmd.buflocal == true
         and autocmd.buffer == bufnr
-        and (autocmd.event == 'BufReadPost' or autocmd.event == 'BufRead')
+        and (autocmd.event == 'BufEnter' or autocmd.event == 'BufEnter')
     end, autocmds) == 0
   then
     table.insert(augroup, {
-      'BufReadPost',
+      'BufEnter',
       function()
         -- reattach if we reopen a previously closed buffer
         vim.tbl_map(function(client)
