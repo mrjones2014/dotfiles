@@ -125,6 +125,22 @@ return {
         },
         right_sep = 'block',
       },
+      unsaved_changes = {
+        left_sep = 'left_rounded',
+        provider = function()
+          local unsaved_buffers = vim.tbl_filter(function(buf)
+            return vim.api.nvim_buf_get_option(buf, 'modifiable') and vim.api.nvim_buf_get_option(buf, 'modified')
+          end, vim.api.nvim_list_bufs())
+          if #vim.fn.expand('%') == 0 or #unsaved_buffers == 0 then
+            return ''
+          end
+          return string.format(' %s unsaved file%s ', #unsaved_buffers, #unsaved_buffers > 1 and 's' or '')
+        end,
+        icon = '',
+        hl = {
+          bg = colors.fg_gutter,
+        },
+      },
       diagnostics = function(severity)
         local ui = diagnostics_ui[severity]
         return {
@@ -153,7 +169,10 @@ return {
     local statusline_components = {
       { components.mode, components.branch, components.file_info },
       {},
-      vim.list_extend({ components.op }, vim.tbl_map(components.diagnostics, diagnostics_order)),
+      vim.list_extend(
+        { components.unsaved_changes, components.op },
+        vim.tbl_map(components.diagnostics, diagnostics_order)
+      ),
     }
 
     require('feline').setup({
