@@ -34,6 +34,14 @@ function M.default_commands()
       end,
       description = 'Search help for word under cursor',
     },
+    {
+      ':OpenFileDir',
+      function()
+        local dir = vim.fn.expand('%:p:h')
+        vim.cmd(string.format('!open %s', dir))
+      end,
+      description = 'Open directory containing current file',
+    },
   }
 end
 
