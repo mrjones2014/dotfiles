@@ -49,7 +49,6 @@ packer.startup({
     use(require('my.configure.lspconfig'))
     use(require('my.configure.completion'))
     use(require('my.configure.trouble'))
-    use(require('my.configure.goto-preview'))
     use(require('my.configure.treesitter'))
     use(require('my.configure.treesitter-playground'))
 
