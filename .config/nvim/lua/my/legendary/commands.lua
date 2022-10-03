@@ -21,9 +21,7 @@ function M.default_commands()
     },
     {
       ':Icons',
-      function()
-        require('my.nerdfonticons').pick()
-      end,
+      require('my.nerdfonticons').pick,
       description = 'Find NerdFont icons',
     },
     {
@@ -46,6 +44,7 @@ function M.default_commands()
 end
 
 function M.lsp_commands(bufnr, server_name)
+  local h = require('legendary.helpers')
   -- don't need to gate these since we aren't creating the actual commands
   local commands = {
     {
@@ -78,9 +77,7 @@ function M.lsp_commands(bufnr, server_name)
     -- Neotest
     require('my.utils').insert_all(commands, {
       ':Test',
-      function()
-        require('neotest').run.run()
-      end,
+      h.lazy_required_fn('neotest', 'run.run'),
       description = 'Run nearest test',
       opts = { buffer = bufnr },
     }, {
@@ -92,23 +89,17 @@ function M.lsp_commands(bufnr, server_name)
       opts = { buffer = bufnr },
     }, {
       ':TestStop',
-      function()
-        require('neotest').run.stop()
-      end,
+      h.lazy_required_fn('neotest', 'run.stop'),
       description = 'Kill running tests',
       opts = { buffer = bufnr },
     }, {
       ':TestOpen',
-      function()
-        require('neotest').output.open({ enter = true })
-      end,
+      h.lazy_required_fn('neotest', 'output.open', { enter = true }),
       description = 'Open test output',
       opts = { buffer = bufnr },
     }, {
       ':TestSummary',
-      function()
-        require('neotest').summary.open()
-      end,
+      h.lazy_required_fn('neotest', 'summary.open'),
       opts = { buffer = bufnr },
     })
   end
