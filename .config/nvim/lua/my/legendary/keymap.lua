@@ -52,15 +52,14 @@ function M.default_keymaps()
 
     -- up arrow from command line to search command history
     {
-      '<Up>',
-      h.lazy_required_fn('telescope.builtin', 'command_history'),
+      '<C-f>',
+      function()
+        local search = vim.fn.getcmdline()
+        vim.fn.setcmdline('')
+        require('telescope.builtin').command_history({ default_text = search })
+      end,
       description = 'Search command history',
       mode = 'c',
-    },
-    {
-      '<C-f>',
-      h.lazy_required_fn('telescope.builtin', 'current_buffer_fuzzy_find', { previewer = false }),
-      description = 'Find pattern in current buffer',
     },
     { 'fr', h.lazy_required_fn('telescope.builtin', 'resume'), description = 'Resume last Telescope finder' },
     { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
