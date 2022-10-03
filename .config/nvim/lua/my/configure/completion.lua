@@ -14,6 +14,7 @@ return {
   },
   event = { 'InsertEnter' },
   keys = { { 'v', ':' }, { 'n', ':' } },
+  module = 'cmp',
   config = function()
     local luasnip = require('luasnip')
     luasnip.config.setup({
