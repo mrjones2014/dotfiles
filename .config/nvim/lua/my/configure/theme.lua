@@ -5,6 +5,7 @@ return {
     local utils = require('onedarkpro.utils')
     onedarkpro.setup({
       dark_theme = 'onedark_dark',
+      caching = true,
       colors = {
         telescope_prompt = utils.lighten('#000000', 0.01, '#101010'),
         telescope_results = '#000000',
