@@ -6,14 +6,6 @@ return {
     'rmagatti/goto-preview',
   },
   config = function()
-    require('fidget').setup({
-      text = {
-        spinner = 'arc',
-      },
-    })
-    require('goto-preview').setup({
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    })
     require('my.lsp')
   end,
 }
