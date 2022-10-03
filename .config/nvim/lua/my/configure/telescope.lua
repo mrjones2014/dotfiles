@@ -140,6 +140,16 @@ return {
             }
           end,
         },
+        command_history = {
+          mappings = {
+            i = {
+              ['<CR>'] = require('telescope.actions').edit_command_line,
+            },
+            n = {
+              ['<CR>'] = require('telescope.actions').edit_command_line,
+            },
+          },
+        },
       },
       extensions = {
         fzf = {
