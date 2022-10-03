@@ -2,7 +2,7 @@ return {
   'olimorris/onedarkpro.nvim',
   config = function()
     local onedarkpro = require('onedarkpro')
-    local utils = require('onedarkpro.utils')
+    local utils = require('onedarkpro.lib.color')
     onedarkpro.setup({
       dark_theme = 'onedark_dark',
       caching = true,
@@ -66,7 +66,16 @@ return {
         BufferCurrentMod = { fg = 'Normal', style = 'bold,italic' },
       },
       plugins = {
-        all = true,
+        gitsigns = true,
+        indentline = true,
+        neotest = true,
+        nvim_cmp = true,
+        native_lsp = true,
+        nvim_tree = true,
+        nvim_ts_rainbow = true,
+        op_nvim = true,
+        packer = true,
+        trouble = true,
       },
       options = {
         bold = true,

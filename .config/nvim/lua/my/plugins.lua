@@ -63,8 +63,8 @@ packer.startup({
     use(require('my.configure.barbar'))
     use(require('my.configure.colorizer'))
     use(require('my.configure.todo-comments'))
-    use(require('my.configure.nvim-notify'))
     use(require('my.configure.startuptime'))
+    use(require('my.configure.noice'))
   end,
   config = {
     profile = {
