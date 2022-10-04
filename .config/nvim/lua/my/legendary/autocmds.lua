@@ -85,6 +85,13 @@ function M.default_autocmds()
         },
       },
     },
+    {
+      name = 'CmdHeightZeroFix',
+      {
+        'WinScrolled',
+        ':redrawstatus',
+      },
+    },
   }
 end
 
