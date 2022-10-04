@@ -3,11 +3,12 @@ return {
   config = function()
     local onedarkpro = require('onedarkpro')
     local utils = require('onedarkpro.lib.color')
+    local dark_gray = utils.lighten('#000000', 0.01, '#101010')
     onedarkpro.setup({
       dark_theme = 'onedark_dark',
       caching = true,
       colors = {
-        telescope_prompt = utils.lighten('#000000', 0.01, '#101010'),
+        telescope_prompt = dark_gray,
         telescope_results = '#000000',
         comment = onedarkpro.get_colors('onedark_vivid').gray,
       },
@@ -24,7 +25,7 @@ return {
       },
       highlights = {
         CmdLine = {
-          bg = '#1F1F23',
+          bg = dark_gray,
           fg = '${Normal}',
         },
         LineNr = '${color_column}',
