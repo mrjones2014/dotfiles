@@ -23,6 +23,10 @@ return {
         },
       },
       highlights = {
+        CmdLine = {
+          bg = '#272B33',
+          fg = '${Normal}',
+        },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
         Search = {
