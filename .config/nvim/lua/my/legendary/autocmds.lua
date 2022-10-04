@@ -74,6 +74,17 @@ function M.default_autocmds()
         end,
       },
     },
+    {
+      -- recompile OneDarkPro.nvim cache on :PackerCompile
+      name = 'RecompileOnedarkproCache',
+      {
+        'User',
+        ':OnedarkproCache',
+        opts = {
+          pattern = 'PackerCompileDone',
+        },
+      },
+    },
   }
 end
 
