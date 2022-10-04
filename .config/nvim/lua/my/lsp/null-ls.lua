@@ -51,15 +51,6 @@ local diagnostics = {
   }),
 }
 
-local function check_exit_code(exit_code, error_output)
-  if exit_code ~= 0 then
-    error_output = string.format('[null-ls] Formatter error:\n%s', error_output)
-    vim.notify(error_output)
-  end
-
-  return exit_code == 0
-end
-
 local formatters = {
   b.formatting.eslint_d,
   b.formatting.stylelint.with({
