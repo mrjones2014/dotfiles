@@ -11,6 +11,13 @@ return {
       history = {
         filter = {},
       },
+      cmdline = {
+        icons = {
+          ['/'] = { icon = '  ' },
+          ['?'] = { icon = '  ' },
+          [':'] = { icon = '  ', firstc = ':' },
+        },
+      },
       routes = {
         {
           filter = { find = 'No active Snippet' },
@@ -27,6 +34,7 @@ return {
             row = vim.o.lines - 4,
             col = 0,
           },
+          size = { width = '100%' },
           border = {
             style = 'none',
             padding = { 1, 3 },
