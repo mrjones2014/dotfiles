@@ -13,6 +13,10 @@ return {
           filter = { find = 'No active Snippet' },
           opts = { skip = true },
         },
+        {
+          filter = { kind = 'wmsg' },
+          opts = { skip = true },
+        },
       },
       views = {
         cmdline_popup = {
