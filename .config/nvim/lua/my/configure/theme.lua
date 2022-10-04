@@ -24,7 +24,7 @@ return {
       },
       highlights = {
         CmdLine = {
-          bg = '#272B33',
+          bg = '#1F1F23',
           fg = '${Normal}',
         },
         LineNr = '${color_column}',
