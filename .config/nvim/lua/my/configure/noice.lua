@@ -8,6 +8,9 @@ return {
   event = 'VimEnter',
   config = function()
     require('noice').setup({
+      history = {
+        filter = {},
+      },
       routes = {
         {
           filter = { find = 'No active Snippet' },
