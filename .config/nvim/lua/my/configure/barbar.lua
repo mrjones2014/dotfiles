@@ -22,6 +22,9 @@ return {
         'nofile',
         'qf',
       },
+      winbar_disabled_buftypes = {
+        'nofile',
+      },
     })
     vim.api.nvim_create_autocmd('BufAdd', { command = 'BufferOrderByBufferNumber' })
   end,
