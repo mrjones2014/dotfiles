@@ -40,6 +40,13 @@ function M.default_commands()
       end,
       description = 'Open directory containing current file',
     },
+    {
+      ':Dismiss',
+      function()
+        require('notify').dismiss({ pending = true, silent = true })
+      end,
+      description = 'Dismiss notifications',
+    },
   }
 end
 
