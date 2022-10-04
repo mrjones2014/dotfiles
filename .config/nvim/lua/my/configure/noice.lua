@@ -16,9 +16,13 @@ return {
       },
       views = {
         cmdline_popup = {
+          position = {
+            row = vim.o.lines - 4,
+            col = 0,
+          },
           border = {
             style = 'none',
-            padding = { 2, 3 },
+            padding = { 1, 3 },
           },
           filter_options = {},
           win_options = {
