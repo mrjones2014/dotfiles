@@ -22,6 +22,9 @@ packer.startup({
     -- it's also required in init.lua
     use('lewis6991/impatient.nvim')
 
+    -- load theme first to avoid flashing
+    use(require('my.configure.theme'))
+
     -- Packer can manage itself
     use('wbthomason/packer.nvim')
 
@@ -53,7 +56,6 @@ packer.startup({
     use(require('my.configure.treesitter-playground'))
 
     -- UI + utils
-    use(require('my.configure.theme'))
     use(require('my.configure.markdown-preview'))
     use(require('my.configure.telescope'))
     use(require('my.configure.gitsigns'))
