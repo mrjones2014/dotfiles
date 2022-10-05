@@ -58,6 +58,7 @@ return {
         -- barbar.nvim
         BufferCurrent = { fg = 'Normal', style = 'bold,italic' },
         BufferCurrentMod = { fg = 'Normal', style = 'bold,italic' },
+        BufferInactiveSign = { fg = dark_gray },
       },
       plugins = {
         gitsigns = true,
