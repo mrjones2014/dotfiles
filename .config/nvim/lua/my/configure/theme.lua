@@ -12,17 +12,6 @@ return {
         telescope_results = '#000000',
         comment = onedarkpro.get_colors('onedark_vivid').gray,
       },
-      ft_highlights = {
-        markdown = {
-          TSTitle = { fg = '${red}', style = 'bold' },
-          TSPunctSpecial = { fg = '${red}' },
-          TSPunctDelimiter = { fg = '${comment}' },
-          TSTextReference = { fg = '${blue}' },
-          TSURI = { fg = '${comment}' },
-          TSLiteral = { fg = '${green}' },
-          TSParameter = { fg = '${fg}' },
-        },
-      },
       highlights = {
         CmdLine = {
           bg = dark_gray,
