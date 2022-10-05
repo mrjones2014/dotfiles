@@ -25,7 +25,8 @@ function M.default_keymaps()
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
-    { 'W', ':Bdelete<CR>', description = 'Close current buffer' },
+    -- :BufferClose comes from winbarbar.nvim
+    { 'W', ':BufferClose<CR>', description = 'Close current buffer' },
 
     { 'gx', require('my.utils').open_url_under_cursor, description = 'Open URL under cursor' },
 

@@ -12,7 +12,6 @@ return {
   requires = {
     -- used by key mappings
     'fedepujol/move.nvim',
-    'famiu/bufdelete.nvim'
   },
   config = function()
     require('legendary').setup({
