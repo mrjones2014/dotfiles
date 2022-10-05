@@ -9,6 +9,7 @@ alias vi="nvim"
 alias v="nvim"
 # lol, sometimes I'm stupid
 alias :q="exit"
+alias :Q="exit"
 
 alias update-nvim-plugins="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 
