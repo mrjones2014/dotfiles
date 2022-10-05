@@ -189,7 +189,6 @@ return {
         { components.unsaved_changes, components.op },
         vim.tbl_map(components.diagnostics, diagnostics_order)
       ),
-      {},
     }
 
     require('feline').setup({

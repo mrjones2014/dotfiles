@@ -11,7 +11,7 @@ return {
     require('bufferline').setup({
       maximum_padding = 1,
       no_name_title = '[No Name]',
-      winbar_disabled_filetypes = {
+      disabled_filetypes = {
         'NvimTree',
         'TelescopePrompt',
         '1PasswordSidebar',
@@ -21,7 +21,7 @@ return {
         'nofile',
         'qf',
       },
-      winbar_disabled_buftypes = {
+      disabled_buftypes = {
         'nofile',
       },
     })
