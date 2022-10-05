@@ -1,8 +1,8 @@
 -- use local while my PR is open
 local paths = require('my.paths')
-local plugin_path = 'mrjones2014/barbar.nvim'
-if vim.fn.isdirectory(paths.join(paths.home, 'git/github/barbar.nvim')) > 0 then
-  plugin_path = '~/git/github/barbar.nvim'
+local plugin_path = 'mrjones2014/winbarbar.nvim'
+if vim.fn.isdirectory(paths.join(paths.home, 'git/github/winbarbar.nvim')) > 0 then
+  plugin_path = '~/git/github/winbarbar.nvim'
 end
 
 return {
@@ -11,7 +11,6 @@ return {
     require('bufferline').setup({
       maximum_padding = 1,
       no_name_title = '[No Name]',
-      use_winbar = true,
       winbar_disabled_filetypes = {
         'NvimTree',
         'TelescopePrompt',
