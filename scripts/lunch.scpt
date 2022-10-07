@@ -22,4 +22,4 @@ end slashCommand
 slashCommand("status", ":fork_and_knife: Out for food")
 
 # Lock screen
-#tell application "System Events" to keystroke "q" using {control down, command down}
+tell application "System Events" to keystroke "q" using {control down, command down}
