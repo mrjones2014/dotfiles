@@ -4,6 +4,11 @@ if present then
   impatient.enable_profile()
 end
 
+-- utility for debugging lua stuff
+_G.p = function(any)
+  print(vim.inspect(any))
+end
+
 require('my.disable-builtins')
 require('my.settings')
 require('my.plugins').setup()
