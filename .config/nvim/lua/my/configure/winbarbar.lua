@@ -25,6 +25,6 @@ return {
         'nofile',
       },
     })
-    vim.api.nvim_create_autocmd('BufAdd', { command = 'BufferOrderByBufferNumber' })
+    vim.api.nvim_create_autocmd({ 'BufAdd', 'BufWinEnter', 'BufEnter' }, { command = 'BufferOrderByBufferNumber' })
   end,
 }
