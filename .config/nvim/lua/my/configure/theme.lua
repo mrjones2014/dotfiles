@@ -4,6 +4,8 @@ return {
     local onedarkpro = require('onedarkpro')
     local utils = require('onedarkpro.lib.color')
     local dark_gray = utils.lighten('#000000', 0.01, '#101010')
+    local normal_fg = '#abb2bf'
+    local buffer_inactive = '#434852'
     onedarkpro.setup({
       dark_theme = 'onedark_dark',
       caching = true,
@@ -15,7 +17,7 @@ return {
       highlights = {
         CmdLine = {
           bg = dark_gray,
-          fg = '${Normal}',
+          fg = normal_fg,
         },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
@@ -56,9 +58,9 @@ return {
         TelescopeSelection = { bg = '${telescope_prompt}' },
 
         -- barbar.nvim
-        BufferCurrent = { fg = 'Normal', style = 'bold,italic' },
-        BufferCurrentMod = { fg = 'Normal', style = 'bold,italic' },
-        BufferInactiveSign = { fg = 'Comment' },
+        BufferCurrent = { fg = normal_fg, style = 'bold,italic' },
+        BufferCurrentMod = { fg = normal_fg, style = 'bold,italic' },
+        BufferInactiveSign = { fg = buffer_inactive },
       },
       plugins = {
         gitsigns = true,
