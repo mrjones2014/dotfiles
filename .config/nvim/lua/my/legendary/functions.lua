@@ -4,13 +4,13 @@ function M.default_functions()
   return {
     {
       function()
-        require('my.utils').copy_to_clipboard(require('my.paths').relative_filepath())
+        Clipboard.copy(Path.relative(vim.fn.expand('%')))
       end,
       description = 'Copy current relative filepath to clipboard',
     },
     {
       function()
-        require('my.utils').copy_to_clipboard(require('my.utils').git_branch())
+        Clipboard.copy((vim.b.gitsigns_head or ''):gsub('\n', ''))
       end,
       description = 'Copy current git branch name to clipboard',
     },

@@ -93,7 +93,7 @@ function M.lsp_commands(bufnr, server_name)
 
   if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Test then
     -- Neotest
-    require('my.utils').insert_all(commands, {
+    table.insert_all(commands, {
       ':Test',
       h.lazy_required_fn('neotest', 'run.run'),
       description = 'Run nearest test',

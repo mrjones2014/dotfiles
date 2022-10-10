@@ -1,18 +1,18 @@
-local paths = require('my.paths')
-
 local M = {}
 
-M.compile_path = paths.join(vim.fn.stdpath('data'), 'site/pack/loader/start/packer.nvim/lua/packer_compiled.lua')
+M.compile_path = Path.join(vim.fn.stdpath('data'), 'site/pack/loader/start/packer.nvim/lua/packer_compiled.lua')
+
+M.plugin_install_path = Path.join(vim.fn.stdpath('data'), 'site/pack/packer/start/packer.nvim')
 
 function M.setup()
   -- if packer isn't already installed, install it
   local packer_bootstrap = false
-  if vim.fn.empty(vim.fn.glob(paths.plugin_install_path)) > 0 then
+  if vim.fn.empty(vim.fn.glob(M.plugin_install_path)) > 0 then
     packer_bootstrap = vim.fn.system({
       'git',
       'clone',
       'https://github.com/wbthomason/packer.nvim',
-      paths.plugin_install_path,
+      M.plugin_install_path,
     })
     vim.cmd.packadd('packer.nvim')
   end
@@ -38,6 +38,7 @@ function M.setup()
       use(require('my.configure.mine.op'))
       use(require('my.configure.mine.legendary'))
       use(require('my.configure.mine.smart-splits'))
+      use(require('my.configure.mine.winbarbar'))
 
       -- Editing enhancements and tools
       use(require('my.configure.autopairs'))
@@ -65,7 +66,6 @@ function M.setup()
       use(require('my.configure.nvim-tree'))
       use(require('my.configure.indent-blankline'))
       use(require('my.configure.feline'))
-      use(require('my.configure.winbarbar'))
       use(require('my.configure.colorizer'))
       use(require('my.configure.todo-comments'))
       use(require('my.configure.startuptime'))

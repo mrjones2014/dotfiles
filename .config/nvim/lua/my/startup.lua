@@ -23,7 +23,7 @@ local function center(strs)
 end
 
 local header = center({
-  require('my.paths').relative_cwd(),
+  Path.relative(vim.loop.cwd()),
   '',
   '',
   '',
