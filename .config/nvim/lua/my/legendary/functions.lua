@@ -10,7 +10,11 @@ function M.default_functions()
     },
     {
       function()
-        Clipboard.copy((vim.b.gitsigns_head or ''):gsub('\n', ''))
+        if vim.b.gitsigns_head then
+          Clipboard.copy(vim.b.gitsigns_head)
+        else
+          vim.notify('Not in a git repo.')
+        end
       end,
       description = 'Copy current git branch name to clipboard',
     },
