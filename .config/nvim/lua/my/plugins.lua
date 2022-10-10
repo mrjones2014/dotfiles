@@ -59,6 +59,7 @@ function M.setup()
 
       -- UI + utils
       use(require('my.configure.theme'))
+      use(require('my.configure.autolist'))
       use(require('my.configure.markdown-preview'))
       use(require('my.configure.telescope'))
       use(require('my.configure.gitsigns'))
