@@ -5,7 +5,6 @@ return {
   requires = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
-    'smartpde/telescope-recent-files',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     'stevearc/dressing.nvim',
   },
@@ -91,7 +90,7 @@ return {
         oldfiles = {
           only_cwd = true,
           file_ignore_patterns = {
-            'COMMIT_EDITMSG',
+            '.git/COMMIT_EDITMSG',
           },
           on_input_filter_cb = file_extension_filter,
         },
@@ -157,13 +156,9 @@ return {
           override_file_sorter = true,
           case_mode = 'smart_case',
         },
-        recent_files = {
-          only_cwd = true,
-        },
       },
     })
 
     telescope.load_extension('fzf')
-    telescope.load_extension('recent_files')
   end,
 }

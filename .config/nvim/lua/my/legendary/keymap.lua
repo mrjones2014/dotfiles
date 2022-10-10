@@ -68,9 +68,7 @@ function M.default_keymaps()
     { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },
     {
       'fh',
-      function()
-        require('telescope').extensions.recent_files.pick()
-      end,
+      h.lazy_required_fn('telescope.builtin', 'oldfiles'),
       description = 'Find recent files',
     },
     {
