@@ -11,7 +11,8 @@ function M.pick()
       return
     end
     local icon = selected[2]
-    require('my.utils').copy_to_clipboard(icon)
+    icon = icon:gsub('\n', '')
+    Clipboard.copy(icon)
     vim.notify('Copied icon to clipboard.')
   end)
 end

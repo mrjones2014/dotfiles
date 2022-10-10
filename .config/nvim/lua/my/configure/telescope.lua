@@ -11,7 +11,6 @@ return {
   config = function()
     require('dressing').setup()
     local trouble = require('trouble.providers.telescope')
-    local paths = require('my.paths')
 
     local function file_extension_filter(prompt)
       -- if prompt starts with escaped @ then treat it as a literal
@@ -42,7 +41,7 @@ return {
           '--column',
           '--smart-case',
           '--ignore-file',
-          (paths.join(paths.config, '.ignore')),
+          (Path.join(vim.env.HOME, '.config', '.ignore')),
         },
         prompt_prefix = '  ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
@@ -81,7 +80,7 @@ return {
             '--column',
             '--smart-case',
             '--ignore-file',
-            (paths.join(paths.config, '.ignore')),
+            (Path.join(vim.env.HOME, '.config', '.ignore')),
             '--iglob',
             '!.git',
           },

@@ -10,6 +10,7 @@ _G.p = function(any)
 end
 
 require('my.disable-builtins')
+require('my.globals')
 require('my.settings')
 require('my.plugins').setup()
 require('my.whitespace')

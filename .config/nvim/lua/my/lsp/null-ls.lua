@@ -1,4 +1,3 @@
-local paths = require('my.paths')
 local null_ls = require('null-ls')
 local b = null_ls.builtins
 
@@ -34,7 +33,7 @@ local diagnostics = {
     diagnostics_format = '#{m} [#{s}] [#{c}]',
   }),
   b.diagnostics.codespell.with({
-    args = { '-I', paths.join(paths.config, 'codespell/custom_dict.txt'), '-' },
+    args = { '-I', Path.join(vim.env.HOME, '.config', 'codespell/custom_dict.txt'), '-' },
     filetypes = {
       'javascript',
       'typescript',
@@ -99,7 +98,7 @@ local formatters = {
 }
 
 local config = {
-  sources = require('my.utils').join_lists(code_actions, diagnostics, formatters),
+  sources = table.join_lists(code_actions, diagnostics, formatters),
   on_attach = require('my.lsp.utils').on_attach,
 }
 
