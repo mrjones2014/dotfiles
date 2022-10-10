@@ -50,7 +50,6 @@ function M.setup()
       use('tpope/vim-sleuth')
 
       -- LSP + syntax
-      use(require('my.configure.mason'))
       use(require('my.configure.lspconfig'))
       use(require('my.configure.completion'))
       use(require('my.configure.trouble'))
