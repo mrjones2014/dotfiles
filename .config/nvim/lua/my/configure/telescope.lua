@@ -6,10 +6,8 @@ return {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-    'stevearc/dressing.nvim',
   },
   config = function()
-    require('dressing').setup()
     local trouble = require('trouble.providers.telescope')
 
     local function file_extension_filter(prompt)
