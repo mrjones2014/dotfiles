@@ -10,6 +10,7 @@ return {
       commands = require('my.legendary.commands').default_commands(),
       autocmds = require('my.legendary.autocmds').default_autocmds(),
       functions = require('my.legendary.functions').default_functions(),
+      col_separator_char = '',
       select_prompt = function(kind)
         if kind == 'legendary.items' then
           return ' Legendary '
