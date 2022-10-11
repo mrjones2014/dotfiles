@@ -1,25 +1,27 @@
 #!/usr/bin/env osascript
 
-on slashCommand(cmd, msg)
+on status()
 	tell application "Slack"
 		activate
 		tell application "System Events"
 			delay 0.5
-			keystroke  "." using command down # close thread if one is open
+			keystroke "Y" using command down
 			delay 0.5
-			keystroke "/"
+			key code 48 using shift down
+			key code 36
+			delay 0.1
+			keystroke "coffee"
 			delay 0.5
-			keystroke cmd & " " & msg
-		  delay 0.5
-		  key code 36
-		  delay 0.5
-		  key code 36
+			key code 36
+			key code 48
+			keystroke "Making coffee, brb"
+			key code 36
 		end tell
 	end tell
-end slashCommand
+end status
 
 # set slack status to Lunch
-slashCommand("status", ":coffee: Making coffee, brb")
+status()
 
 # Lock screen
 tell application "System Events" to keystroke "q" using {control down, command down}
