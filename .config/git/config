@@ -44,6 +44,15 @@
   old = red bold
   new = green bold
   whitespace = red reverse
+[fetch]
+  prune = true
+[checkout]
+  defaultRemote = origin
+
+# faster git server communications
+# https://git-scm.com/docs/protocol-v2
+[protocol]
+  version = 2
 
 ; Force GitHub to use SSH
 [url "git@github.com:"]
