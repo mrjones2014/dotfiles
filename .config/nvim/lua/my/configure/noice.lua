@@ -20,11 +20,13 @@ return {
       },
       routes = {
         {
-          filter = { find = 'No active Snippet' },
-          opts = { skip = true },
-        },
-        {
-          filter = { kind = 'wmsg' },
+          filter = {
+            any = {
+              { find = 'No active Snippet' },
+              { find = '^<$' },
+              { kind = 'wmsg' },
+            },
+          },
           opts = { skip = true },
         },
       },
