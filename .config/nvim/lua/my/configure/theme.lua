@@ -7,6 +7,7 @@ return {
     local normal_fg = '#abb2bf'
     local buffer_inactive = '#434852'
     onedarkpro.setup({
+      log_level = 'debug',
       dark_theme = 'onedark_dark',
       caching = true,
       colors = {
