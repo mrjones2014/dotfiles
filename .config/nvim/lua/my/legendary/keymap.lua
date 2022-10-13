@@ -111,12 +111,6 @@ function M.default_keymaps()
     { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
 
     {
-      '<leader>c',
-      ':CommentToggle<CR>',
-      description = 'Toggle comment',
-      mode = { 'n', 'x' },
-    },
-    {
       '<leader>w',
       [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
       description = 'Replace all instances of word under cursor in current buffer',
