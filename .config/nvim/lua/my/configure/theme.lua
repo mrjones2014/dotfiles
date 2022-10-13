@@ -19,6 +19,10 @@ return {
           bg = dark_gray,
           fg = normal_fg,
         },
+        CmdLineBorder = {
+          bg = dark_gray,
+          fg = dark_gray,
+        },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
         Search = {
