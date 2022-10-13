@@ -38,12 +38,11 @@ return {
           },
           size = { width = '100%' },
           border = {
-            style = 'none',
-            padding = { 1, 3 },
+            padding = { 0, 3 },
           },
           filter_options = {},
           win_options = {
-            winhighlight = 'NormalFloat:CmdLine,FloatBorder:CmdLine',
+            winhighlight = 'NormalFloat:CmdLine,FloatBorder:CmdLineBorder',
           },
         },
       },

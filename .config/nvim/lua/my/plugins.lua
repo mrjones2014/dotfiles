@@ -18,6 +18,7 @@ function M.setup()
   end
 
   local packer = require('packer')
+  packer.reset()
   packer.init({
     compile_path = M.compile_path,
   })
