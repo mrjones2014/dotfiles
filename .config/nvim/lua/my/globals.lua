@@ -1,6 +1,10 @@
 -- Global helper functions
 
--- luacheck:ignore
+-- utility for debugging lua stuff
+_G.p = function(any)
+  print(vim.inspect(any))
+end
+
 _G.Path = {
   join = function(...)
     return table.concat({ ... }, '/')
