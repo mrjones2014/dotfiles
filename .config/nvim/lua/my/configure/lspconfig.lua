@@ -6,6 +6,7 @@ return {
     'rmagatti/goto-preview',
     'williamboman/mason.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
     require('mason').setup()
