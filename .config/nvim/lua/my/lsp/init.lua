@@ -11,8 +11,11 @@ function M.setup()
     vim.api.nvim_create_autocmd('BufReadPre', {
       callback = function()
         local _, config = pcall(require, 'my.lsp.' .. filetype)
-        config = config or {}
-        config.capabilities = require('cmp_nvim_lsp').default_capabilities()
+        -- pcall returns an error string in failure case
+        if not config or type(config) ~= 'table' then
+          config = {}
+        end
+        config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
         config.on_attach = require('my.lsp.utils').on_attach
         local server = require('my.lsp.filetypes').servers[filetype]
         require('lspconfig')[server].setup(config)

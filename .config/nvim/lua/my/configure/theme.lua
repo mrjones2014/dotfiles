@@ -16,6 +16,9 @@ return {
         comment = onedarkpro.get_colors('onedark_vivid').gray,
       },
       highlights = {
+        ['@variable.lua'] = { fg = '#ef596f' },
+        ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
+
         CmdLine = {
           bg = dark_gray,
           fg = normal_fg,
@@ -68,6 +71,7 @@ return {
         BufferInactiveSign = { fg = buffer_inactive },
       },
       plugins = {
+        all = false,
         gitsigns = true,
         indentline = true,
         neotest = true,
@@ -78,6 +82,7 @@ return {
         op_nvim = true,
         packer = true,
         trouble = true,
+        leap = true,
       },
       options = {
         bold = true,
