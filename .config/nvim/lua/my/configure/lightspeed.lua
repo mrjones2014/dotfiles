@@ -1,1 +1,0 @@
-return { 'ggandor/lightspeed.nvim' }
