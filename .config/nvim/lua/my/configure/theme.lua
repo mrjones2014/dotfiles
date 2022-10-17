@@ -16,9 +16,8 @@ return {
         comment = onedarkpro.get_colors('onedark_vivid').gray,
       },
       highlights = {
-        ['@variable.lua'] = { fg = '#ef596f' },
         ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
-
+        ['@operator.lua'] = { link = '@keyword.operator.lua' },
         CmdLine = {
           bg = dark_gray,
           fg = normal_fg,
@@ -83,6 +82,7 @@ return {
         packer = true,
         trouble = true,
         leap = true,
+        treesitter = true,
       },
       options = {
         bold = true,
