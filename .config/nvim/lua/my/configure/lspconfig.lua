@@ -36,6 +36,6 @@ return {
         'shfmt',
       },
     })
-    require('my.lsp')
+    require('my.lsp').setup()
   end,
 }
