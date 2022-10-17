@@ -10,11 +10,8 @@ function M.setup()
   for filetype, file_patterns in pairs(require('my.lsp.filetypes').filetype_patterns) do
     vim.api.nvim_create_autocmd('BufReadPre', {
       callback = function()
-        local _, config = pcall(require, 'my.lsp.' .. filetype)
-        -- pcall returns an error string in failure case
-        if not config or type(config) ~= 'table' then
-          config = {}
-        end
+        local has_config, config = pcall(require, 'my.lsp.' .. filetype)
+        config = has_config and config or {}
         config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
         config.on_attach = require('my.lsp.utils').on_attach
         local server = require('my.lsp.filetypes').servers[filetype]
