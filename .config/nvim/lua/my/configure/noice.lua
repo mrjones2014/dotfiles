@@ -1,8 +1,8 @@
 return {
   'folke/noice.nvim',
   requires = {
-    'MunifTanjim/nui.nvim',
     'rcarriga/nvim-notify',
+    'MunifTanjim/nui.nvim',
     'hrsh7th/nvim-cmp',
   },
   event = 'VimEnter',
@@ -11,18 +11,12 @@ return {
       history = {
         filter = {},
       },
-      cmdline = {
-        icons = {
-          ['/'] = { icon = '  ' },
-          ['?'] = { icon = '  ' },
-          [':'] = { icon = '  ', firstc = ':' },
-        },
-      },
       routes = {
         {
           filter = {
             any = {
               { find = 'No active Snippet' },
+              { find = 'No signature help available' },
               { find = '^<$' },
               { kind = 'wmsg' },
             },
@@ -31,6 +25,19 @@ return {
         },
       },
       views = {
+        mini = {
+          position = {
+            row = vim.o.lines - 8,
+          },
+        },
+        popup = {
+          win_options = {
+            winhighlight = {
+              Normal = 'NormalFloat',
+              FloatBorder = 'FloatBorder',
+            },
+          },
+        },
         cmdline_popup = {
           position = {
             row = vim.o.lines - 4,
@@ -40,9 +47,11 @@ return {
           border = {
             padding = { 0, 3 },
           },
-          filter_options = {},
           win_options = {
-            winhighlight = 'NormalFloat:CmdLine,FloatBorder:CmdLineBorder',
+            winhighlight = {
+              Normal = 'CmdLine',
+              FloatBorder = 'CmdLineBorder',
+            },
           },
         },
       },

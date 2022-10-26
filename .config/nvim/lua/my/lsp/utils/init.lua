@@ -12,11 +12,6 @@ function M.on_attach(client, bufnr)
 
   if not init_done then
     init_done = true
-    require('fidget').setup({
-      text = {
-        spinner = 'arc',
-      },
-    })
     require('goto-preview').setup({
       border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
     })
