@@ -2,7 +2,6 @@ return {
   'neovim/nvim-lspconfig',
   requires = {
     'jose-elias-alvarez/null-ls.nvim',
-    'j-hui/fidget.nvim',
     'rmagatti/goto-preview',
     'williamboman/mason.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
