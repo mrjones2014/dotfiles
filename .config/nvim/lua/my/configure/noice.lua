@@ -8,6 +8,32 @@ return {
   event = 'VimEnter',
   config = function()
     require('noice').setup({
+      cmdline = {
+        format = {
+          cmdline = { icon = ' ' },
+          search_down = { icon = '  ' },
+          search_up = { icon = '  ' },
+          filter = { icon = ' ', lang = 'fish' },
+          lua = { icon = ' ' },
+          help = { icon = ' ' },
+        },
+        opts = {
+          position = {
+            row = vim.o.lines - 3,
+            col = 0,
+          },
+          size = { width = '100%' },
+          border = {
+            padding = { 0, 3 },
+          },
+          win_options = {
+            winhighlight = {
+              Normal = 'CmdLine',
+              FloatBorder = 'CmdLineBorder',
+            },
+          },
+        },
+      },
       history = {
         filter = {},
       },
@@ -35,22 +61,6 @@ return {
             winhighlight = {
               Normal = 'NormalFloat',
               FloatBorder = 'FloatBorder',
-            },
-          },
-        },
-        cmdline_popup = {
-          position = {
-            row = vim.o.lines - 4,
-            col = 0,
-          },
-          size = { width = '100%' },
-          border = {
-            padding = { 0, 3 },
-          },
-          win_options = {
-            winhighlight = {
-              Normal = 'CmdLine',
-              FloatBorder = 'CmdLineBorder',
             },
           },
         },
