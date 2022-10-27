@@ -26,6 +26,13 @@ return {
           bg = dark_gray,
           fg = dark_gray,
         },
+        LspFloat = {
+          bg = dark_gray,
+        },
+        LspFloatBorder = {
+          bg = dark_gray,
+          fg = normal_fg,
+        },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
         Search = {

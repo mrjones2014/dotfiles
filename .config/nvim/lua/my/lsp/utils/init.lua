@@ -94,9 +94,6 @@ function M.apply_ui_tweaks()
 
   -- enable virtual text diagnostics for Neotest only
   vim.diagnostic.config({ virtual_text = true }, vim.api.nvim_create_namespace('neotest'))
-
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 end
 
 function M.format_document()

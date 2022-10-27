@@ -8,6 +8,34 @@ return {
   event = 'VimEnter',
   config = function()
     require('noice').setup({
+      lsp = {
+        signature = {
+          enabled = true,
+          opts = {
+            border = { style = 'rounded' },
+            win_options = {
+              winhighlight = {
+                Normal = 'LspFloat',
+                FloatBorder = 'LspFloatBorder',
+              },
+            },
+          },
+        },
+        documentation = {
+          enabled = true,
+          opts = {
+            border = { style = 'rounded' },
+            win_options = {
+              concealcursor = 'n',
+              conceallevel = 3,
+              winhighlight = {
+                Normal = 'LspFloat',
+                FloatBorder = 'LspFloatBorder',
+              },
+            },
+          },
+        },
+      },
       cmdline = {
         format = {
           cmdline = { icon = ' ' },
