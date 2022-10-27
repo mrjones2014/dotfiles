@@ -2,10 +2,8 @@ return {
   'olimorris/onedarkpro.nvim',
   config = function()
     local onedarkpro = require('onedarkpro')
-    local utils = require('onedarkpro.lib.color')
-    local dark_gray = utils.lighten('#000000', 0.01, '#101010')
-    local normal_fg = '#abb2bf'
-    local buffer_inactive = '#434852'
+    local colors = require('onedarkpro').get_colors('onedark_dark')
+    local dark_gray = '#1A1A1A'
     onedarkpro.setup({
       log_level = 'debug',
       dark_theme = 'onedark_dark',
@@ -18,9 +16,10 @@ return {
       highlights = {
         ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
         ['@operator.lua'] = { link = '@keyword.operator.lua' },
+        CmpItemMenu = { bg = dark_gray },
         CmdLine = {
           bg = dark_gray,
-          fg = normal_fg,
+          fg = colors.fg,
         },
         CmdLineBorder = {
           bg = dark_gray,
@@ -31,7 +30,7 @@ return {
         },
         LspFloatBorder = {
           bg = dark_gray,
-          fg = normal_fg,
+          fg = dark_gray,
         },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
@@ -72,9 +71,9 @@ return {
         TelescopeSelection = { bg = '${telescope_prompt}' },
 
         -- barbar.nvim
-        BufferCurrent = { fg = normal_fg, style = 'bold,italic' },
-        BufferCurrentMod = { fg = normal_fg, style = 'bold,italic' },
-        BufferInactiveSign = { fg = buffer_inactive },
+        BufferCurrent = { fg = colors.fg, style = 'bold,italic' },
+        BufferCurrentMod = { fg = colors.fg, style = 'bold,italic' },
+        BufferInactiveSign = { fg = dark_gray },
       },
       plugins = {
         all = false,
