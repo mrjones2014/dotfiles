@@ -13,11 +13,6 @@ return {
         hover = { enabled = true },
         documentation = {
           opts = {
-            border = { style = 'rounded' },
-            relative = 'cursor',
-            position = {
-              row = 2,
-            },
             win_options = {
               concealcursor = 'n',
               conceallevel = 3,

@@ -28,10 +28,13 @@ return {
       },
     })
     local cmp = require('cmp')
+    local window_config = cmp.config.window.bordered({
+      winhighlight = 'Normal:LspFloat,FloatBorder:LspFloatBorder,CursorLine:Visual,Search:None',
+    })
     local shared_config = {
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = window_config,
+        documentation = window_config,
       },
       preselect = cmp.PreselectMode.None,
       snippet = {
