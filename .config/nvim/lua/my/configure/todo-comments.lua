@@ -8,8 +8,12 @@ return {
     -- PERF performance note
     -- NOTE just a note
     -- HACK this is a hack
+    --
+    -- TODO with a very long
+    --      multiline comment
     require('todo-comments').setup({
       merge_keywords = true,
+      multiline = true,
       keywords = {
         WARNING = { icon = ' ', color = 'warning' },
       },
