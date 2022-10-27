@@ -63,8 +63,6 @@ return {
     }))
 
     cmp.setup.cmdline(':', vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'cmdline' } } }))
-    local cmdline_search_opts = vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'buffer' } } })
-    cmp.setup.cmdline('/', cmdline_search_opts)
-    cmp.setup.cmdline('?', cmdline_search_opts)
+    cmp.setup.cmdline({ '/', '?' }, vim.tbl_deep_extend('force', shared_config, { sources = { { name = 'buffer' } } }))
   end,
 }
