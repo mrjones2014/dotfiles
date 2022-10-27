@@ -9,22 +9,15 @@ return {
   config = function()
     require('noice').setup({
       lsp = {
-        signature = {
-          enabled = true,
-          opts = {
-            border = { style = 'rounded' },
-            win_options = {
-              winhighlight = {
-                Normal = 'LspFloat',
-                FloatBorder = 'LspFloatBorder',
-              },
-            },
-          },
-        },
+        signature = { enabled = true },
+        hover = { enabled = true },
         documentation = {
-          enabled = true,
           opts = {
             border = { style = 'rounded' },
+            relative = 'cursor',
+            position = {
+              row = 2,
+            },
             win_options = {
               concealcursor = 'n',
               conceallevel = 3,
