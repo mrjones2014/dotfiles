@@ -11,9 +11,7 @@ return {
     require('mason').setup()
     require('mason-tool-installer').setup({
       auto_update = true,
-      ensure_installed = vim.tbl_map(function(config)
-        return config.mason
-      end, vim.tbl_values(require('my.lsp.filetypes').config)),
+      ensure_installed = require('my.lsp.filetypes').mason_packages,
     })
     require('my.lsp').setup()
   end,

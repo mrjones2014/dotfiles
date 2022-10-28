@@ -19,12 +19,12 @@ M.config = {
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
     lspconfig = 'tsserver',
-    mason = 'typescript-language-server',
+    mason = { 'typescript-language-server', 'prettierd', 'eslint_d' },
   },
   ['lua'] = {
     patterns = { '*.lua' },
     lspconfig = 'sumneko_lua',
-    mason = 'lua-language-server',
+    mason = { 'lua-language-server', 'stylua', 'luacheck' },
   },
   ['rust'] = {
     patterns = { '*.rs' },
@@ -51,11 +51,23 @@ M.config = {
     lspconfig = 'marksman',
     mason = 'marksman',
   },
-  ['codespell'] = {
-    mason = 'codespell'
-  }
 }
 
 M.filetypes = vim.tbl_keys(M.config)
+
+M.mason_packages = {}
+
+vim.tbl_map(function(config)
+  if type(config.mason) == 'string' then
+    table.insert(M.mason_packages, config.mason)
+  else
+    for _, package in ipairs(config.mason) do
+      table.insert(M.mason_packages, package)
+    end
+  end
+end, vim.tbl_values(M.config))
+
+-- extras not associated with any one language
+table.insert(M.mason_packages, 'codespell')
 
 return M
