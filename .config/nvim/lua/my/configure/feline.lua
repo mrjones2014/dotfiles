@@ -185,10 +185,12 @@ return {
     local statusline_components = {
       { components.mode, components.branch, components.file_info },
       {},
+      ---@diagnostic disable -- optional parameters omitted
       vim.list_extend(
         { components.unsaved_changes, components.op },
         vim.tbl_map(components.diagnostics, diagnostics_order)
       ),
+      ---@diagnostic enable
     }
 
     require('feline').setup({

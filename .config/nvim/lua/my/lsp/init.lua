@@ -4,6 +4,17 @@ function M.setup()
   -- always load null-ls
   require('my.lsp.null-ls')
 
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('LspOnAttachCallback', { clear = true }),
+    callback = function(args)
+      if not (args.data and args.data.client_id) then
+        return
+      end
+
+      require('my.lsp.utils').on_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+    end,
+  })
+
   -- lazy-load the rest of the configs with
   -- an autocommand that runs only once
   -- for each lsp config
@@ -14,8 +25,8 @@ function M.setup()
         callback = function()
           local has_config, config = pcall(require, 'my.lsp.' .. filetype)
           config = has_config and config or {}
-          config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-          config.on_attach = require('my.lsp.utils').on_attach
+          config.capabilities =
+            require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
           require('lspconfig')[filetype_config.lspconfig].setup(config)
           local snippets = require('my.lsp.snippets')[filetype]
           if snippets then

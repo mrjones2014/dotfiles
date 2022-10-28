@@ -16,7 +16,7 @@ return {
         return { prompt = prompt:sub(2) }
       end
 
-      local result = vim.split(prompt, ' ')
+      local result = vim.split(prompt, ' ', {})
       -- if prompt starts with, for example, @rs
       -- then only search files ending in *.rs
       if #result == 2 and result[1]:sub(1, 1) == '@' and (#result[1] == 2 or #result[1] == 3 or #result[1] == 4) then
