@@ -31,6 +31,7 @@ table.join_lists = function(...)
   local lists = { ... }
   local result = {}
   for _, list in ipairs(lists) do
+    ---@diagnostic disable-next-line -- optional parameters omitted
     vim.list_extend(result, list)
   end
   return result

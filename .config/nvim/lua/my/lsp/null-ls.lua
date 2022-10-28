@@ -99,7 +99,6 @@ local formatters = {
 
 local config = {
   sources = table.join_lists(code_actions, diagnostics, formatters),
-  on_attach = require('my.lsp.utils').on_attach,
 }
 
 if typescript_root_dir ~= nil then

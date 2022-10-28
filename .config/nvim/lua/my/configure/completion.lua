@@ -7,7 +7,6 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
-    { 'hrsh7th/cmp-nvim-lua', ft = 'lua' },
     { 'mtoohey31/cmp-fish', ft = 'fish' },
     'L3MON4D3/LuaSnip',
   },
@@ -58,7 +57,6 @@ return {
       sources = {
         { name = 'luasnip', priority = 100 },
         { name = 'nvim_lsp', priority = 90 },
-        { name = 'nvim_lua', priority = 90 },
         { name = 'fish' },
         { name = 'path', priority = 5 },
         { name = 'buffer', priority = 1 },

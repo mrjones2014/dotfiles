@@ -2,8 +2,6 @@ local M = {}
 
 local init_done = false
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
   require('legendary').bind_keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
@@ -98,7 +96,7 @@ end
 
 function M.format_document()
   -- check if LSP is attached
-  if (#vim.lsp.buf_get_clients()) < 1 then
+  if (#vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })) < 1 then
     return
   end
 

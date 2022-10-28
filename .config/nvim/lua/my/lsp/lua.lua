@@ -1,9 +1,9 @@
-local runtime_path = vim.split(package.path, ';')
+local runtime_path = vim.split(package.path, ';', {})
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 local globals = { 'vim' }
-if string.find(vim.loop.cwd(), 'hammerspoon') then
+if string.find(assert(vim.loop.cwd()), 'hammerspoon') then
   globals = { 'hs' }
 end
 
