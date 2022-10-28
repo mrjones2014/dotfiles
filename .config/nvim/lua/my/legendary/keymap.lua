@@ -69,7 +69,7 @@ function M.default_keymaps()
       description = 'Shrink selection to next Treesitter node',
     },
 
-    -- up arrow from command line to search command history
+    -- ctrl+f from command line to search command history
     {
       '<C-f>',
       function()
@@ -203,11 +203,11 @@ function M.lsp_keymaps(bufnr)
         -- I have diagnostics float on CursorHold,
         -- disable that if I've manually shown the hover window
         -- see autocmds.lua, lsp_autocmds()
-        vim.cmd.set('eventignore=CursorHold')
+        vim.cmd.set('eventignore+=CursorHold')
         vim.lsp.buf.hover()
         require('legendary').bind_autocmds({
           'CursorMoved',
-          ':set eventignore=""',
+          ':set eventignore-=CursorHold',
           opts = { pattern = '<buffer>', once = true },
         })
       end,
