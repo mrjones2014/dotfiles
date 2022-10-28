@@ -198,6 +198,11 @@ function M.lsp_keymaps(bufnr)
   local h = require('legendary.helpers')
   return {
     {
+      'fs',
+      h.lazy_required_fn('telescope.builtin', 'lsp_document_symbols'),
+      description = 'Find LSP document symbols',
+    },
+    {
       'gh',
       function()
         -- I have diagnostics float on CursorHold,
