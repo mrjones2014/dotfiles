@@ -13,7 +13,7 @@ return {
       auto_update = true,
       ensure_installed = vim.tbl_map(function(config)
         return config.mason
-      end, require('my.lsp.filetypes').config),
+      end, vim.tbl_values(require('my.lsp.filetypes').config)),
     })
     require('my.lsp').setup()
   end,

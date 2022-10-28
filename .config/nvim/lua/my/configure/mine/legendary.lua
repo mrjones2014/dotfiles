@@ -21,6 +21,12 @@ return {
         -- Convert kind to Title Case (e.g. legendary.keymaps => Legendary Keymaps)
         return ' ' .. string.gsub(' ' .. kind:gsub('%.', ' '), '%W%l', string.upper):sub(2) .. ' '
       end,
+      plugins = {
+        diffview = true,
+        smart_splits = true,
+        op = true,
+        onedarkpro = true,
+      },
     })
 
     -- require('which-key').setup({

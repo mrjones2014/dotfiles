@@ -46,6 +46,14 @@ M.config = {
     lspconfig = 'gopls',
     mason = 'gopls',
   },
+  ['markdown'] = {
+    patterns = { '*.md', '*.markdown' },
+    lspconfig = 'marksman',
+    mason = 'marksman',
+  },
+  ['codespell'] = {
+    mason = 'codespell'
+  }
 }
 
 M.filetypes = vim.tbl_keys(M.config)
