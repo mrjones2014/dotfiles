@@ -28,6 +28,7 @@ return {
     })
     local cmp = require('cmp')
     local window_config = cmp.config.window.bordered({
+      border = 'none',
       winhighlight = 'Normal:LspFloat,FloatBorder:LspFloatBorder,CursorLine:Visual,Search:None',
     })
     local shared_config = {
