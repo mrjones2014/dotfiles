@@ -11,7 +11,7 @@ on status()
 			key code 36
 			delay 0.1
 			keystroke "coffee"
-			delay 0.5
+			delay 1.0
 			key code 36
 			key code 48
 			keystroke "Making coffee, brb"
