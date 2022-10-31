@@ -8,7 +8,7 @@ function M.setup()
   -- if packer isn't already installed, install it
   local packer_bootstrap = false
   if vim.fn.empty(vim.fn.glob(M.plugin_install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({
+    packer_bootstrap = not not vim.fn.system({
       'git',
       'clone',
       'https://github.com/wbthomason/packer.nvim',
