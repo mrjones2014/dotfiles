@@ -1,5 +1,10 @@
 return {
   'iamcco/markdown-preview.nvim',
-  cmd = 'MarkdownPreview',
-  run = 'cd app && npm install',
+  ft = { 'markdown', 'md' },
+  setup = function()
+    vim.g.mkdp_theme = 'dark'
+  end,
+  run = function()
+    vim.fn['mkdp#util#install']()
+  end,
 }
