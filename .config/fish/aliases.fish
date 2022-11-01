@@ -7,6 +7,7 @@ alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias oldvim="$(which vim)"
 # lol, sometimes I'm stupid
 alias :q="exit"
 alias :Q="exit"
