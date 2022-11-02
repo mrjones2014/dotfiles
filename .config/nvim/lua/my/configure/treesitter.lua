@@ -21,6 +21,8 @@ return {
   end,
   config = function()
     require('nvim-treesitter.configs').setup({
+      -- when entering a buffer, auto-install treesitter parser if missing
+      auto_install = true,
       highlight = {
         enable = true,
       },
