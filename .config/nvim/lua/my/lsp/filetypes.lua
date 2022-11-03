@@ -51,6 +51,10 @@ M.config = {
     lspconfig = 'marksman',
     mason = 'marksman',
   },
+  ['sh'] = {
+    patterns = { '*.sh', '*.bash', '*.zsh' },
+    mason = { 'shellcheck', 'shfmt' },
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
