@@ -10,7 +10,7 @@ function M.default_commands()
     {
       ':BindLspKeymaps',
       function()
-        require('legendary').bind_keymaps(require('my.legendary.keymap').lsp_keymaps(0))
+        require('legendary-v2').keymaps(require('my.legendary.keymap').lsp_keymaps(0))
       end,
       description = "Manually bind LSP keymaps in case they didn't get bound",
     },
