@@ -6,7 +6,7 @@ local function has_words_before()
 end
 
 function M.default_keymaps()
-  local h = require('legendary.helpers')
+  local h = require('legendary-v2.helpers')
   return {
     -- jk is mapped to escape by better-escape.nvim plugin
     -- make escape work in terminal mode,
@@ -195,7 +195,7 @@ function M.lsp_keymaps(bufnr)
     return {}
   end
 
-  local h = require('legendary.helpers')
+  local h = require('legendary-v2.helpers')
   return {
     {
       'fs',
