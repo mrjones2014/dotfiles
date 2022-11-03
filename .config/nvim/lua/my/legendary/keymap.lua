@@ -25,7 +25,7 @@ function M.default_keymaps()
 
     {
       '<C-p>',
-      require('legendary').find,
+      require('legendary-v2').find,
       description = 'Search keybinds and commands',
       mode = { 'n', 'i', 'x' },
     },
@@ -210,7 +210,7 @@ function M.lsp_keymaps(bufnr)
         -- see autocmds.lua, lsp_autocmds()
         vim.cmd.set('eventignore+=CursorHold')
         vim.lsp.buf.hover()
-        require('legendary').bind_autocmds({
+        require('legendary-v2').autocmd({
           'CursorMoved',
           ':set eventignore-=CursorHold',
           opts = { pattern = '<buffer>', once = true },
