@@ -103,7 +103,7 @@ function M.lsp_autocmds(bufnr, server_name)
   then
     table.insert(augroup, {
       'CursorHold',
-      require('legendary.helpers').lazy(
+      require('legendary-v2.helpers').lazy(
         vim.diagnostic.open_float,
         nil,
         { focus = false, scope = 'cursor', border = 'rounded' }

@@ -62,7 +62,7 @@ function M.default_commands()
 end
 
 function M.lsp_commands(bufnr, server_name)
-  local h = require('legendary.helpers')
+  local h = require('legendary-v2.helpers')
   -- don't need to gate these since we aren't creating the actual commands
   local commands = {
     {
