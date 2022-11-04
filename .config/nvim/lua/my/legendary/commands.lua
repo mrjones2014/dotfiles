@@ -10,7 +10,7 @@ function M.default_commands()
     {
       ':BindLspKeymaps',
       function()
-        require('legendary-v2').keymaps(require('my.legendary.keymap').lsp_keymaps(0))
+        require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(0))
       end,
       description = "Manually bind LSP keymaps in case they didn't get bound",
     },
@@ -52,9 +52,11 @@ function M.default_commands()
       function()
         local path = require('my.plugins').compile_path
         vim.fn.jobstart({ 'rm', path }, { detach = true })
+        ---@diagnostic disable
         vim.defer_fn(function()
           vim.cmd('PackerCompile')
         end, 1)
+        ---@diagnostic enable
       end,
       description = 'Delete packer_compiled.lua',
     },
@@ -62,7 +64,7 @@ function M.default_commands()
 end
 
 function M.lsp_commands(bufnr, server_name)
-  local h = require('legendary-v2.helpers')
+  local h = require('legendary.toolbox')
   -- don't need to gate these since we aren't creating the actual commands
   local commands = {
     {
