@@ -54,14 +54,17 @@ M.config = {
   ['sh'] = {
     patterns = { '*.sh', '*.bash', '*.zsh' },
     mason = { 'shellcheck', 'shfmt' },
+    treesitter = 'bash',
   },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
 
 M.mason_packages = {}
+M.treesitter_parsers = {}
 
-vim.tbl_map(function(config)
+for filetype, config in pairs(M.config) do
+  -- mason package names
   if type(config.mason) == 'string' then
     table.insert(M.mason_packages, config.mason)
   else
@@ -69,9 +72,21 @@ vim.tbl_map(function(config)
       table.insert(M.mason_packages, package)
     end
   end
-end, vim.tbl_values(M.config))
+
+  -- treesitter parser names
+  if type(config.treesitter) == 'string' then
+    table.insert(M.treesitter_parsers, config.treesitter)
+  elseif type(config.treesitter) == 'table' then
+    table.insert_all(M.treesitter_parsers, config.treesitter)
+  else
+    table.insert(M.treesitter_parsers, filetype)
+  end
+end
 
 -- extras not associated with any one language
+
 table.insert(M.mason_packages, 'codespell')
+
+table.insert(M.treesitter_parsers, 'comment')
 
 return M

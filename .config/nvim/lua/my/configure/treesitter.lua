@@ -21,8 +21,7 @@ return {
   end,
   config = function()
     require('nvim-treesitter.configs').setup({
-      -- when entering a buffer, auto-install treesitter parser if missing
-      auto_install = true,
+      ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
       highlight = {
         enable = true,
       },
