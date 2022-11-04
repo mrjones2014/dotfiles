@@ -7,23 +7,17 @@ function M.default_autocmds()
       [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif]],
     },
     {
-      name = 'JsonOptions',
+      name = 'MyCustomFiletypeOptions',
       {
         'FileType',
         ':setlocal conceallevel=0',
         opts = { pattern = 'json' },
       },
-    },
-    {
-      name = 'MarkdownOptions',
       {
         'FileType',
         ':setlocal wrap linebreak',
         opts = { pattern = 'markdown' },
       },
-    },
-    {
-      name = 'JsoncFiletypeDetection',
       {
         { 'BufRead', 'BufNewFile' },
         ':set filetype=jsonc',
@@ -103,7 +97,7 @@ function M.lsp_autocmds(bufnr, server_name)
   then
     table.insert(augroup, {
       'CursorHold',
-      require('legendary-v2.helpers').lazy(
+      require('legendary.toolbox').lazy(
         vim.diagnostic.open_float,
         nil,
         { focus = false, scope = 'cursor', border = 'rounded' }

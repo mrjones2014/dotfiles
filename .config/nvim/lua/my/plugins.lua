@@ -21,6 +21,7 @@ function M.setup()
   packer.reset()
   packer.init({
     compile_path = M.compile_path,
+    max_jobs = 20,
   })
   packer.startup({
     function(use)

@@ -6,7 +6,7 @@ local function has_words_before()
 end
 
 function M.default_keymaps()
-  local h = require('legendary-v2.helpers')
+  local h = require('legendary.toolbox')
   return {
     -- jk is mapped to escape by better-escape.nvim plugin
     -- make escape work in terminal mode,
@@ -25,7 +25,7 @@ function M.default_keymaps()
 
     {
       '<C-p>',
-      require('legendary-v2').find,
+      require('legendary').find,
       description = 'Search keybinds and commands',
       mode = { 'n', 'i', 'x' },
     },
@@ -195,7 +195,7 @@ function M.lsp_keymaps(bufnr)
     return {}
   end
 
-  local h = require('legendary-v2.helpers')
+  local h = require('legendary.toolbox')
   return {
     {
       'fs',
@@ -210,7 +210,7 @@ function M.lsp_keymaps(bufnr)
         -- see autocmds.lua, lsp_autocmds()
         vim.cmd.set('eventignore+=CursorHold')
         vim.lsp.buf.hover()
-        require('legendary-v2').autocmd({
+        require('legendary').autocmd({
           'CursorMoved',
           ':set eventignore-=CursorHold',
           opts = { pattern = '<buffer>', once = true },

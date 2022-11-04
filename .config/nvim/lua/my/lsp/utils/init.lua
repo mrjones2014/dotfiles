@@ -4,9 +4,9 @@ local init_done = false
 
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
-  require('legendary-v2').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
-  require('legendary-v2').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
-  require('legendary-v2').autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
+  require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
+  require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
+  require('legendary').autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
 
   if not init_done then
     init_done = true
