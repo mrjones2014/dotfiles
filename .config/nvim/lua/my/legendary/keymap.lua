@@ -118,6 +118,8 @@ function M.default_keymaps()
       description = 'Replace all instances of word under cursor in current buffer',
     },
 
+    { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
+
     -- h/j/k/l mappings, split movement
     { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
     { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
