@@ -4,13 +4,14 @@ return {
     local onedarkpro = require('onedarkpro')
     local colors = require('onedarkpro').get_colors('onedark_dark')
     local dark_gray = '#1A1A1A'
+    local darker_gray = '#141414'
     onedarkpro.setup({
       log_level = 'debug',
       dark_theme = 'onedark_dark',
       caching = true,
       colors = {
         telescope_prompt = dark_gray,
-        telescope_results = '#000000',
+        telescope_results = darker_gray,
         comment = onedarkpro.get_colors('onedark_vivid').gray,
       },
       highlights = {
@@ -26,11 +27,11 @@ return {
           fg = dark_gray,
         },
         LspFloat = {
-          bg = dark_gray,
+          bg = darker_gray,
         },
         LspFloatBorder = {
-          bg = dark_gray,
-          fg = dark_gray,
+          bg = darker_gray,
+          fg = darker_gray,
         },
         LineNr = '${color_column}',
         SignColumn = '${color_column}',
@@ -73,7 +74,7 @@ return {
         -- barbar.nvim
         BufferCurrent = { fg = colors.fg, style = 'bold,italic' },
         BufferCurrentMod = { fg = colors.fg, style = 'bold,italic' },
-        BufferInactiveSign = { fg = dark_gray },
+        BufferInactiveSign = { fg = darker_gray },
       },
       plugins = {
         all = false,
@@ -89,6 +90,7 @@ return {
         trouble = true,
         leap = true,
         treesitter = true,
+        telescope = true,
       },
       options = {
         bold = true,
