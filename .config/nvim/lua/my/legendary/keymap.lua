@@ -153,23 +153,23 @@ function M.default_keymaps()
       '<S-h>',
       {
         n = { ':MoveHChar(-1)<CR>' },
-        x = { ':MoveHBlock(-1)<CR>' },
+        x = { ":'<,'>MoveHBlock(-1)<CR>" },
       },
       description = 'Move text left',
     },
     {
       '<S-j>',
-      { n = ':MoveLine(1)<CR>', x = ':MoveBlock(1)<CR>' },
+      { n = ':MoveLine(1)<CR>', x = ":'<,'>MoveBlock(1)<CR>" },
       description = 'Move text down',
     },
     {
       '<S-k>',
-      { n = ':MoveLine(-1)<CR>', x = ':MoveBlock(-1)<CR>' },
+      { n = ':MoveLine(-1)<CR>', x = ":'<,'>MoveBlock(-1)<CR>" },
       description = 'Move text up',
     },
     {
       '<S-l>',
-      { n = ':MoveHChar(1)<CR>', x = ':MoveHBlock(1)<CR>' },
+      { n = ':MoveHChar(1)<CR>', x = ":'<,'>MoveHBlock(1)<CR>" },
       description = 'Move text right',
     },
 
