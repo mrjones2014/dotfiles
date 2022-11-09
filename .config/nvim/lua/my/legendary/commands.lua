@@ -60,6 +60,20 @@ function M.default_commands()
       end,
       description = 'Delete packer_compiled.lua',
     },
+
+    -- keymaps come from Comment.nvim
+    {
+      ':Comment',
+      function()
+        local keys = 'gcc'
+        if require('legendary.toolbox').is_visual_mode() then
+          keys = 'gc'
+        end
+
+        vim.api.nvim_feedkeys(keys, 't', true)
+      end,
+      description = 'Toggle comment',
+    },
   }
 end
 
