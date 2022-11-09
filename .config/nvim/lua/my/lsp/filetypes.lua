@@ -20,6 +20,7 @@ M.config = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
     lspconfig = 'tsserver',
     mason = { 'typescript-language-server', 'prettierd', 'eslint_d' },
+    treesitter = { 'javascript', 'typescript', 'tsx' },
   },
   ['lua'] = {
     patterns = { '*.lua' },
