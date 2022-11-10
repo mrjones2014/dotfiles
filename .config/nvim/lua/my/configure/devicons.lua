@@ -1666,6 +1666,12 @@ return {
           cterm_color = '203',
           name = 'razor',
         },
+        ['scpt'] = {
+          icon = '',
+          color = '#ECECEC',
+          cterm_color = '255',
+          name = 'Applescript',
+        },
       },
     })
   end,
