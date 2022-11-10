@@ -234,13 +234,13 @@ function M.lsp_keymaps(bufnr)
     { '<leader>rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
     {
       'gpd',
-      h.lazy_required_fn('goto-preview', 'goto_preview_definition'),
+      h.lazy_required_fn('peek', 'Peek', 'definition'),
       description = 'Peek definition',
       opts = { buffer = bufnr },
     },
     {
       'gpi',
-      h.lazy_required_fn('goto-preview', 'goto_preview_implementation'),
+      h.lazy_required_fn('peek', 'Peek', 'implementation'),
       description = 'Peek implementation',
       opts = { buffer = bufnr },
     },
