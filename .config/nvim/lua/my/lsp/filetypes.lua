@@ -69,7 +69,9 @@ for filetype, config in pairs(M.config) do
   if type(config.mason) == 'string' then
     table.insert(M.mason_packages, config.mason)
   else
-    for _, package in ipairs(config.mason) do
+    for _, package in
+      ipairs(config.mason --[[@as table]])
+    do
       table.insert(M.mason_packages, package)
     end
   end
@@ -89,5 +91,6 @@ end
 table.insert(M.mason_packages, 'codespell')
 
 table.insert(M.treesitter_parsers, 'comment')
+table.insert(M.treesitter_parsers, 'fish')
 
 return M
