@@ -34,7 +34,7 @@ function M.setup()
 
       -- Dependencies of other plugins
       use('nvim-lua/plenary.nvim')
-      use('kyazdani42/nvim-web-devicons')
+      use(require('my.configure.devicons'))
 
       -- Plugins I develop
       use(require('my.configure.mine.op'))
