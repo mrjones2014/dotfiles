@@ -10,10 +10,6 @@ function M.on_attach(client, bufnr)
 
   if not init_done then
     init_done = true
-    require('goto-preview').setup({
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    })
-
     M.setup_async_formatting()
     M.apply_ui_tweaks()
   end
