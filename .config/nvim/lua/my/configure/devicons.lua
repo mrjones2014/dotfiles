@@ -1648,12 +1648,6 @@ return {
           cterm_color = '220',
           name = 'CONTRIBUTING.md',
         },
-        ['README.md'] = {
-          icon = '',
-          color = '#42a5f5',
-          cterm_color = '75',
-          name = 'README.md',
-        },
         ['razor'] = {
           icon = '',
           color = '#42a5f5',
