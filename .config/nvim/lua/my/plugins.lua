@@ -77,29 +77,7 @@ function M.setup()
   })
   packer.startup({
     function(use)
-      local theme = require('my.configure.theme')
-      for _, config in ipairs(M.plugin_configs) do
-        if type(config) == 'table' then
-          if config[1] == theme[1] then
-            -- make the colorscheme load after impatient.nvim
-            local after = config.after or {}
-            after = type(after) == 'string' and { after } or after
-            table.insert(after, 'impatient.nvim')
-            config.after = after
-          else
-            -- make everything else load after the colorscheme
-            local theme_module_name = theme[1]:sub(({ theme[1]:find('/') })[1] + 1)
-            local after = config.after or {}
-            after = type(after) == 'string' and { after } or after
-            if not vim.tbl_contains(after, theme_module_name) then
-              table.insert(after, theme_module_name)
-              config.after = after
-            end
-          end
-
-        end
-          use(config)
-      end
+      vim.tbl_map(use, M.plugin_configs)
     end,
     config = {
       profile = {
