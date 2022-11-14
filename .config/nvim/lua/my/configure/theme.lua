@@ -2,79 +2,75 @@ return {
   'olimorris/onedarkpro.nvim',
   config = function()
     local onedarkpro = require('onedarkpro')
-    local colors = require('onedarkpro').get_colors('onedark_dark')
-    local dark_gray = '#1A1A1A'
-    local darker_gray = '#141414'
     onedarkpro.setup({
       log_level = 'debug',
       dark_theme = 'onedark_dark',
       caching = true,
       colors = {
-        telescope_prompt = dark_gray,
-        telescope_results = darker_gray,
-        comment = onedarkpro.get_colors('onedark_vivid').gray,
+        dark_gray = '#1A1A1A',
+        darker_gray = '#141414',
+        darkest_gray = '#080808',
+        color_column = '#181919',
       },
       highlights = {
         ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
         ['@operator.lua'] = { link = '@keyword.operator.lua' },
-        CmpItemMenu = { bg = dark_gray },
+        CmpItemMenu = { bg = '${dark_gray}' },
         CmdLine = {
-          bg = dark_gray,
-          fg = colors.fg,
+          bg = '${dark_gray}',
+          fg = '${fg}',
         },
         CmdLineBorder = {
-          bg = dark_gray,
-          fg = dark_gray,
+          bg = '${dark_gray}',
+          fg = '${dark_gray}',
         },
         LspFloat = {
-          bg = darker_gray,
+          bg = '${darker_gray}',
         },
         LspFloatBorder = {
-          bg = darker_gray,
-          fg = darker_gray,
+          bg = '${darker_gray}',
+          fg = '${darker_gray}',
         },
-        LineNr = '${color_column}',
-        SignColumn = '${color_column}',
         Search = {
           fg = '${black}',
           bg = '${highlight}',
         },
         TelescopeBorder = {
-          fg = '${telescope_results}',
-          bg = '${telescope_results}',
+          fg = '${darkest_gray}',
+          bg = '${darkest_gray}',
         },
         TelescopePromptBorder = {
-          fg = '${telescope_prompt}',
-          bg = '${telescope_prompt}',
+          fg = '${darker_gray}',
+          bg = '${darker_gray}',
         },
         TelescopePromptCounter = { fg = '${fg}' },
-        TelescopePromptNormal = { fg = '${fg}', bg = '${telescope_prompt}' },
+        TelescopePromptNormal = { fg = '${fg}', bg = '${darker_gray}' },
         TelescopePromptPrefix = {
           fg = '${green}',
-          bg = '${telescope_prompt}',
+          bg = '${darker_gray}',
         },
         TelescopePromptTitle = {
-          fg = '${telescope_prompt}',
+          fg = '${darker_gray}',
           bg = '${green}',
         },
 
         TelescopePreviewTitle = {
-          fg = '${telescope_results}',
+          fg = '${darkest_gray}',
           bg = '${green}',
         },
         TelescopeResultsTitle = {
-          fg = '${telescope_results}',
-          bg = '${telescope_results}',
+          fg = '${darkest_gray}',
+          bg = '${darkest_gray}',
         },
 
         TelescopeMatching = { fg = '${green}' },
-        TelescopeNormal = { bg = '${telescope_results}' },
-        TelescopeSelection = { bg = '${telescope_prompt}' },
+        TelescopeNormal = { bg = '${darkest_gray}' },
+        TelescopeSelection = { bg = '${darker_gray}' },
 
         -- barbar.nvim
-        BufferCurrent = { fg = colors.fg, style = 'bold,italic' },
-        BufferCurrentMod = { fg = colors.fg, style = 'bold,italic' },
-        BufferInactiveSign = { fg = darker_gray },
+        BufferCurrent = { fg = '${fg}', style = 'bold,italic' },
+        BufferCurrentMod = { fg = '${fg}', style = 'bold,italic' },
+        BufferInactiveSign = { fg = '${darkest_gray}' },
       },
       plugins = {
         all = false,
