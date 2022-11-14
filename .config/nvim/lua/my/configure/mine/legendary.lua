@@ -13,6 +13,9 @@ return {
       autocmds = require('my.legendary.autocmds').default_autocmds(),
       functions = require('my.legendary.functions').default_functions(),
       col_separator_char = ' ',
+      default_opts = {
+        keymaps = { silent = true, noremap = true },
+      },
       -- which_key = { auto_register = true },
     })
 
