@@ -4,6 +4,58 @@ M.compile_path = Path.join(vim.fn.stdpath('data'), 'site/pack/loader/start/packe
 
 M.plugin_install_path = Path.join(vim.fn.stdpath('data'), 'site/pack/packer/start/packer.nvim')
 
+M.plugin_configs = {
+  -- impatient.nvim has to be loaded before anything else,
+  -- it's also required in init.lua
+  'lewis6991/impatient.nvim',
+
+  -- Packer can manage itself
+  'wbthomason/packer.nvim',
+
+  -- Dependencies of other plugins
+  'nvim-lua/plenary.nvim',
+  require('my.configure.devicons'),
+
+  -- Plugins I develop
+  require('my.configure.mine.op'),
+  require('my.configure.mine.legendary'),
+  require('my.configure.mine.smart-splits'),
+  require('my.configure.mine.winbarbar'),
+
+  -- Editing enhancements and tools
+  require('my.configure.autopairs'),
+  require('my.configure.comments'),
+  require('my.configure.better-escape'),
+  require('my.configure.leap'),
+  require('my.configure.neotest'),
+  require('my.configure.diffview'),
+  'tpope/vim-eunuch',
+  'tpope/vim-sleuth',
+
+  -- LSP + syntax
+  require('my.configure.lspconfig'),
+  require('my.configure.completion'),
+  require('my.configure.trouble'),
+  require('my.configure.treesitter'),
+  require('my.configure.treesitter-playground'),
+
+  -- UI + utils
+  require('my.configure.theme'),
+  require('my.configure.dressing'),
+  require('my.configure.autolist'),
+  require('my.configure.markdown-preview'),
+  require('my.configure.telescope'),
+  require('my.configure.gitsigns'),
+  require('my.configure.nvim-tree'),
+  require('my.configure.indent-blankline'),
+  require('my.configure.feline'),
+  require('my.configure.colorizer'),
+  require('my.configure.todo-comments'),
+  require('my.configure.startuptime'),
+  require('my.configure.noice'),
+  require('my.configure.colorful-winsep'),
+}
+
 function M.setup()
   -- if packer isn't already installed, install it
   local packer_bootstrap = false
@@ -25,54 +77,29 @@ function M.setup()
   })
   packer.startup({
     function(use)
-      -- impatient.nvim has to be loaded before anything else,
-      -- it's also required in init.lua
-      use('lewis6991/impatient.nvim')
+      local theme = require('my.configure.theme')
+      for _, config in ipairs(M.plugin_configs) do
+        if type(config) == 'table' then
+          if config[1] == theme[1] then
+            -- make the colorscheme load after impatient.nvim
+            local after = config.after or {}
+            after = type(after) == 'string' and { after } or after
+            table.insert(after, 'impatient.nvim')
+            config.after = after
+          else
+            -- make everything else load after the colorscheme
+            local theme_module_name = theme[1]:sub(({ theme[1]:find('/') })[1] + 1)
+            local after = config.after or {}
+            after = type(after) == 'string' and { after } or after
+            if not vim.tbl_contains(after, theme_module_name) then
+              table.insert(after, theme_module_name)
+              config.after = after
+            end
+          end
 
-      -- Packer can manage itself
-      use('wbthomason/packer.nvim')
-
-      -- Dependencies of other plugins
-      use('nvim-lua/plenary.nvim')
-      use(require('my.configure.devicons'))
-
-      -- Plugins I develop
-      use(require('my.configure.mine.op'))
-      use(require('my.configure.mine.legendary'))
-      use(require('my.configure.mine.smart-splits'))
-      use(require('my.configure.mine.winbarbar'))
-
-      -- Editing enhancements and tools
-      use(require('my.configure.autopairs'))
-      use(require('my.configure.comments'))
-      use(require('my.configure.better-escape'))
-      use(require('my.configure.leap'))
-      use(require('my.configure.neotest'))
-      use(require('my.configure.diffview'))
-      use('tpope/vim-eunuch')
-      use('tpope/vim-sleuth')
-
-      -- LSP + syntax
-      use(require('my.configure.lspconfig'))
-      use(require('my.configure.completion'))
-      use(require('my.configure.trouble'))
-      use(require('my.configure.treesitter'))
-      use(require('my.configure.treesitter-playground'))
-
-      -- UI + utils
-      use(require('my.configure.theme'))
-      use(require('my.configure.dressing'))
-      use(require('my.configure.autolist'))
-      use(require('my.configure.markdown-preview'))
-      use(require('my.configure.telescope'))
-      use(require('my.configure.gitsigns'))
-      use(require('my.configure.nvim-tree'))
-      use(require('my.configure.indent-blankline'))
-      use(require('my.configure.feline'))
-      use(require('my.configure.colorizer'))
-      use(require('my.configure.todo-comments'))
-      use(require('my.configure.startuptime'))
-      use(require('my.configure.noice'))
+        end
+          use(config)
+      end
     end,
     config = {
       profile = {
