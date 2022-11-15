@@ -21,7 +21,9 @@ function M.default_commands()
     },
     {
       ':Icons',
-      require('my.nerdfonticons').pick,
+      function()
+        require('my.nerdfonticons').pick()
+      end,
       description = 'Find NerdFont icons',
     },
     {

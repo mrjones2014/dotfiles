@@ -7,7 +7,9 @@ end
 require('my.globals')
 
 -- force set colorscheme immediately
-pcall(vim.cmd.colorscheme, 'onedarkpro')
+pcall(function()
+  require('my.configure.theme').config()
+end)
 
 require('my.disable-builtins')
 require('my.settings')
