@@ -49,11 +49,8 @@ if status is-interactive
     if [ -z "$TMUX" ]
         if [ "$START_TMUX_PLEASE" = 1 ]
             exec tmux new-session -A -s $USER
-        else if [ "$SSH_CLIENT" != "" ]
-            exec tmux new-session -A -s ssh-user
         end
     end
-
 
     # push prompt to bottom
     for i in (seq 1 $LINES)
