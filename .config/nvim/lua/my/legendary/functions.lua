@@ -4,7 +4,7 @@ function M.default_functions()
   return {
     {
       function()
-        Clipboard.copy(Path.relative(vim.fn.expand('%')))
+        Clipboard.copy(vim.fn.simplify(Path.relative(vim.fn.expand('%'))))
       end,
       description = 'Copy current relative filepath to clipboard',
     },
