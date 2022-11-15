@@ -71,6 +71,9 @@ return {
         BufferCurrent = { fg = '${fg}', style = 'bold,italic' },
         BufferCurrentMod = { fg = '${fg}', style = 'bold,italic' },
         BufferInactiveSign = { fg = '${darkest_gray}' },
+
+        -- mini.trailspace
+        MiniTrailspace = { bg = '${red}' },
       },
       plugins = {
         all = false,
