@@ -10,6 +10,7 @@ return {
     -- via LSP, don't need to actually do anything with it
     'folke/neodev.nvim',
   },
+  event = 'VimEnter',
   config = function()
     require('mason').setup()
     require('mason-tool-installer').setup({

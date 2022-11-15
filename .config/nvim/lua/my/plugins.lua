@@ -54,6 +54,7 @@ M.plugin_configs = {
   require('my.configure.startuptime'),
   require('my.configure.noice'),
   require('my.configure.colorful-winsep'),
+  require('my.configure.trailspace'),
 }
 
 function M.setup()
