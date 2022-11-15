@@ -1,7 +1,7 @@
 return {
   'echasnovski/mini.trailspace',
-  event = 'VimEnter',
+  event = 'BufWritePre',
   config = function()
-    require('mini.trailspace').setup()
+    require('mini.trailspace').setup({})
   end,
 }

@@ -6,7 +6,15 @@ return {
     'haydenmeade/neotest-jest',
     'rouge8/neotest-rust',
   },
-  ft = require('my.lsp.filetypes').filetypes,
+  ft = {
+    'lua',
+    'go',
+    'rust',
+    'javascript',
+    'typescript',
+    'javascriptreact',
+    'typescriptreact',
+  },
   config = function()
     require('neotest').setup({
       discovery = { enabled = false },
