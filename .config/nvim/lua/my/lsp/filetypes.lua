@@ -51,6 +51,7 @@ M.config = {
     patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
     mason = 'marksman',
+    treesitter = { 'markdown', 'markdown_inline' },
   },
   ['sh'] = {
     patterns = { '*.sh', '*.bash', '*.zsh' },
