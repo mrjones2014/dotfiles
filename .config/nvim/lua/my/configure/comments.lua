@@ -1,7 +1,7 @@
 return {
   'numToStr/Comment.nvim',
   after = 'nvim-treesitter',
-  keys = { { 'v', 'gc' }, { 'n', 'gcc' } },
+  keys = { { 'v', 'gc' }, { 'n', 'gc' } },
   config = function()
     -- default mappings:
     -- {
