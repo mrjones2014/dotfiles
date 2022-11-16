@@ -60,7 +60,7 @@ M.plugin_configs = {
 function M.setup()
   -- if packer isn't already installed, install it
   local packer_bootstrap = false
-  if vim.fn.empty(vim.fn.glob(M.plugin_install_path)) > 0 then
+  if vim.fn.isdirectory(M.plugin_install_path) == 0 then
     packer_bootstrap = not not vim.fn.system({
       'git',
       'clone',
@@ -71,16 +71,13 @@ function M.setup()
   end
 
   local packer = require('packer')
-  packer.reset()
-  packer.init({
-    compile_path = M.compile_path,
-    max_jobs = 20,
-  })
   packer.startup({
     function(use)
       vim.tbl_map(use, M.plugin_configs)
     end,
     config = {
+      compile_path = M.compile_path,
+      max_jobs = 20,
       profile = {
         enable = true,
         threshold = 1,
