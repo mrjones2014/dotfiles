@@ -5,7 +5,6 @@ packer_compiled.lua
 .DS_Store
 .netrwhist
 dist/
-vendor/
 node_modules/
 **/node_modules/
 wget-log
