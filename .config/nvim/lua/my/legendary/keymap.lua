@@ -25,7 +25,9 @@ function M.default_keymaps()
 
     {
       '<C-p>',
-      require('legendary').find,
+      function()
+        require('legendary').find({ filters = require('legendary.filters').current_mode() })
+      end,
       description = 'Search keybinds and commands',
       mode = { 'n', 'i', 'x' },
     },
