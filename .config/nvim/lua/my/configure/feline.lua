@@ -1,7 +1,9 @@
 return {
   'feline-nvim/feline.nvim',
   after = 'onedarkpro.nvim',
+  event = 'BufRead',
   config = function()
+    vim.opt.laststatus = 3
     local colors = require('onedarkpro').get_colors('onedark_dark')
     local mode_icons = {
       ['n'] = '🅽',

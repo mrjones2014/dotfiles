@@ -1,9 +1,3 @@
-local update_cmd = ':TSUpdate'
--- Run TSUpdateSync if running headless
-if #vim.api.nvim_list_uis() == 0 then
-  update_cmd = ':TSUpdateSync'
-end
-
 return {
   'nvim-treesitter/nvim-treesitter',
   requires = {
@@ -13,7 +7,16 @@ return {
     'andymass/vim-matchup',
     'aarondiel/spread.nvim',
   },
-  run = update_cmd,
+  event = 'BufRead',
+  run = function()
+    if #vim.api.nvim_list_uis() == 0 then
+      -- update sync if running headless
+      vim.cmd.TSUpdateSync()
+    else
+      -- otherwise update async
+      vim.cmd.TSUpdate()
+    end
+  end,
   setup = function()
     vim.g.matchup_matchparen_offscreen = {
       method = 'popup',
