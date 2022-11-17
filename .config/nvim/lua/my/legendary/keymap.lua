@@ -30,7 +30,7 @@ function M.default_keymaps()
       mode = { 'n', 'i', 'x' },
     },
 
-    { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
+    { '<leader>qq', ':wqa<CR>', description = 'Save all and quit' },
 
     -- :Bwipeout comes from bufdelete.nvim
     { 'W', ':Bwipeout<CR>', description = 'Close current buffer' },

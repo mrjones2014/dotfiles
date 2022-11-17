@@ -1,6 +1,6 @@
 return {
   'folke/todo-comments.nvim',
-  event = 'VimEnter',
+  event = 'BufRead',
   config = function()
     -- See result with below comments
     -- TODO a todo message
