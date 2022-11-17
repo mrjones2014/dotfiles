@@ -15,10 +15,7 @@ return {
             },
           }
           if opts.kind == 'legendary.nvim' then
-            cfg.telescope.sorter = require('legendary.integrations.telescope').get_sorter({
-              most_recent_first = true,
-              user_items_first = true,
-            })
+            cfg.telescope.sorter = require('telescope.sorters').fuzzy_with_index_bias({})
           end
           return cfg
         end,
