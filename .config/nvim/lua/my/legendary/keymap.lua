@@ -32,8 +32,8 @@ function M.default_keymaps()
 
     { '<leader>s', ':wa<CR>', description = 'Write all buffers' },
 
-    -- :BufferClose comes from winbarbar.nvim
-    { 'W', ':BufferClose<CR>', description = 'Close current buffer' },
+    -- :Bwipeout comes from bufdelete.nvim
+    { 'W', ':Bwipeout<CR>', description = 'Close current buffer' },
 
     {
       'gx',

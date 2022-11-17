@@ -10,8 +10,8 @@ function M.default_functions()
     },
     {
       function()
-        if vim.b.gitsigns_head then
-          Clipboard.copy(vim.b.gitsigns_head)
+        if vim.g.gitsigns_head or vim.b.gitsigns_head then
+          Clipboard.copy(vim.g.gitsigns_head or vim.b.gitsigns_head)
         else
           vim.notify('Not in a git repo.')
         end
