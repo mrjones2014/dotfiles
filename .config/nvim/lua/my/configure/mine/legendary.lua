@@ -3,6 +3,7 @@ return {
   requires = {
     -- used by key mappings
     'fedepujol/move.nvim',
+    'famiu/bufdelete.nvim',
     -- used sometimes for testing integration
     -- 'folke/which-key.nvim',
   },

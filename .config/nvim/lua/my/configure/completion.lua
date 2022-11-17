@@ -54,7 +54,7 @@ return {
       },
     }
 
-    cmp.setup(vim.tbl_deep_extend('force', shared_config, {
+    cmp.setup(vim.tbl_deep_extend('force', shared_config, { ---@diagnostic disable-line:redundant-parameter
       sources = {
         { name = 'luasnip', priority = 100 },
         { name = 'nvim_lsp', priority = 90 },

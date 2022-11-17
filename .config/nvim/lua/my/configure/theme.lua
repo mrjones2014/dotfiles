@@ -83,6 +83,21 @@ return {
 
         -- mini.trailspace
         MiniTrailspace = { bg = '${red}' },
+
+        -- nvim-navic
+        NavicIconsClass = { fg = '${purple}', bg = '${darker_gray}' },
+        NavicIconsFunction = { fg = '${blue}', bg = '${darker_gray}' },
+        NavicIconsVariable = { fg = '${orange}', bg = '${darker_gray}' },
+        NavicIconsConstant = { fg = '${orange}', bg = '${darker_gray}' },
+        NavicIconsBoolean = { fg = '${orange}', bg = '${darker_gray}' },
+        NavicIconsString = { fg = '${green}', bg = '${darker_gray}' },
+        NavicIconsObject = { fg = '${purple}', bg = '${darker_gray}' },
+        NavicIconsProperty = { fg = '${fg}', bg = '${darker_gray}' },
+        NavicText = { fg = '${white}', bg = '${darker_gray}' },
+        NavicSeparator = { fg = '${gray}', bg = '${darker_gray}' },
+        WinBar = { bg = '${darker_gray}' },
+        WinBarNC = { bg = '${bg_statusline}' },
+
       },
       plugins = {
         all = false,

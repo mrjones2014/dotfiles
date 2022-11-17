@@ -67,7 +67,7 @@ return {
       vim.diagnostic.severity.ERROR,
     }
 
-    local unsaved_changes = function()
+    local function unsaved_changes()
       local unsaved_buffers = vim.tbl_filter(function(buf)
         return vim.api.nvim_buf_get_option(buf, 'modifiable') and vim.api.nvim_buf_get_option(buf, 'modified')
       end, vim.api.nvim_list_bufs())
@@ -75,6 +75,10 @@ return {
         return ''
       end
       return string.format(' %s unsaved file%s ', #unsaved_buffers, #unsaved_buffers > 1 and 's' or '')
+    end
+
+    local function is_current_buf()
+      return vim.api.nvim_get_current_buf() == tonumber(vim.g.actual_curbuf)
     end
 
     local components = {
@@ -112,17 +116,79 @@ return {
           fg = colors.green,
         },
         right_sep = 'right_rounded',
+        enabled = function()
+          return not not vim.b.gitsigns_head
+        end,
       },
       file_info = {
         left_sep = 'block',
         provider = {
           name = 'file_info',
           opts = {
-            file_readonly_icon = '',
+            file_readonly_icon = ' ',
             type = 'relative',
           },
         },
         right_sep = 'right_rounded',
+        enabled = function()
+          return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
+        end,
+      },
+      file_info_short = {
+        left_sep = 'block',
+        provider = {
+          name = 'file_info',
+          opts = {
+            file_readonly_icon = ' ',
+            type = 'unique',
+          },
+        },
+        hl = function()
+          return {
+            bg = is_current_buf() and colors.bg or colors.dark_gray,
+          }
+        end,
+        right_sep = {
+          str = '  ┃',
+          hl = function()
+            return {
+              fg = colors.white,
+              bg = is_current_buf() and colors.bg or colors.dark_gray,
+            }
+          end,
+        },
+        enabled = function()
+          return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
+        end,
+      },
+      navic = {
+        left_sep = {
+          str = 'block',
+          hl = function()
+            local color = is_current_buf() and colors.darker_gray or colors.bg_statusline
+            return {
+              bg = color,
+              fg = color,
+            }
+          end,
+        },
+        provider = function()
+          local ok, navic = pcall(require, 'nvim-navic')
+          if not ok then
+            return nil
+          end
+
+          return navic.get_location({ highlight = true })
+        end,
+        enabled = function()
+          local ok, navic = pcall(require, 'nvim-navic')
+          return ok and navic.is_available()
+        end,
+        hl = function()
+          return {
+            bg = is_current_buf() and colors.darker_gray or colors.bg_statusline,
+          }
+        end,
       },
       op = {
         left_sep = {
@@ -177,7 +243,7 @@ return {
             fg = ui.color,
             bg = colors.bg_statusline,
           },
-          right_sep = diagnostics_order[#diagnostics_order] and 'block' or nil,
+          right_sep = 'block',
         }
       end,
     }
@@ -193,14 +259,30 @@ return {
       ---@diagnostic enable
     }
 
-    require('feline').setup({
+    local winbar_components = {
+      { components.file_info_short, components.navic },
+      {},
+      {},
+    }
+
+    local shared_config = {
       default_bg = colors.bg_statusline,
       default_fg = colors.bg_statusline,
+      vi_mode_colors = mode_colors,
+    }
+
+    require('feline').setup(vim.tbl_deep_extend('force', shared_config, {
       components = {
         active = statusline_components,
         inactive = statusline_components,
       },
-      vi_mode_colors = mode_colors,
-    })
+    }))
+
+    require('feline').winbar.setup(vim.tbl_deep_extend('force', shared_config, {
+      components = {
+        active = winbar_components,
+        inactive = winbar_components,
+      },
+    }))
   end,
 }
