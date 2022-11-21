@@ -199,7 +199,7 @@ return {
             if #unsaved_changes() > 0 then
               return {
                 fg = colors.blue,
-                bg = colors.fg_gutter,
+                bg = colors.yellow,
               }
             else
               return {
@@ -222,7 +222,8 @@ return {
         provider = unsaved_changes,
         icon = '',
         hl = {
-          bg = colors.fg_gutter,
+          bg = colors.yellow,
+          fg = colors.black,
         },
       },
       diagnostics = function(severity)
