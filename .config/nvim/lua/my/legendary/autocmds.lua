@@ -33,7 +33,12 @@ function M.default_autocmds()
       {
         { 'InsertLeave', 'InsertEnter' },
         function()
-          local enabled = require('gitsigns.config').config.current_line_blame
+          local ok, gitsigns_config = pcall(require, 'gitsigns.config')
+          if not ok then
+            return
+          end
+
+          local enabled = gitsigns_config.config.current_line_blame
           local mode = vim.fn.mode()
           if (mode == 'i' and enabled) or (mode ~= 'i' and not enabled) then
             vim.cmd.Gitsigns('toggle_current_line_blame')
