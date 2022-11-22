@@ -8,6 +8,10 @@ set -x HOMEBREW_NO_ANALYTICS 1
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
 set -x GIT_MERGE_AUTOEDIT no
 
+# Use 1Password CLI for sudo
+set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
+alias sudo="sudo -A"
+
 fish_add_path /opt/homebrew/bin
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
