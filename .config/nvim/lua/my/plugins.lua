@@ -73,7 +73,13 @@ function M.setup()
   local packer = require('packer')
   packer.startup({
     function(use)
-      vim.tbl_map(use, M.plugin_configs)
+      vim.tbl_map(function(plugin)
+        if vim.tbl_islist(plugin) then
+          vim.tbl_map(use, plugin)
+        else
+          use(plugin)
+        end
+      end, M.plugin_configs)
     end,
     config = {
       compile_path = M.compile_path,

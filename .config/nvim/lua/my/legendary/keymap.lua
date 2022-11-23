@@ -277,9 +277,9 @@ end
 
 function M.cmp_mappings()
   local cmp = require('cmp')
-  local luasnip = require('luasnip')
   return {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -315,6 +315,7 @@ function M.cmp_mappings()
       'c',
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
