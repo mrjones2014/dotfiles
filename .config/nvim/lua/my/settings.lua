@@ -52,3 +52,11 @@ vim.opt.fillchars = {
   vertright = '┣',
   verthoriz = '╋',
 }
+
+vim.filetype.add({
+  pattern = {
+    ['*.jsonc'] = 'jsonc',
+    ['tsconfig.json'] = 'jsonc',
+    ['tsconfig*.json'] = 'jsonc',
+  },
+})

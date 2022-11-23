@@ -7,26 +7,6 @@ function M.default_autocmds()
       [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif]],
     },
     {
-      name = 'MyCustomFiletypeOptions',
-      {
-        'FileType',
-        ':setlocal conceallevel=0',
-        opts = { pattern = 'json' },
-      },
-      {
-        'FileType',
-        ':setlocal wrap linebreak',
-        opts = { pattern = 'markdown' },
-      },
-      {
-        { 'BufRead', 'BufNewFile' },
-        ':set filetype=jsonc',
-        opts = {
-          pattern = { '*.jsonc', 'tsconfig*.json' },
-        },
-      },
-    },
-    {
       -- turn current line blame off in insert mode,
       -- back on when leaving insert mode
       name = 'GitSignsCurrentLineBlameInsertModeToggle',
