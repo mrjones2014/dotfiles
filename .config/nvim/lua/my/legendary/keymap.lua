@@ -53,7 +53,7 @@ function M.default_keymaps()
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 
-    { '<F3>', ':NvimTreeToggle<CR>', description = 'Toggle file tree' },
+    { '<F3>', ':Workspace LeftPanelToggle<CR>', description = 'Toggle file tree' },
 
     {
       'gnn',
