@@ -46,7 +46,6 @@ M.plugin_configs = {
   require('my.configure.markdown-preview'),
   require('my.configure.telescope'),
   require('my.configure.gitsigns'),
-  -- require('my.configure.nvim-tree'),
   require('my.configure.ide'),
   require('my.configure.indent-blankline'),
   require('my.configure.feline'),

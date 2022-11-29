@@ -26,47 +26,6 @@ return {
       end
     end
 
-    local utils = require('telescope.utils')
-
-    --- Override function to get icons until this is merged
-    --- https://github.com/nvim-telescope/telescope.nvim/pull/2235
-    --- Here I'm using 1 function to handle 2 separate telescope utils
-    --- by just massaging the params a bit
-    --- We need the following overloads:
-    --- function(filename, display, disable_devicons)
-    --- function(filename, disable_devicons)
-    local function get_icon(filename, display, disable_devicons)
-      local devicons = require('nvim-web-devicons')
-
-      local conf = require('telescope.config').values
-      if disable_devicons or not filename then
-        return ''
-      end
-
-      local basename = utils.path_tail(filename)
-      -- the double :e:e gets multipart extensions, if one exists, like *.test.js, for example
-      local icon, icon_highlight = devicons.get_icon(basename, vim.fn.fnamemodify(basename, ':e:e'), { default = true })
-      if display == nil then
-        if conf.color_devicons then
-          return icon, icon_highlight
-        else
-          return icon, nil
-        end
-      else
-        local icon_display = (icon or ' ') .. ' ' .. (display or '')
-        if conf.color_devicons then
-          return icon_display, icon_highlight
-        else
-          return icon_display, nil
-        end
-      end
-    end
-
-    require('telescope.utils').get_devicons = function(filename, disable_devicons)
-      return get_icon(filename, nil, disable_devicons)
-    end
-    require('telescope.utils').transform_devicons = get_icon
-
     local telescope = require('telescope')
 
     telescope.setup({
