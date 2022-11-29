@@ -22,9 +22,16 @@ return {
           },
         },
       },
+      panels = {
+        left = 'git',
+        right = 'explorer',
+      },
       panel_groups = {
         explorer = { bufferlist.Name, explorer.Name, outline.Name },
         git = { changes.Name, commits.Name },
+      },
+      workspaces = {
+        auto_open = 'right',
       },
     })
   end,
