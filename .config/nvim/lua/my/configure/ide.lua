@@ -24,9 +24,6 @@ return {
         explorer = { bufferlist.Name, explorer.Name, outline.Name },
         git = { changes.Name, commits.Name },
       },
-      workspaces = {
-        auto_close = false,
-      },
     })
   end,
 }
