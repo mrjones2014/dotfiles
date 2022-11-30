@@ -14,13 +14,6 @@ function M.on_attach(client, bufnr)
     M.apply_ui_tweaks()
   end
 
-  if client.server_capabilities.documentSymbolProvider then
-    local ok, navic = pcall(require, 'nvim-navic')
-    if ok then
-      navic.attach(client, bufnr)
-    end
-  end
-
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
     client.server_capabilities.documentFormattingProvider = false

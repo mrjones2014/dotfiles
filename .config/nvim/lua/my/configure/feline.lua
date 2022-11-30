@@ -163,35 +163,6 @@ return {
           return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
         end,
       },
-      navic = {
-        left_sep = {
-          str = 'block',
-          hl = function()
-            local color = is_current_buf() and colors.darker_gray or colors.bg_statusline
-            return {
-              bg = color,
-              fg = color,
-            }
-          end,
-        },
-        provider = function()
-          local ok, navic = pcall(require, 'nvim-navic')
-          if not ok then
-            return nil
-          end
-
-          return navic.get_location({ highlight = true })
-        end,
-        enabled = function()
-          local ok, navic = pcall(require, 'nvim-navic')
-          return ok and navic.is_available()
-        end,
-        hl = function()
-          return {
-            bg = is_current_buf() and colors.darker_gray or colors.bg_statusline,
-          }
-        end,
-      },
       op = {
         left_sep = {
           str = 'left_rounded',
@@ -249,6 +220,18 @@ return {
           right_sep = 'block',
         }
       end,
+      winbar_spacer = {
+        provider = function()
+          return ''
+        end,
+        right_sep = {
+          str = ' ',
+          hl = {
+            fg = colors.darker_gray,
+            bg = colors.darker_gray,
+          },
+        },
+      },
     }
 
     local statusline_components = {
@@ -263,7 +246,7 @@ return {
     }
 
     local winbar_components = {
-      { components.file_info_short, components.navic },
+      { components.file_info_short, components.winbar_spacer },
       {},
       {},
     }
