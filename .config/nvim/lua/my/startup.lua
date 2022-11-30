@@ -71,8 +71,9 @@ function M.show()
   local augroup = vim.api.nvim_create_augroup('StartScreen', { clear = true })
 
   -- close the startup buffer when we go anywhere else
+  local close_autocmd_id
   vim.schedule(function()
-    vim.api.nvim_create_autocmd('BufEnter', {
+    close_autocmd_id = vim.api.nvim_create_autocmd('BufEnter', {
       callback = function()
         if vim.api.nvim_get_current_win() ~= win_id then
           return
@@ -82,6 +83,8 @@ function M.show()
         vim.api.nvim_win_set_option(0, 'number', true)
         vim.api.nvim_del_augroup_by_id(augroup)
         vim.g.startscreen_buf_id = nil
+        vim.cmd.doautocmd('User DashboardLeave')
+        vim.api.nvim_del_autocmd(close_autocmd_id)
       end,
       once = false,
       group = augroup,
