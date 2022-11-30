@@ -6,7 +6,6 @@ return {
     'williamboman/mason.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    'SmiteshP/nvim-navic',
     -- having this one installed just makes neovim api docs available
     -- via LSP, don't need to actually do anything with it
     'folke/neodev.nvim',
