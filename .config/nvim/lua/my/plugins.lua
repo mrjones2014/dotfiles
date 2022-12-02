@@ -20,7 +20,6 @@ M.plugin_configs = {
   require('my.configure.mine.op'),
   require('my.configure.mine.legendary'),
   require('my.configure.mine.smart-splits'),
-  -- require('my.configure.mine.winbarbar'),
 
   -- Editing enhancements and tools
   require('my.configure.autopairs'),
