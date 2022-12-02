@@ -18,7 +18,9 @@ return {
           show_file_permissions = false,
         }, keymap_overrides),
         [outline.Name] = keymap_overrides,
-        [bufferlist.Name] = keymap_overrides,
+        [bufferlist.Name] = vim.tbl_extend('keep', {
+          default_height = 10,
+        }, keymap_overrides),
       },
       panel_groups = {
         explorer = { bufferlist.Name, explorer.Name, outline.Name },

@@ -2,15 +2,9 @@ set -g fish_prompt_pwd_dir_length 20
 set -u fish_greeting ""
 
 set -x GPG_TTY (tty)
-set -x EDITOR nvim
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -x HOMEBREW_NO_ANALYTICS 1
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
-set -x GIT_MERGE_AUTOEDIT no
-
-# Use 1Password CLI for sudo
-set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
-alias sudo="sudo -A"
 
 fish_add_path /opt/homebrew/bin
 fish_add_path "$HOME/scripts"
@@ -47,7 +41,12 @@ if status is-interactive
     set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 10
     ctrlg init fish | source
 
-    set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+    set -x GIT_MERGE_AUTOEDIT no
+    set -x MANPAGER "nvim -c 'Man!' -o -"
+    set -x EDITOR nvim
+    # Use 1Password CLI for sudo
+    set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
+    alias sudo="sudo -A"
 
     # start tmux session by default
     if [ -z "$TMUX" ]
