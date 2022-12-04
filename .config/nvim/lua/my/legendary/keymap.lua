@@ -14,9 +14,9 @@ function M.default_keymaps()
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
 
     -- <ESC> clears hlsearch highlighting in normal mode
-    { '<ESC>', ':noh<CR>', description = 'Clear hlsearch highlighting', mode = 'n' },
+    { '<ESC>', ':noh<CR>', mode = 'n' },
     -- <leader>jk to clear notifications
-    { '<leader>jk', ':Dismiss<CR>', description = 'Clear notifications' },
+    { '<leader>jk', ':Dismiss<CR>' },
 
     -- allow moving the cursor through wrapped lines using j and k,
     -- note that I have line wrapping turned off but turned on only for Markdown
@@ -28,7 +28,6 @@ function M.default_keymaps()
       function()
         require('legendary').find({ filters = require('legendary.filters').current_mode() })
       end,
-      description = 'Search keybinds and commands',
       mode = { 'n', 'i', 'x' },
     },
 
@@ -53,8 +52,15 @@ function M.default_keymaps()
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 
-    { '<F3>', ':Workspace LeftPanelToggle<CR>', description = 'Toggle left IDE panel' },
-    { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
+    {
+      itemgroup = 'Workspace',
+      description = 'nvim-ide commands',
+      icon = '',
+      keymaps = {
+        { '<F3>', ':Workspace LeftPanelToggle<CR>', description = 'Toggle left IDE panel' },
+        { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
+      },
+    },
 
     {
       'gnn',
@@ -72,45 +78,52 @@ function M.default_keymaps()
       description = 'Shrink selection to next Treesitter node',
     },
 
-    -- ctrl+f from command line to search command history
     {
-      '<C-f>',
-      function()
-        local search = vim.fn.getcmdline()
-        vim.fn.setcmdline('')
-        require('telescope.builtin').command_history({ default_text = search })
-      end,
-      description = 'Search command history',
-      mode = 'c',
-    },
-    { 'fr', h.lazy_required_fn('telescope.builtin', 'resume'), description = 'Resume last Telescope finder' },
-    { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
-    { 'fb', h.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Find open buffers' },
-    { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },
-    {
-      'fh',
-      h.lazy_required_fn('telescope.builtin', 'oldfiles'),
-      description = 'Find recent files',
-    },
-    {
-      '<leader>f',
-      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'find_files')),
-      description = 'Split vertically, then find files',
-    },
-    {
-      '<leader>b',
-      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'buffers')),
-      description = 'Split vertically, then find open buffers',
-    },
-    {
-      '<leader>h',
-      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'oldfiles')),
-      description = 'Split vertically, then find recent files',
-    },
-    {
-      '<leader>t',
-      h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'live_grep')),
-      description = 'Split vertically, then find file via live grep',
+      itemgroup = 'Search...',
+      description = 'Various telescope.nvim finders',
+      icon = ' ',
+      keymaps = {
+        -- ctrl+f from command line to search command history
+        {
+          '<C-f>',
+          function()
+            local search = vim.fn.getcmdline()
+            vim.fn.setcmdline('')
+            require('telescope.builtin').command_history({ default_text = search })
+          end,
+          description = 'Search command history',
+          mode = 'c',
+        },
+        { 'fr', h.lazy_required_fn('telescope.builtin', 'resume'), description = 'Resume last Telescope finder' },
+        { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
+        { 'fb', h.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Find open buffers' },
+        { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },
+        {
+          'fh',
+          h.lazy_required_fn('telescope.builtin', 'oldfiles'),
+          description = 'Find recent files',
+        },
+        {
+          '<leader>f',
+          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'find_files')),
+          description = 'Split vertically, then find files',
+        },
+        {
+          '<leader>b',
+          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'buffers')),
+          description = 'Split vertically, then find open buffers',
+        },
+        {
+          '<leader>h',
+          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'oldfiles')),
+          description = 'Split vertically, then find recent files',
+        },
+        {
+          '<leader>t',
+          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'live_grep')),
+          description = 'Split vertically, then find file via live grep',
+        },
+      },
     },
 
     { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
@@ -124,32 +137,16 @@ function M.default_keymaps()
     { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
 
     -- h/j/k/l mappings, split movement
-    { '<C-h>', require('smart-splits').move_cursor_left, description = 'Move to next split left' },
-    { '<C-j>', require('smart-splits').move_cursor_down, description = 'Move to next split down' },
-    { '<C-k>', require('smart-splits').move_cursor_up, description = 'Move to next split up' },
-    { '<C-l>', require('smart-splits').move_cursor_right, description = 'Move to next split right' },
+    { '<C-h>', require('smart-splits').move_cursor_left },
+    { '<C-j>', require('smart-splits').move_cursor_down },
+    { '<C-k>', require('smart-splits').move_cursor_up },
+    { '<C-l>', require('smart-splits').move_cursor_right },
 
     -- h/j/k/l mappings, split resizing
-    {
-      '<A-h>',
-      require('smart-splits').resize_left,
-      description = 'Smart resize vertically',
-    },
-    {
-      '<A-l>',
-      require('smart-splits').resize_right,
-      description = 'Smart resize vertically',
-    },
-    {
-      '<A-j>',
-      require('smart-splits').resize_down,
-      description = 'Smart resize horizontally',
-    },
-    {
-      '<A-k>',
-      require('smart-splits').resize_up,
-      description = 'Smart resize horizontally',
-    },
+    { '<A-h>', require('smart-splits').resize_left },
+    { '<A-l>', require('smart-splits').resize_right },
+    { '<A-j>', require('smart-splits').resize_down },
+    { '<A-k>', require('smart-splits').resize_up },
 
     -- h/j/k/l mappings, text moving
     {
@@ -158,22 +155,18 @@ function M.default_keymaps()
         n = { ':MoveHChar(-1)<CR>' },
         x = { ":'<,'>MoveHBlock(-1)<CR>" },
       },
-      description = 'Move text left',
     },
     {
       '<S-j>',
       { n = ':MoveLine(1)<CR>', x = ":'<,'>MoveBlock(1)<CR>" },
-      description = 'Move text down',
     },
     {
       '<S-k>',
       { n = ':MoveLine(-1)<CR>', x = ":'<,'>MoveBlock(-1)<CR>" },
-      description = 'Move text up',
     },
     {
       '<S-l>',
       { n = ':MoveHChar(1)<CR>', x = ":'<,'>MoveHBlock(1)<CR>" },
-      description = 'Move text right',
     },
 
     -- spread
@@ -186,16 +179,6 @@ function M.default_keymaps()
       '<leader>si',
       h.lazy_required_fn('spread', 'combine'),
       description = 'Join arrays/lists/etc. onto a single line',
-    },
-    {
-      itemgroup = 'Test item group...',
-      keymaps = {
-        { '<leader>jk', description = 'Clear notifications' },
-        { '<leader>s', description = 'Something' },
-      },
-      commands = {
-        { ':Workspace', description = 'Access nvim-ide stuff' },
-      },
     },
   }
 end
@@ -212,77 +195,82 @@ function M.lsp_keymaps(bufnr)
 
   local h = require('legendary.toolbox')
   return {
-    {
-      'fs',
-      h.lazy_required_fn('telescope.builtin', 'lsp_document_symbols'),
-      description = 'Find LSP document symbols',
+    itemgroup = 'LSP',
+    description = 'Code navigation and other LSP items',
+    icon = '',
+    keymaps = {
+      {
+        'fs',
+        h.lazy_required_fn('telescope.builtin', 'lsp_document_symbols'),
+        description = 'Find LSP document symbols',
+      },
+      {
+        'gh',
+        function()
+          -- I have diagnostics float on CursorHold,
+          -- disable that if I've manually shown the hover window
+          -- see autocmds.lua, lsp_autocmds()
+          vim.cmd.set('eventignore+=CursorHold')
+          vim.lsp.buf.hover()
+          require('legendary').autocmd({
+            'CursorMoved',
+            ':set eventignore-=CursorHold',
+            opts = { pattern = '<buffer>', once = true },
+          })
+        end,
+        description = 'Show hover information',
+        opts = { buffer = bufnr },
+      },
+      { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
+      {
+        'gr',
+        h.lazy_required_fn('telescope.builtin', 'lsp_references'),
+        description = 'Find references',
+        opts = { buffer = bufnr },
+      },
+      { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
+      { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
+      { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
+      { '<leader>rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
+      {
+        'gpd',
+        h.lazy_required_fn('peek', 'Peek', 'definition'),
+        description = 'Peek definition',
+        opts = { buffer = bufnr },
+      },
+      {
+        'gpi',
+        h.lazy_required_fn('peek', 'Peek', 'implementation'),
+        description = 'Peek implementation',
+        opts = { buffer = bufnr },
+      },
+      {
+        '<leader>gd',
+        h.vsplit_then(vim.lsp.buf.definition),
+        description = 'Go to definition in split',
+        opts = { buffer = bufnr },
+      },
+      {
+        '<leader>gi',
+        h.vsplit_then(vim.lsp.buf.implementation),
+        description = 'Go to implementation in split',
+        opts = { buffer = bufnr },
+      },
+      {
+        '<leader>gt',
+        h.vsplit_then(vim.lsp.buf.type_definition),
+        description = 'Go to type definition in split',
+        opts = { buffer = bufnr },
+      },
+      { 'F', vim.lsp.buf.code_action, description = 'Show code actions', opts = { buffer = bufnr } },
+      {
+        '<leader>p',
+        vim.diagnostic.goto_prev,
+        description = 'Go to previous diagnostic item',
+        opts = { buffer = bufnr },
+      },
+      { '<leader>n', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
     },
-    {
-      'gh',
-      function()
-        -- I have diagnostics float on CursorHold,
-        -- disable that if I've manually shown the hover window
-        -- see autocmds.lua, lsp_autocmds()
-        vim.cmd.set('eventignore+=CursorHold')
-        vim.lsp.buf.hover()
-        require('legendary').autocmd({
-          'CursorMoved',
-          ':set eventignore-=CursorHold',
-          opts = { pattern = '<buffer>', once = true },
-        })
-      end,
-      description = 'Show hover information',
-      opts = { buffer = bufnr },
-    },
-    { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
-    {
-      'gr',
-      h.lazy_required_fn('telescope.builtin', 'lsp_references'),
-      description = 'Find references',
-      opts = { buffer = bufnr },
-    },
-    { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
-    { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
-    { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
-    { '<leader>rn', vim.lsp.buf.rename, description = 'Rename symbol', opts = { buffer = bufnr } },
-    {
-      'gpd',
-      h.lazy_required_fn('peek', 'Peek', 'definition'),
-      description = 'Peek definition',
-      opts = { buffer = bufnr },
-    },
-    {
-      'gpi',
-      h.lazy_required_fn('peek', 'Peek', 'implementation'),
-      description = 'Peek implementation',
-      opts = { buffer = bufnr },
-    },
-    {
-      '<leader>gd',
-      h.vsplit_then(vim.lsp.buf.definition),
-      description = 'Go to definition in split',
-      opts = { buffer = bufnr },
-    },
-    {
-      '<leader>gi',
-      h.vsplit_then(vim.lsp.buf.implementation),
-      description = 'Go to implementation in split',
-      opts = { buffer = bufnr },
-    },
-    {
-      '<leader>gt',
-      h.vsplit_then(vim.lsp.buf.type_definition),
-      description = 'Go to type definition in split',
-      opts = { buffer = bufnr },
-    },
-    { 'F', vim.lsp.buf.code_action, description = 'Show code actions', opts = { buffer = bufnr } },
-    {
-      '<leader>p',
-      vim.diagnostic.goto_prev,
-      description = 'Go to previous diagnostic item',
-      opts = { buffer = bufnr },
-    },
-    { '<leader>n', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
   }
 end
 
