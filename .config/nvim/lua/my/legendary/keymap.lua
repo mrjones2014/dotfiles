@@ -218,7 +218,7 @@ function M.lsp_keymaps(bufnr)
             opts = { pattern = '<buffer>', once = true },
           })
         end,
-        description = 'Show hover information',
+        description = 'Show LSP hover menu',
         opts = { buffer = bufnr },
       },
       { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
