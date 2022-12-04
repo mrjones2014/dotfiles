@@ -187,6 +187,16 @@ function M.default_keymaps()
       h.lazy_required_fn('spread', 'combine'),
       description = 'Join arrays/lists/etc. onto a single line',
     },
+    {
+      itemgroup = 'Test item group...',
+      keymaps = {
+        { '<leader>jk', description = 'Clear notifications' },
+        { '<leader>s', description = 'Something' },
+      },
+      commands = {
+        { ':Workspace', description = 'Access nvim-ide stuff' },
+      },
+    },
   }
 end
 
