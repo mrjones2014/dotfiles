@@ -13,7 +13,7 @@ return {
       keymaps = require('my.legendary.keymap').default_keymaps(),
       commands = require('my.legendary.commands').default_commands(),
       autocmds = require('my.legendary.autocmds').default_autocmds(),
-      functions = require('my.legendary.functions').default_functions(),
+      funcs = require('my.legendary.functions').default_functions(),
       col_separator_char = ' ',
       default_opts = {
         keymaps = { silent = true, noremap = true },
