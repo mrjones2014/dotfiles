@@ -136,7 +136,10 @@ function M.lsp_commands(bufnr, server_name)
     })
   end
 
-  return commands
+  return {
+    itemgroup = 'LSP',
+    commands = commands,
+  }
 end
 
 return M
