@@ -4,6 +4,8 @@ return {
     -- used by key mappings
     'fedepujol/move.nvim',
     'famiu/bufdelete.nvim',
+    -- used for frecency sort
+    'kkharji/sqlite.lua',
     -- used sometimes for testing integration
     -- 'folke/which-key.nvim',
   },
