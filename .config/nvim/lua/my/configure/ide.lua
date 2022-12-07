@@ -1,6 +1,7 @@
 return {
   localplugin('ldelossa/nvim-ide'),
   event = 'User DashboardLeave',
+  cmd = 'Workspace',
   config = function()
     local explorer = require('ide.components.explorer')
     local outline = require('ide.components.outline')
