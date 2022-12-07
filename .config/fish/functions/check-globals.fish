@@ -11,6 +11,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install delta and configure it as git's default diff handler: brew install git-delta, then see: https://github.com/dandavison/delta#get-started"
     end
 
+    if ! type gh &>/dev/null
+        echo "Install GitHub CLI: brew install gh"
+    end
+
     if ! type thefuck &>/dev/null
         echo "Install thefuck: brew install thefuck"
     end
@@ -105,10 +109,6 @@ function check-globals --description "Check for missing command line tools and p
 
     if ! type tmux &>/dev/null
         echo "Install tmux: brew install --HEAD tmux"
-    end
-
-    if [ ! -d "$HOME/.tmux/plugins/tpm" ]
-        echo "Install tmux plugin manager: https://github.com/tmux-plugins/tpm"
     end
 
     return 0
