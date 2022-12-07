@@ -1,7 +1,7 @@
 return {
   'feline-nvim/feline.nvim',
   after = 'onedarkpro.nvim',
-  event = 'BufRead',
+  event = 'User DashboardLeave',
   config = function()
     vim.opt.laststatus = 3
     local colors = require('onedarkpro').get_colors('onedark_dark')
