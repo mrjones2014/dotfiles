@@ -85,7 +85,7 @@ function M.setup()
       max_jobs = 20,
       profile = {
         enable = true,
-        threshold = 1,
+        threshold = 0,
       },
       display = {
         open_fn = function()
