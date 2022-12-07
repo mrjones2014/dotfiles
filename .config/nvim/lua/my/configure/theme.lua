@@ -1,6 +1,7 @@
 return {
   'olimorris/onedarkpro.nvim',
   already_setup = false,
+  branch = 'dev',
   config = function()
     -- this config fn is called from init.lua as well,
     -- in order to ensure the colorscheme is loaded before
@@ -22,6 +23,7 @@ return {
         color_column = '#181919',
       },
       highlights = {
+        NormalNC = { bg = '${color_column}' },
         ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
         ['@operator.lua'] = { link = '@keyword.operator.lua' },
         CmpItemMenu = { bg = '${dark_gray}' },
@@ -107,7 +109,7 @@ return {
         bold = true,
         italic = true,
         undercurl = true,
-        window_unfocused_color = true,
+        highlight_inactive_windows = true,
       },
       styles = {
         comments = 'italic',
