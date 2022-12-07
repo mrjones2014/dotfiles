@@ -1,6 +1,20 @@
 return {
   localplugin('mrjones2014/op.nvim'),
   run = 'make install',
+  cmd = {
+    'OpSignin',
+    'OpSignout',
+    'OpWhoami',
+    'OpCreate',
+    'OpView',
+    'OpEdit',
+    'OpOpen',
+    'OpInsert',
+    'OpNote',
+    'OpSidebar',
+    'OpAnalyzeBuffer',
+  },
+  module = 'op',
   config = function()
     require('op').setup({
       sidebar = {
