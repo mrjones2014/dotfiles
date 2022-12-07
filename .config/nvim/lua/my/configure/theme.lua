@@ -23,7 +23,6 @@ return {
         color_column = '#181919',
       },
       highlights = {
-        NormalNC = { bg = '${color_column}' },
         ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
         ['@operator.lua'] = { link = '@keyword.operator.lua' },
         CmpItemMenu = { bg = '${dark_gray}' },
