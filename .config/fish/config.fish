@@ -5,6 +5,7 @@ set -x GPG_TTY (tty)
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -x HOMEBREW_NO_ANALYTICS 1
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
+set -x GOPATH "$HOME/go"
 
 fish_add_path /opt/homebrew/bin
 fish_add_path "$HOME/scripts"
