@@ -26,6 +26,7 @@ function M.lua()
     p('mfn', 'function M.$1($2)\n  $0\nend', {}),
     p('lfn', 'local function $1($2)\n  $0\nend', {}),
     p('mod', 'local M = {}\n\n$0\n\nreturn M', {}),
+    p('dbg', 'vim.defer_fn(function()\n  vim.notify(vim.inspect($0))\nend, 1000)'),
   })
 end
 
