@@ -14,6 +14,9 @@ function M.on_attach(client, bufnr)
     M.apply_ui_tweaks()
     local glance = require('glance')
     glance.setup({
+      border = {
+        enable = true,
+      },
       -- make win navigation mappings consistent with my default ones
       mappings = {
         list = {
