@@ -1,7 +1,6 @@
 return {
   'olimorris/onedarkpro.nvim',
   already_setup = false,
-  branch = 'dev',
   config = function()
     -- this config fn is called from init.lua as well,
     -- in order to ensure the colorscheme is loaded before
