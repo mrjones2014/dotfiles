@@ -53,6 +53,15 @@ function M.default_autocmds()
         end,
       },
     },
+    {
+      'User',
+      function()
+        vim.notify('Packer compile done!')
+      end,
+      opts = {
+        pattern = 'PackerCompileDone',
+      },
+    },
   }
 end
 

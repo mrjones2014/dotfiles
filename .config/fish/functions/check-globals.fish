@@ -111,5 +111,9 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install tmux: brew install --HEAD tmux"
     end
 
+    if ! type gh &>/dev/null
+        echo "Install GitHub CLI: brew install gh"
+    end
+
     return 0
 end
