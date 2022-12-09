@@ -17,6 +17,7 @@ return {
         [explorer.Name] = vim.tbl_extend('keep', {
           list_directories_first = true,
           show_file_permissions = false,
+          keymaps = require('ide.components.explorer.presets').nvim_tree,
         }, keymap_overrides),
         [outline.Name] = keymap_overrides,
         [bufferlist.Name] = vim.tbl_extend('keep', {
