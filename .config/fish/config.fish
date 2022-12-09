@@ -15,6 +15,9 @@ fish_add_path "$HOME/.dotnet/tools"
 source $HOME/.config/fish/fzf-config.fish
 source $HOME/.config/fish/aliases.fish
 
+# 1Password Shell Plugins!
+source $HOME/.config/op/plugins.sh
+
 # for local-only, non-sync'd stuff
 if test -e $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish

@@ -2,7 +2,7 @@ return {
   'neovim/nvim-lspconfig',
   requires = {
     'jose-elias-alvarez/null-ls.nvim',
-    'LunarVim/peek.lua',
+    'DNLHC/glance.nvim',
     'williamboman/mason.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'hrsh7th/cmp-nvim-lsp',

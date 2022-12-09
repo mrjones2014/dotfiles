@@ -22,8 +22,6 @@ return {
         color_column = '#181919',
       },
       highlights = {
-        ['@keyword.operator.lua'] = { fg = '#d55fde', style = 'italic' },
-        ['@operator.lua'] = { link = '@keyword.operator.lua' },
         CmpItemMenu = { bg = '${dark_gray}' },
         CmdLine = {
           bg = '${dark_gray}',

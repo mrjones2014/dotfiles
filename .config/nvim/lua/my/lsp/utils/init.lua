@@ -12,6 +12,18 @@ function M.on_attach(client, bufnr)
     init_done = true
     M.setup_async_formatting()
     M.apply_ui_tweaks()
+    local glance = require('glance')
+    glance.setup({
+      -- make win navigation mappings consistent with my default ones
+      mappings = {
+        list = {
+          ['<C-h>'] = glance.actions.enter_win('preview'),
+        },
+        preview = {
+          ['<C-l>'] = glance.actions.enter_win('list'),
+        },
+      },
+    })
   end
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
