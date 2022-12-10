@@ -54,6 +54,30 @@ function M.default_autocmds()
       },
     },
     {
+      name = 'MyNeorgOptions',
+      {
+        'BufWritePost',
+        function()
+          local workspace_root = string.format('%s/docs/norg/', vim.env.HOME)
+          -- keep workspace sub-path but replace .norg with .md and /norg/ with /md/
+          local filename =
+            string.format('%s/docs/md/%s.md', vim.env.HOME, vim.fn.expand('%'):sub(1, -6):gsub(workspace_root, ''))
+          local dir = vim.fn.fnamemodify(filename, ':h')
+          if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, 'p')
+          end
+          vim.cmd(string.format('Neorg export to-file %s markdown', filename))
+        end,
+        opts = {
+          pattern = '*.norg',
+        },
+      },
+      {
+        'BufEnter',
+        ':set nofoldenable',
+      },
+    },
+    {
       'User',
       function()
         vim.notify('Packer compile done!')
