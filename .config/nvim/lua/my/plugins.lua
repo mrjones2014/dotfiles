@@ -28,6 +28,7 @@ M.plugin_configs = {
   require('my.configure.leap'),
   require('my.configure.neotest'),
   require('my.configure.diffview'),
+  require('my.configure.neorg'),
   'tpope/vim-eunuch',
   'tpope/vim-sleuth',
 

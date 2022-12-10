@@ -14,6 +14,8 @@ alias :Q="exit"
 # I swear I'm an idiot sometimes
 alias :e="nvim"
 
+alias n="nvim $HOME/docs/norg/"
+
 alias update-nvim-plugins="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 
 alias emptytrash="sudo rm -rf ~/.Trash/*"
