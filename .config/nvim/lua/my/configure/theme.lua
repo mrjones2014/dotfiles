@@ -13,7 +13,6 @@ return {
     local onedarkpro = require('onedarkpro')
     onedarkpro.setup({
       log_level = 'debug',
-      dark_theme = 'onedark_dark',
       caching = true,
       colors = {
         dark_gray = '#1A1A1A',
@@ -112,6 +111,6 @@ return {
         keywords = 'italic',
       },
     })
-    vim.cmd.colorscheme('onedarkpro')
+    vim.cmd.colorscheme('onedark_dark')
   end,
 }
