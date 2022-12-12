@@ -1,0 +1,4 @@
+[languages]
+rust = ["rustfmt"]
+go = ["gofmt"]
+lua = ["stylua -s -"]
