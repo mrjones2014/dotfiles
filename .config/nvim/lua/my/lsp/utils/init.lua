@@ -105,9 +105,19 @@ function M.apply_ui_tweaks()
   vim.diagnostic.config({ virtual_text = true }, vim.api.nvim_create_namespace('neotest'))
 end
 
+function M.is_formatting_supported()
+  local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  for _, client in ipairs(clients) do
+    if client.supports_method('textDocument/formatting') then
+      return true
+    end
+  end
+
+  return false
+end
+
 function M.format_document()
-  -- check if LSP is attached
-  if (#vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })) < 1 then
+  if not M.is_formatting_supported() then
     return
   end
 
