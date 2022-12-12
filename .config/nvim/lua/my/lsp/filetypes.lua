@@ -19,7 +19,7 @@ M.config = {
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
     lspconfig = 'tsserver',
-    mason = { 'typescript-language-server', 'prettierd', 'eslint_d' },
+    mason = { 'typescript-language-server', 'prettier', 'prettierd', 'eslint_d' },
     treesitter = { 'javascript', 'typescript', 'tsx' },
   },
   ['lua'] = {
@@ -50,7 +50,7 @@ M.config = {
   ['markdown'] = {
     patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
-    mason = 'marksman',
+    mason = { 'marksman', 'cbfmt' },
     treesitter = { 'markdown', 'markdown_inline' },
   },
   ['sh'] = {

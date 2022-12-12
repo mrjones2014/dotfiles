@@ -59,6 +59,15 @@ local formatters = {
       'markdown',
     },
   }),
+  b.formatting.cbfmt.with({
+    args = {
+      '--stdin-filepath',
+      '$FILENAME',
+      '--best-effort',
+      '--config',
+      string.format('%s/.config/cbfmt.toml', vim.env.HOME),
+    },
+  }),
   b.formatting.rustfmt.with({
     -- read Rust edition from Cargo.toml
     extra_args = function(params)
