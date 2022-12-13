@@ -12,4 +12,8 @@ require('my.plugins').setup()
 
 if #vim.fn.argv() == 0 then
   require('my.startup').show()
+else
+  vim.schedule(function()
+    vim.cmd.doautocmd('User DashboardLeave')
+  end)
 end
