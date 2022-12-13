@@ -1,10 +1,7 @@
 return {
-  localplugin('pwntester/octo.nvim'),
+  'pwntester/octo.nvim',
   event = 'User DashboardLeave',
   cmd = 'Octo',
-  cond = function()
-    return vim.startswith(string.format('%s/git/github/', vim.env.HOME), vim.loop.cwd() --[[@as string]])
-  end,
   config = function()
     require('octo').setup({
       gh_env = function()

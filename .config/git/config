@@ -1,14 +1,14 @@
 [include]
   path = ~/.config/git/gitconfig.aliases
 
-[includeIf "gitdir:~/git/gitlab/"]
-  path = ~/.config/git/gitconfig.gitlab
-[includeIf "gitdir:~/go/"]
-  path = ~/.config/git/gitconfig.gitlab
-[includeIf "gitdir:~/.dotfiles"]
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
   path = ~/.config/git/gitconfig.github
-[includeIf "gitdir:~/git/github/"]
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = ~/.config/git/gitconfig.github
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
+  path = ~/.config/git/gitconfig.github
+[includeIf "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**"]
+  path = ~/.config/git/gitconfig.gitlab
 
 [user]
   name = Mat Jones

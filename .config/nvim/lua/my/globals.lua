@@ -83,7 +83,7 @@ end
 ---@return string
 _G.localplugin = function(name)
   local local_repo_name = string.gsub(name, '.*/', '')
-  local local_path = string.format('%s/git/github/%s', vim.env.HOME, local_repo_name)
+  local local_path = string.format('%s/git/%s', vim.env.HOME, local_repo_name)
   if vim.fn.isdirectory(local_path) > 0 then
     return local_path
   else

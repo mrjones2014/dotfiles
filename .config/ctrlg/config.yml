@@ -1,6 +1,5 @@
 search_dirs:
-  - ~/git/github/*
-  - ~/git/gitlab/*
+  - ~/git/*
   - ~/go/src/go.1password.io/*
 preview_files:
   - README.*
