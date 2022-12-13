@@ -132,6 +132,7 @@ function M.lsp_commands(bufnr, server_name)
     }, {
       ':TestSummary',
       h.lazy_required_fn('neotest', 'summary.open'),
+      description = 'Show a test summary sidebar',
       opts = { buffer = bufnr },
     })
   end
