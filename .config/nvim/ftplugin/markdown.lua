@@ -1,7 +1,7 @@
 vim.opt_local.wrap = true
 vim.opt_local.linebreak = true
 vim.opt_local.conceallevel = 3
-vim.opt_local.concealcursor = 'n'
+vim.opt_local.concealcursor = 'nc'
 
 local function is_visual_mode(mode_str)
   if mode_str == 'nov' or mode_str == 'noV' or mode_str == 'no' then
