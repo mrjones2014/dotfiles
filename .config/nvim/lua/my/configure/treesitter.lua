@@ -2,7 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'p00f/nvim-ts-rainbow',
-    --'windwp/nvim-ts-autotag',
+    'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
     'aarondiel/spread.nvim',
