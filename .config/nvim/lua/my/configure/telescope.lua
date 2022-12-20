@@ -1,11 +1,13 @@
 return {
   'nvim-telescope/telescope.nvim',
-  module = 'telescope',
   cmd = 'Telescope',
-  requires = {
+  dependencies = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make',
+    },
   },
   config = function()
     local trouble = require('trouble.providers.telescope')

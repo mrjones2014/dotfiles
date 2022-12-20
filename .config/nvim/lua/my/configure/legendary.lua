@@ -1,6 +1,7 @@
 return {
-  localplugin('mrjones2014/legendary.nvim'),
-  requires = {
+  'mrjones2014/legendary.nvim',
+  dev = true,
+  dependencies = {
     -- used by key mappings
     'fedepujol/move.nvim',
     'famiu/bufdelete.nvim',
@@ -9,7 +10,7 @@ return {
     -- used sometimes for testing integration
     -- 'folke/which-key.nvim',
   },
-  event = 'VimEnter',
+  event = 'VeryLazy',
   config = function()
     require('legendary').setup({
       keymaps = require('my.legendary.keymap').default_keymaps(),

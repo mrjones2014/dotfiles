@@ -1,6 +1,6 @@
 return {
   'stevearc/dressing.nvim',
-  event = 'VimEnter',
+  event = 'VeryLazy',
   config = function()
     require('dressing').setup({
       select = {

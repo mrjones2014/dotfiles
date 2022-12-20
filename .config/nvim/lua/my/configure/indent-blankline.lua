@@ -7,7 +7,6 @@ return {
         'NvimTree',
         'terminal',
         'term',
-        'packer',
         'gitcommit',
         'fugitive',
         'nofile',

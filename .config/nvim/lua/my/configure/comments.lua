@@ -1,7 +1,6 @@
 return {
   'numToStr/Comment.nvim',
-  after = 'nvim-treesitter',
-  keys = { { 'v', 'gc' }, { 'n', 'gc' } },
+  event = 'VeryLazy',
   config = function()
     -- default mappings:
     -- {
@@ -28,8 +27,14 @@ return {
     --       eol = 'gcA',
     --   }
     -- }
+    local hook = nil
     require('Comment').setup({
-      pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      pre_hook = function(...)
+        if hook == nil then
+          hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+        end
+        hook(...)
+      end,
     })
   end,
 }
