@@ -18,6 +18,7 @@ function M.pick()
 end
 
 M.icon_list = {
+  { 'lightning-bolt', '' },
   { 'nf-custom-c', '' },
   { 'nf-custom-cpp', '' },
   { 'nf-custom-electron', '' },
