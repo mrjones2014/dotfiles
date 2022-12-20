@@ -10,7 +10,7 @@ return {
     -- via LSP, don't need to actually do anything with it
     'folke/neodev.nvim',
   },
-  event = 'VeryLazy',
+  ft = require('my.lsp.filetypes').filetypse,
   config = function()
     require('mason').setup()
     require('mason-tool-installer').setup({
