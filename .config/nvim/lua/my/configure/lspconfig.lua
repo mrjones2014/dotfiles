@@ -1,6 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
-  requires = {
+  dependencies = {
     'jose-elias-alvarez/null-ls.nvim',
     'DNLHC/glance.nvim',
     'williamboman/mason.nvim',
@@ -10,7 +10,7 @@ return {
     -- via LSP, don't need to actually do anything with it
     'folke/neodev.nvim',
   },
-  event = 'BufRead',
+  event = 'VeryLazy',
   config = function()
     require('mason').setup()
     require('mason-tool-installer').setup({

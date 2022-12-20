@@ -1,15 +1,7 @@
 return {
   'olimorris/onedarkpro.nvim',
-  already_setup = false,
+  lazy = false,
   config = function()
-    -- this config fn is called from init.lua as well,
-    -- in order to ensure the colorscheme is loaded before
-    -- anything else. Make sure we're not running setup twice.
-    if require('my.configure.theme').already_setup then
-      return
-    end
-
-    require('my.configure.theme').already_setup = true
     local onedarkpro = require('onedarkpro')
     onedarkpro.setup({
       log_level = 'debug',
@@ -94,7 +86,6 @@ return {
         nvim_tree = true,
         nvim_ts_rainbow = true,
         op_nvim = true,
-        packer = true,
         trouble = true,
         leap = true,
         treesitter = true,

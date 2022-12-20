@@ -1,7 +1,6 @@
 globals = {
   'vim',
   'p',
-  'localplugin',
   Path = {
     fields = {
       join = function(...) end,

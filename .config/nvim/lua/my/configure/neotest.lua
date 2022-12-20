@@ -1,6 +1,6 @@
 return {
   'nvim-neotest/neotest',
-  requires = {
+  dependencies = {
     'nvim-neotest/neotest-plenary',
     'nvim-neotest/neotest-go',
     'haydenmeade/neotest-jest',

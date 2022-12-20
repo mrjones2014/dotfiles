@@ -74,19 +74,3 @@ table.join_lists = function(...)
   end
   return result
 end
-
----Utility for plugin paths of plugins I work on.
----Returns `~/git/github/[plugin_name]` with the `username/`
----part stripped off if that directory exists,
----and the given string otherwise.
----@param name any
----@return string
-_G.localplugin = function(name)
-  local local_repo_name = string.gsub(name, '.*/', '')
-  local local_path = string.format('%s/git/%s', vim.env.HOME, local_repo_name)
-  if vim.fn.isdirectory(local_path) > 0 then
-    return local_path
-  else
-    return name
-  end
-end

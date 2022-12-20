@@ -1,11 +1,10 @@
 return {
   'folke/noice.nvim',
-  requires = {
+  dependencies = {
     'rcarriga/nvim-notify',
     'MunifTanjim/nui.nvim',
-    'hrsh7th/nvim-cmp',
   },
-  event = 'VimEnter',
+  event = 'VeryLazy',
   config = function()
     require('noice').setup({
       lsp = {

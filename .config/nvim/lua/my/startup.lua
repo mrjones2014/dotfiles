@@ -83,7 +83,6 @@ function M.show()
         vim.api.nvim_win_set_option(0, 'number', true)
         vim.api.nvim_del_augroup_by_id(augroup)
         vim.g.startscreen_buf_id = nil
-        vim.cmd.doautocmd('User DashboardLeave')
         vim.api.nvim_del_autocmd(close_autocmd_id)
       end,
       once = false,

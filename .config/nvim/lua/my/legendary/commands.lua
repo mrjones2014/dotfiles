@@ -49,19 +49,6 @@ function M.default_commands()
       end,
       description = 'Dismiss notifications',
     },
-    {
-      ':PackerRecompile',
-      function()
-        local path = require('my.plugins').compile_path
-        vim.fn.jobstart({ 'rm', path }, { detach = true })
-        ---@diagnostic disable
-        vim.defer_fn(function()
-          vim.cmd('PackerCompile')
-        end, 1)
-        ---@diagnostic enable
-      end,
-      description = 'Delete packer_compiled.lua',
-    },
 
     -- keymaps come from Comment.nvim
     {

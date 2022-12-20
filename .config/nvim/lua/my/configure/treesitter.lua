@@ -1,14 +1,14 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  requires = {
+  dependencies = {
     'p00f/nvim-ts-rainbow',
-    'windwp/nvim-ts-autotag',
+    --'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
     'aarondiel/spread.nvim',
   },
   event = 'BufRead',
-  run = function()
+  build = function()
     if #vim.api.nvim_list_uis() == 0 then
       -- update sync if running headless
       vim.cmd.TSUpdateSync()
@@ -17,7 +17,7 @@ return {
       vim.cmd.TSUpdate()
     end
   end,
-  setup = function()
+  init = function()
     vim.g.matchup_matchparen_offscreen = {
       method = 'popup',
     }

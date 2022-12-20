@@ -1,7 +1,6 @@
 return {
   'feline-nvim/feline.nvim',
-  after = 'onedarkpro.nvim',
-  event = 'User DashboardLeave',
+  lazy = false,
   config = function()
     vim.opt.laststatus = 3
     local colors = require('onedarkpro').get_colors('onedark_dark')
@@ -37,6 +36,7 @@ return {
       ['t'] = '🆃',
       ['nt'] = '🆃',
     }
+
     local mode_colors = {
       ['NORMAL'] = colors.green,
       ['OP'] = colors.green,

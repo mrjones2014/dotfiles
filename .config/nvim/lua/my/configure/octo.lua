@@ -1,6 +1,5 @@
 return {
   'pwntester/octo.nvim',
-  event = 'User DashboardLeave',
   cmd = 'Octo',
   config = function()
     require('octo').setup({
