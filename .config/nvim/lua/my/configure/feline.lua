@@ -1,6 +1,6 @@
 return {
   'feline-nvim/feline.nvim',
-  lazy = false,
+  event = 'VimEnter',
   config = function()
     vim.opt.laststatus = 3
     local colors = require('onedarkpro').get_colors('onedark_dark')

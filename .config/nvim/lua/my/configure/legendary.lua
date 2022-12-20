@@ -10,7 +10,7 @@ return {
     -- used sometimes for testing integration
     -- 'folke/which-key.nvim',
   },
-  event = 'VimEnter',
+  lazy = false,
   config = function()
     require('legendary').setup({
       keymaps = require('my.legendary.keymap').default_keymaps(),
