@@ -7,6 +7,8 @@ if string.find(assert(vim.loop.cwd()), 'hammerspoon') then
   globals = { 'hs' }
 end
 
+require('neodev').setup()
+
 return {
   root_dir = require('lspconfig.util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
   settings = {
