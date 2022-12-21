@@ -4,7 +4,6 @@ return {
   { 'tpope/vim-sleuth', lazy = false },
   {
     'folke/lazy.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
     lazy = false,
   },
 }

@@ -6,15 +6,6 @@ return {
     'haydenmeade/neotest-jest',
     'rouge8/neotest-rust',
   },
-  ft = {
-    'lua',
-    'go',
-    'rust',
-    'javascript',
-    'typescript',
-    'javascriptreact',
-    'typescriptreact',
-  },
   config = function()
     require('neotest').setup({
       discovery = { enabled = false },
