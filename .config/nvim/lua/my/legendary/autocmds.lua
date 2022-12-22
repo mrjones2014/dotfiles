@@ -27,15 +27,6 @@ function M.default_autocmds()
       },
     },
     {
-      name = 'LuasnipJumpsClearOnModeChange',
-      {
-        'InsertLeave',
-        function()
-          require('luasnip').unlink_current()
-        end,
-      },
-    },
-    {
       name = 'MkdirOnWrite',
       {
         'BufWritePre',

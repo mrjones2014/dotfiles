@@ -6,6 +6,9 @@ return {
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
     'aarondiel/spread.nvim',
+    {'ziontee113/query-secretary', config = function()
+      require('query-secretary').setup({})
+    end},
   },
   event = 'BufRead',
   build = function()
@@ -30,12 +33,6 @@ return {
       },
       indent = {
         enable = true,
-      },
-      playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
       },
       incremental_selection = {
         enable = true,

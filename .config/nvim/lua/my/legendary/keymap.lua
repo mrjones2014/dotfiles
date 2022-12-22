@@ -77,6 +77,11 @@ function M.default_keymaps()
       h.lazy_required_fn('nvim-treesitter.incremental_selection', 'node_decremental'),
       description = 'Shrink selection to next Treesitter node',
     },
+    {
+      '<leader>qs',
+      h.lazy_required_fn('query-secretary', 'query_window_initiate'),
+      description = 'Open Query Secretary',
+    },
 
     {
       itemgroup = 'Search...',
@@ -179,6 +184,53 @@ function M.default_keymaps()
       '<leader>si',
       h.lazy_required_fn('spread', 'combine'),
       description = 'Join arrays/lists/etc. onto a single line',
+    },
+
+    -- luasnip
+    {
+      '<C-h>',
+      h.lazy_required_fn('luasnip', 'jump', -1),
+      mode = { 'i', 's' },
+      description = 'Jump to previous snippet node',
+    },
+    {
+      '<C-l>',
+      function()
+        local ls = require('luasnip')
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end,
+      mode = { 'i', 's' },
+      description = 'Expand or jump to next snippet node',
+    },
+    {
+      '<C-j>',
+      function()
+        local ls = require('luasnip')
+        if ls.choice_active() then
+          ls.change_choice(-1)
+        end
+      end,
+      mode = { 'i', 's' },
+      description = 'Select previous choice in snippet choice nodes',
+    },
+    {
+      '<C-k>',
+      function()
+        local ls = require('luasnip')
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end,
+      mode = { 'i', 's' },
+      description = 'Select next choice in snippet choice nodes',
+    },
+    {
+      '<C-s>',
+      h.lazy_required_fn('luasnip', 'unlink_current'),
+      mode = { 'i', 'n' },
+      description = 'Clear snippet jumps',
     },
   }
 end
@@ -284,11 +336,8 @@ function M.cmp_mappings()
   local cmp = require('cmp')
   return {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -320,11 +369,8 @@ function M.cmp_mappings()
       'c',
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      local luasnip = require('luasnip')
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else

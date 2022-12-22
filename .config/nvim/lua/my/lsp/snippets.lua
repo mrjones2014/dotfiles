@@ -1,5 +1,11 @@
 local M = {}
 
+local LUA_MODULE_RETURN_TS_QUERY = [[
+(return_statement
+	(expression_list
+		(identifier) @return-value-name))
+]]
+
 function M.lua()
   local ls = require('luasnip')
   local s = ls.s
@@ -7,6 +13,17 @@ function M.lua()
   local f = ls.function_node
   local fmt = require('luasnip.extras.fmt').fmt
   local p = ls.parser.parse_snippet
+  local c = ls.choice_node
+
+  local function get_returned_mod_name()
+    local query = vim.treesitter.parse_query('lua', LUA_MODULE_RETURN_TS_QUERY)
+    local parser = vim.treesitter.get_parser(0, 'lua')
+    local tree = parser:parse()[1]
+    local num_lines = #vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    for _, node, _ in query:iter_captures(tree:root(), 0, num_lines - 3, num_lines) do
+      return vim.treesitter.query.get_node_text(node, 0, {})
+    end
+  end
 
   ls.add_snippets('lua', {
     s(
@@ -21,12 +38,28 @@ function M.lua()
         i(1),
       })
     ),
+    s(
+      'mfn',
+      c(1, {
+        fmt('function {}.{}({})\n  {}\nend', {
+          f(get_returned_mod_name, {}),
+          i(1),
+          i(2),
+          i(3),
+        }),
+        fmt('function {}:{}({})\n  {}\nend', {
+          f(get_returned_mod_name, {}),
+          i(1),
+          i(2),
+          i(3),
+        }),
+      })
+    ),
     p('rq', "require('$0')", {}),
     p('fn', 'function($1)\n  $0\nend', {}),
-    p('mfn', 'function M.$1($2)\n  $0\nend', {}),
     p('lfn', 'local function $1($2)\n  $0\nend', {}),
     p('mod', 'local M = {}\n\n$0\n\nreturn M', {}),
-    p('dbg', 'vim.defer_fn(function()\n  vim.notify(vim.inspect($0))\nend, 1000)'),
+    p('dbg', 'vim.defer_fn(function()\n  vim.notify(vim.inspect($0))\nend, 1000)', {}),
   })
 end
 
