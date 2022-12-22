@@ -21,7 +21,7 @@ return {
           ext_opts = {
             [require('luasnip.util.types').choiceNode] = {
               active = {
-                virt_text = { { '●', 'LspDiagnosticsSignInformation' } },
+                virt_text = { { '', 'LspDiagnosticsSignInformation' } },
               },
             },
           },
