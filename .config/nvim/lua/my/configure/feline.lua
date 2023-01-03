@@ -3,7 +3,7 @@ return {
   event = 'VimEnter',
   config = function()
     vim.opt.laststatus = 3
-    local colors = require('onedarkpro').get_colors('onedark_dark')
+    local colors = require('onedarkpro.helpers').get_colors()
     local mode_icons = {
       ['n'] = '🅽',
       ['no'] = '🅽',
@@ -103,7 +103,7 @@ return {
             if vim.b.gitsigns_head then
               return {
                 fg = require('feline.providers.vi_mode').get_mode_color(),
-                bg = colors.fg_gutter,
+                bg = colors.gray,
               }
             end
           end,
@@ -114,7 +114,7 @@ return {
         provider = 'git_branch',
         icon = ' ',
         hl = {
-          bg = colors.fg_gutter,
+          bg = colors.gray,
           fg = colors.green,
         },
         right_sep = 'right_rounded',
