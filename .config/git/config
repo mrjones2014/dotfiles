@@ -10,6 +10,9 @@
 [includeIf "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**"]
   path = ~/.config/git/gitconfig.gitlab
 
+[include]
+  path = ~/.config/git/gitconfig.local
+
 [user]
   name = Mat Jones
 [pull]
