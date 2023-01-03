@@ -14,6 +14,6 @@ cleanup() {
 trap 'cleanup' EXIT
 
 mkfifo "$fifo"
-tmux popup -E -x 15 "$* > $fifo" &
+tmux popup -d "$(pwd)" -E -x 15 "$* > $fifo" &
 cat "$fifo"
 rm -f "$fifo"
