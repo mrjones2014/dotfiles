@@ -58,6 +58,11 @@ M.config = {
     mason = { 'shellcheck', 'shfmt' },
     treesitter = 'bash',
   },
+  ['swift'] = {
+    patterns = { '*.swift' },
+    lspconfig = 'sourcekit',
+    treesitter = 'swift',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
@@ -69,7 +74,7 @@ for filetype, config in pairs(M.config) do
   -- mason package names
   if type(config.mason) == 'string' then
     table.insert(M.mason_packages, config.mason)
-  else
+  elseif type(config.mason) == 'table' then
     for _, package in
       ipairs(config.mason --[[@as table]])
     do
