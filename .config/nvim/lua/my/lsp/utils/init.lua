@@ -17,6 +17,9 @@ function M.on_attach(client, bufnr)
       border = {
         enable = true,
       },
+      theme = {
+        mode = 'darken',
+      },
       -- make win navigation mappings consistent with my default ones
       mappings = {
         list = {

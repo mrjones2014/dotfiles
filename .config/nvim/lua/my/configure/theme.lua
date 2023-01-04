@@ -11,6 +11,11 @@ return {
         darker_gray = '#141414',
         darkest_gray = '#080808',
         color_column = '#181919',
+        -- glance.nvim
+        GlancePreviewNormal = "require('onedarkpro.helpers').darken('bg', 6, 'onedark')",
+        GlancePreviewLineNr = "require('onedarkpro.helpers').darken('bg', 6, 'onedark')",
+        GlancePreviewSignColumn = "require('onedarkpro.helpers').darken('bg', 6, 'onedark')",
+        GlancePreviewCursorLine = "require('onedarkpro.helpers').darken('bg', 4, 'onedark')",
       },
       highlights = {
         CmpItemMenu = { bg = '${dark_gray}' },
@@ -75,6 +80,12 @@ return {
 
         WinBar = { bg = '${darker_gray}' },
         WinBarNC = { bg = '${bg_statusline}' },
+
+        -- glance.nvim
+        GlancePreviewNormal = { bg = '${GlancePreviewNormal}' },
+        GlancePreviewLineNr = { bg = '${GlancePreviewLineNr}' },
+        GlancePreviewCursorLine = { bg = '${GlancePreviewCursorLine}' },
+        GlancePreviewSignColumn = { bg = '${GlancePreviewSignColumn}' },
       },
       plugins = {
         all = false,
