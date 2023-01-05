@@ -1,6 +1,5 @@
 return {
   before_init = function(_, config)
-    vim.notify('test')
     -- Override clippy to run in its own directory to avoid clobbering caches
     -- but only if target-dir isn't already set in either the command or the extraArgs
     local checkOnSave = config.settings['rust-analyzer'].checkOnSave
