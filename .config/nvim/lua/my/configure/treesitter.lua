@@ -1,14 +1,17 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'p00f/nvim-ts-rainbow',
+    'mrjones2014/nvim-ts-rainbow',
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
     'aarondiel/spread.nvim',
-    {'ziontee113/query-secretary', config = function()
-      require('query-secretary').setup({})
-    end},
+    {
+      'ziontee113/query-secretary',
+      config = function()
+        require('query-secretary').setup({})
+      end,
+    },
   },
   event = 'BufRead',
   build = function()
