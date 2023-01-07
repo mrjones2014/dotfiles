@@ -8,6 +8,7 @@ end
 function M.default_keymaps()
   local h = require('legendary.toolbox')
   return {
+    { '<leader>qq', opts = { filetype = 'NvimTree' }, description = 'NvimTree: Open file in vertical split' },
     -- jk is mapped to escape by better-escape.nvim plugin
     -- make escape work in terminal mode,
     -- jk will enter vi mode of the shell itself

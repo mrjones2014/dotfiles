@@ -63,6 +63,12 @@ M.config = {
     lspconfig = 'sourcekit',
     treesitter = 'swift',
   },
+  ['csharp'] = {
+    patterns = { '*.cs' },
+    lspconfig = 'omnisharp',
+    mason = 'omnisharp',
+    treesitter = 'c_sharp',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
