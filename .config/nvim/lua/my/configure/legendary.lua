@@ -21,6 +21,9 @@ return {
       default_opts = {
         keymaps = { silent = true, noremap = true },
       },
+      plugins = {
+        nvim_tree = true,
+      },
       -- which_key = { auto_register = true },
     })
 
