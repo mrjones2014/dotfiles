@@ -150,15 +150,7 @@ return {
             bg = is_current_buf() and colors.bg or colors.dark_gray,
           }
         end,
-        right_sep = {
-          str = '  ┃',
-          hl = function()
-            return {
-              fg = colors.white,
-              bg = is_current_buf() and colors.bg or colors.dark_gray,
-            }
-          end,
-        },
+        right_sep = 'block',
         enabled = function()
           return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
         end,
