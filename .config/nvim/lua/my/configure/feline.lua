@@ -172,6 +172,10 @@ return {
           end,
         },
         provider = function()
+          -- don't load the plugin just for the statusline component
+          if not vim.g.op_nvim_remote_loaded then
+            return ' 1P: Signed Out'
+          end
           return require('op.statusline').component()
         end,
         hl = {
