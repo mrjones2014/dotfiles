@@ -42,7 +42,8 @@ return {
     -- })
     -- require('which-key').register({
     --   f = {
-    --     name = 'file', -- optional group name
+    --     name = 'WhichKey: Files', -- optional group name
+    --     desc = 'Some which key items',
     --     q = { '<cmd>Telescope find_files<cr>', 'Find File' },
     --   },
     -- }, {
