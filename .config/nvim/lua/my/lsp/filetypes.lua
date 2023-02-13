@@ -24,7 +24,7 @@ M.config = {
   },
   ['lua'] = {
     patterns = { '*.lua' },
-    lspconfig = 'sumneko_lua',
+    lspconfig = 'lua_ls',
     mason = { 'lua-language-server', 'stylua', 'luacheck' },
   },
   ['rust'] = {

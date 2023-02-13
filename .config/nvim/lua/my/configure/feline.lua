@@ -150,15 +150,7 @@ return {
             bg = is_current_buf() and colors.bg or colors.dark_gray,
           }
         end,
-        right_sep = {
-          str = '  ┃',
-          hl = function()
-            return {
-              fg = colors.white,
-              bg = is_current_buf() and colors.bg or colors.dark_gray,
-            }
-          end,
-        },
+        right_sep = 'block',
         enabled = function()
           return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
         end,
@@ -180,6 +172,10 @@ return {
           end,
         },
         provider = function()
+          -- don't load the plugin just for the statusline component
+          if not vim.g.op_nvim_remote_loaded then
+            return ' 1P: Signed Out'
+          end
           return require('op.statusline').component()
         end,
         hl = {

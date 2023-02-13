@@ -149,6 +149,7 @@ return {
             },
           },
         },
+        buffers = require('telescope.themes').get_dropdown({ previewer = false }),
       },
       extensions = {
         fzf = {
