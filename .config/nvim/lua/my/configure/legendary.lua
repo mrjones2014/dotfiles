@@ -24,7 +24,7 @@ return {
       plugins = {
         nvim_tree = true,
       },
-      -- which_key = { auto_register = true },
+      which_key = { auto_register = true },
     })
 
     -- require('which-key').setup({
@@ -41,13 +41,9 @@ return {
     --   },
     -- })
     -- require('which-key').register({
-    --   f = {
-    --     name = 'WhichKey: Files', -- optional group name
-    --     desc = 'Some which key items',
-    --     q = { '<cmd>Telescope find_files<cr>', 'Find File' },
-    --   },
-    -- }, {
-    --   prefix = '<leader>',
+    --   name = 'WhichKey: Files', -- optional group name
+    --   desc = 'Some which key items',
+    --   fq = { '<cmd>Telescope find_files<cr>', 'Find File' },
     -- })
   end,
 }

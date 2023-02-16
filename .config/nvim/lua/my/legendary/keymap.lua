@@ -129,16 +129,18 @@ function M.default_keymaps()
           h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'live_grep')),
           description = 'Split vertically, then find file via live grep',
         },
+        {
+          '<leader>w',
+          function()
+            local word = vim.fn.expand('<cword>')
+            require('telescope.builtin').live_grep({ default_text = word })
+          end,
+          description = 'Global search for word under cursor',
+        },
       },
     },
 
     { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
-
-    {
-      '<leader>w',
-      [[:%s/\<<C-r>=expand("<cword>")<CR>\>/]],
-      description = 'Replace all instances of word under cursor in current buffer',
-    },
 
     { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
 
