@@ -24,7 +24,7 @@ return {
       plugins = {
         nvim_tree = true,
       },
-      which_key = { auto_register = true },
+      -- which_key = { auto_register = true },
     })
 
     -- require('which-key').setup({
