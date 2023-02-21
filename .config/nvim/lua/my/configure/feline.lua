@@ -1,5 +1,5 @@
 return {
-  'feline-nvim/feline.nvim',
+  'freddiehaddad/feline.nvim',
   event = 'VimEnter',
   config = function()
     vim.opt.laststatus = 3
@@ -100,6 +100,7 @@ return {
         right_sep = {
           str = 'right_rounded',
           hl = function()
+            ---@diagnostic disable-next-line
             if vim.b.gitsigns_head then
               return {
                 fg = require('feline.providers.vi_mode').get_mode_color(),
@@ -119,6 +120,7 @@ return {
         },
         right_sep = 'right_rounded',
         enabled = function()
+          ---@diagnostic disable-next-line
           return not not vim.b.gitsigns_head
         end,
       },
@@ -193,10 +195,17 @@ return {
           fg = colors.black,
         },
       },
-      diagnostics = function(severity)
+      diagnostics = function(severity, is_winbar)
+        if is_winbar == nil then
+          is_winbar = false
+        end
+
         local ui = diagnostics_ui[severity]
         return {
-          left_sep = severity == diagnostics_order[1] and {
+          enabled = (not is_winbar) or function()
+            return require('feline.providers.lsp').diagnostics_exist(severity)
+          end,
+          left_sep = (not is_winbar) and severity == diagnostics_order[1] and {
             str = 'left_rounded',
             hl = {
               bg = colors.blue,
@@ -230,19 +239,21 @@ return {
       },
     }
 
+    local function with_diagnostics(components_tbl, is_winbar)
+      for _, severity in ipairs(diagnostics_order) do
+        table.insert(components_tbl, components.diagnostics(severity, is_winbar))
+      end
+      return components_tbl
+    end
+
     local statusline_components = {
       { components.mode, components.branch, components.file_info },
       {},
-      ---@diagnostic disable -- optional parameters omitted
-      vim.list_extend(
-        { components.unsaved_changes, components.op },
-        vim.tbl_map(components.diagnostics, diagnostics_order)
-      ),
-      ---@diagnostic enable
+      with_diagnostics({ components.unsaved_changes, components.op }, false),
     }
 
     local winbar_components = {
-      { components.file_info_short, components.winbar_spacer },
+      with_diagnostics({ components.file_info_short, components.winbar_spacer }, true),
       {},
       {},
     }
