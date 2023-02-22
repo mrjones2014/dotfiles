@@ -7,6 +7,7 @@ function M.default_commands()
     { ':Qa', ':qa' },
     { ':Wq', ':wq' },
     { ':Wqa', ':wq' },
+    { ':Wa', ':wa' },
     {
       ':BindLspKeymaps',
       function()
