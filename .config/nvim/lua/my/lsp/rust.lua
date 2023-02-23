@@ -26,6 +26,7 @@ return {
       diagnostics = {
         disabled = { 'inactive-code' },
       },
+      procMacro = { enable = true },
       files = {
         excludeDirs = {
           './js/',
