@@ -23,11 +23,6 @@ if test -e $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish
 end
 
-# setup symlink for Linux compatiblity for 1Password SSH agent
-if test -e "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" && test ! -e "$HOME/.1password/agent.sock"
-    mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
-end
-
 if status is-interactive
     # workaround for https://github.com/fish-shell/fish-shell/issues/3481
     function fish_vi_cursor
