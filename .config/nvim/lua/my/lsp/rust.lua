@@ -23,22 +23,8 @@ return {
       checkOnSave = {
         command = 'clippy',
       },
-      check = {
-        extraArgs = {
-          '--',
-          '--warn=clippy::dbg_macro',
-          '--warn=clippy::unimplemented',
-          '--warn=clippy::todo',
-          '--warn=missing_docs',
-          '--deny=broken_intra_doc_links',
-          '--deny=clippy::undocumented_unsafe_blocks',
-          '--forbid=unused_must_use',
-          '--deny=clippy::as_conversions',
-          '--deny=clippy::result_unit_err',
-        },
-      },
       diagnostics = {
-        disabled = { 'inactive-code' },
+        disabled = { 'inactive-code', 'unresolved-proc-macro' },
       },
       procMacro = { enable = true },
       files = {

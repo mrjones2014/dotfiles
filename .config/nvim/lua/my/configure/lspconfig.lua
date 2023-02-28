@@ -7,9 +7,16 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'hrsh7th/cmp-nvim-lsp',
     'folke/neodev.nvim',
+    'folke/neoconf.nvim',
   },
   event = 'BufReadPre',
   config = function()
+    require('neoconf').setup({
+      import = {
+        coc = false,
+        nlsp = false,
+      },
+    })
     require('mason').setup()
     require('mason-tool-installer').setup({
       auto_update = true,

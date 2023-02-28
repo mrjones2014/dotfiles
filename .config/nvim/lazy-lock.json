@@ -24,6 +24,7 @@
   "mason.nvim": { "branch": "main", "commit": "4b82b711cb58e7f2dae75963cc960f5bbddcad8b" },
   "mini.trailspace": { "branch": "main", "commit": "8566ae0cf1524b263e489b6771d339025773189e" },
   "move.nvim": { "branch": "main", "commit": "4f72d2d86f4392cec1aa4e0a8c20314022a806ad" },
+  "neoconf.nvim": { "branch": "main", "commit": "54668cbc4c2f73151eadb361dd94b34ae61dde8e" },
   "neodev.nvim": { "branch": "main", "commit": "a81e749d0fe8429cd340b2e40f274b344bef42ac" },
   "neotest": { "branch": "master", "commit": "b06b0ccbddc61acfe781689da969d2e0117b3dfe" },
   "neotest-go": { "branch": "main", "commit": "981406c12bd3c77eb434211a1b85b964ab5bbdd5" },
