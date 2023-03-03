@@ -24,9 +24,6 @@ if test -e $HOME/.config/fish/local.fish
 end
 
 if status is-interactive
-    # workaround for https://github.com/fish-shell/fish-shell/issues/3481
-    function fish_vi_cursor
-    end
     fish_vi_key_bindings
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
