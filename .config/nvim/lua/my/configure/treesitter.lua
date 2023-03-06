@@ -1,7 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'mrjones2014/nvim-ts-rainbow',
+    'HiPhish/nvim-ts-rainbow2',
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
@@ -29,6 +29,7 @@ return {
     }
   end,
   config = function()
+    local rainbow = require('ts-rainbow')
     require('nvim-treesitter.configs').setup({
       ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
       highlight = {
@@ -44,8 +45,13 @@ return {
       },
       rainbow = {
         enable = true,
-        extended_mode = true,
-        max_file_lines = 1500,
+        strategy = {
+          rainbow.strategy.global,
+        },
+        query = {
+          'rainbow-parens',
+          html = 'rainbow-tags',
+        },
       },
       autotag = {
         enable = true,
