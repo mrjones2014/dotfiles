@@ -14,6 +14,7 @@ return {
     },
   },
   event = 'BufRead',
+  cmd = { 'TSInstall', 'TSUpdate', 'TSUpdateSync' },
   build = function()
     if #vim.api.nvim_list_uis() == 0 then
       -- update sync if running headless
