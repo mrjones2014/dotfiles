@@ -5,12 +5,19 @@ local function kill_zoom(app_name, event_type, app)
       event_type == hs.application.watcher.hidden
       or event_type == hs.application.watcher.terminated
       or event_type == hs.application.watcher.deactivated
-    )
-    and app_name == 'zoom.us'
-    and #app:allWindows() == 0
+    ) and app_name == 'zoom.us'
   then
     -- make Zoom kill itself when I leave a meeting
-    app:kill()
+    local all_windows = app:allWindows()
+    -- if there are zero windows, then kill it
+    if #all_windows == 0 then
+      app:kill()
+    elseif #all_windows == 1 then
+      -- if the only window is the main non-meeting window, then kill it
+      if all_windows[1]:title() == 'Zoom' then
+        app:kill()
+      end
+    end
   end
 end
 
