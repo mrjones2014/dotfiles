@@ -139,7 +139,7 @@ return {
             }
           end,
         },
-        command_history = {
+        command_history = require('telescope.themes').get_dropdown({
           mappings = {
             i = {
               ['<CR>'] = require('telescope.actions').edit_command_line,
@@ -148,7 +148,7 @@ return {
               ['<CR>'] = require('telescope.actions').edit_command_line,
             },
           },
-        },
+        }),
         buffers = require('telescope.themes').get_dropdown({ previewer = false }),
       },
       extensions = {
