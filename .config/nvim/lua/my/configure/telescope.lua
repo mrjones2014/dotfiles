@@ -95,7 +95,7 @@ return {
           },
           on_input_filter_cb = file_extension_filter,
         },
-        live_grep = { -- TODO see https://github.com/nvim-telescope/telescope.nvim/issues/1865
+        live_grep = {
           on_input_filter_cb = function(prompt)
             -- if prompt starts with escaped @ then treat it as a literal
             if (prompt):sub(1, 2) == '\\@' then
