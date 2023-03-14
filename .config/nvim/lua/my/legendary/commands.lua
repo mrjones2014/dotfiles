@@ -23,7 +23,14 @@ function M.default_commands()
     {
       ':Icons',
       function()
-        require('my.nerdfonticons').pick()
+        require('iconpicker').pick(function(icon)
+          if not icon or #icon == 0 then
+            return
+          end
+
+          Clipboard.copy(icon)
+          vim.notify('Copied icon to clipboard.', vim.log.levels.INFO)
+        end)
       end,
       description = 'Find NerdFont icons',
     },
