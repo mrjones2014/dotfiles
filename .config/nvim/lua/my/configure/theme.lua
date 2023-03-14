@@ -93,7 +93,7 @@ return {
         indentline = true,
         neotest = true,
         nvim_cmp = true,
-        native_lsp = true,
+        nvim_lsp = true,
         nvim_tree = true,
         nvim_ts_rainbow = true,
         op_nvim = true,
