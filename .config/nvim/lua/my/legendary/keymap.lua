@@ -241,6 +241,71 @@ function M.default_keymaps()
       mode = { 'i', 'n' },
       description = 'Clear snippet jumps',
     },
+
+    -- diffview.nvim
+    {
+      '[x',
+      description = 'Previous conflict',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      'x]',
+      description = 'Next conflict',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      '<leader>co',
+      description = 'Choose ours',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      '<leader>ct',
+      description = 'Choose theirs',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      '<leader>cb',
+      description = 'Choose base',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      '<leader>ca',
+      description = 'Choose all',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
+    {
+      'dx',
+      description = 'Choose none',
+      filters = {
+        function()
+          return vim.g._diffview_open == true
+        end,
+      },
+    },
   }
 end
 
