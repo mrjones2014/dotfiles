@@ -5,6 +5,7 @@ function M.default_commands()
     -- because sometimes I fat-finger it and run :Q instead of :q by accident
     { ':Q', ':q' },
     { ':Qa', ':qa' },
+    { ':W', ':w' },
     { ':Wq', ':wq' },
     { ':Wqa', ':wq' },
     { ':Wa', ':wa' },

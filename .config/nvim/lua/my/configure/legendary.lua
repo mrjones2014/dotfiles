@@ -7,8 +7,9 @@ return {
     'famiu/bufdelete.nvim',
     -- used for frecency sort
     'kkharji/sqlite.lua',
-    -- used sometimes for testing integration
+    -- used sometimes for testing integrations
     -- 'folke/which-key.nvim',
+    { 'nvim-tree/nvim-tree.lua', cmd = { 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeCollapse' } },
   },
   lazy = false,
   config = function()
