@@ -9,7 +9,11 @@ return {
     'kkharji/sqlite.lua',
     -- used sometimes for testing integrations
     -- 'folke/which-key.nvim',
-    { 'nvim-tree/nvim-tree.lua', cmd = { 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeCollapse' } },
+    {
+      'nvim-tree/nvim-tree.lua',
+      cmd = { 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeCollapse' },
+      setup = true,
+    },
   },
   lazy = false,
   config = function()
@@ -22,7 +26,7 @@ return {
       default_opts = {
         keymaps = { silent = true, noremap = true },
       },
-      plugins = {
+      extensions = {
         nvim_tree = true,
       },
       -- which_key = { auto_register = true },
