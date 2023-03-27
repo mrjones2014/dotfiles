@@ -1,8 +1,8 @@
 local signs = {
-  Error = ' ',
-  Warning = ' ',
-  Warn = ' ',
-  Hint = ' ',
+  Error = '󰅚 ',
+  Warning = '󰀪 ',
+  Warn = '󰀪 ',
+  Hint = '󰌶 ',
   Information = ' ',
   Info = ' ',
 }

@@ -28,6 +28,8 @@ return {
       },
       extensions = {
         nvim_tree = true,
+        smart_splits = true,
+        op_nvim = true,
       },
       -- which_key = { auto_register = true },
     })
