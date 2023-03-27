@@ -35,7 +35,7 @@ return {
           search_up = { icon = '  ' },
           filter = { icon = ' ', lang = 'fish' },
           lua = { icon = ' ' },
-          help = { icon = ' ' },
+          help = { icon = ' 󰋖' },
         },
         opts = {
           position = {
