@@ -1,7 +1,6 @@
 set -g fish_prompt_pwd_dir_length 20
 set -u fish_greeting ""
 
-set -x GPG_TTY (tty)
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -x HOMEBREW_NO_ANALYTICS 1
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
@@ -22,6 +21,13 @@ source $HOME/.config/op/plugins.sh
 if test -e $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish
 end
+
+# Setting up SSH_AUTH_SOCK here rather than ~/.ssh/config
+# because that overrides the environment variables,
+# meaning I can't easily switch between the production and
+# debug auth sockets while working on the 1Password desktop app
+set -g -x SSH_TTY (tty)
+set -g -x SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 if status is-interactive
     fish_vi_key_bindings
