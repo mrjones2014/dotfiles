@@ -3,8 +3,11 @@ return {
   dependencies = {
     'jose-elias-alvarez/null-ls.nvim',
     'DNLHC/glance.nvim',
-    'williamboman/mason.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    {
+      'williamboman/mason.nvim',
+      cmd = { 'Mason', 'MasonUpdate', 'MasonLog', 'MasonInstall', 'MasonUpdate', 'MasonUninstall' },
+    },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim', cmd = { 'MasonToolsUpdate', 'MasonToolsInstall' } },
     'hrsh7th/cmp-nvim-lsp',
     'folke/neodev.nvim',
     'folke/neoconf.nvim',
