@@ -11,12 +11,6 @@ fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path "$HOME/.dotnet/tools"
 
-source $HOME/.config/fish/fzf-config.fish
-source $HOME/.config/fish/aliases.fish
-
-# 1Password Shell Plugins!
-source $HOME/.config/op/plugins.sh
-
 # for local-only, non-sync'd stuff
 if test -e $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish
@@ -33,7 +27,11 @@ if status is-interactive
     fish_vi_key_bindings
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
-    alias cat="bat"
+    # 1Password Shell Plugins!
+    source $HOME/.config/op/plugins.sh
+
+    source $HOME/.config/fish/fzf-config.fish
+    source $HOME/.config/fish/aliases.fish
 
     op completion fish | source
     thefuck --alias | source
