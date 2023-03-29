@@ -57,8 +57,10 @@ if status is-interactive
         end
     end
 
-    # push prompt to bottom
-    for i in (seq 1 $LINES)
-        printf '\n'
-    end
+    # I like to keep the prompt at the bottom rather than the top
+    # of the terminal window so that running `clear` doesn't make
+    # me move my eyes from the bottom back to the top of the screen;
+    # keep the prompt consistently at the bottom
+    tput cup $LINES
+    alias clear="clear && tput cup $LINES"
 end
