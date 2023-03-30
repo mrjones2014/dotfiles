@@ -104,6 +104,7 @@ table.insert(M.mason_packages, 'codespell')
 table.insert(M.mason_packages, 'lemmy-help')
 
 table.insert(M.treesitter_parsers, 'comment')
+table.insert(M.treesitter_parsers, 'luadoc')
 table.insert(M.treesitter_parsers, 'fish')
 table.insert(M.treesitter_parsers, 'gitcommit')
 table.insert(M.treesitter_parsers, 'help')
