@@ -12,24 +12,6 @@ function M.on_attach(client, bufnr)
     init_done = true
     M.setup_async_formatting()
     M.apply_ui_tweaks()
-    local glance = require('glance')
-    glance.setup({
-      border = {
-        enable = true,
-      },
-      theme = {
-        mode = 'darken',
-      },
-      -- make win navigation mappings consistent with my default ones
-      mappings = {
-        list = {
-          ['<C-h>'] = glance.actions.enter_win('preview'),
-        },
-        preview = {
-          ['<C-l>'] = glance.actions.enter_win('list'),
-        },
-      },
-    })
   end
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
@@ -39,7 +21,7 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup_async_formatting()
-  -- format on save asynchronously, see lsp/utils/init.lua M.format function
+  -- format on save asynchronously, see M.format_document
   vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
     if err ~= nil then
       vim.api.nvim_err_write(err)

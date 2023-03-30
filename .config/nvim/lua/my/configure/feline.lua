@@ -1,7 +1,32 @@
 return {
   'freddiehaddad/feline.nvim',
+  dependencies = {
+    {
+      'SmiteshP/nvim-navic',
+      config = function()
+        require('nvim-navic').setup({
+          highlight = true,
+          separator = '  ',
+        })
+      end,
+    },
+  },
   event = 'VimEnter',
   config = function()
+    -- I do not like having this here but there isn't a good way around it
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(args)
+        if not (args.data and args.data.client_id) then
+          return
+        end
+
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.documentSymbolProvider then
+          require('nvim-navic').attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+        end
+      end,
+    })
+
     vim.opt.laststatus = 3
     local colors = require('onedarkpro.helpers').get_colors()
     local mode_icons = {
@@ -225,6 +250,31 @@ return {
           right_sep = 'block',
         }
       end,
+      navic = {
+        provider = function()
+          return require('nvim-navic').get_location()
+        end,
+        enabled = function()
+          -- prevent loading nvim-navic is LSP isn't attached anyway
+          local buf = tonumber(vim.g.actual_curbuf)
+          if #vim.lsp.get_active_clients({ bufnr = buf }) == 0 then
+            return false
+          end
+
+          return require('nvim-navic').is_available()
+        end,
+        hl = {
+          bg = colors.bg_statusline,
+        },
+        left_sep = {
+          str = '   ',
+          hl = { bg = colors.bg_statusline, fg = colors.gray },
+        },
+        right_sep = {
+          str = '',
+          hl = { bg = colors.bg_statusline },
+        },
+      },
       winbar_spacer = {
         provider = function()
           return ''
@@ -247,7 +297,7 @@ return {
     end
 
     local statusline_components = {
-      { components.mode, components.branch, components.file_info },
+      { components.mode, components.branch, components.file_info, components.navic },
       {},
       with_diagnostics({ components.unsaved_changes, components.op }, false),
     }
