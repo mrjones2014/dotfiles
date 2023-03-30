@@ -41,8 +41,14 @@ return {
       },
       incremental_selection = {
         enable = true,
-        -- keymaps defined in keymaps/init.lua
-        keymaps = {},
+        -- not sure why but these don't work correctly
+        -- if they're defined in keymaps.lua instead of here
+        keymaps = {
+          init_selection = '<CR>',
+          node_incremental = '<CR>',
+          scope_incremental = '<S-CR>',
+          node_decremental = '<BS>',
+        },
       },
       rainbow = {
         enable = true,

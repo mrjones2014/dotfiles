@@ -26,7 +26,7 @@ function M.default_keymaps()
     {
       '<C-p>',
       function()
-        require('legendary').find({ filters = require('legendary.filters').current_mode() })
+        require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
       end,
       mode = { 'n', 'i', 'x' },
     },
@@ -60,22 +60,6 @@ function M.default_keymaps()
         { '<F3>', ':Workspace LeftPanelToggle<CR>', description = 'Toggle left IDE panel' },
         { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
       },
-    },
-
-    {
-      'gnn',
-      h.lazy_required_fn('nvim-treesitter.incremental_selection', 'init_selection'),
-      description = 'Start selection with Treesitter',
-    },
-    {
-      'grn',
-      h.lazy_required_fn('nvim-treesitter.incremental_selection', 'node_incremental'),
-      description = 'Expand selection to next Treesitter node',
-    },
-    {
-      'grm',
-      h.lazy_required_fn('nvim-treesitter.incremental_selection', 'node_decremental'),
-      description = 'Shrink selection to next Treesitter node',
     },
     {
       '<leader>qs',
