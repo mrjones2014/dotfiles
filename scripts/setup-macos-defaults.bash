@@ -16,6 +16,8 @@ done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
+echo "Setting general UI/UX system settings..."
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -153,6 +155,8 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 # Safari & WebKit                                                             #
 ###############################################################################
 
+echo "Setting Safari & WebKit settings..."
+
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
@@ -224,6 +228,8 @@ defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 # Mail                                                                        #
 ###############################################################################
 
+echo "Setting Mail.app settings..."
+
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
@@ -233,6 +239,8 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
+
+echo "Setting Activity Monitor.app settings..."
 
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -250,6 +258,8 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
+
+echo "Setting Mac App Store settings..."
 
 # Enable the automatic update check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
@@ -272,6 +282,8 @@ defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
+
+echo "Killing affected applications..."
 
 for app in "Activity Monitor" \
   "Calendar" \
