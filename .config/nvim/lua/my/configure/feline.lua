@@ -267,11 +267,11 @@ return {
           bg = colors.bg_statusline,
         },
         left_sep = {
-          str = '   ',
-          hl = { bg = colors.bg_statusline, fg = colors.gray },
+          str = ' ',
+          hl = { bg = colors.bg_statusline },
         },
         right_sep = {
-          str = '',
+          str = ' ',
           hl = { bg = colors.bg_statusline },
         },
       },
@@ -297,13 +297,13 @@ return {
     end
 
     local statusline_components = {
-      { components.mode, components.branch, components.file_info, components.navic },
+      { components.mode, components.branch, components.file_info },
       {},
       with_diagnostics({ components.unsaved_changes, components.op }, false),
     }
 
     local winbar_components = {
-      with_diagnostics({ components.file_info_short, components.winbar_spacer }, true),
+      with_diagnostics({ components.file_info_short, components.winbar_spacer, components.navic }, true),
       {},
       {},
     }
