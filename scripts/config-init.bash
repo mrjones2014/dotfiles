@@ -16,3 +16,4 @@ dots checkout
 dots config status.showUntrackedFiles no
 dots config core.fsmonitor false
 dots config core.untrackedcache false
+echo "If setting up a mac, you should run ~/scripts/setup-macos-defaults.bash"
