@@ -62,5 +62,5 @@ if status is-interactive
     # me move my eyes from the bottom back to the top of the screen;
     # keep the prompt consistently at the bottom
     tput cup $LINES
-    alias clear="clear && tput cup $LINES"
+    alias clear="clear && tput cup \$LINES"
 end
