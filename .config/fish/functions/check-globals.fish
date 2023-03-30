@@ -7,6 +7,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install Jetbrains Mono NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font"
     end
 
+    if test -z "$(ls ~/Library/Fonts | grep "Fira Code" || echo '')"
+        echo "Install FiraCode NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
+    end
+
     if ! type delta &>/dev/null
         echo "Install delta and configure it as git's default diff handler: brew install git-delta, then see: https://github.com/dandavison/delta#get-started"
     end
