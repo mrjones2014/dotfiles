@@ -11,6 +11,7 @@ return {
         darker_gray = '#141414',
         darkest_gray = '#080808',
         color_column = '#181919',
+        bg_statusline = '#1f1f23',
         -- glance.nvim
         GlancePreviewNormal = "require('onedarkpro.helpers').darken('bg', 6, 'onedark')",
         GlancePreviewLineNr = "require('onedarkpro.helpers').darken('bg', 6, 'onedark')",
@@ -70,11 +71,6 @@ return {
         TelescopeNormal = { bg = '${darkest_gray}' },
         TelescopeSelection = { bg = '${darker_gray}' },
 
-        -- barbar.nvim
-        BufferCurrent = { fg = '${fg}', style = 'bold,italic' },
-        BufferCurrentMod = { fg = '${fg}', style = 'bold,italic' },
-        BufferInactiveSign = { fg = '${darkest_gray}' },
-
         -- mini.trailspace
         MiniTrailspace = { bg = '${red}' },
 
@@ -86,6 +82,18 @@ return {
         GlancePreviewLineNr = { bg = '${GlancePreviewLineNr}' },
         GlancePreviewCursorLine = { bg = '${GlancePreviewCursorLine}' },
         GlancePreviewSignColumn = { bg = '${GlancePreviewSignColumn}' },
+
+        -- nvim-navic
+        NavicText = { fg = '${fg}', bg = '${bg_statusline}' },
+        NavicIconsClass = { fg = '${purple}', bg = '${bg_statusline}' },
+        NavicIconsFunction = { fg = '${blue}', bg = '${bg_statusline}' },
+        NavicIconsVariable = { fg = '${orange}', bg = '${bg_statusline}' },
+        NavicIconsConstant = { fg = '${orange}', bg = '${bg_statusline}' },
+        NavicIconsBoolean = { fg = '${orange}', bg = '${bg_statusline}' },
+        NavicIconsString = { fg = '${green}', bg = '${bg_statusline}' },
+        NavicIconsObject = { fg = '${purple}', bg = '${bg_statusline}' },
+        NavicIconsProperty = { fg = '${fg}', bg = '${bg_statusline}' },
+        NavicSeparator = { fg = '${gray}', bg = '${bg_statusline}' },
       },
       plugins = {
         all = false,

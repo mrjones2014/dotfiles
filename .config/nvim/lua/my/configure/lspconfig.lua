@@ -2,12 +2,49 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'jose-elias-alvarez/null-ls.nvim',
-    'DNLHC/glance.nvim',
+    {
+      'DNLHC/glance.nvim',
+      event = 'LspAttach',
+      config = function()
+        local glance = require('glance')
+        glance.setup({
+          border = {
+            enable = true,
+          },
+          theme = {
+            mode = 'darken',
+          },
+          -- make win navigation mappings consistent with my default ones
+          mappings = {
+            list = {
+              ['<C-h>'] = glance.actions.enter_win('preview'),
+            },
+            preview = {
+              ['<C-l>'] = glance.actions.enter_win('list'),
+            },
+          },
+        })
+      end,
+    },
     {
       'williamboman/mason.nvim',
+      dependencies = {
+        {
+          'WhoIsSethDaniel/mason-tool-installer.nvim',
+          cmd = { 'MasonToolsUpdate', 'MasonToolsInstall' },
+          config = function()
+            require('mason-tool-installer').setup({
+              auto_update = true,
+              ensure_installed = require('my.lsp.filetypes').mason_packages,
+            })
+          end,
+        },
+      },
       cmd = { 'Mason', 'MasonUpdate', 'MasonLog', 'MasonInstall', 'MasonUpdate', 'MasonUninstall' },
+      config = function()
+        require('mason').setup()
+      end,
     },
-    { 'WhoIsSethDaniel/mason-tool-installer.nvim', cmd = { 'MasonToolsUpdate', 'MasonToolsInstall' } },
     'hrsh7th/cmp-nvim-lsp',
     'folke/neodev.nvim',
     'folke/neoconf.nvim',
@@ -20,11 +57,10 @@ return {
         nlsp = false,
       },
     })
-    require('mason').setup()
-    require('mason-tool-installer').setup({
-      auto_update = true,
-      ensure_installed = require('my.lsp.filetypes').mason_packages,
-    })
+
+    -- make mason.nvim and mason-tools-installer.nvim load and run their configs
+    require('mason')
+    require('mason-tool-installer')
 
     -- always load null-ls
     require('my.lsp.null-ls')
