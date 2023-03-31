@@ -4,7 +4,6 @@ local keymaps = require('keymaps')
 return {
   window_decorations = 'RESIZE',
   cursor_blink_rate = 0,
-  line_height = 1.1,
   font = w.font('FiraCode Nerd Font'),
   font_size = 14,
   use_fancy_tab_bar = true,
