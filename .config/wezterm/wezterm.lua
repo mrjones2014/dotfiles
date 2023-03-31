@@ -2,10 +2,11 @@ local w = require('wezterm')
 local keymaps = require('keymaps')
 
 return {
+  window_decorations = 'RESIZE',
   cursor_blink_rate = 0,
-  -- line_height = 1.1,
+  line_height = 1.1,
   font = w.font('FiraCode Nerd Font'),
-  font_size = 16,
+  font_size = 14,
   use_fancy_tab_bar = true,
   tab_bar_at_bottom = true,
   hide_tab_bar_if_only_one_tab = true,
