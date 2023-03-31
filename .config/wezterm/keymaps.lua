@@ -45,6 +45,8 @@ local function split_nav(resize_or_move, key)
   }
 end
 
+local scratchpad_panes = {}
+
 -- simulate tmux prefix with leader
 return {
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
@@ -87,6 +89,23 @@ return {
       key = 'RightArrow',
       mods = 'META',
       action = w.action.ActivateTabRelative(1),
+    },
+    {
+      key = 't',
+      mods = 'META',
+      action = w.action_callback(function(win, pane)
+        for idx, id in ipairs(scratchpad_panes) do
+          if pane:pane_id() == id then
+            win:perform_action({ CloseCurrentPane = { confirm = false } }, pane)
+            table.remove(scratchpad_panes, idx)
+            return
+          end
+        end
+
+        local new_pane = pane:split({ direction = 'Bottom' })
+        new_pane:tab():set_zoomed(true)
+        table.insert(scratchpad_panes, new_pane:pane_id())
+      end),
     },
   },
 }
