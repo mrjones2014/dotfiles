@@ -30,6 +30,7 @@ return {
         -- nvim_tree = true,
         smart_splits = true,
         op_nvim = true,
+        diffview = true,
       },
       -- which_key = { auto_register = true },
     })
