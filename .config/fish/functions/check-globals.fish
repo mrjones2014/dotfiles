@@ -11,6 +11,10 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install FiraCode NerdFont: brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font"
     end
 
+    if ! type catimg &>/dev/null
+        echo "Install catimg: brew install catimg"
+    end
+
     if ! type delta &>/dev/null
         echo "Install delta and configure it as git's default diff handler: brew install git-delta, then see: https://github.com/dandavison/delta#get-started"
     end

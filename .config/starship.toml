@@ -5,12 +5,12 @@ format = """
 right_format = "$cmd_duration"
 
 [character] # colors from ~/.config/kitty/lighthaus-theme.conf
-success_symbol = "[🅸](bold #89ca78)"
-error_symbol = "[🅸](bold #ef596f)"
-vicmd_symbol = "[🅽](bold #89ca78)"
-vimcmd_replace_one_symbol = "[🆁](bold #d55fde)"
-vimcmd_replace_symbol = "[🆁](bold #d55fde)"
-vimcmd_visual_symbol = "[🆅](bold #e5c07b)"
+success_symbol = "[🅸 ](bold #89ca78)"
+error_symbol = "[🅸 ](bold #ef596f)"
+vicmd_symbol = "[🅽 ](bold #89ca78)"
+vimcmd_replace_one_symbol = "[🆁 ](bold #d55fde)"
+vimcmd_replace_symbol = "[🆁 ](bold #d55fde)"
+vimcmd_visual_symbol = "[🆅 ](bold #e5c07b)"
 
 [custom.gitlab_icon]
 description = 'Show a GitLab or GitHub icon depending on current git remote'

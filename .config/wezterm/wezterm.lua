@@ -1,6 +1,10 @@
 local w = require('wezterm')
 local keymaps = require('keymaps')
 
+w.on('window-config-reloaded', function(window)
+  window:toast_notification('wezterm', 'configuration reloaded!', nil, 4000)
+end)
+
 return {
   window_decorations = 'RESIZE',
   cursor_blink_rate = 0,
