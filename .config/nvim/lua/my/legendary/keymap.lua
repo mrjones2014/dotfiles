@@ -289,6 +289,13 @@ function M.default_keymaps()
         end,
       },
     },
+
+    {
+      '<M-t>',
+      h.lazy_required_fn('FTerm', 'toggle'),
+      description = 'Toggle a floating terminal',
+      mode = { 'n', 't' },
+    },
   }
 end
 
