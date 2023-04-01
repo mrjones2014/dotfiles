@@ -1,6 +1,5 @@
 return {
   'ldelossa/nvim-ide',
-  dev = true,
   cmd = 'Workspace',
   config = function()
     local explorer = require('ide.components.explorer')
