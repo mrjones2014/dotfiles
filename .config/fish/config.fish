@@ -21,14 +21,20 @@ end
 # meaning I can't easily switch between the production and
 # debug auth sockets while working on the 1Password desktop app
 set -g -x SSH_TTY (tty)
-set -g -x SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+if [ "$(uname)" = Darwin ]
+    set -g -x SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+else
+    set -g -x SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
+end
 
 if status is-interactive
     fish_vi_key_bindings
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
     # 1Password Shell Plugins!
-    source $HOME/.config/op/plugins.sh
+    if test -e $HOME/.config.op.plugins.sh
+        source $HOME/.config/op/plugins.sh
+    end
 
     source $HOME/.config/fish/fzf-config.fish
     source $HOME/.config/fish/aliases.fish

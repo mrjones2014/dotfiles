@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-/usr/local/bin/op item get jykzvuekde2rbxjah2rpxevcom --fields password
+if test -f /usr/local/bin/op; then
+  /usr/local/bin/op item get "System Password" --fields password
+else
+  /usr/bin/op item get "System Password" --fields password
+fi

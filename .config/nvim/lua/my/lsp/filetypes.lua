@@ -37,11 +37,6 @@ M.config = {
     lspconfig = 'svelte',
     mason = 'svelte-language-server',
   },
-  ['teal'] = {
-    patterns = { '*.tl', '*.d.tl' },
-    lspconfig = 'teal_ls',
-    mason = 'teal-language-server',
-  },
   ['go'] = {
     patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
@@ -58,11 +53,6 @@ M.config = {
     mason = { 'shellcheck', 'shfmt' },
     treesitter = 'bash',
   },
-  ['swift'] = {
-    patterns = { '*.swift' },
-    lspconfig = 'sourcekit',
-    treesitter = 'swift',
-  },
   ['csharp'] = {
     patterns = { '*.cs' },
     lspconfig = 'omnisharp',
@@ -70,6 +60,14 @@ M.config = {
     treesitter = 'c_sharp',
   },
 }
+
+if vim.fn.has('macunix') ~= 0 then
+  M.config['swift'] = {
+    patterns = { '*.swift' },
+    lspconfig = 'sourcekit',
+    treesitter = 'swift',
+  }
+end
 
 M.filetypes = vim.tbl_keys(M.config)
 

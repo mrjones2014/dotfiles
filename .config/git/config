@@ -10,6 +10,12 @@
 [includeIf "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**"]
   path = ~/.config/git/gitconfig.gitlab
 
+# For platform-specific config
+[includeIf "gitdir:/Users"]
+  path = ~/.gitconfig.macos
+[includeIf "gitdir:/home"]
+    path = ~/.gitconfig.linux
+
 [include]
   path = ~/.config/git/gitconfig.local
 
@@ -23,8 +29,6 @@
   gpgsign = true
 [gpg]
   format = ssh
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [core]
   editor = popup-nvim.bash
   autocrlf = false
