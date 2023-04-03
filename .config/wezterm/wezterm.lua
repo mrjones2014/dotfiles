@@ -9,6 +9,7 @@ else
 end
 
 local config = {
+  color_scheme = 'OneHalfBlack (Gogh)',
   cursor_blink_rate = 0,
   font = w.font('FiraCode Nerd Font'),
   font_size = 14,
