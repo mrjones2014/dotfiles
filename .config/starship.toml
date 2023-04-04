@@ -1,6 +1,6 @@
 format = """
  $directory$custom$git_branch$git_status
- $character """
+ $character"""
 
 right_format = "$cmd_duration"
 
