@@ -65,7 +65,7 @@ function M.lsp_autocmds(bufnr, server_name)
       require('legendary.toolbox').lazy(
         vim.diagnostic.open_float,
         nil,
-        { focus = false, scope = 'cursor', border = 'rounded' }
+        { focus = false, scope = 'cursor', border = 'none' }
       ),
       opts = { buffer = bufnr },
     })
