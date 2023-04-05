@@ -61,7 +61,7 @@ M.config = {
   },
 }
 
-if vim.fn.has('macunix') ~= 0 then
+if vim.loop.os_uname().sysname == 'Darwin' then
   M.config['swift'] = {
     patterns = { '*.swift' },
     lspconfig = 'sourcekit',
