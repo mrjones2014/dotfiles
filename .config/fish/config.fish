@@ -12,7 +12,7 @@ fish_add_path "$HOME/.cargo/bin"
 fish_add_path "$HOME/.dotnet/tools"
 
 # for local-only, non-sync'd stuff
-if test -e $HOME/.config/fish/local.fish
+if test -f $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish
 end
 
@@ -32,7 +32,7 @@ if status is-interactive
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
     # 1Password Shell Plugins!
-    if test -e $HOME/.config.op.plugins.sh
+    if test -f $HOME/.config/op/plugins.sh
         source $HOME/.config/op/plugins.sh
     end
 
