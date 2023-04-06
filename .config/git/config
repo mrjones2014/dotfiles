@@ -12,12 +12,9 @@
 
 # For platform-specific config
 [includeIf "gitdir:/Users"]
-  path = ~/.gitconfig.macos
+  path = ~/.config/git/gitconfig.macos
 [includeIf "gitdir:/home"]
-    path = ~/.gitconfig.linux
-
-[include]
-  path = ~/.config/git/gitconfig.local
+    path = ~/.config/git/gitconfig.linux
 
 [user]
   name = Mat Jones
