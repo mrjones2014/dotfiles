@@ -1,7 +1,0 @@
-search_dirs:
-  - ~/git/*
-  - ~/go/src/go.1password.io/*
-preview_files:
-  - README.*
-  - resume.md
-git_branch_separator: 
