@@ -43,12 +43,10 @@ if status is-interactive
     thefuck --alias | source
     atuin init fish | source
     starship init fish | source
-    bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
-    set CTRLG_TMUX true
-    set CTRLG_TMUX_POPUP true
-    set CTRLG_TMUX_POPUP_ARGS -w "75%" -h "85%" -x 10
-    ctrlg init fish | source
-
+    for mode in insert default normal
+        bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
+        bind -M $mode \a _project_jump
+    end
     set -x GIT_MERGE_AUTOEDIT no
     set -x MANPAGER "nvim -c 'Man!' -o -"
     set -x EDITOR nvim

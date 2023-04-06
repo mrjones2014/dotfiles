@@ -79,12 +79,12 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install atuin: cargo install atuin"
     end
 
-    if ! type ctrlg &>/dev/null
-        echo "Install ctrlg: cargo install ctrlg"
-    end
-
     if ! type bat &>/dev/null
         echo "Install bat: brew install bat"
+    end
+
+    if ! type glow &>/dev/null
+        echo "Install glow: brew install glow"
     end
 
     if ! type exa &>/dev/null
