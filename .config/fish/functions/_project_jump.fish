@@ -61,7 +61,7 @@ function _project_jump --description "Fuzzy-find over git repos and jump to them
     if test "$argv[1]" = --format && test -n "$argv[2]"
         _project_jump_get_readme $argv[2]
     else
-        set -l selected (_project_jump_get_projects | fzf --ansi --preview "_project_jump --format {}" | _project_jump_parse_project)
+        set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "_project_jump --format {}" | _project_jump_parse_project)
         if test -n "$selected"
             cd "$selected"
         end
