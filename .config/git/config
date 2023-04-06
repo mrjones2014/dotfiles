@@ -11,9 +11,9 @@
   path = ~/.config/git/gitconfig.gitlab
 
 # For platform-specific config
-[includeIf "gitdir:/Users"]
+[includeIf "gitdir:/Users/**"]
   path = ~/.config/git/gitconfig.macos
-[includeIf "gitdir:/home"]
+[includeIf "gitdir:/home/**"]
     path = ~/.config/git/gitconfig.linux
 
 [user]
