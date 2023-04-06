@@ -39,8 +39,7 @@ end
 
 function _project_jump_get_projects
     # make sure to use built-in ls, not exa
-    set -l ls_cmd (which ls)
-    for dir in ($ls_cmd "$HOME/git")
+    for dir in (command ls "$HOME/git")
         if test -d "$HOME/git/$dir"
             echo "$(_project_jump_format_project $dir)"
         end
@@ -58,8 +57,9 @@ function _project_jump_get_readme
 end
 
 function _project_jump --description "Fuzzy-find over git repos and jump to them"
-    if test "$argv[1]" = --format && test -n "$argv[2]"
-        _project_jump_get_readme $argv[2]
+    argparse 'format=' -- $argv
+    if set -ql _flag_format
+        _project_jump_get_readme $_flag_format
     else
         set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "_project_jump --format {}" | _project_jump_parse_project)
         if test -n "$selected"
