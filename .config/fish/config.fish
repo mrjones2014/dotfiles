@@ -49,7 +49,7 @@ if status is-interactive
     end
     set -x GIT_MERGE_AUTOEDIT no
     set -x MANPAGER "nvim -c 'Man!' -o -"
-    set -x EDITOR nvim
+    set -x EDITOR "$HOME/.local/share/bob/nvim-bin/nvim"
     # Use 1Password CLI for sudo
     set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
     alias sudo="sudo -A"

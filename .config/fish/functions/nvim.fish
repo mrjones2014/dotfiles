@@ -1,15 +1,14 @@
 function nvim
-    set -l NVIM (which nvim)
 
     if test (count $argv) -lt 1
-        "$NVIM"
+       "$EDITOR" 
         return
     end
 
     if test -d $argv[1]
-        pushd $argv[1] && "$NVIM" && popd
+        pushd $argv[1] && "$EDITOR" && popd
         return
     end
 
-    "$NVIM" $argv
+    "$EDITOR" $argv
 end

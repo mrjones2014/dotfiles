@@ -40,7 +40,7 @@ function check-globals --description "Check for missing command line tools and p
     end
 
     if ! type nvim &>/dev/null
-        echo "Install neovim: brew install neovim"
+        echo "Install bob, then install neovim: cargo install bob-nvim && bob install stable"
     end
 
     if ! type fzf &>/dev/null
