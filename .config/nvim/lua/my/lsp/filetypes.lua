@@ -106,6 +106,7 @@ table.insert(M.treesitter_parsers, 'luadoc')
 table.insert(M.treesitter_parsers, 'fish')
 table.insert(M.treesitter_parsers, 'gitcommit')
 table.insert(M.treesitter_parsers, 'vim')
+table.insert(M.treesitter_parsers, 'vimdoc')
 table.insert(M.treesitter_parsers, 'make')
 
 return M
