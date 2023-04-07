@@ -10,6 +10,7 @@ fish_add_path /opt/homebrew/bin
 fish_add_path "$HOME/scripts"
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path "$HOME/.dotnet/tools"
+fish_add_path "$HOME/.local/share/bob/nvim-bin"
 
 # for local-only, non-sync'd stuff
 if test -f $HOME/.config/fish/local.fish
@@ -49,7 +50,7 @@ if status is-interactive
     end
     set -x GIT_MERGE_AUTOEDIT no
     set -x MANPAGER "nvim -c 'Man!' -o -"
-    set -x EDITOR "$HOME/.local/share/bob/nvim-bin/nvim"
+    set -x EDITOR nvim
     # Use 1Password CLI for sudo
     set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
     alias sudo="sudo -A"
