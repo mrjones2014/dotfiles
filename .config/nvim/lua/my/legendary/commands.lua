@@ -68,6 +68,11 @@ function M.default_commands()
       },
       description = 'Toggle comment',
     },
+    {
+      ':Glow',
+      description = 'Preview markdown with glow',
+      filters = { filetype = 'markdown' },
+    },
   }
 end
 
