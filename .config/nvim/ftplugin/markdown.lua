@@ -62,7 +62,7 @@ local function open_window(source_win, source_buf, cmd, tmp, existing_win)
   }
   job_id = vim.fn.termopen(cmd, cbs)
   vim.api.nvim_set_current_win(source_win)
-  vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+  vim.api.nvim_create_autocmd({ 'TextChanged' }, {
     callback = function()
       local output = vim.api.nvim_buf_get_lines(source_buf, 0, vim.api.nvim_buf_line_count(0), false)
       if vim.tbl_isempty(output) then
