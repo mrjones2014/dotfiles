@@ -16,6 +16,9 @@
 [includeIf "gitdir:/home/**"]
     path = ~/.config/git/gitconfig.linux
 
+[include]
+  path = ~/.config/git/gitconfig.local
+
 [user]
   name = Mat Jones
 [pull]
