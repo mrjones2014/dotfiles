@@ -127,24 +127,6 @@ function M.default_keymaps()
 
     { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
 
-    -- h/j/k/l mappings, split movement
-    { '<C-h>', h.lazy_required_fn('smart-splits', 'move_cursor_left') },
-    { '<C-j>', h.lazy_required_fn('smart-splits', 'move_cursor_down') },
-    { '<C-k>', h.lazy_required_fn('smart-splits', 'move_cursor_up') },
-    { '<C-l>', h.lazy_required_fn('smart-splits', 'move_cursor_right') },
-
-    -- h/j/k/l mappings, split resizing
-    { '<A-h>', h.lazy_required_fn('smart-splits', 'resize_left') },
-    { '<A-j>', h.lazy_required_fn('smart-splits', 'resize_down') },
-    { '<A-k>', h.lazy_required_fn('smart-splits', 'resize_up') },
-    { '<A-l>', h.lazy_required_fn('smart-splits', 'resize_right') },
-
-    -- h/j/k/l mappings, swapping buffers
-    { '<leader><leader>h', h.lazy_required_fn('smart-splits', 'swap_buf_left') },
-    { '<leader><leader>j', h.lazy_required_fn('smart-splits', 'swap_buf_down') },
-    { '<leader><leader>k', h.lazy_required_fn('smart-splits', 'swap_buf_up') },
-    { '<leader><leader>l', h.lazy_required_fn('smart-splits', 'swap_buf_right') },
-
     -- h/j/k/l mappings, text moving
     {
       '<S-h>',

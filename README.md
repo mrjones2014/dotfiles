@@ -6,7 +6,7 @@ You can run the following to get these dotfiles installed on your system. It wil
 curl https://raw.githubusercontent.com/mrjones2014/dotfiles/master/scripts/config-init | bash
 ```
 
-Then, see [manual setup instructions](./docs/manual-setup.md) to get started.
+Then, see [manual setup instructions](./docs/README.md) to get started.
 
 ## Managing Dotfiles
 

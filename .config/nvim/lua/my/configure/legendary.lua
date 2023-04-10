@@ -28,7 +28,14 @@ return {
       },
       extensions = {
         -- nvim_tree = true,
-        smart_splits = true,
+        smart_splits = {
+          mods = {
+            swap = {
+              prefix = '<leader><leader>',
+              mod = '',
+            },
+          },
+        },
         op_nvim = true,
         diffview = true,
       },
