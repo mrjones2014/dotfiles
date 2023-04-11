@@ -160,7 +160,8 @@ return {
         },
         right_sep = 'right_rounded',
         enabled = function()
-          return vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0) ~= ''
+          local bufname = vim.api.nvim_buf_get_name(tonumber(vim.g.actual_curbuf) or 0)
+          return bufname ~= '' and not vim.startswith(bufname, 'component://')
         end,
       },
       file_info_short = {
