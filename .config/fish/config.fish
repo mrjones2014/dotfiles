@@ -29,9 +29,11 @@ else
 end
 
 if status is-interactive
-    function if-installed
+    function installed
         if type "$argv[1]" &>/dev/null
-            $argv
+            return 0
+        else
+            return 1
         end
     end
 
@@ -46,24 +48,27 @@ if status is-interactive
     source $HOME/.config/fish/fzf-config.fish
     source $HOME/.config/fish/aliases.fish
 
-    if-installed op completion fish | source
-    if-installed thefuck --alias | source
-    if-installed atuin init fish | source
-    if-installed starship init fish | source
-    if-installed bob complete fish | source
+    if installed op
+        op completion fish | source
+        # Use 1Password CLI for sudo
+        set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
+        alias sudo="sudo -A"
+    end
+
+    installed thefuck && thefuck --alias | source
+    installed starship && starship init fish | source
+    installed bob && bob complete fish | source
+    installed atuin && atuin init fish | source
     for mode in insert default normal
-        bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
+        installed atuin && bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
         bind -M $mode \a _project_jump
     end
     set -x GIT_MERGE_AUTOEDIT no
     set -x MANPAGER "nvim -c 'Man!' -o -"
     set -x EDITOR nvim
-    # Use 1Password CLI for sudo
-    set -x SUDO_ASKPASS "$HOME/scripts/opsudo.bash"
-    alias sudo="sudo -A"
 
     # start tmux session by default
-    if type tmux &>/dev/null && [ -z "$TMUX" ]
+    if installed tmux && [ -z "$TMUX" ]
         if [ "$START_TMUX_PLEASE" = 1 ]
             exec tmux new-session -A -s $USER
         end
