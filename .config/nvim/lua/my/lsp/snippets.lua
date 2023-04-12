@@ -30,7 +30,7 @@ function M.lua()
       'req',
       fmt("local {} = require('{}')", {
         f(function(req_path)
-          local parts = vim.split(req_path[1][1], '.', { trimempty = true })
+          local parts = vim.split(req_path[1][1], '%.', { trimempty = true })
           return parts[#parts] or ''
         end, {
           1,
