@@ -25,17 +25,26 @@ function M.lua()
     end
   end
 
+  local function get_req_module(req_path)
+    local parts = vim.split(req_path[1][1], '%.', { trimempty = true })
+    return parts[#parts] or ''
+  end
+
+  local function get_req_module_upper(req_path)
+    local path = get_req_module(req_path)
+    return path:sub(1, 1):upper() .. path:sub(2)
+  end
+
   ls.add_snippets('lua', {
     -- type req, type the module path, and the `local {}` will be automatically
     -- filled in as the last section of the module path, e.g. `require('my.custom.mod)` => `local mod`
+    -- the `local` part is also a choice node allowing you to toggle between `local mod` and `local Mod`
     s(
       'req',
       fmt("local {} = require('{}')", {
-        f(function(req_path)
-          local parts = vim.split(req_path[1][1], '%.', { trimempty = true })
-          return parts[#parts] or ''
-        end, {
-          1,
+        c(2, {
+          f(get_req_module, { 1 }),
+          f(get_req_module_upper, { 1 }),
         }),
         i(1),
       })
