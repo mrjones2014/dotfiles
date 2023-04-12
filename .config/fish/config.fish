@@ -29,6 +29,12 @@ else
 end
 
 if status is-interactive
+    function if-installed
+        if type "$argv[1]" &>/dev/null
+            $argv
+        end
+    end
+
     fish_vi_key_bindings
     bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
@@ -40,10 +46,11 @@ if status is-interactive
     source $HOME/.config/fish/fzf-config.fish
     source $HOME/.config/fish/aliases.fish
 
-    op completion fish | source
-    thefuck --alias | source
-    atuin init fish | source
-    starship init fish | source
+    if-installed op completion fish | source
+    if-installed thefuck --alias | source
+    if-installed atuin init fish | source
+    if-installed starship init fish | source
+    if-installed bob complete fish | source
     for mode in insert default normal
         bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
         bind -M $mode \a _project_jump
@@ -56,7 +63,7 @@ if status is-interactive
     alias sudo="sudo -A"
 
     # start tmux session by default
-    if [ -z "$TMUX" ]
+    if type tmux &>/dev/null && [ -z "$TMUX" ]
         if [ "$START_TMUX_PLEASE" = 1 ]
             exec tmux new-session -A -s $USER
         end
