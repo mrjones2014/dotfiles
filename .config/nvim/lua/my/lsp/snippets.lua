@@ -26,6 +26,8 @@ function M.lua()
   end
 
   ls.add_snippets('lua', {
+    -- type req, type the module path, and the `local {}` will be automatically
+    -- filled in as the last section of the module path, e.g. `require('my.custom.mod)` => `local mod`
     s(
       'req',
       fmt("local {} = require('{}')", {
@@ -38,6 +40,12 @@ function M.lua()
         i(1),
       })
     ),
+    -- create a new function on the module, dynamically using the `local` that is
+    -- returned from the overall module, e.g.
+    -- local MyMod =  {}
+    -- ...
+    -- return MyMod
+    -- in this case it will use `function MyMod.fn_name()`
     s(
       'mfn',
       c(1, {
@@ -55,11 +63,14 @@ function M.lua()
         }),
       })
     ),
+    -- create a module structure, allowing you to customize the module name
+    p('mod', 'local $1 = {}\n\n$0\n\nreturn $1', {}),
+    -- require without assigning to a local
     p('rq', "require('$0')", {}),
+    -- inline global function
     p('fn', 'function($1)\n  $0\nend', {}),
+    -- inline local function
     p('lfn', 'local function $1($2)\n  $0\nend', {}),
-    p('mod', 'local M = {}\n\n$0\n\nreturn M', {}),
-    p('dbg', 'vim.defer_fn(function()\n  vim.notify(vim.inspect($0))\nend, 1000)', {}),
   })
 end
 
