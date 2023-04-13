@@ -12,20 +12,53 @@ return {
   config = function()
     local trouble = require('trouble.providers.telescope')
 
-    local function file_extension_filter(prompt)
-      -- if prompt starts with escaped @ then treat it as a literal
-      if (prompt):sub(1, 2) == '\\@' then
-        return { prompt = prompt:sub(2) }
+    local function parse_prompt(prompt)
+      if (prompt or ''):sub(1, 2) == '\\@' then
+        return { prompt = prompt:sub(2), filetype = nil }
       end
 
       local result = vim.split(prompt, ' ', {})
-      -- if prompt starts with, for example, @rs
-      -- then only search files ending in *.rs
-      if #result == 2 and result[1]:sub(1, 1) == '@' and (#result[1] == 2 or #result[1] == 3 or #result[1] == 4) then
-        return { prompt = result[2] .. '.' .. result[1]:sub(2) }
-      else
+      if #result < 2 or result[1]:sub(1, 1) ~= '@' then
+        return { prompt = prompt, filetype = nil }
+      end
+
+      local query = table.concat(vim.list_slice(result, 2, #result), '')
+
+      if result[1]:lower() == '@makefile' then
+        return { prompt = query, filetype = 'Makefile' }
+      end
+
+      -- if it looks like a file extension
+      if #result[1] > 1 and #result[1] < 5 then
+        local filetype = result[1]:sub(2):lower()
+        -- treat TS/TSX/JS/JSX as equivalent
+        if filetype == 'ts' or filetype == 'tsx' or filetype == 'js' or filetype == 'jsx' then
+          return { prompt = query, filetype = { 'ts', 'tsx', 'js', 'jsx' } }
+        end
+
+        return { prompt = query, filetype = filetype }
+      end
+    end
+
+    local function file_extension_filter(prompt)
+      local parsed = parse_prompt(prompt)
+      if parsed.filetype == nil then
         return { prompt = prompt }
       end
+
+      local pattern = parsed.filetype
+      if type(parsed.filetype) == 'table' then
+        pattern = string.format('(%s)', table.concat(parsed.filetype, '|')) ---@diagnostic disable-line
+      end
+
+      return {
+        prompt = string.format(
+          '%s%s%s',
+          parsed.prompt,
+          tostring(pattern):lower() == 'makefile' and '/' or '.',
+          pattern
+        ),
+      }
     end
 
     local telescope = require('telescope')
@@ -121,16 +154,10 @@ return {
         },
         live_grep = {
           on_input_filter_cb = function(prompt)
-            -- if prompt starts with escaped @ then treat it as a literal
-            if (prompt):sub(1, 2) == '\\@' then
-              return { prompt = prompt:sub(2) }
-            end
-            -- if prompt starts with, for example, @rs
-            -- only search files that end in *.rs
-            local result = string.match(prompt, '@%a*%s')
-            if not result then
+            local parsed = parse_prompt(prompt)
+            if parsed.filetype == nil then
               return {
-                prompt = prompt,
+                prompt = parsed.prompt,
                 updated_finder = require('telescope.finders').new_job(function(new_prompt)
                   return vim.tbl_flatten({
                     require('telescope.config').values.vimgrep_arguments,
@@ -141,21 +168,22 @@ return {
               }
             end
 
-            local result_len = #result
-
-            result = result:sub(2)
-            result = vim.trim(result)
-
-            if result == 'js' or result == 'ts' then
-              result = string.format('{%s,%sx}', result, result)
+            local pattern = parsed.filetype
+            if type(parsed.filetype) == 'table' then
+              pattern = string.format('*.{%s}', table.concat(parsed.filetype, ',')) ---@diagnostic disable-line
+            elseif parsed.filetype:lower() == 'makefile' then ---@diagnostic disable-line
+              pattern = '*Makefile'
+            else
+              pattern = string.format('*.%s', parsed.filetype)
             end
 
             return {
-              prompt = prompt:sub(result_len + 1),
+              prompt = parsed.prompt,
               updated_finder = require('telescope.finders').new_job(function(new_prompt)
                 return vim.tbl_flatten({
                   require('telescope.config').values.vimgrep_arguments,
-                  string.format('-g*.%s', result),
+                  '-g',
+                  pattern,
                   '--',
                   new_prompt,
                 })
