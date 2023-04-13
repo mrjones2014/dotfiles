@@ -3,6 +3,13 @@ return {
   dependencies = {
     {
       'SmiteshP/nvim-navic',
+      init = function()
+        LSP.on_attach(function(client, bufnr)
+          if client.server_capabilities.documentSymbolProvider then
+            require('nvim-navic').attach(client, bufnr)
+          end
+        end)
+      end,
       config = function()
         require('nvim-navic').setup({
           highlight = true,
@@ -13,20 +20,6 @@ return {
   },
   event = 'VimEnter',
   config = function()
-    -- I do not like having this here but there isn't a good way around it
-    vim.api.nvim_create_autocmd('LspAttach', {
-      callback = function(args)
-        if not (args.data and args.data.client_id) then
-          return
-        end
-
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client.server_capabilities.documentSymbolProvider then
-          require('nvim-navic').attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
-        end
-      end,
-    })
-
     vim.opt.laststatus = 3
     local colors = require('onedarkpro.helpers').get_colors()
     local mode_icons = {
