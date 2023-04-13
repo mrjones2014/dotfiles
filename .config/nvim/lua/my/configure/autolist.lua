@@ -1,6 +1,6 @@
 return {
   'gaoDean/autolist.nvim',
-  ft = { 'markdown', 'text' },
+  ft = 'markdown',
   config = function()
     local al = require('autolist')
     al.setup()

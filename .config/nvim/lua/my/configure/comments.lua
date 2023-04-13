@@ -1,6 +1,7 @@
 return {
   'numToStr/Comment.nvim',
   event = 'VeryLazy',
+  dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
   config = function()
     -- default mappings:
     -- {
@@ -27,6 +28,8 @@ return {
     --       eol = 'gcA',
     --   }
     -- }
+
+    -- hack to not load ts_context_commentstring until actually needed by the hook
     local hook = nil
     require('Comment').setup({
       pre_hook = function(...)
