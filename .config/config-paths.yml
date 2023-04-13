@@ -1,4 +1,5 @@
 docs: docs/
+presentations: presentations/
 readme: README.md
 fish: .config/fish/
 tmux: .config/tmux/tmux.conf
