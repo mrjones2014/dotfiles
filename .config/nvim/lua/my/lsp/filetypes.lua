@@ -60,18 +60,14 @@ M.config = {
     mason = 'omnisharp',
     treesitter = 'c_sharp',
   },
-}
-
-if vim.loop.os_uname().sysname == 'Darwin' then
-  M.config['swift'] = {
+  ['swift'] = {
     patterns = { '*.swift' },
     lspconfig = 'sourcekit',
     treesitter = 'swift',
-  }
-end
+  },
+}
 
 M.filetypes = vim.tbl_keys(M.config)
-
 M.mason_packages = {}
 M.treesitter_parsers = {}
 
@@ -80,11 +76,7 @@ for filetype, config in pairs(M.config) do
   if type(config.mason) == 'string' then
     table.insert(M.mason_packages, config.mason)
   elseif type(config.mason) == 'table' then
-    for _, package in
-      ipairs(config.mason --[[@as table]])
-    do
-      table.insert(M.mason_packages, package)
-    end
+    table.insert_all(M.mason_packages, config.mason)
   end
 
   -- treesitter parser names
@@ -101,6 +93,7 @@ end
 
 table.insert(M.mason_packages, 'codespell')
 table.insert(M.mason_packages, 'lemmy-help')
+table.insert(M.mason_packages, 'tree-sitter-cli')
 
 table.insert(M.treesitter_parsers, 'comment')
 table.insert(M.treesitter_parsers, 'fish')
