@@ -39,8 +39,12 @@ function check-globals --description "Check for missing command line tools and p
         echo "Install topgrade: brew install topgrade"
     end
 
-    if ! type nvim &>/dev/null
+    if ! test -d "$HOME/.local/share/bob/nvim-bin" &>/dev/null
         echo "Install bob, then install neovim: cargo install bob-nvim && bob install stable"
+    end
+
+    if ! type slides &>/dev/null
+        echo "Install slides CLI: brew install slides"
     end
 
     if ! type fzf &>/dev/null

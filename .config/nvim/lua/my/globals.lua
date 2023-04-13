@@ -78,3 +78,17 @@ table.join_lists = function(...)
   end
   return result
 end
+
+_G.LSP = {
+  ---Set up a callback to run on LSP attach
+  ---@param callback fun(client:table,bufnr:number)
+  on_attach = function(callback)
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        callback(client, bufnr)
+      end,
+    })
+  end,
+}

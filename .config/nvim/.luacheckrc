@@ -11,4 +11,9 @@ globals = {
       copy = function(str) end,
     },
   },
+  LSP = {
+    fields = {
+      on_attach = function(client, bufnr) end,
+    },
+  },
 }

@@ -65,16 +65,7 @@ return {
     -- always load null-ls
     require('my.lsp.null-ls')
 
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('LspOnAttachCallback', { clear = true }),
-      callback = function(args)
-        if not (args.data and args.data.client_id) then
-          return
-        end
-
-        require('my.lsp.utils').on_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
-      end,
-    })
+    LSP.on_attach(require('my.lsp.utils').on_attach)
 
     local function setup_lsp_for_filetype(filetype, server_name)
       local has_config, config = pcall(require, 'my.lsp.' .. filetype)
