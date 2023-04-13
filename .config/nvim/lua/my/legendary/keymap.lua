@@ -37,6 +37,14 @@ function M.default_keymaps()
     { 'W', ':Bwipeout<CR>', description = 'Close current buffer' },
 
     {
+      '<leader>gf',
+      h.vsplit_then(function()
+        vim.api.nvim_feedkeys('gf', 't', true)
+      end),
+      description = 'Split vertically, then go to file under cursor.',
+    },
+
+    {
       'gx',
       function()
         local url = vim.fn.expand('<cfile>')
