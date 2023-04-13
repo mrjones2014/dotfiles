@@ -9,6 +9,7 @@ return {
     require('colorizer').setup({
       filetypes = filetypes,
       user_default_options = {
+        names = false,
         css = true,
         sass = { enable = true, parsers = { 'css' } },
         always_update = true,
