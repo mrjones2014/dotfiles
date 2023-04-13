@@ -13,30 +13,20 @@ return {
     local trouble = require('trouble.providers.telescope')
 
     local function parse_prompt(prompt)
-      if (prompt or ''):sub(1, 2) == '\\@' then
-        return { prompt = prompt:sub(2), filetype = nil }
-      end
-
-      local result = vim.split(prompt, ' ', {})
-      if #result < 2 or result[1]:sub(1, 1) ~= '@' then
+      local first_word, rest = prompt:match('^%s*@(%S+)%s*(.+)$')
+      if first_word == nil then
         return { prompt = prompt, filetype = nil }
       end
 
-      local query = table.concat(vim.list_slice(result, 2, #result), '')
-
-      if result[1]:lower() == '@makefile' then
-        return { prompt = query, filetype = 'Makefile' }
-      end
-
-      -- if it looks like a file extension
-      if #result[1] > 1 and #result[1] < 5 then
-        local filetype = result[1]:sub(2):lower()
-        -- treat TS/TSX/JS/JSX as equivalent
-        if filetype == 'ts' or filetype == 'tsx' or filetype == 'js' or filetype == 'jsx' then
-          return { prompt = query, filetype = { 'ts', 'tsx', 'js', 'jsx' } }
-        end
-
-        return { prompt = query, filetype = filetype }
+      first_word = first_word:lower()
+      if first_word == 'makefile' then
+        return { prompt = rest, filetype = 'Makefile' }
+      elseif first_word:match('^[tj]sx?$') then
+        return { prompt = rest, filetype = { 'ts', 'tsx', 'js', 'jsx' } }
+      elseif #first_word > 1 and #first_word < 5 then
+        return { prompt = rest, filetype = first_word }
+      else
+        return { prompt = prompt, filetype = nil }
       end
     end
 
