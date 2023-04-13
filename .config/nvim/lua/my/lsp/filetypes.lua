@@ -90,16 +90,18 @@ for filetype, config in pairs(M.config) do
 end
 
 -- extras not associated with any one language
-
-table.insert(M.mason_packages, 'codespell')
-table.insert(M.mason_packages, 'lemmy-help')
-table.insert(M.mason_packages, 'tree-sitter-cli')
-
-table.insert(M.treesitter_parsers, 'comment')
-table.insert(M.treesitter_parsers, 'fish')
-table.insert(M.treesitter_parsers, 'gitcommit')
-table.insert(M.treesitter_parsers, 'vim')
-table.insert(M.treesitter_parsers, 'vimdoc')
-table.insert(M.treesitter_parsers, 'make')
+table.insert_all(M.mason_packages, {
+  'codespell',
+  'lemmy-help',
+  'tree-sitter-cli',
+})
+table.insert_all(M.treesitter_parsers, {
+  'comment',
+  'fish',
+  'gitcommit',
+  'vim',
+  'vimdoc',
+  'make',
+})
 
 return M
