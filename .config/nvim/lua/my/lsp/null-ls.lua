@@ -56,9 +56,9 @@ local formatters = {
       'jsonc',
       'scss',
       'css',
-      'markdown',
     },
   }),
+  b.formatting.markdownlint,
   b.formatting.cbfmt.with({
     args = {
       '--stdin-filepath',

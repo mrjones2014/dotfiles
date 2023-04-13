@@ -26,6 +26,7 @@ M.config = {
     patterns = { '*.lua' },
     lspconfig = 'lua_ls',
     mason = { 'lua-language-server', 'stylua', 'luacheck' },
+    treesitter = { 'lua', 'luadoc' },
   },
   ['rust'] = {
     patterns = { '*.rs' },
@@ -45,7 +46,7 @@ M.config = {
   ['markdown'] = {
     patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
-    mason = { 'marksman', 'cbfmt' },
+    mason = { 'marksman', 'cbfmt', 'markdownlint' },
     treesitter = { 'markdown', 'markdown_inline' },
   },
   ['sh'] = {
@@ -102,7 +103,6 @@ table.insert(M.mason_packages, 'codespell')
 table.insert(M.mason_packages, 'lemmy-help')
 
 table.insert(M.treesitter_parsers, 'comment')
-table.insert(M.treesitter_parsers, 'luadoc')
 table.insert(M.treesitter_parsers, 'fish')
 table.insert(M.treesitter_parsers, 'gitcommit')
 table.insert(M.treesitter_parsers, 'vim')
