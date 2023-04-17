@@ -87,14 +87,22 @@ return {
       vim.diagnostic.severity.ERROR,
     }
 
-    local function unsaved_changes()
-      local unsaved_buffers = vim.tbl_filter(function(buf)
+    local function unsaved_buffers_count()
+      if #vim.fn.expand('%') == 0 then
+        return 0
+      end
+
+      return #vim.tbl_filter(function(buf)
         return vim.api.nvim_buf_get_option(buf, 'modifiable') and vim.api.nvim_buf_get_option(buf, 'modified')
       end, vim.api.nvim_list_bufs())
-      if #vim.fn.expand('%') == 0 or #unsaved_buffers == 0 then
+    end
+
+    local function unsaved_changes()
+      local unsaved_buffers = unsaved_buffers_count()
+      if #vim.fn.expand('%') == 0 or unsaved_buffers == 0 then
         return ''
       end
-      return string.format(' %s unsaved file%s ', #unsaved_buffers, #unsaved_buffers > 1 and 's' or '')
+      return string.format(' %s unsaved file%s ', unsaved_buffers, unsaved_buffers > 1 and 's' or '')
     end
 
     local function is_current_buf()
@@ -177,21 +185,7 @@ return {
         end,
       },
       op = {
-        left_sep = {
-          str = 'left_rounded',
-          hl = function()
-            if #unsaved_changes() > 0 then
-              return {
-                fg = colors.blue,
-                bg = colors.yellow,
-              }
-            else
-              return {
-                fg = colors.blue,
-              }
-            end
-          end,
-        },
+        left_sep = 'left_rounded',
         provider = function()
           -- don't load the plugin just for the statusline component
           if not vim.g.op_nvim_remote_loaded then
@@ -208,10 +202,20 @@ return {
       unsaved_changes = {
         left_sep = 'left_rounded',
         provider = unsaved_changes,
+        enabled = function()
+          return unsaved_buffers_count() > 0
+        end,
         icon = '',
         hl = {
           bg = colors.yellow,
           fg = colors.black,
+        },
+        right_sep = {
+          str = 'right_rounded',
+          hl = {
+            bg = colors.bg_statusline,
+            fg = colors.yellow,
+          },
         },
       },
       diagnostics = function(severity, is_winbar)
@@ -281,6 +285,19 @@ return {
           },
         },
       },
+      lazy_stats = {
+        provider = function()
+          local icon = require('lazy.core.config').options.ui.icons.plugin
+          local stats = require('lazy').stats()
+          local updates = require('lazy.status').has_updates()
+              and string.format(' (%s updates available)', tostring(require('lazy.status').updates()):gsub(icon, ''))
+            or ''
+          return string.format('%s %s/%s%s', icon, stats.loaded, stats.count, updates)
+        end,
+        right_sep = {
+          str = 'block',
+        },
+      },
     }
 
     local function with_diagnostics(components_tbl, is_winbar)
@@ -292,8 +309,8 @@ return {
 
     local statusline_components = {
       { components.mode, components.branch, components.file_info },
-      {},
-      with_diagnostics({ components.unsaved_changes, components.op }, false),
+      { components.unsaved_changes },
+      with_diagnostics({ components.lazy_stats, components.op }, false),
     }
 
     local winbar_components = {
