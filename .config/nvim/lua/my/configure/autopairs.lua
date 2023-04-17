@@ -1,7 +1,7 @@
 return {
-  'windwp/nvim-autopairs',
+  'echasnovski/mini.pairs',
   event = 'InsertEnter',
   config = function()
-    require('nvim-autopairs').setup({})
+    require('mini.pairs').setup({})
   end,
 }
