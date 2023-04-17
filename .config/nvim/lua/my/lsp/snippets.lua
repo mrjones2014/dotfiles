@@ -16,7 +16,7 @@ function M.lua()
   local c = ls.choice_node
 
   local function get_returned_mod_name()
-    local query = vim.treesitter.parse_query('lua', LUA_MODULE_RETURN_TS_QUERY)
+    local query = vim.treesitter.query.parse_query('lua', LUA_MODULE_RETURN_TS_QUERY)
     local parser = vim.treesitter.get_parser(0, 'lua')
     local tree = parser:parse()[1]
     local num_lines = #vim.api.nvim_buf_get_lines(0, 0, -1, false)
