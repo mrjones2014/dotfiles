@@ -156,16 +156,10 @@ function M.default_keymaps()
       { n = ':MoveHChar(1)<CR>', x = ":'<,'>MoveHBlock(1)<CR>" },
     },
 
-    -- spread
+    -- mini.splitjoin
     {
-      '<leader>so',
-      h.lazy_required_fn('spread', 'out'),
-      description = 'Split arrays/lists/etc. onto multiple lines',
-    },
-    {
-      '<leader>si',
-      h.lazy_required_fn('spread', 'combine'),
-      description = 'Join arrays/lists/etc. onto a single line',
+      'gS',
+      description = 'Toggle arrays/lists/etc. between single and multi line formats.',
     },
 
     -- luasnip
