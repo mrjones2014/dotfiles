@@ -5,7 +5,6 @@ return {
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
-    'aarondiel/spread.nvim',
     {
       'ziontee113/query-secretary',
       config = function()
