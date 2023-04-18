@@ -31,7 +31,7 @@ M.config = {
   ['rust'] = {
     patterns = { '*.rs' },
     lspconfig = 'rust_analyzer',
-    mason = 'rust-analyzer',
+    mason = { 'rust-analyzer', 'rustfmt' },
   },
   ['svelte'] = {
     patterns = { '*.svelte' },
