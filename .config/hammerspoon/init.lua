@@ -15,11 +15,11 @@ local function wake_callback()
 end
 
 -- reload config every time it changes
-local config_watcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.config/hammerspoon/', reload_config)
+config_watcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.config/hammerspoon/', reload_config)
 config_watcher:start()
 
 -- reload config when waking from sleep
-local sleep_watcher = hs.caffeinate.watcher.new(wake_callback)
+sleep_watcher = hs.caffeinate.watcher.new(wake_callback)
 sleep_watcher:start()
 
 require('keymaps')
