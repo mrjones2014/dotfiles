@@ -14,5 +14,5 @@ local function open_spotify_instead_of_apple_music(app_name, event_type, app_obj
   end
 end
 
-local apple_music_spotify_redirector = hs.application.watcher.new(open_spotify_instead_of_apple_music)
+apple_music_spotify_redirector = hs.application.watcher.new(open_spotify_instead_of_apple_music)
 apple_music_spotify_redirector:start()

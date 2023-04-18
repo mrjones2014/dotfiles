@@ -21,5 +21,5 @@ local function kill_zoom(app_name, event_type, app)
   end
 end
 
-local zoom_killer = hs.application.watcher.new(kill_zoom)
+zoom_killer = hs.application.watcher.new(kill_zoom)
 zoom_killer:start()
