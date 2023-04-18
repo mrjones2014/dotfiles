@@ -74,9 +74,7 @@ return {
     {
       key = 'n',
       mods = 'META',
-      action = w.action_callback(function(win)
-        win:mux_window():spawn_tab({ cwd = '~' })
-      end),
+      action = w.action.SpawnTab('CurrentPaneDomain'),
     },
     {
       key = 'LeftArrow',
