@@ -208,14 +208,6 @@ function M.default_keymaps()
       mode = { 'i', 'n' },
       description = 'Clear snippet jumps',
     },
-
-    -- FTerm.nvim
-    {
-      '<M-t>',
-      h.lazy_required_fn('FTerm', 'toggle'),
-      description = 'Toggle a floating terminal',
-      mode = { 'n', 't' },
-    },
   }
 end
 
