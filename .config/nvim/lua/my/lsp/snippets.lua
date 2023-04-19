@@ -21,7 +21,7 @@ function M.lua()
     local tree = parser:parse()[1]
     local num_lines = #vim.api.nvim_buf_get_lines(0, 0, -1, false)
     for _, node, _ in query:iter_captures(tree:root(), 0, num_lines - 3, num_lines) do
-      return vim.treesitter.query.get_node_text(node, 0, {})
+      return vim.treesitter.get_node_text(node, 0, {})
     end
   end
 
