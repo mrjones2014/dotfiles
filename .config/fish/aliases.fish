@@ -24,6 +24,9 @@ alias cat="bat"
 
 alias gogit="cd ~/git"
 
+# repeat last command with !!
+alias !!="eval \$history[1]"
+
 # since I can never find the site easily
 alias kitty-docs="open https://sw.kovidgoyal.net/kitty/"
 # alias ls to exa with compatibility aliases
