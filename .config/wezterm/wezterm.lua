@@ -23,6 +23,11 @@ config.window_padding = {
   right = 0,
 }
 config.debug_key_events = true
+config.inactive_pane_hsb = {
+  saturation = 0.7,
+  brightness = 0.6,
+}
+
 config.leader = keymaps.leader
 config.keys = keymaps.keys
 
