@@ -16,6 +16,7 @@
   "feline.nvim": { "branch": "main", "commit": "a02bcdde649cdfca0e25d2dd693ba140233b5c3e" },
   "gitsigns.nvim": { "branch": "main", "commit": "5d840679cfba0a93b28ba573f982613ca25d3909" },
   "glance.nvim": { "branch": "master", "commit": "77ebd260c360ce11ddc6aa08efdcea993f40614a" },
+  "heirline.nvim": { "branch": "master", "commit": "2aed06a3a04c877dc64834e9b9dabf6ad3491bc8" },
   "iconpicker.nvim": { "branch": "master", "commit": "22b29fb644f378d74c5ec2aa6e862130d81307da" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "karen-yank.nvim": { "branch": "main", "commit": "19173ebc9542f42ad419f1c96d74c4e4feb1c094" },
