@@ -67,16 +67,8 @@ M.LineNo = {
     local bt = vim.api.nvim_buf_get_option(0, 'buftype')
     return vim.v.virtnum == 0 and (bt == '' or not bt)
   end,
-  init = function(self)
-    local lines = vim.api.nvim_buf_line_count(0)
-    self.padding = tostring(lines):len()
-  end,
-  provider = function(self)
-    if vim.opt.relativenumber then
-      return string.format('%-' .. self.padding .. 'd', vim.v.lnum)
-    else
-      return string.format('%' .. self.padding .. 'd', vim.v.relnum)
-    end
+  provider = function()
+    return string.format('%%=%s', vim.v.lnum)
   end,
 }
 
