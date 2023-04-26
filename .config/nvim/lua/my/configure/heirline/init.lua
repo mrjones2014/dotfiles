@@ -28,6 +28,9 @@ return {
     require('heirline').setup({
       opts = {
         colors = require('onedarkpro.helpers').get_colors(),
+        disable_winbar_cb = function()
+          return not require('my.configure.heirline.conditions').should_show_filename(vim.api.nvim_buf_get_name(0))
+        end,
       },
       statusline = {
         sl.Mode,
@@ -37,6 +40,7 @@ return {
         sl.Align,
         sl.UnsavedChanges,
         sl.Align,
+        sl.LazyStats,
         sl.OnePassword,
         shared.Diagnostics(false),
       },

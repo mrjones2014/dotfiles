@@ -12,11 +12,12 @@ function M.FileIcon(bg_color)
       self.bufname = vim.api.nvim_buf_get_name(0)
     end,
     provider = ' ',
+    hl = { bg = bg_color },
     {
       condition = function(self)
         return self.icon ~= nil
           and self.icon_hl ~= nil
-          and require('my.configure.heirline.conditions').should_show_filename(self)
+          and require('my.configure.heirline.conditions').should_show_filename(self.bufname)
       end,
       provider = function(self)
         return self.icon
