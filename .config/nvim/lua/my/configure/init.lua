@@ -15,7 +15,6 @@ return {
   { 'echasnovski/mini.pairs', event = 'InsertEnter', config = mini },
   { 'echasnovski/mini.trailspace', event = 'BufRead', config = mini },
   { 'echasnovski/mini.splitjoin', keys = { 'gS' }, config = mini },
-  { 'echasnovski/mini.animate', event = 'BufRead', config = mini },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', config = true },
   {
     'saecki/crates.nvim',

@@ -81,7 +81,7 @@ return {
     local diagnostics_ui = {
       [vim.diagnostic.severity.HINT] = { icon = diagnostics_icons.Hint, color = colors.cyan },
       [vim.diagnostic.severity.INFO] = { icon = diagnostics_icons.Info, color = colors.blue },
-      [vim.diagnostic.severity.WARN] = { icon = diagnostics_icons.Warning, color = colors.yellow },
+      [vim.diagnostic.severity.WARN] = { icon = diagnostics_icons.Warn, color = colors.yellow },
       [vim.diagnostic.severity.ERROR] = { icon = diagnostics_icons.Error, color = colors.red },
     }
     local diagnostics_order = {
@@ -328,19 +328,19 @@ return {
       default_fg = colors.bg_statusline,
       vi_mode_colors = mode_colors,
     }
+    --
+    -- require('feline').setup(vim.tbl_deep_extend('force', shared_config, {
+    --   components = {
+    --     active = statusline_components,
+    --     inactive = statusline_components,
+    --   },
+    -- }))
 
-    require('feline').setup(vim.tbl_deep_extend('force', shared_config, {
-      components = {
-        active = statusline_components,
-        inactive = statusline_components,
-      },
-    }))
-
-    require('feline').winbar.setup(vim.tbl_deep_extend('force', shared_config, {
-      components = {
-        active = winbar_components,
-        inactive = winbar_components,
-      },
-    }))
+    -- require('feline').winbar.setup(vim.tbl_deep_extend('force', shared_config, {
+    --   components = {
+    --     active = winbar_components,
+    --     inactive = winbar_components,
+    --   },
+    -- }))
   end,
 }

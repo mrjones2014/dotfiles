@@ -26,7 +26,6 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "a6c4d7df448a78b0a05fd2065bef11ed52bee51c" },
   "mason.nvim": { "branch": "main", "commit": "7f364a3c9b3f77ead3dc5316cf6918d944fc3621" },
-  "mini.animate": { "branch": "main", "commit": "863b01e20cd5cc599eb8ca87f44ecc1f2be04920" },
   "mini.pairs": { "branch": "main", "commit": "771c08bd313614c7e9a1904d277ac76eb226f674" },
   "mini.splitjoin": { "branch": "main", "commit": "a4aa420eb28757ba90895601e92454703f4239e9" },
   "mini.surround": { "branch": "main", "commit": "cc962bae0890217f8473390abc8cef988519d370" },
