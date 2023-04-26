@@ -53,12 +53,12 @@ return {
     {
       key = '\\',
       mods = 'LEADER',
-      action = w.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+      action = w.action.SplitPane({ direction = 'Right', size = { Percent = 30 } }),
     },
     {
       key = '-',
       mods = 'LEADER',
-      action = w.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
+      action = w.action.SplitPane({ direction = 'Down' }),
     },
     -- move between split panes
     split_nav('move', 'h'),
