@@ -1,9 +1,8 @@
 -- plugins with little or no config can go here
 
-local function mini(module)
-  return function()
-    require(string.format('mini.%s', module)).setup({})
-  end
+local function mini(plugin)
+  local mod = vim.split(plugin[1], '/')[2]
+  require(mod).setup({})
 end
 
 return {
@@ -13,9 +12,10 @@ return {
   { 'tenxsoydev/karen-yank.nvim', config = true },
   { 'mrjones2014/iconpicker.nvim' },
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
-  { 'echasnovski/mini.pairs', event = 'InsertEnter', config = mini('pairs') },
-  { 'echasnovski/mini.trailspace', event = 'BufRead', config = mini('trailspace') },
-  { 'echasnovski/mini.splitjoin', event = 'BufRead', config = mini('splitjoin') },
+  { 'echasnovski/mini.pairs', event = 'InsertEnter', config = mini },
+  { 'echasnovski/mini.trailspace', event = 'BufRead', config = mini },
+  { 'echasnovski/mini.splitjoin', keys = { 'gS' }, config = mini },
+  { 'echasnovski/mini.animate', event = 'BufRead', config = mini },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', config = true },
   {
     'saecki/crates.nvim',
