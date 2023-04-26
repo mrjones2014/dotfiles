@@ -58,7 +58,9 @@ M.UniqueFilename = {
     self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(0))
   end,
   {
-    condition = require('my.configure.heirline.conditions').should_show_filename,
+    condition = function(self)
+      return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
+    end,
     provider = function(self)
       return string.format(' %s ', self.bufname)
     end,

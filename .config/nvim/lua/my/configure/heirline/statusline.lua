@@ -103,7 +103,7 @@ M.Branch = {
   },
   {
     provider = sep.rounded_right,
-    hl = { fg = 'gray' },
+    hl = { fg = 'gray', bg = 'bg_statusline' },
   },
 }
 
@@ -114,7 +114,9 @@ M.FilePath = {
   hl = { bg = 'bg_statusline' },
   provider = ' ',
   {
-    condition = require('my.configure.heirline.conditions').should_show_filename,
+    condition = function(self)
+      return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
+    end,
     provider = function()
       return Path.relative(vim.api.nvim_buf_get_name(0))
     end,
@@ -157,6 +159,18 @@ M.UnsavedChanges = {
       },
     },
   },
+}
+
+M.LazyStats = {
+  provider = function()
+    local icon = require('lazy.core.config').options.ui.icons.plugin
+    local stats = require('lazy').stats()
+    local updates = require('lazy.status').has_updates()
+        and string.format(' (%s updates available)', tostring(require('lazy.status').updates()):gsub(icon, ''))
+      or ''
+    return string.format('%s %s/%s%s ', icon, stats.loaded, stats.count, updates)
+  end,
+  hl = { bg = 'bg_statusline' },
 }
 
 M.OnePassword = {
