@@ -74,7 +74,7 @@ return {
         -- mini.trailspace
         MiniTrailspace = { bg = '${red}' },
 
-        WinBar = { bg = '${darker_gray}' },
+        WinBar = { bg = '${bg_statusline}' },
         WinBarNC = { bg = '${bg_statusline}' },
 
         -- glance.nvim

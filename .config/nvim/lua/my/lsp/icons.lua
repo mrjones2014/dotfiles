@@ -7,12 +7,10 @@ local signs = {
   Info = ' ',
 }
 
--- add ability to lookup by Neovim's internal nomenclature
-signs.DiagnosticSignError = signs.Error
-signs.DiagnosticSignWarn = signs.Warn
-signs.DiagnosticSignWarning = signs.Warning
-signs.DiagnosticSignHint = signs.Hint
-signs.DiagnosticSignInformation = signs.Information
-signs.DiagnosticSignInfo = signs.Info
+-- add lowercase keys and Neovim's nomenclature
+for _, key in ipairs(vim.tbl_keys(signs)) do
+  signs[key:lower()] = signs[key]
+  signs[string.format('DiagnosticSign%s', key)] = signs[key]
+end
 
 return signs
