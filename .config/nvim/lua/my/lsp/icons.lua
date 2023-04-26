@@ -1,5 +1,5 @@
 local signs = {
-  Error = '󰅚 ',
+  Error = ' ',
   Warning = ' ',
   Warn = ' ',
   Hint = ' ',
