@@ -26,7 +26,7 @@ vim.opt.confirm = true
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 0
 vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
-vim.opt.laststatus = 0 -- reset to 3 when statusline plugin is loaded
+vim.opt.laststatus = 3
 vim.opt.virtualedit = 'onemore'
 
 -- setting to 0 makes it default to value of tabstop
