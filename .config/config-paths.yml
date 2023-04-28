@@ -1,5 +1,4 @@
 docs: docs/
-presentations: presentations/
 readme: README.md
 fish: .config/fish/
 tmux: .config/tmux/tmux.conf
@@ -14,7 +13,6 @@ starship: .config/starship.toml
 paths: .config/config-paths.yml
 ignore: .config/.ignore
 atuin: .config/atuin/config.toml
-ctrlg: .config/ctrlg/
 codespell: .config/codespell/custom_dict.txt
 topgrade: .config/topgrade.toml
 ssh: .ssh/config

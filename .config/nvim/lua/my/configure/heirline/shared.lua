@@ -68,7 +68,7 @@ function M.Diagnostics(is_winbar)
         provider = function(self)
           return string.format('%s%s ', icons[severity], self[severity])
         end,
-        hl = string.format('LspDiagnosticsSign%s', severity),
+        hl = { fg = utils.get_highlight(string.format('LspDiagnosticsSign%s', severity)).fg, bg = 'bg_statusline' },
       }
       if is_winbar then
         component.condition = function(self)
