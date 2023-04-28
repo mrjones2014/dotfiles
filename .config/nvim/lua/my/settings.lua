@@ -51,6 +51,7 @@ vim.opt.fillchars = {
   vertleft = '┫',
   vertright = '┣',
   verthoriz = '╋',
+  eob = ' ',
 }
 
 vim.filetype.add({
