@@ -8,6 +8,7 @@ local function basename(s)
 end
 
 local function is_vim(pane)
+  print(string.format('!!!!!!!!!!!!!! PROG=%s', pane:get_user_vars().WEZTERM_PROG))
   local process_name = basename(pane:get_foreground_process_name())
   return process_name == 'nvim' or process_name == 'vim'
 end

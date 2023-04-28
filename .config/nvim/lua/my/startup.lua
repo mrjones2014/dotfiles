@@ -57,6 +57,9 @@ end
 
 function M.show()
   local buf_id = vim.api.nvim_get_current_buf()
+  if not vim.api.nvim_buf_get_option(buf_id, 'modifiable') then
+    return
+  end
   vim.g.startscreen_buf_id = buf_id
   local win_id = vim.api.nvim_get_current_win()
   vim.api.nvim_buf_set_option(buf_id, 'buftype', 'nofile')

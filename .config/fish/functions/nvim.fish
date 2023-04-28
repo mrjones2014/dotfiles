@@ -2,7 +2,7 @@ function nvim
     set -l NVIM (which nvim)
 
     if test (count $argv) -lt 1
-       "$NVIM" 
+        "$NVIM"
         return
     end
 
