@@ -1,4 +1,5 @@
 local conditions = require('heirline.conditions')
+local sep = require('my.configure.heirline.separators')
 
 local function get_current_filenames()
   local listed_buffers = vim.tbl_filter(function(bufnr)
@@ -66,14 +67,35 @@ M.UniqueFilename = {
     end,
     hl = { bg = 'black' },
   },
+  {
+    -- file save status indicator
+    condition = function()
+      return vim.bo.modified == true
+    end,
+    provider = ' ',
+    hl = { bg = 'black' },
+  },
+  {
+    provider = sep.rounded_right,
+    hl = function()
+      if conditions.has_diagnostics() then
+        return { bg = 'gray', fg = 'black' }
+      else
+        return { bg = 'bg_statusline', fg = 'black' }
+      end
+    end,
+  },
 }
 
-M.FileSaveStatus = {
-  condition = function()
-    return vim.bo.modified == true
-  end,
-  provider = ' ',
-  hl = { bg = 'black' },
+M.Diagnostics = {
+  provider = ' ',
+  hl = { bg = 'gray' },
+  condition = conditions.has_diagnostics,
+  require('my.configure.heirline.shared').Diagnostics(true, 'gray'),
+  {
+    provider = sep.rounded_right,
+    hl = { fg = 'gray', bg = 'bg_statusline' },
+  },
 }
 
 M.Navic = {
