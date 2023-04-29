@@ -188,7 +188,7 @@ M.OnePassword = {
   },
   {
     provider = string.format(' %s', sep.rounded_left),
-    hl = { fg = 'black', bg = 'blue' },
+    hl = { fg = 'bg_statusline', bg = 'blue' },
   },
 }
 
