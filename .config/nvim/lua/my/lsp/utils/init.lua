@@ -52,7 +52,7 @@ function M.apply_ui_tweaks()
   local icons = require('my.lsp.icons')
   for type, icon in pairs(icons) do
     local highlight = 'DiagnosticSign' .. type
-    local legacy_highlight = 'LspDiagnosticsSign' .. type
+    local legacy_highlight = 'DiagnosticSign' .. type
     vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = highlight })
     vim.fn.sign_define(legacy_highlight, { text = icon, texthl = legacy_highlight, numhl = legacy_highlight })
   end

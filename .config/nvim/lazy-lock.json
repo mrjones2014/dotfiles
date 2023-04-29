@@ -1,6 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "38d3b7eb553872d8866f14a0dd4fe84126068fce" },
   "LuaSnip": { "branch": "master", "commit": "e77fa9ad0b1f4fc6cddf54e51047e17e90c7d7ed" },
+  "aerial.nvim": { "branch": "master", "commit": "07039ea63b562caf9017a223d14eebfa1fc085c1" },
   "autolist.nvim": { "branch": "main", "commit": "0936e384b10315f65b8ef3bf1be938314d23a528" },
   "better-escape.nvim": { "branch": "master", "commit": "426d29708064d5b1bfbb040424651c92af1f3f64" },
   "bufdelete.nvim": { "branch": "master", "commit": "8933abc09df6c381d47dc271b1ee5d266541448e" },
@@ -63,6 +64,6 @@
   "todo-comments.nvim": { "branch": "main", "commit": "8febc60a76feefd8203077ef78b6a262ea1a41f9" },
   "trouble.nvim": { "branch": "main", "commit": "d56bfc0c501ced4002a57cb60433362fb2ce9c4d" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
-  "vim-matchup": { "branch": "master", "commit": "1e276be9306490e439784cf5e8abe1f93b4a41b6" },
+  "vim-matchup": { "branch": "master", "commit": "a8d1b8e635d666b19effa842f331ffa32beb57c2" },
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" }
 }

@@ -47,8 +47,7 @@ return {
       winbar = {
         shared.FileIcon('black'),
         wb.UniqueFilename,
-        wb.FileSaveStatus,
-        shared.Diagnostics(true),
+        wb.Diagnostics,
         wb.Navic,
       },
       statuscolumn = {

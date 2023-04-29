@@ -43,6 +43,7 @@ M.FilePath = {
 
 local icons = require('my.lsp.icons')
 local severities_order = { 'Hint', 'Information', 'Warning', 'Error' }
+local severity_hl = { Hint = 'Hint', Information = 'Info', Warning = 'Warn', Error = 'Error' }
 local severities = {
   Hint = vim.diagnostic.severity.HINT,
   Information = vim.diagnostic.severity.INFO,
@@ -60,7 +61,8 @@ local diagnostics_base = {
   end,
 }
 
-function M.Diagnostics(is_winbar)
+function M.Diagnostics(is_winbar, bg)
+  bg = bg or 'bg_statusline'
   return utils.insert(
     diagnostics_base,
     unpack(vim.tbl_map(function(severity)
@@ -68,7 +70,9 @@ function M.Diagnostics(is_winbar)
         provider = function(self)
           return string.format('%s%s ', icons[severity], self[severity])
         end,
-        hl = { fg = utils.get_highlight(string.format('LspDiagnosticsSign%s', severity)).fg, bg = 'bg_statusline' },
+        hl = function()
+          return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_hl[severity])).fg, bg = bg }
+        end,
       }
       if is_winbar then
         component.condition = function(self)
