@@ -59,6 +59,8 @@ if status is-interactive
     installed starship && starship init fish | source
     installed bob && bob complete fish | source
     installed atuin && atuin init fish | source
+    installed fnm && fnm completions | source
+    installed fnm && fnm env | source
     for mode in insert default normal
         installed atuin && bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
         bind -M $mode \a _project_jump
