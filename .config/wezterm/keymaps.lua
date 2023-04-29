@@ -90,7 +90,7 @@ return {
     { key = '0', mods = 'SUPER', action = w.action.ResetFontSize },
     { key = '=', mods = 'SUPER', action = w.action.IncreaseFontSize },
     { key = 'c', mods = 'SUPER', action = w.action.CopyTo('Clipboard') },
-    { key = 'v', mods = 'SUPER', action = w.action.PasteFrom('PrimarySelection') },
+    { key = 'v', mods = 'SUPER', action = w.action.PasteFrom('Clipboard') },
     { key = '[', mods = 'LEADER', action = w.action.ActivateCopyMode },
   },
 }
