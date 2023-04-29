@@ -28,9 +28,11 @@ return {
     },
     {
       'williamboman/mason.nvim',
+      lazy = false, -- need stuff added to $PATH immediately
       dependencies = {
         {
           'WhoIsSethDaniel/mason-tool-installer.nvim',
+          lazy = false,
           cmd = { 'MasonToolsUpdate', 'MasonToolsInstall' },
           config = function()
             require('mason-tool-installer').setup({
