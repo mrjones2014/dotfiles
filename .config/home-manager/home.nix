@@ -110,7 +110,6 @@
    ];
 
    shellAliases = {
-    clear = "clear && tput cup \\$LINES";
     sourcefish = "source ~/.config/fish/config.fish && fish_logo";
     dots = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
     vim = "nvim";
@@ -173,6 +172,9 @@
     # me move my eyes from the bottom back to the top of the screen;
     # keep the prompt consistently at the bottom
     tput cup $LINES
+    # this alias doesn't work from Nix `shellAliases` definition because
+    # it uses a variable and aliases get single-quotes instead of double-quoted
+    alias clear="clear && tput cup \$LINES";
    '';
   };
 }
