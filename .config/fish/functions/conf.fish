@@ -19,8 +19,7 @@ end
 function conf --description "Quickly open configuration files/directories in Neovim"
     set -l SUBJECT_NAME $argv[1]
     if test -z "$SUBJECT_NAME"
-        set -l SUBJECT_OPTIONS ()
-        set SUBJECT_NAME (grep ".*:" ~/.config/config-paths.yml | awk '{ sub(/:/,""); print $1 }' | fzf)
+        pushd "$HOME/.config/home-manager/" && nvim && popd
     end
 
     if test -z "$SUBJECT_NAME"
@@ -42,6 +41,6 @@ function conf --description "Quickly open configuration files/directories in Neo
     else if test -d "$CONFIG_FULL_PATH"
         pushd "$CONFIG_FULL_PATH" && nvim && popd
     else
-        echo "Path given is not a file or directory."
+        pushd "$HOME/.config/home-manager/" && nvim && popd
     end
 end
