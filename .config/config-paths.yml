@@ -4,7 +4,6 @@ fish: .config/fish/
 tmux: .config/tmux/tmux.conf
 scripts: scripts/
 kitty: .config/kitty/
-alacritty: .config/alacritty/
 hammerspoon: .config/hammerspoon/
 vim: .config/nvim/
 paths: .config/config-paths.yml
