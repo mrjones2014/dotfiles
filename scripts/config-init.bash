@@ -16,4 +16,14 @@ dots checkout
 dots config status.showUntrackedFiles no
 dots config core.fsmonitor false
 dots config core.untrackedcache false
-echo "If setting up a mac, you should run ~/scripts/setup-macos-defaults.bash"
+
+sh <(curl -L https://nixos.org/nix/install) --daemon
+
+echo "Installed Nix package manager. Restart shell, then run the following commands:"
+echo "  \$ nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager"
+echo "  \$ nix-channel --update"
+echo "  \$ nix-shell '<home-manager>' -A install"
+echo "Then, restart shell again and run:"
+echo "  \$ home-manager switch"
+
+echo "If setting up a mac, you should also run ~/scripts/setup-macos-defaults.bash"
