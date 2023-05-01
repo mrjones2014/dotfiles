@@ -95,7 +95,7 @@ return {
     -- an autocommand that runs only once
     -- for each lsp config
     for filetype, filetype_config in pairs(require('my.lsp.filetypes').config) do
-      local file_patterns = filetype_config.patterns
+      local file_patterns = filetype_config.patterns or { string.format('*.%s', filetype) }
       local server_name = filetype_config.lspconfig
       if file_patterns and server_name then
         -- since we're lazy loading lspconfig itself,
