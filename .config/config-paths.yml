@@ -15,3 +15,8 @@ wezterm: .config/wezterm/
 cbfmt: .config/cbfmt.toml
 home: .config/home-manager/
 nix: .config/nix/nix.conf
+git: .config/home-manager/modules/git.nix
+bat: .config/home-manager/modules/bat.nix
+starship: .config/home-manager/modules/starship.nix
+atuin: .config/home-manager/modules/atuin.nix
+topgrade: .config/home-manager/modules/topgrade.nix
