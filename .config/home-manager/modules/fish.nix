@@ -49,7 +49,6 @@
 
     shellInit = ''
     set -g fish_prompt_pwd_dir_length 20
-    set -u fish_greeting ""
 
     # Setting up SSH_AUTH_SOCK here rather than ~/.ssh/config
     # because that overrides the environment variables,
@@ -93,5 +92,9 @@
     # it uses a variable and aliases get single-quotes instead of double-quoted
     alias clear="clear && tput cup \$LINES";
    '';
+
+   functions = {
+    fish_greeting = "";
+   };
   };
 }
