@@ -71,8 +71,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # "${config.xdg.configHome}" = { source = ~/git/dotfiles/.config; recursive = true; };
-    # ".ssh/config".source = ~/git/dotfiles/.ssh/config;
   };
 
   # You can also manage environment variables but you will have to manually
@@ -99,7 +97,6 @@
   programs.home-manager.enable = true;
   programs.fish = {
    enable = true;
-
    plugins = [
     {
        name="foreign-env";
