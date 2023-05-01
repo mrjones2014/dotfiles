@@ -36,7 +36,6 @@
     # '')
     (pkgs.nerdfonts.override { fonts = ["FiraCode"]; })
     pkgs.catimg
-    pkgs.delta
     pkgs.gh
     pkgs.thefuck
     pkgs.starship
@@ -54,6 +53,14 @@
     pkgs.glow
     pkgs.exa
     pkgs.neovim
+    pkgs.tealdeer
+    pkgs.go
+    (pkgs.fetchFromGitHub {
+      owner = "nix-community";
+      repo = "nurl";
+      rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
+      hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
+    })
     # pkgs.op, # no up to date 1Password CLI nix package
     #pkgs.hammerspoon, no package
   ];
