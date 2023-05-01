@@ -18,5 +18,5 @@ topgrade: .config/topgrade.toml
 ssh: .ssh/config
 wezterm: .config/wezterm/
 cbfmt: .config/cbfmt.toml
-home: .config/home-manager/home.nix
+home: .config/home-manager/
 nix: .config/nix/nix.conf
