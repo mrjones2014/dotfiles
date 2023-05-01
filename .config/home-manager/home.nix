@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -61,7 +61,6 @@
       rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
       hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
     })
-    # pkgs.op, # no up to date 1Password CLI nix package
     #pkgs.hammerspoon, no package
   ];
 

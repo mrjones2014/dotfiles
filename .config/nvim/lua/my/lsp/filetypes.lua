@@ -65,6 +65,10 @@ M.config = {
     lspconfig = 'sourcekit',
     treesitter = 'swift',
   },
+  ['nix'] = {
+    lspconfig = 'rnix',
+    treesitter = 'nix',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
