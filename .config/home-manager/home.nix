@@ -48,9 +48,6 @@ in
     pkgs.ripgrep
     pkgs.fnm
     pkgs.jq
-    pkgs.rustup
-    pkgs.cargo-nextest
-    pkgs.cargo-update
     pkgs.glow
     pkgs.exa
     pkgs.neovim
@@ -73,6 +70,7 @@ in
     ./modules/atuin.nix
     ./modules/bat.nix
     ./modules/git.nix
+    ./modules/rust.nix
   ];
 
   # Let Home Manager install and manage itself.
