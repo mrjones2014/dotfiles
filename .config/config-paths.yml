@@ -7,14 +7,9 @@ kitty: .config/kitty/
 alacritty: .config/alacritty/
 hammerspoon: .config/hammerspoon/
 vim: .config/nvim/
-git: .config/git/
-bat: .config/bat/config
-starship: .config/starship.toml
 paths: .config/config-paths.yml
 ignore: .config/.ignore
-atuin: .config/atuin/config.toml
 codespell: .config/codespell/custom_dict.txt
-topgrade: .config/topgrade.toml
 ssh: .ssh/config
 wezterm: .config/wezterm/
 cbfmt: .config/cbfmt.toml
