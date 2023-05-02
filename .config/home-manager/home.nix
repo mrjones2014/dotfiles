@@ -71,6 +71,7 @@ in
     ./modules/bat.nix
     ./modules/git.nix
     ./modules/rust.nix
+    ./modules/ssh.nix
   ];
 
   # Let Home Manager install and manage itself.
