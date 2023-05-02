@@ -10,7 +10,7 @@ end
 local function is_vim(pane)
   print('!!!!! USER VARS: ', pane:get_user_vars())
   local process_name = basename(pane:get_foreground_process_name())
-  return process_name == 'nvim' or process_name == 'vim'
+  return not not process_name:find('vim')
 end
 
 local direction_keys = {
