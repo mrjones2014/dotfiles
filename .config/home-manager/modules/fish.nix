@@ -44,6 +44,9 @@
       ll = "ls -l --git";
       l = "ls -laH";
       lg = "ls -lG";
+      # TODO move my configs around so I can run in pure mode
+      nix-apply =
+        "nix run ~/.config/home-manager/ switch -- --flake ~/.config/home-manager/ --impure";
     };
 
     shellInit = ''
