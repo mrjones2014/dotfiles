@@ -14,6 +14,16 @@
   programs.fish = {
     enable = true;
 
+    plugins = [{
+      name = "foreign-env";
+      src = pkgs.fetchFromGitHub {
+        owner = "oh-my-fish";
+        repo = "plugin-foreign-env";
+        rev = "3ee95536106c11073d6ff466c1681cde31001383";
+        hash = "sha256-vyW/X2lLjsieMpP9Wi2bZPjReaZBkqUbkh15zOi8T4Y=";
+      };
+    }];
+
     shellAliases = {
       sourcefish = "source ~/.config/fish/config.fish && fish_logo";
       dots = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
@@ -53,6 +63,12 @@
       # for local-only, non-sync'd stuff
       if test -f $HOME/.config/fish/local.fish
         source $HOME/.config/fish/local.fish
+      end
+
+      # Source nix files, required to set fish as default shell, otherwise
+      # it doesn't have the nix env vars
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
+        fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
       end
     '';
 
