@@ -2,6 +2,7 @@
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
+  inherit (stdenv) isDarwin;
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -50,6 +51,7 @@ in {
     pkgs.glow
     pkgs.exa
     pkgs.neovim
+    pkgs.luajitPackages.jsregexp
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt

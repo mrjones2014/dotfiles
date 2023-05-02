@@ -1,16 +1,7 @@
 local w = require('wezterm')
 
--- Equivalent to POSIX basename(3)
--- Given "/foo/bar" returns "bar"
--- Given "c:\\foo\\bar" returns "bar"
-local function basename(s)
-  return string.gsub(s, '(.*[/\\])(.*)', '%2')
-end
-
 local function is_vim(pane)
-  print('!!!!! USER VARS: ', pane:get_user_vars())
-  local process_name = basename(pane:get_foreground_process_name())
-  return not not process_name:find('vim')
+  return pane:get_user_vars().IS_NVIM == 'true'
 end
 
 local direction_keys = {
