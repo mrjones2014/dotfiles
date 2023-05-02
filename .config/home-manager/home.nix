@@ -2,8 +2,7 @@
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
-in
-{
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mat";
@@ -39,7 +38,7 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    (pkgs.nerdfonts.override { fonts = ["FiraCode"]; })
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
     pkgs.catimg
     pkgs.gh
     pkgs.thefuck

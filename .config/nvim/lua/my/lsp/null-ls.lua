@@ -94,6 +94,7 @@ local formatters = {
   b.formatting.fish_indent,
   b.formatting.gofmt,
   b.formatting.swiftformat,
+  b.formatting.nixfmt,
 }
 
 local config = {

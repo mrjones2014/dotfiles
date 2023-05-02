@@ -1,9 +1,9 @@
 {
-    programs.atuin = {
-        enable = true;
-        settings = {
-            search_mode = "fuzzy";
-            inline_height = 40;
-        };
+  programs.atuin = {
+    enable = true;
+    settings = {
+      search_mode = "fuzzy";
+      inline_height = 40;
     };
+  };
 }

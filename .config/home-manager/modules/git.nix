@@ -2,9 +2,8 @@
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
-in
-{
-  home.packages = [pkgs.delta];
+in {
+  home.packages = [ pkgs.delta ];
   programs.git = {
     enable = true;
     package = git.override {
@@ -21,17 +20,32 @@ in
       s = "status";
       newbranch = "checkout -b";
       commit-amend = "commit --amend --no-edit";
-      prune-branches = ''!git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
-      ch = ''!if test "$#" -ne 0; then if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then git checkout "$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)" else git checkout "$@"; fi; else git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | sort | uniq | fzf-tmux -p -x 15 | xargs git checkout; fi'';
-      add-ignore-whitespace = "!git diff --ignore-all-space | git apply --cached";
+      prune-branches = ''
+        !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
+      ch = ''
+        !if test "$#" -ne 0; then if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then git checkout "$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)" else git checkout "$@"; fi; else git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | sort | uniq | fzf-tmux -p -x 15 | xargs git checkout; fi'';
+      add-ignore-whitespace =
+        "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | pbcopy";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
     includes = [
-      { condition = "hasconfig:remote.*.url:https://github.com/**"; path = ~/.config/git/gitconfig.github; }
-      { condition = "hasconfig:remote.*.url:git@github.com:*/**"; path = ~/.config/git/gitconfig.github; }
-      { condition = "hasconfig:remote.*.url:ssh://git@github.com:*/**"; path = ~/.config/git/gitconfig.github; }
-      { condition = "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**"; path = ~/.config/git/gitconfig.gitlab; }
+      {
+        condition = "hasconfig:remote.*.url:https://github.com/**";
+        path = ~/.config/git/gitconfig.github;
+      }
+      {
+        condition = "hasconfig:remote.*.url:git@github.com:*/**";
+        path = ~/.config/git/gitconfig.github;
+      }
+      {
+        condition = "hasconfig:remote.*.url:ssh://git@github.com:*/**";
+        path = ~/.config/git/gitconfig.github;
+      }
+      {
+        condition = "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**";
+        path = ~/.config/git/gitconfig.gitlab;
+      }
     ];
     extraConfig = {
       user = { name = "Mat Jones"; };
@@ -41,7 +55,10 @@ in
       gpg = {
         format = "ssh";
         ssh = {
-          program = if isLinux then "/opt/1Password/op-ssh-sign" else "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          program = if isLinux then
+            "/opt/1Password/op-ssh-sign"
+          else
+            "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         };
       };
       core = {
@@ -52,7 +69,10 @@ in
       };
       interactive = { diffFilter = "delta --color-only"; };
       init = { defaultBranch = "master"; };
-      delta = { lineNumbers = true; navigate = true; };
+      delta = {
+        lineNumbers = true;
+        navigate = true;
+      };
       color = {
         ui = true;
         "diff-highlight" = {
@@ -80,7 +100,9 @@ in
         # Force GitHub to use SSH
         "git@github.com:" = { insteadOf = "https://github.com/"; };
         # Use HTTPS for cargo updates
-        "https://github.com/rust-lang/crates.io-index" = { insteadOf = "https://github.com/rust-lang/crates.io-index"; };
+        "https://github.com/rust-lang/crates.io-index" = {
+          insteadOf = "https://github.com/rust-lang/crates.io-index";
+        };
       };
     };
   };
