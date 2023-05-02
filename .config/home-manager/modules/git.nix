@@ -22,8 +22,7 @@ in {
       commit-amend = "commit --amend --no-edit";
       prune-branches = ''
         !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
-      ch = ''
-        !if test "$#" -ne 0; then if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then git checkout "$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)" else git checkout "$@"; fi; else git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | sort | uniq | fzf-tmux -p -x 15 | xargs git checkout; fi'';
+      ch = "!$HOME/scripts/git-ch.bash";
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | pbcopy";
