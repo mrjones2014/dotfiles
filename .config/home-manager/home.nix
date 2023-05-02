@@ -53,12 +53,12 @@ in {
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt
-    (pkgs.fetchFromGitHub {
-      owner = "nix-community";
-      repo = "nurl";
-      rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
-      hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
-    })
+    # (pkgs.fetchFromGitHub {
+    #   owner = "nix-community";
+    #   repo = "nurl";
+    #   rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
+    #   hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
+    # })
     #pkgs.hammerspoon, no package
   ];
 
@@ -75,4 +75,6 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.wezterm.enable = true;
+  xdg.configFile."wezterm/wezterm.lua".enable = false;
 }

@@ -45,7 +45,6 @@
       # debug auth sockets while working on the 1Password desktop app
       set -g -x SSH_TTY (tty)
       if [ "$(uname)" = Darwin ]
-        fish_add_path /Applications/WezTerm.app/Contents/MacOS/
         set -g -x SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       else
         set -g -x SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
