@@ -13,7 +13,6 @@ vim.opt.runtimepath:prepend(lazypath)
 require('lazy').setup('my.configure', {
   defaults = {
     lazy = true,
-    notify = false,
   },
   dev = { path = '~/git' },
   install = {
@@ -21,6 +20,7 @@ require('lazy').setup('my.configure', {
   },
   checker = {
     enabled = true,
+    notify = false,
   },
   performance = {
     rtp = {
