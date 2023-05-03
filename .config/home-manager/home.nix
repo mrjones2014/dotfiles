@@ -56,7 +56,7 @@ in {
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt
-    pkgs._1password-gui
+    pkgs.obsidian
     (pkgs.fetchFromGitHub {
       owner = "nix-community";
       repo = "nurl";
@@ -68,7 +68,7 @@ in {
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "1password" ];
+    builtins.elem (lib.getName pkg) [ "obsidian" ];
 
   imports = [
     ./modules/fish.nix
