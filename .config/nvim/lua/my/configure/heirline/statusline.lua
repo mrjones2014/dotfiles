@@ -165,9 +165,12 @@ M.LazyStats = {
   provider = function()
     local icon = require('lazy.core.config').options.ui.icons.plugin
     local stats = require('lazy').stats()
-    local updates = require('lazy.status').has_updates()
-        and string.format(' (%s updates available)', tostring(require('lazy.status').updates()):gsub(icon, ''))
-      or ''
+    local updates = ''
+    if require('lazy.status').has_updates() then
+      local num_updates, _ = tostring(require('lazy.status').updates()):gsub(icon, '')
+      updates =
+        string.format(' (%s update%s available)', num_updates, num_updates ~= '0' and num_updates ~= '1' and 's' or '')
+    end
     return string.format('%s %s/%s%s ', icon, stats.loaded, stats.count, updates)
   end,
   hl = { bg = 'bg_statusline' },
