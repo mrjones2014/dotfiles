@@ -56,6 +56,7 @@ in {
     pkgs.go
     pkgs.nixfmt
     pkgs.obsidian
+    pkgs.sqlite
     (pkgs.fetchFromGitHub {
       owner = "nix-community";
       repo = "nurl";
@@ -85,5 +86,5 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.direnv.enable = true;
+  # programs.direnv.enable = true;
 }

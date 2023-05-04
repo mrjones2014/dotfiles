@@ -62,6 +62,7 @@ M.config = {
   ['nix'] = {
     lspconfig = 'rnix',
     treesitter = 'nix',
+    mason = { 'rnix-lsp' },
   },
 }
 
