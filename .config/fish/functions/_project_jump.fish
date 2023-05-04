@@ -1,5 +1,5 @@
 function _project_jump_get_icon
-    set -l remote "$(git ls-remote --get-url 2> /dev/null)"
+    set -l remote "$(git --work-tree $argv[1] --git-dir $argv[1]/.git ls-remote --get-url 2> /dev/null)"
     if string match -r "github.com" "$remote" >/dev/null
         set_color --bold normal
         echo -n 
@@ -14,7 +14,7 @@ function _project_jump_format_project
     set -l branch (git --work-tree $repo --git-dir $repo/.git branch --show-current)
     set_color --bold cyan
     echo -n "$argv[1]"
-    echo -n " $(_project_jump_get_icon)"
+    echo -n " $(_project_jump_get_icon $repo)"
     set_color --bold f74e27
     echo "  $branch"
 end
