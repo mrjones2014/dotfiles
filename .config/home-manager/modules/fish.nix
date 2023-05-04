@@ -65,11 +65,6 @@
         set -g -x SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
       end
 
-      # for local-only, non-sync'd stuff
-      if test -f $HOME/.config/fish/local.fish
-        source $HOME/.config/fish/local.fish
-      end
-
       # Source nix files, required to set fish as default shell, otherwise
       # it doesn't have the nix env vars
       if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
