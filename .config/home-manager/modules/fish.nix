@@ -53,6 +53,7 @@
 
     shellInit = ''
       set -g fish_prompt_pwd_dir_length 20
+      fish_add_path "$HOME/.local/share/nvim/mason/bin/"
 
       # Setting up SSH_AUTH_SOCK here rather than ~/.ssh/config
       # because that overrides the environment variables,
