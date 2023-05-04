@@ -50,7 +50,7 @@ return {
     {
       key = '-',
       mods = 'LEADER',
-      action = w.action.SplitPane({ direction = 'Down' }),
+      action = w.action.SplitPane({ direction = 'Down', size = { Percent = 20 } }),
     },
     -- move between split panes
     split_nav('move', 'h'),
