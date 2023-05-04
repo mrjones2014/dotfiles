@@ -79,11 +79,10 @@ in {
     ./modules/git.nix
     ./modules/rust.nix
     ./modules/ssh.nix
+    ./modules/wezterm.nix
   ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.wezterm.enable = true;
   programs.direnv.enable = true;
-  xdg.configFile."wezterm/wezterm.lua".enable = false;
 }
