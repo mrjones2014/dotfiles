@@ -51,7 +51,9 @@ function _project_jump_get_readme
         glow -p -s dark -w 150 "$dir/README.md"
     else
         echo
-        echo "README.md not found"
+        echo (set_color --bold) "README.md not found"
+        echo
+        ls --color=always $dir
     end
 end
 
