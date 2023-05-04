@@ -7,6 +7,7 @@
         "\${custom.git_server_icon}"
         "$git_branch"
         "$git_status"
+        "\${custom.nix_shell}"
         "$line_break"
         "$character"
       ];
@@ -39,6 +40,14 @@
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "bold #f74e27"; # git brand color
           format = "[$output]($style)  ";
+        };
+        nix_shell = {
+          description = "Show an indicator when inside a Nix ephemeral shell";
+          when =
+            ''[ "$IN_NIX_SHELL" != "" ] || [ "$IN_NIX_DEVELOP_SHELL" != "" ]'';
+          shell = [ "bash" "--noprofile" "--norc" ];
+          style = "bold #6ec2e8";
+          format = "[ ]($style)";
         };
       };
     };

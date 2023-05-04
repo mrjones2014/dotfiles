@@ -10,14 +10,13 @@ function _project_jump_get_icon
 end
 
 function _project_jump_format_project
-    pushd "$HOME/git/$argv[1]"
-    set -l branch (git branch --show-current)
+    set -l repo "$HOME/git/$argv[1]"
+    set -l branch (git --work-tree $repo --git-dir $repo/.git branch --show-current)
     set_color --bold cyan
     echo -n "$argv[1]"
     echo -n " $(_project_jump_get_icon)"
     set_color --bold f74e27
     echo "  $branch"
-    popd
 end
 
 function _project_jump_parse_project

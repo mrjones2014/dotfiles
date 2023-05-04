@@ -35,7 +35,7 @@ return {
       },
     })
     -- highlight mdx with markdown -- it's close enough. We also do JSX injection via ./after/queries/markdown/injections.scm
-    require('nvim-treesitter.parsers').filetype_to_parsername.mdx = 'markdown'
+    vim.treesitter.language.register('markdown', 'mdx')
     local rainbow = require('ts-rainbow')
     require('nvim-treesitter.configs').setup({
       ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
