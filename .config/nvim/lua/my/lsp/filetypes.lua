@@ -106,6 +106,7 @@ table.insert_all(M.treesitter_parsers, {
   'vim',
   'vimdoc',
   'make',
+  'regex',
 })
 
 return M
