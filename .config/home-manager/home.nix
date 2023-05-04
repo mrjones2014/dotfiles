@@ -52,7 +52,6 @@ in {
     pkgs.glow
     pkgs.exa
     pkgs.neovim
-    pkgs.luajitPackages.jsregexp
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt
@@ -63,6 +62,8 @@ in {
       rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
       hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
     })
+    pkgs.luajitPackages.jsregexp
+    pkgs.luajitPackages.luarocks-nix
   ] ++ lib.lists.optionals isDarwin [
     # put macOS specific packages here
   ];
