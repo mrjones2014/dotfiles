@@ -10,7 +10,17 @@ return {
     },
   },
   config = function()
-    local trouble = require('trouble.providers.telescope')
+    local actions = require('telescope.actions')
+
+    local function smart_send_to_qflist(...)
+      actions.smart_add_to_qflist(...)
+      vim.cmd.copen()
+    end
+
+    local function send_selected_to_qflist(...)
+      actions.send_selected_to_qf(...)
+      vim.cmd.copen()
+    end
 
     local function parse_prompt(prompt)
       local first_word, rest = prompt:match('^%s*@(%S+)%s*(.+)$')
@@ -95,20 +105,20 @@ return {
         },
         mappings = {
           i = {
-            ['<C-t>'] = trouble.open_with_trouble,
-            ['<C-r>'] = trouble.open_selected_with_trouble,
+            ['<C-t>'] = smart_send_to_qflist,
+            ['<C-r>'] = send_selected_to_qflist,
             ['<C-u>'] = false, -- clear prompt with ctrl+u
-            ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
-            ['<C-f>'] = require('telescope.actions').preview_scrolling_up,
-            ['<C-n>'] = require('telescope.actions').move_selection_next,
-            ['<C-p>'] = require('telescope.actions').move_selection_previous,
+            ['<C-d>'] = actions.preview_scrolling_down,
+            ['<C-f>'] = actions.preview_scrolling_up,
+            ['<C-n>'] = actions.move_selection_next,
+            ['<C-p>'] = actions.move_selection_previous,
           },
           n = {
-            ['<C-t>'] = trouble.open_with_trouble,
-            ['<C-r>'] = trouble.open_selected_with_trouble,
-            ['q'] = require('telescope.actions').close,
-            ['<C-n>'] = require('telescope.actions').move_selection_next,
-            ['<C-p>'] = require('telescope.actions').move_selection_previous,
+            ['<C-t>'] = smart_send_to_qflist,
+            ['<C-r>'] = send_selected_to_qflist,
+            ['q'] = actions.close,
+            ['<C-n>'] = actions.move_selection_next,
+            ['<C-p>'] = actions.move_selection_previous,
           },
         },
         layout_strategy = 'horizontal',
@@ -184,10 +194,10 @@ return {
         command_history = require('telescope.themes').get_dropdown({
           mappings = {
             i = {
-              ['<CR>'] = require('telescope.actions').edit_command_line,
+              ['<CR>'] = actions.edit_command_line,
             },
             n = {
-              ['<CR>'] = require('telescope.actions').edit_command_line,
+              ['<CR>'] = actions.edit_command_line,
             },
           },
         }),
