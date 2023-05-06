@@ -11,7 +11,7 @@ return {
       ft = require('my.lsp.filetypes').filetypes,
       dependencies = { 'onsails/lspkind-nvim' },
     },
-    { 'mtoohey31/cmp-fish', ft = 'fish' },
+    { 'mtoohey31/cmp-fish', ft = 'fish', cond = not not string.find(vim.env.SHELL, 'fish') },
     {
       'L3MON4D3/LuaSnip',
       config = function()
