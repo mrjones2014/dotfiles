@@ -9,6 +9,7 @@
     EDITOR = "nvim";
     GIT_MERGE_AUTOEDIT = "no";
     MANPAGER = "nvim -c 'Man!' -o -";
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
   };
 
   programs.fish = {
