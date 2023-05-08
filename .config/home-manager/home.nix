@@ -67,6 +67,8 @@ in {
     pkgs.luajitPackages.luarocks-nix
   ] ++ lib.lists.optionals isDarwin [
     # put macOS specific packages here
+  ] ++ lib.lists.optionals isLinux [
+    # put Linux specific packages here
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
