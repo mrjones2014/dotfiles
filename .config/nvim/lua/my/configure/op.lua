@@ -1,6 +1,6 @@
 return {
   'mrjones2014/op.nvim',
-  dev = vim.fn.isdirectory(vim.fn.expand('~/git/op.nvim')) ~= 0,
+  dev = true,
   build = 'make install',
   cmd = {
     'OpSignin',

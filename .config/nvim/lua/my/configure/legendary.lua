@@ -1,6 +1,6 @@
 return {
   'mrjones2014/legendary.nvim',
-  dev = vim.fn.isdirectory(vim.fn.expand('~/git/legendary.nvim')) ~= 0,
+  dev = true,
   dependencies = {
     -- used by key mappings
     'fedepujol/move.nvim',
