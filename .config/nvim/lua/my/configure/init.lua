@@ -10,7 +10,7 @@ return {
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
   { 'tpope/vim-sleuth', lazy = false },
   { 'mrjones2014/iconpicker.nvim' },
-  { 'mrjones2014/lua-gf.nvim', dev = vim.fn.isdirectory(vim.fn.expand('~/git/lua-gf')) ~= 0, ft = 'lua' },
+  { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   { 'echasnovski/mini.pairs', event = 'InsertEnter', config = mini },
   { 'echasnovski/mini.trailspace', event = 'BufRead', config = mini },
   { 'echasnovski/mini.splitjoin', keys = { 'gS' }, config = mini },

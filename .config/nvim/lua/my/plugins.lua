@@ -14,7 +14,7 @@ require('lazy').setup('my.configure', {
   defaults = {
     lazy = true,
   },
-  dev = { path = '~/git' },
+  dev = { path = '~/git', fallback = true },
   install = {
     colorscheme = { 'onedark_dark', 'habamax' },
   },
