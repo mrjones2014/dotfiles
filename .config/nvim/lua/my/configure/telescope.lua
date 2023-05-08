@@ -13,11 +13,13 @@ return {
     local actions = require('telescope.actions')
 
     local function smart_send_to_qflist(...)
+      vim.cmd.cexpr('[]')
       actions.smart_add_to_qflist(...)
       vim.cmd.copen()
     end
 
     local function send_selected_to_qflist(...)
+      vim.cmd.cexpr('[]')
       actions.send_selected_to_qf(...)
       vim.cmd.copen()
     end

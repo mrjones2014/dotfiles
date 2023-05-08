@@ -56,9 +56,6 @@ return {
           return require('lspkind').cmp_format({ with_text = true })(...)
         end,
       },
-      experimental = {
-        ghost_text = true,
-      },
     }
 
     cmp.setup(vim.tbl_deep_extend('force', shared_config, { ---@diagnostic disable-line:redundant-parameter
