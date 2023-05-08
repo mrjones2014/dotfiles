@@ -10,6 +10,7 @@ end
 
 local config = w.config_builder()
 config.color_scheme_dirs = { '~/.config/wezterm/colors/' }
+config.color_scheme = 'onedarkpro_onedark_dark'
 config.cursor_blink_rate = 0
 config.font = w.font('FiraCode Nerd Font')
 config.font_size = 14
