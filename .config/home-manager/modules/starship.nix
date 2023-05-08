@@ -43,8 +43,7 @@
         };
         nix_shell = {
           description = "Show an indicator when inside a Nix ephemeral shell";
-          when =
-            ''[ "$IN_NIX_SHELL" != "" ] || [ "$IN_NIX_DEVELOP_SHELL" != "" ]'';
+          when = ''[ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "bold #6ec2e8";
           format = "[ ]($style)";
