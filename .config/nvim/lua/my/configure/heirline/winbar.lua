@@ -108,6 +108,7 @@ M.Navic = {
   hl = { bg = 'bg_statusline' },
   {
     provider = '%<',
+    -- test
   },
 }
 
