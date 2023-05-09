@@ -106,6 +106,9 @@ M.Navic = {
     return string.format(' %s', require('nvim-navic').get_location())
   end,
   hl = { bg = 'bg_statusline' },
+  {
+    provider = '%<',
+  },
 }
 
 return M
