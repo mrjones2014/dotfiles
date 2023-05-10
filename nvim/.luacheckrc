@@ -3,17 +3,22 @@ globals = {
   'p',
   Path = {
     fields = {
-      join = { read_only = true },
+      join = function(...) end,
     },
   },
   Clipboard = {
     fields = {
-      copy = { read_only = true },
+      copy = function(str) end,
     },
   },
   LSP = {
     fields = {
-      on_attach = { read_only = true },
+      on_attach = function(client, bufnr) end,
     },
   },
+  TblUtils = {
+    fields = {
+      join_lists = function(...) end
+    }
+  }
 }

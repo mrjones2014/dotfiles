@@ -75,21 +75,22 @@ for filetype, config in pairs(M.config) do
   if type(config.mason) == 'string' then
     table.insert(M.mason_packages, config.mason)
   elseif type(config.mason) == 'table' then
-    table.insert_all(M.mason_packages, unpack(config.mason --[[@as table]]))
+    M.mason_packages = TblUtils.join_lists(M.mason_packages, config.mason --[[@as table]])
   end
 
   -- treesitter parser names
   if type(config.treesitter) == 'string' then
     table.insert(M.treesitter_parsers, config.treesitter)
   elseif type(config.treesitter) == 'table' then
-    table.insert_all(M.treesitter_parsers, unpack(config.treesitter --[[@as table]]))
+    M.treesitter_parsers = TblUtils.join_lists(M.treesitter_parsers, config.treesitter --[[@as table]])
   else
     table.insert(M.treesitter_parsers, filetype)
   end
 end
 
 -- extras not associated with any one language
-table.insert_all(M.mason_packages, 'codespell', 'lemmy-help', 'tree-sitter-cli')
-table.insert_all(M.treesitter_parsers, 'comment', 'fish', 'gitcommit', 'vim', 'vimdoc', 'make', 'regex')
+M.mason_packages = TblUtils.join_lists(M.mason_packages, { 'codespell', 'lemmy-help', 'tree-sitter-cli' })
+M.treesitter_parsers =
+  TblUtils.join_lists(M.treesitter_parsers, { 'comment', 'fish', 'gitcommit', 'vim', 'vimdoc', 'make', 'regex' })
 
 return M

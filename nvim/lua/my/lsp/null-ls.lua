@@ -98,7 +98,7 @@ local formatters = {
 }
 
 local config = {
-  sources = table.join_lists(code_actions, diagnostics, formatters),
+  sources = TblUtils.join_lists(code_actions, diagnostics, formatters),
   -- add `.luacheckrc` as a root pattern
   root_dir = require('null-ls.utils').root_pattern('.null-ls-root', 'Makefile', '.git', '.luacheckrc'),
 }

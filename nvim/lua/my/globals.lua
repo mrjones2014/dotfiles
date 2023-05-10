@@ -55,29 +55,20 @@ _G.Clipboard = {
   end,
 }
 
----Insert multiple items to a table at once.
----@generic T
----@param tbl T[]
----@param ... T
-table.insert_all = function(tbl, ...)
-  local items = { ... }
-  for _, item in ipairs(items) do
-    table.insert(tbl, item)
-  end
-end
-
 ---Join two or more lists together
 ---@param ... table
 ---@return table
-table.join_lists = function(...)
-  local lists = { ... }
-  local result = {}
-  for _, list in ipairs(lists) do
-    ---@diagnostic disable-next-line -- optional parameters omitted
-    vim.list_extend(result, list)
-  end
-  return result
-end
+_G.TblUtils = {
+  join_lists = function(...)
+    local lists = { ... }
+    local result = {}
+    for _, list in ipairs(lists) do
+      ---@diagnostic disable-next-line -- optional parameters omitted
+      vim.list_extend(result, list)
+    end
+    return result
+  end,
+}
 
 _G.LSP = {
   ---Set up a callback to run on LSP attach
