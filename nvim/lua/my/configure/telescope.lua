@@ -170,7 +170,7 @@ return {
               }
             end
 
-            local pattern = parsed.filetype
+            local pattern
             if type(parsed.filetype) == 'table' then
               pattern = string.format('*.{%s}', table.concat(parsed.filetype, ',')) ---@diagnostic disable-line
             elseif parsed.filetype:lower() == 'makefile' then ---@diagnostic disable-line

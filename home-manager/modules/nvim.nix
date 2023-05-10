@@ -1,4 +1,18 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
+  home.sessionVariables = {
+    MANPAGER = "nvim -c 'Man!' -o -";
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+  };
+
+  programs.fish.shellAliases = {
+    # lol, sometimes I'm stupid
+    ":q" = "exit";
+    ":Q" = "exit";
+    # I swear I'm an idiot sometimes
+    ":e" = "nvim";
+    update-nvim-plugins = "nvim --headless '+Lazy! sync' +qa";
+  };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -8,13 +22,20 @@
     withRuby = false;
     withPython3 = false;
     defaultEditor = true;
+    coc.enable = false;
+
+    extraPackages = [
+      pkgs.nixfmt
+      pkgs.ripgrep
+      pkgs.catimg
+      pkgs.sqlite
+      pkgs.luajitPackages.jsregexp
+      pkgs.fzf
+    ];
   };
 
-  # link my Neovim files in-place so I don't have to reapply the flake
-  # just to change Neovim configs. I still need to reapply the flake if
-  # I add a new file or delete a file.
-  home.activation.linkNvimConfig =
-    config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      ln -f -s ${toString ../../nvim} ${config.xdg.configHome}/nvim
-    '';
+  xdg.configFile."nvim" = {
+    source = ../../nvim;
+    recursive = true;
+  };
 }
