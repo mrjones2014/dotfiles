@@ -15,12 +15,13 @@
     defaultPackage.aarch64-darwin = home-manager.defaultPackage.aarch64-darwin;
     defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
     homeConfigurations = {
-      "mat" = home-manager.lib.homeManagerConfiguration {
-        pkgs = if builtins.currentSystem == "aarch64-darwin" then
-          nixpkgs.legacyPackages.aarch64-darwin
-        else
-          nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home.nix ];
+      "mac" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        modules = [ ./home-manager/home.nix ];
+      };
+      "linux" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [ ./home-manager/home.nix ];
       };
     };
   };
