@@ -81,8 +81,6 @@
       thefuck --alias | source
       starship init fish | source
       atuin init fish | source
-      fnm completions | source
-      fnm env | source
 
       for mode in insert default normal
         bind -M insert \e\[A "_atuin_search; tput cup \$LINES"

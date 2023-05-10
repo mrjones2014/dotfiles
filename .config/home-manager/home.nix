@@ -47,11 +47,11 @@ in {
     pkgs.wget
     pkgs.fzf
     pkgs.ripgrep
-    pkgs.fnm
     pkgs.jq
     pkgs.glow
     pkgs.exa
     pkgs.neovim
+    pkgs.nodejs-slim-19_x
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt
