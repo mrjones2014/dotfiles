@@ -45,7 +45,7 @@ local formatters = {
     command = './node_modules/.bin/stylelint',
     condition = has_local_stylelint,
   }),
-  b.formatting.prettierd.with({
+  b.formatting.prettier_d_slim.with({
     filetypes = {
       'javascript',
       'typescript',
