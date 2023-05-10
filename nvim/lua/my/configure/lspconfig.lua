@@ -26,27 +26,6 @@ return {
         })
       end,
     },
-    {
-      'williamboman/mason.nvim',
-      lazy = false, -- need stuff added to $PATH immediately
-      dependencies = {
-        {
-          'WhoIsSethDaniel/mason-tool-installer.nvim',
-          lazy = false,
-          cmd = { 'MasonToolsUpdate', 'MasonToolsInstall' },
-          config = function()
-            require('mason-tool-installer').setup({
-              auto_update = true,
-              ensure_installed = require('my.lsp.filetypes').mason_packages,
-            })
-          end,
-        },
-      },
-      cmd = { 'Mason', 'MasonUpdate', 'MasonLog', 'MasonInstall', 'MasonUpdate', 'MasonUninstall' },
-      config = function()
-        require('mason').setup()
-      end,
-    },
     'hrsh7th/cmp-nvim-lsp',
     'folke/neodev.nvim',
     'folke/neoconf.nvim',
@@ -59,10 +38,6 @@ return {
         nlsp = false,
       },
     })
-
-    -- make mason.nvim and mason-tools-installer.nvim load and run their configs
-    require('mason')
-    require('mason-tool-installer')
 
     -- always load null-ls
     require('my.lsp.null-ls')

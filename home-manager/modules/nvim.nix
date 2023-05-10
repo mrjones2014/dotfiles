@@ -24,13 +24,38 @@
     defaultEditor = true;
     coc.enable = false;
 
-    extraPackages = [
-      pkgs.nixfmt
-      pkgs.ripgrep
-      pkgs.catimg
-      pkgs.sqlite
-      pkgs.luajitPackages.jsregexp
-      pkgs.fzf
+    extraPackages = with pkgs; [
+      # formatters and linters
+      nixfmt
+      rustfmt
+      shfmt
+      cbfmt
+      stylua
+      codespell
+      luajitPackages.luacheck
+      nodePackages_latest.prettier_d_slim
+      nodePackages_latest.eslint_d
+      nodePackages_latest.markdownlint-cli
+
+      # LSP servers
+      # this includes css-lsp, html-lsp, json-lsp
+      rnix-lsp
+      rust-analyzer
+      gopls
+      lua
+      shellcheck
+      marksman
+      sumneko-lua-language-server
+      nodePackages_latest.vscode-langservers-extracted
+      nodePackages_latest.typescript-language-server
+
+      # other utils and plugin dependencies
+      ripgrep
+      catimg
+      sqlite
+      lemmy-help
+      luajitPackages.jsregexp
+      fzf
     ];
   };
 
@@ -39,3 +64,5 @@
     recursive = true;
   };
 }
+
+# { "css-lsp", "svelte-language-server", "rnix-lsp", "typescript-language-server", "prettier", "prettierd", "eslint_d", "rust-analyzer", "rustfmt", "shellcheck", "shfmt", "json-lsp", "marksman", "cbfmt", "markdownlint", "gopls", "lua-language-server", "stylua", "luacheck", "html-lsp", "codespell", "lemmy-help", "tree-sitter-cli" }
