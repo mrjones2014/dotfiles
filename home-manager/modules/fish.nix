@@ -32,7 +32,6 @@
 
     shellAliases = {
       sourcefish = "source ~/.config/fish/config.fish && fish_logo";
-      dots = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
       # lol, sometimes I'm stupid
       ":q" = "exit";
       ":Q" = "exit";
@@ -50,8 +49,12 @@
       # TODO move my configs around so I can run in pure mode
       # the only file that is preventing this currently is `gitconfig.github/gitlab`,
       # see ./git.nix
-      nix-apply =
-        "nix run ~/git/dotfiles/ switch -- --flake ~/git/dotfiles/ --impure";
+      nix-apply = if pkgs.stdenv.isDarwin then
+        ''
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac  --impure''
+      else
+        ''
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux  --impure'';
     };
 
     shellInit = ''
