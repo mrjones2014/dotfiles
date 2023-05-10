@@ -108,33 +108,39 @@ function M.lsp_commands(bufnr, server_name)
 
   if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Test then
     -- Neotest
-    table.insert_all(commands, {
-      ':Test',
-      h.lazy_required_fn('neotest', 'run.run'),
-      description = 'Run nearest test',
-      opts = { buffer = bufnr },
-    }, {
-      ':TestFile',
-      function()
-        require('neotest').run.run(vim.fn.expand('%'))
-      end,
-      description = 'Run all tests in current file',
-      opts = { buffer = bufnr },
-    }, {
-      ':TestStop',
-      h.lazy_required_fn('neotest', 'run.stop'),
-      description = 'Kill running tests',
-      opts = { buffer = bufnr },
-    }, {
-      ':TestOpen',
-      h.lazy_required_fn('neotest', 'output.open', { enter = true }),
-      description = 'Open test output',
-      opts = { buffer = bufnr },
-    }, {
-      ':TestSummary',
-      h.lazy_required_fn('neotest', 'summary.open'),
-      description = 'Show a test summary sidebar',
-      opts = { buffer = bufnr },
+    commands = TblUtils.join_lists(commands, {
+      {
+        ':Test',
+        h.lazy_required_fn('neotest', 'run.run'),
+        description = 'Run nearest test',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':TestFile',
+        function()
+          require('neotest').run.run(vim.fn.expand('%'))
+        end,
+        description = 'Run all tests in current file',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':TestStop',
+        h.lazy_required_fn('neotest', 'run.stop'),
+        description = 'Kill running tests',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':TestOpen',
+        h.lazy_required_fn('neotest', 'output.open', { enter = true }),
+        description = 'Open test output',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':TestSummary',
+        h.lazy_required_fn('neotest', 'summary.open'),
+        description = 'Show a test summary sidebar',
+        opts = { buffer = bufnr },
+      },
     })
   end
 
