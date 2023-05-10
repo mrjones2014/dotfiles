@@ -1,5 +1,6 @@
 { config, ... }: {
   programs.neovim = {
+    enable = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
@@ -14,6 +15,6 @@
   # I add a new file or delete a file.
   home.activation.linkNvimConfig =
     config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      ln -s ${toString ../../nvim} ${config.xdg.configHome}/nvim
+      ln -f -s ${toString ../../nvim} ${config.xdg.configHome}/nvim
     '';
 }

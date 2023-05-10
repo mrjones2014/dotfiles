@@ -82,11 +82,13 @@ in {
     source = ../nix;
     recursive = true;
   };
-  home.file."${config.xdg.configHome}/cbfmt.toml" = ../cbfmt.toml;
-  home.file."${config.xdg.configHome}/.ignore" = ../.ignore;
-  home.file."${config.xdg.configHome}/config-paths.yml" = ../config-paths.yml;
+  home.file."${config.xdg.configHome}/cbfmt.toml".source = ../cbfmt.toml;
+  home.file."${config.xdg.configHome}/.ignore".source = ../.ignore;
+  home.file."${config.xdg.configHome}/config-paths.yml".source =
+    ../config-paths.yml;
 
   imports = [
+    ./modules/nvim.nix
     ./modules/fish.nix
     ./modules/starship.nix
     ./modules/topgrade.nix
