@@ -20,6 +20,8 @@ If you're on macOS, after installing Hammerspoon, run `defaults write org.hammer
 
 ## Configuring Git
 
+> **Note** This may change in the near future. This is the only bit preventing me from using Nix in pure mode.
+
 In order to keep my email addresses and signing key IDs out of version control, I `includeIf` them from separate
 configs for work vs. personal development. Set `user.email` and `user.signingkey` in `~/.config/git/gitconfig.gitlab`
 and `~/.config/git/gitconfig.github` (which are not tracked in git). Commit signing is done via the 1Password SSH
