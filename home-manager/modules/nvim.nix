@@ -64,5 +64,3 @@
     recursive = true;
   };
 }
-
-# { "css-lsp", "svelte-language-server", "rnix-lsp", "typescript-language-server", "prettier", "prettierd", "eslint_d", "rust-analyzer", "rustfmt", "shellcheck", "shfmt", "json-lsp", "marksman", "cbfmt", "markdownlint", "gopls", "lua-language-server", "stylua", "luacheck", "html-lsp", "codespell", "lemmy-help", "tree-sitter-cli" }
