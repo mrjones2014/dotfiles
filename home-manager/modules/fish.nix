@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.sessionVariables = {
@@ -6,10 +6,15 @@
     HOMEBREW_NO_ANALYTICS = "1";
     CARGO_NET_GIT_FETCH_WITH_CLI = "true";
     GOPATH = "$HOME/go";
-    EDITOR = "nvim";
     GIT_MERGE_AUTOEDIT = "no";
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+  };
+
+  # link my fish config
+  home.file."${config.xdg.configHome}/fish" = {
+    source = ../../fish;
+    recursive = true;
   };
 
   programs.fish = {
@@ -28,9 +33,6 @@
     shellAliases = {
       sourcefish = "source ~/.config/fish/config.fish && fish_logo";
       dots = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
-      vim = "nvim";
-      vi = "nvim";
-      v = "nvim";
       # lol, sometimes I'm stupid
       ":q" = "exit";
       ":Q" = "exit";
@@ -49,7 +51,7 @@
       # the only file that is preventing this currently is `gitconfig.github/gitlab`,
       # see ./git.nix
       nix-apply =
-        "nix run ~/.config/home-manager/ switch -- --flake ~/.config/home-manager/ --impure";
+        "nix run ~/git/dotfiles/ switch -- --flake ~/git/dotfiles/ --impure";
     };
 
     shellInit = ''
