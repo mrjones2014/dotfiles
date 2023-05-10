@@ -50,8 +50,6 @@ in {
     pkgs.jq
     pkgs.glow
     pkgs.exa
-    pkgs.neovim
-    pkgs.nodejs-slim-19_x
     pkgs.tealdeer
     pkgs.go
     pkgs.nixfmt
@@ -73,6 +71,20 @@ in {
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "obsidian" ];
+
+  # link config files, if a dedicated module exists (below)
+  # it will handle its own config
+  home.file."${config.xdg.configHome}/hammerspoon" = {
+    source = ../hammerspoon;
+    recursive = true;
+  };
+  home.file."${config.xdg.configHome}/nix" = {
+    source = ../nix;
+    recursive = true;
+  };
+  home.file."${config.xdg.configHome}/cbfmt.toml" = ../cbfmt.toml;
+  home.file."${config.xdg.configHome}/.ignore" = ../.ignore;
+  home.file."${config.xdg.configHome}/config-paths.yml" = ../config-paths.yml;
 
   imports = [
     ./modules/fish.nix
