@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.sessionVariables = {
@@ -6,10 +6,15 @@
     HOMEBREW_NO_ANALYTICS = "1";
     CARGO_NET_GIT_FETCH_WITH_CLI = "true";
     GOPATH = "$HOME/go";
-    EDITOR = "nvim";
     GIT_MERGE_AUTOEDIT = "no";
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+  };
+
+  # link my fish config
+  home.file."${config.xdg.configHome}/fish" = {
+    source = ../../fish;
+    recursive = true;
   };
 
   programs.fish = {
@@ -27,10 +32,6 @@
 
     shellAliases = {
       sourcefish = "source ~/.config/fish/config.fish && fish_logo";
-      dots = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
-      vim = "nvim";
-      vi = "nvim";
-      v = "nvim";
       # lol, sometimes I'm stupid
       ":q" = "exit";
       ":Q" = "exit";
@@ -48,8 +49,12 @@
       # TODO move my configs around so I can run in pure mode
       # the only file that is preventing this currently is `gitconfig.github/gitlab`,
       # see ./git.nix
-      nix-apply =
-        "nix run ~/.config/home-manager/ switch -- --flake ~/.config/home-manager/ --impure";
+      nix-apply = if pkgs.stdenv.isDarwin then
+        ''
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac  --impure''
+      else
+        ''
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux  --impure'';
     };
 
     shellInit = ''
