@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
@@ -29,22 +29,22 @@ in {
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
     includes = [
-      { path = ~/.config/git/gitconfig.local; }
+      { path = "${config.xdg.configHome}/git/gitconfig.local"; }
       {
         condition = "hasconfig:remote.*.url:https://github.com/**";
-        path = ~/.config/git/gitconfig.github;
+        path = "${config.xdg.configHome}/git/gitconfig.github";
       }
       {
         condition = "hasconfig:remote.*.url:git@github.com:*/**";
-        path = ~/.config/git/gitconfig.github;
+        path = "${config.xdg.configHome}/git/gitconfig.github";
       }
       {
         condition = "hasconfig:remote.*.url:ssh://git@github.com:*/**";
-        path = ~/.config/git/gitconfig.github;
+        path = "${config.xdg.configHome}/git/gitconfig.github";
       }
       {
         condition = "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**";
-        path = ~/.config/git/gitconfig.gitlab;
+        path = "${config.xdg.configHome}/git/gitconfig.gitlab";
       }
     ];
     extraConfig = {
