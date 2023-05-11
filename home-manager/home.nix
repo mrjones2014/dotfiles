@@ -46,11 +46,11 @@ in {
     source = ../nix;
     recursive = true;
   };
-  home.file."${config.xdg.configHome}/cbfmt.toml".source = ../cbfmt.toml;
+  home.file."${config.xdg.configHome}/cbfmt.toml".source = ../misc/cbfmt.toml;
   home.file."${config.xdg.configHome}/ripgrep_ignore".source =
-    ../ripgrep_ignore;
+    ../misc/ripgrep_ignore;
   home.file."${config.xdg.configHome}/config-paths.yml".source =
-    ../config-paths.yml;
+    ../misc/config-paths.yml;
 
   imports = [
     ./modules/nvim.nix
