@@ -49,9 +49,6 @@
       ll = "ls -l --git";
       l = "ls -laH";
       lg = "ls -lG";
-      # TODO move my configs around so I can run in pure mode
-      # the only file that is preventing this currently is `gitconfig.github/gitlab`,
-      # see ./git.nix
       nix-apply = if pkgs.stdenv.isDarwin then
         ''
           NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac''
