@@ -54,10 +54,10 @@
       # see ./git.nix
       nix-apply = if pkgs.stdenv.isDarwin then
         ''
-          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac  --impure''
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac''
       else
         ''
-          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux  --impure'';
+          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux'';
     };
 
     shellInit = ''
