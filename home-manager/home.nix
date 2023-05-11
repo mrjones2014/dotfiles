@@ -38,19 +38,20 @@ in {
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
-  home.file."${config.xdg.configHome}/hammerspoon" = {
-    source = ../hammerspoon;
-    recursive = true;
+  home.file = {
+    "${config.xdg.configHome}/hammerspoon" = {
+      source = ../hammerspoon;
+      recursive = true;
+    };
+    "${config.xdg.configHome}/nix" = {
+      source = ../nix;
+      recursive = true;
+    };
+    "${config.xdg.configHome}/cbfmt.toml".source = ../misc/cbfmt.toml;
+    "${config.xdg.configHome}/ripgrep_ignore".source = ../misc/ripgrep_ignore;
+    "${config.xdg.configHome}/config-paths.yml".source =
+      ../misc/config-paths.yml;
   };
-  home.file."${config.xdg.configHome}/nix" = {
-    source = ../nix;
-    recursive = true;
-  };
-  home.file."${config.xdg.configHome}/cbfmt.toml".source = ../misc/cbfmt.toml;
-  home.file."${config.xdg.configHome}/ripgrep_ignore".source =
-    ../misc/ripgrep_ignore;
-  home.file."${config.xdg.configHome}/config-paths.yml".source =
-    ../misc/config-paths.yml;
 
   imports = [
     ./modules/nvim.nix
