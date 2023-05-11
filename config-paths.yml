@@ -7,7 +7,7 @@ kitty: kitty/
 hammerspoon: hammerspoon/
 vim: nvim/
 paths: config-paths.yml
-ignore: .ignore
+ignore: ripgrep_ignore
 codespell: codespell/custom_dict.txt
 ssh: .ssh/config
 wezterm: wezterm/

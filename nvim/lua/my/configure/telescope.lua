@@ -63,6 +63,10 @@ return {
       }
     end
 
+    local ripgrep_ignore_file_path = (
+      Path.join(vim.env.XDG_CONFIG_HOME or Path.join(vim.env.HOME, '.config'), 'ripgrep_ignore')
+    )
+
     local telescope = require('telescope')
 
     telescope.setup({
@@ -76,7 +80,7 @@ return {
           '--column',
           '--smart-case',
           '--ignore-file',
-          (Path.join(vim.env.HOME, '.config', '.ignore')),
+          ripgrep_ignore_file_path,
         },
         prompt_prefix = '  ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
@@ -141,7 +145,7 @@ return {
             '--column',
             '--smart-case',
             '--ignore-file',
-            (Path.join(vim.env.HOME, '.config', '.ignore')),
+            ripgrep_ignore_file_path,
             '--iglob',
             '!.git',
           },
