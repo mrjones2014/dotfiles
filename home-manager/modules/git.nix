@@ -28,28 +28,13 @@ in {
       copy-branch = "!git branch --show-current | pbcopy";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
-    includes = [
-      # these included files are generated from the ../../init.bash script
-      { path = ../../local/gitconfig.local; }
-      {
-        condition = "hasconfig:remote.*.url:https://github.com/**";
-        path = ../../local/gitconfig.github;
-      }
-      {
-        condition = "hasconfig:remote.*.url:git@github.com:*/**";
-        path = ../../local/gitconfig.github;
-      }
-      {
-        condition = "hasconfig:remote.*.url:ssh://git@github.com:*/**";
-        path = ../../local/gitconfig.github;
-      }
-      {
-        condition = "hasconfig:remote.*.url:ssh://git@ssh.gitlab.*.*:*/**";
-        path = ../../local/gitconfig.gitlab;
-      }
-    ];
     extraConfig = {
-      user = { name = "Mat Jones"; };
+      user = {
+        name = "Mat Jones";
+        email = "mat@mjones.network";
+        signingKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
+      };
       pull = { rebase = false; };
       push = { autoSetupRemote = true; };
       commit = { gpgsign = true; };

@@ -15,7 +15,6 @@ Run the `./init.bash` script from the repo. This will:
 
 - Install Nix if it is not already installed.
 - Install `home-manager` if it is not already installed.
-- Interactively populate `./local/gitconfig.github` and `./local/gitconfig.gitlab`; these files are not in source control. They are used to switch which SSH keys are used between GitHub and GitLab remote hosts.
 - Create the initial Nix generation
 - On macOS, it will also:
   - Configure Hammerspoon to look for config in `$XDG_CONFIG_HOME/hammerspoon` instead of `$HOME/.hammerspoon`.
