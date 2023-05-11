@@ -35,11 +35,11 @@ in {
         path = ~/.config/git/gitconfig.github;
       }
       {
-        condition = "hasconfig:remote.*.url:git@github.com:**";
+        condition = "hasconfig:remote.*.url:git@github.com:*/**";
         path = ~/.config/git/gitconfig.github;
       }
       {
-        condition = "hasconfig:remote.*.url:ssh://git@github.com:**";
+        condition = "hasconfig:remote.*.url:ssh://git@github.com:*/**";
         path = ~/.config/git/gitconfig.github;
       }
       {
