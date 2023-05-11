@@ -30,6 +30,7 @@ in {
     # put macOS specific packages here
   ] ++ lib.lists.optionals isLinux [
     # put Linux specific packages here
+    pkgs.xclip
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:

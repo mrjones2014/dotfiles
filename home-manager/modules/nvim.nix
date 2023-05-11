@@ -60,7 +60,7 @@
   };
 
   xdg.configFile."nvim" = {
-    source = ../../nvim;
+    source = config.lib.file.mkOutOfStoreSymlink ../../nvim;
     recursive = true;
   };
 }
