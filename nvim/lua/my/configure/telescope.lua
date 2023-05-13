@@ -4,10 +4,7 @@ return {
   dependencies = {
     'nvim-telescope/telescope-symbols.nvim',
     'folke/trouble.nvim',
-    {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-    },
+    'nvim-telescope/telescope-fzy-native.nvim',
   },
   config = function()
     local actions = require('telescope.actions')
@@ -210,15 +207,13 @@ return {
         buffers = require('telescope.themes').get_dropdown({ previewer = false }),
       },
       extensions = {
-        fzf = {
-          fuzzy = true,
+        fzy_native = {
           override_generic_sorter = true,
           override_file_sorter = true,
-          case_mode = 'smart_case',
         },
       },
     })
 
-    telescope.load_extension('fzf')
+    telescope.load_extension('fzy_native')
   end,
 }
