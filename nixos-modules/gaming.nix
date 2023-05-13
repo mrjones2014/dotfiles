@@ -11,11 +11,6 @@
     albert
   ];
 
-  environment.variables = {
-    EDITOR = pkgs.nvim;
-    SUDO_EDITOR = pkgs.nvim;
-  };
-
   # use proprietary nvidia drivers
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
