@@ -13,12 +13,12 @@
       ];
       right_format = "$cmd_duration";
       character = {
-        success_symbol = "[🅸 ](bold #89ca78)";
-        error_symbol = "[🅸 ](bold #ef596f)";
-        vicmd_symbol = "[🅽 ](bold #89ca78)";
-        vimcmd_replace_one_symbol = "[🆁 ](bold #d55fde)";
-        vimcmd_replace_symbol = "[🆁 ](bold #d55fde)";
-        vimcmd_visual_symbol = "[🆅 ](bold #e5c07b)";
+        success_symbol = "[ I ](bold bg:#89ca78 fg:#000000)";
+        error_symbol = "[ I ](bold bg:#ef596f fg:#000000)";
+        vicmd_symbol = "[ N ](bold bg:#89ca78 fg:#000000)";
+        vimcmd_replace_one_symbol = "[ R ](bold bg:#d55fde fg:#000000)";
+        vimcmd_replace_symbol = "[ R ](bold bg:#d55fde fg:#000000)";
+        vimcmd_visual_symbol = "[ V ](bold bg:#e5c07b fg:#000000)";
       };
       git_branch = {
         symbol = "";
