@@ -51,6 +51,7 @@ in {
     "${config.xdg.configHome}/ripgrep_ignore".source = ../conf.d/ripgrep_ignore;
     "${config.xdg.configHome}/config-paths.yml".source =
       ../conf.d/config-paths.yml;
+    "${config.home.homeDirectory}/.profile".source = ../conf.d/dot_profile.sh;
   };
 
   imports = [
