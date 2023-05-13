@@ -47,10 +47,10 @@ in {
       source = ../nix;
       recursive = true;
     };
-    "${config.xdg.configHome}/cbfmt.toml".source = ../misc/cbfmt.toml;
-    "${config.xdg.configHome}/ripgrep_ignore".source = ../misc/ripgrep_ignore;
+    "${config.xdg.configHome}/cbfmt.toml".source = ../conf.d/cbfmt.toml;
+    "${config.xdg.configHome}/ripgrep_ignore".source = ../conf.d/ripgrep_ignore;
     "${config.xdg.configHome}/config-paths.yml".source =
-      ../misc/config-paths.yml;
+      ../conf.d/config-paths.yml;
   };
 
   imports = [

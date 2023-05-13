@@ -38,7 +38,7 @@ return {
     vim.treesitter.language.register('markdown', 'mdx')
     local rainbow = require('ts-rainbow')
     require('nvim-treesitter.configs').setup({
-      ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
+      -- ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
       highlight = {
         enable = true,
       },
