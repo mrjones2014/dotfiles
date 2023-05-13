@@ -24,6 +24,8 @@
     defaultEditor = true;
     coc.enable = false;
 
+    plugins = [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
+
     extraPackages = with pkgs; [
       # formatters and linters
       nixfmt

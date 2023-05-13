@@ -1,7 +1,7 @@
 complete --no-files --command conf --arguments "(_getConfCompletions (commandline -cp))"
 function _getConfCompletions
     set -l currentPath (string trim (string replace "conf " "" $argv[1]))
-    set -l allPaths (sed -e 's/:[^:\/\/].*/=/g;s/$//g;s/ *=//g' $HOME/git/dotfiles/config-paths.yml)
+    set -l allPaths (sed -e 's/:[^:\/\/].*/=/g;s/$//g;s/ *=//g' $HOME/git/dotfiles/conf.d/config-paths.yml)
     set -l matchingPaths ""
     for path in $allPaths
         if string match -q -- "*$currentPath*" "$path"
@@ -26,9 +26,9 @@ function conf --description "Quickly open configuration files/directories in Neo
         return
     end
 
-    set -l CONFIG_PATH (grep "$SUBJECT_NAME:" ~/git/dotfiles/config-paths.yml | awk '{ print $2 }')
+    set -l CONFIG_PATH (grep "$SUBJECT_NAME:" ~/git/dotfiles/conf.d/config-paths.yml | awk '{ print $2 }')
     if [ -z "$CONFIG_PATH" ]
-        echo "$SUBJECT_NAME not configured in ~/git/dotfiles/config-paths.yml"
+        echo "$SUBJECT_NAME not configured in ~/git/dotfiles/conf.d/config-paths.yml"
         return
     end
 
