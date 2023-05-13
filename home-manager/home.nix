@@ -31,11 +31,13 @@ in {
   ] ++ lib.lists.optionals isLinux [
     # put Linux specific packages here
     pkgs.xclip
-    pkgs.nodejs
+    pkgs._1password
+    pkgs._1password-gui
+    pkgs.librewolf
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "obsidian" ];
+    builtins.elem (lib.getName pkg) [ "obsidian" "1password" "1password-cli" ];
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config

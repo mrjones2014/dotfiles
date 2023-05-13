@@ -56,6 +56,10 @@
       else
         ''
           NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux'';
+      restart-gui = if pkgs.stdenv.isDarwin then
+        ""
+      else
+        "sudo systemctl restart display-manager.service";
     };
 
     shellInit = ''
