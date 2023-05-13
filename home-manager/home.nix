@@ -31,6 +31,7 @@ in {
   ] ++ lib.lists.optionals isLinux [
     # put Linux specific packages here
     pkgs.xclip
+    pkgs.nodejs
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
