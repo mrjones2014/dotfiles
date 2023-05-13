@@ -31,6 +31,8 @@ config.inactive_pane_hsb = {
 
 config.leader = keymaps.leader
 config.keys = keymaps.keys
+-- behaves weirdly on linux
+config.hide_mouse_cursor_when_typing = os_name == 'macOS'
 
 if os_name == 'macOS' then
   config.window_decorations = 'RESIZE'
