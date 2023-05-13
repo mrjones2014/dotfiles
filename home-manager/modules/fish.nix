@@ -7,6 +7,7 @@
     CARGO_NET_GIT_FETCH_WITH_CLI = "true";
     GOPATH = "$HOME/go";
     GIT_MERGE_AUTOEDIT = "no";
+    NEXT_TELEMETRY_DISABLED = "1";
   };
 
   home.packages = [
