@@ -51,13 +51,14 @@ in {
     "${config.xdg.configHome}/ripgrep_ignore".source = ../conf.d/ripgrep_ignore;
     "${config.xdg.configHome}/config-paths.yml".source =
       ../conf.d/config-paths.yml;
+    # make .desktop files show up in application launcher on Linux
+    "${config.home.homeDirectory}/.xprofile".source = ../conf.d/.xprofile;
   };
 
   imports = [
     ./modules/nvim.nix
     ./modules/fish.nix
     ./modules/starship.nix
-    ./modules/topgrade.nix
     ./modules/atuin.nix
     ./modules/bat.nix
     ./modules/git.nix
