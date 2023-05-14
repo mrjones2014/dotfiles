@@ -5,6 +5,16 @@
     dedicatedServer.openFirewall = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  environment.variables = {
+    SUDO_EDITOR = "nvim";
+    EDITOR = "nvim";
+  };
+
   environment.systemPackages = with pkgs; [
     steam-run
     gnomeExtensions.dash-to-dock
