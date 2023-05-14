@@ -20,16 +20,28 @@
     gnomeExtensions.dash-to-dock
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.search-light
+    # Discord with a system workaround for Wayland support
+    # Work around https://github.com/NixOS/nixpkgs/issues/159267
+    (pkgs.writeShellApplication {
+      name = "discord";
+      text = "${pkgs.discord}/bin/discord --use-gl=desktop";
+    })
+    (pkgs.makeDesktopItem {
+      name = "discord";
+      exec = "discord";
+      desktopName = "Discord";
+    })
   ];
 
-  # use proprietary nvidia drivers
   # some gaming stuff doesn't work good on wayland
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.defaultSession = "gnome-xorg";
-  services.xserver.displayManager.gdm.wayland = false;
+  services.xserver.displayManager.defaultSession = "gnome";
+  services.xserver.displayManager.gdm.wayland = true;
+
+  # use proprietary nvidia drivers
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
