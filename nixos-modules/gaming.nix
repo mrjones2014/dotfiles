@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     steam-run
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.tray-icons-reloaded
     albert
   ];
 
