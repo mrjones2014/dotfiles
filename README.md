@@ -20,7 +20,7 @@ Run the `./init.bash` script from the repo. This will:
   - Configure Hammerspoon to look for config in `$XDG_CONFIG_HOME/hammerspoon` instead of `$HOME/.hammerspoon`.
   - Optionally, with confirmation from user, set up a bunch of macOS default settings to more sane defaults.
 
-Then, open `./home-manager/modules/fish.nix`, copy the `nix-apply` alias definition for your system, and run it.
+Then, open `./home-manager/modules/fish.nix`, copy the `hm-apply` alias definition for your system, and run it.
 
 Restart your terminal, then run `sudo vi /etc/shells` and add the output of `which fish` as a new entry. Then run `chsh -S $(which fish)`
 to change the default shell. You may have to log out and back in after this.
