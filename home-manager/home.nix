@@ -37,7 +37,9 @@ in {
     # unfree
     pkgs._1password
     pkgs._1password-gui
-    pkgs.discord
+    # this is installed in ../nixos-modules/desktop_pc.nix instead
+    # because Discord also requires a system workaround for Wayland support
+    # pkgs.discord
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
