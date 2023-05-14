@@ -51,7 +51,7 @@ elif ! command -v nixos-version >/dev/null 2>&1; then
 fi
 
 echo
-echo "Everything should be set up. Run the following command to apply configuration. After applied, you can use \`nix-apply\` (a shell alias) going forward."
+echo "Everything should be set up. Run the following command to apply configuration. After applied, you can use \`hm-apply\` (a shell alias) going forward."
 echo
 
 if [ "$(uname -s)" == "Darwin" ]; then

@@ -50,7 +50,7 @@
       ll = "ls -l --git";
       l = "ls -laH";
       lg = "ls -lG";
-      nix-apply = if pkgs.stdenv.isDarwin then
+      hm-apply = if pkgs.stdenv.isDarwin then
         ''
           NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac''
       else

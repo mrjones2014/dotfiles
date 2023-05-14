@@ -8,6 +8,13 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # use proprietary nvidia drivers
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # these are needed for Wayland to work
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.nvidiaPersistenced = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
