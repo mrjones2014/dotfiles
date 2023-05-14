@@ -9,7 +9,7 @@
     steam-run
     gnomeExtensions.dash-to-dock
     gnomeExtensions.tray-icons-reloaded
-    albert
+    gnomeExtensions.search-light
   ];
 
   # use proprietary nvidia drivers
