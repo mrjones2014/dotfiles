@@ -1,5 +1,7 @@
 { pkgs, config, ... }: {
   imports = [ ./gnome.nix ];
+  programs.fish.enable = true;
+  users.users.mat.shell = pkgs.fish;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
