@@ -33,6 +33,7 @@ config.leader = keymaps.leader
 config.keys = keymaps.keys
 -- behaves weirdly on linux
 config.hide_mouse_cursor_when_typing = os_name == 'macOS'
+config.enable_wayland = false
 
 if os_name == 'macOS' then
   config.window_decorations = 'RESIZE'
