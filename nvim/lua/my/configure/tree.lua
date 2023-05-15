@@ -2,6 +2,7 @@ local width = 35
 
 return {
   'nvim-tree/nvim-tree.lua',
+  branch = '2189-api.tree.open-target_window',
   cmd = 'Tree',
   dependencies = {
     'stevearc/aerial.nvim',
@@ -50,5 +51,97 @@ return {
       end,
     })
     require('nvim-tree').setup({ view = { side = 'right' } })
+    --- find all winid for normal windows
+    --- @return number[]
+    local function normal_winids()
+      return vim.tbl_filter(function(id)
+        local config = vim.api.nvim_win_get_config(id)
+        return config and config.relative == ''
+      end, vim.api.nvim_list_wins())
+    end
+
+    --- find the first non-floating window containing a file type
+    --- @param ft string
+    --- @return number|nil winid
+    local function first_winid(ft)
+      for _, winid in ipairs(normal_winids()) do
+        local bufnr = vim.api.nvim_win_get_buf(winid)
+        if vim.bo[bufnr] and vim.bo[bufnr].filetype == ft then
+          return winid
+        end
+      end
+    end
+
+    local api = require('nvim-tree.api')
+    local aerial = require('aerial')
+    -- open/focus nvim-tree
+    vim.keymap.set('n', '<space>e', function()
+      -- just focus tree if it's visible
+      if api.tree.is_visible() then
+        api.tree.focus()
+        return
+      end
+
+      -- scratch buffer to create the new window
+      local scratch_bufnr = vim.api.nvim_create_buf(false, true)
+
+      -- find the aerial window
+      local aerial_winid = first_winid('aerial')
+      local new_winid
+      if aerial_winid then
+        -- focus aerial
+        vim.api.nvim_set_current_win(aerial_winid)
+
+        -- create a horizontal split above
+        vim.cmd('aboveleft sbuffer ' .. scratch_bufnr)
+        new_winid = vim.api.nvim_get_current_win()
+      else
+        -- create a full height leftmost vertical split
+        vim.cmd('topleft vertical sbuffer ' .. scratch_bufnr)
+        new_winid = vim.api.nvim_get_current_win()
+      end
+
+      -- open the tree
+      api.tree.open({ winid = new_winid })
+
+      -- delete the scratch buffer
+      vim.api.nvim_buf_delete(scratch_bufnr, { force = true })
+    end, { noremap = true })
+
+    -- open/focus aerial
+    vim.keymap.set('n', '<space>j', function()
+      -- just focus aerial if it's visible
+      local aerial_winid = first_winid('aerial')
+      if aerial_winid then
+        aerial.focus()
+        return
+      end
+
+      -- source window, current
+      local source_winid = vim.api.nvim_get_current_win()
+
+      -- scratch buffer to create the new window
+      local scratch_bufnr = vim.api.nvim_create_buf(false, true)
+
+      local new_winid
+      if api.tree.is_visible() then
+        -- focus nvim-tree
+        api.tree.focus()
+
+        -- create a horizontal split below
+        vim.cmd('belowright sbuffer ' .. scratch_bufnr)
+        new_winid = vim.api.nvim_get_current_win()
+      else
+        -- create a full height leftmost vertical split
+        vim.cmd('topleft vertical sbuffer ' .. scratch_bufnr)
+        new_winid = vim.api.nvim_get_current_win()
+      end
+
+      -- open aerial
+      aerial.open_in_win(new_winid, source_winid)
+
+      -- delete the scratch buffer
+      vim.api.nvim_buf_delete(scratch_bufnr, { force = true })
+    end, { noremap = true })
   end,
 }
