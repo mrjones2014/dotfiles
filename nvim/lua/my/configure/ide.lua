@@ -5,8 +5,6 @@ return {
     local explorer = require('ide.components.explorer')
     local outline = require('ide.components.outline')
     local bufferlist = require('ide.components.bufferlist')
-    local changes = require('ide.components.changes')
-    local commits = require('ide.components.commits')
 
     -- I don't want to close individual components, only hide the whole sidebars
     local keymap_overrides = { keymaps = { hide = '<NOP>' } }
@@ -24,8 +22,8 @@ return {
         }, keymap_overrides),
       },
       panel_groups = {
-        explorer = { bufferlist.Name, explorer.Name, outline.Name },
-        git = { changes.Name, commits.Name },
+        explorer = {},
+        git = { bufferlist.Name, explorer.Name, outline.Name },
       },
     })
   end,
