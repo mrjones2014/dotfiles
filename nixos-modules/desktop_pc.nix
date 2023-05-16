@@ -1,5 +1,5 @@
 { pkgs, config, ... }: {
-  imports = [ ./gnome.nix ];
+  imports = [ ./gnome.nix ./_1password.nix ];
   programs.fish.enable = true;
   users.users.mat.shell = pkgs.fish;
   programs.steam = {
