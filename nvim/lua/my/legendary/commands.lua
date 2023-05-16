@@ -148,17 +148,21 @@ function M.lsp_commands(bufnr, server_name)
     table.insert(commands, {
       ':CargoToml',
       function()
-        local cargo_toml = vim.fs.find('Cargo.toml', {
-          upward = true,
-          stop = vim.loop.cwd(),
-          path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
-        })
-        if #cargo_toml == 0 then
-          vim.notify("Couldn't find Cargo.toml in cwd")
-          return
-        end
-
-        vim.cmd.edit(cargo_toml[1])
+        vim.lsp.buf_request(
+          0,
+          'experimental/openCargoToml',
+          { textDocument = vim.lsp.util.make_text_document_params(0) },
+          function(...)
+            ---@diagnostic disable-next-line
+            local path = vim.tbl_get({ ... }, 2, 'uri')
+            if path and #path > 0 then
+              if vim.startswith(path, 'file://') then
+                path = path:sub(#'file://')
+              end
+              vim.cmd.e(path)
+            end
+          end
+        )
       end,
       description = 'Open the `Cargo.toml` that is closest to the current file in the tree.',
       opts = { buffer = bufnr },
