@@ -42,7 +42,7 @@ in {
         format = "ssh";
         ssh = {
           program = if isLinux then
-            "${config.home.homeDirectory}/.nix-profile/share/1password/op-ssh-sign"
+            "/run/current-system/sw/bin/op-ssh-sign"
           else
             "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         };
