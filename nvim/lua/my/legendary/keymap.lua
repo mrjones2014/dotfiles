@@ -60,15 +60,8 @@ function M.default_keymaps()
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 
-    {
-      itemgroup = 'Workspace',
-      description = 'nvim-ide commands',
-      icon = '',
-      keymaps = {
-        { '<F3>', ':Workspace LeftPanelToggle<CR>', description = 'Toggle left IDE panel' },
-        { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
-      },
-    },
+    { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
+
     {
       '<leader>qs',
       h.lazy_required_fn('query-secretary', 'query_window_initiate'),
