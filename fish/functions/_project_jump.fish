@@ -6,6 +6,9 @@ function _project_jump_get_icon
     else if string match -r gitlab "$remote" >/dev/null
         set_color --bold FC6D26
         echo -n 
+    else
+        set_color --bold F74E27
+        echo -n 󰊢
     end
 end
 
