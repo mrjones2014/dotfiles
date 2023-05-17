@@ -2,27 +2,36 @@
   description = "My dotfiles managed with nix as a flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    darwin.url = "github:lnl7/nix-darwin";
-    mkalias.url = "github:reckenrode/mkalias";
   };
 
-  outputs = { nixpkgs, home-manager, darwin, mkalias, ... }: {
-    defaultPackage.aarch64-darwin = home-manager.defaultPackage.aarch64-darwin;
-    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+    nixosConfigurations = {
+      pc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./nixos-modules/common.nix
+          ./hosts/pc/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mat = import ./home-manager/home.nix;
+          }
+        ];
+      };
+    };
     homeConfigurations = {
       "mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ ./home-manager/home.nix ];
       };
-      "linux" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home-manager/home.nix ];
-      };
+      # linux configuration is done via nixos-rebuld (home-manager as a NixOS module)
     };
   };
 }

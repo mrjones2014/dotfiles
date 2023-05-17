@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   autostartPrograms =
     if pkgs.stdenv.isDarwin then [ ] else [ pkgs._1password-gui ];
