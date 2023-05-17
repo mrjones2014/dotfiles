@@ -51,11 +51,13 @@ in {
     };
     "${config.xdg.configHome}/config-paths.yml".source =
       ../conf.d/config-paths.yml;
-    "${config.xdg.configHome}/op/plugins.sh".source =
-      ../conf.d/op_cli_plugins.sh;
     # make .desktop files show up in application launcher on Linux
     "${config.home.homeDirectory}/.xprofile".source = ../conf.d/.xprofile;
+    "${config.xdg.configHome}/op/plugins.sh".source =
+      ../conf.d/op_cli_plugins.sh;
   };
+
+  home.activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
 
   imports = [
     ./modules/nvim.nix
