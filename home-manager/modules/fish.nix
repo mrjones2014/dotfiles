@@ -82,8 +82,8 @@
 
       # Source nix files, required to set fish as default shell, otherwise
       # it doesn't have the nix env vars
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
-        fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
+        fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
       end
     '';
 
@@ -98,6 +98,10 @@
       for mode in insert default normal
         bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
         bind -M $mode \a _project_jump
+      end
+
+      if [ -e "$XDG_CONFIG_HOME/op/plugins.sh" ]
+        source "$XDG_CONFIG_HOME/op/plugins.sh"
       end
 
       # I like to keep the prompt at the bottom rather than the top
