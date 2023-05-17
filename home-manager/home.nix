@@ -33,26 +33,7 @@ in {
     pkgs.xclip
     pkgs.librewolf
     pkgs.signal-desktop
-
-    # unfree
-
-    # this is installed by ../nixos-modules/_1password.nix
-    # otherwise CLI connection doesn't work
-    # pkgs._1password
-    # pkgs._1password-gui
-
-    # this is installed in ../nixos-modules/desktop_pc.nix instead
-    # because Discord also requires a system workaround for Wayland support
-    # pkgs.discord
   ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "obsidian"
-      "1password"
-      "1password-cli"
-      "discord"
-    ];
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config

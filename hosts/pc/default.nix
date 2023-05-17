@@ -1,7 +1,9 @@
-{ pkgs, config, ... }: {
-  imports = [ ./gnome.nix ./_1password.nix ];
+{ lib, pkgs, config, ... }: {
+  imports = [ ./hardware-configuration.nix ];
+  powerManagement.cpuFreqGovernor = "performance";
   programs.fish.enable = true;
   users.users.mat.shell = pkgs.fish;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -37,7 +39,7 @@
       name = "discord";
       exec = "discord";
       desktopName = "Discord";
-      icon = ./discord.png;
+      icon = ../../nixos-modules/discord.png;
     })
   ];
 }
