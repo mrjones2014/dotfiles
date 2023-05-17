@@ -51,12 +51,9 @@ elif ! command -v nixos-version >/dev/null 2>&1; then
 fi
 
 echo
-echo "Everything should be set up. Run the following command to apply configuration. After applied, you can use \`hm-apply\` (a shell alias) going forward."
+echo "Everything should be set up. Run one of the following commands (depending on your current system) to apply configuration. After applied, you can use \`nix-apply\` (a shell alias) going forward."
 echo
 
-if [ "$(uname -s)" == "Darwin" ]; then
-  echo 'NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac' | sed -e 's/\(.*\)/\x1b[38;5;166m\1\x1b[0m/'
-else
-  echo 'NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#linux' | sed -e 's/\(.*\)/\x1b[38;5;166m\1\x1b[0m/'
-fi
+# output value of the shell alias, highlighted
+grep "switch --flake" "$SCRIPT_DIR/home-manager/modules/fish.nix" | sed -e 's/\(.*\)/\x1b[38;5;166m\1\x1b[0m/' | awk '{$1:$1;print}'
 echo
