@@ -45,8 +45,8 @@ in {
       source = ../hammerspoon;
       recursive = true;
     };
-    "${config.xdg.configHome}/nix" = {
-      source = ../nix;
+    "${config.xdg.configHome}/nix/nix.conf" = {
+      source = ../conf.d/nix.conf;
       recursive = true;
     };
     "${config.xdg.configHome}/config-paths.yml".source =
