@@ -94,6 +94,7 @@
       thefuck --alias | source
       starship init fish | source
       atuin init fish | source
+      gh completion -s fish | source
 
       for mode in insert default normal
         bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
