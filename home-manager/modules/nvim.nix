@@ -13,6 +13,14 @@
     update-nvim-plugins = "nvim --headless '+Lazy! sync' +qa";
   };
 
+  home.file = {
+    "${config.xdg.configHome}/codespell/custom_dict.txt".source =
+      ../../conf.d/codespell_dict.txt;
+    "${config.xdg.configHome}/cbfmt.toml".source = ../../conf.d/cbfmt.toml;
+    "${config.xdg.configHome}/ripgrep_ignore".source =
+      ../../conf.d/ripgrep_ignore;
+  };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
