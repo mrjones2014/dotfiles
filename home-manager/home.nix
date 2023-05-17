@@ -35,6 +35,9 @@ in {
     pkgs.signal-desktop
   ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "obsidian" ];
+
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
   home.file = {
@@ -46,10 +49,10 @@ in {
       source = ../nix;
       recursive = true;
     };
-    "${config.xdg.configHome}/cbfmt.toml".source = ../conf.d/cbfmt.toml;
-    "${config.xdg.configHome}/ripgrep_ignore".source = ../conf.d/ripgrep_ignore;
     "${config.xdg.configHome}/config-paths.yml".source =
       ../conf.d/config-paths.yml;
+    "${config.xdg.configHome}/op/plugins.sh".source =
+      ../conf.d/op_cli_plugins.sh;
     # make .desktop files show up in application launcher on Linux
     "${config.home.homeDirectory}/.xprofile".source = ../conf.d/.xprofile;
   };
