@@ -40,22 +40,18 @@ in {
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
-  home.file = {
-    "${config.xdg.configHome}/hammerspoon" = {
+  xdg.configFile = {
+    "hammerspoon" = {
       source = ../hammerspoon;
       recursive = true;
     };
-    "${config.xdg.configHome}/nix/nix.conf" = {
-      source = ../conf.d/nix.conf;
-      recursive = true;
-    };
-    "${config.xdg.configHome}/config-paths.yml".source =
-      ../conf.d/config-paths.yml;
+    "nix/nix.conf".source = ../conf.d/nix.conf;
+    "config-paths.yml".source = ../conf.d/config-paths.yml;
     # make .desktop files show up in application launcher on Linux
-    "${config.home.homeDirectory}/.xprofile".source = ../conf.d/.xprofile;
-    "${config.xdg.configHome}/op/plugins.sh".source =
-      ../conf.d/op_cli_plugins.sh;
+    "op/plugins.sh".source = ../conf.d/op_cli_plugins.sh;
   };
+  home.file."${config.home.homeDirectory}/.xprofile".source =
+    ../conf.d/.xprofile;
 
   home.activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
 
