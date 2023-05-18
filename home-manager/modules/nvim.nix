@@ -21,6 +21,9 @@
       ../../conf.d/ripgrep_ignore;
   };
 
+  # for rust-analyzer
+  imports = [ ./rust.nix ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -48,16 +51,16 @@
       nodePackages_latest.markdownlint-cli
 
       # LSP servers
-      # this includes css-lsp, html-lsp, json-lsp
       rnix-lsp
-      rust-analyzer
+      # rust-analyzer # pulled in from ./rust.nix
       gopls
       lua
       shellcheck
       marksman
       sumneko-lua-language-server
-      nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.typescript-language-server
+      # this includes css-lsp, html-lsp, json-lsp
+      nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
       ripgrep
