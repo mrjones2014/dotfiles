@@ -63,6 +63,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "obsidian"
       "nvidia-persistenced"
       "nvidia-x11"
       "nvidia-settings"
