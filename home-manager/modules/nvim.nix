@@ -1,7 +1,14 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  treesitter-parsers = pkgs.symlinkJoin {
+    name = "treesitter-parsers";
+    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+  };
+in {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+    TREESITTER_PARSER_HOME = "${treesitter-parsers.out}";
   };
 
   programs.fish.shellAliases = {
@@ -13,12 +20,15 @@
     update-nvim-plugins = "nvim --headless '+Lazy! sync' +qa";
   };
 
-  home.file = {
-    "${config.xdg.configHome}/codespell/custom_dict.txt".source =
-      ../../conf.d/codespell_dict.txt;
-    "${config.xdg.configHome}/cbfmt.toml".source = ../../conf.d/cbfmt.toml;
-    "${config.xdg.configHome}/ripgrep_ignore".source =
-      ../../conf.d/ripgrep_ignore;
+  xdg.configFile = {
+    "codespell/custom_dict.txt".source = ../../conf.d/codespell_dict.txt;
+    "cbfmt.toml".source = ../../conf.d/cbfmt.toml;
+    "ripgrep_ignore".source = ../../conf.d/ripgrep_ignore;
+    "nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/git/dotfiles/nvim";
+      recursive = true;
+    };
   };
 
   # for rust-analyzer
@@ -70,11 +80,5 @@
       luajitPackages.jsregexp
       fzf
     ];
-  };
-
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/git/dotfiles/nvim";
-    recursive = true;
   };
 }
