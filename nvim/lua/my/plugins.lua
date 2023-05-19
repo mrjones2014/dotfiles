@@ -18,10 +18,6 @@ require('lazy').setup('my.configure', {
   install = {
     colorscheme = { 'onedark_dark', 'habamax' },
   },
-  checker = {
-    enabled = true,
-    notify = false,
-  },
   performance = {
     rtp = {
       disabled_plugins = {
