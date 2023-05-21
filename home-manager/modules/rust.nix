@@ -8,8 +8,9 @@
     [ cargo-outdated cargo-update cargo-nextest rustup ]
     ++ lib.lists.optionals pkgs.stdenv.isLinux (with pkgs;
       [
-        # binutils now conflicts with clang as well, turning this off for now...
-        # binutils # For some reason conflicts on darwin
         clang # Provides `cc` for any *-sys crates
       ]);
+
+  home.activation.installRustAnalyzer =
+    "${pkgs.rustup}/bin/rustup component add rust-analyzer";
 }

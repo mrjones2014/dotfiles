@@ -1,7 +1,14 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  treesitter-parsers = pkgs.symlinkJoin {
+    name = "treesitter-parsers";
+    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+  };
+in {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+    TREESITTER_PARSER_HOME = "${treesitter-parsers.out}";
   };
 
   programs.fish.shellAliases = {
@@ -13,13 +20,19 @@
     update-nvim-plugins = "nvim --headless '+Lazy! sync' +qa";
   };
 
-  home.file = {
-    "${config.xdg.configHome}/codespell/custom_dict.txt".source =
-      ../../conf.d/codespell_dict.txt;
-    "${config.xdg.configHome}/cbfmt.toml".source = ../../conf.d/cbfmt.toml;
-    "${config.xdg.configHome}/ripgrep_ignore".source =
-      ../../conf.d/ripgrep_ignore;
+  xdg.configFile = {
+    "codespell/custom_dict.txt".source = ../../conf.d/codespell_dict.txt;
+    "cbfmt.toml".source = ../../conf.d/cbfmt.toml;
+    "ripgrep_ignore".source = ../../conf.d/ripgrep_ignore;
+    "nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/git/dotfiles/nvim";
+      recursive = true;
+    };
   };
+
+  # for rust-analyzer
+  imports = [ ./rust.nix ];
 
   programs.neovim = {
     enable = true;
@@ -48,16 +61,16 @@
       nodePackages_latest.markdownlint-cli
 
       # LSP servers
-      # this includes css-lsp, html-lsp, json-lsp
       rnix-lsp
-      rust-analyzer
+      # rust-analyzer # pulled in from ./rust.nix
       gopls
       lua
       shellcheck
       marksman
       sumneko-lua-language-server
-      nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.typescript-language-server
+      # this includes css-lsp, html-lsp, json-lsp
+      nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
       ripgrep
@@ -67,11 +80,5 @@
       luajitPackages.jsregexp
       fzf
     ];
-  };
-
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/git/dotfiles/nvim";
-    recursive = true;
   };
 }

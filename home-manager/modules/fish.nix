@@ -85,6 +85,8 @@
       if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
         fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
       end
+
+      fish_add_path "$CARGO_HOME/bin"
     '';
 
     interactiveShellInit = ''
