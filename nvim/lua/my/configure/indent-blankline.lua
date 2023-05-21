@@ -21,6 +21,7 @@ return {
         'fugitive',
         'nofile',
         'Greeter',
+        'qf',
       },
       context_patterns = {
         'class',
