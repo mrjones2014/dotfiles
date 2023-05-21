@@ -41,5 +41,6 @@
       desktopName = "Discord";
       icon = ../../nixos-modules/discord.png;
     })
+    pkgs.parsec-bin
   ];
 }

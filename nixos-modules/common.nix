@@ -73,6 +73,7 @@
       "steam"
       "steam-run"
       "steam-original"
+      "parsec-bin"
     ];
 
   # This value determines the NixOS release from which the default
