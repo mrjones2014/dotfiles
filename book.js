@@ -307,6 +307,8 @@ function playground_text(playground, hidden = true) {
         });
 	console.log(themePopup);
 	console.log(themePopup.querySelector);
+	console.log(get_theme());
+	console.log(themePopup.querySelector("button#" + get_theme()));
         themePopup.querySelector("button#" + get_theme()).classList.add('theme-selected');
     }
 
