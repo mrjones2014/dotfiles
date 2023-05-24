@@ -1,5 +1,1 @@
-.DS_Store
-.netrwhist
-result
-# For generated files or any other files I want to keep out of source control
-local/
+book
