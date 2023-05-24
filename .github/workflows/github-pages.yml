@@ -24,7 +24,11 @@ jobs:
       - name: Build Book
         run: ~/bin/mdbook build docs
       - name: Deploy Book
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/book
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./docs/book
+          SCRIPT_MODE: true
+        run: |
+          wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2.5.0/entrypoint.sh
+          bash ./entrypoint.sh
