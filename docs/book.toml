@@ -1,0 +1,15 @@
+[book]
+authors = ["Mat Jones"]
+language = "en"
+multilingual = false
+src = "."
+title = "mjones.network"
+
+[output.html]
+default-theme = "dark"
+preferred-dark-theme = "Ayu"
+additional-css = ["custom.css"]
+cname = "mjones.network"
+
+[output.html.print]
+enable = false
