@@ -10,6 +10,7 @@ default-theme = "dark"
 preferred-dark-theme = "Ayu"
 additional-css = ["custom.css"]
 cname = "mjones.network"
+site-url = "https://mjones.network"
 
 [output.html.print]
 enable = false
