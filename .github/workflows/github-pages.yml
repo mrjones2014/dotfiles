@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch: # allow manual trigger
 jobs:
   deploy:
     runs-on: ubuntu-18.04
