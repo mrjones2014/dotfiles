@@ -305,6 +305,8 @@ function playground_text(playground, hidden = true) {
         themePopup.querySelectorAll('.theme-selected').forEach(function (el) {
             el.classList.remove('theme-selected');
         });
+	console.log(themePopup);
+	console.log(themePopup.querySelector);
         themePopup.querySelector("button#" + get_theme()).classList.add('theme-selected');
     }
 
