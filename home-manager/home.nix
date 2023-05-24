@@ -19,6 +19,7 @@ in {
   xdg.enable = true;
   home.packages = [
     pkgs.obsidian
+    pkgs.mdbook
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
     (pkgs.fetchFromGitHub {
       owner = "nix-community";
