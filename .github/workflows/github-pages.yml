@@ -25,7 +25,7 @@ jobs:
         run: ~/bin/mdbook build docs
       - name: Deploy Book
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/book
           SCRIPT_MODE: true
