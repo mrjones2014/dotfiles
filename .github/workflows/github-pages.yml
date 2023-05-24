@@ -21,9 +21,8 @@ jobs:
           rm "${MDBOOK_TARBALL}"
           mkdir ~/bin
           mv ./mdbook ~/bin/
-          echo "::add-path::~/bin"
       - name: Build Book
-        run: mdbook build docs
+        run: ~/bin/mdbook build docs
       - name: Deploy Book
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
