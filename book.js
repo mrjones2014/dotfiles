@@ -305,10 +305,6 @@ function playground_text(playground, hidden = true) {
         themePopup.querySelectorAll('.theme-selected').forEach(function (el) {
             el.classList.remove('theme-selected');
         });
-	console.log(themePopup);
-	console.log(themePopup.querySelector);
-	console.log(get_theme());
-	console.log(themePopup.querySelector("button#" + get_theme()));
         themePopup.querySelector("button#" + get_theme()).classList.add('theme-selected');
     }
 
