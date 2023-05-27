@@ -12,5 +12,5 @@
       ]);
 
   home.activation.installRustAnalyzer =
-    "${pkgs.rustup}/bin/rustup component add rust-analyzer";
+    "${pkgs.rustup}/bin/rustup default stable && ${pkgs.rustup}/bin/rustup component add rust-analyzer";
 }
