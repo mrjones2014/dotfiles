@@ -34,6 +34,7 @@ in {
     pkgs.xclip
     pkgs.librewolf
     pkgs.signal-desktop
+    pkgs.qbittorrent
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
