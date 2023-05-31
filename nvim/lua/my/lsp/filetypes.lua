@@ -6,7 +6,6 @@ M.config = {
     lspconfig = 'cssls',
   },
   ['html'] = {
-    patterns = { '*.html' },
     lspconfig = 'html',
   },
   ['json'] = {
@@ -18,7 +17,6 @@ M.config = {
     lspconfig = 'tsserver',
   },
   ['lua'] = {
-    patterns = { '*.lua' },
     lspconfig = 'lua_ls',
   },
   ['rust'] = {
@@ -26,7 +24,6 @@ M.config = {
     lspconfig = 'rust_analyzer',
   },
   ['svelte'] = {
-    patterns = { '*.svelte' },
     lspconfig = 'svelte',
   },
   ['go'] = {
@@ -34,18 +31,19 @@ M.config = {
     lspconfig = 'gopls',
   },
   ['markdown'] = {
-    patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
   },
   ['sh'] = {
     patterns = { '*.sh', '*.bash', '*.zsh' },
   },
   ['swift'] = {
-    patterns = { '*.swift' },
     lspconfig = 'sourcekit',
   },
   ['nix'] = {
     lspconfig = 'rnix',
+  },
+  ['toml'] = {
+    lspconfig = 'taplo',
   },
 }
 
