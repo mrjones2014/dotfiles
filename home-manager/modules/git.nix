@@ -85,6 +85,9 @@ in {
       url = {
         # Force GitHub to use SSH
         "git@github.com:" = { insteadOf = "https://github.com/"; };
+        "git@gitlab.1password.io:" = {
+          insteadOf = "https://gitlab.1password.io/";
+        };
         # Use HTTPS for cargo updates
         "https://github.com/rust-lang/crates.io-index" = {
           insteadOf = "https://github.com/rust-lang/crates.io-index";
