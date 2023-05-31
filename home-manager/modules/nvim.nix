@@ -63,6 +63,7 @@ in {
       # LSP servers
       rnix-lsp
       # rust-analyzer # pulled in from ./rust.nix
+      taplo
       gopls
       lua
       shellcheck
