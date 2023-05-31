@@ -3,6 +3,6 @@ return {
   dev = true,
   lazy = false,
   config = function()
-    require('smart-splits').setup()
+    require('smart-splits').setup({ ignored_buftypes = { 'nofile' } })
   end,
 }
