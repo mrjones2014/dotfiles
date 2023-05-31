@@ -9,7 +9,7 @@ vim: nvim/
 paths: config-paths.yml
 ignore: ripgrep_ignore
 codespell: codespell/custom_dict.txt
-ssh: .ssh/config
+ssh: home-manager/modules/ssh.nix
 wezterm: wezterm/
 cbfmt: cbfmt.toml
 home: home-manager/
