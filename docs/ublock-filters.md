@@ -1,4 +1,4 @@
-# Some Useful uBlock Origin Filters
+# Useful uBlock Origin Filters
 
 - [Youtube](#youtube)
 - [Stack Overflow / Stack Exchange](#stack-overflow-stack-exchange)
