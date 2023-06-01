@@ -31,6 +31,7 @@ M.config = {
     lspconfig = 'gopls',
   },
   ['markdown'] = {
+    patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
   },
   ['sh'] = {
