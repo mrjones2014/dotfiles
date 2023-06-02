@@ -2,13 +2,13 @@
 authors = ["Mat Jones"]
 language = "en"
 multilingual = false
-src = "."
+src = "docs"
 title = "mjones.network"
 
 [output.html]
 default-theme = "Ayu"
 preferred-dark-theme = "Ayu"
-additional-css = ["custom.css"]
+additional-css = ["./theme/custom.css"]
 cname = "mjones.network"
 site-url = "https://mjones.network"
 

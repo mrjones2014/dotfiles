@@ -5,3 +5,4 @@ result
 local/
 # I know I'm supposed to commit this file but I don't really care about it, I've never used it
 nvim/lazy-lock.json
+book/

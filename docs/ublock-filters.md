@@ -23,9 +23,10 @@ www.youtube.com###clarify-box
 ## Stack Overflow / Stack Exchange
 
 ```adblock
-! Block the cookie banner that covers the entire bottom left corner
+! Block the cookie banner that covers the entire bottom left corner even with JS disabled
 *.stackexchange.com##.js-consent-banner
 stackoverflow.com##.js-consent-banner
+askubuntu.com##.js-consent-banner
 ```
 
 ## GitHub
