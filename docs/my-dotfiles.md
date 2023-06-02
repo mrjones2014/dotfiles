@@ -16,6 +16,9 @@ Then run the `./init.bash` script from the repo. This will:
   - Optionally, with confirmation from user, set up a bunch of macOS default settings to more sane defaults.
 
 Then, open `./home-manager/modules/fish.nix`, copy the `nix-apply` alias definition for your system, and run it.
+For first time setup, you will likely need to prefix the command with `NIX_CONFIG="experimental-features = nix-command flakes"`
+to set the Nix config to allow the `nix flake` command via the `NIX_CONFIG` environment variable. After initial setup,
+this is set by the `conf.f/nix.conf` file (which is placed at `$XDG_CONFIG_HOME/nix/nix.conf`).
 
 On macOS, you also have to manually change the default shell to Fish.
 
