@@ -51,11 +51,9 @@
       l = "ls -laH";
       lg = "ls -lG";
       nix-apply = if pkgs.stdenv.isDarwin then
-        ''
-          NIX_CONFIG="experimental-features = nix-command flakes" home-manager switch --flake ~/git/dotfiles/.#mac''
+        "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
-        ''
-          NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch --flake .#pc'';
+        "sudo nixos-rebuild switch --flake .#pc";
       restart-gui = if pkgs.stdenv.isDarwin then
         "echo 'Not on NixOS'"
       else
