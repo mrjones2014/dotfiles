@@ -13,7 +13,7 @@ jobs:
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: 'latest'
-      - run: mdbook build docs
+      - run: mdbook build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
