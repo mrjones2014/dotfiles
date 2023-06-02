@@ -33,4 +33,4 @@ On NixOS, the `home-manager` configuration is managed as a NixOS module, so simp
 ## Caveats
 
 I try my best to make things work for both macOS and Linux (NixOS), please let me know if something does not work.
-Windows is absolutely not supported. [Microsoft Windows itself is malware/spyware](https://www.gnu.org/proprietary/malware-microsoft.html) anyway.
+Windows is absolutely not supported, since Nix does not support Windows. [Microsoft Windows itself is malware/spyware](https://www.gnu.org/proprietary/malware-microsoft.html) anyway.
