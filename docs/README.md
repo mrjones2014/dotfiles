@@ -1,3 +1,5 @@
+{{#title mjones.network}}
+
 <div align="center">
 
 <img width="100%" src="./avatar.png">
