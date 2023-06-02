@@ -158,7 +158,10 @@ git clone git@github.com:mrjones2014/dotfiles.git
 </ul>
 </li>
 </ul>
-<p>Then, open <code>./home-manager/modules/fish.nix</code>, copy the <code>nix-apply</code> alias definition for your system, and run it.</p>
+<p>Then, open <code>./home-manager/modules/fish.nix</code>, copy the <code>nix-apply</code> alias definition for your system, and run it.
+For first time setup, you will likely need to prefix the command with <code>NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot;</code>
+to set the Nix config to allow the <code>nix flake</code> command via the <code>NIX_CONFIG</code> environment variable. After initial setup,
+this is set by the <code>conf.f/nix.conf</code> file (which is placed at <code>$XDG_CONFIG_HOME/nix/nix.conf</code>).</p>
 <p>On macOS, you also have to manually change the default shell to Fish.</p>
 <ul>
 <li>Run <code>which fish</code> to get the filepath to the Fish binary (should be something like <code>$HOME/.nix-profile/bin/fish</code>)</li>
