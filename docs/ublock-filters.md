@@ -41,6 +41,10 @@ github.com##.dashboard-changelog.mb-4
 
 ! Block GitHub's ads above the corporate changelog
 github.com##.js-notice
+
+! Block "achievements"
+github.com##.d-block:has(a[href*="?tab=achievements"])
+github.com##.d-md-block:has(a[href*="?tab=achievements"])
 ```
 
 ## Glassdoor
