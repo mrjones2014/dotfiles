@@ -11,6 +11,11 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+      - name: test
+        run: |
+          pwd
+          ls
+          ls ublock-mdbook
       - uses: actions-rs/cargo@v1
         with:
           command: install
