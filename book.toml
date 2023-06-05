@@ -8,9 +8,12 @@ title = "mjones.network"
 [output.html]
 default-theme = "Ayu"
 preferred-dark-theme = "Ayu"
-additional-css = ["./theme/custom.css"]
+additional-css = ["./docs/custom.css"]
 cname = "mjones.network"
 site-url = "https://mjones.network"
 
 [output.html.print]
 enable = false
+
+[preprocessor.ublock-mdbook]
+command = "ublock-mdbook"
