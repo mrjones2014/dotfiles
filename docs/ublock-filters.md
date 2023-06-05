@@ -1,55 +1,12 @@
 # Useful uBlock Origin Filters
 
-- [Youtube](#youtube)
-- [Stack Overflow / Stack Exchange](#stack-overflow-stack-exchange)
-- [GitHub](#github)
-- [Glassdoor](#glassdoor)
+<details>
+<summary>Expand to copy all filters</summary>
 
-## Youtube
+{{#ublockfilters-all}}
 
-```adblock
-! Block "ambient mode" garbage
-youtube.com###cinematics.ytd-watch-flexy
+</details>
 
-! Block YouTube's cringe gigantic banner ads on the home screen
-www.youtube.com##ytd-statement-banner-renderer
-www.youtube.com##.ytd-brand-video-shelf-renderer
+{{#ublockfilters-toc}}
 
-! Block YouTube's definitely totally unbiased "misinformation" banners, I can think for myself
-www.youtube.com##.ytd-clarification-renderer
-www.youtube.com###clarify-box
-```
-
-## Stack Overflow / Stack Exchange
-
-```adblock
-! Block the cookie banner that covers the entire bottom left corner even with JS disabled
-*.stackexchange.com##.js-consent-banner
-stackoverflow.com##.js-consent-banner
-askubuntu.com##.js-consent-banner
-```
-
-## GitHub
-
-```adblock
-! Block GitHub's cringe algorithmic social media style feed
-github.com###feed-next
-github.com##[aria-labelledby="feed-next"]
-
-! Block the corporate changelog above the "Explore Repositories" section
-github.com##.dashboard-changelog.mb-4
-
-! Block GitHub's ads above the corporate changelog
-github.com##.js-notice
-
-! Block "achievements"
-github.com##.d-block:has(a[href*="?tab=achievements"])
-github.com##.d-md-block:has(a[href*="?tab=achievements"])
-```
-
-## Glassdoor
-
-```adblock
-! Block the "hard sell" overlay that tries to force you to pay money just to read a review
-www.glassdoor.com##.hardsellOverlay
-```
+{{#ublockfilters}}
