@@ -27,6 +27,7 @@ in {
       rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
       hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
     })
+    pkgs.cachix
   ] ++ lib.lists.optionals isDarwin [
     # put macOS specific packages here
   ] ++ lib.lists.optionals isLinux [
