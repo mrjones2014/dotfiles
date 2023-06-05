@@ -8,20 +8,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - name: test
-        run: |
-          pwd
-          ls
-          ls docs
-          ls ublock-mdbook
       - uses: actions-rs/cargo@v1
         with:
           command: install
           args: --path ublock-mdbook/
-      - uses: actions/checkout@v3
       - name: Setup mdbook
         uses: peaceiris/actions-mdbook@v1
         with:
