@@ -14,7 +14,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: install
-          args: --path ./ublock-mdbook/
+          args: --path ublock-mdbook/
       - uses: actions/checkout@v3
       - name: Setup mdbook
         uses: peaceiris/actions-mdbook@v1
