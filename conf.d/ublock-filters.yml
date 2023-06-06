@@ -34,3 +34,7 @@
 - Glassdoor: |
     ! Block the "hard sell" overlay that tries to force you to pay money just to read a review
     www.glassdoor.com##.hardsellOverlay
+
+- PayPal: |
+    ! Block the cookie banner, same as rejecting cookies
+    www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
