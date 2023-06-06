@@ -1,6 +1,6 @@
 - YouTube: |
     ! Block "ambient mode" garbage
-    youtube.com###cinematics.ytd-watch-flexy
+    youtube.com###cinematics.ytd-watch-flexy:remove()
 
     ! Block YouTube's cringe gigantic banner ads on the home screen
     www.youtube.com##ytd-statement-banner-renderer
