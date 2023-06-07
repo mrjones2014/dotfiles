@@ -27,10 +27,6 @@ return {
     vim.g.matchup_matchparen_offscreen = {
       method = 'popup',
     }
-
-    if vim.env.TREESITTER_PARSER_HOME then
-      vim.opt.runtimepath:append(vim.env.TREESITTER_PARSER_HOME)
-    end
   end,
   config = function()
     vim.filetype.add({
@@ -42,7 +38,7 @@ return {
     vim.treesitter.language.register('markdown', 'mdx')
     local rainbow = require('ts-rainbow')
     require('nvim-treesitter.configs').setup({
-      ensure_installed = {},
+      auto_install = true,
       highlight = {
         enable = true,
       },

@@ -1,14 +1,7 @@
-{ config, pkgs, lib, ... }:
-let
-  treesitter-parsers = pkgs.symlinkJoin {
-    name = "treesitter-parsers";
-    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-  };
-in {
+{ config, pkgs, lib, ... }: {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
-    TREESITTER_PARSER_HOME = "${treesitter-parsers.out}";
   };
 
   programs.fish.shellAliases = {
@@ -44,8 +37,6 @@ in {
     withPython3 = false;
     defaultEditor = true;
     coc.enable = false;
-
-    plugins = [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
 
     extraPackages = with pkgs; [
       # formatters and linters
