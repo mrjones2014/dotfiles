@@ -28,6 +28,7 @@ vim.opt.cmdheight = 0
 vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
 vim.opt.laststatus = 3
 vim.opt.virtualedit = 'onemore'
+vim.opt.splitkeep = 'screen'
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
