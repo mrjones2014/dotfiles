@@ -66,6 +66,7 @@
 
       # other utils and plugin dependencies
       ripgrep
+      fd
       catimg
       sqlite
       lemmy-help
