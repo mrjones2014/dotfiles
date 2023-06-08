@@ -60,7 +60,14 @@ function M.default_keymaps()
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 
-    { '<F4>', ':Workspace RightPanelToggle<CR>', description = 'Toggle right IDE panel' },
+    {
+      '<F4>',
+      function()
+        vim.cmd.Neotree()
+        require('edgy').open('right')
+      end,
+      description = 'Toggle right sidebar',
+    },
 
     {
       '<leader>qs',
