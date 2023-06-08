@@ -65,7 +65,6 @@ in {
     ./modules/atuin.nix
     ./modules/bat.nix
     ./modules/git.nix
-    ./modules/rust.nix
     ./modules/ssh.nix
     ./modules/wezterm.nix
     ./modules/gnome_tweaks.nix

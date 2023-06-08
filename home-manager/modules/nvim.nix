@@ -24,9 +24,6 @@
     };
   };
 
-  # for rust-analyzer
-  imports = [ ./rust.nix ];
-
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -53,7 +50,7 @@
 
       # LSP servers
       rnix-lsp
-      # rust-analyzer # pulled in from ./rust.nix
+      rust-analyzer
       taplo
       gopls
       lua
