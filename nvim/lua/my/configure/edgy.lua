@@ -6,6 +6,9 @@ return {
       config = function()
         require('neo-tree').setup({
           open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'edgy' },
+          mappings = {
+            ['w'] = false,
+          },
         })
       end,
     },
