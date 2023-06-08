@@ -1,6 +1,12 @@
 { lib, ... }: {
   imports = [ ./gnome.nix ./_1password.nix ];
 
+  # See https://github.com/nix-community/nix-direnv
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+
   # bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
