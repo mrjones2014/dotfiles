@@ -52,4 +52,4 @@
     discord.com##div[class*="reactionInner"][aria-label*="super"]
 
     ! Block "Download Apps" button, I uninstalled Discord for a reason
-    discord.com##foreignObject>div[aria-label="Download Apps"]
+    discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
