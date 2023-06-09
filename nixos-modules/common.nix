@@ -75,7 +75,6 @@
       "nvidia-settings"
       "1password"
       "1password-cli"
-      "discord"
       "steam"
       "steam-run"
       "steam-original"

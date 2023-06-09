@@ -29,7 +29,6 @@ in {
         "1password.desktop"
         "signal-desktop.desktop"
         "librewolf.desktop"
-        "discord.desktop"
         "steam.desktop"
       ];
     };

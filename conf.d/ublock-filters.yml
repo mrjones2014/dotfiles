@@ -38,3 +38,18 @@
 - PayPal: |
     ! Block the cookie banner, same as rejecting cookies
     www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
+
+- Discord: |
+    ! Block "Add super reaction" button
+    discord.com##div[aria-label="Add Super Reaction"]
+
+    ! Block Nitro stuff in user settings
+    discord.com##div[class*="premiumTab"]
+    discord.com##div[class*="premiumFeatureBorder"]
+    discord.com##div[class*="birthdayFeatureBorder"]
+
+    ! Block "Super" reactions, paid emojis lmao
+    discord.com##div[class*="reactionInner"][aria-label*="super"]
+
+    ! Block "Download Apps" button, I uninstalled Discord for a reason
+    discord.com##foreignObject>div[aria-label="Download Apps"]
