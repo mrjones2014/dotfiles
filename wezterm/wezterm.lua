@@ -33,7 +33,7 @@ config.leader = keymaps.leader
 config.keys = keymaps.keys
 -- behaves weirdly on linux
 config.hide_mouse_cursor_when_typing = os_name == 'macOS'
-config.enable_wayland = false
+config.enable_wayland = true
 config.front_end = 'WebGpu'
 config.webgpu_power_preference = 'HighPerformance'
 
