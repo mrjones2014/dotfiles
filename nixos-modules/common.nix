@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   imports = [ ./gnome.nix ./_1password.nix ];
 
   # See https://github.com/nix-community/nix-direnv
@@ -6,6 +6,10 @@
     keep-outputs = true
     keep-derivations = true
   '';
+
+  environment.systemPackages = [ pkgs.mullvad-vpn ];
+  services.mullvad-vpn.enable = true;
+  networking.wireguard.enable = true;
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
