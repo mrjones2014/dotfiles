@@ -27,5 +27,10 @@
     EDITOR = "nvim";
   };
 
-  environment.systemPackages = with pkgs; [ steam-run pkgs.parsec-bin ];
+  environment.systemPackages = with pkgs; [
+    steam-run
+    pkgs.parsec-bin
+    mullvad-vpn
+  ];
+  services.mullvad-vpn.enable = true;
 }
