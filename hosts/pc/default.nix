@@ -29,8 +29,9 @@
 
   environment.systemPackages = with pkgs; [
     steam-run
-    pkgs.parsec-bin
+    parsec-bin
     mullvad-vpn
+    minecraft
   ];
   services.mullvad-vpn.enable = true;
 }
