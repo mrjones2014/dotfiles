@@ -31,7 +31,7 @@
     steam-run
     parsec-bin
     mullvad-vpn
-    minecraft
+    prismlauncher
   ];
   services.mullvad-vpn.enable = true;
 }
