@@ -82,6 +82,7 @@
       "steam"
       "steam-run"
       "steam-original"
+      "minecraft-launcher"
       "parsec-bin"
     ];
 
