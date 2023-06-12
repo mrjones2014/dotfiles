@@ -32,11 +32,11 @@ if [ "$(uname -s)" == "Darwin" ]; then
   defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:-$HOME/.config}/hammerspoon/init.lua"
   echo "On macOS I can also set many OS settings to more sane defaults."
   echo "This will run the following script, you should inspect the contents first if you're not familiar with it:"
-  echo "${SCRIPT_DIR/$HOME/~}/scripts/setup-macos-defaults.bash"
+  echo "${SCRIPT_DIR/$HOME/~}/conf.d/setup-macos-defaults.bash"
   read -r -p "Proceed? (y/n): " input
   case "$input" in
   [yY] | [yY][eE][sS])
-    "$SCRIPT_DIR/scripts/setup-macos-defaults.bash"
+    "$SCRIPT_DIR/conf.d/setup-macos-defaults.bash"
     ;;
   *) ;;
   esac
