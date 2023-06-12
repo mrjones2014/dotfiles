@@ -53,7 +53,7 @@
       nix-apply = if pkgs.stdenv.isDarwin then
         "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
-        "sudo nixos-rebuild switch --flake .#pc";
+        "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc";
       restart-gui = if pkgs.stdenv.isDarwin then
         "echo 'Not on NixOS'"
       else
