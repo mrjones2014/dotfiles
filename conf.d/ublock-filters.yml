@@ -22,7 +22,7 @@
     github.com##[aria-labelledby="feed-next"]
 
     ! Block the corporate changelog above the "Explore Repositories" section
-    github.com##.dashboard-changelog.mb-4
+    github.com##.dashboard-changelog
 
     ! Block GitHub's ads above the corporate changelog
     github.com##.js-notice
@@ -54,4 +54,4 @@
     ! Block "Download Apps" button, I uninstalled Discord for a reason
     discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
     ! Block "Buy Boosts" bar
-    discord.com##div[aria-label*="Buy Boosts to help unlock"
+    discord.com##div[aria-label*="Buy Boosts to help unlock"]
