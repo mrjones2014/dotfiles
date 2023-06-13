@@ -66,7 +66,7 @@ return {
     {
       key = 'n',
       mods = 'META',
-      action = w.action.SpawnTab('CurrentPaneDomain'),
+      action = w.action.SpawnTab('DefaultDomain'),
     },
     {
       key = 'LeftArrow',
