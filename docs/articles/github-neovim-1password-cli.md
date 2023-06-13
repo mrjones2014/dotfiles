@@ -69,9 +69,9 @@ an item from 1Password called "GitHub" in JSON format.
 If you haven't already, install [1Password CLI](https://developer.1password.com/docs/cli/) and the [GitHub CLI](https://cli.github.com/). You may also want to check
 out the [1Password Shell Plugin for the GitHub CLI](https://developer.1password.com/docs/cli/shell-plugins/github/)!
 
-Before we can interact with GitHub via the GitHub CLI in Neovim, we first have to create an access token to use for GitHub authentication. Open the [GitHub deve
-loper settings page](https://github.com/settings/tokens) and create a new "classic" token. In the "Note" field, write "Neovim" (or anything that will remind you
- what it is used for) and grant it the `repo`, `read:org`, and `write:org` permission scopes.
+Before we can interact with GitHub via the GitHub CLI in Neovim, we first have to create an access token to use for GitHub authentication.
+Open the [GitHub developer settings page](https://github.com/settings/tokens) and create a new "classic" token. In the "Note" field, write "Neovim" (or anything that will remind you
+what it is used for) and grant it the `repo`, `read:org`, and `write:org` permission scopes.
 
 ![Permission settings while creating a new GitHub access token](https://user-images.githubusercontent.com/8648891/245626100-4d0a5e61-4485-4012-a65f-88cfb0b65904.png)
 
