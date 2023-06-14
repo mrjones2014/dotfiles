@@ -29,10 +29,12 @@
       ]);
 
     programs.dconf.enable = true;
-    environment.systemPackages = with pkgs; [
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.tray-icons-reloaded
-      gnomeExtensions.search-light
+    environment.systemPackages = with pkgs.gnomeExtensions; [
+      dash-to-dock
+      tray-icons-reloaded
+      search-light
+      no-overview
+      user-themes
     ];
   };
 }

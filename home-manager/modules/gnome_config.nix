@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 let
   autostartPrograms =
     if pkgs.stdenv.isDarwin then [ ] else [ pkgs._1password-gui ];
@@ -17,6 +17,7 @@ in {
       source = (pkg + "/share/applications/" + pkg.pname + ".desktop");
     };
   }) autostartPrograms);
+
   dconf.settings = {
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "close,minimize,maximize,appmenu:";
@@ -30,6 +31,13 @@ in {
         "signal-desktop.desktop"
         "librewolf.desktop"
         "steam.desktop"
+      ];
+      enabled-extensions = [
+        "trayIconsReloaded@selfmade.pl"
+        "search-light@icedman.github.com"
+        "dash-to-dock@micxgx.gmail.com"
+        "no-overview@fthx"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
     };
     "org/gnome/desktop/interface" = {
