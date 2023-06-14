@@ -5,11 +5,8 @@
       videoDrivers = [ "nvidia" ];
       desktopManager.gnome.enable = true;
       displayManager = {
-        defaultSession = "gnome";
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
+        defaultSession = "gnome-xorg";
+        gdm.enable = true;
       };
     };
 
