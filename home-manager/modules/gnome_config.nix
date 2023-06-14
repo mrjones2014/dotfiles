@@ -23,6 +23,7 @@ in {
       button-layout = "close,minimize,maximize,appmenu:";
     };
     "org/gnome/shell" = {
+      disable-user-extensions = false;
       favorite-apps = [
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
