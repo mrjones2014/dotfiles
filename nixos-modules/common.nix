@@ -74,6 +74,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "obsidian"
+      "discord"
       "spotify"
       "nvidia-persistenced"
       "nvidia-x11"
