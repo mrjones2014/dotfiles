@@ -52,7 +52,7 @@ function M.default_keymaps()
         if not string.match(url, '[a-z]*://[^ >,;]*') and string.match(url, '[%w%p\\-]*/[%w%p\\-]*') then
           url = string.format('https://github.com/%s', url)
         end
-        vim.fn.jobstart({ vim.fn.has('macunix') and 'open' or 'xdg-open', url }, { detach = true })
+        vim.fn.jobstart({ vim.fn.has('macunix') ~= 0 and 'open' or 'xdg-open', url }, { detach = true })
       end,
       description = 'Open URL under cursor',
     },
