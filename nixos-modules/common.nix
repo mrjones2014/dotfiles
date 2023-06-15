@@ -1,5 +1,5 @@
 { lib, pkgs, ... }: {
-  imports = [ ./gnome.nix ./_1password.nix ];
+  imports = [ ./desktop_environment.nix ./_1password.nix ];
 
   # See https://github.com/nix-community/nix-direnv
   nix.extraOptions = ''
