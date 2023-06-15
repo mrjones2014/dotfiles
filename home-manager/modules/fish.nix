@@ -1,6 +1,13 @@
 { pkgs, config, ... }:
-
-{
+let
+  inherit (pkgs) stdenv;
+  inherit (stdenv) isLinux;
+  inherit (stdenv) isDarwin;
+  opSudoPasswordScript = pkgs.writeScript "opsudo.bash" ''
+    #!${pkgs.bash}/bin/bash
+    /run/wrappers/bin/op item get "System Password" --fields password
+  '';
+in {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     HOMEBREW_NO_ANALYTICS = "1";
@@ -8,6 +15,7 @@
     GOPATH = "$HOME/go";
     GIT_MERGE_AUTOEDIT = "no";
     NEXT_TELEMETRY_DISABLED = "1";
+    SUDO_ASKPASS = "${opSudoPasswordScript}";
   };
 
   home.packages = [
@@ -62,7 +70,7 @@
         "echo 'Not on NixOS'"
       else
         "sudo nvim /etc/nixos/configuration.nix";
-    };
+    } // pkgs.lib.optionalAttrs isLinux { sudo = "sudo -A"; };
 
     shellInit = ''
       set -g fish_prompt_pwd_dir_length 20
