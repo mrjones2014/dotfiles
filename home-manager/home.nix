@@ -17,29 +17,31 @@ in {
   # release notes.
   home.stateVersion = "22.11"; # Please read the comment before changing.
   xdg.enable = true;
-  home.packages = [
-    pkgs.obsidian
-    pkgs.mdbook
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
-    (pkgs.fetchFromGitHub {
-      owner = "nix-community";
-      repo = "nurl";
-      rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
-      hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
-    })
-    pkgs.cachix
-  ] ++ lib.lists.optionals isDarwin [
-    # put macOS specific packages here
-  ] ++ lib.lists.optionals isLinux [
-    # put Linux specific packages here
-    pkgs.xclip
-    pkgs.librewolf
-    pkgs.signal-desktop
-    pkgs.qbittorrent
-  ];
+  home.packages = with pkgs;
+    [
+      obsidian
+      mdbook
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (fetchFromGitHub {
+        owner = "nix-community";
+        repo = "nurl";
+        rev = "ca1e2596fdd64de0314aa7c201e5477f0d8c3ab7";
+        hash = "sha256-xN6f9XStY3jqEA/nMb7QOnMDBrkhdFRtke0cCQddBRs=";
+      })
+      cachix
+      spotify
+    ] ++ lib.lists.optionals isDarwin [
+      # put macOS specific packages here
+    ] ++ lib.lists.optionals isLinux [
+      # put Linux specific packages here
+      xclip
+      librewolf
+      signal-desktop
+      qbittorrent
+    ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "obsidian" ];
+    builtins.elem (lib.getName pkg) [ "obsidian" "spotify" ];
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
