@@ -18,7 +18,8 @@ if ! command -v nix >/dev/null 2>&1; then
   exit 0 # must restart shell before continuing
 fi
 
-if ! command -v home-manager >/dev/null 2>&1; then
+# only install `home-manager` this way if NOT on NixOS -- NixOS installs it as a NixOS module
+if ! test -f "/etc/NIXOS" && ! command -v home-manager >/dev/null 2>&1; then
   echo "home-manager not installed. Running home-manager installation..."
   nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
   nix-channel --update
