@@ -53,5 +53,9 @@
 
     ! Block "Download Apps" button, I uninstalled Discord for a reason
     discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
+
     ! Block "Buy Boosts" bar
     discord.com##div[aria-label*="Buy Boosts to help unlock"]
+
+    ! Block "Discord's Birthday" crap
+    discord.com##li[role="listitem"]:has-text("Discord's Birthday")
