@@ -12,10 +12,9 @@ jobs:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v21
     - uses: cachix/cachix-action@v12
-    - name: add nix-community cache
       with:
         name: nix-community
-    - name: use nix-community cachix cache
+    - name: add nix-community cache
       run: cachix use nix-community
     - name: update flake.lock
       run: nix flake update
