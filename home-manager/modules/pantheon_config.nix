@@ -51,7 +51,24 @@ in {
       toggle-tiled-left = [ "<Ctrl><Shift><Alt><Super>h" ];
       toggle-tiled-right = [ "<Ctrl><Shift><Alt><Super>l" ];
     };
+    "org/pantheon/desktop/gala/keybindings" = {
+      screenshot =
+        [ "" ]; # disable default screenshot key and use it for Flameshot
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+      terminal = [ "" ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+      {
+        binding = "Print";
+        command = "flameshot gui";
+        name = "flameshot";
+      };
   };
+  home.packages = [ pkgs.flameshot ];
   gtk = {
     gtk2 = {
       configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
