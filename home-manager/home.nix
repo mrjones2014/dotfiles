@@ -30,6 +30,7 @@ in {
       })
       cachix
       spotify
+      (discord.override { withOpenASAR = true; })
     ] ++ lib.lists.optionals isDarwin [
       # put macOS specific packages here
     ] ++ lib.lists.optionals isLinux [
@@ -41,7 +42,7 @@ in {
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "obsidian" "spotify" ];
+    builtins.elem (lib.getName pkg) [ "obsidian" "spotify" "discord" ];
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
