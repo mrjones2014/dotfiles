@@ -14,9 +14,30 @@
   };
 
   xdg.configFile = {
-    "codespell/custom_dict.txt".source = ../../conf.d/codespell_dict.txt;
-    "cbfmt.toml".source = ../../conf.d/cbfmt.toml;
-    "ripgrep_ignore".source = ../../conf.d/ripgrep_ignore;
+    "codespell/custom_dict.txt".text = ''
+      crate
+      Crate
+    '';
+    "cbfmt.toml".text = ''
+      [languages]
+      rust = ["rustfmt"]
+      go = ["gofmt"]
+      lua = ["stylua -s -"]
+    '';
+    "ripgrep_ignore".text = ''
+      .git/
+      yarn.lock
+      package-lock.json
+      packer_compiled.lua
+      .DS_Store
+      .netrwhist
+      dist/
+      node_modules/
+      **/node_modules/
+      wget-log
+      wget-log.*
+      /vendor
+    '';
     "nvim" = {
       source = config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/git/dotfiles/nvim";

@@ -51,13 +51,21 @@ in {
       source = ../hammerspoon;
       recursive = true;
     };
-    "nix/nix.conf".source = ../conf.d/nix.conf;
+    "nix/nix.conf".text = ''
+      experimental-features = nix-command flakes
+      # see https://github.com/nix-community/nix-direnv
+      keep-derivations = true
+      keep-outputs = true
+    '';
     "config-paths.yml".source = ../conf.d/config-paths.yml;
-    # make .desktop files show up in application launcher on Linux
-    "op/plugins.sh".source = ../conf.d/op_cli_plugins.sh;
+    "op/plugins.sh".source = pkgs.writeScript "op_plugins.sh" ''
+      export OP_PLUGIN_ALIASES_SOURCED=1
+      alias gh="op plugin run -- gh"
+    '';
   };
-  home.file."${config.home.homeDirectory}/.xprofile".source =
-    ../conf.d/.xprofile;
+  home.file."${config.home.homeDirectory}/.xprofile".text = ''
+    export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
+  '';
 
   home.activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
 
