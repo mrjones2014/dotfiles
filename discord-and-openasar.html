@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Useful uBlock Origin Filters - mjones.network</title>
+        <title>Discord &amp; OpenAsar - mjones.network</title>
 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html" class="active">Useful uBlock Origin Filters</a></li><li class="chapter-item expanded affix "><a href="discord-and-openasar.html">Discord & OpenAsar</a></li><li class="chapter-item expanded affix "><li class="part-title">Articles</li><li class="chapter-item expanded "><a href="articles/github-neovim-1password-cli.html"><strong aria-hidden="true">1.</strong> Bringing my GitHub workflow into Neovim using 1Password CLI</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html">Useful uBlock Origin Filters</a></li><li class="chapter-item expanded affix "><a href="discord-and-openasar.html" class="active">Discord & OpenAsar</a></li><li class="chapter-item expanded affix "><li class="part-title">Articles</li><li class="chapter-item expanded "><a href="articles/github-neovim-1password-cli.html"><strong aria-hidden="true">1.</strong> Bringing my GitHub workflow into Neovim using 1Password CLI</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,147 +141,41 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="useful-ublock-origin-filters"><a class="header" href="#useful-ublock-origin-filters">Useful uBlock Origin Filters</a></h1>
-<p>Have some useful filters you'd like to contribute? Please <a href="https://github.com/mrjones2014/dotfiles/edit/master/conf.d/ublock-filters.yml">add them here</a>!</p>
-<details>
-<summary>Expand to copy all filters</summary>
-<pre><code class="language-adblock">! Block &quot;ambient mode&quot; garbage
-youtube.com###cinematics.ytd-watch-flexy:remove()
-
-! Block YouTube's cringe gigantic banner ads on the home screen
-www.youtube.com##ytd-statement-banner-renderer
-www.youtube.com##.ytd-brand-video-shelf-renderer
-
-! Block YouTube's definitely totally unbiased &quot;misinformation&quot; banners, I can think for myself
-www.youtube.com##.ytd-clarification-renderer
-www.youtube.com###clarify-box
-
-! Block the cookie banner that covers the entire bottom left corner even with JS disabled
-stackexchange.com##.js-consent-banner
-stackoverflow.com##.js-consent-banner
-askubuntu.com##.js-consent-banner
-
-! Block GitHub's cringe algorithmic social media style feed
-github.com###feed-next
-github.com##[aria-labelledby=&quot;feed-next&quot;]
-
-! Block the corporate changelog above the &quot;Explore Repositories&quot; section
-github.com##.dashboard-changelog
-
-! Block GitHub's ads above the corporate changelog
-github.com##.js-notice
-
-! Block &quot;achievements&quot;
-github.com##.d-block:has(a[href*=&quot;?tab=achievements&quot;])
-github.com##.d-md-block:has(a[href*=&quot;?tab=achievements&quot;])
-
-! Block the &quot;hard sell&quot; overlay that tries to force you to pay money just to read a review
-www.glassdoor.com##.hardsellOverlay
-
-! Block the cookie banner, same as rejecting cookies
-www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
-
-! Block &quot;Add super reaction&quot; button
-discord.com##div[aria-label=&quot;Add Super Reaction&quot;]
-
-! Block Nitro stuff in user settings
-discord.com##div[class*=&quot;premiumTab&quot;]
-discord.com##div[class*=&quot;premiumFeatureBorder&quot;]
-discord.com##div[class*=&quot;birthdayFeatureBorder&quot;]
-
-! Block &quot;Super&quot; reactions, paid emojis lmao
-discord.com##div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;]
-
-! Block &quot;Download Apps&quot; button, I uninstalled Discord for a reason
-discord.com##div[aria-label*=&quot;Download Apps&quot;]:upward(div[class*=&quot;listItem&quot;])
-
-! Block &quot;Buy Boosts&quot; bar
-discord.com##div[aria-label*=&quot;Buy Boosts to help unlock&quot;]
-
-! Block &quot;Discord's Birthday&quot; crap
-discord.com##li[role=&quot;listitem&quot;]:has-text(&quot;Discord's Birthday&quot;)
+                        <h1 id="discord--openasar"><a class="header" href="#discord--openasar">Discord &amp; OpenAsar</a></h1>
+<p>I use <a href="https://github.com/GooseMod/OpenAsar">OpenAsar</a> which is essentially a patch for Discord's <code>app.asar</code>
+(basically an <a href="https://www.electronjs.org/">Electron</a> app bundle) to make it spy on you less
+and add a few extra features like theming.</p>
+<p>On NixOS you can easily install OpenAsar by simply using a package override:</p>
+<pre><code class="language-nix">{ pkgs, ... }: {
+  # if using home-manager
+  home.packages = [ (pkgs.discord.override { withOpenASAR = true; }) ]
+  # if not using home-manager, install globally
+  environment.systemPackages = [ (pkgs.discord.override { withOpenASAR = true; }) ];
+}
 </code></pre>
-</details>
-<ul>
-<li><a href="#youtube">YouTube</a></li>
-<li><a href="#stack-overflow--stack-exchange">Stack Overflow / Stack Exchange</a></li>
-<li><a href="#github">GitHub</a></li>
-<li><a href="#glassdoor">Glassdoor</a></li>
-<li><a href="#paypal">PayPal</a></li>
-<li><a href="#discord">Discord</a></li>
-</ul>
-<h2 id="youtube"><a class="header" href="#youtube">YouTube</a></h2>
-<pre><code class="language-adblock">! Block &quot;ambient mode&quot; garbage
-youtube.com###cinematics.ytd-watch-flexy:remove()
-
-! Block YouTube's cringe gigantic banner ads on the home screen
-www.youtube.com##ytd-statement-banner-renderer
-www.youtube.com##.ytd-brand-video-shelf-renderer
-
-! Block YouTube's definitely totally unbiased &quot;misinformation&quot; banners, I can think for myself
-www.youtube.com##.ytd-clarification-renderer
-www.youtube.com###clarify-box
-</code></pre>
-<h2 id="stack-overflow--stack-exchange"><a class="header" href="#stack-overflow--stack-exchange">Stack Overflow / Stack Exchange</a></h2>
-<pre><code class="language-adblock">! Block the cookie banner that covers the entire bottom left corner even with JS disabled
-stackexchange.com##.js-consent-banner
-stackoverflow.com##.js-consent-banner
-askubuntu.com##.js-consent-banner
-</code></pre>
-<h2 id="github"><a class="header" href="#github">GitHub</a></h2>
-<pre><code class="language-adblock">! Block GitHub's cringe algorithmic social media style feed
-github.com###feed-next
-github.com##[aria-labelledby=&quot;feed-next&quot;]
-
-! Block the corporate changelog above the &quot;Explore Repositories&quot; section
-github.com##.dashboard-changelog
-
-! Block GitHub's ads above the corporate changelog
-github.com##.js-notice
-
-! Block &quot;achievements&quot;
-github.com##.d-block:has(a[href*=&quot;?tab=achievements&quot;])
-github.com##.d-md-block:has(a[href*=&quot;?tab=achievements&quot;])
-</code></pre>
-<h2 id="glassdoor"><a class="header" href="#glassdoor">Glassdoor</a></h2>
-<pre><code class="language-adblock">! Block the &quot;hard sell&quot; overlay that tries to force you to pay money just to read a review
-www.glassdoor.com##.hardsellOverlay
-</code></pre>
-<h2 id="paypal"><a class="header" href="#paypal">PayPal</a></h2>
-<pre><code class="language-adblock">! Block the cookie banner, same as rejecting cookies
-www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
-</code></pre>
-<h2 id="discord"><a class="header" href="#discord">Discord</a></h2>
-<pre><code class="language-adblock">! Block &quot;Add super reaction&quot; button
-discord.com##div[aria-label=&quot;Add Super Reaction&quot;]
-
-! Block Nitro stuff in user settings
-discord.com##div[class*=&quot;premiumTab&quot;]
-discord.com##div[class*=&quot;premiumFeatureBorder&quot;]
-discord.com##div[class*=&quot;birthdayFeatureBorder&quot;]
-
-! Block &quot;Super&quot; reactions, paid emojis lmao
-discord.com##div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;]
-
-! Block &quot;Download Apps&quot; button, I uninstalled Discord for a reason
-discord.com##div[aria-label*=&quot;Download Apps&quot;]:upward(div[class*=&quot;listItem&quot;])
-
-! Block &quot;Buy Boosts&quot; bar
-discord.com##div[aria-label*=&quot;Buy Boosts to help unlock&quot;]
-
-! Block &quot;Discord's Birthday&quot; crap
-discord.com##li[role=&quot;listitem&quot;]:has-text(&quot;Discord's Birthday&quot;)
+<p>Now, when you go to Settings in the Discord app, you should have a new item in the sidebar
+called &quot;OpenAsar&quot;. Clicking that opens the OpenAsar configuration window. From here, I use
+the following CSS to block as many of the Discord Nitro elements as possible:</p>
+<pre><code class="language-css">/* Hide all things Discord Nitro */
+div[aria-label=&quot;Add Super Reaction&quot;],
+div[class*=&quot;premiumTab&quot;],
+div[class*=&quot;premiumFeatureBorder&quot;],
+div[class*=&quot;birthdayFeatureBorder&quot;],
+div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;],
+div[aria-label*=&quot;Buy Boosts to help unlock&quot;] {
+  display: none;
+}
 </code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="my-dotfiles.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ublock-filters.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="discord-and-openasar.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="articles/github-neovim-1password-cli.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -291,11 +185,11 @@ discord.com##li[role=&quot;listitem&quot;]:has-text(&quot;Discord's Birthday&quo
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="my-dotfiles.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ublock-filters.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="discord-and-openasar.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="articles/github-neovim-1password-cli.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
