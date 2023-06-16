@@ -23,6 +23,7 @@
       rust = ["rustfmt"]
       go = ["gofmt"]
       lua = ["stylua -s -"]
+      nix = ["nixfmt"]
     '';
     "ripgrep_ignore".text = ''
       .git/
@@ -57,6 +58,8 @@
     coc.enable = false;
 
     extraPackages = with pkgs; [
+      # for compiling Treesitter parsers
+      gcc
       # formatters and linters
       nixfmt
       rustfmt
