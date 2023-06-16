@@ -6,7 +6,6 @@ src = "docs"
 title = "mjones.network"
 
 [output.html]
-theme = "mdbook-theme" # custom highlight.js with Nix language highlighting
 default-theme = "Ayu"
 preferred-dark-theme = "Ayu"
 additional-css = ["./docs/custom.css"]
