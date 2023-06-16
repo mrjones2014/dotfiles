@@ -13,7 +13,7 @@ I’m a Certified Scrum Master and currently working as a developer at 1Password
 
 My favorite programming languages currently are Rust, Go, and Lua. I like making Neovim plugins, command line tools, and other developer tools.
 
-I'm really passionate about Developer Experience™, solving problems for developers, and creating developer workflows people love to use.
+I'm really passionate about user privacy and sovereignty, Developer Experience™, solving problems for developers, and creating developer workflows people love to use.
 I maintain [`legendary.nvim`](https://github.com/mrjones2014/legendary.nvim) and [`smart-splits.nvim`](https://github.com/mrjones2014/smart-splits.nvim),
 as well as some other side projects.
 
