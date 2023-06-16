@@ -9,7 +9,7 @@
 </div>
 <hr>
 
-I’m a Certified Scrum Master and currently working as a developer at 1Password. I'm an automation enthusiast, Neovim user, and generally a command line junkie.
+I’m currently working as a developer at 1Password. I'm an automation enthusiast, Neovim user, and generally a command line junkie. I'm also a Certified Scrum Master.
 
 My favorite programming languages currently are Rust, Go, and Lua. I like making Neovim plugins, command line tools, and other developer tools.
 
