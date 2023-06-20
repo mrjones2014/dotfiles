@@ -14,6 +14,11 @@ function M.on_attach(client, bufnr)
     M.apply_ui_tweaks()
   end
 
+  -- if current nvim version supports inlay hints, enable them
+  if vim.lsp.buf['inlay_hint'] ~= nil then
+    vim.lsp.buf.inlay_hint(0, true)
+  end
+
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
   if client.name ~= 'null-ls' then
     client.server_capabilities.documentFormattingProvider = false
