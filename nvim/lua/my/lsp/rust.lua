@@ -23,6 +23,12 @@ return {
       checkOnSave = {
         command = 'clippy',
       },
+      inlayHints = {
+        bindingModeHints = { enable = true },
+        closureReturnTypeHints = { enable = true },
+        lifetimeElisionHints = { enable = true },
+        reborrowHints = { enable = true },
+      },
       diagnostics = {
         disabled = { 'inactive-code', 'unresolved-proc-macro' },
       },
