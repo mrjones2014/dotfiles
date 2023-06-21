@@ -208,6 +208,20 @@ function M.default_keymaps()
       mode = { 'i', 'n' },
       description = 'Clear snippet jumps',
     },
+
+    -- flash.nvim
+    {
+      's',
+      h.lazy_required_fn('flash', 'jump'),
+      mode = { 'n', 'x', 'o' },
+      description = 'Jump forwards',
+    },
+    {
+      'S',
+      h.lazy_required_fn('flash', 'jump', { search = { forward = false } }),
+      mode = { 'n', 'x', 'o' },
+      description = 'Jump backwards',
+    },
   }
 end
 
