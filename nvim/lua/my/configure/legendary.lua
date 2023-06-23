@@ -7,7 +7,7 @@ return {
     {
       'famiu/bufdelete.nvim',
       keys = {
-        { 'W', ':Bwipeout<CR>', description = 'Close current buffer' },
+        { 'W', ':Bwipeout<CR>', desc = 'Close current buffer' },
       },
     },
     -- used for frecency sort
@@ -21,8 +21,8 @@ return {
     -- },
   },
   keys = {
-    { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
-    { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
+    { '<leader>d', ':TroubleToggle<CR>', desc = 'Open LSP diagnostics in quickfix window' },
+    { '<leader>l', ':LegendaryScratchToggle<CR>', desc = 'Toggle legendary.nvim scratchpad' },
     {
       '<C-p>',
       function()

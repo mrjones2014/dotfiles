@@ -18,7 +18,7 @@ return {
     keys = {
       {
         'gS',
-        description = 'Toggle arrays/lists/etc. between single and multi line formats.',
+        desc = 'Toggle arrays/lists/etc. between single and multi line formats.',
       },
     },
     config = mini,
