@@ -14,6 +14,57 @@ return {
     { 'mtoohey31/cmp-fish', ft = 'fish', cond = not not string.find(vim.env.SHELL, 'fish') },
     {
       'L3MON4D3/LuaSnip',
+      keys = {
+        {
+          '<C-h>',
+          function()
+            require('luasnip').jump(-1)
+          end,
+          mode = { 'i', 's' },
+          description = 'Jump to previous snippet node',
+        },
+        {
+          '<C-l>',
+          function()
+            local ls = require('luasnip')
+            if ls.expand_or_jumpable() then
+              ls.expand_or_jump()
+            end
+          end,
+          mode = { 'i', 's' },
+          description = 'Expand or jump to next snippet node',
+        },
+        {
+          '<C-j>',
+          function()
+            local ls = require('luasnip')
+            if ls.choice_active() then
+              ls.change_choice(-1)
+            end
+          end,
+          mode = { 'i', 's' },
+          description = 'Select previous choice in snippet choice nodes',
+        },
+        {
+          '<C-k>',
+          function()
+            local ls = require('luasnip')
+            if ls.choice_active() then
+              ls.change_choice(1)
+            end
+          end,
+          mode = { 'i', 's' },
+          description = 'Select next choice in snippet choice nodes',
+        },
+        {
+          '<C-s>',
+          function()
+            require('luasnip').unlink_current()
+          end,
+          mode = { 'i', 'n' },
+          description = 'Clear snippet jumps',
+        },
+      },
       config = function()
         require('luasnip').config.setup({
           history = true,
