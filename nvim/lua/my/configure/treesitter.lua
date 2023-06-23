@@ -13,7 +13,7 @@ return {
           function()
             require('query-secretary').query_window_initiate()
           end,
-          description = 'Open Query Secretary',
+          desc = 'Open Query Secretary',
         },
       },
       config = function()

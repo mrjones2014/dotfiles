@@ -21,7 +21,7 @@ return {
             require('luasnip').jump(-1)
           end,
           mode = { 'i', 's' },
-          description = 'Jump to previous snippet node',
+          desc = 'Jump to previous snippet node',
         },
         {
           '<C-l>',
@@ -32,7 +32,7 @@ return {
             end
           end,
           mode = { 'i', 's' },
-          description = 'Expand or jump to next snippet node',
+          desc = 'Expand or jump to next snippet node',
         },
         {
           '<C-j>',
@@ -43,7 +43,7 @@ return {
             end
           end,
           mode = { 'i', 's' },
-          description = 'Select previous choice in snippet choice nodes',
+          desc = 'Select previous choice in snippet choice nodes',
         },
         {
           '<C-k>',
@@ -54,7 +54,7 @@ return {
             end
           end,
           mode = { 'i', 's' },
-          description = 'Select next choice in snippet choice nodes',
+          desc = 'Select next choice in snippet choice nodes',
         },
         {
           '<C-s>',
@@ -62,7 +62,7 @@ return {
             require('luasnip').unlink_current()
           end,
           mode = { 'i', 'n' },
-          description = 'Clear snippet jumps',
+          desc = 'Clear snippet jumps',
         },
       },
       config = function()

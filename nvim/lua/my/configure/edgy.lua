@@ -27,7 +27,7 @@ return {
         vim.cmd.Neotree()
         require('edgy').open('right')
       end,
-      description = 'Toggle right sidebar',
+      desc = 'Toggle right sidebar',
     },
   },
   config = function()
