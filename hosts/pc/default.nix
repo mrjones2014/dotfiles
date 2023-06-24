@@ -32,6 +32,14 @@
     parsec-bin
     mullvad-vpn
     prismlauncher
+    dolphinEmu
   ];
   services.mullvad-vpn.enable = true;
+
+  # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
+  boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
+
+  # to autoload at boot:
+  boot.kernelModules = [ "gcadapter_oc" ];
+  services.udev.packages = [ pkgs.dolphinEmu ];
 }
