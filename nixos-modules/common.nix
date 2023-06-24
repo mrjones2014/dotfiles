@@ -85,6 +85,10 @@
       "steam-run"
       "steam-original"
       "parsec-bin"
+      # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
+      # however VS Code should NOT be installed on this system!
+      # Use VS Codium instead: https://github.com/VSCodium/vscodium
+      "vscode"
     ];
 
   # This value determines the NixOS release from which the default

@@ -83,6 +83,7 @@
       sumneko-lua-language-server
       nodePackages_latest.typescript-language-server
       # this includes css-lsp, html-lsp, json-lsp
+
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
