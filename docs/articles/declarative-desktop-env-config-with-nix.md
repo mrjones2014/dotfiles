@@ -94,4 +94,4 @@ each custom shortcut group that should exist, then you can specify the shortcuts
 }
 ```
 
-Feel free to take a look at all the current settings I use at time of writing [in my dotfiles repo](https://github.com/mrjones2014/dotfiles/blob/dfe1155a2f14a6fc26fcf44076bbcd8752e2f6e6/home-manager/modules/pantheon_config.nix).
+Feel free to take a look at all the current settings I use at time of writing [in my dotfiles repo](https://github.com/mrjones2014/dotfiles/tree/e3d1dc94b8cbfd108fa22e9bf58e77dca48bc70c/home-manager/modules/gnome).
