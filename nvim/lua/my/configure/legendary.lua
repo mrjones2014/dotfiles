@@ -4,7 +4,12 @@ return {
   dependencies = {
     -- used by key mappings
     'fedepujol/move.nvim',
-    'famiu/bufdelete.nvim',
+    {
+      'famiu/bufdelete.nvim',
+      keys = {
+        { 'W', ':Bwipeout<CR>', desc = 'Close current buffer' },
+      },
+    },
     -- used for frecency sort
     'kkharji/sqlite.lua',
     -- used sometimes for testing integrations
@@ -15,7 +20,19 @@ return {
     --   setup = true,
     -- },
   },
+  keys = {
+    { '<leader>d', ':TroubleToggle<CR>', desc = 'Open LSP diagnostics in quickfix window' },
+    { '<leader>l', ':LegendaryScratchToggle<CR>', desc = 'Toggle legendary.nvim scratchpad' },
+    {
+      '<C-p>',
+      function()
+        require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
+      end,
+      mode = { 'n', 'i', 'x' },
+    },
+  },
   lazy = false,
+  priority = 1000000,
   config = function()
     require('legendary').setup({
       keymaps = require('my.legendary.keymap').default_keymaps(),
@@ -39,6 +56,7 @@ return {
         op_nvim = true,
         diffview = true,
       },
+      lazy_nvim = { auto_register = true },
       -- which_key = { auto_register = true },
     })
 

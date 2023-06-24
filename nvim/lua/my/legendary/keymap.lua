@@ -23,18 +23,7 @@ function M.default_keymaps()
     { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }, mode = { 'n', 'v' } },
     { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }, mode = { 'n', 'v' } },
 
-    {
-      '<C-p>',
-      function()
-        require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
-      end,
-      mode = { 'n', 'i', 'x' },
-    },
-
     { '<leader>qq', ':wqa<CR>', description = 'Save all and quit' },
-
-    -- :Bwipeout comes from bufdelete.nvim
-    { 'W', ':Bwipeout<CR>', description = 'Close current buffer' },
 
     {
       '<leader>gf',
@@ -59,21 +48,6 @@ function M.default_keymaps()
 
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
-
-    {
-      '<F4>',
-      function()
-        vim.cmd.Neotree()
-        require('edgy').open('right')
-      end,
-      description = 'Toggle right sidebar',
-    },
-
-    {
-      '<leader>qs',
-      h.lazy_required_fn('query-secretary', 'query_window_initiate'),
-      description = 'Open Query Secretary',
-    },
 
     {
       itemgroup = 'Search...',
@@ -131,11 +105,9 @@ function M.default_keymaps()
       },
     },
 
-    { '<leader>d', ':TroubleToggle<CR>', description = 'Open LSP diagnostics in quickfix window' },
-
-    { '<leader>l', ':LegendaryScratchToggle<CR>', description = 'Toggle legendary.nvim scratchpad' },
-
-    -- h/j/k/l mappings, text moving
+    -- h/j/k/l mappings, text moving,
+    -- these come from `move.nvim` which is defined
+    -- as a dependency in ../configure/legendary.lua
     {
       '<S-h>',
       {
@@ -154,59 +126,6 @@ function M.default_keymaps()
     {
       '<S-l>',
       { n = ':MoveHChar(1)<CR>', x = ":'<,'>MoveHBlock(1)<CR>" },
-    },
-
-    -- mini.splitjoin
-    {
-      'gS',
-      description = 'Toggle arrays/lists/etc. between single and multi line formats.',
-    },
-
-    -- luasnip
-    {
-      '<C-h>',
-      h.lazy_required_fn('luasnip', 'jump', -1),
-      mode = { 'i', 's' },
-      description = 'Jump to previous snippet node',
-    },
-    {
-      '<C-l>',
-      function()
-        local ls = require('luasnip')
-        if ls.expand_or_jumpable() then
-          ls.expand_or_jump()
-        end
-      end,
-      mode = { 'i', 's' },
-      description = 'Expand or jump to next snippet node',
-    },
-    {
-      '<C-j>',
-      function()
-        local ls = require('luasnip')
-        if ls.choice_active() then
-          ls.change_choice(-1)
-        end
-      end,
-      mode = { 'i', 's' },
-      description = 'Select previous choice in snippet choice nodes',
-    },
-    {
-      '<C-k>',
-      function()
-        local ls = require('luasnip')
-        if ls.choice_active() then
-          ls.change_choice(1)
-        end
-      end,
-      mode = { 'i', 's' },
-      description = 'Select next choice in snippet choice nodes',
-    },
-    {
-      '<C-s>',
-      h.lazy_required_fn('luasnip', 'unlink_current'),
-      mode = { 'i', 'n' },
-      description = 'Clear snippet jumps',
     },
   }
 end
