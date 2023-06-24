@@ -1,7 +1,14 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  inherit (pkgs) stdenv;
+  inherit (stdenv) isLinux;
+in {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
-    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+    LIBSQLITE = if isLinux then
+      "${pkgs.sqlite.out}/lib/libsqlite3.so"
+    else
+      "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
   };
 
   programs.fish.shellAliases = {
