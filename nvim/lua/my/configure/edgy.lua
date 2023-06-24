@@ -20,6 +20,16 @@ return {
     },
   },
   event = 'VeryLazy',
+  keys = {
+    {
+      '<F4>',
+      function()
+        vim.cmd.Neotree()
+        require('edgy').open('right')
+      end,
+      desc = 'Toggle right sidebar',
+    },
+  },
   config = function()
     require('edgy').setup({
       exit_when_last = true,

@@ -106,7 +106,6 @@ return {
         nvim_ts_rainbow = true,
         op_nvim = true,
         trouble = true,
-        leap = true,
         treesitter = true,
         telescope = true,
       },

@@ -2,8 +2,8 @@
 
 Like many (arguably _most_) pieces of free, proprietary software today, Discord is
 [really bad for your privacy](https://tosdr.org/en/service/536). Your "private" messages and even voice chats on Discord
-are collected and stored, readable by Discord staff, according to their own privacy policy, and this is just one of many
-issues.
+are collected and stored, readable by Discord staff, according to their own privacy policy.
+Discord's primary source of revenue is selling your data. These are just a few of many issues.
 
 By default, Discord also collects data on applications you open and run on your computer and build a statistical model
 of what software you are likely to buy/license in the future. You can turn this off under Settings → Privacy & Safety

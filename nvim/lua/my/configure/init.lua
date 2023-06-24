@@ -13,7 +13,16 @@ return {
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   { 'echasnovski/mini.pairs', event = 'InsertEnter', config = mini },
   { 'echasnovski/mini.trailspace', event = 'BufRead', config = mini },
-  { 'echasnovski/mini.splitjoin', keys = { 'gS' }, config = mini },
+  {
+    'echasnovski/mini.splitjoin',
+    keys = {
+      {
+        'gS',
+        desc = 'Toggle arrays/lists/etc. between single and multi line formats.',
+      },
+    },
+    config = mini,
+  },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', config = true },
   {
     'saecki/crates.nvim',

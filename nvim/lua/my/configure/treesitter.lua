@@ -7,6 +7,15 @@ return {
     'andymass/vim-matchup',
     {
       'ziontee113/query-secretary',
+      keys = {
+        {
+          '<leader>qs',
+          function()
+            require('query-secretary').query_window_initiate()
+          end,
+          desc = 'Open Query Secretary',
+        },
+      },
       config = function()
         require('query-secretary').setup({})
       end,

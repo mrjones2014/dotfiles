@@ -10,13 +10,6 @@ function M.default_commands()
     { ':Wqa', ':wq' },
     { ':Wa', ':wa' },
     {
-      ':BindLspKeymaps',
-      function()
-        require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(0))
-      end,
-      description = "Manually bind LSP keymaps in case they didn't get bound",
-    },
-    {
       ':OnlyBuffer',
       ':%bd|e#|bd#',
       description = 'Close all buffers except current',
