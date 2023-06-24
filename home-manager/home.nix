@@ -86,7 +86,7 @@ in {
     ./modules/git.nix
     ./modules/ssh.nix
     ./modules/wezterm.nix
-    ./modules/pantheon_config.nix
+    ./modules/gnome/default.nix
   ];
 
   # Let Home Manager install and manage itself.

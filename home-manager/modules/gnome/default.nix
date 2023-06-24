@@ -1,11 +1,17 @@
-{ pkgs, config, ... }:
+# Shared stuff goes in here, and GNOME or Pantheon specific settings go in their own files
+{ pkgs, config, lib, ... }:
 let
   wallpaperImg = pkgs.fetchurl {
     url =
       "https://user-images.githubusercontent.com/8648891/246180692-b8144052-e947-47b0-b59c-ea1022b9b629.jpg";
     hash = "sha256-itnhNPYvQLfCULNrEZqP+3VBQVmEmvh9wv6C2F3YKQU=";
   };
+  usePantheon = false;
+  useGnome = !usePantheon;
 in {
+  imports = [ ] ++ lib.lists.optionals usePantheon [ ./pantheon.nix ]
+    ++ lib.lists.optionals useGnome [ ./gnome.nix ];
+
   # workaround for https://github.com/nix-community/home-manager/issues/3447
   # autostart 1Password in the background so I can use the SSH agent without manually opening the app first
   xdg.configFile."autostart/1password.desktop".text = ''
@@ -25,8 +31,6 @@ in {
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      cursor-theme = "elementary";
-      icon-theme = "elementary";
       enable-hot-corners = false;
       clock-show-weekday = true;
     };
@@ -34,39 +38,11 @@ in {
       picture-uri = "file://${wallpaperImg}";
     };
     "org/gnome/desktop/datetime" = { automatic-timezone = true; };
-    "io/elementary/files/preferences" = { singleclick-select = true; };
-    "io/elementary/settings-daemon/housekeeping" = {
-      cleanup-downloads-folder = true;
-    };
-    "org/pantheon/desktop/gala/appearance" = {
-      button-layout = "close,minimize,maximize,appmenu:";
-    };
-    "org/pantheon/desktop/gala/mask-corners" = { enable = false; };
-    # key bindings
-    "org/pantheon/desktop/gala/behavior" = {
-      overlay-action =
-        "io.elementary.wingpanel --toggle-indicator=app-launcher";
-    };
+
     "org/gnome/mutter/keybindings" = {
       toggle-tiled-left = [ "<Ctrl><Shift><Alt><Super>h" ];
       toggle-tiled-right = [ "<Ctrl><Shift><Alt><Super>l" ];
     };
-    "org/pantheon/desktop/gala/keybindings" = {
-      screenshot =
-        [ "" ]; # disable default screenshot key and use it for Flameshot
-    };
-    "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-      ];
-      terminal = [ "" ];
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-      {
-        binding = "Print";
-        command = "flameshot gui";
-        name = "flameshot";
-      };
   };
   home.packages = [ pkgs.flameshot ];
   gtk = {
@@ -76,14 +52,7 @@ in {
         gtk-application-prefer-dark-theme=1
       '';
     };
-
     gtk3 = { extraConfig = { gtk-application-prefer-dark-theme = 1; }; };
-
     gtk4 = { extraConfig = { gtk-application-prefer-dark-theme = 1; }; };
-
-    iconTheme = {
-      name = "elementary";
-      package = pkgs.pantheon.elementary-icon-theme;
-    };
   };
 }
