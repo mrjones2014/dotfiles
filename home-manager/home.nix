@@ -42,7 +42,15 @@ in {
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "obsidian" "spotify" "discord" ];
+    builtins.elem (lib.getName pkg) [
+      "obsidian"
+      "spotify"
+      "discord"
+      # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
+      # however VS Code should NOT be installed on this system!
+      # Use VS Codium instead: https://github.com/VSCodium/vscodium
+      "vscode"
+    ];
 
   # link config files, if a dedicated module exists (below)
   # it will handle its own config
