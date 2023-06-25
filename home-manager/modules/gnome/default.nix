@@ -45,6 +45,7 @@ in {
       move-to-monitor-up = [ "<Shift><Control><Alt>k" ];
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
+    "org/gnome/desktop/peripherals/touchpad" = { send-events = "enabled"; };
   };
   home.packages = [ pkgs.flameshot ];
   gtk = {
