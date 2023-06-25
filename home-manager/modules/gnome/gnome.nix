@@ -22,9 +22,9 @@
         "no-overview@fthx"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
-      "/org/gnome/shell/extensions/search-light" = {
-        shortcut-search = [ "<Super>space" ];
-      };
+    };
+    "org/gnome/shell/extensions/search-light" = {
+      shortcut-search = [ "<Super>space" ];
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
