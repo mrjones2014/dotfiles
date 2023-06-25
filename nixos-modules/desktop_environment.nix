@@ -1,5 +1,10 @@
-{ pkgs, ... }: {
-  config = {
+{ pkgs, lib, ... }:
+let
+  vars = (import ../vars.nix);
+  usePantheon = vars.usePantheon;
+  useGnome = vars.useGnome;
+in {
+  config = { } // lib.optionalAttrs useGnome {
     services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
@@ -36,31 +41,30 @@
       no-overview
       user-themes
     ];
-
-    # uncomment to switch to Pantheon
-    # environment.systemPackages = [ pkgs.pantheon.elementary-dock ];
-    # programs.dconf.enable = true;
-    # services.xserver = {
-    #   enable = true;
-    #   videoDrivers = [ "nvidia" ];
-    #   desktopManager.pantheon.enable = true;
-    #   displayManager.lightdm = {
-    #     enable = true;
-    #     greeters.pantheon.enable = true;
-    #   };
-    # };
-    # environment.pantheon.excludePackages = with pkgs.pantheon; [
-    #   appcenter
-    #   elementary-calculator
-    #   elementary-calendar
-    #   elementary-camera
-    #   elementary-code
-    #   elementary-feedback
-    #   elementary-mail
-    #   elementary-music
-    #   elementary-photos
-    #   elementary-tasks
-    #   elementary-videos
-    # ];
+  } // lib.optionalAttrs usePantheon {
+    environment.systemPackages = [ pkgs.pantheon.elementary-dock ];
+    programs.dconf.enable = true;
+    services.xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      desktopManager.pantheon.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        greeters.pantheon.enable = true;
+      };
+    };
+    environment.pantheon.excludePackages = with pkgs.pantheon; [
+      appcenter
+      elementary-calculator
+      elementary-calendar
+      elementary-camera
+      elementary-code
+      elementary-feedback
+      elementary-mail
+      elementary-music
+      elementary-photos
+      elementary-tasks
+      elementary-videos
+    ];
   };
 }
