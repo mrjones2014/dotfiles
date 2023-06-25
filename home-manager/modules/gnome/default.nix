@@ -39,10 +39,11 @@ in {
       picture-uri = "file://${wallpaperImg}";
     };
     "org/gnome/desktop/datetime" = { automatic-timezone = true; };
-
-    "org/gnome/mutter/keybindings" = {
-      toggle-tiled-left = [ "<Ctrl><Shift><Alt><Super>h" ];
-      toggle-tiled-right = [ "<Ctrl><Shift><Alt><Super>l" ];
+    "org/gnome/desktop/wm/keybindings" = {
+      move-to-monitor-left = [ "<Shift><Control><Alt>h" ];
+      move-to-monitor-right = [ "<Shift><Control><Alt>l" ];
+      move-to-monitor-up = [ "<Shift><Control><Alt>k" ];
+      move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
   };
   home.packages = [ pkgs.flameshot ];

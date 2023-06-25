@@ -20,11 +20,24 @@
         "search-light@icedman.github.com"
         "dash-to-dock@micxgx.gmail.com"
         "no-overview@fthx"
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "gTile@vibou"
       ];
     };
     "org/gnome/shell/extensions/search-light" = {
       shortcut-search = [ "<Super>space" ];
+    };
+    "org/gnome/shell/extensions/gtile" = {
+      auto-close-keyboard-shortcut = [ true ];
+      grid-sizes = "11x1";
+      # right 2/3rds of screen
+      resize1 = "11x1 5:1 11:1";
+      preset-resize-1 = [ "<Shift><Control><Alt><Super>l" ];
+      # left 1/3rd of screen
+      resize2 = "11x1 1:1 4:1";
+      preset-resize-2 = [ "<Shift><Control><Alt><Super>h" ];
+      # center 2/3rds of screen
+      resize3 = "5x1 2:1 4:1";
+      preset-resize-3 = [ "<Shift><Control><Alt><Super>k" ];
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";

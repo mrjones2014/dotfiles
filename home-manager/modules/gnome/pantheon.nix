@@ -34,6 +34,11 @@
         command = "flameshot gui";
         name = "flameshot";
       };
+
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [ "<Ctrl><Shift><Alt><Super>h" ];
+      toggle-tiled-right = [ "<Ctrl><Shift><Alt><Super>l" ];
+    };
   };
 
   gtk = {

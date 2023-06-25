@@ -39,7 +39,7 @@ in {
       tray-icons-reloaded
       search-light
       no-overview
-      user-themes
+      gtile
     ];
   } // lib.optionalAttrs usePantheon {
     environment.systemPackages = [ pkgs.pantheon.elementary-dock ];
