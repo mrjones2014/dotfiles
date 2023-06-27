@@ -3,7 +3,6 @@ return {
   dependencies = {
     {
       'nvim-neo-tree/neo-tree.nvim',
-      config = true,
       opts = {
         open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'edgy' },
         mappings = {
@@ -11,10 +10,7 @@ return {
         },
       },
     },
-    {
-      'simrat39/symbols-outline.nvim',
-      config = true,
-    },
+    'simrat39/symbols-outline.nvim',
   },
   event = 'VeryLazy',
   keys = {
@@ -27,7 +23,6 @@ return {
       desc = 'Toggle right sidebar',
     },
   },
-  config = true,
   opts = {
     exit_when_last = true,
     animate = {
