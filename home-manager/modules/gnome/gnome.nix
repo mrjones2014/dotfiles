@@ -23,6 +23,11 @@
         "gTile@vibou"
       ];
     };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      enable-hot-corners = false;
+      clock-show-weekday = true;
+    };
     "org/gnome/shell/extensions/search-light" = {
       shortcut-search = [ "<Super>space" ];
     };
@@ -39,10 +44,8 @@
       resize3 = "5x1 2:1 4:1";
       preset-resize-3 = [ "<Shift><Control><Alt><Super>k" ];
     };
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-      enable-hot-corners = false;
-      clock-show-weekday = true;
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      intellihide-mode = "ALL_WINDOWS";
     };
   };
 }
