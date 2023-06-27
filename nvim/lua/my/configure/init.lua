@@ -10,6 +10,13 @@ return {
   { 'echasnovski/mini.trailspace', event = 'BufRead', config = true },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', config = true },
   {
+    'echasnovski/mini.splitjoin',
+    keys = {
+      { 'gS', desc = 'Toggle arrays/lists/etc. between single and multi line formats.' },
+    },
+    config = true,
+  },
+  {
     'saecki/crates.nvim',
     event = { 'BufRead Cargo.toml' },
     config = true,
