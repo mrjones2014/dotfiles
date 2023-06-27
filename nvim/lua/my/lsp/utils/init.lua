@@ -2,6 +2,8 @@ local M = {}
 
 local init_done = false
 
+local formatting_enabled = true
+
 function M.on_attach(client, bufnr)
   -- setup LSP-specific keymaps
   require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
@@ -95,7 +97,21 @@ function M.apply_ui_tweaks()
   vim.diagnostic.config({ virtual_text = true }, vim.api.nvim_create_namespace('neotest'))
 end
 
+function M.toggle_formatting_enabled(enable)
+  if not enable or formatting_enabled then
+    formatting_enabled = false
+    vim.notify('Disabling LSP formatting...', vim.log.levels.INFO)
+  else
+    formatting_enabled = true
+    vim.notify('Enabling LSP formatting...', vim.log.levels.INFO)
+  end
+end
+
 function M.is_formatting_supported()
+  if not formatting_enabled then
+    return false
+  end
+
   local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting') then
