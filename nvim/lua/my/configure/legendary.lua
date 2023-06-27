@@ -13,7 +13,29 @@ return {
     -- used for frecency sort
     'kkharji/sqlite.lua',
     -- used sometimes for testing integrations
-    -- 'folke/which-key.nvim',
+    -- {
+    --   'folke/which-key.nvim',
+    --   config = function()
+    --     require('which-key').setup({
+    --       plugins = {
+    --         presets = {
+    --           operators = false,
+    --           motions = false,
+    --           text_objects = false,
+    --           windows = false,
+    --           nav = false,
+    --           z = false,
+    --           g = false,
+    --         },
+    --       },
+    --     })
+    --     require('which-key').register({
+    --       name = 'WhichKey: Files', -- optional group name
+    --       desc = 'Some which key items',
+    --       fq = { '<cmd>Telescope find_files<cr>', 'Find File' },
+    --     })
+    --   end,
+    -- },
     -- {
     --   'nvim-tree/nvim-tree.lua',
     --   cmd = { 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeCollapse' },
@@ -59,24 +81,5 @@ return {
       lazy_nvim = { auto_register = true },
       -- which_key = { auto_register = true },
     })
-
-    -- require('which-key').setup({
-    --   plugins = {
-    --     presets = {
-    --       operators = false,
-    --       motions = false,
-    --       text_objects = false,
-    --       windows = false,
-    --       nav = false,
-    --       z = false,
-    --       g = false,
-    --     },
-    --   },
-    -- })
-    -- require('which-key').register({
-    --   name = 'WhichKey: Files', -- optional group name
-    --   desc = 'Some which key items',
-    --   fq = { '<cmd>Telescope find_files<cr>', 'Find File' },
-    -- })
   end,
 }

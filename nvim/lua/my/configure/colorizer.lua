@@ -5,15 +5,14 @@ return {
   'NvChad/nvim-colorizer.lua',
   ft = filetypes,
   cmd = 'ColorizerAttachToBuffer',
-  config = function()
-    require('colorizer').setup({
-      filetypes = filetypes,
-      user_default_options = {
-        names = false,
-        css = true,
-        sass = { enable = true, parsers = { 'css' } },
-        always_update = true,
-      },
-    })
-  end,
+  opts = {
+    filetypes = filetypes,
+    user_default_options = {
+      names = false,
+      css = true,
+      sass = { enable = true, parsers = { 'css' } },
+      always_update = true,
+    },
+  },
+  config = true,
 }
