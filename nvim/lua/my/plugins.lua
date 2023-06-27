@@ -13,6 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require('lazy').setup('my.configure', {
   defaults = {
     lazy = true,
+    config = true,
   },
   dev = { path = '~/git', fallback = true },
   install = {
