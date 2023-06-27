@@ -15,6 +15,7 @@ return {
     'OpSidebar',
     'OpAnalyzeBuffer',
   },
+  config = true,
   opts = {
     sidebar = {
       side = 'left',

@@ -1,6 +1,7 @@
 return {
   'echasnovski/mini.surround',
   keys = { '<leader>s' },
+  config = true,
   opts = {
     mappings = {
       add = '<leader>sa',

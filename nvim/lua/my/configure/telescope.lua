@@ -6,11 +6,13 @@ return {
     'nvim-telescope/telescope-fzy-native.nvim',
     {
       'folke/trouble.nvim',
+      config = true,
       opts = { action_keys = { hover = {} } },
     },
     {
       'kevinhwang91/nvim-bqf',
       ft = 'qf', -- load on quickfix list opened,
+      config = true,
       opts = {
         func_map = {
           pscrolldown = '<C-d>',

@@ -14,4 +14,5 @@ return {
       always_update = true,
     },
   },
+  config = true,
 }

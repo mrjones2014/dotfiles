@@ -5,6 +5,7 @@ return {
     'MunifTanjim/nui.nvim',
   },
   event = 'VeryLazy',
+  config = true,
   opts = {
     lsp = {
       signature = { enabled = true },

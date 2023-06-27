@@ -36,4 +36,5 @@ return {
       width_preview = 120,
     },
   },
+  config = true,
 }
