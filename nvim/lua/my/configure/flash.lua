@@ -18,9 +18,8 @@ return {
       desc = 'Jump backwards',
     },
   },
-  config = function()
-    require('flash').setup({
-      jump = { nohlsearch = true },
-    })
-  end,
+  config = true,
+  opts = {
+    jump = { nohlsearch = true },
+  },
 }

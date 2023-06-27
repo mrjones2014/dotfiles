@@ -1,7 +1,8 @@
 return {
   'folke/todo-comments.nvim',
   event = 'BufRead',
-  config = function()
+  config = true,
+  opts = {
     -- See result with below comments
     -- TODO a todo message
     -- FIX Fix me
@@ -14,12 +15,10 @@ return {
     --
     -- TODO with a very long
     --      multiline comment
-    require('todo-comments').setup({
-      highlight = {
-        pattern = [[.*<(KEYWORDS)\s*]],
-        keyword = 'bg',
-        comments_only = true,
-      },
-    })
-  end,
+    highlight = {
+      pattern = [[.*<(KEYWORDS)\s*]],
+      keyword = 'bg',
+      comments_only = true,
+    },
+  },
 }

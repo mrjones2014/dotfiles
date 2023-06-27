@@ -3,20 +3,17 @@ return {
   dependencies = {
     {
       'nvim-neo-tree/neo-tree.nvim',
-      config = function()
-        require('neo-tree').setup({
-          open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'edgy' },
-          mappings = {
-            ['w'] = false,
-          },
-        })
-      end,
+      config = true,
+      opts = {
+        open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'edgy' },
+        mappings = {
+          ['w'] = false,
+        },
+      },
     },
     {
       'simrat39/symbols-outline.nvim',
-      config = function()
-        require('symbols-outline').setup()
-      end,
+      config = true,
     },
   },
   event = 'VeryLazy',
@@ -30,45 +27,44 @@ return {
       desc = 'Toggle right sidebar',
     },
   },
-  config = function()
-    require('edgy').setup({
-      exit_when_last = true,
-      animate = {
-        enabled = false,
-      },
-      options = {
-        right = { size = 30 },
-      },
-      keys = {
-        ['q'] = function(win)
-          win.view.edgebar:close()
+  config = true,
+  opts = {
+    exit_when_last = true,
+    animate = {
+      enabled = false,
+    },
+    options = {
+      right = { size = 30 },
+    },
+    keys = {
+      ['q'] = function(win)
+        win.view.edgebar:close()
+      end,
+    },
+    right = {
+      {
+        title = 'Neo-Tree Buffers',
+        ft = 'neo-tree',
+        filter = function(buf)
+          return vim.b[buf].neo_tree_source == 'buffers'
         end,
+        pinned = true,
+        open = 'Neotree position=top buffers',
+        size = { height = 0.1 },
       },
-      right = {
-        {
-          title = 'Neo-Tree Buffers',
-          ft = 'neo-tree',
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == 'buffers'
-          end,
-          pinned = true,
-          open = 'Neotree position=top buffers',
-          size = { height = 0.1 },
-        },
-        {
-          title = 'Neo-Tree',
-          ft = 'neo-tree',
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == 'filesystem'
-          end,
-          size = { height = 0.5 },
-        },
-        {
-          ft = 'Outline',
-          pinned = true,
-          open = 'SymbolsOutline',
-        },
+      {
+        title = 'Neo-Tree',
+        ft = 'neo-tree',
+        filter = function(buf)
+          return vim.b[buf].neo_tree_source == 'filesystem'
+        end,
+        size = { height = 0.5 },
       },
-    })
-  end,
+      {
+        ft = 'Outline',
+        pinned = true,
+        open = 'SymbolsOutline',
+      },
+    },
+  },
 }

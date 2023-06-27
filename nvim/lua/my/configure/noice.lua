@@ -5,86 +5,85 @@ return {
     'MunifTanjim/nui.nvim',
   },
   event = 'VeryLazy',
-  config = function()
-    require('noice').setup({
-      lsp = {
-        signature = { enabled = true },
-        hover = { enabled = true },
-        documentation = {
-          opts = {
-            win_options = {
-              concealcursor = 'n',
-              conceallevel = 3,
-              winhighlight = {
-                Normal = 'LspFloat',
-                FloatBorder = 'LspFloatBorder',
-              },
-            },
-          },
-        },
-        override = {
-          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-          ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true,
-        },
-      },
-      cmdline = {
-        format = {
-          cmdline = { icon = ' ' },
-          search_down = { icon = '  ' },
-          search_up = { icon = '  ' },
-          filter = { icon = ' ', lang = 'fish' },
-          lua = { icon = ' ' },
-          help = { icon = ' 󰋖' },
-        },
+  config = true,
+  opts = {
+    lsp = {
+      signature = { enabled = true },
+      hover = { enabled = true },
+      documentation = {
         opts = {
-          position = {
-            row = vim.o.lines - 3,
-            col = 0,
-          },
-          size = { width = '100%' },
-          border = {
-            padding = { 0, 3 },
-          },
           win_options = {
+            concealcursor = 'n',
+            conceallevel = 3,
             winhighlight = {
-              Normal = 'CmdLine',
-              FloatBorder = 'CmdLineBorder',
+              Normal = 'LspFloat',
+              FloatBorder = 'LspFloatBorder',
             },
           },
         },
       },
-      history = {
-        filter = {},
+      override = {
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+        ['vim.lsp.util.stylize_markdown'] = true,
+        ['cmp.entry.get_documentation'] = true,
       },
-      routes = {
-        {
-          filter = {
-            any = {
-              { find = 'No active Snippet' },
-              { find = 'No signature help available' },
-              { find = '^<$' },
-              { kind = 'wmsg' },
-            },
+    },
+    cmdline = {
+      format = {
+        cmdline = { icon = ' ' },
+        search_down = { icon = '  ' },
+        search_up = { icon = '  ' },
+        filter = { icon = ' ', lang = 'fish' },
+        lua = { icon = ' ' },
+        help = { icon = ' 󰋖' },
+      },
+      opts = {
+        position = {
+          row = vim.o.lines - 3,
+          col = 0,
+        },
+        size = { width = '100%' },
+        border = {
+          padding = { 0, 3 },
+        },
+        win_options = {
+          winhighlight = {
+            Normal = 'CmdLine',
+            FloatBorder = 'CmdLineBorder',
           },
-          opts = { skip = true },
         },
       },
-      views = {
-        mini = {
-          position = {
-            row = vim.o.lines - 8,
+    },
+    history = {
+      filter = {},
+    },
+    routes = {
+      {
+        filter = {
+          any = {
+            { find = 'No active Snippet' },
+            { find = 'No signature help available' },
+            { find = '^<$' },
+            { kind = 'wmsg' },
           },
         },
-        popup = {
-          win_options = {
-            winhighlight = {
-              Normal = 'NormalFloat',
-              FloatBorder = 'FloatBorder',
-            },
+        opts = { skip = true },
+      },
+    },
+    views = {
+      mini = {
+        position = {
+          row = vim.o.lines - 8,
+        },
+      },
+      popup = {
+        win_options = {
+          winhighlight = {
+            Normal = 'NormalFloat',
+            FloatBorder = 'FloatBorder',
           },
         },
       },
-    })
-  end,
+    },
+  },
 }
