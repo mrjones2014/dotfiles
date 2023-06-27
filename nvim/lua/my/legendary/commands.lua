@@ -91,11 +91,29 @@ function M.lsp_commands(bufnr, server_name)
   }
 
   if server_name == 'null-ls' and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
-    table.insert(commands, {
-      ':Format',
-      require('my.lsp.utils').format_document,
-      description = 'Format the current document with LSP',
-      opts = { buffer = bufnr },
+    commands = TblUtils.join_lists(commands, {
+      {
+        ':Format',
+        require('my.lsp.utils').format_document,
+        description = 'Format the current document with LSP',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':DisableFormatting',
+        function()
+          require('my.lsp.utils').toggle_formatting_enabled(false)
+        end,
+        description = 'Disable LSP formatting',
+        opts = { buffer = bufnr },
+      },
+      {
+        ':EnableFormatting',
+        function()
+          require('my.lsp.utils').toggle_formatting_enabled(true)
+        end,
+        description = 'Enable LSP formatting',
+        opts = { buffer = bufnr },
+      },
     })
   end
 
