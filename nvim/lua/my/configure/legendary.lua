@@ -2,8 +2,6 @@ return {
   'mrjones2014/legendary.nvim',
   dev = true,
   dependencies = {
-    -- used by key mappings
-    'fedepujol/move.nvim',
     {
       'famiu/bufdelete.nvim',
       keys = {
