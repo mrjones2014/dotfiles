@@ -104,29 +104,6 @@ function M.default_keymaps()
         },
       },
     },
-
-    -- h/j/k/l mappings, text moving,
-    -- these come from `move.nvim` which is defined
-    -- as a dependency in ../configure/legendary.lua
-    {
-      '<S-h>',
-      {
-        n = { ':MoveHChar(-1)<CR>' },
-        x = { ":'<,'>MoveHBlock(-1)<CR>" },
-      },
-    },
-    {
-      '<S-j>',
-      { n = ':MoveLine(1)<CR>', x = ":'<,'>MoveBlock(1)<CR>" },
-    },
-    {
-      '<S-k>',
-      { n = ':MoveLine(-1)<CR>', x = ":'<,'>MoveBlock(-1)<CR>" },
-    },
-    {
-      '<S-l>',
-      { n = ':MoveHChar(1)<CR>', x = ":'<,'>MoveHBlock(1)<CR>" },
-    },
   }
 end
 
