@@ -222,7 +222,6 @@ function M.lsp_keymaps(bufnr)
         description = 'Go to previous diagnostic item',
         opts = { buffer = bufnr },
       },
-      { '<leader>n', vim.diagnostic.goto_next, description = 'Go to next diagnostic item', opts = { buffer = bufnr } },
     },
   }
 end
