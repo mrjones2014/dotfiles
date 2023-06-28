@@ -2,6 +2,9 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'jose-elias-alvarez/null-ls.nvim',
+    'hrsh7th/cmp-nvim-lsp',
+    'folke/neodev.nvim',
+    'folke/neoconf.nvim',
     {
       'DNLHC/glance.nvim',
       event = 'LspAttach',
@@ -26,9 +29,19 @@ return {
         })
       end,
     },
-    'hrsh7th/cmp-nvim-lsp',
-    'folke/neodev.nvim',
-    'folke/neoconf.nvim',
+    {
+      'simrat39/symbols-outline.nvim',
+      config = true,
+      keys = {
+        {
+          '<F4>',
+          function()
+            require('symbols-outline').toggle_outline()
+          end,
+          desc = 'Toggle symbols outline',
+        },
+      },
+    },
   },
   event = 'BufReadPre',
   config = function()
