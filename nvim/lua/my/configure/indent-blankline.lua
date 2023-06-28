@@ -1,7 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   event = 'BufRead',
-  config = true,
   opts = {
     buftype_exclude = {
       'NvimTree',

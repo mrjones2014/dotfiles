@@ -2,7 +2,6 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
-    config = true,
     opts = {
       -- see also: autocmds.lua
       -- this gets toggled off in insert mode
@@ -33,7 +32,6 @@ return {
       'DiffviewFileHistory',
       'DiffviewToggleFiles',
     },
-    config = true,
     opts = {
       enhanced_diff_hl = true,
       view = {
@@ -48,7 +46,6 @@ return {
   {
     'pwntester/octo.nvim',
     cmd = 'Octo',
-    config = true,
     opts = {
       gh_env = function()
         local github_token = require('op').get_secret('GitHub', 'token')

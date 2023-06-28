@@ -18,7 +18,6 @@ return {
       desc = 'Jump backwards',
     },
   },
-  config = true,
   opts = {
     jump = { nohlsearch = true },
   },
