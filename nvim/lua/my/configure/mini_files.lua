@@ -27,7 +27,11 @@ return {
     {
       '<F3>',
       function()
-        require('mini.files').open(vim.loop.cwd(), true)
+        if vim.bo.filetype == 'minifiles' then
+          require('mini.files').close()
+        else
+          require('mini.files').open(vim.loop.cwd(), true)
+        end
       end,
       desc = 'Open mini.files',
     },
