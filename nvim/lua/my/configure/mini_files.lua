@@ -32,7 +32,7 @@ return {
           minifiles.close()
         else
           local current_file = vim.api.nvim_buf_get_name(0)
-          local is_file = not vim.bo.buftype or vim.bo.buftype == ''
+          local is_file = vim.fn.filereadable(current_file) ~= 0
           minifiles.open(vim.loop.cwd(), true)
           -- reveal current buffer in file tree
           if is_file then
