@@ -34,7 +34,7 @@ in {
     extraConfig = ''
       local w = require('wezterm')
       local config = w.config_builder()
-      local os_name = ${if isLinux then "linux" else "macos"}
+      local os_name = '${if isLinux then "linux" else "macos"}'
 
       local w = require('wezterm')
 
@@ -73,7 +73,7 @@ in {
       -- macOS specific settings
       -- this setting behaves weirdly on linux
       config.hide_mouse_cursor_when_typing = os_name == 'macos'
-      if os_name == 'macOS' then
+      if os_name == 'macos' then
         config.window_decorations = 'RESIZE'
       end
 
