@@ -33,7 +33,7 @@ return {
         else
           local current_file = vim.api.nvim_buf_get_name(0)
           local is_file = vim.fn.filereadable(current_file) ~= 0
-          minifiles.open(vim.loop.cwd(), true)
+          minifiles.open(vim.loop.cwd(), false)
           -- reveal current buffer in file tree
           if is_file then
             vim.schedule(function()
