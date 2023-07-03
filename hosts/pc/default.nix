@@ -36,6 +36,7 @@
     mullvad-vpn
     prismlauncher
     dolphinEmu
+    rpcs3
   ];
   services.mullvad-vpn.enable = true;
 
