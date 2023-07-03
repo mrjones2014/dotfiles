@@ -79,7 +79,7 @@ in {
   home.activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
   # symlink ~/.steam to ~/_steam so that Spider-Man Modding Tool can see the directory
   home.activation.symlinkSteamDir =
-    "mkdir -p ${config.home.homeDirectory}/.steam && ln -s ${config.home.homeDirectory}/.steam ${config.home.homeDirectory}/_steam";
+    "mkdir -p ${config.home.homeDirectory}/.steam && test ! -d ${config.home.homeDirectory}/_steam && ln -s ${config.home.homeDirectory}/.steam ${config.home.homeDirectory}/_steam || :";
 
   imports = [
     ./modules/nvim.nix
