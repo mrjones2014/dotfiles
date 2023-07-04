@@ -115,6 +115,14 @@ function M.is_formatting_supported()
   local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting') then
+      if client.name == 'null-ls' then
+        local sources = require('null-ls.sources').get_available(vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype)
+        for _, source in ipairs(sources) do
+          if source.methods.NULL_LS_FORMATTING then
+            return true, source.name
+          end
+        end
+      end
       return true
     end
   end

@@ -191,11 +191,12 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    if require('my.lsp.utils').is_formatting_supported() then
-      return 'auto-format '
-    else
-      return 'auto-format '
+    local supported, name = require('my.lsp.utils').is_formatting_supported()
+    local label = 'auto-format'
+    if supported and name then
+      label = string.format('%s (%s)', label, name)
     end
+    return string.format('%s ', label)
   end,
   hl = { bg = 'bg_statusline' },
   {
