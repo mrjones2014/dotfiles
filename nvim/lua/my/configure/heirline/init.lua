@@ -40,6 +40,7 @@ return {
         sl.Align,
         sl.UnsavedChanges,
         sl.Align,
+        sl.LspFormatToggle,
         sl.LazyStats,
         sl.OnePassword,
         shared.Diagnostics(false),
