@@ -98,12 +98,31 @@ function M.apply_ui_tweaks()
 end
 
 function M.toggle_formatting_enabled(enable)
-  if not enable or formatting_enabled then
-    formatting_enabled = false
-    vim.notify('Disabling LSP formatting...', vim.log.levels.INFO)
-  else
+  if enable == nil then
+    enable = not formatting_enabled
+  end
+  if enable then
     formatting_enabled = true
     vim.notify('Enabling LSP formatting...', vim.log.levels.INFO)
+  else
+    formatting_enabled = false
+    vim.notify('Disabling LSP formatting...', vim.log.levels.INFO)
+  end
+end
+
+function M.get_formatter_name()
+  local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  for _, client in ipairs(clients) do
+    if client.supports_method('textDocument/formatting') then
+      if client.name == 'null-ls' then
+        local sources = require('null-ls.sources').get_available(vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype)
+        for _, source in ipairs(sources) do
+          if source.methods.NULL_LS_FORMATTING then
+            return source.name
+          end
+        end
+      end
+    end
   end
 end
 
@@ -115,14 +134,6 @@ function M.is_formatting_supported()
   local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting') then
-      if client.name == 'null-ls' then
-        local sources = require('null-ls.sources').get_available(vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype)
-        for _, source in ipairs(sources) do
-          if source.methods.NULL_LS_FORMATTING then
-            return true, source.name
-          end
-        end
-      end
       return true
     end
   end
