@@ -1,7 +1,32 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'HiPhish/nvim-ts-rainbow2',
+    {
+      'hiphish/rainbow-delimiters.nvim',
+      config = function()
+        local rainbow = require('rainbow-delimiters')
+        vim.g.rainbow_delimiters = {
+          strategy = {
+            [''] = rainbow.strategy['global'],
+            vim = rainbow.strategy['local'],
+          },
+          query = {
+            [''] = 'rainbow-delimiters',
+            lua = 'rainbow-blocks',
+            html = 'rainbow-tags',
+          },
+          highlight = {
+            'RainbowDelimiterRed',
+            'RainbowDelimiterYellow',
+            'RainbowDelimiterBlue',
+            'RainbowDelimiterOrange',
+            'RainbowDelimiterGreen',
+            'RainbowDelimiterViolet',
+            'RainbowDelimiterCyan',
+          },
+        }
+      end,
+    },
     'windwp/nvim-ts-autotag',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'andymass/vim-matchup',
@@ -45,7 +70,6 @@ return {
     })
     -- highlight mdx with markdown -- it's close enough. We also do JSX injection via ./after/queries/markdown/injections.scm
     vim.treesitter.language.register('markdown', 'mdx')
-    local rainbow = require('ts-rainbow')
     require('nvim-treesitter.configs').setup({
       auto_install = true,
       highlight = {
@@ -63,16 +87,6 @@ return {
           node_incremental = '<CR>',
           scope_incremental = '<S-CR>',
           node_decremental = '<BS>',
-        },
-      },
-      rainbow = {
-        enable = true,
-        strategy = {
-          rainbow.strategy.global,
-        },
-        query = {
-          'rainbow-parens',
-          html = 'rainbow-tags',
         },
       },
       autotag = {
