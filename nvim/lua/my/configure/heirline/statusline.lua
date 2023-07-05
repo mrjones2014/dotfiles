@@ -191,29 +191,32 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    local supported, name = require('my.lsp.utils').is_formatting_supported()
-    local label = 'auto-format'
-    if supported and name then
-      label = string.format('%s (%s)', label, name)
+    if require('my.lsp.utils').is_formatting_supported() then
+      return '   '
+    else
+      return '   '
     end
-    return string.format('%s ', label)
   end,
   hl = { bg = 'bg_statusline' },
+  on_click = {
+    callback = function()
+      require('my.lsp.utils').toggle_formatting_enabled()
+    end,
+    name = 'heirline_LSP',
+  },
+  {
+    provider = 'auto-format',
+    hl = { bg = 'bg_statusline' },
+  },
   {
     provider = function()
-      if require('my.lsp.utils').is_formatting_supported() then
-        return '   '
-      else
-        return '   '
+      local name = require('my.lsp.utils').get_formatter_name()
+      if name then
+        return string.format(' (%s)  ', name)
       end
+      return '  '
     end,
     hl = { bg = 'bg_statusline' },
-    onclick = {
-      callback = function()
-        require('my.lsp.utils').toggle_formatting_enabled()
-      end,
-      name = 'heirline_LSP',
-    },
   },
 }
 
