@@ -1,10 +1,25 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    'jose-elias-alvarez/null-ls.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    'folke/neodev.nvim',
-    'folke/neoconf.nvim',
+    {
+      'jose-elias-alvarez/null-ls.nvim',
+      event = 'BufReadPre',
+      opts = function()
+        return require('my.lsp.null-ls')
+      end,
+    },
+    { 'folke/neodev.nvim', event = 'BufReadPre' },
+    {
+      'folke/neoconf.nvim',
+      event = 'BufReadPre',
+      opts = {
+        import = {
+          coc = false,
+          nlsp = false,
+        },
+      },
+    },
     {
       'DNLHC/glance.nvim',
       event = 'LspAttach',
@@ -44,19 +59,10 @@ return {
     },
   },
   event = 'BufReadPre',
-  config = function()
-    require('neoconf').setup({
-      import = {
-        coc = false,
-        nlsp = false,
-      },
-    })
-
-    -- always load null-ls
-    require('my.lsp.null-ls')
-
+  init = function()
     LSP.on_attach(require('my.lsp.utils').on_attach)
-
+  end,
+  config = function()
     local function setup_lsp_for_filetype(filetype, server_name)
       local has_config, config = pcall(require, 'my.lsp.' .. filetype)
       config = has_config and config or {}

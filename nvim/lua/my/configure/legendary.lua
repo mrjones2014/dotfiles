@@ -41,7 +41,6 @@ return {
     -- },
   },
   keys = {
-    { '<leader>d', ':TroubleToggle<CR>', desc = 'Open LSP diagnostics in quickfix window' },
     { '<leader>l', ':LegendaryScratchToggle<CR>', desc = 'Toggle legendary.nvim scratchpad' },
     {
       '<C-p>',
@@ -53,31 +52,37 @@ return {
   },
   lazy = false,
   priority = 1000000,
-  config = function()
-    require('legendary').setup({
-      keymaps = require('my.legendary.keymap').default_keymaps(),
-      commands = require('my.legendary.commands').default_commands(),
-      autocmds = require('my.legendary.autocmds').default_autocmds(),
-      funcs = require('my.legendary.functions').default_functions(),
-      col_separator_char = ' ',
-      default_opts = {
-        keymaps = { silent = true, noremap = true },
-      },
-      extensions = {
-        -- nvim_tree = true,
-        smart_splits = {
-          mods = {
-            swap = {
-              prefix = '<leader><leader>',
-              mod = '',
-            },
+  init = function()
+    LSP.on_attach(function(client, bufnr)
+      -- setup LSP-specific keymaps
+      require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
+      require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
+      require('legendary').autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
+    end)
+  end,
+  opts = {
+    keymaps = require('my.legendary.keymap').default_keymaps,
+    commands = require('my.legendary.commands').default_commands,
+    autocmds = require('my.legendary.autocmds').default_autocmds,
+    funcs = require('my.legendary.functions').default_functions,
+    col_separator_char = ' ',
+    default_opts = {
+      keymaps = { silent = true, noremap = true },
+    },
+    extensions = {
+      -- nvim_tree = true,
+      smart_splits = {
+        mods = {
+          swap = {
+            prefix = '<leader><leader>',
+            mod = '',
           },
         },
-        op_nvim = true,
-        diffview = true,
       },
-      lazy_nvim = { auto_register = true },
-      -- which_key = { auto_register = true },
-    })
-  end,
+      op_nvim = true,
+      diffview = true,
+    },
+    lazy_nvim = { auto_register = true },
+    -- which_key = { auto_register = true },
+  },
 }

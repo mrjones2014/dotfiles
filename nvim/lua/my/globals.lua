@@ -55,10 +55,10 @@ _G.Clipboard = {
   end,
 }
 
----Join two or more lists together
----@param ... table
----@return table
 _G.TblUtils = {
+  ---Join two or more lists together
+  ---@param ... table
+  ---@return table
   join_lists = function(...)
     local lists = { ... }
     local result = {}

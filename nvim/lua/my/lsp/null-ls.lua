@@ -97,10 +97,8 @@ local formatters = {
   b.formatting.nixfmt,
 }
 
-local config = {
+return {
   sources = TblUtils.join_lists(code_actions, diagnostics, formatters),
   -- add `.luacheckrc` as a root pattern
   root_dir = require('null-ls.utils').root_pattern('.null-ls-root', 'Makefile', '.git', '.luacheckrc'),
 }
-
-null_ls.setup(config)
