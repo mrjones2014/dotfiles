@@ -45,22 +45,22 @@ ever pay money for Discord Nitro, ever. I would try convincing my friends to swi
 With OpenAsar, I can use the "Theming" tab to inject custom CSS and remove a lot of the Discord Nitro ads from the Discord app.
 
 ```css
-// Hide all things Discord Nitro
-// "Add Super Reaction" button
+/* Hide all things Discord Nitro */
+/* "Add Super Reaction" button */
 div[aria-label="Add Super Reaction"],
-// Super Reactions others have added
+/* Super Reactions others have added */
 div[class*="reactionInner"][aria-label*="super"],
-// "Nitro" section in sidebar of settings page
+/* "Nitro" section in sidebar of settings page */
 div[class*="premiumTab"],
-// The huge Nitro ads on the profile customization page
+/* The huge Nitro ads on the profile customization page */
 div[class*="premiumFeatureBorder"],
-// Discord's Birthday stuff on the profile customization page
+/* Discord's Birthday stuff on the profile customization page */
 div[class*="birthdayFeatureBorder"],
-// The "boost" status on Discord server sidebars
+/* The "boost" status on Discord server sidebars */
 div[aria-label*="Buy Boosts to help unlock"],
-// The "Nitro" item in the direct messages list
+/* The "Nitro" item in the direct messages list */
 ul[aria-label="Direct Messages"] a[href="/store"],
-// The "Discord's Birthday" item in the direct messages list
+/* The "Discord's Birthday" item in the direct messages list */
 ul[aria-label="Direct Messages"] a[href="/activities"] {
   display: none;
 }
