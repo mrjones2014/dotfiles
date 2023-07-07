@@ -193,22 +193,22 @@ API endpoint, disable showing others when you're typing in Discord, and apply cu
 throughout the app, and how arbitrary the set of features that are put behind the Nitro paywall is. Sorry, Discord, but I will never,
 ever pay money for Discord Nitro, ever. I would try convincing my friends to switch to Matrix before paying for Nitro.</p>
 <p>With OpenAsar, I can use the &quot;Theming&quot; tab to inject custom CSS and remove a lot of the Discord Nitro ads from the Discord app.</p>
-<pre><code class="language-css">// Hide all things Discord Nitro
-// &quot;Add Super Reaction&quot; button
+<pre><code class="language-css">/* Hide all things Discord Nitro */
+/* &quot;Add Super Reaction&quot; button */
 div[aria-label=&quot;Add Super Reaction&quot;],
-// Super Reactions others have added
+/* Super Reactions others have added */
 div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;],
-// &quot;Nitro&quot; section in sidebar of settings page
+/* &quot;Nitro&quot; section in sidebar of settings page */
 div[class*=&quot;premiumTab&quot;],
-// The huge Nitro ads on the profile customization page
+/* The huge Nitro ads on the profile customization page */
 div[class*=&quot;premiumFeatureBorder&quot;],
-// Discord's Birthday stuff on the profile customization page
+/* Discord's Birthday stuff on the profile customization page */
 div[class*=&quot;birthdayFeatureBorder&quot;],
-// The &quot;boost&quot; status on Discord server sidebars
+/* The &quot;boost&quot; status on Discord server sidebars */
 div[aria-label*=&quot;Buy Boosts to help unlock&quot;],
-// The &quot;Nitro&quot; item in the direct messages list
+/* The &quot;Nitro&quot; item in the direct messages list */
 ul[aria-label=&quot;Direct Messages&quot;] a[href=&quot;/store&quot;],
-// The &quot;Discord's Birthday&quot; item in the direct messages list
+/* The &quot;Discord's Birthday&quot; item in the direct messages list */
 ul[aria-label=&quot;Direct Messages&quot;] a[href=&quot;/activities&quot;] {
   display: none;
 }
