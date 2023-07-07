@@ -4,12 +4,7 @@ local init_done = false
 
 local formatting_enabled = true
 
-function M.on_attach(client, bufnr)
-  -- setup LSP-specific keymaps
-  require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
-  require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
-  require('legendary').autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
-
+function M.on_attach(client)
   if not init_done then
     init_done = true
     M.setup_async_formatting()

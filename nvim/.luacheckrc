@@ -18,7 +18,7 @@ globals = {
   },
   TblUtils = {
     fields = {
-      join_lists = function(...) end
-    }
-  }
+      join_lists = function(...) end,
+    },
+  },
 }
