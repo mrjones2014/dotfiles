@@ -12,14 +12,15 @@ return {
   {
     'gaoDean/autolist.nvim',
     ft = 'markdown',
-    config = function()
-      local al = require('autolist')
-      al.setup()
-      al.create_mapping_hook('i', '<CR>', al.new)
-      al.create_mapping_hook('i', '<Tab>', al.indent)
-      al.create_mapping_hook('i', '<S-Tab>', al.indent, '<C-d>')
-      al.create_mapping_hook('n', 'o', al.new)
-      al.create_mapping_hook('n', 'O', al.new_before)
+    init = function()
+      vim.keymap.set('i', '<tab>', '<cmd>AutolistTab<cr>')
+      vim.keymap.set('i', '<s-tab>', '<cmd>AutolistShiftTab<cr>')
+      vim.keymap.set('i', '<CR>', '<CR><cmd>AutolistNewBullet<cr>')
+      vim.keymap.set('n', 'o', 'o<cmd>AutolistNewBullet<cr>')
+      vim.keymap.set('n', 'O', 'O<cmd>AutolistNewBulletBefore<cr>')
+      vim.keymap.set('n', '<CR>', '<cmd>AutolistToggleCheckbox<cr><CR>')
+      vim.keymap.set('n', '<C-r>', '<cmd>AutolistRecalculate<cr>')
     end,
+    config = true,
   },
 }
