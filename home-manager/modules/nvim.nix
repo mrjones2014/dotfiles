@@ -29,7 +29,7 @@ in {
       [languages]
       rust = ["rustfmt"]
       go = ["gofmt"]
-      lua = ["stylua -s -"]
+      lua = ["stylua --config-path ${config.home.homeDirectory}/git/dotfiles/nvim/stylua.toml -s -"]
       nix = ["nixfmt"]
     '';
     "ripgrep_ignore".text = ''
