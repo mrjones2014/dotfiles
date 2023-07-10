@@ -37,6 +37,7 @@ return {
           -- reveal current buffer in file tree
           if is_file then
             vim.schedule(function()
+              minifiles.reset()
               local line = 1
               local entry = minifiles.get_fs_entry(0, line)
               while entry do
