@@ -16,7 +16,7 @@ in {
   # workaround for https://github.com/nix-community/home-manager/issues/3447
   # autostart 1Password in the background so I can use the SSH agent without manually opening the app first
   xdg.configFile."autostart/1password.desktop".text = ''
-     [Desktop Entry]
+    [Desktop Entry]
     Name=1Password
     Exec=1password --silent
     Terminal=false
@@ -26,6 +26,19 @@ in {
     Comment=Password manager and secure wallet
     MimeType=x-scheme-handler/onepassword;
     Categories=Office;
+  '';
+  # autostart Signal
+  xdg.configFile."autostart/signal-desktop.desktop".text = ''
+    [Desktop Entry]
+    Name=Signal
+    Exec=signal-desktop --no-sandbox --start-in-tray %U
+    Terminal=false
+    Type=Application
+    Icon=signal-desktop
+    StartupWMClass=Signal
+    Comment=Private messaging from your desktop
+    MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
+    Categories=Network;InstantMessaging;Chat;
   '';
 
   # see  https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
