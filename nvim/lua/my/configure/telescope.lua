@@ -29,12 +29,6 @@ return {
       vim.cmd.copen()
     end
 
-    local function send_selected_to_qflist(...)
-      vim.cmd.cexpr('[]')
-      actions.send_selected_to_qf(...)
-      vim.cmd.copen()
-    end
-
     local function parse_prompt(prompt)
       local first_word, rest = prompt:match('^%s*@(%S+)%s*(.+)$')
       if first_word == nil then
@@ -123,7 +117,7 @@ return {
         mappings = {
           i = {
             ['<C-t>'] = smart_send_to_qflist,
-            ['<C-r>'] = send_selected_to_qflist,
+            ['<C-r>'] = smart_send_to_qflist,
             ['<C-u>'] = false, -- clear prompt with ctrl+u
             ['<C-d>'] = actions.preview_scrolling_down,
             ['<C-f>'] = actions.preview_scrolling_up,
@@ -132,7 +126,7 @@ return {
           },
           n = {
             ['<C-t>'] = smart_send_to_qflist,
-            ['<C-r>'] = send_selected_to_qflist,
+            ['<C-r>'] = smart_send_to_qflist,
             ['q'] = actions.close,
             ['<C-n>'] = actions.move_selection_next,
             ['<C-p>'] = actions.move_selection_previous,
