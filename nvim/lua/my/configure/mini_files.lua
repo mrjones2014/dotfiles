@@ -28,10 +28,14 @@ return {
       '<F3>',
       function()
         local minifiles = require('mini.files')
-        local file = vim.api.nvim_buf_get_name(0)
-        local file_exists = vim.fn.filereadable(file) ~= 0
-        minifiles.open(file_exists and file or nil)
-        minifiles.reveal_cwd()
+        if vim.bo.ft == 'minifiles' then
+          minifiles.close()
+        else
+          local file = vim.api.nvim_buf_get_name(0)
+          local file_exists = vim.fn.filereadable(file) ~= 0
+          minifiles.open(file_exists and file or nil)
+          minifiles.reveal_cwd()
+        end
       end,
       desc = 'Open mini.files',
     },
