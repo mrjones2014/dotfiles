@@ -62,7 +62,7 @@ in {
     };
     "nix/nix.conf".text = ''
       experimental-features = nix-command flakes
-      # see https://github.com/nix-community/nix-direnv
+      # see https://github.com/nix-community/nix-direnv#via-home-manager
       keep-derivations = true
       keep-outputs = true
     '';
