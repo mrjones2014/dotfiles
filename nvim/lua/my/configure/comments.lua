@@ -24,7 +24,8 @@ return {
   },
   {
     'numToStr/Comment.nvim',
-    event = 'VeryLazy',
+    keys = { 'gcc', 'gcb' },
+    cmd = 'Comment',
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
     config = function()
       -- default mappings:

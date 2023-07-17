@@ -1,3 +1,7 @@
+vim.notify = function(...)
+  require('notify')(...)
+end
+
 return {
   'folke/noice.nvim',
   dependencies = {

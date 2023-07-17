@@ -1,7 +1,7 @@
 return {
   {
     'lewis6991/gitsigns.nvim',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     opts = {
       -- see also: autocmds.lua
       -- this gets toggled off in insert mode

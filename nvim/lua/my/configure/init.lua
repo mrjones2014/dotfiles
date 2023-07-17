@@ -3,7 +3,7 @@
 return {
   { 'nvim-lua/plenary.nvim' },
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
-  { 'tpope/vim-sleuth', lazy = false },
+  { 'tpope/vim-sleuth', event = 'BufReadPre' },
   { 'mrjones2014/iconpicker.nvim' },
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   { 'echasnovski/mini.pairs', event = 'InsertEnter', opts = {} },
@@ -33,5 +33,13 @@ return {
   {
     'folke/lazy.nvim',
     lazy = false,
+    keys = {
+      {
+        '<leader>L',
+        function()
+          vim.cmd.Lazy()
+        end,
+      },
+    },
   },
 }
