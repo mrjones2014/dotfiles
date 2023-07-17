@@ -1,5 +1,5 @@
 let usePantheon = false;
 in {
-  usePantheon = usePantheon;
+  inherit usePantheon;
   useGnome = !usePantheon;
 }
