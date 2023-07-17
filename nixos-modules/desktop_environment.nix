@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 let
-  vars = (import ../vars.nix);
-  usePantheon = vars.usePantheon;
-  useGnome = vars.useGnome;
+  vars = import ../vars.nix;
+  inherit (vars) usePantheon;
+  inherit (vars) useGnome;
 in {
   config = { } // lib.optionalAttrs useGnome {
     services.xserver = {

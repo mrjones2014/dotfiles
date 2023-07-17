@@ -6,9 +6,9 @@ let
       "https://user-images.githubusercontent.com/8648891/246180692-b8144052-e947-47b0-b59c-ea1022b9b629.jpg";
     hash = "sha256-itnhNPYvQLfCULNrEZqP+3VBQVmEmvh9wv6C2F3YKQU=";
   };
-  vars = (import ../../../vars.nix);
-  usePantheon = vars.usePantheon;
-  useGnome = vars.useGnome;
+  vars = import ../../../vars.nix;
+  inherit (vars) usePantheon;
+  inherit (vars) useGnome;
 in {
   imports = [ ] ++ lib.lists.optionals usePantheon [ ./pantheon.nix ]
     ++ lib.lists.optionals useGnome [ ./gnome.nix ];

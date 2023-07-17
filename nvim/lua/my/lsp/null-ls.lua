@@ -9,6 +9,7 @@ local code_actions = {
   b.code_actions.gitsigns,
   b.code_actions.eslint_d,
   b.code_actions.shellcheck,
+  b.code_actions.statix,
 }
 
 local diagnostics = {
@@ -37,6 +38,7 @@ local diagnostics = {
       'html',
     },
   }),
+  b.diagnostics.statix,
 }
 
 local formatters = {

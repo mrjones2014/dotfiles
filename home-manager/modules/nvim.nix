@@ -74,6 +74,7 @@ in {
       cbfmt
       stylua
       codespell
+      statix
       luajitPackages.luacheck
       nodePackages_latest.prettier_d_slim
       nodePackages_latest.eslint_d
