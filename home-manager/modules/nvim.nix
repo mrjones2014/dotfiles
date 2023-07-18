@@ -67,6 +67,7 @@ in {
     extraPackages = with pkgs; [
       # for compiling Treesitter parsers
       gcc
+
       # formatters and linters
       nixfmt
       rustfmt
@@ -90,8 +91,8 @@ in {
       marksman
       sumneko-lua-language-server
       nodePackages_latest.typescript-language-server
-      # this includes css-lsp, html-lsp, json-lsp
 
+      # this includes css-lsp, html-lsp, json-lsp
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
@@ -102,6 +103,7 @@ in {
       lemmy-help
       luajitPackages.jsregexp
       fzf
+      cargo
     ];
   };
 }
