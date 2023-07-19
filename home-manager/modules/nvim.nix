@@ -104,6 +104,7 @@ in {
       luajitPackages.jsregexp
       fzf
       cargo
+      cargo-nextest
     ];
   };
 }

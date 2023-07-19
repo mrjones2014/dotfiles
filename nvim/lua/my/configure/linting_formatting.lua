@@ -66,6 +66,7 @@ local ft_settings = {
 
 return {
   'nvimdev/guard.nvim',
+  enabled = false,
   ft = vim.tbl_keys(ft_settings),
   opts = {
     fmt_on_save = true,

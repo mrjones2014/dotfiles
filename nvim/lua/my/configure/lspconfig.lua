@@ -4,7 +4,6 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     {
       'jose-elias-alvarez/null-ls.nvim',
-      enabled = false,
       event = 'BufReadPre',
       opts = function()
         return require('my.lsp.null-ls')
