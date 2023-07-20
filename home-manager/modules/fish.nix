@@ -62,15 +62,11 @@ in {
         "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
         "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc";
-      restart-gui = if pkgs.stdenv.isDarwin then
-        "echo 'Not on NixOS'"
-      else
-        "sudo systemctl restart display-manager.service";
-      cfgnix = if pkgs.stdenv.isDarwin then
-        "echo 'Not on NixOS'"
-      else
-        "sudo nvim /etc/nixos/configuration.nix";
-    } // pkgs.lib.optionalAttrs isLinux { sudo = "sudo -A"; };
+    } // pkgs.lib.optionalAttrs isLinux {
+      sudo = "sudo -A";
+      cfgnix = "sudo nvim /etc/nixos/configuration.nix";
+      restart-gui = "sudo systemctl restart display-manager.service";
+    };
 
     shellInit = ''
       set -g fish_prompt_pwd_dir_length 20
