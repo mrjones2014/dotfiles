@@ -10,6 +10,7 @@ return {
     require('neotest').setup({
       discovery = { enabled = false },
       diagnostic = { enabled = true },
+      status = { enabled = true },
       icons = {
         expanded = '',
         child_prefix = '',
