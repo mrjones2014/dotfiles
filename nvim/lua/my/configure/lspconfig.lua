@@ -3,6 +3,14 @@ return {
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     {
+      'creativenull/efmls-configs-nvim',
+      enabled = false,
+      event = 'BufReadPre',
+      config = function()
+        require('my.lsp.efm')
+      end,
+    },
+    {
       'jose-elias-alvarez/null-ls.nvim',
       event = 'BufReadPre',
       opts = function()
