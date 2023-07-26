@@ -43,7 +43,7 @@ return {
   opts = {
     content = {
       filter = function(entry)
-        return entry.name ~= '.DS_Store' and entry.name ~= '.git'
+        return entry.name ~= '.DS_Store' and entry.name ~= '.git' and entry.name ~= '.direnv'
       end,
     },
     mappings = {
