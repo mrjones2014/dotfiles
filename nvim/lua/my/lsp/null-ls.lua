@@ -39,6 +39,7 @@ local diagnostics = {
     },
   }),
   b.diagnostics.statix,
+  b.diagnostics.fish,
 }
 
 local formatters = {

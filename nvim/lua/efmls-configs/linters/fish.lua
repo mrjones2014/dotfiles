@@ -5,7 +5,7 @@ local command = string.format('%s --no-execute ${INPUT}', linter)
 
 return {
   lintCommand = command,
-  lintIgnoreExitCode = true,
+  -- lintIgnoreExitCode = true,
   lintStdin = false,
   lintFormats = { '%f (line %l): %m' },
 }
