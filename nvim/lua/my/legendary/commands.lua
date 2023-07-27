@@ -90,7 +90,7 @@ function M.lsp_commands(bufnr, server_name)
     },
   }
 
-  if server_name == 'null-ls' and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
+  if (server_name == 'null-ls' or server_name == 'efm') and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
     commands = TblUtils.join_lists(commands, {
       {
         ':Format',

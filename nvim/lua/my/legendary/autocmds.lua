@@ -72,7 +72,7 @@ function M.lsp_autocmds(bufnr, server_name)
   end
 
   if
-    server_name == 'null-ls'
+    (server_name == 'null-ls' or server_name == 'efm')
     and #vim.tbl_filter(function(autocmd)
         return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'BufWritePost'
       end, autocmds)

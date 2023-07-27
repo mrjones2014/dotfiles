@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 let
-  inherit (pkgs) stdenv;
-  inherit (stdenv) isLinux;
+  # inherit (pkgs) stdenv;
+  # inherit (stdenv) isLinux;
+  isLinux = pkgs.stdenv.isLinux;
 in {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
@@ -58,7 +59,7 @@ in {
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    withNodeJs = true;
+    withNodeJs = false;
     withRuby = false;
     withPython3 = false;
     defaultEditor = true;
@@ -82,6 +83,7 @@ in {
       nodePackages_latest.markdownlint-cli
 
       # LSP servers
+      efm-langserver
       rnix-lsp
       rust-analyzer
       taplo

@@ -17,7 +17,7 @@ function M.on_attach(client)
   end
 
   -- Disable formatting with other LSPs because we're handling formatting via null-ls
-  if client.name ~= 'null-ls' then
+  if client.name ~= 'null-ls' and client.name ~= 'efm' then
     client.server_capabilities.documentFormattingProvider = false
   end
 end
@@ -26,6 +26,14 @@ function M.setup_async_formatting()
   -- format on save asynchronously, see M.format_document
   vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
     if err ~= nil then
+      -- efm uses table messages
+      if type(err) == 'table' then
+        if err.message then
+          err = err.message
+        else
+          err = vim.inspect(err)
+        end
+      end
       vim.api.nvim_err_write(err)
       return
     end
