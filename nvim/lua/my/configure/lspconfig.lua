@@ -6,7 +6,7 @@ return {
       'creativenull/efmls-configs-nvim',
       -- neoconf must be loaded before any LSP
       dependencies = { 'folke/neoconf.nvim' },
-      enabled = false,
+      enabled = true,
       event = 'BufReadPre',
       config = function()
         require('my.lsp.efm')
@@ -14,7 +14,7 @@ return {
     },
     {
       'jose-elias-alvarez/null-ls.nvim',
-      enabled = true,
+      enabled = false,
       event = 'BufReadPre',
       opts = function()
         return require('my.lsp.null-ls')

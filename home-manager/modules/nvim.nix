@@ -1,8 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  # inherit (pkgs) stdenv;
-  # inherit (stdenv) isLinux;
-  isLinux = pkgs.stdenv.isLinux;
+  inherit (pkgs) stdenv;
+  inherit (stdenv) isLinux;
 in {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
