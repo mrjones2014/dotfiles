@@ -40,7 +40,7 @@ efmls.setup({
   },
   markdown = {
     formatter = {
-      require('efmls-configs.formatters.markdownlint'),
+      require('efmls-configs.formatters.prettier'),
       cbfmt,
     },
   },

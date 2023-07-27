@@ -3,6 +3,7 @@ return {
   event = 'BufRead',
   opts = {
     buftype_exclude = {
+      'qf',
       'NvimTree',
       'terminal',
       'term',
