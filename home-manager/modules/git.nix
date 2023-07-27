@@ -37,7 +37,9 @@ in {
       ch = "!${gitCheckoutScript}";
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
-      copy-branch = "!git branch --show-current | pbcopy";
+      copy-branch = "!git branch --show-current | ${
+          if isLinux then "xclip -sel clip" else "pbcopy"
+        }";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
     extraConfig = {
