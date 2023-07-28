@@ -21,4 +21,9 @@ globals = {
       join_lists = function(...) end,
     },
   },
+  Url = {
+    fields = {
+      open = function(url) end,
+    },
+  },
 }

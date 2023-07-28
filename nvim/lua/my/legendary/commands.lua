@@ -61,6 +61,23 @@ function M.default_commands()
       },
       description = 'Toggle comment',
     },
+
+    {
+      ':Plugins',
+      function()
+        local plugin_shorthands = vim.tbl_map(function(plugin)
+          return plugin[1]
+        end, require('lazy').plugins())
+        vim.ui.select(plugin_shorthands, { prompt = 'Select Plugin' }, function(selected)
+          if not selected then
+            return
+          end
+
+          Url.open(selected)
+        end)
+      end,
+      description = 'Search installed plugins and open the repo in browser',
+    },
     {
       ':Glow',
       description = 'Preview markdown with glow',

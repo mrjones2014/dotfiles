@@ -37,11 +37,7 @@ function M.default_keymaps()
       'gx',
       function()
         local url = vim.fn.expand('<cfile>')
-        -- plugin paths as interpreted by plugin manager, e.g. mrjones2014/op.nvim
-        if not string.match(url, '[a-z]*://[^ >,;]*') and string.match(url, '[%w%p\\-]*/[%w%p\\-]*') then
-          url = string.format('https://github.com/%s', url)
-        end
-        vim.fn.jobstart({ vim.fn.has('macunix') ~= 0 and 'open' or 'xdg-open', url }, { detach = true })
+        Url.open(url)
       end,
       description = 'Open URL under cursor',
     },
