@@ -1,5 +1,4 @@
 function pr
-
     set -l PROJECT_PATH (git config --get remote.origin.url)
     set -l PROJECT_PATH (string replace "git@github.com:" "" "$PROJECT_PATH")
     set -l PROJECT_PATH (string replace "https://github.com/" "" "$PROJECT_PATH")
