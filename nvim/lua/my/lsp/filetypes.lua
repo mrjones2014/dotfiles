@@ -65,6 +65,15 @@ M.config['javascriptreact'] = M.config['typescript']
 
 M.filetypes = vim.tbl_keys(M.config)
 
+local efm_customizations = {
+  ['cbfmt'] = function()
+    local cbfmt = require('efmls-configs.formatters.cbfmt')
+    cbfmt.formatCommand =
+      string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
+    return cbfmt
+  end,
+}
+
 local function load_efm_modules(mods, mod_type)
   if not mods then
     return nil
@@ -74,12 +83,8 @@ local function load_efm_modules(mods, mod_type)
     return require(string.format('efmls-configs.%s.%s', mod_type, mods))
   else
     return vim.tbl_map(function(mod)
-      -- cbfmt is a special case, we need to pass our config file path
-      if mod == 'cbfmt' then
-        local cbfmt = require('efmls-configs.formatters.cbfmt')
-        cbfmt.formatCommand =
-          string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
-        return cbfmt
+      if efm_customizations[mod] then
+        return efm_customizations[mod]()
       end
 
       return require(string.format('efmls-configs.%s.%s', mod_type, mod))
