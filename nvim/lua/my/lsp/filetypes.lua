@@ -57,6 +57,9 @@ M.config = {
   ['toml'] = {
     lspconfig = 'taplo',
   },
+  ['fish'] = {
+    formatter = 'fish_indent',
+  },
 }
 -- these all use the same config
 M.config['javascript'] = M.config['typescript']
