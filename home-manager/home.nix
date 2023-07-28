@@ -40,6 +40,7 @@ in {
       librewolf
       signal-desktop
       qbittorrent
+      vlc
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
