@@ -76,11 +76,7 @@ local efm_customizations = {
     return cbfmt
   end,
   ['rustfmt'] = function()
-    local ok, rustfmt = pcall(require, 'efmls-configs.formatters.rustfmt')
-    if not ok then
-      p(rustfmt)
-      return
-    end
+    local rustfmt = require('efmls-configs.formatters.rustfmt')
     -- default to edition=2021
     if not string.find(rustfmt.formatCommand, '--edition') then
       rustfmt.formatCommand = string.format('%s --edition=2021', rustfmt.formatCommand)
@@ -94,20 +90,15 @@ local function load_efm_modules(mods, mod_type)
     return nil
   end
 
-  if type(mods) == 'string' then
-    if efm_customizations[mods] then
-      return efm_customizations[mods]()
+  -- normalize type to string[]
+  mods = type(mods) == 'string' and { mods } or mods
+  return vim.tbl_map(function(mod)
+    if efm_customizations[mod] then
+      return efm_customizations[mod]()
     end
-    return require(string.format('efmls-configs.%s.%s', mod_type, mods))
-  else
-    return vim.tbl_map(function(mod)
-      if efm_customizations[mod] then
-        return efm_customizations[mod]()
-      end
 
-      return require(string.format('efmls-configs.%s.%s', mod_type, mod))
-    end, mods)
-  end
+    return require(string.format('efmls-configs.%s.%s', mod_type, mod))
+  end, mods)
 end
 
 local function load_linters(linters)
