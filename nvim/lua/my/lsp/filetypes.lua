@@ -98,7 +98,12 @@ local function load_efm_modules(mods, mod_type)
       return efm_customizations[mod]()
     end
 
-    return require(string.format('efmls-configs.%s.%s', mod_type, mod))
+    local ok, module = pcall(require, string.format('efmls-configs.%s.%s', mod_type, mod))
+    if not ok then
+      vim.notify(string.format('Module efmls-configs.%s.%s not found', mod_type, mod))
+      return nil
+    end
+    return module
   end, mods)
 end
 
