@@ -124,9 +124,19 @@ function M.get_formatter_name()
             return source.name
           end
         end
+      elseif client.name == 'efm' then
+        local ft_config = require('my.lsp.filetypes').config[vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype]
+        if ft_config then
+          if type(ft_config.formatter) == 'table' then
+            return ft_config.formatter[1]
+          else
+            return ft_config.formatter
+          end
+        end
       end
     end
   end
+  return nil
 end
 
 function M.is_formatting_supported()
