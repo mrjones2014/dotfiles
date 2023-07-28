@@ -59,6 +59,7 @@ M.config = {
   },
   ['fish'] = {
     formatter = 'fish_indent',
+    linter = 'fish',
   },
 }
 -- these all use the same config
