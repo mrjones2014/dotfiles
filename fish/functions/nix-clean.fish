@@ -3,8 +3,10 @@ function nix-clean
     nix-store --gc
     nix-channel --update
     nix-env -u --always
-    for link in /nix/var/nix/gcroots/auto/*
-        rm $(readlink "$link")
+    if test -f /etc/NIXOS
+        for link in /nix/var/nix/gcroots/auto/*
+            rm $(readlink "$link")
+        end
     end
     nix-collect-garbage -d
 end
