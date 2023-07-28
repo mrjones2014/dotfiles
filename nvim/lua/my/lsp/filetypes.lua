@@ -75,6 +75,18 @@ local efm_customizations = {
       string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
     return cbfmt
   end,
+  ['rustfmt'] = function()
+    local ok, rustfmt = pcall(require, 'efmls-configs.formatters.rustfmt')
+    if not ok then
+      p(rustfmt)
+      return
+    end
+    -- default to edition=2021
+    if not string.find(rustfmt.formatCommand, '--edition') then
+      rustfmt.formatCommand = string.format('%s --edition=2021', rustfmt.formatCommand)
+    end
+    return rustfmt
+  end,
 }
 
 local function load_efm_modules(mods, mod_type)
@@ -83,6 +95,9 @@ local function load_efm_modules(mods, mod_type)
   end
 
   if type(mods) == 'string' then
+    if efm_customizations[mods] then
+      return efm_customizations[mods]()
+    end
     return require(string.format('efmls-configs.%s.%s', mod_type, mods))
   else
     return vim.tbl_map(function(mod)
