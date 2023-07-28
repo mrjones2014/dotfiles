@@ -16,8 +16,8 @@ function M.on_attach(client)
     vim.lsp.buf.inlay_hint(0, true)
   end
 
-  -- Disable formatting with other LSPs because we're handling formatting via null-ls
-  if client.name ~= 'null-ls' and client.name ~= 'efm' then
+  -- Disable formatting with other LSPs because we're handling formatting via efm-langserver
+  if client.name ~= 'efm' then
     client.server_capabilities.documentFormattingProvider = false
   end
 end
@@ -117,14 +117,7 @@ function M.get_formatter_name()
   local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting') then
-      if client.name == 'null-ls' then
-        local sources = require('null-ls.sources').get_available(vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype)
-        for _, source in ipairs(sources) do
-          if source.methods.NULL_LS_FORMATTING then
-            return source.name
-          end
-        end
-      elseif client.name == 'efm' then
+      if client.name == 'efm' then
         local ft_config = require('my.lsp.filetypes').config[vim.bo[tonumber(vim.g.actual_curbuf or 0)].filetype]
         if ft_config then
           if type(ft_config.formatter) == 'table' then

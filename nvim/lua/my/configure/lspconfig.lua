@@ -19,14 +19,6 @@ return {
         efmls.setup(require('my.lsp.filetypes').efmls_config())
       end,
     },
-    {
-      'jose-elias-alvarez/null-ls.nvim',
-      enabled = false,
-      event = 'BufReadPre',
-      opts = function()
-        return require('my.lsp.null-ls')
-      end,
-    },
     { 'folke/neodev.nvim', event = 'BufReadPre' },
     {
       'folke/neoconf.nvim',
