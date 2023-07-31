@@ -83,11 +83,7 @@ function M.apply_ui_tweaks()
   }
 
   local function diagnostic_format(diagnostic)
-    if diagnostic.source == 'eslint' or diagnostic.source == 'eslint_d' then
-      return string.format('%s %s (%s)', icon_map[diagnostic.severity], diagnostic.message, diagnostic.code)
-    end
-
-    return string.format('%s %s', icon_map[diagnostic.severity], diagnostic.message)
+    return string.format('%s %s (%s)', icon_map[diagnostic.severity], diagnostic.message, diagnostic.code)
   end
 
   vim.diagnostic.config({
