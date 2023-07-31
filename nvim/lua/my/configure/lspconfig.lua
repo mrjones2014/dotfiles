@@ -11,7 +11,6 @@ return {
       config = function()
         local efmls = require('efmls-configs')
         efmls.init({
-          on_attach = require('my.lsp.utils').on_attach,
           init_options = {
             documentFormatting = true,
           },
