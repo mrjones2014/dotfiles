@@ -94,6 +94,23 @@ return {
       return false
     end
 
+    local function setup_server(filetype, file_patterns, server_name)
+      -- since we're lazy loading lspconfig itself,
+      -- check if we need to start LSP immediately or not
+      if current_buf_matches_file_patterns(file_patterns) then
+        setup_lsp_for_filetype(filetype, server_name)
+      else
+        -- if not, set up an autocmd to lazy load the rest
+        vim.api.nvim_create_autocmd('BufReadPre', {
+          callback = function()
+            setup_lsp_for_filetype(filetype, server_name)
+          end,
+          pattern = file_patterns,
+          once = true,
+        })
+      end
+    end
+
     -- lazy-load the rest of the configs with
     -- an autocommand that runs only once
     -- for each lsp config
@@ -101,19 +118,12 @@ return {
       local file_patterns = filetype_config.patterns or { string.format('*.%s', filetype) }
       local server_name = filetype_config.lspconfig
       if file_patterns and server_name then
-        -- since we're lazy loading lspconfig itself,
-        -- check if we need to start LSP immediately or not
-        if current_buf_matches_file_patterns(file_patterns) then
-          setup_lsp_for_filetype(filetype, server_name)
+        if type(server_name) == 'table' then
+          for _, server in ipairs(server_name) do
+            setup_server(filetype, file_patterns, server)
+          end
         else
-          -- if not, set up an autocmd to lazy load the rest
-          vim.api.nvim_create_autocmd('BufReadPre', {
-            callback = function()
-              setup_lsp_for_filetype(filetype, server_name)
-            end,
-            pattern = file_patterns,
-            once = true,
-          })
+          setup_server(filetype, file_patterns, server_name)
         end
       end
     end

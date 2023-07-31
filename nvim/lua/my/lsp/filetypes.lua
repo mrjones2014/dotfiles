@@ -14,9 +14,8 @@ M.config = {
   },
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
-    lspconfig = 'tsserver',
+    lspconfig = { 'tsserver', 'eslint' },
     formatter = 'prettier',
-    linter = 'eslint_d',
   },
   ['lua'] = {
     lspconfig = 'lua_ls',

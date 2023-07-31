@@ -78,7 +78,6 @@ in {
       statix
       luajitPackages.luacheck
       nodePackages_latest.prettier
-      nodePackages_latest.eslint_d
 
       # LSP servers
       efm-langserver
@@ -92,7 +91,7 @@ in {
       sumneko-lua-language-server
       nodePackages_latest.typescript-language-server
 
-      # this includes css-lsp, html-lsp, json-lsp
+      # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
