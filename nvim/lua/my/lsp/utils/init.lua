@@ -4,7 +4,7 @@ local init_done = false
 
 local formatting_enabled = true
 
-function M.on_attach(client)
+function M.on_attach(client, bufnr)
   if not init_done then
     init_done = true
     M.setup_async_formatting()
@@ -19,6 +19,14 @@ function M.on_attach(client)
   -- Disable formatting with other LSPs because we're handling formatting via efm-langserver
   if client.name ~= 'efm' then
     client.server_capabilities.documentFormattingProvider = false
+  end
+
+  -- Run eslint fixes before writing
+  if client.name == 'eslint' then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      command = 'EslintFixAll',
+    })
   end
 end
 
