@@ -81,7 +81,7 @@ in {
 
       # LSP servers
       efm-langserver
-      rnix-lsp
+      nil
       rust-analyzer
       taplo
       gopls

@@ -49,7 +49,7 @@ M.config = {
     lspconfig = 'sourcekit',
   },
   ['nix'] = {
-    lspconfig = 'rnix',
+    lspconfig = 'nil_ls',
     linter = 'statix',
     formatter = 'nixfmt',
   },
