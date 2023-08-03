@@ -10,6 +10,12 @@ return {
   { 'echasnovski/mini.trailspace', event = 'BufRead', opts = {} },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', opts = {} },
   {
+    'mrjones2014/glowy.nvim',
+    dev = true,
+    ft = 'markdown',
+    dependencies = { 'norcalli/nvim-terminal.lua', config = true },
+  },
+  {
     'Wansmer/treesj',
     keys = {
       {

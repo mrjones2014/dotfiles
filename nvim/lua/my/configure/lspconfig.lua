@@ -4,6 +4,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     {
       'creativenull/efmls-configs-nvim',
+      dev = true,
       -- neoconf must be loaded before any LSP
       dependencies = { 'folke/neoconf.nvim' },
       enabled = true,

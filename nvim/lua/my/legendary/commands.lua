@@ -78,11 +78,6 @@ function M.default_commands()
       end,
       description = 'Search installed plugins and open the repo in browser',
     },
-    {
-      ':Glow',
-      description = 'Preview markdown with glow',
-      filters = { filetype = 'markdown' },
-    },
   }
 end
 
