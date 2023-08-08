@@ -6,7 +6,15 @@ return {
     'nvim-telescope/telescope-fzy-native.nvim',
     {
       'folke/trouble.nvim',
-      keys = { { '<leader>d', ':TroubleToggle<CR>', desc = 'Open LSP diagnostics in quickfix window' } },
+      keys = {
+        {
+          '<leader>d',
+          function()
+            require('trouble').toggle()
+          end,
+          desc = 'Open LSP diagnostics in quickfix window',
+        },
+      },
       opts = { action_keys = { hover = {} } },
     },
     {

@@ -1,4 +1,4 @@
-vim.notify = function(...)
+vim.notify = function(...) ---@diagnostic disable-line
   require('notify')(...)
 end
 
