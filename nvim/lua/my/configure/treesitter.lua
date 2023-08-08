@@ -89,6 +89,8 @@ return {
           node_decremental = '<BS>',
         },
       },
+      -- treesitter parser for Swift requires treesitter-cli and only really works on mac
+      additional_vim_regex_highlighting = { 'swift' },
       autotag = {
         enable = true,
       },
