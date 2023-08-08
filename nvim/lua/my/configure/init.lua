@@ -10,7 +10,7 @@ return {
   { 'echasnovski/mini.trailspace', event = 'BufRead', opts = {} },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', opts = {} },
   {
-    'mrjones2014/glowy.nvim',
+    'mrjones2014/mdpreview.nvim',
     dev = true,
     ft = 'markdown',
     dependencies = { 'norcalli/nvim-terminal.lua', config = true },

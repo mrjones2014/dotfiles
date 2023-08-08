@@ -3,12 +3,12 @@ local M = {}
 function M.default_commands()
   return {
     -- because sometimes I fat-finger it and run :Q instead of :q by accident
-    { ':Q', ':q' },
-    { ':Qa', ':qa' },
-    { ':W', ':w' },
-    { ':Wq', ':wq' },
+    { ':Q',   ':q' },
+    { ':Qa',  ':qa' },
+    { ':W',   ':w' },
+    { ':Wq',  ':wq' },
     { ':Wqa', ':wq' },
-    { ':Wa', ':wa' },
+    { ':Wa',  ':wa' },
     {
       ':OnlyBuffer',
       ':%bd|e#|bd#',
@@ -102,7 +102,7 @@ function M.lsp_commands(bufnr, server_name)
     },
   }
 
-  if server_name == 'efm' and not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
+  if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
     commands = TblUtils.join_lists(commands, {
       {
         ':Format',

@@ -16,11 +16,6 @@ function M.on_attach(client, bufnr)
     vim.lsp.buf.inlay_hint(0, true)
   end
 
-  -- Disable formatting with other LSPs because we're handling formatting via efm-langserver
-  if client.name ~= 'efm' then
-    client.server_capabilities.documentFormattingProvider = false
-  end
-
   -- Run eslint fixes before writing
   if client.name == 'eslint' then
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -51,7 +46,7 @@ function M.setup_async_formatting()
     end
 
     if
-      vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
+        vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
     then
       local view = vim.fn.winsaveview()
       vim.lsp.util.apply_text_edits(result, ctx.bufnr, 'utf-16')
@@ -130,6 +125,8 @@ function M.get_formatter_name()
             return ft_config.formatter
           end
         end
+      else
+        return client.name
       end
     end
   end
@@ -157,8 +154,14 @@ function M.format_document()
   end
 
   if not vim.b.format_saving then
-    vim.b.format_changedtick = vim.b.changedtick
-    vim.lsp.buf.format({ async = true })
+    vim.b.format_changedtick = vim.b.changedtick ---@diagnostic disable-line
+    local formats_with_efm = require('my.lsp.filetypes').formats_with_efm()
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(client)
+        return formats_with_efm and client.name == 'efm' or client.name ~= 'efm'
+      end,
+    })
   end
 end
 

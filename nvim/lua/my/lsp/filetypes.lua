@@ -25,12 +25,10 @@ M.config = {
   ['rust'] = {
     patterns = { '*.rs' },
     lspconfig = 'rust_analyzer',
-    formatter = 'rustfmt',
   },
   ['go'] = {
     patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
-    formatter = 'gofmt',
   },
   ['markdown'] = {
     patterns = { '*.md', '*.markdown' },
@@ -72,16 +70,8 @@ local efm_customizations = {
   ['cbfmt'] = function()
     local cbfmt = require('efmls-configs.formatters.cbfmt')
     cbfmt.formatCommand =
-      string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
+        string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
     return cbfmt
-  end,
-  ['rustfmt'] = function()
-    local rustfmt = require('efmls-configs.formatters.rustfmt')
-    -- default to edition=2021
-    if not string.find(rustfmt.formatCommand, '--edition') then
-      rustfmt.formatCommand = string.format('%s --edition=2021', rustfmt.formatCommand)
-    end
-    return rustfmt
   end,
 }
 
@@ -126,6 +116,11 @@ function M.efmls_config()
   end
 
   return result
+end
+
+function M.formats_with_efm(ft)
+  ft = ft or vim.bo.ft
+  return vim.tbl_get(M.config, ft, 'formatter') ~= nil
 end
 
 return M

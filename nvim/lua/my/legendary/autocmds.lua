@@ -56,9 +56,9 @@ function M.lsp_autocmds(bufnr, server_name)
   }
 
   if
-    #vim.tbl_filter(function(autocmd)
-      return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
-    end, autocmds) == 0
+      #vim.tbl_filter(function(autocmd)
+        return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
+      end, autocmds) == 0
   then
     table.insert(augroup, {
       'CursorHold',
@@ -71,9 +71,7 @@ function M.lsp_autocmds(bufnr, server_name)
     })
   end
 
-  if
-    server_name == 'efm'
-    and #vim.tbl_filter(function(autocmd)
+  if #vim.tbl_filter(function(autocmd)
         return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'BufWritePost'
       end, autocmds)
       == 0
