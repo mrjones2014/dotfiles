@@ -11,16 +11,19 @@ M.config = {
   ['json'] = {
     patterns = { '*.json', '*.jsonc' },
     lspconfig = 'jsonls',
+    treesitter = { 'json', 'jsonc' },
   },
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
     lspconfig = { 'tsserver', 'eslint' },
     formatter = 'prettier',
+    treesitter = { 'typescript', 'javascript', 'tsx' },
   },
   ['lua'] = {
     lspconfig = 'lua_ls',
     formatter = 'stylua',
     linter = 'luacheck',
+    treesitter = { 'lua', 'luadoc' },
   },
   ['rust'] = {
     patterns = { '*.rs' },
@@ -38,14 +41,17 @@ M.config = {
       'prettier',
       'cbfmt',
     },
+    treesitter = { 'markdown', 'markdown_inline' },
   },
   ['sh'] = {
     patterns = { '*.sh', '*.bash', '*.zsh' },
     linter = 'shellcheck',
     formatter = 'shfmt',
+    treesitter = { 'bash' },
   },
   ['swift'] = {
     lspconfig = 'sourcekit',
+    treesitter = false, -- requires treesitter-cli and only really works on mac
   },
   ['nix'] = {
     lspconfig = 'nil_ls',
@@ -122,6 +128,19 @@ end
 function M.formats_with_efm(ft)
   ft = ft or vim.bo.ft
   return vim.tbl_get(M.config, ft, 'formatter') ~= nil
+end
+
+function M.treesitter_parsers()
+  local result = {}
+  for ft, config in pairs(M.config) do
+    if config.treesitter ~= false then
+      local treesitter = config.treesitter or ft
+      treesitter = type(treesitter) == 'table' and treesitter or { treesitter }
+      result = vim.list_extend(result, treesitter)
+    end
+  end
+
+  return result
 end
 
 return M
