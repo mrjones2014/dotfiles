@@ -29,6 +29,7 @@ M.config = {
   ['go'] = {
     patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
+    formatter = 'gofmt',
   },
   ['markdown'] = {
     patterns = { '*.md', '*.markdown' },
