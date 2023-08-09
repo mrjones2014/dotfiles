@@ -5,7 +5,8 @@ local M = {}
 function M.FileIcon(bg_color)
   return {
     init = function(self)
-      local ft = vim.api.nvim_buf_get_option(0, 'filetype')
+      local ft = vim.b.mdpreview_session and 'markdown' ---@diagnostic disable-line
+        or vim.api.nvim_buf_get_option(0, 'filetype')
       local icon, hl = require('nvim-web-devicons').get_icon_by_filetype(ft)
       self.icon = icon
       self.icon_hl = hl

@@ -1,4 +1,5 @@
 local conditions = require('heirline.conditions')
+local myconditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 
 local M = {}
@@ -84,20 +85,23 @@ M.Mode = {
   },
 }
 
+local function git_branch()
+  local status
+  if vim.b.mdpreview_session then ---@diagnostic disable-line
+    status = vim.b[vim.b.mdpreview_session.source_buf].gitsigns_status_dict ---@diagnostic disable-line
+  else
+    status = vim.b.gitsigns_status_dict ---@diagnostic disable-line
+  end
+  return vim.tbl_get(status or {}, 'head')
+end
+
 M.Branch = {
-  condition = conditions.is_git_repo,
-  init = function(self)
-    ---@diagnostic disable-next-line: undefined-field
-    self.status_dict = vim.b.gitsigns_status_dict
-    self.has_changes = (
-      (self.status_dict.added ~= 0)
-      or (self.status_dict.removed ~= 0)
-      or (self.status_dict.changed ~= 0)
-    )
+  condition = function()
+    return git_branch() ~= nil
   end,
   {
-    provider = function(self)
-      return string.format('  %s', self.status_dict.head)
+    provider = function()
+      return string.format('  %s', git_branch())
     end,
     hl = { fg = 'green', bg = 'gray' },
   },
@@ -118,7 +122,12 @@ M.FilePath = {
       return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
     end,
     provider = function()
-      return Path.relative(vim.api.nvim_buf_get_name(0))
+      local buf = 0
+      local mdpreview_session = vim.b.mdpreview_session ---@diagnostic disable-line
+      if mdpreview_session then
+        buf = mdpreview_session.source_buf
+      end
+      return Path.relative(vim.api.nvim_buf_get_name(buf))
     end,
   },
 }
@@ -217,6 +226,45 @@ M.LspFormatToggle = {
       return '  '
     end,
     hl = { bg = 'bg_statusline' },
+  },
+}
+
+M.MarkdownPreview = {
+  condition = function()
+    return conditions.buffer_matches({ filetype = { 'markdown' } }) or myconditions.is_markdown_preview()
+  end,
+  on_click = {
+    callback = function()
+      if vim.b.mdpreview_session then ---@diagnostic disable-line
+        require('mdpreview').stop_preview()
+      else
+        require('mdpreview').preview({
+          opts = {
+            create_preview_win = function()
+              return 0
+            end,
+          },
+        })
+      end
+    end,
+    name = 'heirline_MarkdownPreview',
+  },
+  {
+    provider = sep.rounded_right,
+    hl = { bg = 'green', fg = 'bg_statusline' },
+  },
+  {
+    provider = function()
+      if vim.b.mdpreview_session then ---@diagnostic disable-line
+        return '   Source  '
+      end
+      return '   Preview  '
+    end,
+    hl = { bg = 'green', fg = 'bg_statusline' },
+  },
+  {
+    provider = sep.rounded_right,
+    hl = { bg = 'bg_statusline', fg = 'green' },
   },
 }
 

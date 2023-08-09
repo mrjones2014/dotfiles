@@ -36,6 +36,7 @@ return {
           sl.Branch,
           shared.FileIcon('bg_statusline'),
           sl.FilePath,
+          sl.MarkdownPreview,
           sl.Align,
           sl.UnsavedChanges,
           sl.Align,
