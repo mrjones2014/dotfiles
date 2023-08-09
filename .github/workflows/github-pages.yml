@@ -12,29 +12,10 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - uses: actions/cache@v3
-        id: cache-ublock-mdbook-build
-        with: # restore mdbook preprocessor build if possible
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-ublock-mdbook-${{ hashFiles('**/ublock-mdbook/**') }} }}
-          restore-keys: |
-            ${{ runner.os }}-ublock-mdbook-
       - uses: actions-rs/cargo@v1
-        if: steps.cache-ublock-mdbook-build.outputs.cache-hit != 'true'
         with:
           command: install
           args: --path ublock-mdbook/
-      - uses: actions/cache/save@v3
-        id: cache-ublock-mdbook-build-save
-        with: # save mdbook preprocessor build as cache
-          path: |
-            ~/.cargo/bin/ublock-mdbook
-          key: ${{ steps.cache-ublock-mdbook-build.outputs.cache-primary-key }}
       - name: Setup mdbook
         uses: peaceiris/actions-mdbook@v1
         with:
