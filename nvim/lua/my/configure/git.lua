@@ -13,6 +13,9 @@ return {
         delay = 100,
       },
       current_line_blame_formatter = ' <abbrev_sha> | <author>, <author_time> - <summary>',
+      on_attach = function()
+        vim.cmd.redrawstatus()
+      end,
     },
   },
   {
