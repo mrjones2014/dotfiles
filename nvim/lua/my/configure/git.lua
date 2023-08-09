@@ -13,12 +13,6 @@ return {
         delay = 100,
       },
       current_line_blame_formatter = ' <abbrev_sha> | <author>, <author_time> - <summary>',
-      worktrees = {
-        {
-          toplevel = vim.env.HOME,
-          gitdir = string.format('%s/.dotfiles', vim.env.HOME),
-        },
-      },
     },
   },
   {
