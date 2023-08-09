@@ -61,7 +61,9 @@ div[aria-label*="Buy Boosts to help unlock"],
 /* The "Nitro" item in the direct messages list */
 ul[aria-label="Direct Messages"] a[href="/store"],
 /* The "Discord's Birthday" item in the direct messages list */
-ul[aria-label="Direct Messages"] a[href="/activities"] {
+ul[aria-label="Direct Messages"] a[href="/activities"]
+/* The "Start an Activity" button */
+button[aria-label="Start an Activity"] {
   display: none;
 }
 ```

@@ -142,3 +142,6 @@
 
     ! Block "Discord's Birthday" crap
     discord.com##li[role="listitem"]:has-text("Discord's Birthday")
+
+    ! Block "Start an Activity" button
+    discord.com##button[aria-label="Start an Activity"]
