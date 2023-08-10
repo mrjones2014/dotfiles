@@ -28,10 +28,10 @@
     };
     homeConfigurations = {
       "mac" = home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = { inherit inputs; };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ ./home-manager/home.nix ];
       };
-      # linux configuration is done via nixos-rebuld (home-manager as a NixOS module)
     };
   };
 }

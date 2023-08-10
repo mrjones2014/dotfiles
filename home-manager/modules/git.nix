@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
@@ -21,13 +21,7 @@ in {
     package = git.override {
       guiSupport = false; # gui? never heard of her.
     };
-    ignores = [
-      "Session.vim"
-      "packer_compiled.lua"
-      ".DS_Store"
-      "wget-log"
-      "wget-log.*"
-    ];
+    ignores = [ "Session.vim" ".DS_Store" ];
     aliases = {
       s = "status";
       newbranch = "checkout -b";

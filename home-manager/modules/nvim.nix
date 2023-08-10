@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;

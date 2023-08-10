@@ -2,7 +2,6 @@
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
-  inherit (stdenv) isDarwin;
   opSudoPasswordScript = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
     /run/wrappers/bin/op item get "System Password" --fields password
