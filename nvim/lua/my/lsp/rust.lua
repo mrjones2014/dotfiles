@@ -25,9 +25,8 @@ return {
       },
       inlayHints = {
         bindingModeHints = { enable = true },
-        closureReturnTypeHints = { enable = true },
-        lifetimeElisionHints = { enable = true },
-        reborrowHints = { enable = true },
+        closureReturnTypeHints = { enable = 'always' },
+        discriminantHints = { enable = 'always' },
       },
       diagnostics = {
         disabled = { 'inactive-code', 'unresolved-proc-macro' },
