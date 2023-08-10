@@ -200,7 +200,8 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    if require('my.lsp.utils').is_formatting_supported() then
+    local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0 ---@diagnostic disable-line
+    if require('my.lsp.utils').is_formatting_supported(buf) then
       return '   '
     else
       return '   '
@@ -219,7 +220,8 @@ M.LspFormatToggle = {
   },
   {
     provider = function()
-      local name = require('my.lsp.utils').get_formatter_name()
+      local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0 ---@diagnostic disable-line
+      local name = require('my.lsp.utils').get_formatter_name(buf)
       if name then
         return string.format(' (%s)  ', name)
       end
