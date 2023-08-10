@@ -242,9 +242,7 @@ M.MarkdownPreview = {
       else
         require('mdpreview').preview({
           opts = {
-            create_preview_win = function()
-              return 0
-            end,
+            winnr = 0,
           },
         })
       end
