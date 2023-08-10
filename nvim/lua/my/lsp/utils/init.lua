@@ -46,7 +46,7 @@ function M.setup_async_formatting()
     end
 
     if
-        vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
+      vim.api.nvim_buf_get_var(ctx.bufnr, 'format_changedtick') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
     then
       local view = vim.fn.winsaveview()
       vim.lsp.util.apply_text_edits(result, ctx.bufnr, 'utf-16')
@@ -116,23 +116,25 @@ end
 ---@return string|nil
 function M.get_formatter_name(buf)
   buf = buf or tonumber(vim.g.actual_curbuf or vim.api.nvim_get_current_buf())
+
+  -- if it uses efm-langserver, grab the formatter name
+  local ft_efm_cfg = require('my.lsp.filetypes').config[vim.bo[buf].filetype]
+  if ft_efm_cfg and ft_efm_cfg.formatter then
+    if type(ft_efm_cfg.formatter) == 'table' then
+      return ft_efm_cfg.formatter[1]
+    else
+      return tostring(ft_efm_cfg.formatter)
+    end
+  end
+
+  -- otherwise just return the LSP server name
   local clients = vim.lsp.get_active_clients({ bufnr = buf })
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting') then
-      if client.name == 'efm' then
-        local ft_config = require('my.lsp.filetypes').config[vim.bo[buf].filetype]
-        if ft_config then
-          if type(ft_config.formatter) == 'table' then
-            return ft_config.formatter[1]
-          else
-            return ft_config.formatter
-          end
-        end
-      else
-        return client.name
-      end
+      return client.name
     end
   end
+
   return nil
 end
 
