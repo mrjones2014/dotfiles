@@ -7,6 +7,7 @@ return {
       log_level = 'debug',
       caching = true,
       colors = {
+        light_gray = '#646870',
         dark_gray = '#1A1A1A',
         darker_gray = '#141414',
         darkest_gray = '#080808',
@@ -94,6 +95,9 @@ return {
         NavicIconsObject = { fg = '${purple}', bg = '${bg_statusline}' },
         NavicIconsProperty = { fg = '${fg}', bg = '${bg_statusline}' },
         NavicSeparator = { fg = '${gray}', bg = '${bg_statusline}' },
+
+        -- LSP inlay hints are too dark/not enough contrast with the default nvim_lsp theme plugin
+        LspInlayHint = { fg = '${light_gray}', bg = '${darker_gray}' },
       },
       plugins = {
         all = false,

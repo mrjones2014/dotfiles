@@ -12,8 +12,8 @@ function M.on_attach(client, bufnr)
   end
 
   -- if current nvim version supports inlay hints, enable them
-  if vim.lsp.buf['inlay_hint'] ~= nil and client.supports_method('textDocument/inlayHint') then
-    vim.lsp.buf.inlay_hint(0, true)
+  if vim.lsp['inlay_hint'] ~= nil and client.supports_method('textDocument/inlayHint') then
+    vim.lsp.inlay_hint(0, true)
   end
 
   -- Run eslint fixes before writing

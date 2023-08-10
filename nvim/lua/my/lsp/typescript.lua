@@ -1,8 +1,8 @@
 local root_dir = require('lspconfig.util').root_pattern('pnpm-workspace.yaml', 'package.json')
 -- prioritize workspace roots
 if
-  vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yaml') > 0
-  or vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yml') > 0
+    vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yaml') > 0
+    or vim.fn.filereadable(vim.loop.cwd() .. '/pnpm-workspace.yml') > 0
 then
   root_dir = function()
     return vim.loop.cwd()
@@ -15,9 +15,9 @@ return {
     typescript = {
       inlayHints = {
         includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHints = false,
         includeInlayPropertyDeclarationTypeHints = true,
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
@@ -26,9 +26,9 @@ return {
     javascript = {
       inlayHints = {
         includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHints = false,
         includeInlayPropertyDeclarationTypeHints = true,
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
