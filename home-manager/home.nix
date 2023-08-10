@@ -1,10 +1,17 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
   inherit (stdenv) isDarwin;
 in {
+  nixpkgs.overlays = [
+    (final: prev:
+      (import ../packages {
+        inherit inputs;
+        inherit pkgs;
+      }))
+  ];
   home.username = "mat";
   home.homeDirectory = if isLinux then "/home/mat" else "/Users/mat";
 

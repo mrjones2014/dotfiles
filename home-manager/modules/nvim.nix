@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
@@ -54,12 +54,7 @@ in {
   };
 
   programs.neovim = {
-    package = if isLinux then
-      inputs.neovim-flake.packages."x86_64-linux".neovim
-    else
-      pkgs.callPackage ../../packages/neovim-nightly.nix {
-        inherit (inputs.neovim-flake.packages."aarch64-darwin") neovim;
-      };
+    package = pkgs.neovim-nightly;
     enable = true;
     viAlias = true;
     vimAlias = true;
