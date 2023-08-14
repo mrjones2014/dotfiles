@@ -1,13 +1,9 @@
 return {
   {
-    'iamcco/markdown-preview.nvim',
-    ft = { 'markdown', 'md' },
-    init = function()
-      vim.g.mkdp_theme = 'dark'
-    end,
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
+    'mrjones2014/mdpreview.nvim',
+    dev = true,
+    ft = 'markdown',
+    dependencies = { 'norcalli/nvim-terminal.lua', config = true },
   },
   {
     'gaoDean/autolist.nvim',
