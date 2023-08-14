@@ -167,7 +167,11 @@ function M.format_document()
     vim.lsp.buf.format({
       async = true,
       filter = function(client)
-        return formats_with_efm and client.name == 'efm' or client.name ~= 'efm'
+        if formats_with_efm then
+          return client.name == 'efm'
+        else
+          return client.name ~= 'efm'
+        end
       end,
     })
   end
