@@ -62,7 +62,6 @@ in {
       keep-derivations = true
       keep-outputs = true
     '';
-    "config-paths.yml".source = ../conf.d/config-paths.yml;
     "op/plugins.sh".source = pkgs.writeScript "op_plugins.sh" ''
       export OP_PLUGIN_ALIASES_SOURCED=1
       alias gh="op plugin run -- gh"

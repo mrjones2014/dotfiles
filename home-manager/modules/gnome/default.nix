@@ -6,7 +6,7 @@ let
       "https://user-images.githubusercontent.com/8648891/246180692-b8144052-e947-47b0-b59c-ea1022b9b629.jpg";
     hash = "sha256-itnhNPYvQLfCULNrEZqP+3VBQVmEmvh9wv6C2F3YKQU=";
   };
-  vars = import ../../../vars.nix;
+  vars = import ../../../conf.d/vars.nix;
   inherit (vars) usePantheon;
   inherit (vars) useGnome;
 in {
