@@ -1,11 +1,12 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
   opSudoPasswordScript = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
-    /run/wrappers/bin/op item get "System Password" --fields password
+    ${pkgs._1password}/bin/op item get "System Password" --fields password
   '';
+  op-shell-plugins = [ "gh" ];
 in {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
@@ -18,8 +19,10 @@ in {
   };
 
   home.packages = with pkgs;
-    [ wget thefuck gh fzf jq glow exa tealdeer tokei cachix ]
+    [ wget thefuck gh fzf jq glow exa tealdeer tokei cachix _1password ]
     ++ lib.lists.optionals isLinux [ xclip ];
+
+  programs.gh.enable = true;
 
   programs.fish = {
     enable = true;
@@ -43,6 +46,7 @@ in {
       ll = "ls -l --git";
       l = "ls -laH";
       lg = "ls -lG";
+      sudo = "sudo -A";
       nix-apply = if pkgs.stdenv.isDarwin then
         "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
@@ -50,7 +54,6 @@ in {
       oplocal =
         "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
     } // pkgs.lib.optionalAttrs isLinux {
-      sudo = "sudo -A";
       cfgnix = "sudo nvim /etc/nixos/configuration.nix";
       restart-gui = "sudo systemctl restart display-manager.service";
     };
@@ -82,19 +85,15 @@ in {
       fish_vi_key_bindings
       bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
-      thefuck --alias | source
-      starship init fish | source
-      atuin init fish | source
-      gh completion -s fish | source
-
       for mode in insert default normal
         bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
         bind -M $mode \a _project_jump
       end
 
-      if [ -e "$XDG_CONFIG_HOME/op/plugins.sh" ]
-        source "$XDG_CONFIG_HOME/op/plugins.sh"
-      end
+      export OP_PLUGIN_ALIASES_SOURCED=1
+      ${lib.concatMapStrings
+      (plugin: ''alias ${plugin}="op plugin run -- ${plugin}"'')
+      op-shell-plugins}
 
       # I like to keep the prompt at the bottom rather than the top
       # of the terminal window so that running `clear` doesn't make

@@ -62,10 +62,6 @@ in {
       keep-derivations = true
       keep-outputs = true
     '';
-    "op/plugins.sh".source = pkgs.writeScript "op_plugins.sh" ''
-      export OP_PLUGIN_ALIASES_SOURCED=1
-      alias gh="op plugin run -- gh"
-    '';
   };
   home.file."${config.home.homeDirectory}/.xprofile".text = ''
     export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
