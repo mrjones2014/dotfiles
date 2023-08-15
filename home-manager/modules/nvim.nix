@@ -29,7 +29,9 @@ in {
       [languages]
       rust = ["rustfmt"]
       go = ["gofmt"]
-      lua = ["stylua --config-path ${config.home.homeDirectory}/git/dotfiles/nvim/stylua.toml -s -"]
+      lua = ["stylua --config-path ${
+        config.lib.file.mkOutOfStoreSymlink ../../nvim/stylua.toml
+      } -s -"]
       nix = ["nixfmt"]
     '';
     "ripgrep_ignore".text = ''
@@ -47,8 +49,7 @@ in {
       /vendor
     '';
     "nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/git/dotfiles/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink ../../nvim;
       recursive = true;
     };
   };
