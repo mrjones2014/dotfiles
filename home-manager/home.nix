@@ -55,6 +55,8 @@ in {
       "obsidian"
       "spotify"
       "discord"
+      "1password"
+      "1password-cli"
       # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
       # however VS Code should NOT be installed on this system!
       # Use VS Codium instead: https://github.com/VSCodium/vscodium
