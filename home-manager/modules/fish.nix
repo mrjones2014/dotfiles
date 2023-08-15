@@ -154,24 +154,6 @@ in {
           command nix-shell $argv --run "exec fish"
         '';
       };
-      nvim = {
-        wraps = "nvim";
-        body = ''
-          set -l NVIM (which nvim)
-
-          if test (count $argv) -lt 1
-              "$NVIM"
-              return
-          end
-
-          if test -d $argv[1]
-              pushd $argv[1] && "$NVIM" && popd
-              return
-          end
-
-          "$NVIM" $argv
-        '';
-      };
       mr = ''
         set -l GITLAB_BASE_URL "https://gitlab.1password.io"
         set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
