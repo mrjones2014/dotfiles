@@ -19,7 +19,7 @@ in {
 
   home.packages = with pkgs;
     [ wget thefuck gh fzf jq glow exa tealdeer tokei cachix ]
-    ++ lib.lists.optionals.isLinux [ xclip ];
+    ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.fish = {
     enable = true;
