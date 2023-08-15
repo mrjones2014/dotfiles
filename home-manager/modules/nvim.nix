@@ -27,12 +27,12 @@ in {
     '';
     "cbfmt.toml".text = ''
       [languages]
-      rust = ["rustfmt"]
-      go = ["gofmt"]
-      lua = ["stylua --config-path ${
-        config.lib.file.mkOutOfStoreSymlink ../../nvim/stylua.toml
+      rust = ["${pkgs.rustfmt}/bin/rustfmt"]
+      go = ["${pkgs.go}/bin/gofmt"]
+      lua = ["${pkgs.stylua}/bin/stylua --config-path ${
+        ../../nvim/stylua.toml
       } -s -"]
-      nix = ["nixfmt"]
+      nix = ["${pkgs.nixfmt}/bin/nixfmt"]
     '';
     "ripgrep_ignore".text = ''
       .git/
