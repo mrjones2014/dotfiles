@@ -17,16 +17,9 @@ in {
     SUDO_ASKPASS = "${opSudoPasswordScript}";
   };
 
-  home.packages = [
-    pkgs.wget
-    pkgs.thefuck
-    pkgs.gh
-    pkgs.fzf
-    pkgs.jq
-    pkgs.glow
-    pkgs.exa
-    pkgs.tealdeer
-  ];
+  home.packages = with pkgs;
+    [ wget thefuck gh fzf jq glow exa tealdeer tokei cachix ]
+    ++ lib.lists.optionals.isLinux [ xclip ];
 
   programs.fish = {
     enable = true;
@@ -60,7 +53,6 @@ in {
       sudo = "sudo -A";
       cfgnix = "sudo nvim /etc/nixos/configuration.nix";
       restart-gui = "sudo systemctl restart display-manager.service";
-      open = "xdg-open";
     };
 
     shellInit = ''
@@ -185,7 +177,7 @@ in {
         set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
         set -l CURRENT_BRANCH_NAME (git branch --show-current)
         set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$CURRENT_BRANCH_NAME"
-        open "$GITLAB_MR_URL"
+        ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
       '';
       pr = ''
         set -l PROJECT_PATH (git config --get remote.origin.url)
@@ -198,7 +190,9 @@ in {
         if test -z "$GIT_BRANCH"
           echo "Error: not a git repository"
         else
-          open "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
+          ${
+            if isLinux then "xdg-open" else "open"
+          } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
         end
       '';
       opauthsock = {

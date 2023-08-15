@@ -3,6 +3,7 @@ let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
 in {
+  home.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
   programs.wezterm = {
     enable = true;
     colorSchemes.onedarkpro = {
