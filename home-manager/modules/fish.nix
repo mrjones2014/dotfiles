@@ -16,6 +16,7 @@ in {
     GIT_MERGE_AUTOEDIT = "no";
     NEXT_TELEMETRY_DISABLED = "1";
     SUDO_ASKPASS = "${opSudoPasswordScript}";
+    FZF_CTRL_T_COMMAND = "${pkgs.ripgrep}/bin/rg --files";
   };
 
   home.packages = with pkgs;
