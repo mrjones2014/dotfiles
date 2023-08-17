@@ -20,10 +20,17 @@ in {
   };
 
   home.packages = with pkgs;
-    [ wget thefuck gh fzf jq glow exa tealdeer tokei cachix _1password ]
+    [ wget thefuck gh jq glow exa tealdeer tokei cachix _1password ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.gh.enable = true;
+
+  programs.fzf = {
+    enable = true;
+    defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
+    fileWidgetCommand = "${pkgs.ripgrep}/bin/rg --files";
+    fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --color=always {}'" ];
+  };
 
   programs.fish = {
     enable = true;
