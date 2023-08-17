@@ -85,10 +85,6 @@ in {
       fish_vi_key_bindings
       bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
-      for mode in insert default normal
-        # bind -M $mode \a _project_jump
-      end
-
       export OP_PLUGIN_ALIASES_SOURCED=1
       ${lib.concatMapStrings
       (plugin: ''alias ${plugin}="op plugin run -- ${plugin}"'')

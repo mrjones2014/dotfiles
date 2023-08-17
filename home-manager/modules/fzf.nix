@@ -70,12 +70,12 @@
       function _project_jump_get_readme
         set -l dir (_project_jump_parse_project "$argv[1]")
         if test -f "$dir/README.md"
-          glow -p -s dark -w 150 "$dir/README.md"
+          ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
         else
           echo
           echo (set_color --bold) "README.md not found"
           echo
-          ls --color=always $dir
+          ${pkgs.exa}/bin/exa --icons -s type -F --color=always $dir
         end
       end
 
@@ -83,7 +83,7 @@
       if set -ql _flag_format
         _project_jump_get_readme $_flag_format
       else
-        set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "_project_jump --format {}" | _project_jump_parse_project)
+        set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}" | _project_jump_parse_project)
         if test -n "$selected"
           cd "$selected"
         end
