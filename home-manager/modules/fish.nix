@@ -28,6 +28,7 @@ in {
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
+    defaultOptions = [ "--prompt='  '" "--marker=''" ];
     fileWidgetCommand = "${pkgs.ripgrep}/bin/rg --files";
     fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --color=always {}'" ];
   };
