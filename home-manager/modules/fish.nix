@@ -175,6 +175,27 @@ in {
           } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
         end
       '';
+      login = {
+        description = "Select a 1Password item via fzf and open it in browser";
+        body = ''
+          set -l selected (op item list --categories login --format json | jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | jq -r '.id, .urls[0].href')
+          if [ -z "$selected" ]
+            tput cup $LINES
+            commandline -f repaint
+            return
+          end
+          set -l id $selected[1]
+          set -l url $selected[2]
+          # if it has a ? then append query string with &
+          if string match -e -- '\?' "$url"
+            set -f fill_session_url "$url&$id=$id"
+          else
+            # otherwise append query string with ?
+            set -f fill_session_url "$url?$id=$id"
+          end
+          ${if isLinux then "xdg-open" else "open"} "$fill_session_url"
+        '';
+      };
       opauthsock = {
         argumentNames = [ "mode" ];
         description =
