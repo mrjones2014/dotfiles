@@ -2,7 +2,7 @@
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
-  gitCheckoutScript = pkgs.writeScript "git-ch.bash" ''
+  git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
     #!${pkgs.bash}/bin/bash
     if test "$#" -ne 0; then
       if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then
@@ -15,7 +15,6 @@ let
     fi
   '';
 in {
-  home.packages = [ pkgs.delta ];
   programs.git = {
     enable = true;
     package = git.override {
@@ -28,7 +27,7 @@ in {
       commit-amend = "commit -a --amend --no-edit";
       prune-branches = ''
         !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
-      ch = "!${gitCheckoutScript}";
+      ch = "!${git_checkout_fzf_script}";
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | ${
@@ -57,11 +56,11 @@ in {
       };
       core = {
         autocrlf = false;
-        pager = "delta";
+        pager = "${pkgs.delta}/bin/delta";
         fsmonitor = true;
         untrackedcache = true;
       };
-      interactive = { diffFilter = "delta --color-only"; };
+      interactive = { diffFilter = "${pkgs.delta}/bin/delta --color-only"; };
       init = { defaultBranch = "master"; };
       delta = {
         lineNumbers = true;
