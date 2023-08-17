@@ -19,7 +19,7 @@ in {
   };
 
   home.packages = with pkgs;
-    [ wget thefuck gh jq glow exa tealdeer tokei cachix _1password ]
+    [ wget thefuck exa tealdeer tokei cachix _1password ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.gh.enable = true;
@@ -178,7 +178,7 @@ in {
       login = {
         description = "Select a 1Password item via fzf and open it in browser";
         body = ''
-          set -l selected (op item list --categories login --format json | jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | jq -r '.id, .urls[0].href')
+          set -l selected (op item list --categories login --format json | ${pkgs.jq}/bin/jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | ${pkgs.jq}/bin/jq -r '.id, .urls[0].href')
           if [ -z "$selected" ]
             tput cup $LINES
             commandline -f repaint
