@@ -11,7 +11,7 @@ let
         git checkout "$@"
       fi
     else
-      git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | grep -v "origin" | sort | uniq | fzf-tmux -p -x 15 | xargs git checkout
+      git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | grep -v "origin" | sort | uniq | ${pkgs.fzf}/bin/fzf | xargs git checkout
     fi
   '';
 in {

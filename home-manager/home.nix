@@ -75,6 +75,7 @@ in {
   imports = [
     ./modules/nvim.nix
     ./modules/fish.nix
+    ./modules/fzf.nix
     ./modules/starship.nix
     ./modules/atuin.nix
     ./modules/bat.nix

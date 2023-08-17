@@ -1,8 +1,8 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, lib, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
-  opSudoPasswordScript = pkgs.writeScript "opsudo.bash" ''
+  op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
     ${pkgs._1password}/bin/op item get "System Password" --fields password
   '';
@@ -15,8 +15,7 @@ in {
     GOPATH = "$HOME/go";
     GIT_MERGE_AUTOEDIT = "no";
     NEXT_TELEMETRY_DISABLED = "1";
-    SUDO_ASKPASS = "${opSudoPasswordScript}";
-    FZF_CTRL_T_COMMAND = "${pkgs.ripgrep}/bin/rg --files";
+    SUDO_ASKPASS = "${op_sudo_password_script}";
   };
 
   home.packages = with pkgs;
@@ -24,14 +23,6 @@ in {
     ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.gh.enable = true;
-
-  programs.fzf = {
-    enable = true;
-    defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
-    defaultOptions = [ "--prompt='  '" "--marker=''" ];
-    fileWidgetCommand = "${pkgs.ripgrep}/bin/rg --files";
-    fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --color=always {}'" ];
-  };
 
   programs.fish = {
     enable = true;
@@ -95,8 +86,7 @@ in {
       bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
       for mode in insert default normal
-        bind -M insert \e\[A "_atuin_search; tput cup \$LINES"
-        bind -M $mode \a _project_jump
+        # bind -M $mode \a _project_jump
       end
 
       export OP_PLUGIN_ALIASES_SOURCED=1
@@ -213,6 +203,4 @@ in {
       };
     };
   };
-  home.file."${config.xdg.configHome}/fish/functions/_project_jump.fish".source =
-    ../../conf.d/_project_jump.fish;
 }
