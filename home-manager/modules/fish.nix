@@ -19,7 +19,7 @@ in {
   };
 
   home.packages = with pkgs;
-    [ wget thefuck exa tealdeer tokei cachix _1password ]
+    [ thefuck tealdeer tokei cachix _1password ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.gh.enable = true;
@@ -41,7 +41,7 @@ in {
       cat = "bat";
       gogit = "cd ~/git";
       "!!" = "eval \\$history[1]";
-      ls = "exa -a --icons --color=always -s type -F";
+      ls = "${pkgs.exa}/bin/exa -a --icons --color=always -s type -F";
       la = "ls -a";
       ll = "ls -l --git";
       l = "ls -laH";

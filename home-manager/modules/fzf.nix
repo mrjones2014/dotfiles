@@ -12,11 +12,11 @@ let
       lhs = "\\a";
       rhs = "fzf-project-widget";
     }
-    # {
-    #   # ctrl+t
-    #   lhs = "\\ct";
-    #   rhs = "fzf-file-widget-wrapped";
-    # }
+    {
+      # ctrl+t
+      lhs = "\\ct";
+      rhs = "fzf-file-widget-wrapped";
+    }
   ];
 in {
   programs.fzf = {
