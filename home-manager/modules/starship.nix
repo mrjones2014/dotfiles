@@ -1,6 +1,7 @@
 { lib, ... }: {
   programs.starship = {
     enable = true;
+    enableTransience = true;
     settings = {
       format = lib.concatStrings [
         "$directory"

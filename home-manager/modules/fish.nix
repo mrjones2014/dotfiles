@@ -102,7 +102,7 @@ in {
       fish_greeting = "";
       _prompt_move_to_bottom = {
         onEvent = "fish_postexec";
-        body = ''echo "test" && tput cup $LINES'';
+        body = "tput cup $LINES";
       };
       nix-clean = ''
         nix-env --delete-generations old
