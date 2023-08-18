@@ -1,4 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }:
+let
+  key-bindings = [
+    {
+      lhs = "\\ce";
+      rhs = "fzf-vim-widget";
+    }
+    {
+      lhs = "\\a";
+      rhs = "fzf-project-widget";
+    }
+    {
+      lhs = "\\ct";
+      rhs = "fzf-file-widget-wrapped";
+    }
+  ];
+in {
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
@@ -13,9 +29,9 @@
   programs.fish = {
     interactiveShellInit = ''
       for mode in insert default normal
-        bind -M $mode \ce fzf-vim-widget
-        bind -M $mode \a fzf-project-widget
-        bind -M $mode \ct fzf-file-widget-wrapped
+      ${lib.concatMapStrings (keybind: ''
+        bind -M $mode ${keybind.lhs} ${keybind.rhs}
+      '') key-bindings}
       end
     '';
     functions.fzf-file-widget-wrapped = ''
