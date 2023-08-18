@@ -47,6 +47,7 @@ in {
       l = "ls -laH";
       lg = "ls -lG";
       sudo = "sudo -A";
+      clear = "clear && _prompt_move_to_bottom";
       nix-apply = if pkgs.stdenv.isDarwin then
         "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
@@ -94,14 +95,15 @@ in {
       # of the terminal window so that running `clear` doesn't make
       # me move my eyes from the bottom back to the top of the screen;
       # keep the prompt consistently at the bottom
-      tput cup $LINES
-      # this alias doesn't work from Nix `shellAliases` definition because
-      # it uses a variable and aliases get single-quotes instead of double-quoted
-      alias clear="clear && tput cup \$LINES";
+      _prompt_move_to_bottom # call function manually to load it since event handlers don't get autoloaded
     '';
 
     functions = {
       fish_greeting = "";
+      _prompt_move_to_bottom = {
+        onEvent = "fish_postexec";
+        body = ''echo "test" && tput cup $LINES'';
+      };
       nix-clean = ''
         nix-env --delete-generations old
         nix-store --gc
@@ -176,7 +178,6 @@ in {
         body = ''
           set -l selected (op item list --categories login --format json | ${pkgs.jq}/bin/jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | ${pkgs.jq}/bin/jq -r '.id, .urls[0].href')
           if [ -z "$selected" ]
-            tput cup $LINES
             commandline -f repaint
             return
           end

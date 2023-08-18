@@ -12,11 +12,11 @@ let
       lhs = "\\a";
       rhs = "fzf-project-widget";
     }
-    {
-      # ctrl+t
-      lhs = "\\ct";
-      rhs = "fzf-file-widget-wrapped";
-    }
+    # {
+    #   # ctrl+t
+    #   lhs = "\\ct";
+    #   rhs = "fzf-file-widget-wrapped";
+    # }
   ];
 in {
   programs.fzf = {
@@ -40,7 +40,7 @@ in {
     '';
     functions.fzf-file-widget-wrapped = ''
       fzf-file-widget
-      tput cup $LINES
+      _prompt_move_to_bottom
     '';
     functions.fzf-project-widget = ''
       function _project_jump_get_icon
@@ -113,7 +113,7 @@ in {
         if test -n "$selected"
           cd "$selected"
         end
-        tput cup $LINES
+        _prompt_move_to_bottom
         commandline -f repaint
       end
     '';
@@ -138,7 +138,7 @@ in {
         eval "$FZF_CTRL_T_COMMAND | "(__fzfcmd)' -m --query "'$fzf_query'"' | while read -l r; set result $result $r; end
       end
       if [ -z "$result" ]
-        tput cup $LINES
+        _prompt_move_to_bottom
         commandline -f repaint
         return
       end
@@ -148,7 +148,7 @@ in {
         set filepath_result "$filepath_result$(string escape $i)"
         set filepath_result "$filepath_result "
       end
-      tput cup $LINES
+      _prompt_move_to_bottom
       commandline -f repaint
       $EDITOR $result
     '';
