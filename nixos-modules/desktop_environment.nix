@@ -1,6 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, vars, ... }:
 let
-  vars = import ../conf.d/vars.nix;
   inherit (vars) usePantheon;
   inherit (vars) useGnome;
 in {
