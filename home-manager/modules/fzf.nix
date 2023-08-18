@@ -7,6 +7,7 @@
     fileWidgetOptions = [
       # Preview files with bat
       "--preview '${pkgs.bat}/bin/bat --color=always {}'"
+      "--layout default"
     ];
   };
   programs.fish = {
@@ -14,7 +15,12 @@
       for mode in insert default normal
         bind -M $mode \ce fzf-vim-widget
         bind -M $mode \a fzf-project-widget
+        bind -M $mode \ct fzf-file-widget-wrapped
       end
+    '';
+    functions.fzf-file-widget-wrapped = ''
+      fzf-file-widget
+      tput cup $LINES
     '';
     functions.fzf-project-widget = ''
       function _project_jump_get_icon
@@ -87,6 +93,7 @@
         if test -n "$selected"
           cd "$selected"
         end
+        tput cup $LINES
         commandline -f repaint
       end
     '';
