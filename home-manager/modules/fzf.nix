@@ -68,11 +68,13 @@ in {
       end
 
       function _project_jump_parse_project
-        read -f selected
-        # if not coming from pipe
+        # check args
+        set -f selected $argv[1]
+
+        # if not coming from args
         if [ "$selected" = "" ]
-          # check args
-          set -f selected $argv[1]
+          # check pipe
+          read -f selected
         end
 
         # if still empty, return
@@ -109,12 +111,19 @@ in {
       if set -ql _flag_format
         _project_jump_get_readme $_flag_format
       else
-        set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}" | _project_jump_parse_project)
-        if test -n "$selected"
-          cd "$selected"
+        set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}" --bind "space:execute(echo 'pickfile:{}')+abort")
+        set -l proj_dir (string replace -r "^pickfile:" "" "$selected" || true)
+        if test -n "$proj_dir"
+          cd (_project_jump_parse_project "$proj_dir")
         end
-        _prompt_move_to_bottom
         commandline -f repaint
+        # if instructed to pick a file, do it
+        if [ "$(string length \"$proj_dir\")" != "$(string length \"$selected\")" ]
+          set -l selected_file (fzf --preview-window 'right,70%' --preview "${pkgs.bat}/bin/bat {}")
+          if test -n "$selected_file"
+            $EDITOR "$selected_file"
+          end
+        end
       end
     '';
     functions.fzf-vim-widget = ''
