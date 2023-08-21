@@ -119,7 +119,7 @@ in {
         commandline -f repaint
         # if instructed to pick a file, do it
         if [ "$(string length \"$proj_dir\")" != "$(string length \"$selected\")" ]
-          set -l selected_file (fzf --preview-window 'right,70%' --preview "${pkgs.bat}/bin/bat {}")
+          set -l selected_file (fzf --preview-window 'right,70%' --preview "${pkgs.bat}/bin/bat --color=always {}")
           if test -n "$selected_file"
             $EDITOR "$selected_file"
           end
