@@ -7,17 +7,6 @@ return {
       dev = true,
       -- neoconf must be loaded before any LSP
       dependencies = { 'folke/neoconf.nvim' },
-      enabled = true,
-      event = 'BufReadPre',
-      config = function()
-        local efmls = require('efmls-configs')
-        efmls.init({
-          init_options = {
-            documentFormatting = true,
-          },
-        })
-        efmls.setup(require('my.lsp.filetypes').efmls_config())
-      end,
     },
     { 'folke/neodev.nvim', event = 'BufReadPre' },
     {
@@ -73,10 +62,19 @@ return {
     LSP.on_attach(require('my.lsp.utils').on_attach)
   end,
   config = function()
+    local efm_setup_done = false
+
     local function setup_lsp_for_filetype(filetype, server_name)
       local has_config, config = pcall(require, 'my.lsp.' .. filetype)
       config = has_config and config or {}
       config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+      -- setup efmls if not done already
+      if not efm_setup_done and require('my.lsp.filetypes').uses_efm(filetype) then
+        efm_setup_done = true
+        require('lspconfig').efm.setup(require('my.lsp.filetypes').efmls_config(config.capabilities))
+      end
+
       require('lspconfig')[server_name].setup(config)
       local snippets = require('my.lsp.snippets')[filetype]
       if snippets then
@@ -85,14 +83,14 @@ return {
     end
 
     local function current_buf_matches_file_patterns(patterns)
-      local bufname = vim.fn.expand('%')
+      local bufname = vim.api.nvim_buf_get_name(0)
       for _, pattern in ipairs(patterns) do
         if string.match(bufname, string.format('.%s', pattern)) then
           return true
         end
       end
 
-      return false
+      return require('my.lsp.filetypes').uses_efm(vim.bo.ft)
     end
 
     local function setup_server(filetype, file_patterns, server_name)

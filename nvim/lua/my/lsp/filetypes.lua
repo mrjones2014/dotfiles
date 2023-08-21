@@ -77,7 +77,7 @@ local efm_customizations = {
   ['cbfmt'] = function()
     local cbfmt = require('efmls-configs.formatters.cbfmt')
     cbfmt.formatCommand =
-        string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
+      string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
     return cbfmt
   end,
 }
@@ -111,18 +111,34 @@ local function load_formatters(formatters)
   return load_efm_modules(formatters, 'formatters')
 end
 
-function M.efmls_config()
-  local result = {}
+function M.efmls_config(capabilities)
+  local languages = {}
   for filetype, config in pairs(M.config) do
     if config.linter or config.formatter then
-      result[filetype] = {
+      languages[filetype] = {
         formatter = load_formatters(config.formatter),
         linter = load_linters(config.linter),
       }
     end
   end
 
-  return result
+  return {
+    filetypes = vim.tbl_keys(languages),
+    settings = {
+      rootMarkers = {
+        '.git/',
+        '.luacheckrc',
+        'stylua.toml',
+        'Cargo.toml',
+      },
+      languages = languages,
+    },
+    init_options = {
+      documentFormatting = true,
+      documentRangeFormatting = true,
+    },
+    capabilities = capabilities,
+  }
 end
 
 function M.formats_with_efm(ft)
