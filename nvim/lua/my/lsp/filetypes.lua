@@ -104,21 +104,18 @@ local function load_efm_modules(mods, mod_type)
 end
 
 local function load_linters(linters)
-  return load_efm_modules(linters, 'linters')
+  return load_efm_modules(linters, 'linters') or {}
 end
 
 local function load_formatters(formatters)
-  return load_efm_modules(formatters, 'formatters')
+  return load_efm_modules(formatters, 'formatters') or {}
 end
 
 function M.efmls_config(capabilities)
   local languages = {}
   for filetype, config in pairs(M.config) do
     if config.linter or config.formatter then
-      languages[filetype] = {
-        formatter = load_formatters(config.formatter),
-        linter = load_linters(config.linter),
-      }
+      languages[filetype] = vim.list_extend(load_formatters(config.formatter), load_linters(config.linter))
     end
   end
 
