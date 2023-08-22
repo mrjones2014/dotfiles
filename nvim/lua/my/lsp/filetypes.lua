@@ -141,6 +141,11 @@ function M.efmls_config(capabilities)
   }
 end
 
+function M.uses_efm(ft)
+  ft = ft or vim.bo.ft
+  return vim.tbl_get(M.config, ft, 'formatter') ~= nil or vim.tbl_get(M.config, ft, 'linter') ~= nil
+end
+
 function M.formats_with_efm(ft)
   ft = ft or vim.bo.ft
   return vim.tbl_get(M.config, ft, 'formatter') ~= nil

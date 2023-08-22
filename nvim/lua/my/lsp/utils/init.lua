@@ -1,3 +1,5 @@
+local Methods = vim.lsp.protocol.Methods
+
 local M = {}
 
 local init_done = false
@@ -12,7 +14,7 @@ function M.on_attach(client, bufnr)
   end
 
   -- if current nvim version supports inlay hints, enable them
-  if vim.lsp['inlay_hint'] ~= nil and client.supports_method('textDocument/inlayHint') then
+  if vim.lsp['inlay_hint'] ~= nil and client.supports_method(Methods.textDocument_inlayHint) then
     vim.lsp.inlay_hint(0, true)
   end
 
@@ -27,7 +29,7 @@ end
 
 function M.setup_async_formatting()
   -- format on save asynchronously, see M.format_document
-  vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
+  vim.lsp.handlers[Methods.textDocument_formatting] = function(err, result, ctx)
     if err ~= nil then
       -- efm uses table messages
       if type(err) == 'table' then
@@ -128,11 +130,9 @@ function M.get_formatter_name(buf)
   end
 
   -- otherwise just return the LSP server name
-  local clients = vim.lsp.get_active_clients({ bufnr = buf })
-  for _, client in ipairs(clients) do
-    if client.supports_method('textDocument/formatting') then
-      return client.name
-    end
+  local clients = vim.lsp.get_clients({ bufnr = buf, method = Methods.textDocument_formatting })
+  if #clients > 0 then
+    return clients[1].name
   end
 
   return nil
@@ -146,14 +146,8 @@ function M.is_formatting_supported(buf)
     return false
   end
 
-  local clients = vim.lsp.get_active_clients({ bufnr = buf })
-  for _, client in ipairs(clients) do
-    if client.supports_method('textDocument/formatting') then
-      return true
-    end
-  end
-
-  return false
+  local clients = vim.lsp.get_clients({ bufnr = buf, method = Methods.textDocument_formatting })
+  return #clients > 0
 end
 
 function M.format_document()
