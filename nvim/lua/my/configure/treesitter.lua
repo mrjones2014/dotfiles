@@ -4,7 +4,7 @@ return {
     {
       'calops/hmts.nvim',
       version = '*',
-      filetype = 'nix',
+      ft = 'nix',
     },
     {
       'hiphish/rainbow-delimiters.nvim',
