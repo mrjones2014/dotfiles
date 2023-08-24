@@ -77,7 +77,6 @@ in {
     ./modules/fish.nix
     ./modules/fzf.nix
     ./modules/starship.nix
-    ./modules/atuin.nix
     ./modules/bat.nix
     ./modules/git.nix
     ./modules/ssh.nix

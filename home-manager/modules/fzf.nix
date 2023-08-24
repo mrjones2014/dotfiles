@@ -17,6 +17,11 @@ let
       lhs = "\\ct";
       rhs = "fzf-file-widget-wrapped";
     }
+    {
+      # ctrl+r
+      lhs = "\\cR";
+      rhs = "fzf-history-widget-wrapped";
+    }
   ];
 in {
   programs.fzf = {
@@ -37,6 +42,10 @@ in {
         bind -M $mode ${keybind.lhs} ${keybind.rhs}
       '') key-bindings}
       end
+    '';
+    functions.fzf-history-widget-wrapped = ''
+      fzf-history-widget
+      _prompt_move_to_bottom
     '';
     functions.fzf-file-widget-wrapped = ''
       fzf-file-widget
@@ -118,7 +127,7 @@ in {
         end
         commandline -f repaint
         # if instructed to pick a file, do it
-        if [ "$(string length \"$proj_dir\")" != "$(string length \"$selected\")" ]
+        if [ "$proj_dir" != "" ] && [ "$(string length \"$proj_dir\")" != "$(string length \"$selected\")" ]
           set -l selected_file (fzf --preview-window 'right,70%' --preview "${pkgs.bat}/bin/bat --color=always {}")
           if test -n "$selected_file"
             $EDITOR "$selected_file"
