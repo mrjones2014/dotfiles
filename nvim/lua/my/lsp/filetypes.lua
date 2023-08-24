@@ -121,15 +121,7 @@ function M.efmls_config(capabilities)
 
   return {
     filetypes = vim.tbl_keys(languages),
-    settings = {
-      rootMarkers = {
-        '.git/',
-        '.luacheckrc',
-        'stylua.toml',
-        'Cargo.toml',
-      },
-      languages = languages,
-    },
+    settings = { languages = languages },
     init_options = {
       documentFormatting = true,
       documentRangeFormatting = true,
