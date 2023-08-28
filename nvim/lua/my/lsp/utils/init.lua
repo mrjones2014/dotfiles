@@ -52,7 +52,9 @@ function M.setup_async_formatting()
     then
       local view = vim.fn.winsaveview()
       vim.lsp.util.apply_text_edits(result, ctx.bufnr, 'utf-16')
-      vim.fn.winrestview(view)
+      if view then
+        vim.fn.winrestview(view)
+      end
       if ctx.bufnr == vim.api.nvim_get_current_buf() then
         vim.b.format_saving = true
         vim.cmd.noautocmd('update')
@@ -68,7 +70,9 @@ function M.apply_ui_tweaks()
   for type, icon in pairs(icons) do
     local highlight = 'DiagnosticSign' .. type
     local legacy_highlight = 'DiagnosticSign' .. type
+    ---@diagnostic disable-next-line
     vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = highlight })
+    ---@diagnostic disable-next-line
     vim.fn.sign_define(legacy_highlight, { text = icon, texthl = legacy_highlight, numhl = legacy_highlight })
   end
 
