@@ -34,6 +34,7 @@ in {
       signal-desktop
       qbittorrent
       vlc
+      cura
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
