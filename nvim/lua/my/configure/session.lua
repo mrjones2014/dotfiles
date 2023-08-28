@@ -8,7 +8,7 @@ return {
       if vim.v.shell_error ~= 0 then
         branch = ''
       end
-      vim.trim(string.format('%s%s', name, branch))
+      return vim.trim(string.format('%s%s', name, branch))
     end
 
     local resession = require('resession')
