@@ -4,7 +4,7 @@ return {
   init = function()
     local function get_session_name()
       local name = vim.fn.getcwd()
-      local branch = vim.fn.system('git branch --show-current')
+      local branch = vim.fn.system({ 'git', 'branch', '--show-current' })
       if vim.v.shell_error ~= 0 then
         branch = ''
       end
