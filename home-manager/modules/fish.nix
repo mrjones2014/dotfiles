@@ -41,7 +41,7 @@ in {
       cat = "bat";
       gogit = "cd ~/git";
       "!!" = "eval \\$history[1]";
-      ls = "${pkgs.exa}/bin/exa -a --icons --color=always -s type -F";
+      ls = "${pkgs.lsd}/bin/lsd --group-directories-first";
       la = "ls -a";
       ll = "ls -l --git";
       l = "ls -laH";
@@ -78,8 +78,6 @@ in {
       if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
         fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
       end
-
-      fish_add_path "$CARGO_HOME/bin"
     '';
 
     interactiveShellInit = ''

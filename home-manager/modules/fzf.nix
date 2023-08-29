@@ -113,7 +113,7 @@ in {
             echo
             echo (set_color --bold) "README.md not found"
             echo
-            ${pkgs.exa}/bin/exa --icons -s type -F --color=always $dir
+            ${pkgs.lsd}/bin/lsd --icon=always --group-directories-first -F --color=always $dir
           end
         end
 
