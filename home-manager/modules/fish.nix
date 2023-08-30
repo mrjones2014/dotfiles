@@ -29,12 +29,7 @@ in {
 
     plugins = [{
       name = "foreign-env";
-      src = pkgs.fetchFromGitHub {
-        owner = "oh-my-fish";
-        repo = "plugin-foreign-env";
-        rev = "3ee95536106c11073d6ff466c1681cde31001383";
-        hash = "sha256-vyW/X2lLjsieMpP9Wi2bZPjReaZBkqUbkh15zOi8T4Y=";
-      };
+      inherit (pkgs.fishPlugins.foreign-env) src;
     }];
 
     shellAliases = {
