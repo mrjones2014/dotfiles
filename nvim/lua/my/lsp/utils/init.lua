@@ -57,7 +57,7 @@ function M.setup_async_formatting()
       end
       if ctx.bufnr == vim.api.nvim_get_current_buf() then
         vim.b.format_saving = true
-        vim.cmd.noautocmd('update')
+        vim.cmd.update()
         vim.b.format_saving = false
       end
     end
