@@ -106,6 +106,7 @@ in {
       fzf
       cargo
       cargo-nextest
+      clippy
       glow
     ];
   };

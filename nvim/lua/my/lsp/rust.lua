@@ -27,6 +27,7 @@ return {
         bindingModeHints = { enable = true },
         closureReturnTypeHints = { enable = 'always' },
         discriminantHints = { enable = 'always' },
+        parameterHints = { enable = true },
       },
       diagnostics = {
         disabled = { 'inactive-code', 'unresolved-proc-macro' },
