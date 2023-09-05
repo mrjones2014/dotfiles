@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, vars, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
@@ -33,6 +33,8 @@ in {
     }];
 
     shellAliases = {
+      copy = vars.copyCmd;
+      paste = vars.pasteCmd;
       cat = "bat";
       gogit = "cd ~/git";
       "!!" = "eval \\$history[1]";

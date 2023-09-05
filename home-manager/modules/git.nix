@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, vars, ... }:
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
@@ -30,9 +30,7 @@ in {
       ch = "!${git_checkout_fzf_script}";
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
-      copy-branch = "!git branch --show-current | ${
-          if isLinux then "xclip -sel clip" else "pbcopy"
-        }";
+      copy-branch = "!git branch --show-current | ${vars.copyCmd}";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
     extraConfig = {
