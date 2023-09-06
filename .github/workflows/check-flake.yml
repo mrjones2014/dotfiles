@@ -1,0 +1,16 @@
+name: Check Nix flake
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch: # allow manual trigger
+jobs:
+  check-flake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Nix flake
+        uses: DeterminateSystems/flake-checker-action@v2
+        with:
+          fail-mode: true
+          send-statistics: false
