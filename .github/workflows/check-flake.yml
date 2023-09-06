@@ -9,8 +9,8 @@ jobs:
   check-flake:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Nix CLI
-        uses: cachix/install-nix-action@v22
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
       - name: Check Nix flake inputs
         uses: DeterminateSystems/flake-checker-action@v2
         with:
