@@ -27,7 +27,13 @@ in {
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
-    defaultOptions = [ "--prompt='  '" "--marker=''" "--marker=' '" ];
+    defaultOptions = [
+      "--prompt='  '"
+      "--marker=''"
+      "--marker=' '"
+      # this keybind should match the telescope ones in nvim config
+      ''--bind="ctrl-d:preview-down,ctrl-f:preview-up"''
+    ];
     fileWidgetCommand = "${pkgs.ripgrep}/bin/rg --files";
     fileWidgetOptions = [
       # Preview files with bat
