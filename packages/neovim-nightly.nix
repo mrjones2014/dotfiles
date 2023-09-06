@@ -26,4 +26,3 @@ in neovim.overrideAttrs (o: {
     != "use-the-correct-replacement-args-for-gsub-directive.patch") o.patches;
   nativeBuildInputs = o.nativeBuildInputs ++ lib.optionals isDarwin [ liblpeg ];
 })
-

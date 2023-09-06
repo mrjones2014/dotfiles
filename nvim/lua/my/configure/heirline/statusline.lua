@@ -137,7 +137,10 @@ local function unsaved_count()
     return 0
   else
     return #vim.tbl_filter(function(buf)
-      return vim.api.nvim_buf_get_option(buf, 'modifiable') and vim.api.nvim_buf_get_option(buf, 'modified')
+      return vim.bo[buf].ft ~= 'minifiles'
+        and vim.bo[buf].bt ~= 'acwrite'
+        and vim.bo[buf].modifiable
+        and vim.bo[buf].modified
     end, vim.api.nvim_list_bufs())
   end
 end
