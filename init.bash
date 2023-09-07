@@ -6,11 +6,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 if ! command -v nix >/dev/null 2>&1; then
   echo "Nix is not installed. Running Nix installation..."
-  if [ "$(uname -s)" == "Darwin" ]; then
-    sh <(curl -L https://nixos.org/nix/install)
-  else
-    sh <(curl -L https://nixos.org/nix/install) --daemon
-  fi
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
   echo
   echo "Nix installed successfully. Restart your shell, then run this script again."
