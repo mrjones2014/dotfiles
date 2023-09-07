@@ -52,5 +52,5 @@ echo "Everything should be set up. Run one of the following commands (depending 
 echo
 
 # output value of the shell alias, highlighted
-echo "NIX_CONFIG=\"experimental-features = nix-command flakes\" $(grep "switch --flake" "$SCRIPT_DIR/home-manager/modules/fish.nix") | sed -e 's/\(.*\)/\x1b[38;5;166m\1\x1b[0m/' | awk '{$1:$1;print}'
+grep "switch --flake" "$SCRIPT_DIR/home-manager/modules/fish.nix" | sed 's/^/NIX_CONFIG="experimental-features = nix-command flakes"/' | sed -e 's/\(.*\)/\x1b[38;5;166m\1\x1b[0m/' | awk '{$1=$1;print}'
 echo
