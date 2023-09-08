@@ -16,4 +16,3 @@ in {
   else
     pkgs.callPackage ./neovim-nightly.nix { inherit neovim; };
 }
-

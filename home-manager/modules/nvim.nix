@@ -79,7 +79,7 @@ in {
       codespell
       statix
       luajitPackages.luacheck
-      nodePackages_latest.prettier
+      prettierd
 
       # LSP servers
       efm-langserver
