@@ -28,6 +28,7 @@ in {
     [ obsidian mdbook spotify (discord.override { withOpenASAR = true; }) ]
     ++ lib.lists.optionals isDarwin [
       # put macOS specific packages here
+      xcodes
     ] ++ lib.lists.optionals isLinux [
       # put Linux specific packages here
       librewolf
