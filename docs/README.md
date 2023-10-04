@@ -9,12 +9,11 @@
 </div>
 <hr>
 
-I’m currently working as a developer at 1Password. I'm an automation enthusiast, Neovim user, and generally a command line junkie. I'm also a Certified Scrum Master.
+I’m currently working as a developer at 1Password. I'm a software engineer with a passion for developer experience, user privacy and sovereignty, open source, Rust, and NixOS.
 
-My favorite programming languages currently are Rust, Go, Lua, and Nix. I like making Neovim plugins, command line tools, and other developer tools.
+My favorite programming languages currently are Rust, Nix, and Lua (for Neovim plugins). I like making Neovim plugins, command line tools, and other developer tools.
 
-I'm really passionate about user privacy and sovereignty, Developer Experience™, solving problems for developers, and creating developer workflows people love to use.
-I maintain [`legendary.nvim`](https://github.com/mrjones2014/legendary.nvim) and [`smart-splits.nvim`](https://github.com/mrjones2014/smart-splits.nvim),
+I maintain [`legendary.nvim`](https://github.com/mrjones2014/legendary.nvim) and [`smart-splits.nvim`](https://github.com/mrjones2014/smart-splits.nvim) (Neovim plugins),
 as well as some other side projects.
 
 - <i class="fa fa-envelope"></i> [Email](mailto:mat@mjones.network)
