@@ -13,8 +13,8 @@ I’m currently working as a developer at 1Password. I'm a software engineer wit
 
 My favorite programming languages currently are Rust, Nix, and Lua (for Neovim plugins). I like making Neovim plugins, command line tools, and other developer tools.
 
-I maintain [`legendary.nvim`](https://github.com/mrjones2014/legendary.nvim) and [`smart-splits.nvim`](https://github.com/mrjones2014/smart-splits.nvim) (Neovim plugins),
-as well as some other side projects.
+I manage my [dotfiles](https://github.com/mrjones2014/dotfiles) as a Nix flake, and maintain [`legendary.nvim`](https://github.com/mrjones2014/legendary.nvim) and
+[`smart-splits.nvim`](https://github.com/mrjones2014/smart-splits.nvim) (Neovim plugins), as well as some other side projects.
 
 - <i class="fa fa-envelope"></i> [Email](mailto:mat@mjones.network)
 - <i class="fa fa-github"></i> [GitHub](https://github.com/mrjones2014)
