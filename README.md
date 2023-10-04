@@ -1,4 +1,4 @@
-<img width="100%" src="./docs/avatar.png">
+# Dotfiles
 
 These are my NixOS and macOS dotfiles, packaged as a Nix flake, using [`home-manager`](https://github.com/nix-community/home-manager).
 
