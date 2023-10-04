@@ -1,15 +1,15 @@
 -- bind mouse side buttons to forward/back
-hs.eventtap
-  .new({ hs.eventtap.event.types.otherMouseUp }, function(event)
-    local button = event:getProperty(hs.eventtap.event.properties.mouseEventButtonNumber)
-    if button == 3 then
-      hs.eventtap.keyStroke({ 'cmd' }, '[')
-    end
-    if button == 4 then
-      hs.eventtap.keyStroke({ 'cmd' }, ']')
-    end
-  end)
-  :start()
+-- hs.eventtap
+--   .new({ hs.eventtap.event.types.otherMouseUp }, function(event)
+--     local button = event:getProperty(hs.eventtap.event.properties.mouseEventButtonNumber)
+--     if button == 3 then
+--       hs.eventtap.keyStroke({ 'cmd' }, '[')
+--     end
+--     if button == 4 then
+--       hs.eventtap.keyStroke({ 'cmd' }, ']')
+--     end
+--   end)
+--   :start()
 
 -- bind shift+ctrl+option+l to lock screen
 hs.hotkey.bind({ 'alt', 'ctrl', 'shift' }, 'L', function()
