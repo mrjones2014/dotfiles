@@ -4,6 +4,11 @@ return {
   { 'nvim-lua/plenary.nvim' },
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
   { 'tpope/vim-sleuth', event = 'BufReadPre' },
+  {
+    'nat-418/boole.nvim',
+    keys = { '<C-a>', '<C-x>' },
+    opts = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
+  },
   { 'mrjones2014/iconpicker.nvim' },
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   {
