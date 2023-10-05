@@ -46,7 +46,7 @@ return {
       first_word = first_word:lower()
       if first_word == 'makefile' then
         return { prompt = rest, filetype = 'Makefile' }
-      elseif first_word:match('^[tj]sx?$') then
+      elseif first_word:match('^[tj]s$') then
         return { prompt = rest, filetype = { 'ts', 'tsx', 'js', 'jsx' } }
       elseif #first_word > 1 then
         return { prompt = rest, filetype = first_word }
