@@ -1,3 +1,7 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! YouTube                             !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block "ambient mode" garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
@@ -92,10 +96,20 @@ youtube.com##.ytd-rich-item-renderer:has(>.ytd-feed-nudge-renderer)
 ! explore categories
 youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER])
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Stack Overflow / Stack Exchange     !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the cookie banner that covers the entire bottom left corner even with JS disabled
 stackexchange.com##.js-consent-banner
 stackoverflow.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! GitHub                              !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! Block "Code 55% faster with GitHub Copilot" (lmao)
 github.com##button:has-text(with GitHub Copilot)
@@ -114,11 +128,26 @@ github.com##.js-notice
 github.com##.d-block:has(a[href*="?tab=achievements"])
 github.com##.d-md-block:has(a[href*="?tab=achievements"])
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Glassdoor                           !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the "hard sell" overlay that tries to force you to pay money just to read a review
 www.glassdoor.com##.hardsellOverlay
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PayPal                              !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the cookie banner, same as rejecting cookies
 www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Discord                             !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! Block "Add super reaction" button
 discord.com##div[aria-label="Add Super Reaction"]

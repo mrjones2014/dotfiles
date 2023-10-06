@@ -172,7 +172,11 @@
 <p>Have some useful filters you'd like to contribute? Please <a href="https://github.com/mrjones2014/dotfiles/edit/master/conf.d/ublock-filters.yml">add them here</a>!</p>
 <details>
 <summary>Expand to copy all filters</summary>
-<pre><code class="language-adblock">! Block &quot;ambient mode&quot; garbage
+<pre><code class="language-adblock">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! YouTube                             !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Block &quot;ambient mode&quot; garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
 ! Block YouTube's cringe gigantic banner ads on the home screen
@@ -266,10 +270,20 @@ youtube.com##.ytd-rich-item-renderer:has(&gt;.ytd-feed-nudge-renderer)
 ! explore categories
 youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER])
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Stack Overflow / Stack Exchange     !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the cookie banner that covers the entire bottom left corner even with JS disabled
 stackexchange.com##.js-consent-banner
 stackoverflow.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! GitHub                              !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! Block &quot;Code 55% faster with GitHub Copilot&quot; (lmao)
 github.com##button:has-text(with GitHub Copilot)
@@ -288,11 +302,26 @@ github.com##.js-notice
 github.com##.d-block:has(a[href*=&quot;?tab=achievements&quot;])
 github.com##.d-md-block:has(a[href*=&quot;?tab=achievements&quot;])
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Glassdoor                           !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the &quot;hard sell&quot; overlay that tries to force you to pay money just to read a review
 www.glassdoor.com##.hardsellOverlay
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PayPal                              !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Block the cookie banner, same as rejecting cookies
 www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Discord                             !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! Block &quot;Add super reaction&quot; button
 discord.com##div[aria-label=&quot;Add Super Reaction&quot;]
