@@ -9,6 +9,8 @@ Have some useful filters you'd like to contribute? Please [add them here](https:
 
 </details>
 
+Or add the full list as a filter list in uBlock Origin: [ublock-filters.txt](https://mjones.network/ublock-filters.txt)
+
 {{#ublockfilters-toc}}
 
 {{#ublockfilters}}
