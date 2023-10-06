@@ -24,6 +24,8 @@ jobs:
         run: mkdir -p theme && curl https://raw.githubusercontent.com/mrjones2014/highlight-js-nix/master/highlight.js -o theme/highlight.js
       - name: Run mbdook build
         run: mdbook build
+      - name: Generate ublock-filters.txt
+        run: ublock-mdbook gen-filter-list
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

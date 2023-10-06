@@ -5,7 +5,11 @@ use mdbook::{
     BookItem,
 };
 use regex::Regex;
+use std::io::prelude::*;
 use std::{collections::HashMap, error::Error, io, process};
+
+const FILTER_LIST_TXT_PATH: &str =
+    concat!(env!("CARGO_MANIFEST_DIR"), "/../book/ublock-filters.txt");
 
 fn parse_ublock_filters() -> (String, String, String) {
     let filters = serde_yaml::from_str::<Vec<HashMap<String, String>>>(include_str!(
@@ -16,7 +20,7 @@ fn parse_ublock_filters() -> (String, String, String) {
     let md_linkify_pattern = Regex::new(r"[^A-Za-z]").unwrap();
 
     let mut filters_toc = String::from("");
-    let mut filters_all = String::from("```adblock\n");
+    let mut filters_all = String::from("");
     let mut individual_sections = String::from("");
     for item in filters.iter() {
         for (site_name, filters_text) in item.iter() {
@@ -43,7 +47,6 @@ fn parse_ublock_filters() -> (String, String, String) {
     }
 
     filters_all = filters_all.trim().to_string();
-    filters_all.push_str("\n```");
 
     filters_toc.push('\n');
 
@@ -58,12 +61,15 @@ impl Preprocessor for UblockTagProcessor {
     }
 
     fn run(&self, _: &PreprocessorContext, mut book: Book) -> mdbook::errors::Result<Book> {
+        let (filters_all, filters_toc, filters_sections) = parse_ublock_filters();
         book.for_each_mut(|bookitem| {
-            let (filters_all, filters_toc, filters_sections) = parse_ublock_filters();
             if let BookItem::Chapter(chapter) = bookitem {
                 chapter.content = chapter
                     .content
-                    .replace("{{#ublockfilters-all}}", filters_all.as_str())
+                    .replace(
+                        "{{#ublockfilters-all}}",
+                        format!("```adblock\n{}\n```", filters_all.as_str()).as_str(),
+                    )
                     .replace("{{#ublockfilters-toc}}", filters_toc.as_str())
                     .replace("{{#ublockfilters}}", filters_sections.as_str());
             }
@@ -76,31 +82,25 @@ fn handle_processing(pre: &dyn Preprocessor) -> Result<(), Box<dyn Error>> {
     let (ctx, book) = CmdPreprocessor::parse_input(io::stdin())?;
     let processed_book = pre.run(&ctx, book).unwrap();
     serde_json::to_writer(io::stdout(), &processed_book)?;
+
     Ok(())
 }
 
-fn handle_supports(pre: &dyn Preprocessor, sub_args: &ArgMatches) -> ! {
+fn is_supported(pre: &dyn Preprocessor, sub_args: &ArgMatches) -> bool {
     let renderer = sub_args
         .get_one::<String>("renderer")
         .expect("Required argument");
-    let supported = pre.supports_renderer(renderer);
-
-    // Signal whether the renderer is supported by exiting with 1 or 0.
-    if supported {
-        process::exit(0);
-    } else {
-        process::exit(1);
-    }
+    pre.supports_renderer(renderer)
 }
 
 fn make_app() -> Command {
-    Command::new("nop-preprocessor")
-        .about("A mdbook preprocessor which loads my uBlock Origin filters into the page.")
+    Command::new("ublockfilters-preprocessor")
+        .about("A mdbook preprocessor which loads my uBlock Origin filters into the page, and generates a filter list which can be subscribed to.")
         .subcommand(
             Command::new("supports")
                 .arg(Arg::new("renderer").required(true))
                 .about("Check whether a renderer is supported by this preprocessor"),
-        )
+        ).subcommand(Command::new("gen-filter-list").about("Generate ublock-filters.txt list that can be subscribed to."))
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -109,7 +109,19 @@ fn main() -> Result<(), Box<dyn Error>> {
     let preprocessor = UblockTagProcessor {};
 
     if let Some(sub_args) = matches.subcommand_matches("supports") {
-        handle_supports(&preprocessor, sub_args);
+        process::exit(if is_supported(&preprocessor, sub_args) {
+            0
+        } else {
+            1
+        });
+    } else if matches.subcommand_matches("gen-filter-list").is_some() {
+        let (filters_all, _, _) = parse_ublock_filters();
+        let mut writer = std::fs::OpenOptions::new()
+            .create(true)
+            .write(true)
+            .truncate(true)
+            .open(FILTER_LIST_TXT_PATH)?;
+        writer.write_all(filters_all.as_bytes())?;
     } else if let Err(e) = handle_processing(&preprocessor) {
         eprintln!("{}", e);
         process::exit(1);
