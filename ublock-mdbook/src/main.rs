@@ -42,7 +42,22 @@ fn parse_ublock_filters() -> (String, String, String) {
                 )
                 .as_str(),
             );
-            filters_all.push_str(format!("{}\n\n", filters_text.trim()).as_str());
+            filters_all.push_str(
+                format!(
+                    r#"
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! {}{}!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+{}
+
+"#,
+                    site_name,
+                    " ".repeat(36 - site_name.len()),
+                    filters_text.trim(),
+                )
+                .as_str(),
+            );
         }
     }
 
