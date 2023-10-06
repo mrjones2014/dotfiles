@@ -8,6 +8,7 @@
         "\${custom.git_server_icon}"
         "$git_branch"
         "$git_status"
+        "\${custom.direnv} "
         "\${custom.nix_shell}"
         "$line_break"
         "$character"
@@ -51,6 +52,13 @@
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "bold #6ec2e8";
           format = "[ ]($style)";
+        };
+        direnv = {
+          description = "Show '.envrc' when using a direnv environment";
+          when = ''[ "$DIRENV_DIR" != "" ]'';
+          shell = [ "bash" "--noprofile" "--norc" ];
+          style = "italic #e5c07b";
+          format = "[.envrc]($style)";
         };
       };
     };
