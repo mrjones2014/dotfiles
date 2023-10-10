@@ -72,7 +72,7 @@ M.UniqueFilename = {
     condition = function()
       return vim.bo.modified == true
     end,
-    provider = ' ',
+    provider = ' ',
     hl = { bg = 'black' },
   },
   {
