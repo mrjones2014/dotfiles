@@ -3,7 +3,19 @@ let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
 in {
-  home.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+  home = {
+    packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    sessionVariables = { TERM = "wezterm"; };
+    activation.installWeztermTerminfo = ''
+      ${pkgs.ncurses}/bin/tic -x -o $HOME/.terminfo ${
+        pkgs.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo";
+          sha256 = "P+mUyBjCvblCtqOmNZlc2bqUU32tMNWpYO9g25KAgNs=";
+        }
+      }
+    '';
+  };
   programs.wezterm = {
     enable = true;
     colorSchemes.onedarkpro = {
@@ -153,14 +165,4 @@ in {
       return config
     '';
   };
-  home.sessionVariables = { TERM = "wezterm"; };
-  home.activation.installWeztermTerminfo = ''
-    ${pkgs.ncurses}/bin/tic -x -o $HOME/.terminfo ${
-      pkgs.fetchurl {
-        url =
-          "https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo";
-        sha256 = "P+mUyBjCvblCtqOmNZlc2bqUU32tMNWpYO9g25KAgNs=";
-      }
-    }
-  '';
 }
