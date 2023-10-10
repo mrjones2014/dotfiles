@@ -16,10 +16,12 @@ return {
       -- TODO with a very long
       --      multiline comment
       highlight = {
+        -- change pattern to not require a colon after the keyword
         pattern = [[.*<(KEYWORDS)\s*]],
         keyword = 'bg',
         comments_only = true,
       },
+      search = { pattern = [[.*<(KEYWORDS)\s*]] },
     },
   },
   {
