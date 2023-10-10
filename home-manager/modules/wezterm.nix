@@ -4,7 +4,10 @@ let
   inherit (stdenv) isLinux;
 in {
   home = {
-    packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      maple-mono-NF
+    ];
     sessionVariables = { TERM = "wezterm"; };
     activation.installWeztermTerminfo = ''
       ${pkgs.ncurses}/bin/tic -x -o $HOME/.terminfo ${
@@ -92,8 +95,20 @@ in {
 
       config.color_scheme = 'onedarkpro'
       config.cursor_blink_rate = 0
-      config.font = w.font('FiraCode Nerd Font')
-      config.font_size = 14
+      -- config.font = w.font('Maple Mono NF')
+      config.font = wezterm.font({
+        family = 'Maple Mono NF',
+        harfbuzz_features = {
+          'cv03',
+          'cv04',
+          'ss01',
+          'ss02',
+          'ss03',
+          'ss04',
+          'ss05',
+        },
+      })
+      config.font_size = 16
       config.use_fancy_tab_bar = true
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
