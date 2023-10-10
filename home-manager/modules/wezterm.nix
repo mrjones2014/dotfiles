@@ -6,7 +6,7 @@ in {
   home = {
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      maple-mono-NF
+      maple-mono
     ];
     sessionVariables = { TERM = "wezterm"; };
     activation.installWeztermTerminfo = ''
@@ -97,7 +97,7 @@ in {
       config.cursor_blink_rate = 0
       -- config.font = w.font('Maple Mono NF')
       config.font = wezterm.font({
-        family = 'Maple Mono NF',
+        family = 'Maple Mono',
         harfbuzz_features = {
           'cv03',
           'cv04',
