@@ -30,9 +30,19 @@ return {
       --       },
       --     })
       --     require('which-key').register({
-      --       name = 'WhichKey: Files', -- optional group name
+      --       name = 'WhichKey: Files',
       --       desc = 'Some which key items',
       --       fq = { '<cmd>Telescope find_files<cr>', 'Find File' },
+      --     })
+      --     require('which-key').register({
+      --       ['<leader>'] = {
+      --         f = {
+      --           name = '+file',
+      --           f = { '<cmd>Telescope find_files<cr>', 'Find File' },
+      --           r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
+      --           n = { '<cmd>enew<cr>', 'New File' },
+      --         },
+      --       },
       --     })
       --   end,
       -- },
@@ -73,6 +83,8 @@ return {
       },
       extensions = {
         -- nvim_tree = true,
+        -- which_key = { auto_register = true },
+        lazy_nvim = true,
         smart_splits = {
           mods = {
             swap = {
@@ -84,8 +96,6 @@ return {
         op_nvim = true,
         diffview = true,
       },
-      lazy_nvim = { auto_register = true },
-      -- which_key = { auto_register = true },
     },
   },
 }
