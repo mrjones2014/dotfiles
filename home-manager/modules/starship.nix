@@ -8,8 +8,8 @@
         "\${custom.git_server_icon}"
         "$git_branch"
         "$git_status"
-        "\${custom.direnv} "
         "\${custom.nix_shell}"
+        "\${custom.direnv} "
         "$line_break"
         "$character"
       ];
@@ -58,7 +58,7 @@
           when = ''[ "$DIRENV_DIR" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "italic #e5c07b";
-          format = "[.envrc]($style)";
+          format = "[via](italic #586068) [.envrc]($style)";
         };
       };
     };
