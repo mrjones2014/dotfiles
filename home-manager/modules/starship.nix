@@ -3,8 +3,6 @@
     enable = true;
     enableTransience = true;
     settings = {
-      # core repo at work is frickin huge, `git` command frequently times out :(
-      command_timeout = 750;
       format = lib.concatStrings [
         "$directory"
         "\${custom.git_server_icon}"
@@ -37,6 +35,9 @@
         style = "bold #586068";
       };
       directory = { read_only = " 󰌾"; };
+      git_commit = { disabled = true; };
+      git_state = { disabled = true; };
+      git_metrics = { disabled = true; };
       custom = {
         git_server_icon = {
           description =
