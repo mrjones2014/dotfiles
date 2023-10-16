@@ -8,15 +8,15 @@ return {
       return
     end
 
-    local extraArgs = checkOnSave.extraArgs
-    for _, v in pairs(extraArgs) do
+    checkOnSave.extraArgs = checkOnSave.extraArgs or {}
+    for _, v in pairs(checkOnSave.extraArgs or {}) do
       if string.find(v, needle) then
         return
       end
     end
 
     local target_dir = config.root_dir .. '/target/ide-clippy'
-    table.insert(extraArgs, '--target-dir=' .. target_dir)
+    table.insert(checkOnSave.extraArgs, '--target-dir=' .. target_dir)
   end,
   settings = {
     ['rust-analyzer'] = {

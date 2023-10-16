@@ -150,6 +150,9 @@ function M.treesitter_parsers()
     end
   end
 
+  -- insert extra parsers here
+  table.insert(result, 'regex')
+
   return result
 end
 
