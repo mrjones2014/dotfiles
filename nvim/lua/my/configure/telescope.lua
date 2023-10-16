@@ -38,7 +38,7 @@ return {
     end
 
     local function parse_prompt(prompt)
-      local first_word, rest = prompt:match('^%s*@(%S+)%s*(.+)$')
+      local first_word, rest = prompt:match('^%s*@(%S+)%s*(.*)$')
       if first_word == nil then
         return { prompt = prompt, filetype = nil }
       end
