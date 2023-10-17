@@ -2,13 +2,13 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
+    { 'folke/neodev.nvim', event = 'BufReadPre' },
     {
       'creativenull/efmls-configs-nvim',
       dev = true,
       -- neoconf must be loaded before any LSP
       dependencies = { 'folke/neoconf.nvim' },
     },
-    { 'folke/neodev.nvim', event = 'BufReadPre' },
     {
       'folke/neoconf.nvim',
       event = 'BufReadPre',
@@ -20,15 +20,33 @@ return {
       },
     },
     {
+      'SmiteshP/nvim-navbuddy',
+      dependencies = {
+        'SmiteshP/nvim-navic',
+        'MunifTanjim/nui.nvim',
+      },
+      opts = { lsp = { auto_attach = true } },
+      keys = {
+        {
+          '<F4>',
+          function()
+            require('nvim-navbuddy').open()
+          end,
+          desc = 'Jump to symbol',
+        },
+      },
+    },
+    {
       'DNLHC/glance.nvim',
       event = 'LspAttach',
       config = function()
         local glance = require('glance')
-        glance.setup({
+        glance.setup({ ---@diagnostic disable-line:missing-fields
           border = {
             enable = true,
           },
           theme = {
+            enable = true,
             mode = 'darken',
           },
           -- make win navigation mappings consistent with my default ones
@@ -42,19 +60,6 @@ return {
           },
         })
       end,
-    },
-    {
-      'simrat39/symbols-outline.nvim',
-      config = true,
-      keys = {
-        {
-          '<F4>',
-          function()
-            require('symbols-outline').toggle_outline()
-          end,
-          desc = 'Toggle symbols outline',
-        },
-      },
     },
   },
   event = 'BufReadPre',
