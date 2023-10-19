@@ -1,3 +1,4 @@
+local lsp_bound_buffer_ids = {}
 return {
   {
     'famiu/bufdelete.nvim',
@@ -66,10 +67,14 @@ return {
     priority = 1000000,
     init = function()
       LSP.on_attach(function(client, bufnr)
+        if vim.tbl_contains(lsp_bound_buffer_ids, bufnr) then
+          return
+        end
         -- setup LSP-specific keymaps
         require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
         require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
         require('legendary').autocmds(require('my.legendary.autocmds').lsp_autocmds(bufnr, client.name))
+        table.insert(lsp_bound_buffer_ids, bufnr)
       end)
     end,
     opts = {
