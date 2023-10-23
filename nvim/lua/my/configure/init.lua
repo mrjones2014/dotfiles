@@ -23,8 +23,6 @@ return {
         -- Here, we disable the functionality instead of inserting a matching quote
         -- if there is an adjacent non-space character
         ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%S][^%S]', register = { cr = false } },
-        ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%S][^%S]', register = { cr = false } },
-        ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%S][^%S]', register = { cr = false } },
       },
     },
   },
