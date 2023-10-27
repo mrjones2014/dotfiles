@@ -3,12 +3,12 @@ local M = {}
 function M.default_commands()
   return {
     -- because sometimes I fat-finger it and run :Q instead of :q by accident
-    { ':Q',   ':q' },
-    { ':Qa',  ':qa' },
-    { ':W',   ':w' },
-    { ':Wq',  ':wq' },
+    { ':Q', ':q' },
+    { ':Qa', ':qa' },
+    { ':W', ':w' },
+    { ':Wq', ':wq' },
     { ':Wqa', ':wq' },
-    { ':Wa',  ':wa' },
+    { ':Wa', ':wa' },
     {
       ':OnlyBuffer',
       ':%bd|e#|bd#',
@@ -176,7 +176,6 @@ function M.lsp_commands(bufnr, server_name)
           'experimental/openCargoToml',
           { textDocument = vim.lsp.util.make_text_document_params(0) },
           function(...)
-            ---@diagnostic disable-next-line
             local path = vim.tbl_get({ ... }, 2, 'uri')
             if path and #path > 0 then
               if vim.startswith(path, 'file://') then

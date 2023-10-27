@@ -70,9 +70,7 @@ function M.apply_ui_tweaks()
   for type, icon in pairs(icons) do
     local highlight = 'DiagnosticSign' .. type
     local legacy_highlight = 'DiagnosticSign' .. type
-    ---@diagnostic disable-next-line
     vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = highlight })
-    ---@diagnostic disable-next-line
     vim.fn.sign_define(legacy_highlight, { text = icon, texthl = legacy_highlight, numhl = legacy_highlight })
   end
 
@@ -160,7 +158,7 @@ function M.format_document()
   end
 
   if not vim.b.format_saving then
-    vim.b.format_changedtick = vim.b.changedtick ---@diagnostic disable-line
+    vim.b.format_changedtick = vim.b.changedtick
     local formats_with_efm = require('my.lsp.filetypes').formats_with_efm()
     vim.lsp.buf.format({
       async = true,

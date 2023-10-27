@@ -63,7 +63,7 @@ return {
 
       local pattern = parsed.filetype
       if type(parsed.filetype) == 'table' then
-        pattern = string.format('(%s)', table.concat(parsed.filetype, '|')) ---@diagnostic disable-line
+        pattern = string.format('(%s)', table.concat(parsed.filetype --[[@as table]], '|'))
       end
 
       return {
@@ -189,8 +189,10 @@ return {
 
             local pattern
             if type(parsed.filetype) == 'table' then
-              pattern = string.format('*.{%s}', table.concat(parsed.filetype, ',')) ---@diagnostic disable-line
-            elseif parsed.filetype:lower() == 'makefile' then ---@diagnostic disable-line
+              pattern = string.format('*.{%s}', table.concat(parsed.filetype --[[@as table]], ','))
+            elseif
+              (parsed.filetype --[[@as string]]):lower() == 'makefile'
+            then
               pattern = '*Makefile'
             else
               pattern = string.format('*.%s', parsed.filetype)

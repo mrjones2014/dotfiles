@@ -61,6 +61,25 @@ return {
         })
       end,
     },
+    {
+      'chrisgrieser/nvim-rulebook',
+      keys = {
+        {
+          '<leader>ri',
+          function()
+            require('rulebook').ignoreRule()
+          end,
+          desc = 'Add comment to ignore diagnostic error/warning rules',
+        },
+        {
+          '<leader>rl',
+          function()
+            require('rulebook').lookupRule()
+          end,
+          desc = 'Look up rule documentation for error/warning diagnostics',
+        },
+      },
+    },
   },
   event = 'BufReadPre',
   init = function()

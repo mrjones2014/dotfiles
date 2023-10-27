@@ -87,10 +87,10 @@ M.Mode = {
 
 local function git_branch()
   local status
-  if vim.b.mdpreview_session then ---@diagnostic disable-line
-    status = vim.b[vim.b.mdpreview_session.source_buf].gitsigns_status_dict ---@diagnostic disable-line
+  if vim.b.mdpreview_session then
+    status = vim.b[vim.b.mdpreview_session.source_buf].gitsigns_status_dict
   else
-    status = vim.b.gitsigns_status_dict ---@diagnostic disable-line
+    status = vim.b.gitsigns_status_dict
   end
   return vim.tbl_get(status or {}, 'head')
 end
@@ -123,7 +123,7 @@ M.FilePath = {
     end,
     provider = function()
       local buf = 0
-      local mdpreview_session = vim.b.mdpreview_session ---@diagnostic disable-line
+      local mdpreview_session = vim.b.mdpreview_session
       if mdpreview_session then
         buf = mdpreview_session.source_buf
       end
@@ -203,7 +203,7 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0 ---@diagnostic disable-line
+    local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
     if require('my.lsp.utils').is_formatting_supported(buf) then
       return '   '
     else
@@ -223,7 +223,7 @@ M.LspFormatToggle = {
   },
   {
     provider = function()
-      local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0 ---@diagnostic disable-line
+      local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
       local name = require('my.lsp.utils').get_formatter_name(buf)
       if name then
         return string.format(' (%s)  ', name)
@@ -240,7 +240,7 @@ M.MarkdownPreview = {
   end,
   on_click = {
     callback = function()
-      if vim.b.mdpreview_session then ---@diagnostic disable-line
+      if vim.b.mdpreview_session then
         require('mdpreview').stop_preview()
       else
         require('mdpreview').preview({
@@ -258,7 +258,7 @@ M.MarkdownPreview = {
   },
   {
     provider = function()
-      if vim.b.mdpreview_session then ---@diagnostic disable-line
+      if vim.b.mdpreview_session then
         return '   Source  '
       end
       return '   Preview  '

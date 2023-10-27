@@ -12,6 +12,7 @@ _G.p = function(...)
     what = what[1]
   end
   local msg = vim.inspect(vim.deepcopy(what))
+  ---@diagnostic disable-next-line missing-fields
   require('notify').notify(msg, vim.log.levels.INFO, {
     title = 'Debug: ' .. source,
     on_open = function(win)
@@ -38,7 +39,7 @@ _G.Path = {
   ---@param path string
   ---@return string
   relative = function(path)
-    return vim.fn.fnamemodify(path, ':~:.')
+    return vim.fn.fnamemodify(path, ':~:.') or path
   end,
 }
 
@@ -63,7 +64,6 @@ _G.TblUtils = {
     local lists = { ... }
     local result = {}
     for _, list in ipairs(lists) do
-      ---@diagnostic disable-next-line -- optional parameters omitted
       vim.list_extend(result, list)
     end
     return result
@@ -78,7 +78,9 @@ _G.LSP = {
       callback = function(args)
         local bufnr = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
-        callback(client, bufnr)
+        if client then
+          callback(client, bufnr)
+        end
       end,
     })
   end,

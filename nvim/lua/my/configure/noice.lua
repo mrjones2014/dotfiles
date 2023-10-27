@@ -1,4 +1,4 @@
-vim.notify = function(...) ---@diagnostic disable-line
+vim.notify = function(...) ---@diagnostic disable-line duplicate-set-field
   require('notify')(...)
 end
 
