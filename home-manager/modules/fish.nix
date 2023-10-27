@@ -19,7 +19,7 @@ in {
   };
 
   home.packages = with pkgs;
-    [ thefuck tealdeer tokei cachix _1password ]
+    [ thefuck tealdeer tokei cachix _1password btop ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
   programs.gh.enable = true;
