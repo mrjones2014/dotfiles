@@ -9,15 +9,6 @@ in {
       maple-mono
     ];
     sessionVariables = { TERM = "wezterm"; };
-    activation.installWeztermTerminfo = ''
-      ${pkgs.ncurses}/bin/tic -x -o $HOME/.terminfo ${
-        pkgs.fetchurl {
-          url =
-            "https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo";
-          sha256 = "P+mUyBjCvblCtqOmNZlc2bqUU32tMNWpYO9g25KAgNs=";
-        }
-      }
-    '';
   };
   programs.wezterm = {
     enable = true;
