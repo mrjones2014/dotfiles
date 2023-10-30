@@ -25,7 +25,18 @@ return {
         'SmiteshP/nvim-navic',
         'MunifTanjim/nui.nvim',
       },
-      opts = { lsp = { auto_attach = true } },
+      opts = {
+        lsp = { auto_attach = true },
+        mappings = {
+          -- structured like this to avoid having to `require('nvim-navbuddy')` during startup
+          ['/'] = {
+            callback = function(display)
+              return require('nvim-navbuddy.actions').telescope().callback(display)
+            end,
+            description = 'Fuzzy search current level with telescope',
+          },
+        },
+      },
       keys = {
         {
           '<F4>',
