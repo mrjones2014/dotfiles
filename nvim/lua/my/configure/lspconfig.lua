@@ -1,3 +1,4 @@
+local nvim_navbuddy_telescope
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
@@ -27,11 +28,23 @@ return {
       },
       opts = {
         lsp = { auto_attach = true },
+        window = { sections = { right = { preview = 'always' } } },
         mappings = {
           -- structured like this to avoid having to `require('nvim-navbuddy')` during startup
           ['/'] = {
             callback = function(display)
-              return require('nvim-navbuddy.actions').telescope().callback(display)
+              if nvim_navbuddy_telescope == nil then
+                nvim_navbuddy_telescope = require('nvim-navbuddy.actions').telescope({
+                  layout_config = {
+                    height = 0.60,
+                    width = 0.60,
+                    prompt_position = 'top',
+                    preview_width = 0.50,
+                  },
+                  layout_strategy = 'horizontal',
+                })
+              end
+              return nvim_navbuddy_telescope.callback(display)
             end,
             description = 'Fuzzy search current level with telescope',
           },
