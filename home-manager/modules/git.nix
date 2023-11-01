@@ -61,7 +61,7 @@ in {
       interactive = { diffFilter = "${pkgs.delta}/bin/delta --color-only"; };
       init = { defaultBranch = "master"; };
       delta = {
-        lineNumbers = true;
+        line-numbers = true;
         navigate = true;
       };
       color = {
