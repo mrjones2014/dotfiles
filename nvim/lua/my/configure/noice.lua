@@ -42,7 +42,7 @@ return {
       },
       opts = {
         position = {
-          row = vim.o.lines - 3,
+          row = '98%',
           col = 0,
         },
         size = { width = '100%' },
@@ -76,7 +76,7 @@ return {
     views = {
       mini = {
         position = {
-          row = vim.o.lines - 8,
+          row = '98%',
         },
       },
       popup = {
