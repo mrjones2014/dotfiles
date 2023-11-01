@@ -21,8 +21,16 @@ let
     nativeBuildInputs = [ pkgs.fixDarwinDylibNames ];
   };
 in neovim.overrideAttrs (o: {
+  # custom patch required for bulding on macOS
+  # see: https://github.com/nix-community/neovim-nightly-overlay/issues/176
+  # see: https://github.com/hurricanehrndz/nixcfg/commit/69e37b6ef878ddba8a8af1bd514f967879ea0082
   patches = builtins.filter (p:
     (if builtins.typeOf p == "set" then baseNameOf p.name else baseNameOf)
     != "use-the-correct-replacement-args-for-gsub-directive.patch") o.patches;
   nativeBuildInputs = o.nativeBuildInputs ++ lib.optionals isDarwin [ liblpeg ];
+  # Neovim GitHub org has a mirror of libvterm that tags releases before they're
+  # available upstream; use Neovim's libvterm mirror.
+  buildInputs = lib.lists.remove pkgs.libvterm-neovim o.buildInputs ++ [
+    (pkgs.callPackage ./libvterm-neovim.nix { inherit (pkgs) libvterm-neovim; })
+  ];
 })
