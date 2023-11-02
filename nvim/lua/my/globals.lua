@@ -12,8 +12,7 @@ _G.p = function(...)
     what = what[1]
   end
   local msg = vim.inspect(vim.deepcopy(what))
-  ---@diagnostic disable-next-line missing-fields
-  require('notify').notify(msg, vim.log.levels.INFO, {
+  vim.notify(msg, vim.log.levels.INFO, {
     title = 'Debug: ' .. source,
     on_open = function(win)
       vim.wo[win].conceallevel = 3

@@ -1,7 +1,3 @@
-vim.notify = function(...) ---@diagnostic disable-line duplicate-set-field
-  require('notify')(...)
-end
-
 return {
   'folke/noice.nvim',
   dependencies = {
