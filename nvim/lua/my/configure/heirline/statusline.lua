@@ -138,6 +138,7 @@ local function unsaved_count()
   else
     return #vim.tbl_filter(function(buf)
       return vim.bo[buf].ft ~= 'minifiles'
+        and vim.bo[buf].ft ~= 'dap-repl'
         and vim.bo[buf].bt ~= 'acwrite'
         and vim.bo[buf].modifiable
         and vim.bo[buf].modified
