@@ -45,5 +45,5 @@
 
   # to autoload at boot:
   boot.kernelModules = [ "gcadapter_oc" ];
-  services.udev.packages = [ pkgs.dolphinEmu ];
+  # services.udev.packages = [ pkgs.dolphinEmu ];
 }
