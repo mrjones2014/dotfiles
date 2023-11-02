@@ -70,6 +70,9 @@ in {
       # for compiling Treesitter parsers
       gcc
 
+      # debuggers
+      lldb # comes with lldb-vscode
+
       # formatters and linters
       nixfmt
       rustfmt
