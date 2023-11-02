@@ -35,13 +35,13 @@
     parsec-bin
     mullvad-vpn
     prismlauncher
-    dolphinEmu
+    # dolphinEmu # dolphin build is suuuuper slow and also broken rn
     rpcs3
   ];
   services.mullvad-vpn.enable = true;
 
   # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
-  boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
 
   # to autoload at boot:
   boot.kernelModules = [ "gcadapter_oc" ];
