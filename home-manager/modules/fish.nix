@@ -4,7 +4,9 @@ let
   inherit (stdenv) isLinux;
   op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
-    ${pkgs._1password}/bin/op item get "System Password" --fields password
+    # TODO figure out a way to do this without silently depending on `op` being on $PATH
+    # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
+    op item get "System Password" --fields password
   '';
   op-shell-plugins = [ "gh" ];
 in {
