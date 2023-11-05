@@ -170,7 +170,7 @@ function M.lsp_commands(bufnr, server_name)
   if vim.api.nvim_buf_get_option(bufnr, 'filetype') == 'rust' then
     table.insert(commands, {
       ':CargoToml',
-      function()
+      function(args)
         vim.lsp.buf_request(
           0,
           'experimental/openCargoToml',
@@ -181,13 +181,16 @@ function M.lsp_commands(bufnr, server_name)
               if vim.startswith(path, 'file://') then
                 path = path:sub(#'file://')
               end
+              if not args.bang then
+                vim.cmd.vsp()
+              end
               vim.cmd.e(path)
             end
           end
         )
       end,
       description = 'Open the `Cargo.toml` that is closest to the current file in the tree.',
-      opts = { buffer = bufnr },
+      opts = { buffer = bufnr, bang = true },
     })
   end
 
