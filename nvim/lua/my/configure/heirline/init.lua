@@ -28,10 +28,12 @@ return {
         opts = {
           colors = require('onedarkpro.helpers').get_colors(),
           disable_winbar_cb = function()
-            return not require('my.configure.heirline.conditions').should_show_filename(vim.api.nvim_buf_get_name(0))
+            local conditions = require('my.configure.heirline.conditions')
+            return not conditions.is_floating_window()
+              and not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
           end,
         },
-        statusline = {
+        statusline = { ---@diagnostic disable-line:missing-fields
           sl.Mode,
           sl.Branch,
           shared.FileIcon('bg_statusline'),
@@ -45,13 +47,13 @@ return {
           sl.OnePassword,
           shared.Diagnostics(false),
         },
-        winbar = {
+        winbar = { ---@diagnostic disable-line:missing-fields
           shared.FileIcon('black'),
           wb.UniqueFilename,
           wb.Diagnostics,
           wb.Navic,
         },
-        statuscolumn = {
+        statuscolumn = { ---@diagnostic disable-line:missing-fields
           sc.DiagnosticSign,
           sc.Align,
           sc.LineNumAndGitIndicator,
