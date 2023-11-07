@@ -29,8 +29,7 @@ return {
           colors = require('onedarkpro.helpers').get_colors(),
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
-            return not conditions.is_floating_window()
-              and not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
+            return conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
           end,
         },
         statusline = { ---@diagnostic disable-line:missing-fields
