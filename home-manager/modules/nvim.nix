@@ -49,7 +49,8 @@ in {
       /vendor
     '';
     "nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../../nvim;
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/git/dotfiles/nvim";
       recursive = true;
     };
   };
