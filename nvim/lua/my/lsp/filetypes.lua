@@ -3,10 +3,10 @@ local M = {}
 M.config = {
   ['css'] = {
     patterns = { '*.css', '*.scss' },
-    lspconfig = 'cssls',
+    lspconfig = { 'cssls' },
   },
   ['html'] = {
-    lspconfig = 'html',
+    lspconfig = { 'html' },
   },
   ['json'] = {
     patterns = { '*.json', '*.jsonc' },
@@ -66,12 +66,19 @@ M.config = {
     linter = 'fish',
   },
 }
+
+M.filetypes = vim.tbl_keys(M.config)
+
+if vim.fn.filereadable('./tailwind.config.js') then
+  table.insert(M.config['css'].lspconfig, 'tailwindcss')
+  table.insert(M.config['typescript'].lspconfig, 'tailwindcss')
+  table.insert(M.config['html'].lspconfig, 'tailwindcss')
+end
+
 -- these all use the same config
 M.config['javascript'] = M.config['typescript']
 M.config['typescriptreact'] = M.config['typescript']
 M.config['javascriptreact'] = M.config['typescript']
-
-M.filetypes = vim.tbl_keys(M.config)
 
 local efm_customizations = {
   ['cbfmt'] = function()
