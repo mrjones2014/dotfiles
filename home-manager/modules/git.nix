@@ -28,6 +28,8 @@ in {
       prune-branches = ''
         !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
       ch = "!${git_checkout_fzf_script}";
+      mm = ''
+        !git fetch && git merge "origin/$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"'';
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | ${vars.copyCmd}";
