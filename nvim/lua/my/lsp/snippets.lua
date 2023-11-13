@@ -115,6 +115,7 @@ function M.rust()
   local ls = require('luasnip')
   local p = ls.parser.parse_snippet
   ls.add_snippets('rust', {
+    p('deny', '#![deny(clippy::all, clippy::pedantic, rust_2018_idioms, clippy::unwrap_used)]\n\n', {}),
     p('fn', 'fn $1($2)$3 {\n  $0\n}', {}),
     p('res', 'Result<$1, $2>$0', {}),
     p('opt', 'Option<$1>$0', {}),
