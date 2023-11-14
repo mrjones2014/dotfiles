@@ -69,7 +69,7 @@ M.config = {
 
 M.filetypes = vim.tbl_keys(M.config)
 
-if vim.fn.filereadable('./tailwind.config.js') then
+if vim.fn.filereadable('./tailwind.config.js') ~= 0 then
   table.insert(M.config['css'].lspconfig, 'tailwindcss')
   table.insert(M.config['typescript'].lspconfig, 'tailwindcss')
   table.insert(M.config['html'].lspconfig, 'tailwindcss')
