@@ -146,7 +146,7 @@ in {
           key = 'n',
           mods = 'META',
           action = w.action.SpawnCommandInNewTab({
-            args = { '${pkgs.fish}/bin/fish' },
+            args = { '$SHELL' },
             cwd = w.home_dir,
           }),
         },
