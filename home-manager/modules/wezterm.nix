@@ -2,6 +2,7 @@
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
+  fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
     packages = with pkgs; [
@@ -146,7 +147,7 @@ in {
           key = 'n',
           mods = 'META',
           action = w.action.SpawnCommandInNewTab({
-            args = { '$SHELL' },
+            args = { ${fish_path_lua_str} },
             cwd = w.home_dir,
           }),
         },
