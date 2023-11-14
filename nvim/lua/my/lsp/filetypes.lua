@@ -65,6 +65,10 @@ M.config = {
     formatter = 'fish_indent',
     linter = 'fish',
   },
+  ['yaml'] = {
+    lspconfig = 'yamlls',
+    treesitter = { 'yaml' },
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)

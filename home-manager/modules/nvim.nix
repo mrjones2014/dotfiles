@@ -96,6 +96,7 @@ in {
       marksman
       sumneko-lua-language-server
       nodePackages_latest.typescript-language-server
+      yaml-language-server
 
       # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       nodePackages_latest.vscode-langservers-extracted
