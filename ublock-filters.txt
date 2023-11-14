@@ -96,6 +96,9 @@ youtube.com##.ytd-rich-item-renderer:has(>.ytd-feed-nudge-renderer)
 ! explore categories
 youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER])
 
+! youtube shorts in sidebar on video player page
+youtube.com##ytd-reel-shelf-renderer
+
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Stack Overflow / Stack Exchange     !!
