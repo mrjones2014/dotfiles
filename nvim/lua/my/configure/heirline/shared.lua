@@ -84,4 +84,8 @@ function M.Diagnostics(is_winbar, bg)
   )
 end
 
+M.Trunc = {
+  provider = '%<',
+}
+
 return M

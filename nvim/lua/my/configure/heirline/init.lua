@@ -50,6 +50,7 @@ return {
           shared.FileIcon('black'),
           wb.UniqueFilename,
           wb.Diagnostics,
+          shared.Trunc,
           wb.Navic,
         },
         statuscolumn = { ---@diagnostic disable-line:missing-fields
