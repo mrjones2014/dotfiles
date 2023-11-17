@@ -11,6 +11,7 @@
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
