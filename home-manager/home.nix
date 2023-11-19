@@ -76,6 +76,7 @@ in {
   };
 
   imports = [
+    # ./modules/arkenfox.nix # TODO figure out how to load the arkenfox flake module
     ./modules/nvim.nix
     ./modules/fish.nix
     ./modules/fzf.nix
