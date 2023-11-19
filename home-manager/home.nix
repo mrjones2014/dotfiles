@@ -31,7 +31,6 @@ in {
         xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        librewolf
         signal-desktop
         qbittorrent
         vlc
@@ -85,6 +84,7 @@ in {
     ./modules/git.nix
     ./modules/ssh.nix
     ./modules/wezterm.nix
+    ./modules/librewolf.nix
     ./modules/gnome/default.nix
   ];
   programs = {
