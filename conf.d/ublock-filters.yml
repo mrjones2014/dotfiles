@@ -1,4 +1,8 @@
 - YouTube: |
+    ! Block YouTube's absolutely disgusting, disrespectful, abusive,
+    ! and probably illegal artificial 5 second delay for Firefox users
+    www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
+
     ! Block "ambient mode" garbage
     youtube.com###cinematics.ytd-watch-flexy:remove()
 
