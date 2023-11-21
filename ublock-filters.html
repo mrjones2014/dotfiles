@@ -176,6 +176,10 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! Block YouTube's absolutely disgusting, disrespectful, abusive,
+! and probably illegal artificial 5 second delay for Firefox users
+www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
+
 ! Block &quot;ambient mode&quot; garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
@@ -360,7 +364,11 @@ discord.com##button[aria-label=&quot;Start an Activity&quot;]
 <li><a href="#discord">Discord</a></li>
 </ul>
 <h2 id="youtube"><a class="header" href="#youtube">YouTube</a></h2>
-<pre><code class="language-adblock">! Block &quot;ambient mode&quot; garbage
+<pre><code class="language-adblock">! Block YouTube's absolutely disgusting, disrespectful, abusive,
+! and probably illegal artificial 5 second delay for Firefox users
+www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
+
+! Block &quot;ambient mode&quot; garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
 ! Block YouTube's cringe gigantic banner ads on the home screen
