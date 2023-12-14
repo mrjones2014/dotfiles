@@ -1,6 +1,6 @@
-{
+{ pkgs, ... }: {
   programs.librewolf = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux; # broken on macOS currently :|
     settings = { "webgl.disabled" = false; }; # enable WebGL
   };
 }

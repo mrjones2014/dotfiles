@@ -1,6 +1,6 @@
 globals = {
   'vim',
-  'p',
+  'dbg',
   Path = {
     fields = {
       join = function(...) end,

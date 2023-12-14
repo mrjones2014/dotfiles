@@ -78,7 +78,7 @@ in {
       nixfmt
       rustfmt
       shfmt
-      cbfmt
+      # cbfmt # broken right now
       stylua
       codespell
       statix
@@ -102,6 +102,7 @@ in {
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
+      src-cli
       ripgrep
       fd
       catimg

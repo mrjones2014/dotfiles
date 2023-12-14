@@ -2,7 +2,7 @@
 
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
-_G.p = function(...)
+_G.dbg = function(...)
   local info = debug.getinfo(2, 'S')
   local source = info.source:sub(2)
   source = vim.loop.fs_realpath(source) or source

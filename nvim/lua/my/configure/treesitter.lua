@@ -33,7 +33,13 @@ return {
       end,
     },
     'windwp/nvim-ts-autotag',
-    'JoosepAlviste/nvim-ts-context-commentstring',
+    {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      init = function()
+        vim.g.skip_ts_context_commentstring_module = true
+      end,
+      opts = {},
+    },
     'andymass/vim-matchup',
     {
       'ziontee113/query-secretary',
@@ -95,9 +101,6 @@ return {
       -- treesitter parser for Swift requires treesitter-cli and only really works on mac
       additional_vim_regex_highlighting = { 'swift' },
       autotag = {
-        enable = true,
-      },
-      context_commentstring = {
         enable = true,
       },
       matchup = {
