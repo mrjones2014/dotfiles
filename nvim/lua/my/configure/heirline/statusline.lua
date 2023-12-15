@@ -136,13 +136,16 @@ local function unsaved_count()
   if #vim.fn.expand('%') == 0 then
     return 0
   else
-    return #vim.tbl_filter(function(buf)
-      return vim.bo[buf].ft ~= 'minifiles'
-        and vim.bo[buf].ft ~= 'dap-repl'
-        and vim.bo[buf].bt ~= 'acwrite'
-        and vim.bo[buf].modifiable
-        and vim.bo[buf].modified
-    end, vim.api.nvim_list_bufs())
+    return #vim
+      .iter(vim.api.nvim_list_bufs())
+      :filter(function(buf)
+        return vim.bo[buf].ft ~= 'minifiles'
+          and vim.bo[buf].ft ~= 'dap-repl'
+          and vim.bo[buf].bt ~= 'acwrite'
+          and vim.bo[buf].modifiable
+          and vim.bo[buf].modified
+      end)
+      :totable()
   end
 end
 

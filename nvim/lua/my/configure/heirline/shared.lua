@@ -54,9 +54,12 @@ local diagnostics_base = {
   init = function(self)
     local all_diagnostics = vim.diagnostic.get(0)
     for key, severity in pairs(severities) do
-      self[key] = #vim.tbl_filter(function(d)
-        return d.severity == severity
-      end, all_diagnostics)
+      self[key] = #vim
+        .iter(all_diagnostics)
+        :filter(function(d)
+          return d.severity == severity
+        end)
+        :totable()
     end
   end,
 }
@@ -65,22 +68,25 @@ function M.Diagnostics(is_winbar, bg)
   bg = bg or 'bg_statusline'
   return utils.insert(
     diagnostics_base,
-    unpack(vim.tbl_map(function(severity)
-      local component = {
-        provider = function(self)
-          return string.format('%s%s ', icons[severity], self[severity])
-        end,
-        hl = function()
-          return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_hl[severity])).fg, bg = bg }
-        end,
-      }
-      if is_winbar then
-        component.condition = function(self)
-          return self[severity] > 0
+    unpack(vim
+      .iter(severities_order)
+      :map(function(severity)
+        local component = {
+          provider = function(self)
+            return string.format('%s%s ', icons[severity], self[severity])
+          end,
+          hl = function()
+            return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_hl[severity])).fg, bg = bg }
+          end,
+        }
+        if is_winbar then
+          component.condition = function(self)
+            return self[severity] > 0
+          end
         end
-      end
-      return component
-    end, severities_order))
+        return component
+      end)
+      :totable())
   )
 end
 

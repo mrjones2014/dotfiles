@@ -106,9 +106,9 @@ end
 function M.lsp_keymaps(bufnr)
   -- if the buffer already has LSP keymaps bound, do nothing
   if
-    #vim.tbl_filter(function(keymap)
+    vim.iter(vim.api.nvim_buf_get_keymap(bufnr, 'n')):find(function(keymap)
       return (keymap.desc or ''):lower() == 'rename symbol'
-    end, vim.api.nvim_buf_get_keymap(bufnr, 'n')) > 0
+    end)
   then
     return {}
   end

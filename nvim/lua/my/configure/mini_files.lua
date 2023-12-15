@@ -50,9 +50,12 @@ return {
         -- like I would have to in `content.filter` above is too slow. Here we can give it _all_ the entries
         -- at once, which is much more performant.
         local all_paths = table.concat(
-          vim.tbl_map(function(entry)
-            return entry.path
-          end, entries),
+          vim
+            .iter(entries)
+            :map(function(entry)
+              return entry.path
+            end)
+            :totable(),
           '\n'
         )
         local output_lines = {}
@@ -72,9 +75,12 @@ return {
         vim.fn.chansend(job_id, all_paths)
         vim.fn.chanclose(job_id, 'stdin')
         vim.fn.jobwait({ job_id })
-        return require('mini.files').default_sort(vim.tbl_filter(function(entry)
-          return not vim.tbl_contains(output_lines, entry.path)
-        end, entries))
+        return require('mini.files').default_sort(vim
+          .iter(entries)
+          :filter(function(entry)
+            return not vim.tbl_contains(output_lines, entry.path)
+          end)
+          :totable())
       end,
     },
     mappings = {

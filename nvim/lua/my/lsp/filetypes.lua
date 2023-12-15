@@ -100,18 +100,21 @@ local function load_efm_modules(mods, mod_type)
 
   -- normalize type to string[]
   mods = type(mods) == 'string' and { mods } or mods
-  return vim.tbl_map(function(mod)
-    if efm_customizations[mod] then
-      return efm_customizations[mod]()
-    end
+  return vim
+    .iter(mods)
+    :map(function(mod)
+      if efm_customizations[mod] then
+        return efm_customizations[mod]()
+      end
 
-    local ok, module = pcall(require, string.format('efmls-configs.%s.%s', mod_type, mod))
-    if not ok then
-      vim.notify(string.format('Module efmls-configs.%s.%s not found', mod_type, mod))
-      return nil
-    end
-    return module
-  end, mods)
+      local ok, module = pcall(require, string.format('efmls-configs.%s.%s', mod_type, mod))
+      if not ok then
+        vim.notify(string.format('Module efmls-configs.%s.%s not found', mod_type, mod))
+        return nil
+      end
+      return module
+    end)
+    :totable()
 end
 
 local function load_linters(linters)

@@ -2,22 +2,26 @@ local conditions = require('heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 
 local function get_current_filenames()
-  local listed_buffers = vim.tbl_filter(function(bufnr)
-    return vim.bo[bufnr].buflisted and vim.api.nvim_buf_is_loaded(bufnr)
-  end, vim.api.nvim_list_bufs())
+  local listed_buffers = vim
+    .iter(vim.api.nvim_list_bufs())
+    :filter(function(bufnr)
+      return vim.bo[bufnr].buflisted and vim.api.nvim_buf_is_loaded(bufnr)
+    end)
+    :totable()
 
-  return vim.tbl_map(vim.api.nvim_buf_get_name, listed_buffers)
+  return vim.iter(listed_buffers):map(vim.api.nvim_buf_get_name):totable()
 end
 
 -- Get unique name for the current buffer
 local function get_unique_filename(filename)
-  local filenames = vim.tbl_filter(function(filename_other)
-    return filename_other ~= filename
-  end, get_current_filenames())
-
-  -- Reverse filenames in order to compare their names
+  local filenames = vim
+    .iter(get_current_filenames())
+    :filter(function(filename_other)
+      return filename_other ~= filename
+    end)
+    :map(string.reverse)
+    :totable() -- Reverse filenames in order to compare their names
   filename = string.reverse(filename)
-  filenames = vim.tbl_map(string.reverse, filenames)
 
   local index
 
@@ -25,15 +29,18 @@ local function get_unique_filename(filename)
   -- find the minimum index `i` where the i-th character is different for the two filenames
   -- After doing it for every filename, get the maximum value of `i`
   if next(filenames) then
-    index = math.max(unpack(vim.tbl_map(function(filename_other)
-      for i = 1, #filename do
-        -- Compare i-th character of both names until they aren't equal
-        if filename:sub(i, i) ~= filename_other:sub(i, i) then
-          return i
+    index = math.max(unpack(vim
+      .iter(filenames)
+      :map(function(filename_other)
+        for i = 1, #filename do
+          -- Compare i-th character of both names until they aren't equal
+          if filename:sub(i, i) ~= filename_other:sub(i, i) then
+            return i
+          end
         end
-      end
-      return 1
-    end, filenames)))
+        return 1
+      end)
+      :totable()))
   else
     index = 1
   end

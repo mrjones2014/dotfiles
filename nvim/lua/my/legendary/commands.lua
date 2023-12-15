@@ -65,9 +65,9 @@ function M.default_commands()
     {
       ':Plugins',
       function()
-        local plugin_shorthands = vim.tbl_map(function(plugin)
+        local plugin_shorthands = vim.iter(require('lazy').plugins()):map(function(plugin)
           return plugin[1]
-        end, require('lazy').plugins())
+        end)
         vim.ui.select(plugin_shorthands, { prompt = 'Select Plugin' }, function(selected)
           if not selected then
             return
