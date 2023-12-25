@@ -11,7 +11,10 @@
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+    arkenfox = {
+      url = "github:dwarfmaster/arkenfox-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
@@ -44,7 +47,10 @@
           vars = (import ./lib/vars.nix) { isDarwin = true; };
         };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./home-manager/home.nix ];
+        modules = [
+          ./home-manager/home.nix
+          arkenfox.hmModules.default
+        ];
       };
     };
   };
