@@ -76,7 +76,8 @@ in {
   };
 
   imports = [
-    # ./modules/arkenfox.nix # TODO figure out how to load the arkenfox flake module
+    # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
+    # ./modules/arkenfox.nix
     ./modules/nvim.nix
     ./modules/fish.nix
     ./modules/fzf.nix
@@ -88,6 +89,7 @@ in {
     ./modules/librewolf.nix
     ./modules/gnome/default.nix
   ];
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
