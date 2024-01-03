@@ -93,7 +93,7 @@ function M.apply_ui_tweaks()
     float = {
       format = diagnostic_format,
     },
-    signs = { priority = 1000000 },
+    signs = { priority = 100 },
     underline = true,
     update_in_insert = false,
     severity_sort = true,

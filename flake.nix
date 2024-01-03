@@ -30,11 +30,13 @@
           ./hosts/pc/default.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.useUserPackages = true;
-            home-manager.users.mat = import ./home-manager/home.nix;
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              vars = (import ./lib/vars.nix) { isDarwin = false; };
+            home-manager = {
+              useUserPackages = true;
+              users.mat = import ./home-manager/home.nix;
+              extraSpecialArgs = {
+                inherit inputs;
+                vars = (import ./lib/vars.nix) { isDarwin = false; };
+              };
             };
           }
         ];
@@ -47,10 +49,7 @@
           vars = (import ./lib/vars.nix) { isDarwin = true; };
         };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [
-          ./home-manager/home.nix
-          arkenfox.hmModules.default
-        ];
+        modules = [ inputs.arkenfox.hmModules.default ./home-manager/home.nix ];
       };
     };
   };
