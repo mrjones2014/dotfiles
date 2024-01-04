@@ -47,7 +47,7 @@
             GIT_REMOTE=$(git ls-remote --get-url 2> /dev/null); if [[ "$GIT_REMOTE" =~ "github" ]]; then printf "\e[1;37m\e[0m"; elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then echo ""; else echo "󰊢"; fi'';
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "bold #f74e27"; # git brand color
-          format = "[$output]($style)  ";
+          format = "[$output]($style) ";
         };
         nix_shell = {
           description = "Show an indicator when inside a Nix ephemeral shell";
