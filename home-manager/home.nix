@@ -25,8 +25,15 @@ in {
     # release notes.
     stateVersion = "22.11";
     packages = with pkgs;
-      [ obsidian mdbook spotify (discord.override { withOpenASAR = true; }) ]
-      ++ lib.lists.optionals isDarwin [
+      [
+        obsidian
+        mdbook
+        spotify
+        (discord.override {
+          withOpenASAR = true;
+          withVencord = true;
+        })
+      ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         xcodes
       ] ++ lib.lists.optionals isLinux [
