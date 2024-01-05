@@ -26,7 +26,8 @@ in {
     stateVersion = "22.11";
     packages = with pkgs;
       [
-        obsidian
+        # TODO re-enable when they update to a non EOL version of electron...
+        # obsidian
         mdbook
         spotify
         (discord.override {
@@ -52,19 +53,6 @@ in {
     activation.symlinkSteamDir =
       "mkdir -p ${config.home.homeDirectory}/.steam && test ! -d ${config.home.homeDirectory}/_steam && ln -s ${config.home.homeDirectory}/.steam ${config.home.homeDirectory}/_steam || :";
   }; # Please read the comment before changing.
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "obsidian"
-      "spotify"
-      "discord"
-      "1password"
-      "1password-cli"
-      # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
-      # however VS Code should NOT be installed on this system!
-      # Use VS Codium instead: https://github.com/VSCodium/vscodium
-      "vscode"
-    ];
 
   xdg.enable = true;
   # link config files, if a dedicated module exists (below)
@@ -95,6 +83,7 @@ in {
     ./modules/wezterm.nix
     ./modules/librewolf.nix
     ./modules/gnome/default.nix
+    ../nixos-modules/allowed-unfree.nix
   ];
 
   programs = {
