@@ -41,6 +41,7 @@ return {
           sl.Align,
           sl.UnsavedChanges,
           sl.Align,
+          sl.RecordingMacro,
           sl.LspFormatToggle,
           sl.LazyStats,
           sl.OnePassword,

@@ -275,4 +275,16 @@ M.MarkdownPreview = {
   },
 }
 
+M.RecordingMacro = {
+  provider = function()
+    local macro_reg = vim.fn.reg_recording()
+    if macro_reg == '' then
+      return ''
+    end
+
+    return string.format(' Recording macro: %s  ', macro_reg)
+  end,
+  hl = { bg = 'bg_statusline' },
+}
+
 return M
