@@ -90,8 +90,6 @@ in {
       # https://git-scm.com/docs/protocol-v2
       protocol = { version = 2; };
       url = {
-        # Force GitHub to use SSH
-        "git@github.com:" = { insteadOf = "https://github.com/"; };
         "git@gitlab.1password.io:" = {
           insteadOf = "https://gitlab.1password.io/";
         };

@@ -40,43 +40,10 @@ in {
       ];
     };
     extraConfig = ''
-      local w = require('wezterm')
-      local config = w.config_builder()
+      local wezterm = require('wezterm')
+      local config = wezterm.config_builder()
       local os_name = ${if isLinux then "'linux'" else "'macos'"}
-
-      local w = require('wezterm')
-
-      local function is_vim(pane)
-        return pane:get_user_vars().IS_NVIM == 'true'
-      end
-
-      local direction_keys = {
-        h = 'Left',
-        j = 'Down',
-        k = 'Up',
-        l = 'Right',
-      }
-
-      local function split_nav(resize_or_move, key)
-        return {
-          key = key,
-          mods = resize_or_move == 'resize' and 'META' or 'CTRL',
-          action = w.action_callback(function(win, pane)
-            if is_vim(pane) then
-              -- pass the keys through to vim/nvim
-              win:perform_action({
-                SendKey = { key = key, mods = resize_or_move == 'resize' and 'META' or 'CTRL' },
-              }, pane)
-            else
-              if resize_or_move == 'resize' then
-                win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
-              else
-                win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
-              end
-            end
-          end),
-        }
-      end
+      local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
       -- macOS specific settings
       -- this setting behaves weirdly on linux
@@ -85,9 +52,23 @@ in {
         config.window_decorations = 'RESIZE'
       end
 
+      wezterm.on('augment-command-palette', function(window, pane)
+      return {
+        {
+          brief = 'Update Plugins',
+          icon = 'fa_puzzle_piece',
+          action = wezterm.action_callback(function()
+            -- TODO debug why the toast notification isn't showing, are plugins actually updating?
+            window:toast_notification('Wezterm Plugins', 'Updating Wezterm plugins...', nil, 4000)
+            wezterm.plugin.update_all()
+          end)
+        }
+      }
+      end)
+
+      config.notification_handling = 'AlwaysShow'
       config.color_scheme = 'onedarkpro'
       config.cursor_blink_rate = 0
-      -- config.font = w.font('Maple Mono NF')
       config.font = wezterm.font({
         family = 'Maple Mono',
         harfbuzz_features = {
@@ -125,49 +106,42 @@ in {
         {
           key = '\\',
           mods = 'LEADER',
-          action = w.action.SplitPane({ direction = 'Right', size = { Percent = 30 } }),
+          action = wezterm.action.SplitPane({ direction = 'Right', size = { Percent = 30 } }),
         },
         {
           key = '-',
           mods = 'LEADER',
-          action = w.action.SplitPane({ direction = 'Down', size = { Percent = 20 } }),
+          action = wezterm.action.SplitPane({ direction = 'Down', size = { Percent = 20 } }),
         },
-        -- move between split panes
-        split_nav('move', 'h'),
-        split_nav('move', 'j'),
-        split_nav('move', 'k'),
-        split_nav('move', 'l'),
-        -- resize panes
-        split_nav('resize', 'h'),
-        split_nav('resize', 'j'),
-        split_nav('resize', 'k'),
-        split_nav('resize', 'l'),
         -- new window
         {
           key = 'n',
           mods = 'META',
-          action = w.action.SpawnCommandInNewTab({
+          action = wezterm.action.SpawnCommandInNewTab({
             args = { ${fish_path_lua_str} },
-            cwd = w.home_dir,
+            cwd = wezterm.home_dir,
           }),
         },
         {
           key = 'LeftArrow',
           mods = 'META',
-          action = w.action.ActivateTabRelative(-1),
+          action = wezterm.action.ActivateTabRelative(-1),
         },
         {
           key = 'RightArrow',
           mods = 'META',
-          action = w.action.ActivateTabRelative(1),
+          action = wezterm.action.ActivateTabRelative(1),
         },
-        { key = '-', mods = 'SUPER', action = w.action.DecreaseFontSize },
-        { key = '0', mods = 'SUPER', action = w.action.ResetFontSize },
-        { key = '=', mods = 'SUPER', action = w.action.IncreaseFontSize },
-        { key = 'c', mods = 'SUPER', action = w.action.CopyTo('Clipboard') },
-        { key = 'v', mods = 'SUPER', action = w.action.PasteFrom('Clipboard') },
-        { key = '[', mods = 'LEADER', action = w.action.ActivateCopyMode },
+        { key = '-', mods = 'SUPER', action = wezterm.action.DecreaseFontSize },
+        { key = '0', mods = 'SUPER', action = wezterm.action.ResetFontSize },
+        { key = '=', mods = 'SUPER', action = wezterm.action.IncreaseFontSize },
+        { key = 'c', mods = 'SUPER', action = wezterm.action.CopyTo('Clipboard') },
+        { key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom('Clipboard') },
+        { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+        { key = 'p', mods = 'CTRL', action = wezterm.action.ActivateCommandPalette },
       }
+
+      smart_splits.apply_to_config(config)
 
       return config
     '';
