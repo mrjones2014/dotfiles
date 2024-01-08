@@ -138,7 +138,7 @@ in {
         { key = 'c', mods = 'SUPER', action = wezterm.action.CopyTo('Clipboard') },
         { key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom('Clipboard') },
         { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
-        { key = 'p', mods = 'CTRL', action = wezterm.action.ActivateCommandPalette },
+        { key = 'p', mods = 'SUPER', action = wezterm.action.ActivateCommandPalette },
       }
 
       smart_splits.apply_to_config(config)
