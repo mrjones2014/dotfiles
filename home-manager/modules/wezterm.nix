@@ -66,7 +66,6 @@ in {
       }
       end)
 
-      config.notification_handling = 'AlwaysShow'
       config.color_scheme = 'onedarkpro'
       config.cursor_blink_rate = 0
       config.font = wezterm.font({
