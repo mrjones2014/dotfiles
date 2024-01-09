@@ -78,7 +78,7 @@ in {
       nixfmt
       rustfmt
       shfmt
-      # cbfmt # broken right now
+      cbfmt
       stylua
       codespell
       statix

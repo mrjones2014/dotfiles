@@ -9,4 +9,5 @@ let
     packages.aarch64-darwin.neovim;
 in {
   neovim-nightly = pkgs.callPackage ./neovim-nightly.nix { inherit neovim; };
+  cbfmt = pkgs.callPackage ./cbfmt.nix { };
 }
