@@ -42,25 +42,22 @@ M.FilePath = {
 }
 
 local icons = require('my.lsp.icons')
-local severities_order = { 'Hint', 'Information', 'Warning', 'Error' }
-local severity_hl = { Hint = 'Hint', Information = 'Info', Warning = 'Warn', Error = 'Error' }
-local severities = {
-  Hint = vim.diagnostic.severity.HINT,
-  Information = vim.diagnostic.severity.INFO,
-  Warning = vim.diagnostic.severity.WARN,
-  Error = vim.diagnostic.severity.ERROR,
+local diagnostics_order = {
+  vim.diagnostic.severity.HINT,
+  vim.diagnostic.severity.INFO,
+  vim.diagnostic.severity.WARN,
+  vim.diagnostic.severity.ERROR,
+}
+local severity_hl = {
+  [vim.diagnostic.severity.HINT] = 'Hint',
+  [vim.diagnostic.severity.INFO] = 'Info',
+  [vim.diagnostic.severity.WARN] = 'Warn',
+  [vim.diagnostic.severity.ERROR] = 'Error',
 }
 local diagnostics_base = {
+  update = { 'DiagnosticChanged', 'BufEnter' },
   init = function(self)
-    local all_diagnostics = vim.diagnostic.get(0)
-    for key, severity in pairs(severities) do
-      self[key] = #vim
-        .iter(all_diagnostics)
-        :filter(function(d)
-          return d.severity == severity
-        end)
-        :totable()
-    end
+    self.counts = vim.diagnostic.count(0)
   end,
 }
 
@@ -69,11 +66,11 @@ function M.Diagnostics(is_winbar, bg)
   return utils.insert(
     diagnostics_base,
     unpack(vim
-      .iter(severities_order)
+      .iter(diagnostics_order)
       :map(function(severity)
         local component = {
           provider = function(self)
-            return string.format('%s%s ', icons[severity], self[severity])
+            return string.format('%s%s ', icons[severity], self.counts[severity] or 0)
           end,
           hl = function()
             return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_hl[severity])).fg, bg = bg }
@@ -81,7 +78,7 @@ function M.Diagnostics(is_winbar, bg)
         }
         if is_winbar then
           component.condition = function(self)
-            return self[severity] > 0
+            return (self.counts[severity] or 0) > 0
           end
         end
         return component
