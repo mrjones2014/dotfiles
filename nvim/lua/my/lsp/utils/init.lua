@@ -39,7 +39,7 @@ function M.setup_async_formatting()
           err = vim.inspect(err)
         end
       end
-      vim.api.nvim_err_write(err)
+      vim.api.nvim_err_write(err --[[@as string]])
       return
     end
 
