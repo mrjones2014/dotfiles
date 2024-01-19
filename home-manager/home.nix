@@ -73,6 +73,7 @@ in {
   imports = [
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
+    ./modules/espanso.nix
     ./modules/nvim.nix
     ./modules/fish.nix
     ./modules/fzf.nix
