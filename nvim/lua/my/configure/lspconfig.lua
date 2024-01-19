@@ -35,13 +35,12 @@ return {
             callback = function(display)
               if nvim_navbuddy_telescope == nil then
                 nvim_navbuddy_telescope = require('nvim-navbuddy.actions').telescope({
+                  layout_strategy = 'horizontal',
                   layout_config = {
                     height = 0.60,
                     width = 0.60,
-                    prompt_position = 'top',
                     preview_width = 0.50,
                   },
-                  layout_strategy = 'horizontal',
                 })
               end
               return nvim_navbuddy_telescope.callback(display)
