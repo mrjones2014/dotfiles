@@ -1,6 +1,6 @@
-{
+{ pkgs, ... }: {
   services.espanso = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     matches = {
       base = {
         matches = [{
