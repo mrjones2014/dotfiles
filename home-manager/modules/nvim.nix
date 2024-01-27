@@ -56,7 +56,7 @@ in {
   };
 
   programs.neovim = {
-    package = pkgs.neovim-nightly;
+    # package = pkgs.neovim-nightly; # nightly broken rn
     enable = true;
     viAlias = true;
     vimAlias = true;
