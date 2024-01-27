@@ -19,6 +19,22 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
+      server = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [
+          ./nixos-modules/common.nix
+          ./hosts/server/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              users.mat = import ./home-manager/server.nix;
+              extraSpecialArgs = { inherit inputs; };
+            };
+          }
+        ];
+      };
       pc = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;

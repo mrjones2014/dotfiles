@@ -57,6 +57,8 @@ in {
         "home-manager switch --flake ~/git/dotfiles/.#mac"
       else
         "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc";
+      nix-server-apply =
+        "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server";
       oplocal =
         "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
     } // pkgs.lib.optionalAttrs isLinux {

@@ -1,9 +1,22 @@
 { pkgs, config, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+  networking.hostName = "nixos-pc";
+  imports = [
+    ./desktop_environment.nix
+    ./_1password.nix
+    ./allowed-unfree.nix
+    ./hardware-configuration.nix
+  ];
+  users.users.mat = {
+    shell = pkgs.fish;
+    isNormalUser = true;
+    description = "mat";
+    # generated via: nix-shell -p pkgs.openssl --run "openssl passwd -1"
+    hashedPassword = "$1$kWL6uedh$2zhN6tfwSD8dhWG5jONJK.";
+    home = "/home/mat";
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
   powerManagement.cpuFreqGovernor = "performance";
-  users.users.mat.shell = pkgs.fish;
   hardware = {
-
     # use proprietary nvidia drivers
     opengl.enable = true;
     nvidia = {
