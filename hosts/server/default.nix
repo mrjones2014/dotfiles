@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   networking.hostName = "nixos-server";
+
   services = {
     openssh = {
       # only allow SSH key auth
@@ -22,6 +23,7 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
+
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -32,6 +34,7 @@
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
     ];
   };
+  programs.fish.enable = true;
 
   users = {
     mutableUsers = false;
