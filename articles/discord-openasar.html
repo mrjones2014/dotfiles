@@ -172,15 +172,15 @@
                     <main>
                         <h1 id="fixing-discord-with-openasar"><a class="header" href="#fixing-discord-with-openasar">Fixing Discord With OpenAsar</a></h1>
 <p>Like many (arguably <em>most</em>) pieces of free, proprietary software today, Discord is
-<a href="https://tosdr.org/en/service/536">really bad for your privacy</a>. Your &quot;private&quot; messages and even voice chats on Discord
+<a href="https://tosdr.org/en/service/536">really bad for your privacy</a>. Your "private" messages and even voice chats on Discord
 are collected and stored, readable by Discord staff, according to their own privacy policy.
 Discord's primary source of revenue is selling your data. These are just a few of many issues.</p>
 <p>By default, Discord also collects data on applications you open and run on your computer and build a statistical model
 of what software you are likely to buy/license in the future. You can turn this off under Settings → Privacy &amp; Safety
-by turning off &quot;Use data to improve Discord&quot;, but they try to scare you out of disabling it.</p>
+by turning off "Use data to improve Discord", but they try to scare you out of disabling it.</p>
 <p><img src="https://user-images.githubusercontent.com/8648891/246507023-6f16bcaa-f19a-409c-970c-cb85cfb6d548.png" alt="Discord trying to scare you into not turning off spyware" /></p>
 <p>You also have to disable it twice before it actually does anything, at least in my own personal experience. I recommend turning off every
-setting under the &quot;HOW WE USE YOUR DATA&quot; heading.</p>
+setting under the "HOW WE USE YOUR DATA" heading.</p>
 <h1 id="what-is-openasar"><a class="header" href="#what-is-openasar">What is OpenAsar</a></h1>
 <p>The Discord desktop app is built with <a href="https://www.electronjs.org/">Electron</a>, which basically means its a web view
 running in Chromium as a desktop app. Electron bundles application scripts in an <code>app.asar</code> archive file, and <code>OpenAsar</code>
@@ -191,34 +191,34 @@ really nice additional features.</p>
 <p>If you have a GitHub account, give the <a href="https://github.com/GooseMod/OpenAsar">OpenAsar repository</a> a star!</p>
 <h2 id="what-does-openasar-do"><a class="header" href="#what-does-openasar-do">What Does OpenAsar Do?</a></h2>
 <p>Once <code>OpenAsar</code> is installed (see <a href="#installing-openasar">Installing OpenAsar</a>), if you go to Settings in the Discord app,
-you should see a new section in the sidebar under &quot;App Settings&quot; called &quot;OpenAsar&quot;. Clicking this will open the OpenAsar
+you should see a new section in the sidebar under "App Settings" called "OpenAsar". Clicking this will open the OpenAsar
 settings window.</p>
 <p>From this window, you can turn off a lot (but most likely not all) of Discord's spyware by completely blocking the <code>/api/science</code> Discord
-API endpoint, disable showing others when you're typing in Discord, and apply custom CSS from the &quot;Theming&quot; tab.</p>
+API endpoint, disable showing others when you're typing in Discord, and apply custom CSS from the "Theming" tab.</p>
 <p><img src="https://user-images.githubusercontent.com/8648891/246509701-d0978e27-f549-40b3-9a05-a9b8f50bc086.png" alt="OpenAsar settings page" /></p>
 <p>One of the things that annoys me the most about Discord is how aggressively they push Discord Nitro subscriptions on you everywhere
 throughout the app, and how arbitrary the set of features that are put behind the Nitro paywall is. Sorry, Discord, but I will never,
 ever pay money for Discord Nitro, ever. I would try convincing my friends to switch to Matrix before paying for Nitro.</p>
-<p>With OpenAsar, I can use the &quot;Theming&quot; tab to inject custom CSS and remove a lot of the Discord Nitro ads from the Discord app.</p>
+<p>With OpenAsar, I can use the "Theming" tab to inject custom CSS and remove a lot of the Discord Nitro ads from the Discord app.</p>
 <pre><code class="language-css">/* Hide all things Discord Nitro */
-/* &quot;Add Super Reaction&quot; button */
-div[aria-label=&quot;Add Super Reaction&quot;],
+/* "Add Super Reaction" button */
+div[aria-label="Add Super Reaction"],
 /* Super Reactions others have added */
-div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;],
-/* &quot;Nitro&quot; section in sidebar of settings page */
-div[class*=&quot;premiumTab&quot;],
+div[class*="reactionInner"][aria-label*="super"],
+/* "Nitro" section in sidebar of settings page */
+div[class*="premiumTab"],
 /* The huge Nitro ads on the profile customization page */
-div[class*=&quot;premiumFeatureBorder&quot;],
+div[class*="premiumFeatureBorder"],
 /* Discord's Birthday stuff on the profile customization page */
-div[class*=&quot;birthdayFeatureBorder&quot;],
-/* The &quot;boost&quot; status on Discord server sidebars */
-div[aria-label*=&quot;Buy Boosts to help unlock&quot;],
-/* The &quot;Nitro&quot; item in the direct messages list */
-ul[aria-label=&quot;Direct Messages&quot;] a[href=&quot;/store&quot;],
-/* The &quot;Discord's Birthday&quot; item in the direct messages list */
-ul[aria-label=&quot;Direct Messages&quot;] a[href=&quot;/activities&quot;]
-/* The &quot;Start an Activity&quot; button */
-button[aria-label=&quot;Start an Activity&quot;] {
+div[class*="birthdayFeatureBorder"],
+/* The "boost" status on Discord server sidebars */
+div[aria-label*="Buy Boosts to help unlock"],
+/* The "Nitro" item in the direct messages list */
+ul[aria-label="Direct Messages"] a[href="/store"],
+/* The "Discord's Birthday" item in the direct messages list */
+ul[aria-label="Direct Messages"] a[href="/activities"]
+/* The "Start an Activity" button */
+button[aria-label="Start an Activity"] {
   display: none;
 }
 </code></pre>

@@ -186,7 +186,7 @@ shortcuts declaratively using Nix.</p>
 <pre><code class="language-nix">{ pkgs, ... }: {
   dconf.settings = {
     # place your dconf settings here
-    &quot;some/settings/namespace&quot; = { some-setting = &quot;some-value&quot;; };
+    "some/settings/namespace" = { some-setting = "some-value"; };
   };
 }
 </code></pre>
@@ -205,14 +205,14 @@ changing your wallpaper image from the settings GUI should output something like
 <pre><code class="language-nix">{ pkgs, ... }:
 let
   wallpaperImg = pkgs.fetchurl {
-    url = &quot;https://url/to/your/image&quot;;
+    url = "https://url/to/your/image";
     # replace this with the SHA256 hash of the image file
-    hash = &quot;sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;;
+    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
   };
 in {
   dconf.settings = {
-    &quot;org/gnome/desktop/background&quot; = {
-      picture-uri = &quot;file://${wallpaperImg}&quot;;
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${wallpaperImg}";
     };
   };
 }
@@ -224,19 +224,19 @@ require some fiddling with.</p>
 each custom shortcut group that should exist, then you can specify the shortcuts themselves. For example:</p>
 <pre><code class="language-nix">{ pkgs, ... }: {
   dconf.settings = {
-    &quot;org/gnome/settings-daemon/plugins/media-keys&quot; = {
-      # specify that custom shortcut &quot;custom0&quot; should exist and be included
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      # specify that custom shortcut "custom0" should exist and be included
       custom-keybindings = [
-        &quot;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/&quot;
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
       ];
-      terminal = [ &quot;&quot; ];
+      terminal = [ "" ];
     };
-    # now you can specify the &quot;custom0&quot; shortcut itself
-    &quot;org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0&quot; =
+    # now you can specify the "custom0" shortcut itself
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
       {
-        binding = &quot;Print&quot;; # printscrn key
-        command = &quot;flameshot gui&quot;;
-        name = &quot;flameshot&quot;;
+        binding = "Print"; # printscrn key
+        command = "flameshot gui";
+        name = "flameshot";
       };
   };
 }

@@ -171,8 +171,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="installing-on-a-new-system"><a class="header" href="#installing-on-a-new-system">Installing on a New System</a></h1>
-<pre><code class="language-bash">mkdir -p &quot;$HOME/git&quot;
-cd &quot;$HOME/git&quot;
+<pre><code class="language-bash">mkdir -p "$HOME/git"
+cd "$HOME/git"
 git clone git@github.com:mrjones2014/dotfiles.git
 </code></pre>
 <p>Then run the <code>./init.bash</code> script from the repo. This will:</p>
@@ -188,7 +188,7 @@ git clone git@github.com:mrjones2014/dotfiles.git
 </li>
 </ul>
 <p>Then, open <code>./home-manager/modules/fish.nix</code>, copy the <code>nix-apply</code> alias definition for your system, and run it.
-For first time setup, you will likely need to prefix the command with <code>NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot;</code>
+For first time setup, you will likely need to prefix the command with <code>NIX_CONFIG="experimental-features = nix-command flakes"</code>
 to set the Nix config to allow the <code>nix flake</code> command via the <code>NIX_CONFIG</code> environment variable. After initial setup,
 this is set by the <code>conf.f/nix.conf</code> file (which is placed at <code>$XDG_CONFIG_HOME/nix/nix.conf</code>).</p>
 <p>On macOS, you also have to manually change the default shell to Fish.</p>

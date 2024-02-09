@@ -182,14 +182,14 @@
 ! and probably illegal artificial 5 second delay for Firefox users
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
 
-! Block &quot;ambient mode&quot; garbage
+! Block "ambient mode" garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
 ! Block YouTube's cringe gigantic banner ads on the home screen
 www.youtube.com##ytd-statement-banner-renderer
 www.youtube.com##.ytd-brand-video-shelf-renderer
 
-! Block YouTube's definitely totally unbiased &quot;misinformation&quot; banners, I can think for myself
+! Block YouTube's definitely totally unbiased "misinformation" banners, I can think for myself
 www.youtube.com##.ytd-clarification-renderer
 www.youtube.com###clarify-box
 
@@ -238,7 +238,7 @@ youtube.com##.ytd-rating-survey-renderer
 youtube.com##.ytd-red-cancel-survey-renderer
 youtube.com##ytd-red-cancel-survey-renderer
 
-! &quot;how are your recommendations&quot; survey
+! "how are your recommendations" survey
 youtube.com##ytd-single-option-survey-renderer
 youtube.com##.ytd-single-option-survey-renderer
 
@@ -247,7 +247,7 @@ youtube.com##.ytd-single-option-survey-renderer
 youtube.com##ytd-rich-shelf-renderer[has-rounded-box-art-thumbnail-style]
 
 ! free movies (targets movies channelID
-youtube.com##ytd-rich-shelf-renderer:has(a[href=&quot;/channel/UClgRkhTL3_hImCAmdLfDE4g&quot;])
+youtube.com##ytd-rich-shelf-renderer:has(a[href="/channel/UClgRkhTL3_hImCAmdLfDE4g"])
 
 ! community posts
 youtube.com##ytd-rich-shelf-renderer:has(ytd-rich-item-renderer[is-post])
@@ -269,7 +269,7 @@ youtube.com##ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-rende
 ! movies free with ads
 youtube.com##ytd-rich-item-renderer:has(.badge-style-type-ypc&gt; span:has-text(Free with Ads))
 
-! &quot;new to you&quot; (#2)
+! "new to you" (#2)
 youtube.com##ytd-rich-item-renderer.style-scope:has(&gt;.ytd-feed-nudge-renderer)
 youtube.com##.ytd-rich-item-renderer:has(&gt;.ytd-feed-nudge-renderer)
 
@@ -294,29 +294,29 @@ askubuntu.com##.js-consent-banner
 !! GitHub                              !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! Block &quot;Code 55% faster with GitHub Copilot&quot; (lmao)
+! Block "Code 55% faster with GitHub Copilot" (lmao)
 github.com##button:has-text(with GitHub Copilot)
 
 ! Block GitHub's cringe algorithmic social media style feed
 github.com###feed-next
-github.com##[aria-labelledby=&quot;feed-next&quot;]
+github.com##[aria-labelledby="feed-next"]
 
-! Block the corporate changelog above the &quot;Explore Repositories&quot; section
+! Block the corporate changelog above the "Explore Repositories" section
 github.com##.dashboard-changelog
 
 ! Block GitHub's ads above the corporate changelog
 github.com##.js-notice
 
-! Block &quot;achievements&quot;
-github.com##.d-block:has(a[href*=&quot;?tab=achievements&quot;])
-github.com##.d-md-block:has(a[href*=&quot;?tab=achievements&quot;])
+! Block "achievements"
+github.com##.d-block:has(a[href*="?tab=achievements"])
+github.com##.d-md-block:has(a[href*="?tab=achievements"])
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Glassdoor                           !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! Block the &quot;hard sell&quot; overlay that tries to force you to pay money just to read a review
+! Block the "hard sell" overlay that tries to force you to pay money just to read a review
 www.glassdoor.com##.hardsellOverlay
 
 
@@ -332,28 +332,28 @@ www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
 !! Discord                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! Block &quot;Add super reaction&quot; button
-discord.com##div[aria-label=&quot;Add Super Reaction&quot;]
+! Block "Add super reaction" button
+discord.com##div[aria-label="Add Super Reaction"]
 
 ! Block Nitro stuff in user settings
-discord.com##div[class*=&quot;premiumTab&quot;]
-discord.com##div[class*=&quot;premiumFeatureBorder&quot;]
-discord.com##div[class*=&quot;birthdayFeatureBorder&quot;]
+discord.com##div[class*="premiumTab"]
+discord.com##div[class*="premiumFeatureBorder"]
+discord.com##div[class*="birthdayFeatureBorder"]
 
-! Block &quot;Super&quot; reactions, paid emojis lmao
-discord.com##div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;]
+! Block "Super" reactions, paid emojis lmao
+discord.com##div[class*="reactionInner"][aria-label*="super"]
 
-! Block &quot;Download Apps&quot; button, I uninstalled Discord for a reason
-discord.com##div[aria-label*=&quot;Download Apps&quot;]:upward(div[class*=&quot;listItem&quot;])
+! Block "Download Apps" button, I uninstalled Discord for a reason
+discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
 
-! Block &quot;Buy Boosts&quot; bar
-discord.com##div[aria-label*=&quot;Buy Boosts to help unlock&quot;]
+! Block "Buy Boosts" bar
+discord.com##div[aria-label*="Buy Boosts to help unlock"]
 
-! Block &quot;Discord's Birthday&quot; crap
-discord.com##li[role=&quot;listitem&quot;]:has-text(&quot;Discord's Birthday&quot;)
+! Block "Discord's Birthday" crap
+discord.com##li[role="listitem"]:has-text("Discord's Birthday")
 
-! Block &quot;Start an Activity&quot; button
-discord.com##button[aria-label=&quot;Start an Activity&quot;]
+! Block "Start an Activity" button
+discord.com##button[aria-label="Start an Activity"]
 </code></pre>
 </details>
 <p>Or add the full list as a filter list in uBlock Origin: <a href="https://mjones.network/ublock-filters.txt">ublock-filters.txt</a></p>
@@ -370,14 +370,14 @@ discord.com##button[aria-label=&quot;Start an Activity&quot;]
 ! and probably illegal artificial 5 second delay for Firefox users
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
 
-! Block &quot;ambient mode&quot; garbage
+! Block "ambient mode" garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
 
 ! Block YouTube's cringe gigantic banner ads on the home screen
 www.youtube.com##ytd-statement-banner-renderer
 www.youtube.com##.ytd-brand-video-shelf-renderer
 
-! Block YouTube's definitely totally unbiased &quot;misinformation&quot; banners, I can think for myself
+! Block YouTube's definitely totally unbiased "misinformation" banners, I can think for myself
 www.youtube.com##.ytd-clarification-renderer
 www.youtube.com###clarify-box
 
@@ -426,7 +426,7 @@ youtube.com##.ytd-rating-survey-renderer
 youtube.com##.ytd-red-cancel-survey-renderer
 youtube.com##ytd-red-cancel-survey-renderer
 
-! &quot;how are your recommendations&quot; survey
+! "how are your recommendations" survey
 youtube.com##ytd-single-option-survey-renderer
 youtube.com##.ytd-single-option-survey-renderer
 
@@ -435,7 +435,7 @@ youtube.com##.ytd-single-option-survey-renderer
 youtube.com##ytd-rich-shelf-renderer[has-rounded-box-art-thumbnail-style]
 
 ! free movies (targets movies channelID
-youtube.com##ytd-rich-shelf-renderer:has(a[href=&quot;/channel/UClgRkhTL3_hImCAmdLfDE4g&quot;])
+youtube.com##ytd-rich-shelf-renderer:has(a[href="/channel/UClgRkhTL3_hImCAmdLfDE4g"])
 
 ! community posts
 youtube.com##ytd-rich-shelf-renderer:has(ytd-rich-item-renderer[is-post])
@@ -457,7 +457,7 @@ youtube.com##ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-rende
 ! movies free with ads
 youtube.com##ytd-rich-item-renderer:has(.badge-style-type-ypc&gt; span:has-text(Free with Ads))
 
-! &quot;new to you&quot; (#2)
+! "new to you" (#2)
 youtube.com##ytd-rich-item-renderer.style-scope:has(&gt;.ytd-feed-nudge-renderer)
 youtube.com##.ytd-rich-item-renderer:has(&gt;.ytd-feed-nudge-renderer)
 
@@ -474,25 +474,25 @@ stackoverflow.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
 </code></pre>
 <h2 id="github"><a class="header" href="#github">GitHub</a></h2>
-<pre><code class="language-adblock">! Block &quot;Code 55% faster with GitHub Copilot&quot; (lmao)
+<pre><code class="language-adblock">! Block "Code 55% faster with GitHub Copilot" (lmao)
 github.com##button:has-text(with GitHub Copilot)
 
 ! Block GitHub's cringe algorithmic social media style feed
 github.com###feed-next
-github.com##[aria-labelledby=&quot;feed-next&quot;]
+github.com##[aria-labelledby="feed-next"]
 
-! Block the corporate changelog above the &quot;Explore Repositories&quot; section
+! Block the corporate changelog above the "Explore Repositories" section
 github.com##.dashboard-changelog
 
 ! Block GitHub's ads above the corporate changelog
 github.com##.js-notice
 
-! Block &quot;achievements&quot;
-github.com##.d-block:has(a[href*=&quot;?tab=achievements&quot;])
-github.com##.d-md-block:has(a[href*=&quot;?tab=achievements&quot;])
+! Block "achievements"
+github.com##.d-block:has(a[href*="?tab=achievements"])
+github.com##.d-md-block:has(a[href*="?tab=achievements"])
 </code></pre>
 <h2 id="glassdoor"><a class="header" href="#glassdoor">Glassdoor</a></h2>
-<pre><code class="language-adblock">! Block the &quot;hard sell&quot; overlay that tries to force you to pay money just to read a review
+<pre><code class="language-adblock">! Block the "hard sell" overlay that tries to force you to pay money just to read a review
 www.glassdoor.com##.hardsellOverlay
 </code></pre>
 <h2 id="paypal"><a class="header" href="#paypal">PayPal</a></h2>
@@ -500,28 +500,28 @@ www.glassdoor.com##.hardsellOverlay
 www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
 </code></pre>
 <h2 id="discord"><a class="header" href="#discord">Discord</a></h2>
-<pre><code class="language-adblock">! Block &quot;Add super reaction&quot; button
-discord.com##div[aria-label=&quot;Add Super Reaction&quot;]
+<pre><code class="language-adblock">! Block "Add super reaction" button
+discord.com##div[aria-label="Add Super Reaction"]
 
 ! Block Nitro stuff in user settings
-discord.com##div[class*=&quot;premiumTab&quot;]
-discord.com##div[class*=&quot;premiumFeatureBorder&quot;]
-discord.com##div[class*=&quot;birthdayFeatureBorder&quot;]
+discord.com##div[class*="premiumTab"]
+discord.com##div[class*="premiumFeatureBorder"]
+discord.com##div[class*="birthdayFeatureBorder"]
 
-! Block &quot;Super&quot; reactions, paid emojis lmao
-discord.com##div[class*=&quot;reactionInner&quot;][aria-label*=&quot;super&quot;]
+! Block "Super" reactions, paid emojis lmao
+discord.com##div[class*="reactionInner"][aria-label*="super"]
 
-! Block &quot;Download Apps&quot; button, I uninstalled Discord for a reason
-discord.com##div[aria-label*=&quot;Download Apps&quot;]:upward(div[class*=&quot;listItem&quot;])
+! Block "Download Apps" button, I uninstalled Discord for a reason
+discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
 
-! Block &quot;Buy Boosts&quot; bar
-discord.com##div[aria-label*=&quot;Buy Boosts to help unlock&quot;]
+! Block "Buy Boosts" bar
+discord.com##div[aria-label*="Buy Boosts to help unlock"]
 
-! Block &quot;Discord's Birthday&quot; crap
-discord.com##li[role=&quot;listitem&quot;]:has-text(&quot;Discord's Birthday&quot;)
+! Block "Discord's Birthday" crap
+discord.com##li[role="listitem"]:has-text("Discord's Birthday")
 
-! Block &quot;Start an Activity&quot; button
-discord.com##button[aria-label=&quot;Start an Activity&quot;]
+! Block "Start an Activity" button
+discord.com##button[aria-label="Start an Activity"]
 </code></pre>
 
                     </main>
