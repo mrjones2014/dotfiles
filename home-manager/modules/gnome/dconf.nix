@@ -55,6 +55,7 @@ in {
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
     };
+    "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
     "org/gnome/desktop/background" = {
       picture-uri = "file://${wallpaperImg}";
     };
