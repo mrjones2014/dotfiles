@@ -33,10 +33,7 @@
       #   ];
       # };
       pc = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          vars = (import ./lib/vars.nix) { isDarwin = false; };
-        };
+        specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
           ./nixos-modules/common.nix
@@ -46,10 +43,7 @@
             home-manager = {
               useUserPackages = true;
               users.mat = import ./home-manager/home.nix;
-              extraSpecialArgs = {
-                inherit inputs;
-                vars = (import ./lib/vars.nix) { isDarwin = false; };
-              };
+              extraSpecialArgs = { inherit inputs; };
             };
           }
         ];
@@ -57,10 +51,7 @@
     };
     homeConfigurations = {
       "mac" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {
-          inherit inputs;
-          vars = (import ./lib/vars.nix) { isDarwin = true; };
-        };
+        extraSpecialArgs = { inherit inputs; };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ inputs.arkenfox.hmModules.default ./home-manager/home.nix ];
       };

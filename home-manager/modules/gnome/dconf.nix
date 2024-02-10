@@ -1,4 +1,12 @@
-{
+{ pkgs, ... }:
+let
+  wallpaperImg = pkgs.fetchurl {
+    url =
+      "https://user-images.githubusercontent.com/8648891/246180692-b8144052-e947-47b0-b59c-ea1022b9b629.jpg";
+    hash = "sha256-itnhNPYvQLfCULNrEZqP+3VBQVmEmvh9wv6C2F3YKQU=";
+  };
+in {
+  # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
   dconf.settings = {
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "close,minimize,maximize,appmenu:";
@@ -47,5 +55,16 @@
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
     };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${wallpaperImg}";
+    };
+    "org/gnome/desktop/datetime" = { automatic-timezone = true; };
+    "org/gnome/desktop/wm/keybindings" = {
+      move-to-monitor-left = [ "<Shift><Control><Alt>h" ];
+      move-to-monitor-right = [ "<Shift><Control><Alt>l" ];
+      move-to-monitor-up = [ "<Shift><Control><Alt>k" ];
+      move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
+    };
+    "org/gnome/desktop/peripherals/touchpad" = { send-events = "enabled"; };
   };
 }

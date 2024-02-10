@@ -1,4 +1,4 @@
-{ pkgs, vars, ... }:
+{ pkgs, ... }:
 let
   inherit (pkgs) git stdenv;
   inherit (stdenv) isLinux;
@@ -32,7 +32,12 @@ in {
         !git fetch && git merge "origin/$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"'';
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
-      copy-branch = "!git branch --show-current | ${vars.copyCmd}";
+      copy-branch = "!git branch --show-current | ${
+          if pkgs.stdenv.isDarwin then
+            "pbcopy"
+          else
+            "xclip -selection clipboard"
+        }";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };
     extraConfig = {

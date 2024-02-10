@@ -1,4 +1,4 @@
-{ pkgs, lib, vars, ... }:
+{ pkgs, lib, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
@@ -41,8 +41,12 @@ in {
     }];
 
     shellAliases = {
-      copy = vars.copyCmd;
-      paste = vars.pasteCmd;
+      copy =
+        if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -selection clipboard";
+      paste = if pkgs.stdenv.isDarwin then
+        "pbpaste"
+      else
+        "xlip -o -selection clipboard";
       cat = "bat";
       gogit = "cd ~/git";
       "!!" = "eval \\$history[1]";
