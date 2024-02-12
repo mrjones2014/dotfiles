@@ -10,6 +10,7 @@
         "$git_status"
         "\${custom.nix_shell}"
         "\${custom.direnv} "
+        "$python"
         "$line_break"
         "$character"
       ];
@@ -38,6 +39,11 @@
       git_commit = { disabled = true; };
       git_state = { disabled = true; };
       git_metrics = { disabled = true; };
+      python = {
+        format = "[\${symbol}\${virtualenv}]($style)";
+        symbol = " ";
+        pyenv_version_name = true;
+      };
       custom = {
         git_server_icon = {
           description =
