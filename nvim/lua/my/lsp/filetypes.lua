@@ -69,6 +69,10 @@ M.config = {
     lspconfig = 'yamlls',
     treesitter = { 'yaml' },
   },
+  ['python'] = {
+    patterns = { '*.py' },
+    lspconfig = 'pyright',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
