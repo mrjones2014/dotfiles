@@ -72,6 +72,7 @@ M.config = {
   ['python'] = {
     patterns = { '*.py' },
     lspconfig = 'pyright',
+    formatter = 'black',
   },
 }
 
