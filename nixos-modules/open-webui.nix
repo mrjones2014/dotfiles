@@ -5,18 +5,17 @@
 { pkgs, ... }:
 
 let
-  ollama-webui-static = pkgs.buildNpmPackage {
-    pname = "ollama-webui";
+  open-webui-static = pkgs.buildNpmPackage {
+    pname = "open-webui";
     version = "0.0.1";
 
     src = pkgs.fetchFromGitHub {
-      owner = "ollama-webui";
-      repo = "ollama-webui";
-      rev = "970a71354b5dabc48862731dae2a0bfef733bfa9";
-      sha256 = "5cHxHh2rHk/WGw8XyroKqCBG1Do+GnTvkgnX711bPEQ=";
-      # hash = "sha256-noidea2er";
+      owner = "open-webui";
+      repo = "open-webui";
+      rev = "76a788939f92a7a7d9705f971b9ce6e27b249d31";
+      sha256 = "sha256-MWgERNvg3FX1N6GD11Zl27Ni/tuEoRyYNWPiLiHst2M=";
     };
-    npmDepsHash = "sha256-N+wyvyKqsDfUqv3TQbxjuf8DF0uEJ7OBrwdCnX+IMZ4=";
+    npmDepsHash = "sha256-TavFWEROSXS3GKbMzKhblLYLuN1tpXzlJG0Tm5p6fMI=";
 
     PUBLIC_API_BASE_URL = "http://localhost:11434/api";
 
@@ -27,16 +26,10 @@ let
     installPhase = ''
       cp -R ./build $out
     '';
-    # meta = with pkgs.stdenv.lib; {
-    #   homepage = "https://github.com/my-username/my-repo";
-    #   description = "ChatGPT-Style Web Interface for Ollama";
-    #   license = licenses.mit;
-    #   # maintainers = [ maintainers.john ];
-    # };
   };
-  ollama-webui = pkgs.writeShellScriptBin "ollama-webui" ''
+  open-webui = pkgs.writeShellScriptBin "open-webui" ''
     # cors: allow broswer to make requests to ollama on different port than website
-    ${pkgs.nodePackages.http-server}/bin/http-server ${ollama-webui-static} --cors='*' --port 8080
+    ${pkgs.nodePackages.http-server}/bin/http-server ${open-webui-static} --cors='*' --port 8080
   '';
 in {
   # create a Linux user that will run ollama
@@ -49,14 +42,14 @@ in {
   };
   # suggested by nix build, no idea why
   users.groups.ollama = { };
-  systemd.services.ollama-webui = {
+  systemd.services.open-webui = {
     description = "Ollama WebUI Service";
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     enable = true;
 
     serviceConfig = {
-      ExecStart = "${ollama-webui}/bin/ollama-webui";
+      ExecStart = "${open-webui}/bin/open-webui";
       # DynamicUser = "true";
       User = "ollama";
       Type = "simple";
