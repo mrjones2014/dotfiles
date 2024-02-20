@@ -15,7 +15,7 @@
     hashedPassword =
       "$y$j9T$L.RrmE3CRSB.lQayiw2ZN/$vA4XkSR13yL016t3HaZ11uCN/sCmXqBcuUcSBxMjiPD";
     home = "/home/mat";
-    extraGroups = [ "networkmanager" "wheel" "oci" ];
+    extraGroups = [ "networkmanager" "wheel" "oci" "podman" ];
   };
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
