@@ -49,6 +49,7 @@
     wireguard.enable = true;
     # Enable networking
     networkmanager.enable = true;
+    nameservers = [ "45.90.28.117" "45.90.30.117" ];
   };
 
   # Set your time zone.
