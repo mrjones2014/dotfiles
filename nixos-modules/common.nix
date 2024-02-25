@@ -49,7 +49,17 @@
     wireguard.enable = true;
     # Enable networking
     networkmanager.enable = true;
-    nameservers = [ "45.90.28.117" "45.90.30.117" ];
+  };
+
+  environment.etc = {
+    "resolved.conf".text = ''
+      [Resolve]
+      DNS=45.90.28.0#7cac77.dns.nextdns.io
+      DNS=2a07:a8c0::#7cac77.dns.nextdns.io
+      DNS=45.90.30.0#7cac77.dns.nextdns.io
+      DNS=2a07:a8c1::#7cac77.dns.nextdns.io
+      DNSOverTLS=yes
+    '';
   };
 
   # Set your time zone.
