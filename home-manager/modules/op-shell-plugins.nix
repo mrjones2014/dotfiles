@@ -29,7 +29,7 @@ in {
       (map (package: builtins.baseNameOf (lib.getExe package)) cfg.plugins)}
     '';
   in mkIf cfg.enable (mkMerge [{
-    home.packages = cfg.plugins;
+    home.packages = [ pkgs._1password ] ++ cfg.plugins;
     programs = {
       fish.interactiveShellInit = ''
         ${aliases}
