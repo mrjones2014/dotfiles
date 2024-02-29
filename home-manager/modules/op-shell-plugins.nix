@@ -29,7 +29,7 @@ in {
       (map (package: builtins.baseNameOf (lib.getExe package)) cfg.plugins)}
     '';
   in mkIf cfg.enable (mkMerge [{
-    activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
+    home.activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
     home.packages = [ pkgs._1password ] ++ cfg.plugins;
     programs = {
       fish.interactiveShellInit = ''
