@@ -47,12 +47,7 @@ in {
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';
-
-    activation.opDirPermissions = "chmod 700 ${config.xdg.configHome}/op";
-    # symlink ~/.steam to ~/_steam so that Spider-Man Modding Tool can see the directory
-    activation.symlinkSteamDir =
-      "mkdir -p ${config.home.homeDirectory}/.steam && test ! -d ${config.home.homeDirectory}/_steam && ln -s ${config.home.homeDirectory}/.steam ${config.home.homeDirectory}/_steam || :";
-  }; # Please read the comment before changing.
+  };
 
   xdg.enable = true;
   # link config files, if a dedicated module exists (below)
