@@ -14,7 +14,6 @@ let
 
     echo $PASSWORD
   '';
-  op-shell-plugins = [ "gh" ];
 in {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
@@ -30,8 +29,11 @@ in {
     [ thefuck tealdeer tokei cachix _1password btop ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
-  programs.gh.enable = true;
-
+  imports = [ ./op-shell-plugins.nix ];
+  programs.op-shell-plugins = {
+    enable = true;
+    plugins = with pkgs; [ gh ];
+  };
   programs.fish = {
     enable = true;
 
@@ -94,11 +96,6 @@ in {
     interactiveShellInit = ''
       fish_vi_key_bindings
       bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
-
-      export OP_PLUGIN_ALIASES_SOURCED=1
-      ${lib.concatMapStrings
-      (plugin: ''alias ${plugin}="op plugin run -- ${plugin}"'')
-      op-shell-plugins}
 
       # I like to keep the prompt at the bottom rather than the top
       # of the terminal window so that running `clear` doesn't make
