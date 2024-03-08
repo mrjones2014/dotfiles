@@ -64,7 +64,7 @@
         };
         direnv = {
           description = "Show '.envrc' when using a direnv environment";
-          when = ''[ "$DIRENV_DIR" != "" ]'';
+          when = ''[ "$DIRENV_DIR" != "" ] && [ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
           style = "italic #e5c07b";
           format = "[via](italic #586068) [.envrc]($style)";
