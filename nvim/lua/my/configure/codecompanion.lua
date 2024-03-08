@@ -1,5 +1,6 @@
 return {
   'olimorris/codecompanion.nvim',
+  dev = true,
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-lua/plenary.nvim',
@@ -17,8 +18,14 @@ return {
   config = function()
     require('codecompanion').setup({
       adapters = {
-        chat = require('codecompanion.adapters').use('ollama'),
-        inline = require('codecompanion.adapters').use('ollama'),
+        chat = require('codecompanion.adapters').use(
+          'ollama',
+          { schema = { model = { default = 'dolphin-mixtral' } } }
+        ),
+        inline = require('codecompanion.adapters').use(
+          'ollama',
+          { schema = { model = { default = 'dolphin-mixtral' } } }
+        ),
       },
     })
   end,
