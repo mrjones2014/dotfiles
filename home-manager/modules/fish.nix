@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 let
   inherit (pkgs) stdenv;
   inherit (stdenv) isLinux;
@@ -29,8 +29,8 @@ in {
     [ thefuck tealdeer tokei cachix _1password btop ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
-  imports = [ ./op-shell-plugins.nix ];
-  programs.op-shell-plugins = {
+  imports = [ inputs._1password-shell-plugins.hmModules.default ];
+  programs._1password-shell-plugins = {
     enable = true;
     plugins = with pkgs; [ gh ];
   };

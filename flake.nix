@@ -12,6 +12,7 @@
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
