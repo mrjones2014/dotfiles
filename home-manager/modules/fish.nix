@@ -112,7 +112,7 @@ in {
       };
       clone = {
         description = "Clone a git repository, then cd into it.";
-        body = "git clone $argv && cd $(basename $argv .git)";
+        body = "cd $HOME/git && git clone $argv && cd $(basename $argv .git)";
       };
       nix-clean = ''
         nix-env --delete-generations old
