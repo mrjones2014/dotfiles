@@ -110,6 +110,10 @@ in {
         onEvent = "fish_postexec";
         body = "tput cup $LINES";
       };
+      clone = {
+        description = "Clone a git repository, then cd into it.";
+        body = "git clone $argv && cd $(basename $argv .git)";
+      };
       nix-clean = ''
         nix-env --delete-generations old
         nix-store --gc
