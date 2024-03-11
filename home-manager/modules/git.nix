@@ -20,7 +20,7 @@ in {
     package = git.override {
       guiSupport = false; # gui? never heard of her.
     };
-    ignores = [ "Session.vim" ".DS_Store" ];
+    ignores = [ "Session.vim" ".DS_Store" ".direnv/" ];
     aliases = {
       s = "status";
       newbranch = "checkout -b";
