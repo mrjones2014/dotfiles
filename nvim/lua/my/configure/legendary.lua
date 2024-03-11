@@ -90,6 +90,7 @@ return {
         -- nvim_tree = true,
         -- which_key = { auto_register = true },
         lazy_nvim = true,
+        codecompanion = true,
         smart_splits = {
           mods = {
             swap = {
