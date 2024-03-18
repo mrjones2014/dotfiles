@@ -15,17 +15,31 @@ return {
     'CodeCompanionToggle',
     'CodeCompanionActions',
   },
-  keys = { {
-    '<leader>cc',
-    function()
-      require('codecompanion').actions()
-    end,
-    desc = 'CodeCompanion Actions',
-  } },
+  keys = {
+    {
+      '<leader>cc',
+      function()
+        require('codecompanion').actions()
+      end,
+      desc = 'CodeCompanion Actions',
+    },
+  },
   opts = {
     adapters = {
       chat = 'ollama',
       inline = 'ollama',
+    },
+    display = {
+      chat = {
+        type = 'buffer',
+        buf_options = {
+          buflisted = true,
+        },
+        win_options = {
+          wrap = true,
+          linebreak = true,
+        },
+      },
     },
   },
 }
