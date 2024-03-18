@@ -15,18 +15,10 @@ return {
     'CodeCompanionToggle',
     'CodeCompanionActions',
   },
-  config = function()
-    require('codecompanion').setup({
-      adapters = {
-        chat = require('codecompanion.adapters').use(
-          'ollama',
-          { schema = { model = { default = 'dolphin-mixtral' } } }
-        ),
-        inline = require('codecompanion.adapters').use(
-          'ollama',
-          { schema = { model = { default = 'dolphin-mixtral' } } }
-        ),
-      },
-    })
-  end,
+  opts = {
+    adapters = {
+      chat = 'ollama',
+      inline = 'ollama',
+    },
+  },
 }
