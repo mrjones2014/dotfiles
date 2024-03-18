@@ -15,6 +15,13 @@ return {
     'CodeCompanionToggle',
     'CodeCompanionActions',
   },
+  keys = { {
+    '<leader>cc',
+    function()
+      require('codecompanion').actions()
+    end,
+    desc = 'CodeCompanion Actions',
+  } },
   opts = {
     adapters = {
       chat = 'ollama',
