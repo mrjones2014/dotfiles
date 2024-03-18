@@ -26,6 +26,18 @@ return {
       },
     },
   },
+  {
+    'echasnovski/mini.splitjoin',
+    keys = {
+      {
+        'gS',
+        function()
+          require('mini.splitjoin').toggle()
+        end,
+        desc = 'Split/join arrays, argument lists, etc. from one vs. multiline and vice versa',
+      },
+    },
+  },
   { 'echasnovski/mini.trailspace', event = 'BufRead', opts = {} },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', opts = {} },
   {
