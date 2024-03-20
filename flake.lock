@@ -268,6 +268,23 @@
         "type": "github"
       }
     },
+    "lazyvim": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dirtyRev": "fff83caa76ebb41da316f0e4ee6c250ae1a7cdfc-dirty",
+        "dirtyShortRev": "fff83ca-dirty",
+        "lastModified": 1710972109,
+        "narHash": "sha256-Q9U41R2cOcg80caP1gH/cVNUupXZBkC7sp1j5J9BF7s=",
+        "type": "git",
+        "url": "file:///home/mat/git/lazyvim.nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/mat/git/lazyvim.nix"
+      }
+    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -298,7 +315,7 @@
         "flake-parts": "flake-parts",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1710461031,
@@ -364,6 +381,18 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 0,
+        "narHash": "sha256-pP86Pcfu3BrAvRO7R64x7hs+GaQrjFes+mEPowCfkxY=",
+        "path": "/nix/store/9mf8fkjw3vw1gm4s6j5fqlwrv5wf2knf-source",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1710408871,
         "narHash": "sha256-YpSGYZR96I8g5OK/Fdm0O4+mHLen6YPA1cPanqqNqT0=",
         "owner": "NixOS",
@@ -378,7 +407,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1710451336,
         "narHash": "sha256-pP86Pcfu3BrAvRO7R64x7hs+GaQrjFes+mEPowCfkxY=",
@@ -421,8 +450,9 @@
         "_1password-shell-plugins": "_1password-shell-plugins",
         "arkenfox": "arkenfox",
         "home-manager": "home-manager",
+        "lazyvim": "lazyvim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       }
     },
     "systems": {

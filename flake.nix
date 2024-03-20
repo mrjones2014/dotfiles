@@ -13,6 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    lazyvim.url = "git+file:///home/mat/git/lazyvim.nix";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
