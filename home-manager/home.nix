@@ -36,7 +36,7 @@ in {
         })
       ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
-        xcodes
+        # xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         signal-desktop
