@@ -41,22 +41,6 @@ return {
   { 'echasnovski/mini.trailspace', event = 'BufRead', opts = {} },
   { 'max397574/better-escape.nvim', event = 'InsertEnter', opts = {} },
   {
-    'Wansmer/treesj',
-    keys = {
-      {
-        'gS',
-        function()
-          require('treesj').toggle()
-        end,
-        desc = 'Toggle arrays/lists/etc. between single and multi line formats.',
-      },
-    },
-    opts = {
-      use_default_keymaps = false,
-      max_join_length = 300,
-    },
-  },
-  {
     'saecki/crates.nvim',
     event = { 'BufRead Cargo.toml' },
     opts = {},
