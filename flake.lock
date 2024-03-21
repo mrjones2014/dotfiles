@@ -273,16 +273,14 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "dirtyRev": "fff83caa76ebb41da316f0e4ee6c250ae1a7cdfc-dirty",
-        "dirtyShortRev": "fff83ca-dirty",
-        "lastModified": 1710972109,
-        "narHash": "sha256-Q9U41R2cOcg80caP1gH/cVNUupXZBkC7sp1j5J9BF7s=",
+        "lastModified": 1711030213,
+        "narHash": "sha256-HrQ7mbBUlqVhp57OhsWTcQVlP0KMrhHTaCSCfkSefW8=",
         "type": "git",
-        "url": "file:///home/mat/git/lazyvim.nix"
+        "url": "file:///Users/mat/git/lazyvim.nix"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/mat/git/lazyvim.nix"
+        "url": "file:///Users/mat/git/lazyvim.nix"
       }
     },
     "neovim-flake": {
@@ -381,10 +379,12 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-pP86Pcfu3BrAvRO7R64x7hs+GaQrjFes+mEPowCfkxY=",
-        "path": "/nix/store/9mf8fkjw3vw1gm4s6j5fqlwrv5wf2knf-source",
-        "type": "path"
+        "lastModified": 1710889954,
+        "narHash": "sha256-Pr6F5Pmd7JnNEMHHmspZ0qVqIBVxyZ13ik1pJtm2QXk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7872526e9c5332274ea5932a0c3270d6e4724f3b",
+        "type": "github"
       },
       "original": {
         "id": "nixpkgs",

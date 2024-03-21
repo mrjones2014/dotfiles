@@ -36,7 +36,6 @@ in {
         })
       ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
-        xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         signal-desktop
@@ -66,7 +65,7 @@ in {
   };
 
   imports = [
-    ./modules/lazyvim.nix
+    ./modules/lazyvim/default.nix
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
     ./modules/espanso.nix

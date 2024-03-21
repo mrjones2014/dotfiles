@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  imports = [ inputs.lazyvim.nixosModules.default ];
+  imports = [ inputs.lazyvim.nixosModules.default ./misc_plugins.nix ];
   programs.lazyvim = {
     enable = true;
     mapleader = " ";
