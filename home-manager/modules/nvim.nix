@@ -114,6 +114,7 @@ in {
       cargo-nextest
       clippy
       glow
+      mysql
     ];
   };
 }

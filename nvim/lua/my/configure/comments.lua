@@ -65,6 +65,7 @@ return {
           hook(...)
         end,
       })
+      require('Comment.ft').mysql = { '# %s', '/* %s */' }
     end,
   },
 }
