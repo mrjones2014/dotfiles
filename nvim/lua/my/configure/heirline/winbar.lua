@@ -1,6 +1,8 @@
 local conditions = require('heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 
+local special_filenames = { 'mod.rs', 'lib.rs' }
+
 local function get_current_filenames()
   local listed_buffers = vim
     .iter(vim.api.nvim_list_bufs())
@@ -56,7 +58,20 @@ local function get_unique_filename(filename)
     index = index + 1
   end
 
-  return string.reverse(string.sub(filename, 1, index))
+  local result = string.reverse(string.sub(filename, 1, index))
+  -- for special filenames like `lib.rs`, `mod.rs`, `index.ts` etc.
+  -- always show at least one parent
+  if vim.iter(ipairs(special_filenames)):any(function(_, special)
+    return special == result
+  end) then
+    local parts = vim.split(string.reverse(filename), '/')
+    -- if parent is just `src` then show another parent
+    if parts[#parts - 1] == 'src' then
+      return table.concat({ parts[#parts - 2], parts[#parts - 1], parts[#parts] }, '/')
+    end
+    return table.concat({ parts[#parts - 1], parts[#parts] }, '/')
+  end
+  return result
 end
 
 local M = {}
