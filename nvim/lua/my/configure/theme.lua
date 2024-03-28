@@ -98,6 +98,15 @@ return {
 
         -- LSP inlay hints are too dark/not enough contrast with the default nvim_lsp theme plugin
         LspInlayHint = { fg = '${light_gray}', bg = '${darker_gray}' },
+
+        -- Spectre + my custom UI
+        NuiComponentsTreeSpectreIcon = { fg = '${gray}' },
+        NuiComponentsTreeSpectreCodeLine = { fg = '${fg}' },
+        NuiComponentsTreeSpectreSearchValue = { link = 'DiffAdd' },
+        NuiComponentsTreeSpectreSearchOldValue = { link = 'DiffDelete' },
+        NuiComponentsTreeSpectreSearchNewValue = { link = 'DiffAdd' },
+        NuiComponentsTreeSpectreReplaceSuccess = { fg = '${green}' },
+        NuiComponentsBorderLabel = { fg = '${gray}', bg = '${fg}' },
       },
       plugins = {
         all = false,
