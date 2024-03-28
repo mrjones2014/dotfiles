@@ -31,14 +31,14 @@ function M.toggle()
   local win_width = vim.api.nvim_win_get_width(0)
   local win_height = vim.api.nvim_win_get_height(0)
   local width = 72
-  local height = win_height
+  local height = win_height - 1
 
   local renderer = n.create_renderer({
     width = width,
     height = height,
     relative = 'editor',
     position = {
-      row = 0,
+      row = 1,
       col = win_width - width - 1,
     },
   })
