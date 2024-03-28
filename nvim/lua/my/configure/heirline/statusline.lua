@@ -1,6 +1,7 @@
 local conditions = require('heirline.conditions')
 local myconditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
+local path = require('my.utils.path')
 
 local M = {}
 
@@ -127,7 +128,7 @@ M.FilePath = {
       if mdpreview_session then
         buf = mdpreview_session.source_buf
       end
-      return Path.relative(vim.api.nvim_buf_get_name(buf))
+      return path.relative(vim.api.nvim_buf_get_name(buf))
     end,
   },
 }
@@ -208,7 +209,7 @@ M.OnePassword = {
 M.LspFormatToggle = {
   provider = function()
     local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
-    if require('my.lsp.utils').is_formatting_supported(buf) then
+    if require('my.utils.lsp').is_formatting_supported(buf) then
       return '   '
     else
       return '   '
@@ -217,7 +218,7 @@ M.LspFormatToggle = {
   hl = { bg = 'bg_statusline' },
   on_click = {
     callback = function()
-      require('my.lsp.utils').toggle_formatting_enabled()
+      require('my.utils.lsp').toggle_formatting_enabled()
     end,
     name = 'heirline_LSP',
   },
@@ -228,7 +229,7 @@ M.LspFormatToggle = {
   {
     provider = function()
       local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
-      local name = require('my.lsp.utils').get_formatter_name(buf)
+      local name = require('my.utils.lsp').get_formatter_name(buf)
       if name then
         return string.format(' (%s)  ', name)
       end

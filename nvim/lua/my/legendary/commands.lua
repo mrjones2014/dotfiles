@@ -1,3 +1,5 @@
+local clipboard = require('my.utils.clipboard')
+
 local M = {}
 
 function M.default_commands()
@@ -22,7 +24,7 @@ function M.default_commands()
             return
           end
 
-          Clipboard.copy(icon)
+          clipboard.copy(icon)
           vim.notify('Copied icon to clipboard.', vim.log.levels.INFO)
         end)
       end,
@@ -73,7 +75,7 @@ function M.default_commands()
             return
           end
 
-          Url.open(selected)
+          require('my.utils.url').open(selected)
         end)
       end,
       description = 'Search installed plugins and open the repo in browser',
@@ -103,17 +105,17 @@ function M.lsp_commands(bufnr, server_name)
   }
 
   if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Format then
-    commands = TblUtils.join_lists(commands, {
+    vim.list_extend(commands, {
       {
         ':Format',
-        require('my.lsp.utils').format_document,
+        require('my.utils.lsp').format_document,
         description = 'Format the current document with LSP',
         opts = { buffer = bufnr },
       },
       {
         ':DisableFormatting',
         function()
-          require('my.lsp.utils').toggle_formatting_enabled(false)
+          require('my.utils.lsp').toggle_formatting_enabled(false)
         end,
         description = 'Disable LSP formatting',
         opts = { buffer = bufnr },
@@ -121,7 +123,7 @@ function M.lsp_commands(bufnr, server_name)
       {
         ':EnableFormatting',
         function()
-          require('my.lsp.utils').toggle_formatting_enabled(true)
+          require('my.utils.lsp').toggle_formatting_enabled(true)
         end,
         description = 'Enable LSP formatting',
         opts = { buffer = bufnr },
@@ -131,7 +133,7 @@ function M.lsp_commands(bufnr, server_name)
 
   if not (vim.api.nvim_buf_get_commands(0, {}) or {}).Test then
     -- Neotest
-    commands = TblUtils.join_lists(commands, {
+    vim.list_extend(commands, {
       {
         ':Test',
         h.lazy_required_fn('neotest', 'run.run'),

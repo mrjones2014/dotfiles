@@ -2,7 +2,7 @@ return {
   {
     'SmiteshP/nvim-navic',
     init = function()
-      LSP.on_attach(function(client, bufnr)
+      require('my.utils.lsp').on_attach(function(client, bufnr)
         if client.server_capabilities.documentSymbolProvider then
           require('nvim-navic').attach(client, bufnr)
         end

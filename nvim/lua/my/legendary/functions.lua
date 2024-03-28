@@ -1,10 +1,13 @@
+local clipboard = require('my.utils.clipboard')
+local path = require('my.utils.path')
+
 local M = {}
 
 function M.default_functions()
   return {
     {
       function()
-        Clipboard.copy(vim.fn.simplify(Path.relative(vim.fn.expand('%') --[[@as string]])))
+        clipboard.copy(vim.fn.simplify(path.relative(vim.fn.expand('%') --[[@as string]])))
       end,
       description = 'Copy current relative filepath to clipboard',
     },

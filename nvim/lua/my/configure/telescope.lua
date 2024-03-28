@@ -1,3 +1,5 @@
+local path = require('my.utils.path')
+
 return {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
@@ -77,7 +79,7 @@ return {
     end
 
     local ripgrep_ignore_file_path = (
-      Path.join(vim.env.XDG_CONFIG_HOME or Path.join(vim.env.HOME, '.config'), 'ripgrep_ignore')
+      path.join(vim.env.XDG_CONFIG_HOME or path.join(vim.env.HOME, '.config'), 'ripgrep_ignore')
     )
 
     local telescope = require('telescope')

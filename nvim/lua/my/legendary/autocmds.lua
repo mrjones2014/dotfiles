@@ -78,7 +78,7 @@ function M.lsp_autocmds(bufnr, server_name)
   then
     table.insert(augroup, {
       'BufWritePost',
-      require('my.lsp.utils').format_document,
+      require('my.utils.lsp').format_document,
       opts = { buffer = bufnr },
     })
   end

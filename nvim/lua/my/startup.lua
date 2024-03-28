@@ -1,3 +1,5 @@
+local path = require('my.utils.path')
+
 local M = {}
 
 local function longest_line(strs)
@@ -23,7 +25,7 @@ local function center(strs)
 end
 
 local header = center({
-  Path.relative(vim.loop.cwd()),
+  path.relative(vim.loop.cwd()),
   '',
   '',
   '',

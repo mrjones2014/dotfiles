@@ -66,7 +66,7 @@ return {
     lazy = false,
     priority = 1000000,
     init = function()
-      LSP.on_attach(function(client, bufnr)
+      require('my.utils.lsp').on_attach(function(client, bufnr)
         if vim.tbl_contains(lsp_bound_buffer_ids, bufnr) then
           return
         end

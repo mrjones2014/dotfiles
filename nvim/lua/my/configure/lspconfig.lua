@@ -106,7 +106,7 @@ return {
   },
   event = 'BufReadPre',
   init = function()
-    LSP.on_attach(require('my.lsp.utils').on_attach)
+    require('my.utils.lsp').on_attach(require('my.utils.lsp').on_attach_default)
   end,
   config = function()
     local efm_setup_done = false

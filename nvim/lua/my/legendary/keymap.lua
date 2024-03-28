@@ -37,7 +37,7 @@ function M.default_keymaps()
       'gx',
       function()
         local url = vim.fn.expand('<cfile>')
-        Url.open(url)
+        require('my.utils.url').open(url)
       end,
       description = 'Open URL under cursor',
     },

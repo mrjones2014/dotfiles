@@ -29,18 +29,6 @@ function M.FileIcon(bg_color)
   }
 end
 
-M.FilePath = {
-  init = function(self)
-    self.bufname = vim.api.nvim_buf_get_name(0)
-  end,
-  condition = function(self)
-    return self.bufname ~= '' and not vim.startswith(self.bufname, 'component://')
-  end,
-  provider = function(self)
-    return Path.relative(self.bufname)
-  end,
-}
-
 local icons = require('my.lsp.icons')
 local diagnostics_order = {
   vim.diagnostic.severity.HINT,

@@ -6,7 +6,21 @@ local init_done = false
 
 local formatting_enabled = true
 
-function M.on_attach(client, bufnr)
+---Set up a callback to run on LSP attach
+---@param callback fun(client:table,bufnr:number)
+function M.on_attach(callback)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        callback(client, bufnr)
+      end
+    end,
+  })
+end
+
+function M.on_attach_default(client, bufnr)
   if not init_done then
     init_done = true
     M.setup_async_formatting()
