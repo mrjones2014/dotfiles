@@ -1,10 +1,5 @@
 local M = {}
 
-local function has_words_before()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
 function M.default_keymaps()
   local h = require('legendary.toolbox')
   return {
@@ -196,81 +191,6 @@ function M.lsp_keymaps(bufnr)
         opts = { buffer = bufnr },
       },
     },
-  }
-end
-
-function M.cmp_mappings()
-  local cmp = require('cmp')
-  return {
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      's',
-      'c',
-    }),
-    ['<C-n>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      's',
-      'c',
-    }),
-    ['<C-p>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      's',
-      'c',
-    }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      's',
-      'c',
-    }),
-    ['<C-d>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(-4) }),
-    ['<C-f>'] = cmp.mapping({ i = cmp.mapping.scroll_docs(4) }),
-    ['<C-Space>'] = cmp.mapping({ c = cmp.mapping.confirm({ select = true }) }),
-    ['<Right>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.mapping.confirm({ select = true })()
-      else
-        fallback()
-      end
-    end, {
-      'c',
-    }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-e>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.mapping.close()()
-      else
-        fallback()
-      end
-    end, {
-      'i',
-      'c',
-    }),
   }
 end
 
