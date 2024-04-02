@@ -115,15 +115,17 @@ in {
         body = "cd $HOME/git && git clone $argv && cd $(basename $argv .git)";
       };
       nix-clean = ''
+        # NixOS-specific steps
+        if test -f /etc/NIXOS
+          sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+          for link in /nix/var/nix/gcroots/auto/*
+              rm $(readlink "$link")
+          end
+        end
         nix-env --delete-generations old
         nix-store --gc
         nix-channel --update
         nix-env -u --always
-        if test -f /etc/NIXOS
-            for link in /nix/var/nix/gcroots/auto/*
-                rm $(readlink "$link")
-            end
-        end
         nix-collect-garbage -d
       '';
       groot = {
