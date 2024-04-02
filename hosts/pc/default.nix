@@ -57,7 +57,7 @@
     mullvad-vpn
     prismlauncher
     # dolphinEmu # dolphin build is suuuuper slow and also broken rn
-    rpcs3
+    # rpcs3 # broken right now
   ];
   services.mullvad-vpn.enable = true;
 
