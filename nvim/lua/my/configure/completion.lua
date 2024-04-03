@@ -105,6 +105,7 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
+      view = { entries = { follow_cursor = true } },
       mapping = {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
