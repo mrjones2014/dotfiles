@@ -59,10 +59,6 @@ in {
       lg = "ls -lG";
       sudo = "sudo -A";
       clear = "clear && _prompt_move_to_bottom";
-      nix-apply = if pkgs.stdenv.isDarwin then
-        "home-manager switch --flake ~/git/dotfiles/.#mac"
-      else
-        "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc";
       nix-server-apply =
         "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server";
       oplocal =
@@ -114,20 +110,42 @@ in {
         description = "Clone a git repository, then cd into it.";
         body = "cd $HOME/git && git clone $argv && cd $(basename $argv .git)";
       };
-      nix-clean = ''
-        # NixOS-specific steps
-        if test -f /etc/NIXOS
-          sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
-          for link in /nix/var/nix/gcroots/auto/*
-              rm $(readlink "$link")
+      nix-apply = {
+        description =
+          "Apply latest Nix configuration; checks if you need to do a git pull first";
+        body = ''
+          pushd ~/git/dotfiles
+          git fetch
+          set -l gitstatus $(git log HEAD..origin/$(git branch --show-current))
+          if [ "$gitstatus" != "" ]
+            echo "Run `git pull` in ~/git/dotfiles first"
+            return
           end
-        end
-        nix-env --delete-generations old
-        nix-store --gc
-        nix-channel --update
-        nix-env -u --always
-        nix-collect-garbage -d
-      '';
+          popd
+          ${if pkgs.stdenv.isDarwin then
+            "home-manager switch --flake ~/git/dotfiles/.#mac"
+          else
+            "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}
+        '';
+      };
+      nix-clean = {
+        description =
+          "Run Nix garbage collection and remove old kernels to free up space in boot partition";
+        body = ''
+          # NixOS-specific steps
+          if test -f /etc/NIXOS
+            sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+            for link in /nix/var/nix/gcroots/auto/*
+                rm $(readlink "$link")
+            end
+          end
+          nix-env --delete-generations old
+          nix-store --gc
+          nix-channel --update
+          nix-env -u --always
+          nix-collect-garbage -d
+        '';
+      };
       groot = {
         description = "cd to the root of the current git repository";
         body = ''
