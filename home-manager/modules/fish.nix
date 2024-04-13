@@ -26,7 +26,7 @@ in {
   };
 
   home.packages = with pkgs;
-    [ tealdeer tokei cachix _1password btop ]
+    [ tealdeer tokei cachix _1password btop jq ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
