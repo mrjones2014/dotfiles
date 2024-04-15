@@ -16,6 +16,7 @@ in {
       favorite-apps = [
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
+        "obsidian.desktop"
         "org.wezfurlong.wezterm.desktop"
         "1password.desktop"
         "signal-desktop.desktop"
