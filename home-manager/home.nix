@@ -26,8 +26,7 @@ in {
     stateVersion = "22.11";
     packages = with pkgs;
       [
-        # TODO re-enable when they update to a non EOL version of electron...
-        # obsidian
+        obsidian
         mdbook
         spotify
         (discord.override {

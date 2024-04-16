@@ -1,13 +1,11 @@
 { pkgs, ... }: {
   config = {
+    services.displayManager.defaultSession = "gnome-xorg";
     services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
       desktopManager.gnome.enable = true;
-      displayManager = {
-        defaultSession = "gnome-xorg";
-        gdm.enable = true;
-      };
+      displayManager = { gdm.enable = true; };
     };
 
     # don't install GNOME crap like Contacts, Photos, etc.
