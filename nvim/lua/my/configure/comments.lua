@@ -55,15 +55,8 @@ return {
       --   }
       -- }
 
-      -- hack to not load ts_context_commentstring until actually needed by the hook
-      local hook = nil
       require('Comment').setup({
-        pre_hook = function(...)
-          if hook == nil then
-            hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
-          end
-          hook(...)
-        end,
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       })
       require('Comment.ft').mysql = { '# %s', '/* %s */' }
     end,
