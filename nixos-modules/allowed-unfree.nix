@@ -21,6 +21,7 @@
       # CUDA support (e.g. for Ollama)
       "cudatoolkit"
       "cuda_cudart"
+      "cuda-merged"
     ];
 }
 
