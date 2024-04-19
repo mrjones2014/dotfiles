@@ -1,6 +1,7 @@
 { lib, ... }: {
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
+    let name = lib.getName pkg;
+    in builtins.elem name [
       "obsidian"
       "discord"
       "spotify"
@@ -17,15 +18,10 @@
       # however VS Code should NOT be installed on this system!
       # Use VS Codium instead: https://github.com/VSCodium/vscodium
       "vscode"
-
-      # CUDA support (e.g. for Ollama)
-      "cudatoolkit"
-      "cuda_cudart"
-      "cuda-merged"
-      "cuda_cuobjdump"
-      "cuda_gdb"
-      "cuda_nvcc"
-      "cuda_nvdisasm"
-    ];
+    ] ||
+    # CUDA support (e.g. for Ollama)
+    # CUDA has like a billion different packages for some reason
+    # so just allow all CUDA packages
+    (builtins.substring 0 4 name) == "cuda";
 }
 
