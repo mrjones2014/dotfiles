@@ -21,6 +21,7 @@
     ] ||
     # CUDA has like a billion different packages for some reason
     # so just allow all CUDA packages
-    pkg.meta.license == lib.licenses.nvidiaCudaRedist;
+    (builtins.trace pkg.meta.license pkg.meta.license)
+    == lib.licenses.nvidiaCudaRedist;
 }
 
