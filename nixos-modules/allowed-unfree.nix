@@ -21,6 +21,7 @@
 
       # CUDA support (e.g. for Ollama)
       "libcublas"
+      "libcufft"
     ] ||
     # CUDA has like a billion different packages for some reason
     # so just allow all CUDA packages
