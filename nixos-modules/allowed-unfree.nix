@@ -25,6 +25,7 @@
       "cuda_cuobjdump"
       "cuda_gdb"
       "cuda_nvcc"
+      "cuda_nvdisasm"
     ];
 }
 
