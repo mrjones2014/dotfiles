@@ -22,6 +22,7 @@
       "cudatoolkit"
       "cuda_cudart"
       "cuda-merged"
+      "cuda_cuobjdump"
     ];
 }
 
