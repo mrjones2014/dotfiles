@@ -18,13 +18,9 @@
       # however VS Code should NOT be installed on this system!
       # Use VS Codium instead: https://github.com/VSCodium/vscodium
       "vscode"
-
-      # CUDA support (e.g. for Ollama)
-      "libcublas"
-      "libcufft"
     ] ||
     # CUDA has like a billion different packages for some reason
     # so just allow all CUDA packages
-    (builtins.substring 0 4 name) == "cuda";
+    pkg.meta.license == "CUDA EULA";
 }
 
