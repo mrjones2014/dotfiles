@@ -100,6 +100,7 @@ return {
         prompt_prefix = '  ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         dynamic_preview_title = true,
+        path_display = { 'filename_first' },
         -- preview = {
         --   mime_hook = function(filepath, bufnr, opts)
         --     local is_image = function(fp)
