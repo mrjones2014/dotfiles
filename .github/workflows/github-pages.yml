@@ -17,7 +17,7 @@ jobs:
           command: install
           args: --path ublock-mdbook/
       - name: Setup mdbook
-        uses: peaceiris/actions-mdbook@v1
+        uses: peaceiris/actions-mdbook@v2
         with:
           mdbook-version: 'latest'
       - name: Download custom highlight.js
