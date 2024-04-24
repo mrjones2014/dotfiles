@@ -35,7 +35,7 @@ Windows reports any time you launch an app to Microsoft via a "feature" called "
 type of spyware in Windows (what Microsoft calls "telemetry") that privacy tools like [NextDNS](https://nextdns.io/), a privacy and security
 enhancing DNS server, offer native Windows tracker blocking functionality.
 
-![NextDNS Windows Tracker Blocking](https://private-user-images.githubusercontent.com/8648891/325272446-fee6eda0-6380-4177-9c46-72f2c83cb9f4.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTM5NzExMzAsIm5iZiI6MTcxMzk3MDgzMCwicGF0aCI6Ii84NjQ4ODkxLzMyNTI3MjQ0Ni1mZWU2ZWRhMC02MzgwLTQxNzctOWM0Ni03MmYyYzgzY2I5ZjQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MDQyNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDA0MjRUMTUwMDMwWiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MTRkOWRhYmE0YWRiZmMyNmI4Nzc2Y2ZiZmFkZDEwZGQwZTY2Yjg4MzJjNTU2ZWM2OWQ3Y2FkOWE4YmM1ODllMSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ.nOAwvioiBn1Q_R5nfQSym9Z2NZ-UuZudqOlwBJkxxaE)
+![NextDNS Windows Tracker Blocking](https://github.com/mrjones2014/dotfiles/assets/8648891/d224e6d8-d429-4454-a5d4-c6e88da42997)
 
 The Free Software Foundation even has [a page dedicated to all the pieces of malware Microsoft has introduced as "features" to Windows over the years](https://www.gnu.org/proprietary/malware-microsoft.html).
 
