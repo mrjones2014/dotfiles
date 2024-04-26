@@ -5,7 +5,7 @@ local path = require('my.utils.path')
 
 local M = {}
 
-M.Align = { provider = '%=', hl = { bg = 'bg_statusline' } }
+M.Align = { provider = '%=', hl = { bg = 'surface0' } }
 
 M.Mode = {
   init = function(self)
@@ -80,7 +80,7 @@ M.Mode = {
       if conditions.is_git_repo() then
         return { fg = self.mode_colors[mode], bg = 'gray' }
       else
-        return { fg = self.mode_colors[mode], bg = 'bg_statusline' }
+        return { fg = self.mode_colors[mode], bg = 'surface0' }
       end
     end,
   },
@@ -108,7 +108,7 @@ M.Branch = {
   },
   {
     provider = sep.rounded_right,
-    hl = { fg = 'gray', bg = 'bg_statusline' },
+    hl = { fg = 'gray', bg = 'surface0' },
   },
 }
 
@@ -116,7 +116,7 @@ M.FilePath = {
   init = function(self)
     self.bufname = vim.api.nvim_buf_get_name(0)
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface0' },
   provider = ' ',
   {
     condition = function(self)
@@ -162,7 +162,7 @@ M.UnsavedChanges = {
       {
 
         provider = sep.rounded_left,
-        hl = { fg = 'yellow', bg = 'bg_statusline' },
+        hl = { fg = 'yellow', bg = 'surface0' },
       },
       {
         provider = function(self)
@@ -172,7 +172,7 @@ M.UnsavedChanges = {
       },
       {
         provider = sep.rounded_right,
-        hl = { fg = 'yellow', bg = 'bg_statusline' },
+        hl = { fg = 'yellow', bg = 'surface0' },
       },
     },
   },
@@ -184,12 +184,12 @@ M.LazyStats = {
     local stats = require('lazy').stats()
     return string.format('%s %s/%s ', icon, stats.loaded, stats.count)
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface0' },
 }
 
 M.OnePassword = {
   provider = sep.rounded_left,
-  hl = { fg = 'blue', bg = 'bg_statusline' },
+  hl = { fg = 'blue', bg = 'surface0' },
   {
     provider = function()
       if not vim.g.op_nvim_remote_loaded then
@@ -202,7 +202,7 @@ M.OnePassword = {
   },
   {
     provider = string.format(' %s', sep.rounded_left),
-    hl = { fg = 'bg_statusline', bg = 'blue' },
+    hl = { fg = 'surface0', bg = 'blue' },
   },
 }
 
@@ -215,7 +215,7 @@ M.LspFormatToggle = {
       return '   '
     end
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface0' },
   on_click = {
     callback = function()
       require('my.utils.lsp').toggle_formatting_enabled()
@@ -224,7 +224,7 @@ M.LspFormatToggle = {
   },
   {
     provider = 'auto-format',
-    hl = { bg = 'bg_statusline' },
+    hl = { bg = 'surface0' },
   },
   {
     provider = function()
@@ -235,7 +235,7 @@ M.LspFormatToggle = {
       end
       return '  '
     end,
-    hl = { bg = 'bg_statusline' },
+    hl = { bg = 'surface0' },
   },
 }
 
@@ -259,7 +259,7 @@ M.MarkdownPreview = {
   },
   {
     provider = sep.rounded_right,
-    hl = { bg = 'green', fg = 'bg_statusline' },
+    hl = { bg = 'green', fg = 'surface0' },
   },
   {
     provider = function()
@@ -268,11 +268,11 @@ M.MarkdownPreview = {
       end
       return '   Preview  '
     end,
-    hl = { bg = 'green', fg = 'bg_statusline' },
+    hl = { bg = 'green', fg = 'surface0' },
   },
   {
     provider = sep.rounded_right,
-    hl = { bg = 'bg_statusline', fg = 'green' },
+    hl = { bg = 'surface0', fg = 'green' },
   },
 }
 
@@ -285,7 +285,7 @@ M.RecordingMacro = {
 
     return string.format(' Recording macro: %s  ', macro_reg)
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface0' },
 }
 
 return M

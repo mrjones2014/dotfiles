@@ -65,6 +65,7 @@ in {
   };
 
   imports = [
+    inputs.catppuccin.homeManagerModules.catppuccin
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
     ./modules/espanso.nix
@@ -80,6 +81,8 @@ in {
     ./modules/gnome/default.nix
     ../nixos-modules/allowed-unfree.nix
   ];
+
+  catppuccin.flavour = "mocha";
 
   programs = {
     # Let Home Manager install and manage itself.

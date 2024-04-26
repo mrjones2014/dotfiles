@@ -26,6 +26,7 @@ let
 in {
   programs.fzf = {
     enable = true;
+    catppuccin.enable = true;
     defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
     defaultOptions = [
       "--prompt='  '"

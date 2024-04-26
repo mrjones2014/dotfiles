@@ -1,6 +1,7 @@
 { lib, ... }: {
   programs.starship = {
     enable = true;
+    catppuccin.enable = true;
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
@@ -15,6 +16,7 @@
         "$character"
       ];
       right_format = "$cmd_duration";
+      # TODO
       character = {
         success_symbol = "[ I ](bold bg:#89ca78 fg:#000000)[](fg:#89ca78)";
         error_symbol = "[ I ](bold bg:#ef596f fg:#000000)[](fg:#ef596f)";

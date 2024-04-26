@@ -13,32 +13,6 @@ in {
   };
   programs.wezterm = {
     enable = true;
-    colorSchemes.onedarkpro = {
-      background = "#000000";
-      foreground = "#abb2bf";
-      selection_bg = "#d55fde";
-      selection_fg = "#abb2bf";
-      ansi = [
-        "#000000"
-        "#ef596f"
-        "#89ca78"
-        "#e5c07b"
-        "#61afef"
-        "#d55fde"
-        "#2bbac5"
-        "#abb2bf"
-      ];
-      brights = [
-        "#434852"
-        "#f38897"
-        "#a9d89d"
-        "#edd4a6"
-        "#8fc6f4"
-        "#e089e7"
-        "#4bced8"
-        "#c8cdd5"
-      ];
-    };
     extraConfig = ''
       local wezterm = require('wezterm')
       local config = wezterm.config_builder()
@@ -66,7 +40,10 @@ in {
       }
       end)
 
-      config.color_scheme = 'onedarkpro'
+      config.color_scheme = 'Catppuccin Mocha'
+      config.colors = {
+        cursor_bg = '#40a02b',
+      }
       config.cursor_blink_rate = 0
       config.font = wezterm.font({
         family = 'Maple Mono',

@@ -26,7 +26,7 @@ return {
 
       require('heirline').setup({
         opts = {
-          colors = require('onedarkpro.helpers').get_colors(),
+          colors = require('catppuccin.palettes').get_palette('mocha'),
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
             return conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
@@ -35,7 +35,7 @@ return {
         statusline = { ---@diagnostic disable-line:missing-fields
           sl.Mode,
           sl.Branch,
-          shared.FileIcon('bg_statusline'),
+          shared.FileIcon('surface0'),
           sl.FilePath,
           sl.MarkdownPreview,
           sl.Align,

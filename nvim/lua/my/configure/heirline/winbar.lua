@@ -101,9 +101,9 @@ M.UniqueFilename = {
     provider = sep.rounded_right,
     hl = function()
       if conditions.has_diagnostics() then
-        return { bg = 'gray', fg = 'black' }
+        return { bg = 'surface2', fg = 'black' }
       else
-        return { bg = 'bg_statusline', fg = 'black' }
+        return { bg = 'surface0', fg = 'black' }
       end
     end,
   },
@@ -111,12 +111,12 @@ M.UniqueFilename = {
 
 M.Diagnostics = {
   provider = ' ',
-  hl = { bg = 'gray' },
+  hl = { bg = 'surface2' },
   condition = conditions.has_diagnostics,
-  require('my.configure.heirline.shared').Diagnostics(true, 'gray'),
+  require('my.configure.heirline.shared').Diagnostics(true, 'surface2'),
   {
     provider = sep.rounded_right,
-    hl = { fg = 'gray', bg = 'bg_statusline' },
+    hl = { fg = 'surface2', bg = 'surface0' },
   },
 }
 
@@ -127,7 +127,7 @@ M.Navic = {
   provider = function()
     return string.format(' %s', require('nvim-navic').get_location())
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface0' },
 }
 
 return M

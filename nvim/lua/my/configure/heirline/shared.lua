@@ -50,7 +50,7 @@ local diagnostics_base = {
 }
 
 function M.Diagnostics(is_winbar, bg)
-  bg = bg or 'bg_statusline'
+  bg = bg or 'surface0'
   return utils.insert(
     diagnostics_base,
     unpack(vim
