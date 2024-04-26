@@ -24,7 +24,6 @@ function M.on_attach_default(client, bufnr)
   if not init_done then
     init_done = true
     M.setup_async_formatting()
-    M.apply_ui_tweaks()
   end
 
   -- if current nvim version supports inlay hints, enable them
@@ -80,12 +79,15 @@ end
 
 function M.apply_ui_tweaks()
   -- customize LSP icons
-  local icons = require('my.lsp.icons')
+  local icons = {
+    Error = ' ',
+    Warn = ' ',
+    Hint = ' ',
+    Info = ' ',
+  }
   for type, icon in pairs(icons) do
     local highlight = 'DiagnosticSign' .. type
-    local legacy_highlight = 'DiagnosticSign' .. type
     vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = highlight })
-    vim.fn.sign_define(legacy_highlight, { text = icon, texthl = legacy_highlight, numhl = legacy_highlight })
   end
 
   local icon_map = {

@@ -168,5 +168,6 @@ return {
         lsp_trouble = true,
       },
     })
+    vim.cmd.colorscheme('catppuccin')
   end,
 }

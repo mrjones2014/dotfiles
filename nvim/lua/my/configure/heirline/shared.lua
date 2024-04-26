@@ -29,14 +29,13 @@ function M.FileIcon(bg_color)
   }
 end
 
-local icons = require('my.lsp.icons')
 local diagnostics_order = {
   vim.diagnostic.severity.HINT,
   vim.diagnostic.severity.INFO,
   vim.diagnostic.severity.WARN,
   vim.diagnostic.severity.ERROR,
 }
-local severity_hl = {
+local severity_name = {
   [vim.diagnostic.severity.HINT] = 'Hint',
   [vim.diagnostic.severity.INFO] = 'Info',
   [vim.diagnostic.severity.WARN] = 'Warn',
@@ -58,10 +57,11 @@ function M.Diagnostics(is_winbar, bg)
       :map(function(severity)
         local component = {
           provider = function(self)
-            return string.format('%s%s ', icons[severity], self.counts[severity] or 0)
+            local sign = vim.fn.sign_getdefined('DiagnosticSign' .. severity_name[severity])[1]
+            return string.format('%s%s ', sign and sign.text, self.counts[severity] or 0)
           end,
           hl = function()
-            return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_hl[severity])).fg, bg = bg }
+            return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_name[severity])).fg, bg = bg }
           end,
         }
         if is_winbar then

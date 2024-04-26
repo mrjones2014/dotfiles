@@ -43,3 +43,6 @@ vim.api.nvim_create_autocmd('UiEnter', {
   end,
   once = true,
 })
+
+-- set up UI tweaks on load
+require('my.utils.lsp').apply_ui_tweaks()

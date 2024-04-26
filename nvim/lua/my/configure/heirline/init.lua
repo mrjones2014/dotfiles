@@ -22,7 +22,6 @@ return {
       local shared = require('my.configure.heirline.shared')
       local sl = require('my.configure.heirline.statusline')
       local wb = require('my.configure.heirline.winbar')
-      local sc = require('my.configure.heirline.statuscolumn')
 
       require('heirline').setup({
         opts = {
@@ -53,11 +52,6 @@ return {
           wb.Diagnostics,
           shared.Trunc,
           wb.Navic,
-        },
-        statuscolumn = { ---@diagnostic disable-line:missing-fields
-          sc.DiagnosticSign,
-          sc.Align,
-          sc.LineNumAndGitIndicator,
         },
       })
     end,
