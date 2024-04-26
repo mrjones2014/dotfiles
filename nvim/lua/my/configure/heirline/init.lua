@@ -47,7 +47,7 @@ return {
           shared.Diagnostics(false),
         },
         winbar = { ---@diagnostic disable-line:missing-fields
-          shared.FileIcon('black'),
+          shared.FileIcon('base'),
           wb.UniqueFilename,
           wb.Diagnostics,
           shared.Trunc,

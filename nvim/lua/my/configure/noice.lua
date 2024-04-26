@@ -14,10 +14,7 @@ return {
           win_options = {
             concealcursor = 'n',
             conceallevel = 3,
-            winhighlight = {
-              Normal = 'LspFloat',
-              FloatBorder = 'LspFloatBorder',
-            },
+            winhighlight = { Normal = 'LspFloat' },
           },
         },
       },
@@ -47,8 +44,8 @@ return {
         },
         win_options = {
           winhighlight = {
-            Normal = 'CmdLine',
-            FloatBorder = 'CmdLineBorder',
+            Normal = 'TelescopeNormal',
+            FloatBorder = 'TelescopeBorder',
           },
         },
       },
