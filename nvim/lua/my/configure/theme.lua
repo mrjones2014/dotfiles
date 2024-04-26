@@ -144,7 +144,7 @@ return {
   config = function()
     require('catppuccin').setup({
       flavour = 'mocha',
-      dim_inactive = { enabled = true },
+      dim_inactive = { enabled = true, percentage = 0.000001 },
       styles = {
         loops = { 'italic' },
         keyword = { 'italic' },
