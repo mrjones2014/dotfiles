@@ -29,6 +29,13 @@
       modesetting.enable = true;
       nvidiaPersistenced = true;
     };
+
+    # logitech mouse support
+    logitech.wireless = {
+      enable = true;
+      # installs solaar for configuring mouse buttons
+      enableGraphical = true;
+    };
   };
 
   programs = {
