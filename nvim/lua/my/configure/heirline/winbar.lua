@@ -87,7 +87,7 @@ M.UniqueFilename = {
     provider = function(self)
       return string.format(' %s ', self.bufname)
     end,
-    hl = { bg = 'black' },
+    hl = { bg = 'base' },
   },
   {
     -- file save status indicator
@@ -95,28 +95,24 @@ M.UniqueFilename = {
       return vim.bo.modified == true
     end,
     provider = ' ',
-    hl = { bg = 'black' },
+    hl = { bg = 'base' },
   },
   {
     provider = sep.rounded_right,
     hl = function()
-      if conditions.has_diagnostics() then
-        return { bg = 'gray', fg = 'black' }
-      else
-        return { bg = 'bg_statusline', fg = 'black' }
-      end
+      return { bg = conditions.has_diagnostics() and 'surface1' or 'surface2', fg = 'base' }
     end,
   },
 }
 
 M.Diagnostics = {
   provider = ' ',
-  hl = { bg = 'gray' },
+  hl = { bg = 'surface1' },
   condition = conditions.has_diagnostics,
-  require('my.configure.heirline.shared').Diagnostics(true, 'gray'),
+  require('my.configure.heirline.shared').Diagnostics(true, 'surface1'),
   {
     provider = sep.rounded_right,
-    hl = { fg = 'gray', bg = 'bg_statusline' },
+    hl = { fg = 'surface1', bg = 'surface2' },
   },
 }
 
@@ -127,7 +123,7 @@ M.Navic = {
   provider = function()
     return string.format(' %s', require('nvim-navic').get_location())
   end,
-  hl = { bg = 'bg_statusline' },
+  hl = { bg = 'surface2' },
 }
 
 return M

@@ -6,6 +6,7 @@ return {
       -- see also: autocmds.lua
       -- this gets toggled off in insert mode
       -- and back on when leaving insert mode
+      signcolumn = true,
       current_line_blame = true,
       current_line_blame_opts = {
         virt_text = true,

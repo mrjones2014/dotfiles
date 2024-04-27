@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('UiEnter', {
     for _, buf in ipairs(bufs) do
       local bufname = vim.api.nvim_buf_get_name(buf)
       if #bufs == 1 and vim.fn.isdirectory(bufname) ~= 0 then
-        -- if opened to a directory, cd to the directory and show startup
+        -- if opened to a directory, cd to the directory
         vim.cmd.cd(bufname)
         break
       end
@@ -40,8 +40,9 @@ vim.api.nvim_create_autocmd('UiEnter', {
         return
       end
     end
-
-    require('my.startup').show()
   end,
   once = true,
 })
+
+-- set up UI tweaks on load
+require('my.utils.lsp').apply_ui_tweaks()

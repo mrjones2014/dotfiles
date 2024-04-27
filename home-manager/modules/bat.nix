@@ -1,6 +1,6 @@
 {
   programs.bat = {
     enable = true;
-    config = { theme = "ansi"; };
+    catppuccin.enable = true;
   };
 }

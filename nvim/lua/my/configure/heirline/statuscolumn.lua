@@ -4,36 +4,46 @@ local M = {}
 
 M.Align = { provider = '%=' }
 
+local severity_name = {
+  [vim.diagnostic.severity.HINT] = 'Hint',
+  [vim.diagnostic.severity.INFO] = 'Info',
+  [vim.diagnostic.severity.WARN] = 'Warn',
+  [vim.diagnostic.severity.ERROR] = 'Error',
+}
+
 M.DiagnosticSign = {
   {
     condition = function()
-      return not conditions.lsp_attached or #vim.diagnostic.get(0) == 0
+      return not conditions.lsp_attached() or #vim.diagnostic.get(0) == 0
     end,
     provider = ' ',
   },
   {
     condition = function()
-      return conditions.lsp_attached or #vim.diagnostic.get(0) > 0
+      return #vim.diagnostic.get(0) > 0
     end,
     init = function(self)
       self.sign = nil
       self.has_sign = false
       local buf = vim.api.nvim_get_current_buf()
-      local signs = vim.fn.sign_getplaced(buf, { group = '*', lnum = vim.v.lnum })[1]
+      local diagnostics = vim.diagnostic.get(buf, { lnum = vim.v.lnum - 1 })
+      table.sort(diagnostics, function(a, b)
+        return a.severity < b.severity
+      end)
       -- only show the highest severity sign
-      if signs.signs[1] ~= nil and vim.startswith(signs.signs[1].group, 'vim.diagnostic') then
+      if diagnostics and #diagnostics > 0 then
         self.has_sign = true
-        self.sign = signs.signs[1]
+        self.sign = vim.fn.sign_getdefined('DiagnosticSign' .. severity_name[diagnostics[1].severity])[1]
       end
     end,
     provider = function(self)
       if self.has_sign then
-        return require('my.lsp.icons')[self.sign.name]
+        return self.sign.text
       end
     end,
     hl = function(self)
       if self.has_sign then
-        return self.sign.name
+        return self.sign.texthl
       end
     end,
   },
@@ -57,11 +67,16 @@ M.LineNumAndGitIndicator = {
         self.sign = nil
         self.has_sign = false
         local buf = vim.api.nvim_get_current_buf()
-        local signs = vim.fn.sign_getplaced(buf, { group = 'gitsigns_vimfn_signs_', lnum = vim.v.lnum })[1]
+
+        local signs = vim.fn.sign_getplaced(buf, { group = 'gitsigns_extmark_signs_', lnum = vim.v.lnum })[1]
         if signs.signs[1] ~= nil and signs.signs and signs.signs[1] then
           self.has_sign = true
           self.sign = signs.signs[1]
           self.hlgroup = self.sign.name
+          --
+          ---
+          ----
+          -----
         end
       end
     end,
