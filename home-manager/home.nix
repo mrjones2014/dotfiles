@@ -82,10 +82,7 @@ in {
     ../nixos-modules/allowed-unfree.nix
   ];
 
-  catppuccin = {
-    enable = true;
-    flavour = "mocha";
-  };
+  catppuccin.flavour = "mocha";
 
   programs = {
     # Let Home Manager install and manage itself.
