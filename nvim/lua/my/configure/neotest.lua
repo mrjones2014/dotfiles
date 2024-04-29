@@ -1,9 +1,10 @@
 return {
   'nvim-neotest/neotest',
   dependencies = {
+    'nvim-neotest/nvim-nio',
     'nvim-neotest/neotest-plenary',
     'nvim-neotest/neotest-go',
-    'haydenmeade/neotest-jest',
+    'nvim-neotest/neotest-jest',
     'rouge8/neotest-rust',
   },
   config = function()
