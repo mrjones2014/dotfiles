@@ -16,17 +16,16 @@
         "$character"
       ];
       right_format = "$cmd_duration";
-      # TODO
       character = {
-        success_symbol = "[ I ](bold bg:#89ca78 fg:#000000)[](fg:#89ca78)";
-        error_symbol = "[ I ](bold bg:#ef596f fg:#000000)[](fg:#ef596f)";
-        vicmd_symbol = "[ N ](bold bg:#89ca78 fg:#000000)[](fg:#89ca78)";
+        success_symbol = "[ I ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
+        error_symbol = "[ I ](bold bg:#f38ba8 fg:#000000)[](fg:#f38ba8)";
+        vicmd_symbol = "[ N ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
         vimcmd_replace_one_symbol =
-          "[ R ](bold bg:#d55fde fg:#000000)[](fg:#d55fde)";
+          "[ R ](bold bg:#cba6f8 fg:#000000)[](fg:#cba6f8)";
         vimcmd_replace_symbol =
-          "[ R ](bold bg:#d55fde fg:#000000)[](fg:#d55fde)";
+          "[ R ](bold bg:#cba6f8 fg:#000000)[](fg:#cba6f8)";
         vimcmd_visual_symbol =
-          "[ V ](bold bg:#e5c07b fg:#000000)[](fg:#e5c07b)";
+          "[ V ](bold bg:#f9e2af fg:#000000)[](fg:#f9e2af)";
       };
       git_branch = {
         symbol = "";
@@ -68,7 +67,7 @@
           description = "Show '.envrc' when using a direnv environment";
           when = ''[ "$DIRENV_DIR" != "" ] && [ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
-          style = "italic #e5c07b";
+          style = "italic #f9e2af";
           format = "[via](italic #586068) [.envrc]($style)";
         };
       };
