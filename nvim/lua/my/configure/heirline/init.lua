@@ -54,11 +54,12 @@ return {
           shared.Trunc,
           wb.Navic,
         },
-        statuscolumn = { ---@diagnostic disable-line:missing-fields
-          sc.DiagnosticSign,
-          sc.Align,
-          sc.LineNumAndGitIndicator,
-        },
+        -- TODO this causes "too many highlight groups" error: https://github.com/neovim/neovim/issues/16494
+        -- statuscolumn = { ---@diagnostic disable-line:missing-fields
+        --   sc.DiagnosticSign,
+        --   sc.Align,
+        --   sc.LineNumAndGitIndicator,
+        -- },
       })
     end,
   },
