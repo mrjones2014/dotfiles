@@ -29,7 +29,6 @@
     environment.systemPackages = with pkgs.gnomeExtensions; [
       dash-to-dock
       tray-icons-reloaded
-      search-light
       no-overview
       gtile
     ];

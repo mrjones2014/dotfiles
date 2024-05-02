@@ -26,7 +26,6 @@ in {
       ];
       enabled-extensions = [
         "trayIconsReloaded@selfmade.pl"
-        "search-light@icedman.github.com"
         "dash-to-dock@micxgx.gmail.com"
         "no-overview@fthx"
         "gTile@vibou"
@@ -36,9 +35,6 @@ in {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
       clock-show-weekday = true;
-    };
-    "org/gnome/shell/extensions/search-light" = {
-      shortcut-search = [ "<Super>space" ];
     };
     "org/gnome/shell/extensions/gtile" = {
       auto-close-keyboard-shortcut = [ true ];
