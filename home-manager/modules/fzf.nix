@@ -13,8 +13,8 @@ let
       rhs = "fzf-project-widget";
     }
     {
-      # ctrl+t
-      lhs = "\\ct";
+      # ctrl+f
+      lhs = "\\cf";
       rhs = "fzf-file-widget-wrapped";
     }
     {
