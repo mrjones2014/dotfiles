@@ -81,8 +81,6 @@ in {
         end
 
         local active_idx = active_tab_idx(tabs)
-        print('formatting tab ' .. i)
-        print('active tab ' .. active_idx)
         local end_sep_color = inactive_bg
         if i == (#tabs - 1) then
           end_sep_color = bar_bg
@@ -143,6 +141,24 @@ in {
       config.front_end = 'WebGpu'
       config.webgpu_power_preference = 'HighPerformance'
 
+      local function find_vim_pane(tab)
+        for _, pane in ipairs(tab:panes()) do
+          if smart_splits.is_vim(pane) then
+            return pane
+          end
+        end
+      end
+
+      local function active_pane_with_info(panes_with_info)
+        for _, pane in ipairs(panes_with_info) do
+          if pane.is_active then
+            return pane
+          end
+        end
+
+        return nil
+      end
+
       -- simulate tmux prefix with leader
       config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
       config.keys = {
@@ -175,6 +191,31 @@ in {
           key = 'RightArrow',
           mods = 'META',
           action = wezterm.action.ActivateTabRelative(1),
+        },
+        -- Toggle zoom for neovim
+        {
+          key = 't',
+          mods = 'CTRL',
+          action = wezterm.action_callback(function(window, pane)
+            local tab = pane:tab()
+            local panes = tab:panes_with_info()
+            local active_pane_info = active_pane_with_info(panes)
+            if #panes == 1 then
+              -- Open pane below if when there is only one pane and it is vim
+              pane:split({ direction = "Bottom", size = 20 })
+            else
+              if not active_pane_info.is_zoomed then
+                local vim = find_vim_pane(tab)
+                if vim then
+                  vim:activate()
+                end
+                tab:set_zoomed(true)
+              else
+                tab:set_zoomed(false)
+                window:perform_action({ ActivatePaneDirection = 'Down' }, pane)
+              end
+            end
+          end),
         },
         { key = '-', mods = 'SUPER', action = wezterm.action.DecreaseFontSize },
         { key = '0', mods = 'SUPER', action = wezterm.action.ResetFontSize },
