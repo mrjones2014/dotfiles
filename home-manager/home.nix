@@ -68,6 +68,7 @@ in {
     inputs.catppuccin.homeManagerModules.catppuccin
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
+    ./modules/rofi.nix
     ./modules/espanso.nix
     ./modules/nvim.nix
     ./modules/fish.nix
