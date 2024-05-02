@@ -48,11 +48,11 @@ in {
       config.hide_tab_bar_if_only_one_tab = true
       local hostname = wezterm.hostname()
       local function tab_title(tab)
-        local title = string.sub(tab.tab_title or "", #hostname)
+        local title = string.sub(tab.tab_title or "", #hostname + 3)
         if title and #title > 0 then
           return title
         end
-        return string.sub(tab.active_pane.title, #hostname)
+        return string.sub(tab.active_pane.title, #hostname + 3)
       end
       local function active_tab_idx(tabs)
         for _, tab in ipairs(tabs) do
