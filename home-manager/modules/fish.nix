@@ -110,12 +110,18 @@ in {
           description =
             "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
+            argparse --name nix-apply 'o/offline' -- $argv
+            or return 1
+
             pushd ~/git/dotfiles
-            git fetch
-            set -l gitstatus $(git log HEAD..origin/$(git branch --show-current))
-            if [ "$gitstatus" != "" ]
-              echo "Run `git pull` in ~/git/dotfiles first"
-              return
+            if not set _flag_offline
+              echo "syncing with remote..."
+              git fetch > /dev/null && echo "" || return 1
+              set -l gitstatus $(git log HEAD..origin/$(git branch --show-current))
+              if "$gitstatus" != ""
+                echo "Run `git pull` in ~/git/dotfiles first"
+                return 1
+              end
             end
             popd
             ${if isDarwin then
