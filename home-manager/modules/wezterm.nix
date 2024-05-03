@@ -42,36 +42,19 @@ in {
       config.show_new_tab_button_in_tab_bar = false
       config.tab_max_width = 30
       config.tab_bar_at_bottom = true
-      config.hide_tab_bar_if_only_one_tab = true
-
-      -- Equivalent to POSIX basename(3)
-      -- Given "/foo/bar" returns "bar"
-      -- Given "c:\\foo\\bar" returns "bar"
-      local function basename(s)
-        return string.gsub(s, '(.*[/\\])(.*)', '%2')
-      end
-
-      local function replace_home(path)
-        if not path then
-          return ""
-        end
-        if path:sub(1, #wezterm.home_dir) == wezterm.home_dir then
-          return string.format('~%s', path:sub(#wezterm.home_dir + 1))
-        end
-        return path
-      end
+      config.hide_tab_bar_if_only_one_tab = false
 
       local function tab_title(tab)
-        local pane = tab.active_pane
-        local process = basename(pane.foreground_process_name or "")
-        if process == "fish" or process == "" then
-          return basename(replace_home(pane.current_working_dir.file_path))
-        elseif process == "nvim" then
-          return string.format('nvim %s', basename(replace_home(pane.current_working_dir.file_path)))
-        else
-          return process
+        local hostname = wezterm.hostname()
+        local title = tab.tab_title
+
+        if title and #title > 0 then
+          return title
         end
+
+        return string.sub(tab.active_pane.title, #hostname)
       end
+
       local function active_tab_idx(tabs)
         for _, tab in ipairs(tabs) do
           if tab.is_active then
@@ -115,6 +98,7 @@ in {
           { Background = { Color = bg } },
           { Foreground = { Color = fg } },
           { Text = title },
+          { Text = has_unseen_output and '  ' or "" },
           { Background = { Color = bar_bg } },
           { Foreground = { Color =  bg } },
           { Text = "" },
@@ -234,6 +218,19 @@ in {
               end
             end
           end),
+        },
+        -- Rename tab
+        {
+          key = "r",
+          mods = "CMD",
+          action = wezterm.action.PromptInputLine({
+            description = "Enter new name for tab",
+            action = wezterm.action_callback(function(window, _, line)
+              if line then
+                window:active_tab():set_title(line)
+              end
+            end),
+          }),
         },
         { key = '-', mods = 'SUPER', action = wezterm.action.DecreaseFontSize },
         { key = '0', mods = 'SUPER', action = wezterm.action.ResetFontSize },
