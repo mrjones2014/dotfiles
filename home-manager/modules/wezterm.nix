@@ -52,7 +52,13 @@ in {
           return title
         end
 
-        return string.sub(tab.active_pane.title, #hostname)
+        return string.sub(tab.active_pane.title, #hostname ${
+        # on NixOS, the hostname is returned surrounded by brackets and followed by a space
+        # e.g.
+        # NixOS: [nixos-pc]
+        # macOS: mats-mac
+          if isLinux then "+ 3" else ""
+        })
       end
 
       local function active_tab_idx(tabs)
