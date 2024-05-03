@@ -46,13 +46,28 @@ in {
       config.tab_max_width = 22
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = true
-      local hostname = wezterm.hostname()
-      local function tab_title(tab)
-        local title = string.sub(tab.tab_title or "", #hostname + 3)
-        if title and #title > 0 then
-          return title
+
+      -- Equivalent to POSIX basename(3)
+      -- Given "/foo/bar" returns "bar"
+      -- Given "c:\\foo\\bar" returns "bar"
+      local function basename(s)
+        return string.gsub(s, '(.*[/\\])(.*)', '%2')
+      end
+
+      local function replace_home(path)
+        if path:sub(1, #wezterm.home_dir) == wezterm.home_dir then
+          return string.format('~%s', path:sub(#wezterm.home_dir + 1))
         end
-        return string.sub(tab.active_pane.title, #hostname + 3)
+      end
+
+      local function tab_title(tab)
+        local pane = tab.active_pane
+        local process = basename(pane.foreground_process_name or "")
+        if process == "fish" then
+          return basename(replace_home(pane.current_working_dir.file_path))
+        else
+          return process
+        end
       end
       local function active_tab_idx(tabs)
         for _, tab in ipairs(tabs) do
@@ -223,7 +238,7 @@ in {
         { key = 'c', mods = 'SUPER', action = wezterm.action.CopyTo('Clipboard') },
         { key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom('Clipboard') },
         { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
-        { key = 'p', mods = 'SUPER', action = wezterm.action.ActivateCommandPalette },
+        { key = 'k', mods = 'SUPER', action = wezterm.action.ActivateCommandPalette },
       }
 
       smart_splits.apply_to_config(config)
