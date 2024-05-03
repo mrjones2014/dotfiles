@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, isLinux, ... }: {
   programs.rofi = {
-    enable = true;
+    enable = isLinux;
     catppuccin.enable = true;
     plugins = with pkgs; [ rofi-top rofi-calc rofi-power-menu ];
     terminal = "${config.programs.wezterm.package}/bin/wezterm";

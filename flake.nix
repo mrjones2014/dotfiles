@@ -45,7 +45,11 @@
             home-manager = {
               useUserPackages = true;
               users.mat = import ./home-manager/home.nix;
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = {
+                inherit inputs;
+                isDarwin = false;
+                isLinux = true;
+              };
             };
           }
         ];
@@ -53,7 +57,11 @@
     };
     homeConfigurations = {
       "mac" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+          isDarwin = true;
+          isLinux = false;
+        };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ inputs.arkenfox.hmModules.default ./home-manager/home.nix ];
       };

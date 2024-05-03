@@ -1,9 +1,4 @@
-{ inputs, config, pkgs, lib, ... }:
-let
-  inherit (pkgs) stdenv;
-  inherit (stdenv) isLinux;
-  inherit (stdenv) isDarwin;
-in {
+{ inputs, config, pkgs, lib, isDarwin, isLinux, ... }: {
   nixpkgs.overlays = [
     (final: prev:
       (import ../packages {

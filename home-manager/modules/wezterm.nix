@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-let
-  inherit (pkgs) stdenv;
-  inherit (stdenv) isLinux;
-  fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
+{ pkgs, isLinux, ... }:
+let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
     packages = with pkgs; [
@@ -55,16 +52,22 @@ in {
       end
 
       local function replace_home(path)
+        if not path then
+          return ""
+        end
         if path:sub(1, #wezterm.home_dir) == wezterm.home_dir then
           return string.format('~%s', path:sub(#wezterm.home_dir + 1))
         end
+        return path
       end
 
       local function tab_title(tab)
         local pane = tab.active_pane
         local process = basename(pane.foreground_process_name or "")
-        if process == "fish" then
+        if process == "fish" or process == "" then
           return basename(replace_home(pane.current_working_dir.file_path))
+        elseif process == "nvim" then
+          return string.format('nvim %s', basename(replace_home(pane.current_working_dir.file_path)))
         else
           return process
         end
@@ -210,7 +213,7 @@ in {
         -- Toggle zoom for neovim
         {
           key = 't',
-          mods = 'CTRL',
+          mods = 'SUPER',
           action = wezterm.action_callback(function(window, pane)
             local tab = pane:tab()
             local panes = tab:panes_with_info()

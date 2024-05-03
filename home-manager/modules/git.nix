@@ -1,7 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, isDarwin, isLinux, ... }:
 let
-  inherit (pkgs) git stdenv;
-  inherit (stdenv) isLinux;
   git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
     #!${pkgs.bash}/bin/bash
     if test "$#" -ne 0; then
@@ -17,7 +15,7 @@ let
 in {
   programs.git = {
     enable = true;
-    package = git.override {
+    package = pkgs.git.override {
       guiSupport = false; # gui? never heard of her.
     };
     ignores = [ "Session.vim" ".DS_Store" ".direnv/" ];
@@ -33,10 +31,7 @@ in {
       add-ignore-whitespace =
         "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | ${
-          if pkgs.stdenv.isDarwin then
-            "pbcopy"
-          else
-            "xclip -selection clipboard"
+          if isDarwin then "pbcopy" else "xclip -selection clipboard"
         }";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
     };

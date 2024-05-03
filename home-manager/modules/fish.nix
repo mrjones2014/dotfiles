@@ -1,7 +1,5 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, isDarwin, isLinux, ... }:
 let
-  inherit (pkgs) stdenv;
-  inherit (stdenv) isLinux;
   op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
@@ -45,14 +43,8 @@ in {
       }];
 
       shellAliases = {
-        copy = if pkgs.stdenv.isDarwin then
-          "pbcopy"
-        else
-          "xclip -selection clipboard";
-        paste = if pkgs.stdenv.isDarwin then
-          "pbpaste"
-        else
-          "xlip -o -selection clipboard";
+        copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
+        paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
         cat = "bat";
         gogit = "cd ~/git";
         "!!" = "eval \\$history[1]";
@@ -126,7 +118,7 @@ in {
               return
             end
             popd
-            ${if pkgs.stdenv.isDarwin then
+            ${if isDarwin then
               "home-manager switch --flake ~/git/dotfiles/.#mac"
             else
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}

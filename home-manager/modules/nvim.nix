@@ -1,8 +1,4 @@
-{ config, pkgs, ... }:
-let
-  inherit (pkgs) stdenv;
-  inherit (stdenv) isLinux;
-in {
+{ config, pkgs, isLinux, ... }: {
   home.sessionVariables = {
     MANPAGER = "nvim -c 'Man!' -o -";
     LIBSQLITE = if isLinux then
