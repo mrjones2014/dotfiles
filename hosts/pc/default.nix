@@ -7,6 +7,10 @@
     ../../nixos-modules/allowed-unfree.nix
     ./hardware-configuration.nix
   ];
+
+  boot.loader.efi. # Enable the X11 windowing system.
+  xserver.enable = true;
+  efiSysMountPoint = "/boot/efi";
   users.users.mat = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -74,4 +78,13 @@
   # to autoload at boot:
   boot.kernelModules = [ "gcadapter_oc" ];
   # services.udev.packages = [ pkgs.dolphinEmu ];
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "22.11"; # Did you read the comment?
+
 }

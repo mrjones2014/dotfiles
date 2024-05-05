@@ -18,24 +18,39 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      # server = nixpkgs.lib.nixosSystem {
-      #   specialArgs = { inherit inputs; };
-      #   system = "x86_64-linux";
-      #   modules = [
-      #     ./nixos-modules/common.nix
-      #     ./hosts/server/default.nix
-      #     home-manager.nixosModules.home-manager
-      #     {
-      #       home-manager = {
-      #         useUserPackages = true;
-      #         users.mat = import ./home-manager/server.nix;
-      #         extraSpecialArgs = { inherit inputs; };
-      #       };
-      #     }
-      #   ];
-      # };
+      server = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          isServer = true;
+          isLinux = true;
+          isDarwin = false;
+        };
+        system = "x86_64-linux";
+        modules = [
+          ./nixos-modules/common.nix
+          ./hosts/server/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              users.mat = import ./home-manager/server.nix;
+              extraSpecialArgs = {
+                inherit inputs;
+                isServer = true;
+                isLinux = true;
+                isDarwin = false;
+              };
+            };
+          }
+        ];
+      };
       pc = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          isServer = false;
+          isDarwin = false;
+          isLinux = true;
+        };
         system = "x86_64-linux";
         modules = [
           ./nixos-modules/common.nix
@@ -47,6 +62,7 @@
               users.mat = import ./home-manager/home.nix;
               extraSpecialArgs = {
                 inherit inputs;
+                isServer = false;
                 isDarwin = false;
                 isLinux = true;
               };
@@ -59,6 +75,7 @@
       "mac" = home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = {
           inherit inputs;
+          isServer = false;
           isDarwin = true;
           isLinux = false;
         };

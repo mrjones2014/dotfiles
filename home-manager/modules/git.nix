@@ -1,4 +1,4 @@
-{ pkgs, isDarwin, isLinux, ... }:
+{ pkgs, isDarwin, isLinux, isServer, config, ... }:
 let
   git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
     #!${pkgs.bash}/bin/bash
@@ -47,6 +47,7 @@ in {
       commit = { gpgsign = true; };
       gpg = {
         format = "ssh";
+      } // pkgs.lib.optionalAttrs (!isServer) {
         ssh = {
           program = if isLinux then
             "/run/current-system/sw/bin/op-ssh-sign"
