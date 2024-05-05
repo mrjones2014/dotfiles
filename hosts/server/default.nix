@@ -1,6 +1,7 @@
 { pkgs, ... }: {
 
-  imports = [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ];
+  imports =
+    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./samba.nix ];
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -32,6 +33,7 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
 
+  networking.firewall.enable = true;
   services = {
     openssh = {
       enable = true;

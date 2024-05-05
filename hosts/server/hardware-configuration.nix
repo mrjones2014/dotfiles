@@ -10,16 +10,20 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
   };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/1d1ea430-2313-4753-a4b2-d20923e375a2";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/FC16-1546";
-    fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/1d1ea430-2313-4753-a4b2-d20923e375a2";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/FC16-1546";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+    "/mnt/jellyfin" = {
+      device = "/dev/disk/by-uuid/03606b53-5d7c-4e68-b729-9615d100c902";
+      fsType = "ext4";
+    };
   };
 
   swapDevices =

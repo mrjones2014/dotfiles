@@ -2,7 +2,7 @@
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   security.acme = {
     acceptTerms = true;
-    email = "homelab@mjones.network";
+    defaults.email = "homelab@mjones.network";
   };
   services.nginx = let
     SSL = {
