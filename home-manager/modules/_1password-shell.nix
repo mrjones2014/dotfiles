@@ -13,8 +13,10 @@ let
     echo $PASSWORD
   '';
 in {
-  sessionVariables.SUDO_ASKPASS = "${op_sudo_password_script}";
-  home.packages = with pkgs; [ _1password ];
+  home = {
+    sessionVariables.SUDO_ASKPASS = "${op_sudo_password_script}";
+    packages = with pkgs; [ _1password ];
+  };
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
   programs = {
     fish = {

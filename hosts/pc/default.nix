@@ -8,9 +8,9 @@
     ./hardware-configuration.nix
   ];
 
-  boot.loader.efi. # Enable the X11 windowing system.
-  xserver.enable = true;
-  efiSysMountPoint = "/boot/efi";
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   users.users.mat = {
     shell = pkgs.fish;
     isNormalUser = true;

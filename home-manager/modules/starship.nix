@@ -18,6 +18,10 @@
         "$character"
       ];
       right_format = "$cmd_duration";
+      username = {
+        show_always = false;
+        detect_env_vars = [ "SSH_CONNECTION" ];
+      };
       character = {
         success_symbol = "[ I ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
         error_symbol = "[ I ](bold bg:#f38ba8 fg:#000000)[](fg:#f38ba8)";
