@@ -15,6 +15,9 @@
       "ai.mjones.network" = SSL // {
         locations."/".proxyPass = "http://127.0.0.1:8080";
       };
+      "jellyfin.mjones.network" = SSL // {
+        locations."/".proxyPass = "http://127.0.0.1:8096";
+      };
     };
   };
 }
