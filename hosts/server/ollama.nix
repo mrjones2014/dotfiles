@@ -1,8 +1,5 @@
 { pkgs, ... }: {
   imports = [ ./open-webui.nix ];
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
+  services.ollama.enable = true;
   environment.systemPackages = [ pkgs.oterm ];
 }

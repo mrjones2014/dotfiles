@@ -3,7 +3,6 @@
   imports = [
     ../../nixos-modules/desktop_environment.nix
     ../../nixos-modules/_1password.nix
-    ../../nixos-modules/ollama.nix
     ../../nixos-modules/allowed-unfree.nix
     ./hardware-configuration.nix
   ];

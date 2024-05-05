@@ -1,13 +1,17 @@
 { pkgs, ... }: {
 
-  imports = [ ./hardware-configuration.nix ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  networking.hostName = "nixos-server";
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  imports = [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ];
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot";
+    };
+  };
+  networking = {
+    hostName = "nixos-server";
+    networkmanager.enable = true;
+  }; # Easiest to use and most distros use this by default.
   time.timeZone = "America/New_York";
 
   # This option defines the first version of NixOS you have installed on this particular machine,
