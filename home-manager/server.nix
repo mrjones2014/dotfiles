@@ -10,6 +10,7 @@
   home = {
     username = "mat";
     homeDirectory = "/home/mat";
+    sessionVariables.TERM = "xterm-256color";
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -27,6 +28,7 @@
     keep-outputs = true
   '';
   imports = [
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./modules/fish.nix
     ./modules/nvim.nix
     ./modules/ssh.nix

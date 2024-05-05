@@ -1,18 +1,4 @@
-{ pkgs, lib, inputs, isDarwin, isLinux, ... }:
-let
-  op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
-    #!${pkgs.bash}/bin/bash
-    # TODO figure out a way to do this without silently depending on `op` being on $PATH
-    # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
-    PASSWORD="$(op item get "System Password" --fields password)"
-    if [[ -z "$PASSWORD" ]]; then
-      echo "Failed to get password from 1Password."
-      read -s -p "Password: " PASSWORD
-    fi
-
-    echo $PASSWORD
-  '';
-in {
+{ pkgs, lib, isDarwin, isLinux, ... }: {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     HOMEBREW_NO_ANALYTICS = "1";
@@ -20,17 +6,11 @@ in {
     GOPATH = "$HOME/go";
     GIT_MERGE_AUTOEDIT = "no";
     NEXT_TELEMETRY_DISABLED = "1";
-    SUDO_ASKPASS = "${op_sudo_password_script}";
   };
   programs = {
     btop = {
       enable = true;
       catppuccin.enable = true;
-    };
-
-    _1password-shell-plugins = {
-      enable = true;
-      plugins = with pkgs; [ gh ];
     };
 
     fish = {
@@ -53,7 +33,6 @@ in {
         ll = "ls -l --git";
         l = "ls -laH";
         lg = "ls -lG";
-        sudo = "sudo -A";
         clear = "clear && _prompt_move_to_bottom";
         nix-server-apply =
           "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server";
@@ -66,17 +45,6 @@ in {
 
       shellInit = ''
         set -g fish_prompt_pwd_dir_length 20
-
-        # Setting up SSH_AUTH_SOCK here rather than ~/.ssh/config
-        # because that overrides the environment variables,
-        # meaning I can't easily switch between the production and
-        # debug auth sockets while working on the 1Password desktop app
-        set -g -x SSH_TTY (tty)
-        if [ "$(uname)" = Darwin ]
-          set -g -x SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-        else
-          set -g -x SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
-        end
 
         # Source nix files, required to set fish as default shell, otherwise
         # it doesn't have the nix env vars
@@ -226,39 +194,11 @@ in {
             ${if isLinux then "xdg-open" else "open"} "$fill_session_url"
           '';
         };
-        opauthsock = {
-          argumentNames = [ "mode" ];
-          description =
-            "Configure 1Password SSH agent to use production or debug socket path";
-          body = ''
-            # complete -c opauthsock -n __fish_use_subcommand -xa prod -d 'use production socket path'
-            # complete -c opauthsock -n __fish_use_subcommand -xa debug -d 'use debug socket path'
-            # complete -c opauthsock -n 'not __fish_use_subcommand' -f
-
-              if test -z $mode
-                echo $SSH_AUTH_SOCK
-              else
-                set -f prefix "$HOME/.1password"
-                if [ "$(uname)" = Darwin ]
-                  set -f prefix "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password"
-                end
-                echo "setting ssh auth sock to: $mode"
-                switch $mode
-                  case prod
-                    set -g -x SSH_AUTH_SOCK "$prefix/t/agent.sock"
-                  case debug
-                    set -g -x SSH_AUTH_SOCK "$prefix/t/debug/agent.sock"
-                end
-              end
-          '';
-        };
       };
     };
   };
 
   home.packages = with pkgs;
-    [ tealdeer tokei cachix _1password jq ]
-    ++ lib.lists.optionals isLinux [ xclip ];
+    [ tealdeer tokei cachix jq ] ++ lib.lists.optionals isLinux [ xclip ];
 
-  imports = [ inputs._1password-shell-plugins.hmModules.default ];
 }

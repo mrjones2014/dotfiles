@@ -5,6 +5,8 @@
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
+        "$username"
+        "$hostname"
         "$directory"
         "\${custom.git_server_icon}"
         "$git_branch"

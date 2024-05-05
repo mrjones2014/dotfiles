@@ -1,4 +1,6 @@
-{ inputs, config, pkgs, lib, isDarwin, isLinux, ... }: {
+{ inputs, config, pkgs, lib, isDarwin, isLinux, ... }:
+
+{
   nixpkgs.overlays = [
     (final: prev:
       (import ../packages {
@@ -63,6 +65,7 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
+    ./modules/_1password-shell.nix
     ./modules/rofi.nix
     ./modules/espanso.nix
     ./modules/nvim.nix
