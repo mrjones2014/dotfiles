@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, isDarwin, ... }:
 let
   op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
@@ -13,14 +13,10 @@ let
     echo $PASSWORD
   '';
 in {
-  home = {
-    sessionVariables.SUDO_ASKPASS = "${op_sudo_password_script}";
-    packages = with pkgs; [ _1password ];
-  };
+  home.packages = with pkgs; [ _1password ];
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
   programs = {
     fish = {
-      shellAliases.sudo = "sudo -A";
       shellInit = ''
         # Setting up SSH_AUTH_SOCK here rather than ~/.ssh/config
         # because that overrides the environment variables,
@@ -33,6 +29,11 @@ in {
           set -g -x SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
         end
       '';
+      interactiveShellInit = if isDarwin then ''
+        export SUDO_ASKPASS="${op_sudo_password_script}"
+        alias sudo="sudo -A"
+      '' else
+        "";
       functions.opauthsock = {
         argumentNames = [ "mode" ];
         description =
