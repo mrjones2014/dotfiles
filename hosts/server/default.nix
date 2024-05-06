@@ -35,6 +35,13 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
   networking.firewall.enable = true;
+  security = {
+    sudo.enable = true;
+    pam = {
+      enableSSHAgentAuth = true;
+      services.sudo.sshAgentAuth = true;
+    };
+  };
   services = {
     openssh = {
       enable = true;
