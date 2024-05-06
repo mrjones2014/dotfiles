@@ -1,7 +1,8 @@
 { pkgs, ... }: {
 
   imports =
-    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./samba.nix ];
+    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./content.nix ];
+
   boot = {
     loader = {
       systemd-boot.enable = true;

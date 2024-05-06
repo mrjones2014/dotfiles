@@ -23,6 +23,7 @@
     "/mnt/jellyfin" = {
       device = "/dev/disk/by-uuid/03606b53-5d7c-4e68-b729-9615d100c902";
       fsType = "ext4";
+      options = [ "bind" ];
     };
   };
 
