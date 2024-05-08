@@ -9,27 +9,39 @@
       enableACME = true;
       forceSSL = true;
     };
+    services = builtins.map (service: {
+      name = "${service.name}.mjones.network";
+      value = SSL // {
+        locations."/".proxyPass = "https://127.0.0.1:${service.port}";
+      };
+    }) [
+      {
+        name = "ai";
+        port = "8080";
+      }
+      {
+        name = "jellyfin";
+        port = "8096";
+      }
+      {
+        name = "deluge";
+        port = "8112";
+      }
+      {
+        name = "prowlarr";
+        port = "9696";
+      }
+      {
+        name = "sonarr";
+        port = "8989";
+      }
+      {
+        name = "radarr";
+        port = "7878";
+      }
+    ];
   in {
     enable = true;
-    virtualHosts = {
-      "ai.mjones.network" = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:8080";
-      };
-      "jellyfin.mjones.network" = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:8096";
-      };
-      "deluge.mjones.network" = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:8112";
-      };
-      "prowlarr.mjones.network" = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:9696";
-      };
-      "sonarr.mjones.network" = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:8989";
-      };
-      "radarr.mjones.network" = SSL // {
-        locations."/".proxyPass = "https://127.0.0.1:7878";
-      };
-    };
+    virtualHosts = builtins.listToAttrs services;
   };
 }
