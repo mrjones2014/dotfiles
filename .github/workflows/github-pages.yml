@@ -9,26 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-      - uses: actions-rs/cargo@v1
-        with:
-          command: install
-          args: --path ublock-mdbook/
-      - name: Setup mdbook
-        uses: peaceiris/actions-mdbook@v2
-        with:
-          mdbook-version: 'latest'
-      - name: Download custom highlight.js
-        run: mkdir -p theme && curl https://raw.githubusercontent.com/mrjones2014/highlight-js-nix/master/highlight.js -o theme/highlight.js
-      - name: Run mbdook build
-        run: mdbook build
-      - name: Generate ublock-filters.txt
-        run: ublock-mdbook gen-filter-list
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build mdbook site
+        run: nix build ./docs/
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./book
+          publish_dir: ./result/
