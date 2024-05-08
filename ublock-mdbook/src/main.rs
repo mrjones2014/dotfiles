@@ -12,10 +12,9 @@ const FILTER_LIST_TXT_PATH: &str =
     concat!(env!("CARGO_MANIFEST_DIR"), "/../book/ublock-filters.txt");
 
 fn parse_ublock_filters() -> (String, String, String) {
-    let filters = serde_yaml::from_str::<Vec<HashMap<String, String>>>(include_str!(
-        "../../conf.d/ublock-filters.yml"
-    ))
-    .unwrap();
+    let filters =
+        serde_yaml::from_str::<Vec<HashMap<String, String>>>(include_str!("./ublock-filters.yml"))
+            .unwrap();
 
     let md_linkify_pattern = Regex::new(r"[^A-Za-z]").unwrap();
 

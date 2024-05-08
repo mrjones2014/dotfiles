@@ -1,0 +1,157 @@
+- YouTube: |
+    ! Block YouTube's absolutely disgusting, disrespectful, abusive,
+    ! and probably illegal artificial 5 second delay for Firefox users
+    www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
+
+    ! Block "ambient mode" garbage
+    youtube.com###cinematics.ytd-watch-flexy:remove()
+
+    ! Block YouTube's cringe gigantic banner ads on the home screen
+    www.youtube.com##ytd-statement-banner-renderer
+    www.youtube.com##.ytd-brand-video-shelf-renderer
+
+    ! Block YouTube's definitely totally unbiased "misinformation" banners, I can think for myself
+    www.youtube.com##.ytd-clarification-renderer
+    www.youtube.com###clarify-box
+
+    ! Copied from https://raw.githubusercontent.com/mchangrh/yt-neuter/main/yt-neuter.txt
+
+    ! voice search button
+    youtube.com###voice-search-button
+
+    ! create button
+    youtube.com##ytd-topbar-menu-button-renderer:has(button[aria-label=Create])
+
+    ! block image/animations from being fetched (falls back to normal logo)
+    ||www.gstatic.com/youtube/img/promos/*$image
+
+    ! block child elements of yoodle
+    youtube.com##.ytd-yoodle-renderer
+
+    !! surveys (#24)
+    ! survey answer card/ thanks
+    youtube.com##yt-survey-answer-card-renderer
+
+    ! checkbox survey?
+    youtube.com##.ytd-checkbox-survey-renderer
+
+    ! feedback survey?
+    youtube.com##ytd-feedback-survey-renderer
+    youtube.com##.ytd-feedback-survey-renderer
+
+    ! follow up survey?
+    youtube.com##.ytd-survey-follow-up-renderer
+    youtube.com##ytd-survey-follow-up-renderer
+
+    ! generic surveys
+    youtube.com##ytd-inline-survey-renderer
+    youtube.com##.ytd-inline-survey-renderer
+
+    ! multistage survey?
+    youtube.com##.ytd-multi-stage-survey-renderer
+    youtube.com##ytd-multi-stage-survey-renderer
+
+    ! ratings survey?
+    youtube.com##ytd-rating-survey-renderer
+    youtube.com##.ytd-rating-survey-renderer
+
+    ! RED exit survey
+    youtube.com##.ytd-red-cancel-survey-renderer
+    youtube.com##ytd-red-cancel-survey-renderer
+
+    ! "how are your recommendations" survey
+    youtube.com##ytd-single-option-survey-renderer
+    youtube.com##.ytd-single-option-survey-renderer
+
+    ! shelves (#15)
+    ! game shelf
+    youtube.com##ytd-rich-shelf-renderer[has-rounded-box-art-thumbnail-style]
+
+    ! free movies (targets movies channelID
+    youtube.com##ytd-rich-shelf-renderer:has(a[href="/channel/UClgRkhTL3_hImCAmdLfDE4g"])
+
+    ! community posts
+    youtube.com##ytd-rich-shelf-renderer:has(ytd-rich-item-renderer[is-post])
+
+    ! breaking news shelf
+    youtube.com##ytd-rich-shelf-renderer:has(#title:has-text(Breaking news))
+    m.youtube.com##ytm-rich-section-renderer:has(.rich-shelf-title:has-text(Breaking news))
+
+    ! brand featured banner/ shelf #40
+    youtube.com##ytd-rich-shelf-renderer:has(ytd-badge-supported-renderer#featured-badge)
+    youtube.com##ytd-statement-banner-renderer
+    youtube.com##ytd-brand-video-singleton-renderer
+    youtube.com##ytd-brand-video-shelf-renderer
+    youtube.com##.ytd-brand-video-shelf-renderer
+
+    ! mixes
+    youtube.com##ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer)
+
+    ! movies free with ads
+    youtube.com##ytd-rich-item-renderer:has(.badge-style-type-ypc> span:has-text(Free with Ads))
+
+    ! "new to you" (#2)
+    youtube.com##ytd-rich-item-renderer.style-scope:has(>.ytd-feed-nudge-renderer)
+    youtube.com##.ytd-rich-item-renderer:has(>.ytd-feed-nudge-renderer)
+
+    ! explore categories
+    youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER])
+
+    ! youtube shorts in sidebar on video player page
+    youtube.com##ytd-reel-shelf-renderer
+
+- Stack Overflow / Stack Exchange: |
+    ! Block the cookie banner that covers the entire bottom left corner even with JS disabled
+    stackexchange.com##.js-consent-banner
+    stackoverflow.com##.js-consent-banner
+    askubuntu.com##.js-consent-banner
+
+- GitHub: |
+    ! Block "Code 55% faster with GitHub Copilot" (lmao)
+    github.com##button:has-text(with GitHub Copilot)
+
+    ! Block GitHub's cringe algorithmic social media style feed
+    github.com###feed-next
+    github.com##[aria-labelledby="feed-next"]
+
+    ! Block the corporate changelog above the "Explore Repositories" section
+    github.com##.dashboard-changelog
+
+    ! Block GitHub's ads above the corporate changelog
+    github.com##.js-notice
+
+    ! Block "achievements"
+    github.com##.d-block:has(a[href*="?tab=achievements"])
+    github.com##.d-md-block:has(a[href*="?tab=achievements"])
+
+- Glassdoor: |
+    ! Block the "hard sell" overlay that tries to force you to pay money just to read a review
+    www.glassdoor.com##.hardsellOverlay
+
+- PayPal: |
+    ! Block the cookie banner, same as rejecting cookies
+    www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
+
+- Discord: |
+    ! Block "Add super reaction" button
+    discord.com##div[aria-label="Add Super Reaction"]
+
+    ! Block Nitro stuff in user settings
+    discord.com##div[class*="premiumTab"]
+    discord.com##div[class*="premiumFeatureBorder"]
+    discord.com##div[class*="birthdayFeatureBorder"]
+
+    ! Block "Super" reactions, paid emojis lmao
+    discord.com##div[class*="reactionInner"][aria-label*="super"]
+
+    ! Block "Download Apps" button, I uninstalled Discord for a reason
+    discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
+
+    ! Block "Buy Boosts" bar
+    discord.com##div[aria-label*="Buy Boosts to help unlock"]
+
+    ! Block "Discord's Birthday" crap
+    discord.com##li[role="listitem"]:has-text("Discord's Birthday")
+
+    ! Block "Start an Activity" button
+    discord.com##button[aria-label="Start an Activity"]
