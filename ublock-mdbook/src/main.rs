@@ -8,9 +8,6 @@ use regex::Regex;
 use std::io::prelude::*;
 use std::{collections::HashMap, error::Error, io, process};
 
-const FILTER_LIST_TXT_PATH: &str =
-    concat!(env!("CARGO_MANIFEST_DIR"), "/../book/ublock-filters.txt");
-
 fn parse_ublock_filters() -> (String, String, String) {
     let filters =
         serde_yaml::from_str::<Vec<HashMap<String, String>>>(include_str!("./ublock-filters.yml"))
@@ -114,7 +111,9 @@ fn make_app() -> Command {
             Command::new("supports")
                 .arg(Arg::new("renderer").required(true))
                 .about("Check whether a renderer is supported by this preprocessor"),
-        ).subcommand(Command::new("gen-filter-list").about("Generate ublock-filters.txt list that can be subscribed to."))
+        ).subcommand(Command::new("gen-filter-list").arg(
+            Arg::new("path").required(true)
+        ).about("Generate ublock-filters.txt list that can be subscribed to."))
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -128,13 +127,16 @@ fn main() -> Result<(), Box<dyn Error>> {
         } else {
             1
         });
-    } else if matches.subcommand_matches("gen-filter-list").is_some() {
+    } else if let Some(sub_args) = matches.subcommand_matches("gen-filter-list") {
+        let path = sub_args
+            .get_one::<String>("path")
+            .expect("required argument");
         let (filters_all, _, _) = parse_ublock_filters();
         let mut writer = std::fs::OpenOptions::new()
             .create(true)
             .write(true)
             .truncate(true)
-            .open(FILTER_LIST_TXT_PATH)?;
+            .open(path)?;
         writer.write_all(filters_all.as_bytes())?;
     } else if let Err(e) = handle_processing(&preprocessor) {
         eprintln!("{}", e);
