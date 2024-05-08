@@ -113,11 +113,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-it8XD0qP2lBHqdS1RKdnwybBphqCoBv+rehwfG3OH28=",
-        "path": "/nix/store/m33hl7zrrx5y73j8qy8k90s6kb5qz8v4-source/ublock-mdbook",
+        "path": "/nix/store/jncglmbr5x7drdksn10b4bpxm4ikxfgs-source/ublock-mdbook",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/m33hl7zrrx5y73j8qy8k90s6kb5qz8v4-source/ublock-mdbook",
+        "path": "/nix/store/jncglmbr5x7drdksn10b4bpxm4ikxfgs-source/ublock-mdbook",
         "type": "path"
       }
     }
