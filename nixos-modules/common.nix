@@ -50,7 +50,7 @@
   security = {
     sudo.enable = true;
     pam = {
-      enableSSHAgentAuth = true;
+      sshAgentAuth.enable = true;
       services.sudo.sshAgentAuth = true;
     };
   };
