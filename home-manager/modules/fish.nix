@@ -72,7 +72,11 @@
         };
         clone = {
           description = "Clone a git repository, then cd into it.";
-          body = "cd $HOME/git && git clone $argv && cd $(basename $argv .git)";
+          body = ''
+            echo "cd ~/git/"
+            cd $HOME/git
+            git clone $argv && cd $(basename $argv .git)
+          '';
         };
         nix-apply = {
           description =
