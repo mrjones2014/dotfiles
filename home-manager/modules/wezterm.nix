@@ -77,8 +77,8 @@ in {
         local i = tab.tab_index
         title = string.format(' %d %s ', i + 1, title)
 
-        -- Catppuccin colors
-        local bar_bg = '#11111b'
+        -- tokyonight colors
+        local bar_bg = '#292e42'
         local inactive_bg = '#585b70'
         local active_bg =  '#1e1e2e'
         local bg = inactive_bg
@@ -118,6 +118,11 @@ in {
       end)
 
       config.color_scheme = 'tokyonight_night'
+      config.colors = {
+        tab_bar = {
+          background = '#292e42'
+        }
+      }
       config.cursor_blink_rate = 0
       config.font = wezterm.font({
         family = 'Maple Mono',
