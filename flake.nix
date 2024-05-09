@@ -81,7 +81,7 @@
           isLinux = false;
         };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ inputs.arkenfox.hmModules.default ./home-manager/home.nix ];
+        modules = [ ./home-manager/home.nix ];
       };
     };
   };

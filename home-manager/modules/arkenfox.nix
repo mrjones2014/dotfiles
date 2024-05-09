@@ -1,4 +1,5 @@
-{
+{ inputs, ... }: {
+  imports = [ inputs.arkenfox.hmModules.default ];
   programs.firefox = {
     enable = true;
     arkenfox = {
