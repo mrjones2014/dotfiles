@@ -61,16 +61,10 @@
     ../nixos-modules/theme.nix
     # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
     # ./modules/arkenfox.nix
+    ./shared.nix
     ./modules/_1password-shell.nix
     ./modules/rofi.nix
     ./modules/espanso.nix
-    ./modules/nvim.nix
-    ./modules/fish.nix
-    ./modules/fzf.nix
-    ./modules/starship.nix
-    ./modules/bat.nix
-    ./modules/git.nix
-    ./modules/ssh.nix
     ./modules/wezterm.nix
     ./modules/librewolf.nix
     ./modules/gnome/default.nix

@@ -55,7 +55,7 @@ return {
       --   }
       -- }
 
-      require('Comment').setup({
+      require('Comment').setup({ ---@diagnostic disable-line: missing-fields
         pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       })
       require('Comment.ft').mysql = { '# %s', '/* %s */' }
