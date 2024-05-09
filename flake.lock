@@ -507,11 +507,11 @@
         "tokyonight": "tokyonight_2"
       },
       "locked": {
-        "lastModified": 1715213518,
-        "narHash": "sha256-CawQPUI2xBWZu6xKOUHqS1R4RtM+7h+OPUxRAIgiil4=",
+        "lastModified": 1715262338,
+        "narHash": "sha256-IZs74IFNB2DMu2+yUWc0vOPL3Ss7Zgy8Smwc+PENuDk=",
         "owner": "mrjones2014",
         "repo": "tokyonight.nix",
-        "rev": "211b0a8febdf288a785c27d40bbdb3147270efdc",
+        "rev": "468a2fe732afab6229425a5199b129b20e51c0d1",
         "type": "github"
       },
       "original": {

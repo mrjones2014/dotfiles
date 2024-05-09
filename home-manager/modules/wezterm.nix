@@ -117,7 +117,7 @@ in {
         }
       end)
 
-      config.color_scheme = 'Catppuccin Mocha'
+      config.color_scheme = 'tokyonight_night'
       config.colors = {
         cursor_bg = '#40a02b',
       }
