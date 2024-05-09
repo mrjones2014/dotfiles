@@ -39,6 +39,10 @@
         name = "radarr";
         port = "7878";
       }
+      {
+        name = "jellyseerr";
+        port = "5055";
+      }
     ];
   in {
     enable = true;

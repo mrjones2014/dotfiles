@@ -8,11 +8,14 @@
       # UDP: 1900 7359
       openFirewall = true;
     };
+    jellyseer = {
+      enable = true;
+      openFirewall = true;
+    };
     deluge = {
       enable = true;
       web = {
         enable = true;
-        port = 8112;
         openFirewall = true;
       };
     };
