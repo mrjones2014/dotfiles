@@ -29,7 +29,7 @@ in {
 
     (mkIf (theme == "tokyonight") {
       programs = {
-      git.delta.tokyonight.enable = true;
+        git.delta.tokyonight.enable = true;
         bat.tokyonight.enable = true;
         fish.tokyonight.enable = true;
         fzf.tokyonight.enable = true;
