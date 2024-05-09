@@ -8,14 +8,10 @@
     NEXT_TELEMETRY_DISABLED = "1";
   };
   programs = {
-    btop = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    btop = { enable = true; };
 
     fish = {
       enable = true;
-      catppuccin.enable = true;
 
       plugins = [{
         name = "foreign-env";

@@ -22,11 +22,11 @@ return {
       local shared = require('my.configure.heirline.shared')
       local sl = require('my.configure.heirline.statusline')
       local wb = require('my.configure.heirline.winbar')
-      local sc = require('my.configure.heirline.statuscolumn')
+      -- local sc = require('my.configure.heirline.statuscolumn')
 
       require('heirline').setup({
         opts = {
-          colors = require('catppuccin.palettes').get_palette('mocha'),
+          colors = require('my.utils.theme').heirline_colors,
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
             return conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))

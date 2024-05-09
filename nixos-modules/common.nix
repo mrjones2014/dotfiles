@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   # See https://github.com/nix-community/nix-direnv
   nix.extraOptions = ''
     keep-outputs = true
@@ -51,6 +51,8 @@
     sudo.enable = true;
     pam = {
       sshAgentAuth.enable = true;
+      # sshAgentAuth.authorizedKeysFiles =
+      #   lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
       services.sudo.sshAgentAuth = true;
     };
   };

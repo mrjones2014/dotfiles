@@ -1,6 +1,3 @@
-require('my.settings')
-require('my.plugins')
-
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
 _G.dbg = function(...)
@@ -9,7 +6,7 @@ _G.dbg = function(...)
   source = vim.loop.fs_realpath(source) or source
   source = vim.fn.fnamemodify(source, ':~:.') .. ':' .. info.linedefined
   local what = { ... }
-  if vim.tbl_islist(what) and vim.tbl_count(what) <= 1 then
+  if vim.islist(what) and vim.tbl_count(what) <= 1 then
     what = what[1]
   end
   local msg = vim.inspect(vim.deepcopy(what))
@@ -24,6 +21,9 @@ _G.dbg = function(...)
     end,
   })
 end
+
+require('my.settings')
+require('my.plugins')
 
 vim.api.nvim_create_autocmd('UiEnter', {
   callback = function()

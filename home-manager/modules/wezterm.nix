@@ -117,10 +117,7 @@ in {
         }
       end)
 
-      config.color_scheme = 'Catppuccin Mocha'
-      config.colors = {
-        cursor_bg = '#40a02b',
-      }
+      config.color_scheme = 'tokyonight_night'
       config.cursor_blink_rate = 0
       config.font = wezterm.font({
         family = 'Maple Mono',

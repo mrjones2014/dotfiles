@@ -123,7 +123,7 @@ M.Navic = {
   provider = function()
     return string.format(' %s', require('nvim-navic').get_location())
   end,
-  hl = { bg = 'surface2' },
+  hl = { bg = 'surface0' },
 }
 
 return M

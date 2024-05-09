@@ -5,6 +5,6 @@ result
 nvim/lazy-lock.json
 book/
 # mdbook theme, only used at build time in CI
-theme/
+docs/theme/
 ublock-mdbook/.direnv
 .direnv
