@@ -67,7 +67,6 @@ in {
         enable = true;
         line-numbers = true;
         navigate = true;
-        catppuccin.enable = true;
       };
       color = {
         ui = true;
