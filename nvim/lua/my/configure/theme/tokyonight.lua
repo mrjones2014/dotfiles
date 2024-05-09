@@ -52,8 +52,8 @@ return {
         fg = prompt,
       }
       hl.TelescopePromptTitle = {
-        bg = prompt,
-        fg = prompt,
+        bg = c.bg_dark,
+        fg = c.fg,
       }
       hl.TelescopePreviewTitle = {
         bg = c.bg,
