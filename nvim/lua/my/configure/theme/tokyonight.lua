@@ -32,7 +32,6 @@ return {
       for key, _ in pairs(hl) do
         if vim.startswith(key, 'NavicIcons') then
           hl[key] = { bg = hl.WinBar.bg, fg = get_hl_fg(hl, key) }
-          dbg(hl[key])
         end
       end
       -- borderless telescope
