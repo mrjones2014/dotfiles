@@ -8,7 +8,7 @@
       # UDP: 1900 7359
       openFirewall = true;
     };
-    jellyseer = {
+    jellyseerr = {
       enable = true;
       openFirewall = true;
     };
