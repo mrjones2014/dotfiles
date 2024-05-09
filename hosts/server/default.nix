@@ -1,18 +1,4 @@
 { pkgs, ... }: {
-
-  imports =
-    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./content.nix ];
-
-  powerManagement.cpuFreqGovernor = "performance";
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/boot";
-    };
-  };
-  networking.hostName = "nixos-server";
-
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -29,18 +15,33 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "23.11";
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      # only allow SSH key auth
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      AllowUsers = [ "mat" ];
+  imports =
+    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./content.nix ];
+
+  powerManagement.cpuFreqGovernor = "performance";
+  networking.hostName = "nixos-server";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot";
     };
+  };
+  services = { # Did you read the comment?
+    fail2ban.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        # only allow SSH key auth
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = [ "mat" ];
+      };
 
-    ports = [ 6969 ];
+      ports = [ 6969 ];
+    };
   };
 
   # enable vaapi on OS-level
