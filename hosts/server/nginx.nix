@@ -12,7 +12,7 @@
     services = builtins.map (service: {
       name = "${service.name}.mjones.network";
       value = SSL // {
-        locations."/".proxyPass = "https://127.0.0.1:${service.port}";
+        locations."/".proxyPass = "http://127.0.0.1:${service.port}";
       };
     }) [
       {
@@ -44,8 +44,9 @@
         port = "5055";
       }
     ];
+    virtualHosts = builtins.listToAttrs services;
   in {
     enable = true;
-    virtualHosts = builtins.listToAttrs services;
+    inherit virtualHosts;
   };
 }
