@@ -24,6 +24,10 @@
       device = "/dev/disk/by-label/fileshare";
       fsType = "ext4";
     };
+    "/export/fileshare" = {
+      device = "/mnt/fileshare";
+      options = [ "bind" ];
+    };
     "/mnt/jellyfin" = {
       device = "/dev/disk/by-label/jellyfin";
       fsType = "ext4";

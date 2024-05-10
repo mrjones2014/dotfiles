@@ -1,23 +1,27 @@
 {
+  # these are NOT exposed to the internet
   networking.firewall.allowPing = true;
   services = {
+    # samba for windows
     samba = {
       enable = true;
-      securityType = "user";
       openFirewall = true;
       extraConfig = ''
-        hosts allow = 192.168. 127.0.0.1 localhost
-        hosts deny = 0.0.0.0/0
-        browseable = yes
+        guest account = nobody
+        map to gues = Bad User
+        load printers = no
+        printcap name = /dev/null
+        log file = /var/log/samba/client.%I
+        log level = 2
       '';
       shares = {
-        jellyfin = {
-          path = "/mnt/jellyfin";
+        fileshare = {
+          path = "/export/fileshare";
           browseable = "yes";
           "read only" = "no";
           "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
+          "force user" = "nobody";
+          "force group" = "users";
         };
       };
     };

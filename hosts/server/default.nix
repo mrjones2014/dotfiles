@@ -17,8 +17,13 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11";
 
-  imports =
-    [ ./hardware-configuration.nix ./ollama.nix ./nginx.nix ./content.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./ollama.nix
+    ./nginx.nix
+    ./content.nix
+    ./nas.nix
+  ];
 
   powerManagement.cpuFreqGovernor = "performance";
   networking.hostName = "nixos-server";
@@ -41,6 +46,9 @@
       };
 
       ports = [ 6969 ];
+      extraConfig = ''
+        AcceptEnv WEZTERM_REMOTE_PANE
+      '';
     };
   };
 
