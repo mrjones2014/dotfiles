@@ -12,7 +12,12 @@
     services = builtins.map (service: {
       name = "${service.name}.mjones.network";
       value = SSL // {
-        locations."/".proxyPass = "http://127.0.0.1:${service.port}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${service.port}";
+          extraConfig = ''
+            proxy_set_header Host https://${service.name}.mjones.network;
+          '';
+        };
       };
     }) [
       {
