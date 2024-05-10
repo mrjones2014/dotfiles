@@ -15,9 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: {
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -28,9 +29,14 @@
         };
         system = "x86_64-linux";
         modules = [
-          ./nixos-modules/common.nix
-          ./hosts/server/default.nix
           home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
+          {
+            environment.systemPackages =
+              [ agenix.packages.x86_64-linux.default ];
+          }
+          ./nixos-modules/common.nix
+          ./hosts/server
           {
             home-manager = {
               useUserPackages = true;
@@ -55,7 +61,7 @@
         system = "x86_64-linux";
         modules = [
           ./nixos-modules/common.nix
-          ./hosts/pc/default.nix
+          ./hosts/pc
           home-manager.nixosModules.home-manager
           {
             home-manager = {

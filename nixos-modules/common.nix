@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, ... }: {
   # See https://github.com/nix-community/nix-direnv
   nix.extraOptions = ''
     keep-outputs = true

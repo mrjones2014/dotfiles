@@ -1,4 +1,5 @@
 {
+  imports = [ ./deluge.nix ];
   services = {
     jellyfin = {
       enable = true;
@@ -11,13 +12,6 @@
     jellyseerr = {
       enable = true;
       openFirewall = true;
-    };
-    deluge = {
-      enable = true;
-      web = {
-        enable = true;
-        openFirewall = true;
-      };
     };
     prowlarr = {
       enable = true;

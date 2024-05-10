@@ -25,6 +25,8 @@
     ./nas.nix
   ];
 
+  age.secrets.mullvad_wireguard.file = ../../mullvad_wireguard.age;
+
   powerManagement.cpuFreqGovernor = "performance";
   networking.hostName = "nixos-server";
   boot = {

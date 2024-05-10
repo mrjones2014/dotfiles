@@ -66,7 +66,7 @@
     ./modules/espanso.nix
     ./modules/wezterm.nix
     ./modules/librewolf.nix
-    ./modules/gnome/default.nix
+    ./modules/gnome
     ../nixos-modules/allowed-unfree.nix
   ];
 

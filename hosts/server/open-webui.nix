@@ -3,7 +3,7 @@
 { config, ... }:
 let dataDir = "${config.users.users.mat.home}/open-webui";
 in {
-  systemd.tmpfiles.rules = [ "d ${dataDir} 055 nobody nobody - -" ];
+  systemd.tmpfiles.rules = [ "d ${dataDir} 055 nobody users - -" ];
   virtualisation = {
     podman = {
       enable = true;
