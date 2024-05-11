@@ -102,8 +102,6 @@
             Sonarr = {
               icon = "sonarr.svg";
               description = "Sonarr Monitors";
-              href = "{{HOMEPAGE_VAR_SONARR_URL}}";
-              target = "_self";
               widget = {
                 type = "sonarr";
                 url = "http://localhost:8989";
@@ -115,8 +113,6 @@
             Radarr = {
               icon = "radarr.svg";
               description = "Radarr Monitors";
-              href = "{{HOMEPAGE_VAR_RADARR_URL}}";
-              target = "_self";
               widget = {
                 type = "radarr";
                 url = "http://localhost:7878";
