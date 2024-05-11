@@ -34,5 +34,10 @@
       enable = true;
       openFirewall = true;
     };
+    # port 6767
+    bazarr = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 }
