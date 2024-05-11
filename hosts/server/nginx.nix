@@ -36,6 +36,10 @@
         name = "jellyseerr";
         port = "5055";
       }
+      {
+        name = "homepage";
+        port = "8082";
+      }
     ];
     virtualHosts = builtins.listToAttrs services;
   in {

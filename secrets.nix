@@ -4,11 +4,14 @@
 let
   # my public key
   users = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXHRx83f5MWdhcEHXduTINyUu6yqd2eOgZHE0XNYFlO mat@nixos-server"
   ];
   # server host key
   systems = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUa3f8x3mb2fHF5JXjGKdWF5EUX8GQj7hMhEUn7LffI root@nixos-server"
   ];
-in { "mullvad_wireguard.age".publicKeys = users ++ systems; }
+in {
+  "mullvad_wireguard.age".publicKeys = users ++ systems;
+  "homepage.age".publicKeys = users ++ systems;
+}
 
