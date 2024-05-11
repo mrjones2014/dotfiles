@@ -10,7 +10,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  users.users.mat.extraGroups = [ "oci" "podman" ];
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
     # use proprietary nvidia drivers

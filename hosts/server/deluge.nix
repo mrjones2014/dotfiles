@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  configDir = "${config.users.users.mat.home}/delugevpn";
+  configDir = "/var/lib/delugevpn";
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
 in {
 
@@ -9,7 +9,7 @@ in {
     "d ${configDir}/wireguard 055 delugevpn delugevpn - -"
   ];
   system.activationScripts.copyWireguardConfigIntoContainer.text = ''
-    mkdir -p ${configDir}/wireguard && cp ${wireguardConfigPath} ${configDir}/wireguard/mullvad.conf
+    mkdir -p ${configDir}/wireguard && cp ${wireguardConfigPath} ${configDir}/wireguard/mullvad_wireguard.conf
   '';
   networking.firewall = {
     allowedTCPPorts = [ 8112 8118 58846 58946 ];
@@ -31,7 +31,7 @@ in {
           VPN_CLIENT = "wireguard";
           STRICT_PORT_FORWARD = "yes";
           ENABLE_PRIVOXY = "yes";
-          LAN_NETWORK = "192.168.1.0/24";
+          LAN_NETWORK = "192.168.146.0/24";
           NAME_SERVERS =
             "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
           DELUGE_DAEMON_LOG_LEVEL = "info";

@@ -19,13 +19,12 @@
 
   imports = [
     ./hardware-configuration.nix
+    ./secrets.nix
     ./ollama.nix
     ./nginx.nix
     ./content.nix
     ./nas.nix
   ];
-
-  age.secrets.mullvad_wireguard.file = ../../mullvad_wireguard.age;
 
   powerManagement.cpuFreqGovernor = "performance";
   networking.hostName = "nixos-server";
