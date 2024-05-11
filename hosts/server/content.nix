@@ -1,5 +1,8 @@
 {
-  imports = [ ./deluge.nix ];
+  imports = [
+    # port 8112
+    ./deluge.nix
+  ];
   services = {
     jellyfin = {
       enable = true;
@@ -13,14 +16,17 @@
       enable = true;
       openFirewall = true;
     };
+    # port 9696
     prowlarr = {
       enable = true;
       openFirewall = true;
     };
+    # port 8989
     sonarr = {
       enable = true;
       openFirewall = true;
     };
+    # port 7878
     radarr = {
       enable = true;
       openFirewall = true;

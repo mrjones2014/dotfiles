@@ -33,22 +33,6 @@
         port = "8096";
       }
       {
-        name = "deluge";
-        port = "8112";
-      }
-      {
-        name = "prowlarr";
-        port = "9696";
-      }
-      {
-        name = "sonarr";
-        port = "8989";
-      }
-      {
-        name = "radarr";
-        port = "7878";
-      }
-      {
         name = "jellyseerr";
         port = "5055";
       }
