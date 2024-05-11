@@ -101,7 +101,7 @@
           {
             Sonarr = {
               icon = "sonarr.svg";
-              description = "Sonarr Monitors";
+              description = "Shows";
               widget = {
                 type = "sonarr";
                 url = "http://localhost:8989";
@@ -112,11 +112,22 @@
           {
             Radarr = {
               icon = "radarr.svg";
-              description = "Radarr Monitors";
+              description = "Movies";
               widget = {
                 type = "radarr";
                 url = "http://localhost:7878";
                 key = "{{HOMEPAGE_VAR_RADARR_API_KEY}}";
+              };
+            };
+          }
+          {
+            Bazarr = {
+              icon = "bazarr.svg";
+              description = "Subtitles";
+              widget = {
+                type = "bazarr";
+                url = "http://localhost:6767";
+                key = "{{HOMEPAGE_VAR_BAZARR_API_KEY}}";
               };
             };
           }
