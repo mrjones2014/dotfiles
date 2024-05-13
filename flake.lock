@@ -600,19 +600,36 @@
     },
     "tokyonight": {
       "inputs": {
-        "tokyonight": "tokyonight_2"
+        "tokyonight": "tokyonight_2",
+        "tokyonight-rofi": "tokyonight-rofi"
       },
       "locked": {
-        "lastModified": 1715270783,
-        "narHash": "sha256-31x40UjjqogtdMixYjsdxe9rlAd8e5bqewQS8bTjCT8=",
+        "lastModified": 1715638595,
+        "narHash": "sha256-ITwU/RJtwOIE3WCwKg1kj1IhV2o8oRsL60H5RJJoScI=",
         "owner": "mrjones2014",
         "repo": "tokyonight.nix",
-        "rev": "9074776388370d13cd07f24950bef6f5dfe50e38",
+        "rev": "1317c9c6e0ed056f2ff22adf6041a7f5b62301c6",
         "type": "github"
       },
       "original": {
         "owner": "mrjones2014",
         "repo": "tokyonight.nix",
+        "type": "github"
+      }
+    },
+    "tokyonight-rofi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710787931,
+        "narHash": "sha256-bgRt1TEMSju4NzFu7jtLzGNBtKE7HHS+mscGYHK0xBM=",
+        "owner": "w8ste",
+        "repo": "Tokyonight-rofi-theme",
+        "rev": "7400f6c3cc1ae5fa6c21c3dfce2421e6ee94322c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "w8ste",
+        "repo": "Tokyonight-rofi-theme",
         "type": "github"
       }
     },
