@@ -14,10 +14,6 @@
       TERM = "xterm-256color";
       COLORTERM = "truecolor";
     };
-    # While we aren't in a graphical environment on the server,
-    # having the `wezterm` CLI available allows us to use the nice
-    # `wezterm connect` command for an enhanced SSH experience
-    packages = [ pkgs.wezterm ];
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
