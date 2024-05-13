@@ -47,9 +47,6 @@
       };
 
       ports = [ 6969 ];
-      extraConfig = ''
-        AcceptEnv WEZTERM_REMOTE_PANE
-      '';
     };
   };
 

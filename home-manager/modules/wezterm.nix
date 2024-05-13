@@ -169,6 +169,14 @@ in {
         return nil
       end
 
+      config.ssh_domains = {
+        {
+          name = 'nixos-server',
+          remote_address = 'nixos-server',
+          username = 'mat',
+        }
+      }
+
       -- simulate tmux prefix with leader
       config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
       config.keys = {
