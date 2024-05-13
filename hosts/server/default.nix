@@ -24,6 +24,7 @@
     ./nginx.nix
     ./content.nix
     ./nas.nix
+    ./containers.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
