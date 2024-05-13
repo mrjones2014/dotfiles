@@ -1,4 +1,4 @@
-{ pkgs, lib, isDarwin, isLinux, ... }: {
+{ pkgs, lib, isDarwin, isLinux, isServer, ... }: {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     HOMEBREW_NO_ANALYTICS = "1";
@@ -30,8 +30,6 @@
         l = "ls -laH";
         lg = "ls -lG";
         clear = "clear && _prompt_move_to_bottom";
-        nix-server-apply =
-          "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server";
         oplocal =
           "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
       } // pkgs.lib.optionalAttrs isLinux {
@@ -94,6 +92,8 @@
             popd
             ${if isDarwin then
               "home-manager switch --flake ~/git/dotfiles/.#mac"
+            else if isServer then
+              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
             else
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}
           '';
