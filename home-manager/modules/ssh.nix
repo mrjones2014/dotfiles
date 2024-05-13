@@ -7,7 +7,7 @@ let
         "Library/Group Containers/2BUA8C4S2C.com.1password/t"
     }/agent.sock";
 in {
-  home.sessionVariables = {
+  home.sessionVariables = { } // lib.optionalAttrs (!isServer) {
     SSH_AUTH_SOCK = "$HOME/${lib.strings.removePrefix "~/" sshAuthSock}";
   };
   programs.ssh = {

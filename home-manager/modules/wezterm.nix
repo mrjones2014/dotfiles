@@ -38,7 +38,7 @@ in {
         end
 
         -- remove hostname
-        return string.gsub(tab.active_pane.title, '^%[?[%a%d\\-]%]? ')
+        return string.gsub(tab.active_pane.title, '^%[?[%a%d\\-]%]? ', "")
       end
 
       local function active_tab_idx(tabs)
@@ -234,6 +234,7 @@ in {
         { key = 'c', mods = 'SUPER', action = wezterm.action.CopyTo('Clipboard') },
         { key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom('Clipboard') },
         { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+        { key = 'p', mods = 'SUPER', action = wezterm.action.ActivateCommandPalette },
         { key = 'k', mods = 'SUPER', action = wezterm.action.ShowLauncherArgs {flags = "FUZZY|LAUNCH_MENU_ITEMS", title = "Command Palette"} },
       }
 
@@ -242,9 +243,6 @@ in {
           label = 'SSH to nixos-server',
           domain = { DomainName = 'nixos-server' },
           cwd = '~/git/dotfiles',
-          set_environment_variables = {
-            WEZTERM_SSH_ACTIVE = '1',
-          },
         }
       }
 
