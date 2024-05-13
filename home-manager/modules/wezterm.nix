@@ -23,20 +23,6 @@ in {
         config.window_decorations = 'RESIZE'
       end
 
-      wezterm.on('augment-command-palette', function(window, pane)
-      return {
-        {
-          brief = 'Update Plugins',
-          icon = 'fa_puzzle_piece',
-          action = wezterm.action_callback(function()
-            -- TODO debug why the toast notification isn't showing, are plugins actually updating?
-            window:toast_notification('Wezterm Plugins', 'Updating Wezterm plugins...', nil, 4000)
-            wezterm.plugin.update_all()
-          end)
-        }
-      }
-      end)
-
       -- sleek tab bar
       config.use_fancy_tab_bar = false
       config.show_new_tab_button_in_tab_bar = false
@@ -45,20 +31,14 @@ in {
       config.hide_tab_bar_if_only_one_tab = false
 
       local function tab_title(tab)
-        local hostname = wezterm.hostname()
         local title = tab.tab_title
 
         if title and #title > 0 then
           return title
         end
 
-        return string.sub(tab.active_pane.title, #hostname ${
-        # on NixOS, the hostname is returned surrounded by brackets and followed by a space
-        # e.g.
-        # NixOS: [nixos-pc]
-        # macOS: mats-mac
-          if isLinux then "+ 3" else ""
-        })
+        -- remove hostname
+        return string.gsub(tab.active_pane.title, '^%[?[%a%d\\-]%]? ')
       end
 
       local function active_tab_idx(tabs)
@@ -254,7 +234,18 @@ in {
         { key = 'c', mods = 'SUPER', action = wezterm.action.CopyTo('Clipboard') },
         { key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom('Clipboard') },
         { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
-        { key = 'k', mods = 'SUPER', action = wezterm.action.ActivateCommandPalette },
+        { key = 'k', mods = 'SUPER', action = wezterm.action.ShowLauncherArgs {flags = "FUZZY|LAUNCH_MENU_ITEMS", title = "Command Palette"} },
+      }
+
+      config.launch_menu = {
+        {
+          label = 'SSH to nixos-server',
+          domain = { DomainName = 'nixos-server' },
+          cwd = '~/git/dotfiles',
+          set_environment_variables = {
+            WEZTERM_SSH_ACTIVE = '1',
+          },
+        }
       }
 
       smart_splits.apply_to_config(config)
