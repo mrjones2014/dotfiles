@@ -33,6 +33,7 @@ in {
         bat.tokyonight.enable = true;
         fish.tokyonight.enable = true;
         fzf.tokyonight.enable = true;
+        btop.settings.color_theme = "tokyo-night";
       };
     })
   ];
