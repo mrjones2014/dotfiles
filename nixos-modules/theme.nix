@@ -34,6 +34,10 @@ in {
         fish.tokyonight.enable = true;
         fzf.tokyonight.enable = true;
         btop.settings.color_theme = "tokyo-night";
+        rofi.tokyonight = {
+          enable = true;
+          variant = "big1";
+        };
       };
     })
   ];
