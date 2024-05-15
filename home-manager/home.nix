@@ -70,8 +70,6 @@
     ../nixos-modules/allowed-unfree.nix
   ];
 
-  theme = "tokyonight";
-
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
