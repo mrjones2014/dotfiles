@@ -23,6 +23,21 @@ local function heirline_colors_tokyonight()
   }
 end
 
+--- @return MyStatusLineColors
+local function heirline_colors_catppuccin()
+  local colors = require('catppuccin.palettes').get_palette('mocha')
+  return {
+    black = colors.crust,
+    gray = colors.overlay1,
+    green = colors.green,
+    blue = colors.blue,
+    base = colors.base,
+    surface0 = colors.surface0,
+    surface1 = colors.surface1,
+    surface2 = colors.surface2,
+  }
+end
+
 ---@class MyThemeUtils
 ---@field heirline_colors MyStatusLineColors
 
