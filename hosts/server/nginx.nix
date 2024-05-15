@@ -12,16 +12,7 @@
     services = builtins.map (service: {
       name = "${service.name}.mjones.network";
       value = SSL // {
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${service.port}";
-          extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $http_connection;
-          '';
-        };
+        locations."/".proxyPass = "http://127.0.0.1:${service.port}";
       };
     }) [
       {
@@ -44,6 +35,13 @@
     virtualHosts = builtins.listToAttrs services;
   in {
     enable = true;
+    recommendedTlsSettings = true;
+    recommendedProxySettings = true;
     inherit virtualHosts;
+    extraConfig = ''
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $http_connection;
+    '';
   };
 }
