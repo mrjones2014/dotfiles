@@ -67,6 +67,7 @@
     ./modules/wezterm.nix
     ./modules/librewolf.nix
     ./modules/gnome
+    ./modules/recyclarr.nix
     ../nixos-modules/allowed-unfree.nix
   ];
 

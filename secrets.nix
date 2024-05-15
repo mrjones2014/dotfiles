@@ -13,5 +13,4 @@ let
 in {
   "mullvad_wireguard.age".publicKeys = users ++ systems;
   "homepage.age".publicKeys = users ++ systems;
-  "recyclarr.age".publicKeys = users ++ systems;
 }
