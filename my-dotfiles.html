@@ -175,26 +175,25 @@
 cd "$HOME/git"
 git clone git@github.com:mrjones2014/dotfiles.git
 </code></pre>
-<p>Then run the <code>./init.bash</code> script from the repo. This will:</p>
-<ul>
-<li>Install Nix if it is not already installed.</li>
-<li>Install <code>home-manager</code> if it is not already installed.</li>
-<li>Create the initial Nix generation</li>
-<li>On macOS, it will also:
-<ul>
-<li>Configure Hammerspoon to look for config in <code>$XDG_CONFIG_HOME/hammerspoon</code> instead of <code>$HOME/.hammerspoon</code>.</li>
-<li>Optionally, with confirmation from user, set up a bunch of macOS default settings to more sane defaults.</li>
-</ul>
-</li>
-</ul>
-<p>Then, open <code>./home-manager/modules/fish.nix</code>, copy the <code>nix-apply</code> alias definition for your system, and run it.
-For first time setup, you will likely need to prefix the command with <code>NIX_CONFIG="experimental-features = nix-command flakes"</code>
-to set the Nix config to allow the <code>nix flake</code> command via the <code>NIX_CONFIG</code> environment variable. After initial setup,
-this is set by the <code>conf.f/nix.conf</code> file (which is placed at <code>$XDG_CONFIG_HOME/nix/nix.conf</code>).</p>
+<h2 id="nixos"><a class="header" href="#nixos">NixOS</a></h2>
+<p>If you're installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
+Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
+since we'll be installing GNOME anyway.</p>
+<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).
+After the first time, you won't need the <code>NIX_CONFIG=</code> part, as the flake will set that up in <code>$XDG_CONFIG_HOME/nix/nix.conf</code>.</p>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<p>On macOS, you will need to <a href="https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone">install the <code>home-manager</code> CLI manually</a>.
+Then, you can run <code>home-manager switch --flake ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).</p>
+<p>On macOS, you should then also run the following:</p>
+<pre><code class="language-sh"># configure Hammerspoon.app to look for its config file in `$XDG_CONFIG_HOME/hammerspoon` instead of `$HOME/.hammerspoon`
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:-$HOME/.config}/hammerspoon/init.lua"
+# Run a script to set up a lot of macOS settings to more sensible defaults
+~/git/dotfiles/conf.d/setup-macos-defaults.bash
+</code></pre>
 <p>On macOS, you also have to manually change the default shell to Fish.</p>
 <ul>
 <li>Run <code>which fish</code> to get the filepath to the Fish binary (should be something like <code>$HOME/.nix-profile/bin/fish</code>)</li>
-<li>Run <code>sudo vi /etc/shells</code> and add the output of <code>which fish</code> as an entry, then write the file and quit</li>
+<li>Run <code>sudo vi /etc/shells</code> and add the output of <code>which fish</code> (usually this should be something like <code>$HOME/.nix-profile/bin/fish</code>) as an entry, then write the file and quit</li>
 <li>Run <code>chsh -s $(which fish)</code></li>
 <li>Log out and back in</li>
 </ul>
