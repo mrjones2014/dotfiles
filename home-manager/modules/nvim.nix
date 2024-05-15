@@ -111,12 +111,6 @@
       clippy
       glow
       mysql
-      gnused
-      # for macOS + nvim-spectre, it expects the gsed package
-      (pkgs.writeScriptBin "gsed" ''
-        #!${pkgs.bash}/bin/bash
-        ${pkgs.gnused}/bin/sed "$@"
-      '')
     ];
   };
 }
