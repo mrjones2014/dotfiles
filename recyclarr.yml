@@ -1,7 +1,7 @@
 # Instance Definition: https://recyclarr.dev/wiki/yaml/config-reference/basic/
 sonarr:
-  1080p-2160p:
-    base_url: http://localhost:8989
+  sonarr-1080p-2160p:
+    base_url: http://192.168.146.119:8989
     api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Sonarr API Key"
 
     include:
@@ -9,7 +9,8 @@ sonarr:
       - template: sonarr-quality-definition-series
       - template: sonarr-v4-custom-formats-web-2160p
       - template: sonarr-v4-custom-formats-web-1080p
-      # - template: sonarr-v4-quality-profile-web-2160p
+      - template: sonarr-v4-quality-profile-web-1080p
+      - template: sonarr-v4-quality-profile-web-2160p
 
     # start with 1080p but upgradable to 4K
     quality_profiles:
@@ -18,7 +19,7 @@ sonarr:
           enabled: true
         upgrade:
           allowed: true
-          until_quality: WEB 2160p
+          until_quality: 2160p
           until_score: 10000
         min_format_score: 0
         quality_sort: top
@@ -27,8 +28,12 @@ sonarr:
             qualities:
               - WEBDL-1080p
               - WEBRip-1080p
+              - Bluray-1080p
+              - Bluray-1080p Remux
           - name: 2160p
             qualities:
+              - Bluray-2160p
+              - Bluray-2160p Remux
               - WEBDL-2160p
               - WEBRip-2160p
 
@@ -72,15 +77,15 @@ sonarr:
             # score: 0 # Uncomment this line to enable SDR releases
 
 radarr:
-  1080p-2160p:
-    base_url: http://localhost:7878
+  radarr-1080p-2160p:
+    base_url: http://192.168.146.119:7878
     api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Radarr API Key"
 
     include:
       # Comment out any of the following includes to disable them
       - template: radarr-quality-definition-movie
       - template: radarr-custom-formats-remux-web-2160p
-      # - template: radarr-quality-profile-remux-web-2160p
+      - template: radarr-quality-profile-remux-web-2160p
 
     # start with 1080p but upgradable to 4K
     quality_profiles:
