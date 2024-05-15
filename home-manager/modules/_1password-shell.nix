@@ -1,4 +1,4 @@
-{ inputs, pkgs, isDarwin, ... }:
+{ inputs, pkgs, ... }:
 let
   op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
     #!${pkgs.bash}/bin/bash
@@ -17,11 +17,10 @@ in {
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
   programs = {
     fish = {
-      interactiveShellInit = if isDarwin then ''
+      interactiveShellInit = ''
         export SUDO_ASKPASS="${op_sudo_password_script}"
         alias sudo="sudo -A"
-      '' else
-        "";
+      '';
     };
     _1password-shell-plugins = {
       enable = true;
