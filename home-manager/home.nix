@@ -35,6 +35,7 @@
         qbittorrent
         vlc
         cura
+        r2modman
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
