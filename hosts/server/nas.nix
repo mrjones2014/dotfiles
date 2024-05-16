@@ -18,6 +18,8 @@
         fileshare = {
           path = "/export/fileshare";
           browseable = "yes";
+          writable = "yes";
+          public = "yes";
           "read only" = "no";
           "guest ok" = "yes";
           "force user" = "nobody";
