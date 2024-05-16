@@ -8,7 +8,7 @@
       openFirewall = true;
       extraConfig = ''
         guest account = nobody
-        map to gues = Bad User
+        map to guest = Bad User
         load printers = no
         printcap name = /dev/null
         log file = /var/log/samba/client.%I
