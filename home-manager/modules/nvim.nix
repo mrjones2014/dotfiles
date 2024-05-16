@@ -17,10 +17,6 @@
   };
 
   xdg.configFile = {
-    "codespell/custom_dict.txt".text = ''
-      crate
-      Crate
-    '';
     "cbfmt.toml".text = ''
       [languages]
       rust = ["${pkgs.rustfmt}/bin/rustfmt"]
@@ -76,7 +72,6 @@
       shfmt
       cbfmt
       stylua
-      codespell
       statix
       luajitPackages.luacheck
       prettierd
