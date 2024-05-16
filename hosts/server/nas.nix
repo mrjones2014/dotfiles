@@ -2,7 +2,8 @@
   # these are NOT exposed to the internet
   networking.firewall.allowPing = true;
   services = {
-    # samba for windows
+    # samba share, allow guest users full access
+    # it's only reachable via LAN anyway
     samba = {
       enable = true;
       openFirewall = true;
@@ -21,9 +22,9 @@
           writable = "yes";
           public = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
           "force user" = "nobody";
           "force group" = "users";
+          "force directory mode" = "2770";
         };
       };
     };
