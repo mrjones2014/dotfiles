@@ -16,7 +16,7 @@ return {
     event = 'InsertEnter',
     opts = {
       mappings = {
-        -- source: https://old.reddit.com/r/neovim/comments/163rzex/how_to_avoid_autocompleting_right_parentheses/jy4zwp8/
+        -- https://old.reddit.com/r/neovim/comments/163rzex/how_to_avoid_autocompleting_right_parentheses/jy4zwp8/
         -- disable if a matching character is in an adjacent position (eg. fixes
         -- markdown triple ticks) neigh_pattern: a pattern for *two* neighboring
         -- characters (before and after). Use dot `.` to allow any character.

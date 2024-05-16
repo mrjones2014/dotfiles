@@ -1,13 +1,12 @@
 local M = {}
 
+-- use OSC52 yank so it works over SSH
+local copy_fn = require('vim.ui.clipboard.osc52').copy('+')
+
 ---Copy string to system clipboard
 ---@param str string
 function M.copy(str)
-  if vim.loop.os_uname().sysname == 'Darwin' then
-    vim.fn.jobstart(string.format('echo -n %q | pbcopy', str), { detach = true })
-  else
-    vim.fn.jobstart(string.format('echo -n %q | xclip -sel clip', str), { detach = true })
-  end
+  copy_fn(str)
 end
 
 return M

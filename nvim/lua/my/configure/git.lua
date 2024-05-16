@@ -1,5 +1,20 @@
 return {
   {
+    'ruifm/gitlinker.nvim',
+    config = function()
+      require('gitlinker').setup({
+        action_callback = require('my.utils.clipboard').copy,
+        callbacks = {
+          ['gitlab.1password.io'] = function(url_data)
+            url_data.host = 'gitlab.1password.io'
+            return require('gitlinker.hosts').get_gitlab_type_url(url_data)
+          end,
+        },
+      })
+    end,
+    keys = { { '<leader>gy', desc = 'Copy GitHub permalink' } },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
     opts = {
