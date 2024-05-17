@@ -1,14 +1,36 @@
+local clipboard = require('my.utils.clipboard')
 return {
   {
-    'ruifm/gitlinker.nvim',
+    'linrongbin16/gitlinker.nvim',
+    cmd = { 'GitLink' },
     config = function()
       require('gitlinker').setup({
-        action_callback = require('my.utils.clipboard').copy,
-        callbacks = {
-          ['gitlab.1password.io'] = function(url_data)
-            url_data.host = 'gitlab.1password.io'
-            return require('gitlinker.hosts').get_gitlab_type_url(url_data)
-          end,
+        action_callback = clipboard.copy,
+        router = {
+          browse = {
+            ['gitlab%.1password%.io'] = function(data)
+              local url = string.format(
+                'https://gitlab.1password.io/%s/%s/-/blob/%s/%s',
+                data.org,
+                data.repo:gsub('%.git', ''),
+                data.current_branch,
+                data.file
+              )
+              clipboard.copy(url)
+              return url
+            end,
+            ['^github%.com'] = function(data)
+              local url = string.format(
+                'https://github.com/%s/%s/blob/%s/%s',
+                data.org,
+                data.repo:gsub('%.git', ''),
+                data.current_branch,
+                data.file
+              )
+              clipboard.copy(url)
+              return url
+            end,
+          },
         },
       })
     end,
