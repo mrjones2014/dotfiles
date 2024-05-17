@@ -21,7 +21,7 @@ in {
           "--network=host"
           "--add-host=host.containers.internal:host-gateway"
         ];
-        environment = { OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api"; };
+        environment = { OLLAMA_BASE_URL = "http://localhost:11434"; };
       };
     };
   };
