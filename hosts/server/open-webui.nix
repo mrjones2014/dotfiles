@@ -17,10 +17,7 @@ in {
         image = "ghcr.io/open-webui/open-webui";
         ports = [ "3000:8080" ];
         volumes = [ "${dataDir}:/app/backend/data" ];
-        extraOptions = [
-          "--network=host"
-          "--add-host=host.containers.internal:host-gateway"
-        ];
+        extraOptions = [ "--network=host" ];
         environment = { OLLAMA_BASE_URL = "http://localhost:11434"; };
       };
     };
