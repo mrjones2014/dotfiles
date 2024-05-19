@@ -53,6 +53,7 @@
 
   environment.systemPackages = with pkgs; [
     steam-run
+    steamtinkerlaunch
     parsec-bin
     mullvad-vpn
     prismlauncher
