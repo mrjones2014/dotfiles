@@ -3,37 +3,35 @@ return {
   {
     'linrongbin16/gitlinker.nvim',
     cmd = { 'GitLink' },
-    config = function()
-      require('gitlinker').setup({
-        action_callback = clipboard.copy,
-        router = {
-          browse = {
-            ['gitlab%.1password%.io'] = function(data)
-              local url = string.format(
-                'https://gitlab.1password.io/%s/%s/-/blob/%s/%s',
-                data.org,
-                data.repo:gsub('%.git', ''),
-                data.current_branch,
-                data.file
-              )
-              clipboard.copy(url)
-              return url
-            end,
-            ['^github%.com'] = function(data)
-              local url = string.format(
-                'https://github.com/%s/%s/blob/%s/%s',
-                data.org,
-                data.repo:gsub('%.git', ''),
-                data.current_branch,
-                data.file
-              )
-              clipboard.copy(url)
-              return url
-            end,
-          },
+    opts = {
+      action_callback = clipboard.copy,
+      router = {
+        browse = {
+          ['gitlab%.1password%.io'] = function(data)
+            local url = string.format(
+              'https://gitlab.1password.io/%s/%s/-/blob/%s/%s',
+              data.org,
+              data.repo:gsub('%.git', ''),
+              data.current_branch,
+              data.file
+            )
+            clipboard.copy(url)
+            return url
+          end,
+          ['^github%.com'] = function(data)
+            local url = string.format(
+              'https://github.com/%s/%s/blob/%s/%s',
+              data.org,
+              data.repo:gsub('%.git', ''),
+              data.current_branch,
+              data.file
+            )
+            clipboard.copy(url)
+            return url
+          end,
         },
-      })
-    end,
+      },
+    },
     keys = { { '<leader>gy', '<cmd>GitLink<cr>', desc = 'Copy GitHub link', silent = true } },
   },
   {
