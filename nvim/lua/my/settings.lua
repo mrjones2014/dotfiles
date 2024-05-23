@@ -28,20 +28,21 @@ vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
 vim.opt.laststatus = 3
 vim.opt.virtualedit = 'onemore'
 vim.opt.splitkeep = 'screen'
--- Force use OSC52 escape for clipboard so it works over SSH
 vim.opt.clipboard = 'unnamedplus'
-vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  -- TODO this is slow as fuck for some reason, for now, just use Wezterm paste in insert mode
-  -- paste = {
-  --   ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-  --   ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  -- },
-}
+-- TODO this does not work very well
+-- Force use OSC52 escape for clipboard so it works over SSH
+-- vim.g.clipboard = {
+--   name = 'OSC 52',
+--   copy = {
+--     ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+--     ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+--   },
+--   -- TODO this is slow as fuck for some reason, for now, just use Wezterm paste in insert mode
+--   -- paste = {
+--   --   ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+--   --   ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+--   -- },
+-- }
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
