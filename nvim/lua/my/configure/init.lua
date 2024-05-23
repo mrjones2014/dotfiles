@@ -2,7 +2,13 @@
 
 return {
   { 'nvim-lua/plenary.nvim' },
-  { 'nvim-tree/nvim-web-devicons' },
+  {
+    'nvim-tree/nvim-web-devicons',
+    dependencies = { 'DaikyXendo/nvim-material-icon' },
+    config = function()
+      require('nvim-web-devicons').setup({ override = require('nvim-material-icon').get_icons() })
+    end,
+  },
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
   { 'tpope/vim-sleuth', event = 'BufReadPre' },
   {
