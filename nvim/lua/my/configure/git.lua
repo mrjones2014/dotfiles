@@ -34,7 +34,7 @@ return {
         },
       })
     end,
-    keys = { { '<leader>gy', desc = 'Copy GitHub permalink' } },
+    keys = { { '<leader>gy', '<cmd>GitLink<cr>', desc = 'Copy GitHub link', silent = true } },
   },
   {
     'lewis6991/gitsigns.nvim',
