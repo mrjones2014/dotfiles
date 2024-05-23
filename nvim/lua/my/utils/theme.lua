@@ -10,7 +10,7 @@
 
 ---@return MyStatusLineColors
 local function heirline_colors_tokyonight()
-  local colors = require('tokyonight.colors').setup(require('my.configure.theme.tokyonight').opts)
+  local colors = require('tokyonight.colors').setup()
   return {
     black = colors.bg_dark,
     gray = colors.dark5,
@@ -38,11 +38,25 @@ local function heirline_colors_catppuccin()
   }
 end
 
+--- Return `MyStatusLineColors` for the current colorscheme
+--- @return MyStatusLineColors
+local function heirline_colors()
+  -- when I switch themes, add a new function above and update this
+  if vim.env.COLORSCHEME == 'catppuccin' then
+    return heirline_colors_catppuccin()
+  elseif vim.env.COLORSCHEME == 'tokyonight' then
+    return heirline_colors_tokyonight()
+  else
+    return heirline_colors_tokyonight()
+  end
+end
+
 ---@class MyThemeUtils
+---@field current_colorscheme string
 ---@field heirline_colors MyStatusLineColors
 
 ---@type MyThemeUtils
 return {
-  -- when I switch themes, add a new function above and swap this out
-  heirline_colors = heirline_colors_tokyonight(),
+  current_colorscheme = vim.env.COLORSCHEME,
+  heirline_colors = heirline_colors(),
 }
