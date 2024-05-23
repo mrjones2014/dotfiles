@@ -2,6 +2,7 @@
 
 return {
   { 'nvim-lua/plenary.nvim' },
+  { 'nvim-tree/nvim-web-devicons' },
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
   { 'tpope/vim-sleuth', event = 'BufReadPre' },
   {
