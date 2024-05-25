@@ -39,6 +39,7 @@
           ./hosts/server
           {
             home-manager = {
+              backupFileExtension = "backup";
               useUserPackages = true;
               users.mat = import ./home-manager/server.nix;
               extraSpecialArgs = {
@@ -65,6 +66,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              backupFileExtension = "backup";
               useUserPackages = true;
               users.mat = import ./home-manager/home.nix;
               extraSpecialArgs = {
@@ -80,6 +82,7 @@
     };
     homeConfigurations = {
       "mac" = home-manager.lib.homeManagerConfiguration {
+        backupFileExtension = "backup";
         extraSpecialArgs = {
           inherit inputs;
           isServer = false;

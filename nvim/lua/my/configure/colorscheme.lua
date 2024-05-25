@@ -16,10 +16,12 @@ local function get_tokyonight_hl_fg(hl, group, guard)
   return hl[group].fg
 end
 
+local colorscheme = vim.env.COLORSCHEME or 'tokyonight'
+
 return {
   {
     'catppuccin/nvim',
-    enabled = vim.env.COLORSCHEME == 'catppuccin',
+    enabled = colorscheme == 'catppuccin',
     name = 'catppuccin',
     priority = 1000,
     lazy = false,
@@ -70,7 +72,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    enabled = vim.env.COLORSCHEME == 'tokyonight',
+    enabled = colorscheme == 'tokyonight',
     lazy = false,
     priority = 1000,
     opts = {

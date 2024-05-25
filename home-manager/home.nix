@@ -7,7 +7,7 @@
         inherit inputs;
         inherit pkgs;
       }))
-    inputs.neovim-nightly-overlay.overlay
+    inputs.neovim-nightly-overlay.overlays.default
   ];
   home = {
     username = "mat";
@@ -59,8 +59,7 @@
   };
 
   imports = [
-    # TODO figure out how to load the arkenfox flake module conditionally, since nixpkgs Firefox is broken on macOS
-    # ./modules/arkenfox.nix
+    ./modules/arkenfox.nix
     ./shared.nix
     ./modules/_1password-shell.nix
     ./modules/rofi.nix

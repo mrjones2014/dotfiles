@@ -1,14 +1,24 @@
-{ inputs, ... }: {
+{ inputs, isLinux, ... }: {
   imports = [ inputs.arkenfox.hmModules.default ];
   programs.firefox = {
-    enable = true;
+    enable = isLinux;
     arkenfox = {
       enable = true;
       version = "118.0";
     };
 
+    settings = {
+      # disable Pocket shit
+      "extensions.pocket.enabled" = false;
+      "extensions.pocket.api" = "";
+      "extensions.pocket.bffApi" = "";
+      "browser.urlbar.suggest.pocket" = false;
+      # always show bookmarks toolbar
+      "browser.toolbars.bookmarks.visibility" = "always";
+    };
+
     profiles.Default.arkenfox = {
-      enable = true;
+      enable = isLinux;
       "0000".enable = true;
       "0100".enable = true;
       "0200".enable = true;

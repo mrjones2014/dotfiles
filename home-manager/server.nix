@@ -5,7 +5,7 @@
         inherit inputs;
         inherit pkgs;
       }))
-    inputs.neovim-nightly-overlay.overlay
+    inputs.neovim-nightly-overlay.overlays.default
   ];
   home = {
     username = "mat";
