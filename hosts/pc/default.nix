@@ -34,6 +34,19 @@
   programs = {
     fish.enable = true;
 
+    # For Nexus Mods AppImage
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        icu
+        fuse
+        fontconfig
+        xorg.libX11
+        xorg.libICE
+        xorg.libSM
+      ];
+    };
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
