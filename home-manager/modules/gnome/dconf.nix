@@ -20,7 +20,7 @@ in {
         "org.wezfurlong.wezterm.desktop"
         "1password.desktop"
         "signal-desktop.desktop"
-        "librewolf.desktop"
+        "firefox.desktop"
         "discord.desktop"
         "steam.desktop"
       ];
