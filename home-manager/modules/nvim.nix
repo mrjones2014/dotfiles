@@ -92,10 +92,10 @@
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
+      gnumake
       src-cli
       ripgrep
       fd
-      catimg
       sqlite
       lemmy-help
       luajitPackages.jsregexp
