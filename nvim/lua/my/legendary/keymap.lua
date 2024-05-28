@@ -28,15 +28,6 @@ function M.default_keymaps()
       description = 'Split vertically, then go to file under cursor.',
     },
 
-    {
-      'gx',
-      function()
-        local url = vim.fn.expand('<cfile>')
-        require('my.utils.url').open(url)
-      end,
-      description = 'Open URL under cursor',
-    },
-
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 

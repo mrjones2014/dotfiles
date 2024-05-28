@@ -75,7 +75,7 @@ function M.default_commands()
             return
           end
 
-          require('my.utils.url').open(selected)
+          vim.ui.open(selected)
         end)
       end,
       description = 'Search installed plugins and open the repo in browser',
@@ -83,7 +83,7 @@ function M.default_commands()
   }
 end
 
-function M.lsp_commands(bufnr, server_name)
+function M.lsp_commands(bufnr)
   local h = require('legendary.toolbox')
   -- don't need to gate these since we aren't creating the actual commands
   local commands = {
