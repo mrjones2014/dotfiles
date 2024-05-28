@@ -1,3 +1,5 @@
+-- use Neovim's experimental Lua module loader that does byte-caching of Lua modules
+vim.loader.enable()
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
 _G.dbg = function(...)
