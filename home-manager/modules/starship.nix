@@ -1,4 +1,9 @@
 { lib, isServer, ... }: {
+  programs.fish.functions.starship_transient_prompt_func = ''
+    set -l dir $(starship module directory)
+    set -l dir $(string trim "$dir")
+    echo "$dir $(printf "\e[1;32m❯\e[0m ")"
+  '';
   programs.starship = {
     enable = true;
     enableTransience = true;
