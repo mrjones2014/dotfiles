@@ -47,35 +47,4 @@ function M.default_autocmds()
   }
 end
 
-function M.lsp_autocmds(bufnr)
-  local _, autocmds = pcall(vim.api.nvim_get_autocmds, { group = 'LspOnAttachAutocmds' })
-  autocmds = (type(autocmds) == 'table' and autocmds) or {}
-  local augroup = {
-    name = 'LspOnAttachAutocmds',
-    clear = false,
-  }
-
-  if
-    not vim.iter(autocmds):find(function(autocmd)
-      return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'CursorHold'
-    end)
-  then
-    table.insert(augroup, {
-      'CursorHold',
-      require('legendary.toolbox').lazy(
-        vim.diagnostic.open_float,
-        nil,
-        { focus = false, scope = 'cursor', border = 'none' }
-      ),
-      opts = { buffer = bufnr },
-    })
-  end
-
-  if #augroup == 0 then
-    return {}
-  end
-
-  return { augroup }
-end
-
 return M
