@@ -28,15 +28,6 @@ function M.default_keymaps()
       description = 'Split vertically, then go to file under cursor.',
     },
 
-    {
-      'gx',
-      function()
-        local url = vim.fn.expand('<cfile>')
-        require('my.utils.url').open(url)
-      end,
-      description = 'Open URL under cursor',
-    },
-
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
 
@@ -124,7 +115,7 @@ function M.lsp_keymaps(bufnr)
         function()
           -- I have diagnostics float on CursorHold,
           -- disable that if I've manually shown the hover window
-          -- see autocmds.lua, lsp_autocmds()
+          -- see require('my.utils.lsp').on_attach_default
           vim.cmd.set('eventignore+=CursorHold')
           vim.lsp.buf.hover()
           require('legendary').autocmd({

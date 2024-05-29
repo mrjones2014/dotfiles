@@ -75,7 +75,7 @@ function M.default_commands()
             return
           end
 
-          require('my.utils.url').open(selected)
+          vim.ui.open(selected)
         end)
       end,
       description = 'Search installed plugins and open the repo in browser',
@@ -83,7 +83,7 @@ function M.default_commands()
   }
 end
 
-function M.lsp_commands(bufnr, server_name)
+function M.lsp_commands(bufnr)
   local h = require('legendary.toolbox')
   -- don't need to gate these since we aren't creating the actual commands
   local commands = {
@@ -108,7 +108,9 @@ function M.lsp_commands(bufnr, server_name)
     vim.list_extend(commands, {
       {
         ':Format',
-        require('my.utils.lsp').format_document,
+        function()
+          require('conform').format({ async = true, lsp_fallback = true })
+        end,
         description = 'Format the current document with LSP',
         opts = { buffer = bufnr },
       },

@@ -129,9 +129,22 @@ in {
       config.front_end = 'WebGpu'
       config.webgpu_power_preference = 'HighPerformance'
 
+      local function basename(pane)
+        local proc
+        if pane.foreground_process_name then
+          proc = pane.foreground_process_name
+        elseif pane.get_foreground_process_name then
+          proc = pane:get_foreground_process_name()
+        else
+          return ""
+        end
+        return string.gsub(proc, '(.*[/\\])(.*)', '%2')
+      end
+
       local function find_vim_pane(tab)
         for _, pane in ipairs(tab:panes()) do
-          if smart_splits.is_vim(pane) then
+          -- for some reason the user vars aren't always present here in this specific context
+          if smart_splits.is_vim(pane) or basename(pane) == 'nvim' then
             return pane
           end
         end

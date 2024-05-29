@@ -80,7 +80,7 @@ return {
     -- highlight mdx with markdown -- it's close enough. We also do JSX injection via ./after/queries/markdown/injections.scm
     vim.treesitter.language.register('markdown', 'mdx')
     require('nvim-treesitter.configs').setup({ ---@diagnostic disable-line:missing-fields
-      ensure_installed = require('my.lsp.filetypes').treesitter_parsers(),
+      ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
       highlight = {
         enable = true,
       },

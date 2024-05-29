@@ -1,3 +1,5 @@
+-- use Neovim's experimental Lua module loader that does byte-caching of Lua modules
+vim.loader.enable()
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
 _G.dbg = function(...)
@@ -43,6 +45,16 @@ vim.api.nvim_create_autocmd('UiEnter', {
   end,
   once = true,
 })
+
+-- custom URL handling to open GitHub shorthands
+local open = vim.ui.open
+vim.ui.open = function(uri) ---@diagnostic disable-line: duplicate-set-field
+  -- GitHub shorthand pattern, e.g. mrjones2014/dotfiles
+  if not string.match(uri, '[a-z]*://[^ >,;]*') and string.match(uri, '[%w%p\\-]*/[%w%p\\-]*') then
+    uri = string.format('https://github.com/%s', uri)
+  end
+  open(uri)
+end
 
 -- set up UI tweaks on load
 require('my.utils.lsp').apply_ui_tweaks()

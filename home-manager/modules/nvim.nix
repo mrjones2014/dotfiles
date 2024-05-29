@@ -17,15 +17,6 @@
   };
 
   xdg.configFile = {
-    "cbfmt.toml".text = ''
-      [languages]
-      rust = ["${pkgs.rustfmt}/bin/rustfmt"]
-      go = ["${pkgs.go}/bin/gofmt"]
-      lua = ["${pkgs.stylua}/bin/stylua --config-path ${
-        ../../nvim/stylua.toml
-      } -s -"]
-      nix = ["${pkgs.nixfmt}/bin/nixfmt"]
-    '';
     "ripgrep_ignore".text = ''
       .git/
       yarn.lock
@@ -69,14 +60,12 @@
       nixfmt
       rustfmt
       shfmt
-      cbfmt
       stylua
       statix
       luajitPackages.luacheck
       prettierd
 
       # LSP servers
-      efm-langserver
       nil
       rust-analyzer
       taplo

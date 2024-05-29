@@ -39,7 +39,7 @@ M.config = {
     lspconfig = 'marksman',
     formatter = {
       'prettier_d',
-      'cbfmt',
+      'injected', -- see :h conform-formatters, formats injected code blocks
     },
     treesitter = { 'markdown', 'markdown_inline' },
   },
@@ -89,77 +89,20 @@ M.config['javascript'] = M.config['typescript']
 M.config['typescriptreact'] = M.config['typescript']
 M.config['javascriptreact'] = M.config['typescript']
 
-local efm_customizations = {
-  ['cbfmt'] = function()
-    local cbfmt = require('efmls-configs.formatters.cbfmt')
-    cbfmt.formatCommand =
-      string.format('%s --config %s', cbfmt.formatCommand, string.format('%s/.config/cbfmt.toml', vim.env.HOME))
-    return cbfmt
-  end,
-}
-
-local function load_efm_modules(mods, mod_type)
-  if not mods then
-    return nil
-  end
-
-  -- normalize type to string[]
-  mods = type(mods) == 'string' and { mods } or mods
-  return vim
-    .iter(mods)
-    :map(function(mod)
-      if efm_customizations[mod] then
-        return efm_customizations[mod]()
-      end
-
-      local ok, module = pcall(require, string.format('efmls-configs.%s.%s', mod_type, mod))
-      if not ok then
-        vim.notify(string.format('Module efmls-configs.%s.%s not found', mod_type, mod))
-        return nil
-      end
-      return module
-    end)
-    :totable()
-end
-
-local function load_linters(linters)
-  return load_efm_modules(linters, 'linters') or {}
-end
-
-local function load_formatters(formatters)
-  return load_efm_modules(formatters, 'formatters') or {}
-end
-
-function M.efmls_config(capabilities)
-  local languages = {}
-  for filetype, config in pairs(M.config) do
-    if config.linter or config.formatter then
-      languages[filetype] = vim.list_extend(load_formatters(config.formatter), load_linters(config.linter))
+local function cfg_by_ft(cfg)
+  local result = {}
+  for ft, ft_cfg in pairs(M.config) do
+    if ft_cfg[cfg] then
+      result[ft] = type(ft_cfg[cfg]) == 'table' and ft_cfg[cfg] or { ft_cfg[cfg] }
     end
   end
-
-  return {
-    filetypes = vim.tbl_keys(languages),
-    settings = { languages = languages },
-    init_options = {
-      documentFormatting = true,
-      documentRangeFormatting = true,
-    },
-    capabilities = capabilities,
-  }
+  return result
 end
 
-function M.uses_efm(ft)
-  ft = ft or vim.bo.ft
-  return vim.tbl_get(M.config, ft, 'formatter') ~= nil or vim.tbl_get(M.config, ft, 'linter') ~= nil
-end
+M.formatters_by_ft = cfg_by_ft('formatter')
+M.linters_by_ft = cfg_by_ft('linter')
 
-function M.formats_with_efm(ft)
-  ft = ft or vim.bo.ft
-  return vim.tbl_get(M.config, ft, 'formatter') ~= nil
-end
-
-function M.treesitter_parsers()
+M.treesitter_parsers = (function()
   local result = {}
   for ft, config in pairs(M.config) do
     if config.treesitter ~= false then
@@ -173,6 +116,6 @@ function M.treesitter_parsers()
   table.insert(result, 'regex')
 
   return result
-end
+end)()
 
 return M
