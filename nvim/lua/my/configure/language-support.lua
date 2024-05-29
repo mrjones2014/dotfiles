@@ -4,7 +4,7 @@ local linters_by_ft = require('my.lsp.filetypes').linters_by_ft
 return {
   {
     'stevearc/conform.nvim',
-    ft = formatters_by_ft,
+    ft = vim.tbl_keys(formatters_by_ft),
     opts = {
       formatters_by_ft = formatters_by_ft,
       format_after_save = function()
@@ -17,7 +17,7 @@ return {
   },
   {
     'mfussenegger/nvim-lint',
-    ft = linters_by_ft,
+    ft = vim.tbl_keys(linters_by_ft),
     init = function()
       vim.api.nvim_create_autocmd('BufWritePost', {
         callback = function()
