@@ -108,7 +108,9 @@ function M.lsp_commands(bufnr)
     vim.list_extend(commands, {
       {
         ':Format',
-        require('my.utils.lsp').format_document,
+        function()
+          require('conform').format({ async = true, lsp_fallback = true })
+        end,
         description = 'Format the current document with LSP',
         opts = { buffer = bufnr },
       },

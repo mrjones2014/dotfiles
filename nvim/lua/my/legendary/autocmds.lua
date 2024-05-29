@@ -47,7 +47,7 @@ function M.default_autocmds()
   }
 end
 
-function M.lsp_autocmds(bufnr, server_name)
+function M.lsp_autocmds(bufnr)
   local _, autocmds = pcall(vim.api.nvim_get_autocmds, { group = 'LspOnAttachAutocmds' })
   autocmds = (type(autocmds) == 'table' and autocmds) or {}
   local augroup = {
@@ -67,18 +67,6 @@ function M.lsp_autocmds(bufnr, server_name)
         nil,
         { focus = false, scope = 'cursor', border = 'none' }
       ),
-      opts = { buffer = bufnr },
-    })
-  end
-
-  if
-    not vim.iter(autocmds):find(function(autocmd)
-      return autocmd.buflocal == true and autocmd.buffer == bufnr and autocmd.event == 'BufWritePost'
-    end)
-  then
-    table.insert(augroup, {
-      'BufWritePost',
-      require('my.utils.lsp').format_document,
       opts = { buffer = bufnr },
     })
   end

@@ -1,14 +1,35 @@
 local nvim_navbuddy_telescope
+local formatters_by_ft = require('my.lsp.filetypes').formatters_by_ft
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
-    { 'folke/neodev.nvim', event = 'BufReadPre' },
+    { 'folke/neodev.nvim' },
+    { 'folke/neoconf.nvim' },
     {
-      'creativenull/efmls-configs-nvim',
-      dev = true,
-      -- neoconf must be loaded before any LSP
-      dependencies = { 'folke/neoconf.nvim' },
+      'stevearc/conform.nvim',
+      opts = {
+        formatters_by_ft = formatters_by_ft,
+        format_after_save = function()
+          if not require('my.utils.lsp').is_formatting_enabled() then
+            return
+          end
+          return { lsp_fallback = true }
+        end,
+      },
+    },
+    {
+      'mfussenegger/nvim-lint',
+      init = function()
+        vim.api.nvim_create_autocmd('BufWritePost', {
+          callback = function()
+            require('lint').try_lint()
+          end,
+        })
+      end,
+      config = function()
+        require('lint').linters_by_ft = require('my.lsp.filetypes').linters_by_ft
+      end,
     },
     {
       'folke/neoconf.nvim',
@@ -109,18 +130,10 @@ return {
     require('my.utils.lsp').on_attach(require('my.utils.lsp').on_attach_default)
   end,
   config = function()
-    local efm_setup_done = false
-
     local function setup_lsp_for_filetype(filetype, server_name)
       local has_config, config = pcall(require, 'my.lsp.' .. filetype)
       config = has_config and config or {}
       config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-      -- setup efmls if not done already
-      if not efm_setup_done and require('my.lsp.filetypes').uses_efm(filetype) then
-        efm_setup_done = true
-        require('lspconfig').efm.setup(require('my.lsp.filetypes').efmls_config(config.capabilities))
-      end
 
       require('lspconfig')[server_name].setup(config)
       local snippets = require('my.lsp.snippets')[filetype]
@@ -137,7 +150,7 @@ return {
         end
       end
 
-      return require('my.lsp.filetypes').uses_efm(vim.bo.ft)
+      return false
     end
 
     local function setup_server(filetype, file_patterns, server_name)

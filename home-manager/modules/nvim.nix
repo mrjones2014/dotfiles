@@ -76,7 +76,6 @@
       prettierd
 
       # LSP servers
-      efm-langserver
       nil
       rust-analyzer
       taplo
