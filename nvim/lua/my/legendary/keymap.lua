@@ -17,9 +17,6 @@ function M.default_keymaps()
     -- note that I have line wrapping turned off but turned on only for Markdown
     { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }, mode = { 'n', 'v' } },
     { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }, mode = { 'n', 'v' } },
-
-    { '<leader>qq', ':wqa<CR>', description = 'Save all and quit' },
-
     {
       '<leader>gf',
       h.vsplit_then(function()

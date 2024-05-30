@@ -48,14 +48,11 @@ return {
     'nvim-telescope/telescope-fzy-native.nvim',
     {
       'folke/trouble.nvim',
+      cmd = 'Trouble',
       keys = {
-        {
-          '<leader>d',
-          function()
-            require('trouble').toggle()
-          end,
-          desc = 'Open LSP diagnostics in quickfix window',
-        },
+        { '<leader>d', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Toggle diagnostics list' },
+        { '<leader>q', '<cmd>Trouble qflist toggle<cr>', desc = 'Toggle quickfix list' },
+        { '<leader>r', '<cmd>Trouble lsp toggle win.position=right<cr>' },
       },
       opts = { action_keys = { hover = {} } },
     },
@@ -131,6 +128,7 @@ return {
     )
 
     local telescope = require('telescope')
+    local open_with_trouble = require('trouble.sources.telescope').open
 
     telescope.setup({
       defaults = {
@@ -151,8 +149,7 @@ return {
         path_display = { 'filename_first' },
         mappings = {
           i = {
-            ['<C-t>'] = smart_send_to_qflist,
-            ['<C-r>'] = smart_send_to_qflist,
+            ['<C-t>'] = open_with_trouble,
             ['<C-u>'] = false, -- clear prompt with ctrl+u
             ['<C-d>'] = actions.preview_scrolling_down,
             ['<C-f>'] = actions.preview_scrolling_up,
@@ -160,8 +157,7 @@ return {
             ['<C-p>'] = actions.move_selection_previous,
           },
           n = {
-            ['<C-t>'] = smart_send_to_qflist,
-            ['<C-r>'] = smart_send_to_qflist,
+            ['<C-t>'] = open_with_trouble,
             ['q'] = actions.close,
             ['<C-n>'] = actions.move_selection_next,
             ['<C-p>'] = actions.move_selection_previous,
