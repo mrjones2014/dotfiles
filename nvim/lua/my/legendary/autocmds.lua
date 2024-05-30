@@ -8,7 +8,7 @@ function M.default_autocmds()
     },
     {
       -- if I'm editing my nvim config, make sure I'm `cd`d into `nvim`
-      'BufReadPre',
+      'BufRead',
       function()
         local bufname = vim.api.nvim_buf_get_name(0)
         if
