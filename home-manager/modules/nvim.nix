@@ -49,6 +49,7 @@
     defaultEditor = true;
     coc.enable = false;
 
+    extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [
       # for compiling Treesitter parsers
       gcc
@@ -87,7 +88,6 @@
       fd
       sqlite
       lemmy-help
-      luajitPackages.jsregexp
       fzf
       cargo
       cargo-nextest
