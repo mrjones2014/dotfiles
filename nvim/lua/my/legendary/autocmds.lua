@@ -7,6 +7,20 @@ function M.default_autocmds()
       [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif]],
     },
     {
+      -- if I'm editing my nvim config, make sure I'm `cd`d into `nvim`
+      'BufReadPre',
+      function()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        if
+          string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.loop.cwd()--[[@as string]], '/nvim')
+        then
+          vim.cmd.cd('./nvim')
+          vim.schedule(vim.cmd.e)
+        end
+      end,
+      opts = { once = true },
+    },
+    {
       -- turn current line blame off in insert mode,
       -- back on when leaving insert mode
       name = 'GitSignsCurrentLineBlameInsertModeToggle',
