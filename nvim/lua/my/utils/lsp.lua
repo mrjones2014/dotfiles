@@ -48,10 +48,6 @@ function M.apply_ui_tweaks()
     Hint = ' ',
     Info = ' ',
   }
-  for type, icon in pairs(icons) do
-    local highlight = 'DiagnosticSign' .. type
-    vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = highlight })
-  end
 
   local icon_map = {
     [vim.diagnostic.severity.ERROR] = icons.Error,
@@ -72,7 +68,7 @@ function M.apply_ui_tweaks()
     float = {
       format = diagnostic_format,
     },
-    signs = { priority = 100 },
+    signs = { priority = 100, text = icon_map },
     underline = true,
     update_in_insert = false,
     severity_sort = true,

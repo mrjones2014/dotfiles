@@ -57,8 +57,8 @@ function M.Diagnostics(is_winbar, bg)
       :map(function(severity)
         local component = {
           provider = function(self)
-            local sign = vim.fn.sign_getdefined('DiagnosticSign' .. severity_name[severity])[1]
-            return string.format('%s%s ', sign and sign.text, self.counts[severity] or 0)
+            local sign = vim.diagnostic.config().signs.text[severity]
+            return string.format('%s%s ', sign, self.counts[severity] or 0)
           end,
           hl = function()
             return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_name[severity])).fg, bg = bg }

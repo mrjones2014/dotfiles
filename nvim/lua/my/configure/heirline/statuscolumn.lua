@@ -33,7 +33,7 @@ M.DiagnosticSign = {
       -- only show the highest severity sign
       if diagnostics and #diagnostics > 0 then
         self.has_sign = true
-        self.sign = vim.fn.sign_getdefined('DiagnosticSign' .. severity_name[diagnostics[1].severity])[1]
+        self.sign = vim.diagnostic.config().signs.text[diagnostics[1].severity]
       end
     end,
     provider = function(self)
