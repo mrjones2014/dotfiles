@@ -16,9 +16,7 @@ in {
       local os_name = ${if isLinux then "'linux'" else "'macos'"}
       local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
-      -- macOS specific settings
-      -- this setting behaves weirdly on linux
-      config.hide_mouse_cursor_when_typing = os_name == 'macos'
+      config.hide_mouse_cursor_when_typing = true
       if os_name == 'macos' then
         config.window_decorations = 'RESIZE'
       end
