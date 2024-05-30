@@ -1,8 +1,48 @@
 local path = require('my.utils.path')
 
+---@param picker string
+---@param preexec fun()|nil
+local function search(picker, preexec)
+  return function()
+    if preexec then
+      preexec()
+    end
+    require('telescope.builtin')[picker]()
+  end
+end
+
 return {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
+  keys = {
+    {
+      '<C-f>',
+      function()
+        local prompt = vim.fn.getcmdline()
+        vim.fn.setcmdline('')
+        require('telescope.builtin').command_history({ default_text = prompt })
+      end,
+      mode = 'c',
+      desc = 'Fuzzy find command history',
+    },
+    { 'ff', search('find_files'), desc = 'Find files' },
+    { 'fh', search('oldfiles'), desc = 'Find oldfiles' },
+    { 'fb', search('buffers'), desc = 'Find buffers' },
+    { 'ft', search('live_grep'), desc = 'Find text' },
+    { 'fr', search('resume'), desc = 'Resume last finder' },
+    {
+      '<leader>w',
+      function()
+        local word = vim.fn.expand('<cword>')
+        require('telescope.builtin').live_grep({ default_text = word })
+      end,
+      desc = 'Grep word under cursor',
+    },
+    { '<leader>f', search('find_files', vim.cmd.vsp), desc = 'Split vertically, then find files' },
+    { '<leader>h', search('oldfiles', vim.cmd.vsp), desc = 'Split vertically, then find oldfiles' },
+    { '<leader>b', search('buffers', vim.cmd.vsp), desc = 'Split vertically, then find buffers' },
+    { '<leader>t', search('live_grep', vim.cmd.vsp), desc = 'Split vertically, then find text' },
+  },
   dependencies = {
     'nvim-telescope/telescope-symbols.nvim',
     'nvim-telescope/telescope-fzy-native.nvim',
@@ -32,6 +72,14 @@ return {
   },
   config = function()
     local actions = require('telescope.actions')
+
+    local function switch_picker(new_picker)
+      return function(prompt_bufnr)
+        local prompt = require('telescope.actions.state').get_current_line()
+        actions.close(prompt_bufnr)
+        require('telescope.builtin')[new_picker]({ default_text = prompt })
+      end
+    end
 
     local function smart_send_to_qflist(...)
       vim.cmd.cexpr('[]')
@@ -117,6 +165,10 @@ return {
             ['q'] = actions.close,
             ['<C-n>'] = actions.move_selection_next,
             ['<C-p>'] = actions.move_selection_previous,
+            ['ff'] = switch_picker('find_files'),
+            ['fh'] = switch_picker('oldfiles'),
+            ['fb'] = switch_picker('buffers'),
+            ['ft'] = switch_picker('live_grep'),
           },
         },
         layout_strategy = 'horizontal',

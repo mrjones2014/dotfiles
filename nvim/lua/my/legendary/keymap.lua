@@ -30,62 +30,6 @@ function M.default_keymaps()
 
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
-
-    {
-      itemgroup = 'Search...',
-      description = 'Various telescope.nvim finders',
-      icon = ' ',
-      keymaps = {
-        -- ctrl+f from command line to search command history
-        {
-          '<C-f>',
-          function()
-            local search = vim.fn.getcmdline()
-            vim.fn.setcmdline('')
-            require('telescope.builtin').command_history({ default_text = search })
-          end,
-          description = 'Search command history',
-          mode = 'c',
-        },
-        { 'fr', h.lazy_required_fn('telescope.builtin', 'resume'), description = 'Resume last Telescope finder' },
-        { 'ff', h.lazy_required_fn('telescope.builtin', 'find_files'), description = 'Find files' },
-        { 'fb', h.lazy_required_fn('telescope.builtin', 'buffers'), description = 'Find open buffers' },
-        { 'ft', h.lazy_required_fn('telescope.builtin', 'live_grep'), description = 'Find pattern' },
-        {
-          'fh',
-          h.lazy_required_fn('telescope.builtin', 'oldfiles'),
-          description = 'Find recent files',
-        },
-        {
-          '<leader>f',
-          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'find_files')),
-          description = 'Split vertically, then find files',
-        },
-        {
-          '<leader>b',
-          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'buffers')),
-          description = 'Split vertically, then find open buffers',
-        },
-        {
-          '<leader>h',
-          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'oldfiles')),
-          description = 'Split vertically, then find recent files',
-        },
-        {
-          '<leader>t',
-          h.vsplit_then(h.lazy_required_fn('telescope.builtin', 'live_grep')),
-          description = 'Split vertically, then find file via live grep',
-        },
-        {
-          '<leader>w',
-          function()
-            local word = vim.fn.expand('<cword>')
-            require('telescope.builtin').live_grep({ default_text = word })
-          end,
-          description = 'Global search for word under cursor',
-        },
-      },
-    },
   }
 end
 
@@ -106,11 +50,6 @@ function M.lsp_keymaps(bufnr)
     icon = '',
     keymaps = {
       {
-        'fs',
-        h.lazy_required_fn('telescope.builtin', 'lsp_document_symbols'),
-        description = 'Find LSP document symbols',
-      },
-      {
         'gh',
         function()
           -- I have diagnostics float on CursorHold,
@@ -128,12 +67,7 @@ function M.lsp_keymaps(bufnr)
         opts = { buffer = bufnr },
       },
       { 'gs', vim.lsp.buf.signature_help, description = 'Show signature help', opts = { buffer = bufnr } },
-      {
-        'gr',
-        h.lazy_required_fn('telescope.builtin', 'lsp_references'),
-        description = 'Find references',
-        opts = { buffer = bufnr },
-      },
+      { 'gr', vim.lsp.buf.references, description = 'Find references', opts = { buffer = bufnr } },
       { 'gd', vim.lsp.buf.definition, description = 'Go to definition', opts = { buffer = bufnr } },
       { 'gi', vim.lsp.buf.implementation, description = 'Go to implementation', opts = { buffer = bufnr } },
       { 'gt', vim.lsp.buf.type_definition, description = 'Go to type definition', opts = { buffer = bufnr } },
