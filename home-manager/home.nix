@@ -62,7 +62,6 @@
     ./modules/arkenfox.nix
     ./shared.nix
     ./modules/_1password-shell.nix
-    ./modules/rofi.nix
     ./modules/espanso.nix
     ./modules/wezterm.nix
     ./modules/librewolf.nix

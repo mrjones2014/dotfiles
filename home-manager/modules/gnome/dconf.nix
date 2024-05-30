@@ -29,6 +29,8 @@ in {
         "dash-to-dock@micxgx.gmail.com"
         "no-overview@fthx"
         "gTile@vibou"
+        "search-light@icedman.github.com"
+        "quick@web.search"
       ];
     };
     "org/gnome/desktop/interface" = {
@@ -64,5 +66,8 @@ in {
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
     "org/gnome/desktop/peripherals/touchpad" = { send-events = "enabled"; };
+    "org/gnome/shell/extensions/search-light" = {
+      shortcut-search = [ "<Super>space" ];
+    };
   };
 }

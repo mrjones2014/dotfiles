@@ -27,7 +27,6 @@
     MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
     Categories=Network;InstantMessaging;Chat;
   '';
-  home.packages = [ pkgs.flameshot ];
   gtk = {
     gtk2 = {
       configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

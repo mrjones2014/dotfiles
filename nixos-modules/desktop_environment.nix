@@ -31,6 +31,8 @@
       tray-icons-reloaded
       no-overview
       gtile
+      search-light
+      quick-web-search
     ];
   };
 }
