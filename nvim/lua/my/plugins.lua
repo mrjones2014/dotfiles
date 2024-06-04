@@ -16,7 +16,7 @@ require('lazy').setup('my.configure', {
   },
   dev = { path = '~/git', fallback = true },
   install = {
-    colorscheme = { 'onedark_dark', 'habamax' },
+    colorscheme = { vim.env.COLORSCHEME or 'tokyonight', 'habamax' },
   },
   performance = {
     rtp = {

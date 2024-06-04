@@ -188,6 +188,7 @@ return {
       sources = {
         { name = 'luasnip', priority = 100 },
         { name = 'nvim_lsp', priority = 90 },
+        { name = 'lazydev', group_index = 0 },
         { name = 'fish' },
         { name = 'path', priority = 5 },
         { name = 'buffer', priority = 1 },
