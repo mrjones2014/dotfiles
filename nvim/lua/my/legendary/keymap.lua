@@ -27,6 +27,19 @@ function M.default_keymaps()
 
     { '<Tab>', ':bn<CR>', description = 'Move to next buffer' },
     { '<S-Tab>', ':bp<CR>', description = 'Move to previous buffer' },
+
+    {
+      '<leader>s',
+      function()
+        if vim.o.spell then
+          vim.opt.spell = false
+        else
+          vim.opt.spelloptions = { 'camel', 'noplainbuffer' }
+          vim.opt.spell = true
+        end
+      end,
+      description = 'Toggle spellcheck',
+    },
   }
 end
 
