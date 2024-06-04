@@ -4,7 +4,8 @@ local linters_by_ft = require('my.lsp.filetypes').linters_by_ft
 return {
   {
     'stevearc/conform.nvim',
-    ft = vim.tbl_keys(formatters_by_ft),
+    -- load for *all* languages, because it formats with LSP fallback too
+    ft = vim.tbl_keys(require('my.lsp.filetypes').config),
     opts = {
       formatters_by_ft = formatters_by_ft,
       format_after_save = function()
