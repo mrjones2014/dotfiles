@@ -4,11 +4,12 @@ return {
     vim.api.nvim_create_autocmd('User', {
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)
+        local minifiles = require('mini.files')
         local buf = args.data.buf_id
 
         -- close with <ESC> as well as q
         vim.keymap.set('n', '<ESC>', function()
-          require('mini.files').close()
+          minifiles.close()
         end, { buffer = buf })
 
         -- set up ability to confirm changes with :w
@@ -17,9 +18,18 @@ return {
         vim.api.nvim_create_autocmd('BufWriteCmd', {
           buffer = buf,
           callback = function()
-            require('mini.files').synchronize()
+            minifiles.synchronize()
           end,
         })
+
+        -- ctrl+v to open selected buffer in a split
+        vim.keymap.set('n', '<C-v>', function()
+          vim.api.nvim_win_call(minifiles.get_target_window(), function()
+            vim.cmd.vsp()
+            minifiles.set_target_window(vim.api.nvim_get_current_win())
+          end)
+          minifiles.go_in({ close_on_file = true })
+        end, { desc = 'Open file in split window', buffer = buf })
       end,
     })
   end,
