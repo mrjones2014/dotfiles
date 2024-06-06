@@ -144,7 +144,7 @@ in {
       local function find_vim_pane(tab)
         for _, pane in ipairs(tab:panes()) do
           -- for some reason the user vars aren't always present here in this specific context
-          if smart_splits.is_vim(pane) or basename(pane) == 'nvim' then
+          if smart_splits.is_vim(pane)--[[  or basename(pane) == 'nvim' ]] then
             return pane
           end
         end

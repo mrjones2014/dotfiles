@@ -1,7 +1,6 @@
 return {
   'mrjones2014/smart-splits.nvim',
   dev = true,
-  event = 'WinNew',
-  ft = 'trouble', -- for some reason trouble.nvim doesn't trigger WinNew
+  lazy = false,
   opts = { ignored_buftypes = { 'nofile' } },
 }
