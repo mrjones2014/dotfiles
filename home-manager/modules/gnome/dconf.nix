@@ -27,7 +27,6 @@ in {
       enabled-extensions = [
         "trayIconsReloaded@selfmade.pl"
         "dash-to-dock@micxgx.gmail.com"
-        "no-overview@fthx"
         "gTile@vibou"
         "search-light@icedman.github.com"
         "quick@web.search"
@@ -53,6 +52,7 @@ in {
     };
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
+      disable-overview-on-startup = true;
     };
     "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
     "org/gnome/desktop/background" = {
