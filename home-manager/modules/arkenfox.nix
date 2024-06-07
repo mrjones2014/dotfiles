@@ -16,6 +16,22 @@
       version = "118.0";
     };
     profiles.Default = {
+      isDefault = true;
+      search = {
+        default = "Kagi";
+        force = true;
+        engines = {
+          Kagi = {
+            urls = [{
+              template = "https://kagi.com/search";
+              params = [{
+                name = "q";
+                value = "{searchTerms}";
+              }];
+            }];
+          };
+        };
+      };
       settings = {
         # disable Pocket shit
         "extensions.pocket.enabled" = false;
