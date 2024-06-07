@@ -56,16 +56,14 @@
       services.sudo.sshAgentAuth = true;
     };
   };
-
-  environment.etc = {
-    # Force use NextDNS for DNS server
-    "resolved.conf".text = ''
-      [Resolve]
-      DNS=45.90.28.0#7cac77.dns.nextdns.io
-      DNS=2a07:a8c0::#7cac77.dns.nextdns.io
-      DNS=45.90.30.0#7cac77.dns.nextdns.io
-      DNS=2a07:a8c1::#7cac77.dns.nextdns.io
-      DNSOverTLS=yes
+  services.resolved = {
+    enable = true;
+    dnsovertls = true;
+    extraConfig = ''
+      DNS=45.90.28.0#a6416b.dns.nextdns.io
+      DNS=2a07:a8c0::#a6416b.dns.nextdns.io
+      DNS=45.90.30.0#a6416b.dns.nextdns.io
+      DNS=2a07:a8c1::#a6416b.dns.nextdns.io
     '';
   };
 
