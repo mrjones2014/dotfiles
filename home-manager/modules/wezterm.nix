@@ -98,14 +98,14 @@ in {
         return {
           { Background = { Color = bar_bg } },
           { Foreground = { Color = bg } },
-          { Text = "" },
+          { Text = "▐" },
           { Background = { Color = bg } },
           { Foreground = { Color = fg } },
           { Text = title },
           { Text = has_unseen_output and '  ' or "" },
           { Background = { Color = bar_bg } },
           { Foreground = { Color =  bg } },
-          { Text = "" },
+          { Text = "▌" },
           { Background = { Color = bar_bg } },
           { Foreground = { Color = bar_bg } },
         }
