@@ -22,21 +22,37 @@ in {
       end
 
       -- sleek tab bar
+      local tab_max_width = 30
       config.use_fancy_tab_bar = false
       config.show_new_tab_button_in_tab_bar = false
-      config.tab_max_width = 30
+      config.tab_max_width = tab_max_width
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = false
 
-      local function tab_title(tab)
-        local title = tab.tab_title
+      local function tab_title(tab, is_mux_win)
+        local title
+        if is_mux_win then
+          title = tab:get_title()
+        else
+          title = tab.tab_title
+        end
 
         if title and #title > 0 then
           return title
         end
 
         -- remove hostname
-        return string.gsub(tab.active_pane.title, '^%[?[%a%d\\-]%]? ', "")
+        if is_mux_win then
+          title = tab:window():gui_window():active_pane():get_title()
+        else
+          title = tab.active_pane.title
+        end
+        return string.gsub(title, '^%[?[%a%d\\-]%]? ', "")
+      end
+
+      local function format_tab_title(tab, idx, max_width, is_mux_win)
+        -- 6 because of the two spaces below, plus 2 separators, plus tab index
+        return string.format(' %d %s ', idx, wezterm.truncate_left(tab_title(tab, is_mux_win), max_width - 6))
       end
 
       local function active_tab_idx(tabs)
@@ -48,12 +64,20 @@ in {
 
         return -1
       end
-      wezterm.on('format-tab-title', function(tab, tabs, panes, cf, hover, max_width)
-        local title = tab_title(tab)
-        -- 6 because of the two spaces below, plus 2 separators, plus tab index
-        title = wezterm.truncate_left(title, max_width - 6)
+      wezterm.on('update-status', function(window)
+        local mux_win = window:mux_window()
+        local total_width = mux_win:active_tab():get_size().cols
+        local all_tabs = mux_win:tabs()
+        local tabs_max_width = config.tab_max_width * #all_tabs
+        local tabs_total_width = 0
+        for _, tab in ipairs(mux_win:tabs()) do
+          tabs_total_width = tabs_total_width + #format_tab_title(tab, 0, tab_max_width, true) + 6
+        end
+        window:set_left_status(string.rep(' ', (total_width / 2) - (tabs_total_width / 2)))
+      end)
+      wezterm.on('format-tab-title', function(tab, tabs)
         local i = tab.tab_index
-        title = string.format(' %d %s ', i + 1, title)
+        local title = format_tab_title(tab, i + 1, tab_max_width)
 
         -- tokyonight colors
         local bar_bg = '#292e42'
@@ -66,32 +90,24 @@ in {
         end
 
         local active_idx = active_tab_idx(tabs)
-        local end_sep_color = inactive_bg
-        if i == (#tabs - 1) then
-          end_sep_color = bar_bg
-        elseif i == (active_idx - 1) then
+        local end_sep_color = bar_bg
+        if i == (active_idx - 1) then
           end_sep_color = active_bg
-        elseif i < active_idx then
-          end_sep_color = inactive_bg
         end
 
         return {
           { Background = { Color = bar_bg } },
-          { Foreground = { Color = bar_bg } },
-          { Text = "" },
+          { Foreground = { Color = bg } },
+          { Text = "" },
           { Background = { Color = bg } },
           { Foreground = { Color = fg } },
           { Text = title },
           { Text = has_unseen_output and '  ' or "" },
           { Background = { Color = bar_bg } },
           { Foreground = { Color =  bg } },
-          { Text = "" },
-          { Background = { Color = end_sep_color } },
-          { Foreground = { Color = bar_bg } },
-          { Text = "" },
+          { Text = "" },
           { Background = { Color = bar_bg } },
           { Foreground = { Color = bar_bg } },
-          { Text = "" },
         }
       end)
 
