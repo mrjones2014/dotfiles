@@ -1,4 +1,4 @@
-{ pkgs, isLinux, ... }:
+{ pkgs, ... }:
 let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
@@ -13,13 +13,10 @@ in {
     extraConfig = ''
       local wezterm = require('wezterm')
       local config = wezterm.config_builder()
-      local os_name = ${if isLinux then "'linux'" else "'macos'"}
       local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
       config.hide_mouse_cursor_when_typing = true
-      if os_name == 'macos' then
-        config.window_decorations = 'RESIZE'
-      end
+      config.window_decorations = 'RESIZE'
 
       -- sleek tab bar
       local tab_max_width = 30
