@@ -22,6 +22,8 @@
         force = true;
         engines = {
           Kagi = {
+            iconUpdateURL =
+              "https://help.kagi.com/assets/kagi-logo.f29e5d62.png";
             urls = [{
               template = "https://kagi.com/search";
               params = [{
@@ -30,6 +32,13 @@
               }];
             }];
           };
+          # Hide all other search engines
+          "Amazon.com".metaData.hidden = true;
+          Google.metaData.hidden = true;
+          Bing.metaData.hidden = true;
+          DuckDuckGo.metaData.hidden = true;
+          eBay.metaData.hidden = true;
+          "Wikipedia (en)".metaData.hidden = true;
         };
       };
       settings = {
