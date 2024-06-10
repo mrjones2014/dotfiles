@@ -69,5 +69,9 @@ in {
     "org/gnome/shell/extensions/search-light" = {
       shortcut-search = [ "<Super>space" ];
     };
+    "org/gnome/mutter/keybindings" = {
+      switch-monitor =
+        [ ]; # disable stupid ass default <Super>+p defautl shortcut
+    };
   };
 }

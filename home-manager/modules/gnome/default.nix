@@ -1,4 +1,4 @@
-{ config, ... }: {
+{
   imports = [ ./dconf.nix ];
   # workaround for https://github.com/nix-community/home-manager/issues/3447
   # autostart 1Password in the background so I can use the SSH agent without manually opening the app first
@@ -27,14 +27,5 @@
     MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
     Categories=Network;InstantMessaging;Chat;
   '';
-  gtk = {
-    gtk2 = {
-      configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-      extraConfig = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-    gtk3 = { extraConfig = { gtk-application-prefer-dark-theme = 1; }; };
-    gtk4 = { extraConfig = { gtk-application-prefer-dark-theme = 1; }; };
-  };
+  gtk.enable = true;
 }
