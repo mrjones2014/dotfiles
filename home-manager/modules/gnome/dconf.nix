@@ -8,7 +8,9 @@ let
 in {
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
   dconf.settings = {
-    "org/gnome/desktop/wm/preferences" = { button-layout = "close,appmenu:"; };
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = "close,minimize,maximize,appmenu:";
+    };
     "org/gnome/shell" = {
       disable-user-extensions = false;
       favorite-apps = [
