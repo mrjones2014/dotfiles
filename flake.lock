@@ -69,11 +69,11 @@
     },
     "catppuccin": {
       "locked": {
-        "lastModified": 1718051927,
-        "narHash": "sha256-Ex+xjaSZe/Ag7Tab1HcKj6JHl5y8jUJCs3/NNITe8Uc=",
+        "lastModified": 1718058526,
+        "narHash": "sha256-cf1EzzaeixFIVw/FE1C2BYJFAj5PAinfPoee2tJDzZo=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "c4dac42a4fadc49bbd939fb3531673dbb3b0a949",
+        "rev": "e55fb4262b17f702624bcbb58531a2b84a69a94e",
         "type": "github"
       },
       "original": {
@@ -553,11 +553,11 @@
         "tokyonight-rofi": "tokyonight-rofi"
       },
       "locked": {
-        "lastModified": 1718052025,
-        "narHash": "sha256-kf828n0vzZU9IjpFtEcztkghl6+lLFAm3e/dRhoB1Fc=",
+        "lastModified": 1718060501,
+        "narHash": "sha256-G1vy1DbyoQf9FqOCaB6jJablDJn++svU6yrGvqeyjy4=",
         "owner": "mrjones2014",
         "repo": "tokyonight.nix",
-        "rev": "7ce15512a535d185f43d27994d84af19ae4b51b4",
+        "rev": "e8ff72de5a560fe0194af562efd125ea04aa3135",
         "type": "github"
       },
       "original": {

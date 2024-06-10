@@ -27,5 +27,4 @@
     MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
     Categories=Network;InstantMessaging;Chat;
   '';
-  gtk.enable = true;
 }
