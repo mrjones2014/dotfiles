@@ -2,10 +2,7 @@
 let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
-    packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      maple-mono
-    ];
+    packages = with pkgs; [ maple-mono ];
     sessionVariables = { TERM = "wezterm"; };
   };
   programs.wezterm = {
