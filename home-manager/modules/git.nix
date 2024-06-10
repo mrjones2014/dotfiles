@@ -1,4 +1,4 @@
-{ pkgs, isDarwin, isLinux, isServer, config, ... }:
+{ pkgs, isDarwin, isLinux, isServer, ... }:
 let
   git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
     #!${pkgs.bash}/bin/bash

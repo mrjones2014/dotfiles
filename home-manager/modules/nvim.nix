@@ -17,7 +17,7 @@
   };
 
   xdg.configFile = {
-    "ripgrep_ignore".text = ''
+    ripgrep_ignore.text = ''
       .git/
       yarn.lock
       package-lock.json
@@ -31,7 +31,7 @@
       wget-log.*
       /vendor
     '';
-    "nvim" = {
+    nvim = {
       source = config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/git/dotfiles/nvim";
       recursive = true;
