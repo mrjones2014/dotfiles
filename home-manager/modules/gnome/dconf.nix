@@ -54,6 +54,9 @@ in {
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
       disable-overview-on-startup = true;
+      show-show-apps-button = false;
+      running-indicator-style = "DOTS";
+      apply-custom-theme = false;
     };
     "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
     "org/gnome/desktop/background" = {
