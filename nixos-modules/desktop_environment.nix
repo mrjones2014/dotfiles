@@ -33,6 +33,7 @@
         gtile
         search-light
         quick-web-search
+        user-themes
       ];
     };
 

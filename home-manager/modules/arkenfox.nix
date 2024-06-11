@@ -1,19 +1,15 @@
 { inputs, isLinux, ... }: {
   imports = [ inputs.arkenfox.hmModules.default ];
-  # TODO this doesn't work
-  home.file.".local/share/gnome-shell/search-providers/firefox-search-provider.ini".text =
-    ''
-      [Shell Search Provider]
-      DesktopId=firefox.desktop
-      BusName=org.mozilla.Firefox.SearchProvider
-      ObjectPath=/org/mozilla/Firefox/SearchProvider
-      Version=2
-    '';
   programs.firefox = {
     enable = isLinux;
     arkenfox = {
       enable = true;
       version = "118.0";
+    };
+    policies = {
+      DisableTelemetry = true;
+      DisablePocket = true;
+
     };
     profiles.Default = {
       isDefault = true;
@@ -22,6 +18,8 @@
         force = true;
         engines = {
           Kagi = {
+            iconUpdateURL =
+              "https://help.kagi.com/assets/kagi-logo.f29e5d62.png";
             urls = [{
               template = "https://kagi.com/search";
               params = [{
@@ -30,6 +28,13 @@
               }];
             }];
           };
+          # Hide all other search engines
+          "Amazon.com".metaData.hidden = true;
+          Google.metaData.hidden = true;
+          Bing.metaData.hidden = true;
+          DuckDuckGo.metaData.hidden = true;
+          eBay.metaData.hidden = true;
+          "Wikipedia (en)".metaData.hidden = true;
         };
       };
       settings = {
@@ -40,8 +45,6 @@
         "browser.urlbar.suggest.pocket" = false;
         # always show bookmarks toolbar
         "browser.toolbars.bookmarks.visibility" = "always";
-        # GNOME search provider
-        "browser.gnome-search-provider.enabled" = true;
       };
       arkenfox = {
         enable = isLinux;

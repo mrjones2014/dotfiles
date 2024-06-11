@@ -30,6 +30,7 @@ in {
         "gTile@vibou"
         "search-light@icedman.github.com"
         "quick@web.search"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
     };
     "org/gnome/desktop/interface" = {
@@ -53,6 +54,9 @@ in {
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
       disable-overview-on-startup = true;
+      show-show-apps-button = false;
+      running-indicator-style = "DOTS";
+      apply-custom-theme = false;
     };
     "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
     "org/gnome/desktop/background" = {
@@ -68,6 +72,10 @@ in {
     "org/gnome/desktop/peripherals/touchpad" = { send-events = "enabled"; };
     "org/gnome/shell/extensions/search-light" = {
       shortcut-search = [ "<Super>space" ];
+    };
+    "org/gnome/mutter/keybindings" = {
+      switch-monitor =
+        [ ]; # disable stupid ass default <Super>+p defautl shortcut
     };
   };
 }

@@ -14,6 +14,7 @@
       "steam-run"
       "steam-original"
       "parsec-bin"
+      "libXNVCtrl" # for some NVIDIA driver shit
       # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
       # however VS Code should NOT be installed on this system!
       # Use VS Codium instead: https://github.com/VSCodium/vscodium
