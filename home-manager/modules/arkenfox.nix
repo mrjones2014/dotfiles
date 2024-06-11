@@ -9,10 +9,56 @@
     policies = {
       DisableTelemetry = true;
       DisablePocket = true;
-
+      DisableFirefoxStudies = true;
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+      DisableFirefoxAccounts = true;
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      DisplayBookmarksToolbar = "always";
+      SearchBar = "unified";
+      ExtensionSettings = {
+        # uBlock Origin:
+        "uBlock0@raymondhill.net" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+          default_area = "navbar";
+        };
+        # 1Password
+        "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
+          installation_mode = "force_installed";
+          default_area = "navbar";
+        };
+        # xBrowserSync
+        "{019b606a-6f61-4d01-af2a-cea528f606da}" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/xbs/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # Tokyonight theme
+        "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/tokyo-night-milav/latest.xpi";
+        };
+        # Disable built-in search engines
+        "amazondotcom@search.mozilla.org" = { installation_mode = "blocked"; };
+        "bing.mozilla.org" = { installation_mode = "blocked"; };
+        "ddg.mozilla.org" = { installation_mode = "blocked"; };
+        "ebay.mozilla.org" = { installation_mode = "blocked"; };
+        "google.mozilla.org" = { installation_mode = "blocked"; };
+      };
     };
     profiles.Default = {
       isDefault = true;
+      # tokyonight theme from extension above
+      settings.activeThemeID = "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}";
       search = {
         default = "Kagi";
         force = true;
@@ -36,15 +82,6 @@
           eBay.metaData.hidden = true;
           "Wikipedia (en)".metaData.hidden = true;
         };
-      };
-      settings = {
-        # disable Pocket shit
-        "extensions.pocket.enabled" = false;
-        "extensions.pocket.api" = "";
-        "extensions.pocket.bffApi" = "";
-        "browser.urlbar.suggest.pocket" = false;
-        # always show bookmarks toolbar
-        "browser.toolbars.bookmarks.visibility" = "always";
       };
       arkenfox = {
         enable = isLinux;

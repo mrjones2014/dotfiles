@@ -22,7 +22,12 @@
     # release notes.
     stateVersion = "22.11";
     packages = with pkgs;
-      [ obsidian mdbook spotify gnumake ] ++ lib.lists.optionals isDarwin [
+      [
+        # obsidian # re-enable when the nixpkgs package is fixed
+        mdbook
+        spotify
+        gnumake
+      ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         # xcodes
       ] ++ lib.lists.optionals isLinux [
