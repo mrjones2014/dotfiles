@@ -32,7 +32,7 @@ return {
     npairs.setup({})
     npairs.add_rules({
       Rule('{', '};', 'nix'):with_pair(is_not_inside_nix_list),
-      Rule('[', '];', 'nix'):with_pair(is_not_inside_nix_list), -- TODO why doesn't this one work?
+      Rule('[', '];', 'nix'):with_pair(is_not_inside_nix_list),
     })
   end,
 }
