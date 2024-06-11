@@ -1,5 +1,4 @@
 local function is_not_inside_nix_list()
-  print('running')
   local node = require('nvim-treesitter.ts_utils').get_node_at_cursor(0)
   if not node then
     return false
