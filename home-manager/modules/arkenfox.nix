@@ -54,6 +54,10 @@
         "ebay.mozilla.org" = { installation_mode = "blocked"; };
         "google.mozilla.org" = { installation_mode = "blocked"; };
       };
+      Preferences = {
+        # use 1Password for this
+        "signon.rememberSignons" = false;
+      };
     };
     profiles.Default = {
       isDefault = true;
