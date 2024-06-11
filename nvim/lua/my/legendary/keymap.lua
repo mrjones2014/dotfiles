@@ -40,6 +40,16 @@ function M.default_keymaps()
       end,
       description = 'Toggle spellcheck',
     },
+
+    {
+      '<C-;>',
+      function()
+        local line = vim.api.nvim_get_current_line()
+        vim.api.nvim_set_current_line(string.format('%s;', line))
+      end,
+      mode = 'i',
+      description = 'Add semicolon to end of line from insert mode',
+    },
   }
 end
 

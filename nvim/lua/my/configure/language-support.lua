@@ -20,7 +20,7 @@ return {
     'mfussenegger/nvim-lint',
     ft = vim.tbl_keys(linters_by_ft),
     init = function()
-      vim.api.nvim_create_autocmd('BufWritePost', {
+      vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter' }, {
         callback = function()
           require('lint').try_lint()
         end,
