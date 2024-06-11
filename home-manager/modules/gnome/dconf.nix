@@ -9,6 +9,8 @@ in {
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
   dconf.settings = {
     "org/gnome/desktop/wm/preferences" = {
+      # If this doesn't seem to be working, check `gsettings get org.gnome.settings-daemon.plugins.xsettings overrides`
+      # window button order may be in there
       button-layout = "close,minimize,maximize,appmenu:";
     };
     "org/gnome/shell" = {
