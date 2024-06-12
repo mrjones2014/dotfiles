@@ -42,11 +42,6 @@
             "https://addons.mozilla.org/firefox/downloads/latest/xbs/latest.xpi";
           installation_mode = "force_installed";
         };
-        # Tokyonight theme
-        "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
-          install_url =
-            "https://addons.mozilla.org/firefox/downloads/latest/tokyo-night-milav/latest.xpi";
-        };
         # Disable built-in search engines
         "amazondotcom@search.mozilla.org" = { installation_mode = "blocked"; };
         "bing@search.mozilla.org" = { installation_mode = "blocked"; };
@@ -57,12 +52,11 @@
       Preferences = {
         # use 1Password for this
         "signon.rememberSignons" = false;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
     };
     profiles.Default = {
       isDefault = true;
-      # tokyonight theme from extension above
-      settings.activeThemeID = "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}";
       search = {
         default = "Kagi";
         force = true;
