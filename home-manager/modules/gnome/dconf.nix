@@ -54,6 +54,7 @@ in {
       preset-resize-3 = [ "<Shift><Control><Alt><Super>k" ];
     };
     "org/gnome/shell/extensions/dash-to-dock" = {
+      dash-max-icon-size = 48;
       intellihide-mode = "ALL_WINDOWS";
       disable-overview-on-startup = true;
       show-show-apps-button = false;
