@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
+{ inputs, pkgs, lib, config, isLinux, ... }:
 with lib;
 let inherit (config) theme;
 in {
@@ -34,7 +34,7 @@ in {
       };
       # handle GTK themeing
       gtk = {
-        enable = true;
+        enable = isLinux;
         theme = {
           package = pkgs.tokyonight-gtk-theme;
           name = "Tokyonight-Dark-BL";
@@ -45,7 +45,7 @@ in {
           name = "Tokyonight-Dark-BL";
         };
       };
-      xdg.configFile = {
+      xdg.configFile = { } // lib.optionalAttrs isLinux {
         "gtk-4.0/assets".source =
           "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
         "gtk-4.0/gtk.css".source =
