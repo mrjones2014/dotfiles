@@ -42,6 +42,14 @@ function M.default_keymaps()
     },
 
     {
+      '<leader>y',
+      function()
+        local text = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+        require('my.utils.clipboard').copy(text)
+      end,
+    },
+
+    {
       '<C-;>',
       function()
         local line = vim.api.nvim_get_current_line()
