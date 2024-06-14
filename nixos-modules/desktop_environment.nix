@@ -23,7 +23,9 @@
           hitori # sudoku game
           atomix # puzzle game
           yelp # Help view
+          seahorse # password/ssh manager
           gnome-contacts
+          gnome-calendar
           gnome-initial-setup
         ]);
 
