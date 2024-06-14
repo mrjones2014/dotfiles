@@ -90,4 +90,9 @@ return {
       end,
     },
   },
+  {
+    'moyiz/dit-dev.nvim',
+    cmd = { 'GitDevOpen', 'GitDevCleanAll' },
+    opts = {},
+  },
 }
