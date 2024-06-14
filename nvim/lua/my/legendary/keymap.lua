@@ -52,11 +52,18 @@ function M.default_keymaps()
     {
       '<C-;>',
       function()
+        print('run')
         local line = vim.api.nvim_get_current_line()
-        vim.api.nvim_set_current_line(string.format('%s;', line))
+        local suffix = string.match(line, '.*(;%s*)')
+        if suffix then
+          line = string.sub(line, 1, #line - #suffix)
+        else
+          line = string.format('%s;', line)
+        end
+        vim.api.nvim_set_current_line(line)
       end,
-      mode = 'i',
-      description = 'Add semicolon to end of line from insert mode',
+      mode = { 'n', 'i' },
+      description = 'Toggle semicolon',
     },
   }
 end
