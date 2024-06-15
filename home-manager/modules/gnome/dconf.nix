@@ -2,8 +2,8 @@
 let
   wallpaperImg = pkgs.fetchurl {
     url =
-      "https://raw.githubusercontent.com/czechbol/tokyonight-backgrounds/main/operating-systems/3840x2160/nix-snowflake.png";
-    hash = "sha256-W5GaKCOiV2S3NuORGrRaoOE2x9X6gUS+wYf7cQkw9CY=";
+      "https://www.triplemonitorbackgrounds.com/albums/thewarners777/synthwave.jpg";
+    hash = "sha256-BvFwyMa4Oub8yMRlgIZOuYgtI3UYHlbEf9rebEfEMDY=";
   };
 in {
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
