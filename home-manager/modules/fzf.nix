@@ -51,6 +51,7 @@ in {
     '';
     functions = {
       fzf-history-widget-wrapped = ''
+        history merge # make FZF search history from all sessions
         fzf-history-widget
         _prompt_move_to_bottom
       '';
