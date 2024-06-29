@@ -3,7 +3,6 @@
     let name = lib.getName pkg;
     in builtins.elem name [
       "obsidian"
-      "discord"
       "spotify"
       "nvidia-persistenced"
       "nvidia-x11"

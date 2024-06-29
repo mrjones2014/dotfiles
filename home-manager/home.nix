@@ -32,10 +32,7 @@
         # xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        (discord.override {
-          withOpenASAR = true;
-          withVencord = true;
-        })
+        webcord-vencord
         signal-desktop
         qbittorrent
         vlc
