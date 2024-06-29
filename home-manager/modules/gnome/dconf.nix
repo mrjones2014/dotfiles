@@ -23,7 +23,7 @@ in {
         "1password.desktop"
         "signal-desktop.desktop"
         "firefox.desktop"
-        "webcord.desktop"
+        "vesktop.desktop"
         "steam.desktop"
       ];
       enabled-extensions = [

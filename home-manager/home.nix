@@ -32,7 +32,7 @@
         # xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        webcord-vencord
+        vesktop # discord client
         signal-desktop
         qbittorrent
         vlc
