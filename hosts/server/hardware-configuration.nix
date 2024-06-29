@@ -29,6 +29,10 @@
       options = [ "bind" ];
     };
     "/mnt/jellyfin" = {
+      device = "/dev/disk/by-label/media";
+      fsType = "ext4";
+    };
+    "/mnt/extra-storage" = {
       device = "/dev/disk/by-label/jellyfin";
       fsType = "ext4";
     };
