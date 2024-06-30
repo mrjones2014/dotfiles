@@ -1,6 +1,11 @@
 { inputs, config, pkgs, lib, isDarwin, isLinux, ... }:
-
-{
+let
+  discordIcon = pkgs.fetchurl {
+    url =
+      "https://static-00.iconduck.com/assets.00/apps-discord-icon-2048x2048-hkrl0hxr.png";
+    hash = "sha256-e3AT1zekZJEYRm+S9wwMuJb+G2/zSOZSKJztHGKnOiY=";
+  };
+in {
   nixpkgs.overlays = [
     (final: prev:
       (import ../packages {
@@ -32,7 +37,22 @@
         # xcodes
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        vesktop # discord client
+        # vesktop discord client, I don't like
+        # vesktop's icon, so override it
+        (vesktop.overrideAttrs (oldAttrs: {
+          desktopItems = [
+            (makeDesktopItem {
+              name = "vesktop";
+              desktopName = "Vesktop";
+              exec = "vesktop %U";
+              icon = "discord";
+              startupWMClass = "Vesktop";
+              genericName = "Internet Messenger";
+              keywords = [ "discord" "vencord" "electron" "chat" ];
+              categories = [ "Network" "InstantMessaging" "Chat" ];
+            })
+          ];
+        }))
         signal-desktop
         qbittorrent
         vlc
@@ -43,21 +63,24 @@
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';
   };
-
-  xdg.enable = true;
-  # link config files, if a dedicated module exists (below)
-  # it will handle its own config
-  xdg.configFile = {
-    "hammerspoon" = {
-      source = ../hammerspoon;
-      recursive = true;
+  xdg = {
+    enable = true;
+    # for discord app icon
+    dataFile."icons/discord.png".source = discordIcon;
+    # link config files, if a dedicated module exists (below)
+    # it will handle its own config
+    configFile = {
+      "hammerspoon" = {
+        source = ../hammerspoon;
+        recursive = true;
+      };
+      "nix/nix.conf".text = ''
+        experimental-features = nix-command flakes
+        # see https://github.com/nix-community/nix-direnv#via-home-manager
+        keep-derivations = true
+        keep-outputs = true
+      '';
     };
-    "nix/nix.conf".text = ''
-      experimental-features = nix-command flakes
-      # see https://github.com/nix-community/nix-direnv#via-home-manager
-      keep-derivations = true
-      keep-outputs = true
-    '';
   };
 
   imports = [
