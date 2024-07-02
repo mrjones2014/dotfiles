@@ -78,6 +78,7 @@ return {
     opts = {
       style = 'night',
       dim_inactive = true,
+      plugins = { auto = true },
       on_highlights = function(hl, c)
         hl.WinBar = { bg = c.fg_gutter }
         hl.WinBarNC = hl.WinBar
