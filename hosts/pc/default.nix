@@ -13,7 +13,7 @@
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
     # use proprietary nvidia drivers
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia = {
       # workaround for Steam new UI bug, change this back to `config.boot.kernelPackages.nvidiaPackages.stable` in the future.
       # see: https://wiki.archlinux.org/title/Steam/Troubleshooting#Steam_window_does_not_show_on_Nvidia_GPUs_after_the_June_14,_2023_update

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, ... }: {
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -21,7 +21,6 @@
     ./hardware-configuration.nix
     ./secrets.nix
     ./ollama.nix
-    ./nginx.nix
     ./content.nix
     ./nas.nix
     ./containers.nix
@@ -36,7 +35,9 @@
       efi.efiSysMountPoint = "/boot";
     };
   };
-  services = { # Did you read the comment?
+  services = {
+    tailscale.enable = true;
+    tailscale.authKeyFile = config.age.secrets.tailscale.path;
     fail2ban.enable = true;
     openssh = {
       enable = true;
@@ -56,15 +57,5 @@
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
-    ];
-  };
   programs.fish.enable = true;
 }
