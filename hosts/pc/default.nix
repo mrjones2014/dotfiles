@@ -6,9 +6,6 @@
     ../../nixos-modules/allowed-unfree.nix
     ./hardware-configuration.nix
   ];
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
@@ -61,7 +58,13 @@
     # dolphinEmu # dolphin build is suuuuper slow and also broken rn
     # rpcs3 # broken right now
   ];
-  services.mullvad-vpn.enable = true;
+
+  services = {
+    # Enable the X11 windowing system.
+    xserver.enable = true;
+    mullvad-vpn.enable = true;
+    tailscale.enable = true;
+  };
 
   # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
   # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
