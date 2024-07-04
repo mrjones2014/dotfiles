@@ -24,6 +24,7 @@
     ./content.nix
     ./nas.nix
     ./containers.nix
+    ./tailscale.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -36,8 +37,6 @@
     };
   };
   services = {
-    tailscale.enable = true;
-    tailscale.authKeyFile = config.age.secrets.tailscale.path;
     fail2ban.enable = true;
     openssh = {
       enable = true;
