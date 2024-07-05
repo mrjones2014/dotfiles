@@ -24,7 +24,7 @@
     ./content.nix
     ./nas.nix
     ./containers.nix
-    ./tailscale.nix
+    ./wireguard.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -55,6 +55,9 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-
-  programs.fish.enable = true;
+  programs = {
+    fish.enable = true;
+    dconf.enable =
+      true; # TODO this shouldn't be needed but home-manager complains without it
+  };
 }

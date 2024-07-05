@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, isLinux, ... }:
+{ inputs, pkgs, lib, config, isLinux, isServer, ... }:
 with lib;
 let inherit (config) theme;
 in {
@@ -34,7 +34,7 @@ in {
       };
       # handle GTK themeing
       gtk = {
-        enable = isLinux;
+        enable = isLinux && !isServer;
         theme = {
           package = pkgs.tokyonight-gtk-theme;
           name = "Tokyonight-Dark-BL";
