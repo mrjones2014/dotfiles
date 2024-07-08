@@ -43,7 +43,7 @@ in {
           desktopItems = [
             (makeDesktopItem {
               name = "vesktop";
-              desktopName = "Vesktop";
+              desktopName = "Discord";
               exec = "vesktop %U";
               icon = "discord";
               startupWMClass = "Vesktop";
