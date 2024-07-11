@@ -1,7 +1,7 @@
 # Instance Definition: https://recyclarr.dev/wiki/yaml/config-reference/basic/
 sonarr:
   sonarr-1080p-2160p:
-    base_url: http://192.168.146.119:8989
+    base_url: http://192.168.189.2:8989
     api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Sonarr API Key"
 
     include:
@@ -78,7 +78,7 @@ sonarr:
 
 radarr:
   radarr-1080p-2160p:
-    base_url: http://192.168.146.119:7878
+    base_url: http://192.168.189.2:7878
     api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Radarr API Key"
 
     include:

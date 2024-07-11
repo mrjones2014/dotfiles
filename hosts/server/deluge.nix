@@ -31,7 +31,7 @@ in {
           VPN_CLIENT = "wireguard";
           STRICT_PORT_FORWARD = "yes";
           ENABLE_PRIVOXY = "yes";
-          LAN_NETWORK = "192.168.146.0/24";
+          LAN_NETWORK = "192.168.189.0/24";
           NAME_SERVERS =
             "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
           DELUGE_DAEMON_LOG_LEVEL = "info";

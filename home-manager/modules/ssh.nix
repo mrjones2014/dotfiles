@@ -15,7 +15,7 @@ in {
     matchBlocks = {
       "nixos-server" = {
         port = 6969;
-        hostname = "192.168.146.119";
+        hostname = "192.168.189.2";
       };
       "gitlab.1password.io" = {
         port = 2227;
