@@ -36,7 +36,7 @@ in {
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
       # bc = "branch changes"
       bc =
-        "!export MASTER_BRANCH=$(git branch -r | grep -Po 'HEAD -> \\K.*$') && git diff --name-only $MASTER_BRANCH | ${pkgs.fzf}/bin/fzf --ansi --preview 'git diff --color=always $MASTER_BRANCH {}'";
+        "!export MASTER_BRANCH=$(git branch -r | grep -Po 'HEAD -> \\K.*$') && git diff --name-only $MASTER_BRANCH | ${pkgs.fzf}/bin/fzf --ansi --preview 'git diff --color=always $MASTER_BRANCH {}' --bind 'enter:become($EDITOR {})'";
     };
     extraConfig = {
       user = {
