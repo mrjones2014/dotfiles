@@ -90,7 +90,13 @@
         hashedPassword =
           "$y$j9T$L.RrmE3CRSB.lQayiw2ZN/$vA4XkSR13yL016t3HaZ11uCN/sCmXqBcuUcSBxMjiPD";
         home = "/home/mat";
-        extraGroups = [ "wheel" "networkmanager" "oci" "podman" ];
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+          "oci"
+          "podman"
+          "dialout" # to connect to arduino
+        ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu"
         ];
