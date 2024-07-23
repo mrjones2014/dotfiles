@@ -6,6 +6,9 @@
   '';
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
+  # going to use pipewire instead
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services = {
     mullvad-vpn.enable = true;
 
@@ -74,11 +77,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
 
   users = {
     mutableUsers = false;
