@@ -32,6 +32,7 @@ in {
         mdbook
         spotify
         gnumake
+        yazi
       ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         # xcodes
