@@ -57,7 +57,7 @@ in {
         signal-desktop
         qbittorrent
         vlc
-        cura
+        # cura
         r2modman
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
