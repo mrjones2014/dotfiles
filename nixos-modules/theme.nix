@@ -37,13 +37,11 @@ in {
         enable = isLinux && !isServer;
         theme = {
           package = pkgs.tokyonight-gtk-theme;
-          name = "Tokyonight-Dark-BL";
+          name = "Tokyonight-Dark";
         };
       };
       dconf.settings = {
-        "org/gnome/shell/extensions/user-theme" = {
-          name = "Tokyonight-Dark-BL";
-        };
+        "org/gnome/shell/extensions/user-theme" = { name = "Tokyonight-Dark"; };
       };
       xdg.configFile = { } // lib.optionalAttrs isLinux {
         "gtk-4.0/assets".source =
