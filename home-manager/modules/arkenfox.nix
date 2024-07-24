@@ -42,6 +42,12 @@
             "https://addons.mozilla.org/firefox/downloads/latest/xbs/latest.xpi";
           installation_mode = "force_installed";
         };
+        # tokyonight theme
+        "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/tokyo-night-milav/latest.xpi";
+          installation_mode = "force_installed";
+        };
         # Disable built-in search engines
         "amazondotcom@search.mozilla.org" = { installation_mode = "blocked"; };
         "bing@search.mozilla.org" = { installation_mode = "blocked"; };
@@ -53,6 +59,11 @@
         # use 1Password for this
         "signon.rememberSignons" = false;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        # use native GTK buttons
+        "widget.gtk.non-native-titlebar-buttons.enabled" = false;
+        # apply tokyonight theme from extension above
+        "activeThemeID" = "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}";
+        "extensions.activeThemeID" = "{4520dc08-80f4-4b2e-982a-c17af42e5e4d}";
       };
     };
     profiles.Default = {
