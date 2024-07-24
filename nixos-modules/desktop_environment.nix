@@ -36,8 +36,8 @@
         tray-icons-reloaded
         gtile
         search-light
-        quick-web-search
         user-themes
+        quick-settings-tweaker
       ];
     };
 

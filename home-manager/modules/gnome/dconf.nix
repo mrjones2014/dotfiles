@@ -31,8 +31,8 @@ in {
         "dash-to-dock@micxgx.gmail.com"
         "gTile@vibou"
         "search-light@icedman.github.com"
-        "quick@web.search"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "quick-settings-tweaks@qwreey"
       ];
     };
     "org/gnome/desktop/interface" = {
@@ -62,6 +62,12 @@ in {
       apply-custom-theme = false;
     };
     "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
+    "org/gnome/shell/extensions/quick-settings-tweaks" = {
+      output-show-selected = true;
+      input-show-selected = true;
+      input-always-show = true;
+      volume-mixer-enabled = true;
+    };
     "org/gnome/desktop/background" = {
       picture-uri = "file://${wallpaperImg}";
     };
