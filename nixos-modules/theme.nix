@@ -32,6 +32,10 @@ in {
         enable = true;
         style = "night";
       };
+      programs.btop.settings = {
+        color_theme = "tokyonight-night";
+        theme_background = false;
+      };
       # handle GTK themeing
       gtk = {
         enable = isLinux && !isServer;
