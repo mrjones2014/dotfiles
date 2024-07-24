@@ -24,7 +24,7 @@ in {
     };
     _1password-shell-plugins = {
       enable = true;
-      plugins = with pkgs; [ gh ];
+      plugins = with pkgs; [ gh glab ];
     };
   };
 }
