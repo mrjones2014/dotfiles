@@ -76,7 +76,7 @@ in {
 
         function _project_jump_format_project
           set -l repo "$HOME/git/$argv[1]"
-          set -l branch (git --work-tree $repo --git-dir $repo/.git branch --show-current)
+          set -l branch $(git --work-tree $repo --git-dir $repo/.git branch --show-current)
           set_color --bold cyan
           echo -n "$argv[1]"
           echo -n " $(_project_jump_get_icon $repo)"
@@ -99,13 +99,13 @@ in {
             return
           end
 
-          set -l dir (string trim "$(string match -r ".*(?=\s*󰊢||)" "$selected")")
+          set -l dir $(string trim "$(string match -r ".*(?=\s*󰊢||)" "$selected")")
           echo "$HOME/git/$dir"
         end
 
         function _project_jump_get_projects
           # make sure to use built-in ls, not exa
-          for dir in (command ls "$HOME/git")
+          for dir in $(command ls "$HOME/git")
             if test -d "$HOME/git/$dir"
               echo "$(_project_jump_format_project $dir)"
             end
@@ -113,12 +113,12 @@ in {
         end
 
         function _project_jump_get_readme
-          set -l dir (_project_jump_parse_project "$argv[1]")
+          set -l dir $(_project_jump_parse_project "$argv[1]")
           if test -f "$dir/README.md"
             ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
           else
             echo
-            echo (set_color --bold) "README.md not found"
+            echo $(set_color --bold) "README.md not found"
             echo
             ${pkgs.lsd}/bin/lsd --icon=always --group-directories-first -F --color=always $dir
           end
@@ -128,24 +128,16 @@ in {
         if set -ql _flag_format
           _project_jump_get_readme $_flag_format
         else
-          set -l selected (_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}" --bind "space:execute(echo 'pickfile:{}')+abort")
-          set -l proj_dir (string replace -r "^pickfile:" "" "$selected" || true)
-          if test -n "$proj_dir"
-            cd (_project_jump_parse_project "$proj_dir")
+          set -l selected $(_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}")
+          if test -n "$selected"
+            cd $(_project_jump_parse_project "$selected")
           end
           commandline -f repaint
-          # if instructed to pick a file, do it
-          if [ "$proj_dir" != "" ] && [ "$(string length \"$proj_dir\")" != "$(string length \"$selected\")" ]
-            set -l selected_file (fzf --preview-window 'right,70%' --preview "${pkgs.bat}/bin/bat --color=always {}")
-            if test -n "$selected_file"
-              $EDITOR "$selected_file"
-            end
-          end
         end
       '';
       fzf-vim-widget = ''
         # modified from fzf-file-widget
-        set -l commandline (__fzf_parse_commandline)
+        set -l commandline $(__fzf_parse_commandline)
         set -l dir $commandline[1]
         set -l fzf_query $commandline[2]
         set -l prefix $commandline[3]
