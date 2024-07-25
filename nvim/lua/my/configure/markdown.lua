@@ -1,8 +1,9 @@
 return {
   {
-    'mrjones2014/mdpreview.nvim',
-    dev = true,
+    'MeanderingProgrammer/markdown.nvim',
+    main = 'render-markdown',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    opts = {},
     ft = 'markdown',
-    dependencies = { 'norcalli/nvim-terminal.lua', config = true },
   },
 }
