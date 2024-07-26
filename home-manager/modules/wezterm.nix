@@ -22,6 +22,7 @@ in {
       config.tab_max_width = tab_max_width
       config.tab_bar_at_bottom = true
       config.hide_tab_bar_if_only_one_tab = false
+      config.switch_to_last_active_tab_when_closing_tab = true
 
       local function tab_title(tab, is_mux_win)
         local title
@@ -191,6 +192,14 @@ in {
             args = { ${fish_path_lua_str} },
             cwd = wezterm.home_dir,
           }),
+        },
+        -- show btop in new tab
+        {
+          key = 'p',
+          mods = 'META',
+          action = wezterm.action.SpawnCommandInNewTab({
+            args = { '${pkgs.btop}/bin/btop' },
+          })
         },
         {
           key = 'LeftArrow',
