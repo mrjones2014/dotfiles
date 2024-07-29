@@ -78,12 +78,6 @@ return {
       end
     end
 
-    local function smart_send_to_qflist(...)
-      vim.cmd.cexpr('[]')
-      actions.smart_add_to_qflist(...)
-      vim.cmd.copen()
-    end
-
     local function parse_prompt(prompt)
       local first_word, rest = prompt:match('^%s*@(%S+)%s*(.*)$')
       if first_word == nil then
