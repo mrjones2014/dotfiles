@@ -10,6 +10,16 @@
   programs = {
     btop = { enable = true; };
 
+    lsd = {
+      enable = true;
+      enableAliases = true;
+      settings = {
+        sorting = { dir-grouping = "first"; };
+        icons = { when = "always"; };
+        color = { when = "always"; };
+      };
+    };
+
     fish = {
       enable = true;
 
@@ -24,11 +34,6 @@
         cat = "bat";
         gogit = "cd ~/git";
         "!!" = "eval \\$history[1]";
-        ls = "${pkgs.lsd}/bin/lsd --group-directories-first";
-        la = "ls -a";
-        ll = "ls -l --git";
-        l = "ls -laH";
-        lg = "ls -lG";
         clear = "clear && _prompt_move_to_bottom";
         oplocal =
           "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
