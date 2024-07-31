@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, isLinux, ... }:
 let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
@@ -7,6 +7,10 @@ in {
   };
   programs.wezterm = {
     enable = true;
+    package = if isLinux then
+      inputs.wezterm-nightly.packages.x86_64-linux.default
+    else
+      inputs.wezterm-nightly.packages.aarch64-darwin.default;
     extraConfig = ''
       local wezterm = require('wezterm')
       local config = wezterm.config_builder()
