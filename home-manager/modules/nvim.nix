@@ -7,15 +7,6 @@
       "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
   };
 
-  programs.fish.shellAliases = {
-    # lol, sometimes I'm stupid
-    ":q" = "exit";
-    ":Q" = "exit";
-    # I swear I'm an idiot sometimes
-    ":e" = "nvim";
-    update-nvim-plugins = "nvim --headless '+Lazy! sync' +qa";
-  };
-
   xdg.configFile = {
     ripgrep_ignore.text = ''
       .git/
