@@ -1,13 +1,6 @@
 name: Check Nix flake
 on:
   pull_request:
-    paths:
-      - '*.nix'
-      - flake.lock
-  pull_request_target:
-    paths:
-      - '*.nix'
-      - flake.lock
   push:
     branches:
       - master
