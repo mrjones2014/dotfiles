@@ -1,4 +1,4 @@
-{ pkgs, inputs, isLinux, ... }: {
+{ pkgs, inputs, isLinux, isServer, ... }: {
   home = {
     packages = with pkgs; [ maple-mono ];
     sessionVariables = { TERM = "wezterm"; };
@@ -191,7 +191,12 @@
           key = 'n',
           mods = 'META',
           action = wezterm.action.SpawnCommandInNewTab({
-            args = { "fish" },
+            args = { ${
+              if isServer then
+                "'/run/current-system/sw/bin/fish'"
+              else
+                "wezterm.home_dir .. '/.nix-profile/bin/fish'"
+            } },
             cwd = wezterm.home_dir,
           }),
         },
