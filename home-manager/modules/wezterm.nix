@@ -1,6 +1,4 @@
-{ pkgs, inputs, isLinux, ... }:
-let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
-in {
+{ pkgs, inputs, isLinux, ... }: {
   home = {
     packages = with pkgs; [ maple-mono ];
     sessionVariables = { TERM = "wezterm"; };
@@ -193,7 +191,7 @@ in {
           key = 'n',
           mods = 'META',
           action = wezterm.action.SpawnCommandInNewTab({
-            args = { ${fish_path_lua_str} },
+            args = { "fish" },
             cwd = wezterm.home_dir,
           }),
         },
