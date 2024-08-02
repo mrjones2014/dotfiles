@@ -1,4 +1,6 @@
-{ pkgs, inputs, isLinux, isServer, ... }: {
+{ pkgs, inputs, isLinux, ... }:
+let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
+in {
   home = {
     packages = with pkgs; [ maple-mono ];
     sessionVariables = { TERM = "wezterm"; };
@@ -191,12 +193,7 @@
           key = 'n',
           mods = 'META',
           action = wezterm.action.SpawnCommandInNewTab({
-            args = { ${
-              if isServer then
-                "'/run/current-system/sw/bin/fish'"
-              else
-                "wezterm.home_dir .. '/.nix-profile/bin/fish'"
-            } },
+            args = { ${fish_path_lua_str} },
             cwd = wezterm.home_dir,
           }),
         },
