@@ -5,7 +5,12 @@
     set -l branch $(starship module git_branch)
     set -l branch $(string trim "$branch")
     set -l icon $(starship module custom.git_server_icon)
-    echo "$dir $icon$branch $(printf "\e[1;32m❯\e[0m ")"
+    echo "${
+      if isServer then
+        "$(starship module username)$(starship module hostname)"
+      else
+        ""
+    }$dir $icon$branch $(printf "\e[1;32m❯\e[0m ")"
   '';
   programs.starship = {
     enable = true;
