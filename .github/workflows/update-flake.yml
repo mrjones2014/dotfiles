@@ -20,3 +20,4 @@ jobs:
         commit-message: "flake: update dependencies"
         title: "[automation] update flake dependencies"
         branch: "automation/update-flake-dependencies"
+        token: ${{ secrets.UPDATE_FLAKE_TOKEN }}
