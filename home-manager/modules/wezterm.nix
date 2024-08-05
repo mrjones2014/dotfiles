@@ -2,7 +2,10 @@
 let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
-    packages = with pkgs; [ maple-mono ];
+    packages = with pkgs; [
+      maple-mono
+      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    ];
     sessionVariables = { TERM = "wezterm"; };
   };
   programs.wezterm = {
@@ -117,17 +120,20 @@ in {
         }
       }
       config.cursor_blink_rate = 0
-      config.font = wezterm.font({
-        family = 'Maple Mono',
-        harfbuzz_features = {
-          'cv03',
-          'cv04',
-          'ss01',
-          'ss02',
-          'ss03',
-          'ss04',
-          'ss05',
+      config.font = wezterm.font_with_fallback({
+        {
+          family = 'Maple Mono',
+          harfbuzz_features = {
+            'cv03',
+            'cv04',
+            'ss01',
+            'ss02',
+            'ss03',
+            'ss04',
+            'ss05',
+          },
         },
+        'Symbols Nerd Font Mono'
       })
       config.font_size = 16
       config.window_padding = {
