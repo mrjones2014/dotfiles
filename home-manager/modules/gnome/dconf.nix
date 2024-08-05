@@ -33,6 +33,7 @@ in {
         "search-light@icedman.github.com"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "quick-settings-tweaks@qwreey"
+        "wiggle@mechtifs"
       ];
     };
     "org/gnome/desktop/interface" = {

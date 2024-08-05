@@ -38,6 +38,7 @@
         search-light
         user-themes
         quick-settings-tweaker
+        wiggle
       ];
     };
 
