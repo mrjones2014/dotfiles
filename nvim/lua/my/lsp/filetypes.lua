@@ -3,6 +3,7 @@ local M = {}
 M.config = {
   ['css'] = {
     patterns = { '*.css', '*.scss' },
+    formatter = 'prettierd',
     lspconfig = { 'cssls' },
   },
   ['html'] = {
@@ -88,6 +89,7 @@ end
 M.config['javascript'] = M.config['typescript']
 M.config['typescriptreact'] = M.config['typescript']
 M.config['javascriptreact'] = M.config['typescript']
+M.config['scss'] = M.config['css']
 
 local function cfg_by_ft(cfg)
   local result = {}
