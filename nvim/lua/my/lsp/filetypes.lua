@@ -16,7 +16,7 @@ M.config = {
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
     lspconfig = { 'tsserver', 'eslint' },
-    formatter = 'prettier_d',
+    formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
   },
   ['lua'] = {
@@ -38,7 +38,7 @@ M.config = {
     patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
     formatter = {
-      'prettier_d',
+      'prettierd',
       'injected', -- see :h conform-formatters, formats injected code blocks
     },
     treesitter = { 'markdown', 'markdown_inline' },
