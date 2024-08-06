@@ -21,7 +21,7 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
-    lazy = false, -- unfortunately does not work when lazy loaded
+    ft = { 'html', 'javascriptreact', 'typescriptreact' },
     opts = {},
   },
 }
