@@ -36,7 +36,6 @@ return {
           sl.Branch,
           shared.FileIcon('surface0'),
           sl.FilePath,
-          sl.MarkdownPreview,
           sl.Align,
           sl.UnsavedChanges,
           sl.Align,

@@ -239,43 +239,6 @@ M.LspFormatToggle = {
   },
 }
 
-M.MarkdownPreview = {
-  condition = function()
-    return conditions.buffer_matches({ filetype = { 'markdown' } }) or myconditions.is_markdown_preview()
-  end,
-  on_click = {
-    callback = function()
-      if vim.b.mdpreview_session then
-        require('mdpreview').stop_preview()
-      else
-        require('mdpreview').preview({
-          opts = {
-            winnr = 0,
-          },
-        })
-      end
-    end,
-    name = 'heirline_MarkdownPreview',
-  },
-  {
-    provider = sep.rounded_right,
-    hl = { bg = 'green', fg = 'surface0' },
-  },
-  {
-    provider = function()
-      if vim.b.mdpreview_session then
-        return '   Source  '
-      end
-      return '   Preview  '
-    end,
-    hl = { bg = 'green', fg = 'surface0' },
-  },
-  {
-    provider = sep.rounded_right,
-    hl = { bg = 'surface0', fg = 'green' },
-  },
-}
-
 M.RecordingMacro = {
   provider = function()
     local macro_reg = vim.fn.reg_recording()
