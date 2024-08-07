@@ -28,7 +28,7 @@ in {
     stateVersion = "22.11";
     packages = with pkgs;
       [
-        # obsidian # re-enable when the nixpkgs package is fixed
+        obsidian # re-enable when the nixpkgs package is fixed
         mdbook
         spotify
         gnumake
