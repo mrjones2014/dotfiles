@@ -27,13 +27,7 @@ in {
     # release notes.
     stateVersion = "22.11";
     packages = with pkgs;
-      [
-        obsidian # re-enable when the nixpkgs package is fixed
-        mdbook
-        spotify
-        gnumake
-        yazi
-      ] ++ lib.lists.optionals isDarwin [
+      [ mdbook spotify gnumake yazi ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         # xcodes
       ] ++ lib.lists.optionals isLinux [
@@ -59,6 +53,9 @@ in {
         vlc
         # cura
         r2modman
+        obsidian
+        flatpak
+
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
