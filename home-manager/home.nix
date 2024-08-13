@@ -54,6 +54,7 @@ in {
         # cura
         r2modman
         obsidian
+        parsec-bin
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
