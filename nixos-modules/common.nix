@@ -44,6 +44,13 @@
     };
   };
 
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
+
   networking = {
     wireguard.enable = true;
     networkmanager.enable = true;
