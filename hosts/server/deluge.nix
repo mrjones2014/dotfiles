@@ -1,16 +1,30 @@
-{ config, ... }:
-let
-  configDir = "/var/lib/delugevpn";
-  wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
+let configDir = "/var/lib/delugevpn";
 in {
+  opnix = {
+    secrets.mullvad_wireguard_conf = {
+      source = ''
+        [Interface]
+        # Device: Clever Ibex
+        PrivateKey = {{ op://nixos-server/Mullvad VPN Private Key/Private Key }}
+        Address = 10.64.35.106/32,fc00:bbbb:bbbb:bb01::1:2369/128
+        DNS = 10.64.0.1
+        PostUp = iptables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
+        PreDown = iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
+
+        [Peer]
+        PublicKey = IzqkjVCdJYC1AShILfzebchTlKCqVCt/SMEXolaS3Uc=
+        AllowedIPs = 0.0.0.0/0,::0/0
+        Endpoint = 143.244.47.65:51820
+      '';
+      path = "${configDir}/wireguard/mullvad_wireguard.conf";
+    };
+    systemdWantedBy = [ "podman-delugevpn" ];
+  };
 
   systemd.tmpfiles.rules = [
     "d ${configDir} 055 delugevpn delugevpn - -"
     "d ${configDir}/wireguard 055 delugevpn delugevpn - -"
   ];
-  system.activationScripts.copyWireguardConfigIntoContainer.text = ''
-    mkdir -p ${configDir}/wireguard && cp ${wireguardConfigPath} ${configDir}/wireguard/mullvad_wireguard.conf
-  '';
   networking.firewall = {
     allowedTCPPorts = [ 8112 8118 58846 58946 ];
     allowedUDPPorts = [ 8112 8118 58846 58946 ];
