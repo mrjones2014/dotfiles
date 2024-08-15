@@ -2,7 +2,7 @@
 sonarr:
   sonarr-1080p-2160p:
     base_url: http://192.168.189.2:8989
-    api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Sonarr API Key"
+    api_key: "op://nixos-server/dfbnv6enwexvbz2apxgdlzul3m/Sonarr API Key"
 
     include:
       # Comment out any of the following includes to disable them
@@ -79,7 +79,7 @@ sonarr:
 radarr:
   radarr-1080p-2160p:
     base_url: http://192.168.189.2:7878
-    api_key: "op://Private/vp5kuf3i4ywc6azpr2ay4ojrhq/Radarr API Key"
+    api_key: "op://nixos-server/dfbnv6enwexvbz2apxgdlzul3m/Radarr API Key"
 
     include:
       # Comment out any of the following includes to disable them
