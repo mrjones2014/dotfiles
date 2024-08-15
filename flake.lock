@@ -498,11 +498,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723735662,
+        "lastModified": 1723736049,
         "narHash": "sha256-/aoFeTbIseSQ/GBQcYHuqeiQCefDRe3mRnTePtsFDPY=",
         "owner": "mrjones2014",
         "repo": "opnix",
-        "rev": "764764b7b4a99022c1e44d746c7fd980a1187dc0",
+        "rev": "0815458eea77169b0c92ebe8f2180c3cbb8c7831",
         "type": "github"
       },
       "original": {
