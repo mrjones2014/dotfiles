@@ -1,8 +1,20 @@
 { config, ... }: {
+  opnix = {
+    secrets.homepage_env_file.source = ''
+      HOMEPAGE_VAR_NEXTDNS_API_KEY="{{ op://nixos-server/NextDNS/API Key }}"
+      HOMEPAGE_VAR_JELLYSEERR_API_KEY="{{ op://nixos-server/Jellyfin/Jellyseerr API Key }}"
+      HOMEPAGE_VAR_JELLYFIN_API_KEY="{{ op://nixos-server/Jellyfin/Jellyfin API Key }}"
+      HOMEPAGE_VAR_DELUGE_PASSWORD="{{ op://nixos-server/Deluge/password }}"
+      HOMEPAGE_VAR_SONARR_API_KEY="{{ op://nixos-server/dfbnv6enwexvbz2apxgdlzul3m/Sonarr API Key }}"
+      HOMEPAGE_VAR_RADARR_API_KEY="{{ op://nixos-server/dfbnv6enwexvbz2apxgdlzul3m/Radarr API Key }}"
+      HOMEPAGE_VAR_BAZARR_API_KEY="{{ op://nixos-server/dfbnv6enwexvbz2apxgdlzul3m/Bazarr API Key }}"
+    '';
+    systemdWantedBy = [ "homepage-dashboard" ];
+  };
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    environmentFile = config.age.secrets.homepage.path;
+    environmentFile = config.opnix.secrets.homepage_env_file.path;
     settings = {
       theme = "dark";
       background =
