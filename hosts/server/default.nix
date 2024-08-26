@@ -1,4 +1,4 @@
-{ inputs, lib, ... }: {
+{ inputs, ... }: {
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -21,12 +21,9 @@
   environment.systemPackages =
     [ inputs.wezterm-nightly.packages.x86_64-linux.default ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "1password-cli" ];
-  opnix.environmentFile = "/etc/opnix.env";
-
   imports = [
     ./hardware-configuration.nix
+    ./secrets.nix
     ./ollama.nix
     ./content.nix
     ./nas.nix

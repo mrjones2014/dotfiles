@@ -9,13 +9,6 @@ in {
     enable = true;
     settings = { interface = wireguard_interface; };
   };
-
-  opnix = {
-    secrets.wg_private_key.source =
-      "{{ op://nixos-server/Wireguard Home VPN/Server Private Key }}";
-    systemdWantedBy = [ "wg-quick-${wireguard_interface}" ];
-  };
-
   networking = {
     # Enable NAT
     nat = {
@@ -37,7 +30,7 @@ in {
         # The port that WireGuard listens to - recommended that this be changed from default
         listenPort = wireguard_port;
         # Path to the server's private key
-        privateKeyFile = config.opnix.secrets.wg_private_key.path;
+        privateKeyFile = config.age.secrets.wireguard_server.path;
 
         # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
         postUp = ''

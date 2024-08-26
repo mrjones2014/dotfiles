@@ -5,10 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
     tokyonight.url = "github:mrjones2014/tokyonight.nix";
-    opnix = {
-      url = "github:mrjones2014/opnix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     wezterm-nightly = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,9 +25,13 @@
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, opnix, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: {
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -43,7 +43,11 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
-          opnix.nixosModules.default
+          agenix.nixosModules.default
+          {
+            environment.systemPackages =
+              [ agenix.packages.x86_64-linux.default ];
+          }
           ./nixos-modules/common.nix
           ./hosts/server
           {
