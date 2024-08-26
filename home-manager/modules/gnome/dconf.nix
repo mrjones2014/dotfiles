@@ -13,9 +13,12 @@ let
     user-themes
     quick-settings-tweaker
     wiggle
-    gsconnect
   ];
-  enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
+  enabled-extensions = (map (ext: ext.extensionUuid) gnomeExtensions)
+  # gsconnect requires a systemd service so it needs to be installed
+  # via environment.systemPackages
+  # This is done in ../../../nixos-modules/desktop_environment.nix
+    ++ [ pkgs.gnomeExtensions.gsconnect.extensionUuid ];
 in {
   home.packages = gnomeExtensions;
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
