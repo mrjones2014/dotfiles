@@ -11,7 +11,7 @@
     };
     environment = {
       # don't install GNOME crap like Contacts, Photos, etc.
-      gnome.excludePackages = (with pkgs; [
+      gnome.excludePackages = with pkgs; [
         gnome-photos
         gnome-tour
         cheese # webcam tool
@@ -20,7 +20,6 @@
         yelp # Help view
         seahorse # password/ssh manager, I use 1Password SSH
         gnome-calendar
-      ]) ++ (with pkgs.gnome; [
         gnome-music
         gnome-characters
         tali # poker game
@@ -29,16 +28,6 @@
         atomix # puzzle game
         gnome-contacts
         gnome-initial-setup
-      ]);
-
-      systemPackages = with pkgs.gnomeExtensions; [
-        dash-to-dock
-        tray-icons-reloaded
-        gtile
-        search-light
-        user-themes
-        quick-settings-tweaker
-        wiggle
       ];
     };
 

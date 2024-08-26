@@ -5,7 +5,19 @@ let
       "https://www.triplemonitorbackgrounds.com/albums/thewarners777/synthwave.jpg";
     hash = "sha256-BvFwyMa4Oub8yMRlgIZOuYgtI3UYHlbEf9rebEfEMDY=";
   };
+  gnomeExtensions = with pkgs.gnomeExtensions; [
+    dash-to-dock
+    tray-icons-reloaded
+    gtile
+    search-light
+    user-themes
+    quick-settings-tweaker
+    wiggle
+    gsconnect
+  ];
+  enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in {
+  home.packages = gnomeExtensions;
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
   dconf.settings = {
     "org/gnome/desktop/wm/preferences" = {
@@ -26,15 +38,7 @@ in {
         "vesktop.desktop"
         "steam.desktop"
       ];
-      enabled-extensions = [
-        "trayIconsReloaded@selfmade.pl"
-        "dash-to-dock@micxgx.gmail.com"
-        "gTile@vibou"
-        "search-light@icedman.github.com"
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "quick-settings-tweaks@qwreey"
-        "wiggle@mechtifs"
-      ];
+      inherit enabled-extensions;
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
