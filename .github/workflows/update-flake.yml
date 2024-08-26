@@ -21,10 +21,3 @@ jobs:
         title: "[automation] update flake dependencies"
         branch: "automation/update-flake-dependencies"
         token: ${{ secrets.UPDATE_FLAKE_TOKEN }}
-    - name: Ping me in a comment on the PR
-      run: |
-        PR_NUMBER=${{ github.event.pull_request.number }}
-        COMMENT="Ping @mrjones2014"
-        GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-        COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
-        curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST $COMMENT_URL -d "{\"body\":\"$COMMENT\"}"
