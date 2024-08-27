@@ -2,7 +2,6 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     let name = lib.getName pkg;
     in builtins.elem name [
-      "obsidian"
       "spotify"
       "nvidia-persistenced"
       "nvidia-x11"

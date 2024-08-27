@@ -40,7 +40,10 @@ in {
       gtk = {
         enable = isLinux && !isServer;
         theme = {
-          package = pkgs.tokyonight-gtk-theme;
+          package = pkgs.tokyonight-gtk-theme.override {
+            # macos style window buttons
+            tweakVariants = [ "macos" ];
+          };
           name = "Tokyonight-Dark";
         };
       };
