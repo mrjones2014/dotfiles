@@ -12,10 +12,8 @@
     # use proprietary nvidia drivers
     graphics.enable = true;
     nvidia = {
-      # workaround for Steam new UI bug, change this back to `config.boot.kernelPackages.nvidiaPackages.stable` in the future.
-      # see: https://wiki.archlinux.org/title/Steam/Troubleshooting#Steam_window_does_not_show_on_Nvidia_GPUs_after_the_June_14,_2023_update
-      # see last answer here: https://discourse.nixos.org/t/using-older-revisions-of-nvidia-drivers/28645
       package = config.boot.kernelPackages.nvidiaPackages.latest;
+      open = false;
       modesetting.enable = true;
       nvidiaPersistenced = true;
     };
