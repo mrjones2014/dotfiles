@@ -1,4 +1,5 @@
-{
+{ isLinux, ... }:
+if isLinux then {
   imports = [ ./dconf.nix ];
   # workaround for https://github.com/nix-community/home-manager/issues/3447
   # autostart 1Password in the background so I can use the SSH agent without manually opening the app first
@@ -27,4 +28,5 @@
     MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
     Categories=Network;InstantMessaging;Chat;
   '';
-}
+} else
+  { }
