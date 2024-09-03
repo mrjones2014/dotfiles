@@ -1,7 +1,7 @@
 local conditions = require('heirline.conditions')
-local myconditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 local path = require('my.utils.path')
+local clipboard = require('my.utils.clipboard')
 
 local M = {}
 
@@ -87,19 +87,23 @@ M.Mode = {
 }
 
 local function git_branch()
-  local status
-  if vim.b.mdpreview_session then
-    status = vim.b[vim.b.mdpreview_session.source_buf].gitsigns_status_dict
-  else
-    status = vim.b.gitsigns_status_dict
-  end
-  return vim.tbl_get(status or {}, 'head')
+  return vim.tbl_get(vim.b.gitsigns_status_dict or {}, 'head')
 end
 
 M.Branch = {
   condition = function()
     return git_branch() ~= nil
   end,
+  on_click = {
+    callback = function()
+      local branch = git_branch()
+      if branch and branch ~= '' then
+        clipboard.copy(branch)
+        vim.notify('Git branch copied to clipboard')
+      end
+    end,
+    name = 'heirline_copy_git_branch',
+  },
   {
     provider = function()
       return string.format('  %s', git_branch())
@@ -123,13 +127,15 @@ M.FilePath = {
       return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
     end,
     provider = function()
-      local buf = 0
-      local mdpreview_session = vim.b.mdpreview_session
-      if mdpreview_session then
-        buf = mdpreview_session.source_buf
-      end
-      return path.relative(vim.api.nvim_buf_get_name(buf))
+      return path.relative(vim.api.nvim_buf_get_name(0))
     end,
+    on_click = {
+      callback = function()
+        clipboard.copy(path.relative(vim.api.nvim_buf_get_name(0)))
+        vim.notify('Relative filepath copied to clipboard')
+      end,
+      name = 'heirline_copy_filepath',
+    },
   },
 }
 
@@ -208,8 +214,7 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
-    if require('my.utils.lsp').is_formatting_supported(buf) then
+    if require('my.utils.lsp').is_formatting_supported(0) then
       return '   '
     else
       return '   '
@@ -228,8 +233,7 @@ M.LspFormatToggle = {
   },
   {
     provider = function()
-      local buf = vim.b.mdpreview_session and vim.b.mdpreview_session.source_buf or 0
-      local name = require('my.utils.lsp').get_formatter_name(buf)
+      local name = require('my.utils.lsp').get_formatter_name(0)
       if name then
         return string.format(' (%s)  ', name)
       end

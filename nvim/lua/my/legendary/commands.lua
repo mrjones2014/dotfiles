@@ -171,7 +171,7 @@ function M.lsp_commands(bufnr)
     })
   end
 
-  if vim.api.nvim_buf_get_option(bufnr, 'filetype') == 'rust' then
+  if vim.api.nvim_get_option_value('filetype', { buf = bufnr }) == 'rust' then
     table.insert(commands, {
       ':CargoToml',
       function(args)
