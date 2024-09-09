@@ -15,7 +15,7 @@ jobs:
     - name: update flake.lock
       run: nix flake update
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       id: create-pr
       with:
         commit-message: "flake: update dependencies"
