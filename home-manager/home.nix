@@ -55,6 +55,7 @@ in {
         r2modman
         parsec-bin
         notesnook
+        zed-editor # macOS package is broken, install manually there
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
@@ -88,6 +89,7 @@ in {
     ./modules/wezterm.nix
     ./modules/librewolf.nix
     ./modules/gnome
+    ./modules/zed.nix
     ./modules/recyclarr.nix
     ../nixos-modules/allowed-unfree.nix
   ];
