@@ -7,14 +7,14 @@
     samba = {
       enable = true;
       openFirewall = true;
-      extraConfig = ''
-        guest account = nobody
-        map to guest = Bad User
-        load printers = no
-        printcap name = /dev/null
-        log file = /var/log/samba/client.%I
-        log level = 2
-      '';
+      settings = {
+        global = {
+          "guest account" = "nobody";
+          "map to guest" = "Bad User";
+          "load printers" = "no";
+          "printcap name" = "/dev/null";
+        };
+      };
       shares = {
         fileshare = {
           path = "/export/fileshare";
