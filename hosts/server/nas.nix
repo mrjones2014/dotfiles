@@ -8,10 +8,12 @@
       enable = true;
       openFirewall = true;
       settings = {
-        "guest account" = "nobody";
-        "map to guest" = "Bad User";
-        "load printers" = "no";
-        "printcap name" = "/dev/null";
+        global = {
+          "guest account" = "nobody";
+          "map to guest" = "Bad User";
+          "load printers" = "no";
+          "printcap name" = "/dev/null";
+        };
       };
       shares = {
         fileshare = {
