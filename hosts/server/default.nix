@@ -29,6 +29,7 @@
     ./nas.nix
     ./containers.nix
     ./wireguard.nix
+    ./gotify.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
