@@ -24,7 +24,6 @@
   imports = [
     ./hardware-configuration.nix
     ./secrets.nix
-    ./ollama.nix
     ./content.nix
     ./nas.nix
     ./containers.nix
