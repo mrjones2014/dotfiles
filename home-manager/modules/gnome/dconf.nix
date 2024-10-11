@@ -12,7 +12,6 @@ let
     search-light
     user-themes
     quick-settings-tweaker
-    wiggle
   ];
   enabled-extensions = (map (ext: ext.extensionUuid) gnomeExtensions)
   # gsconnect requires a systemd service so it needs to be installed
