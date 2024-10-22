@@ -60,6 +60,7 @@
       # LSP servers
       nil
       rust-analyzer
+      cargo # sometimes required for rust-analyzer to work
       taplo
       gopls
       lua
