@@ -84,7 +84,7 @@
       cargo-nextest
       clippy
       glow
-      mysql
+      mariadb
     ];
   };
 }
