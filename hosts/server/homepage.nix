@@ -1,6 +1,7 @@
 { config, ... }: {
   services.homepage-dashboard = {
-    enable = true;
+    enable =
+      false; # TODO re-enable when the module updates; `error: 'utillinux' has been renamed to/replaced by 'util-linux'`
     openFirewall = true;
     environmentFile = config.age.secrets.homepage.path;
     settings = {
