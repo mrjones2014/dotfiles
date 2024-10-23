@@ -50,8 +50,6 @@
         PermitRootLogin = "no";
         AllowUsers = [ "mat" ];
       };
-
-      ports = [ 6969 ];
     };
   };
 
