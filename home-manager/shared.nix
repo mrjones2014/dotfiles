@@ -1,4 +1,12 @@
-{
+{ pkgs, ... }: {
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+      auto-optimise-store = true
+    '';
+  };
   theme = "tokyonight";
   imports = [
     ../nixos-modules/theme.nix

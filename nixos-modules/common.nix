@@ -1,9 +1,12 @@
 { pkgs, ... }: {
-  # See https://github.com/nix-community/nix-direnv
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+      auto-optimise-store = true
+    '';
+  };
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
   # going to use pipewire instead
