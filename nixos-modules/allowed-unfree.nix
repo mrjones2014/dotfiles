@@ -11,6 +11,7 @@
       "steam"
       "steam-run"
       "steam-original"
+      "steam-unwrapped"
       "parsec-bin"
       "libXNVCtrl" # for some NVIDIA driver shit
       # This is required for pkgs.nodePackages_latest.vscode-langservers-extracted on NixOS
