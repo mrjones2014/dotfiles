@@ -15,7 +15,7 @@
           "printcap name" = "/dev/null";
         };
       };
-      shares = {
+      settings = {
         fileshare = {
           path = "/export/fileshare";
           browseable = "yes";
