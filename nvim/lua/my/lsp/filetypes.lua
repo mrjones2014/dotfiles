@@ -16,7 +16,7 @@ M.config = {
   },
   ['typescript'] = {
     patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
-    lspconfig = { 'tsserver', 'eslint' },
+    lspconfig = { 'ts_ls', 'eslint' },
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
   },
