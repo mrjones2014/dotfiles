@@ -13,7 +13,7 @@ return {
         end, { buffer = buf })
 
         -- set up ability to confirm changes with :w
-        vim.api.nvim_buf_set_option(buf, 'buftype', 'acwrite')
+        vim.api.nvim_set_option_value('buftype', 'acwrite', { buf = buf })
         vim.api.nvim_buf_set_name(buf, string.format('mini.files-%s', vim.loop.hrtime()))
         vim.api.nvim_create_autocmd('BufWriteCmd', {
           buffer = buf,
