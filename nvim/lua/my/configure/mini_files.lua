@@ -24,7 +24,7 @@ return {
 
         -- ctrl+v to open selected buffer in a split
         vim.keymap.set('n', '<C-v>', function()
-          vim.api.nvim_win_call(minifiles.get_target_window(), function()
+          vim.api.nvim_win_call(minifiles.get_explorer_state().target_window, function()
             vim.cmd.vsp()
             minifiles.set_target_window(vim.api.nvim_get_current_win())
           end)
