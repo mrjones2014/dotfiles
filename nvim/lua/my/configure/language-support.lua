@@ -3,6 +3,12 @@ local formatters_by_ft = require('my.lsp.filetypes').formatters_by_ft
 local linters_by_ft = require('my.lsp.filetypes').linters_by_ft
 return {
   {
+    -- disable stuff like LSP and Treesitter from attaching if the file is massive
+    'folke/snacks.nvim',
+    lazy = false,
+    opts = { bigfile = { enabled = true } },
+  },
+  {
     'stevearc/conform.nvim',
     -- load for *all* languages, because it formats with LSP fallback too
     ft = vim.tbl_keys(require('my.lsp.filetypes').config),

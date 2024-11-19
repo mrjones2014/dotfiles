@@ -1,6 +1,20 @@
 return {
   'echasnovski/mini.files',
+  dependencies = {
+    {
+      'folke/snacks.nvim',
+      lazy = false,
+      opts = { rename = { enabled = false } },
+    },
+  },
   init = function()
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesActionRename',
+      callback = function(event)
+        -- LSP rename files when renamed via mini.files
+        require('snacks.rename').on_rename_file(event.data.from, event.data.to)
+      end,
+    })
     vim.api.nvim_create_autocmd('User', {
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)

@@ -1,9 +1,17 @@
 local lsp_bound_buffer_ids = {}
 return {
   {
-    'famiu/bufdelete.nvim',
+    'folke/snacks.nvim',
+    lazy = false,
+    opts = { bufdelete = { enabled = true } },
     keys = {
-      { 'W', ':Bwipeout<CR>', desc = 'Close current buffer' },
+      {
+        'W',
+        function()
+          require('snacks.bufdelete').delete(0)
+        end,
+        desc = 'Close current buffer',
+      },
     },
   },
   -- used for frecency sort
@@ -66,13 +74,13 @@ return {
     lazy = false,
     priority = 1000000,
     init = function()
-      require('my.utils.lsp').on_attach(function(client, bufnr)
+      require('my.utils.lsp').on_attach(function(_, bufnr)
         if vim.tbl_contains(lsp_bound_buffer_ids, bufnr) then
           return
         end
         -- setup LSP-specific keymaps
         require('legendary').keymaps(require('my.legendary.keymap').lsp_keymaps(bufnr))
-        require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr, client.name))
+        require('legendary').commands(require('my.legendary.commands').lsp_commands(bufnr))
         table.insert(lsp_bound_buffer_ids, bufnr)
       end)
     end,
