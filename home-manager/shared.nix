@@ -5,6 +5,7 @@
       keep-outputs = true
       keep-derivations = true
       auto-optimise-store = true
+      experimental-features = nix-command flakes
     '';
   };
   theme = "tokyonight";
