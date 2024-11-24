@@ -30,7 +30,6 @@ in {
     displayManager.defaultSession = "gnome-xorg";
     xserver = {
       enable = true;
-      videoDrivers = [ "nvidia" ];
       desktopManager.gnome.enable = true;
       displayManager = { gdm.enable = true; };
     };

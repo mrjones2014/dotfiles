@@ -38,6 +38,7 @@
           inherit inputs;
           isServer = true;
           isLinux = true;
+	  isLaptop = false;
           isDarwin = false;
         };
         system = "x86_64-linux";
@@ -59,6 +60,7 @@
                 inherit inputs;
                 isServer = true;
                 isLinux = true;
+		isLaptop = false;
                 isDarwin = false;
               };
             };
@@ -71,6 +73,7 @@
           isServer = false;
           isDarwin = false;
           isLinux = true;
+	  isLaptop = false;
         };
         system = "x86_64-linux";
         modules = [
@@ -87,6 +90,36 @@
                 isServer = false;
                 isDarwin = false;
                 isLinux = true;
+		isLaptop = false;
+              };
+            };
+          }
+        ];
+      };
+      laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          isServer = false;
+          isDarwin = false;
+          isLinux = true;
+	  isLaptop = true;
+        };
+        system = "x86_64-linux";
+        modules = [
+          ./nixos-modules/common.nix
+          ./hosts/laptop
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              backupFileExtension = "backup";
+              useUserPackages = true;
+              users.mat = import ./home-manager/home.nix;
+              extraSpecialArgs = {
+                inherit inputs;
+                isServer = false;
+                isDarwin = false;
+                isLinux = true;
+		isLaptop = true;
               };
             };
           }

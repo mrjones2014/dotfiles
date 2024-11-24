@@ -1,11 +1,5 @@
 { inputs, config, pkgs, lib, isDarwin, isLinux, ... }:
-let
-  discordIcon = pkgs.fetchurl {
-    url =
-      "https://static-00.iconduck.com/assets.00/apps-discord-icon-2048x2048-hkrl0hxr.png";
-    hash = "sha256-e3AT1zekZJEYRm+S9wwMuJb+G2/zSOZSKJztHGKnOiY=";
-  };
-in {
+{
   nixpkgs.overlays = [
     (final: prev:
       (import ../packages {
@@ -64,7 +58,7 @@ in {
   xdg = {
     enable = true;
     # for discord app icon
-    dataFile."icons/discord.png".source = discordIcon;
+    dataFile."icons/discord.png".source = ./discord.png;
     # link config files, if a dedicated module exists (below)
     # it will handle its own config
     configFile = {

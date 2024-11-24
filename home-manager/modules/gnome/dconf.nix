@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, isLaptop, ... }:
 let
   wallpaperImg = pkgs.fetchurl {
     url =
@@ -39,8 +39,7 @@ in {
         "signal-desktop.desktop"
         "firefox.desktop"
         "vesktop.desktop"
-        "steam.desktop"
-      ];
+      ] ++ lib.lists.optionals (!isLaptop) [ "steam.desktop" ];
       inherit enabled-extensions;
     };
     "org/gnome/desktop/interface" = {

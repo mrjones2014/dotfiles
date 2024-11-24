@@ -4,7 +4,7 @@ let
     #!${pkgs.bash}/bin/bash
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
     # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
-    PASSWORD="$(op item get "System Password" --fields password)"
+    PASSWORD="$(op item get "System Password" --fields password --reveal)"
     if [[ -z "$PASSWORD" ]]; then
       echo "Failed to get password from 1Password."
       read -s -p "Password: " PASSWORD
@@ -13,7 +13,7 @@ let
     echo $PASSWORD
   '';
 in {
-  home.packages = with pkgs; [ _1password ];
+  home.packages = with pkgs; [ _1password-cli ];
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
   programs = {
     fish = {

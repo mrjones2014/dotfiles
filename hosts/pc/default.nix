@@ -60,6 +60,7 @@
   services = {
     # Enable the X11 windowing system.
     xserver.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;
