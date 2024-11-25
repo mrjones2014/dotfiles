@@ -1,4 +1,4 @@
-{ pkgs, lib, isDarwin, isLinux, isServer, isLaptop, ... }: {
+{ pkgs, lib, isDarwin, isLinux, isServer, isThinkpad, ... }: {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     HOMEBREW_NO_ANALYTICS = "1";
@@ -107,9 +107,9 @@
               "home-manager switch --flake ~/git/dotfiles/.#mac"
             else if isServer then
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
-            else if isLaptop then
+            else if isThinkpad then
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
-	    else
+            else
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}
           '';
         };

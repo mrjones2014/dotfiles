@@ -38,7 +38,7 @@
           inherit inputs;
           isServer = true;
           isLinux = true;
-	  isLaptop = false;
+          isThinkpad = false;
           isDarwin = false;
         };
         system = "x86_64-linux";
@@ -60,7 +60,7 @@
                 inherit inputs;
                 isServer = true;
                 isLinux = true;
-		isLaptop = false;
+                isThinkpad = false;
                 isDarwin = false;
               };
             };
@@ -73,7 +73,7 @@
           isServer = false;
           isDarwin = false;
           isLinux = true;
-	  isLaptop = false;
+          isThinkpad = false;
         };
         system = "x86_64-linux";
         modules = [
@@ -90,7 +90,7 @@
                 isServer = false;
                 isDarwin = false;
                 isLinux = true;
-		isLaptop = false;
+                isThinkpad = false;
               };
             };
           }
@@ -102,7 +102,7 @@
           isServer = false;
           isDarwin = false;
           isLinux = true;
-	  isLaptop = true;
+          isThinkpad = true;
         };
         system = "x86_64-linux";
         modules = [
@@ -119,7 +119,7 @@
                 isServer = false;
                 isDarwin = false;
                 isLinux = true;
-		isLaptop = true;
+                isThinkpad = true;
               };
             };
           }
@@ -133,6 +133,7 @@
           isServer = false;
           isDarwin = true;
           isLinux = false;
+          isThinkpad = false;
         };
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ ./home-manager/home.nix ];
