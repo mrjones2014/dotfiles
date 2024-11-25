@@ -4,7 +4,7 @@ let
     #!${pkgs.bash}/bin/bash
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
     # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
-    PASSWORD="$(op item get "System Password" --fields password --reveal)"
+    PASSWORD="$(op read "op://Private/System Password/password")"
     if [[ -z "$PASSWORD" ]]; then
       echo "Failed to get password from 1Password."
       read -s -p "Password: " PASSWORD
