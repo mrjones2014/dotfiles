@@ -31,113 +31,69 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: {
-    nixosConfigurations = {
-      server = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          isServer = true;
-          isLinux = true;
-          isThinkpad = false;
-          isDarwin = false;
-        };
-        system = "x86_64-linux";
-        modules = [
-          home-manager.nixosModules.home-manager
-          agenix.nixosModules.default
-          {
-            environment.systemPackages =
-              [ agenix.packages.x86_64-linux.default ];
-          }
-          ./nixos-modules/common.nix
-          ./hosts/server
-          {
-            home-manager = {
-              backupFileExtension = "backup";
-              useUserPackages = true;
-              users.mat = import ./home-manager/server.nix;
-              extraSpecialArgs = {
-                inherit inputs;
-                isServer = true;
-                isLinux = true;
-                isThinkpad = false;
-                isDarwin = false;
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }:
+    let
+      mkNixosConfig = { extraSpecialArgs, extraModules }:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            isLinux = true;
+            isDarwin = false;
+            # override these in extraSpecialArgs
+            isThinkpad = false;
+            isServer = false;
+          } // extraSpecialArgs;
+          system = "x86_64-linux";
+          modules = [
+            home-manager.nixosModules.home-manager
+            ./nixos-modules/common.nix
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  isDarwin = false;
+                  isLinux = true;
+                } // extraSpecialArgs;
               };
-            };
-          }
-        ];
+            }
+          ] ++ extraModules;
+        };
+    in {
+      nixosConfigurations = {
+        server = mkNixosConfig {
+          extraSpecialArgs = { isServer = true; };
+          extraModules = [
+            ./hosts/server
+            agenix.nixosModules.default
+            {
+              environment.systemPackages =
+                [ agenix.packages.x86_64-linux.default ];
+            }
+          ];
+        };
+        pc = mkNixosConfig {
+          extraSpecialArgs = { };
+          extraModules = [ ./hosts/pc ];
+        };
+        laptop = mkNixosConfig {
+          extraSpecialArgs = { isThinkpad = true; };
+          extraModules = [ ./hosts/laptop ];
+        };
       };
-      pc = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          isServer = false;
-          isDarwin = false;
-          isLinux = true;
-          isThinkpad = false;
+      homeConfigurations = {
+        "mac" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = {
+            inherit inputs;
+            isServer = false;
+            isDarwin = true;
+            isLinux = false;
+            isThinkpad = false;
+          };
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [ ./home-manager/home.nix ];
         };
-        system = "x86_64-linux";
-        modules = [
-          ./nixos-modules/common.nix
-          ./hosts/pc
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              backupFileExtension = "backup";
-              useUserPackages = true;
-              users.mat = import ./home-manager/home.nix;
-              extraSpecialArgs = {
-                inherit inputs;
-                isServer = false;
-                isDarwin = false;
-                isLinux = true;
-                isThinkpad = false;
-              };
-            };
-          }
-        ];
-      };
-      laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          isServer = false;
-          isDarwin = false;
-          isLinux = true;
-          isThinkpad = true;
-        };
-        system = "x86_64-linux";
-        modules = [
-          ./nixos-modules/common.nix
-          ./hosts/laptop
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              backupFileExtension = "backup";
-              useUserPackages = true;
-              users.mat = import ./home-manager/home.nix;
-              extraSpecialArgs = {
-                inherit inputs;
-                isServer = false;
-                isDarwin = false;
-                isLinux = true;
-                isThinkpad = true;
-              };
-            };
-          }
-        ];
       };
     };
-    homeConfigurations = {
-      "mac" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {
-          inherit inputs;
-          isServer = false;
-          isDarwin = true;
-          isLinux = false;
-          isThinkpad = false;
-        };
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./home-manager/home.nix ];
-      };
-    };
-  };
 }
