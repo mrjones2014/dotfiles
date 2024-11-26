@@ -4,6 +4,7 @@
     ../../nixos-modules/desktop_environment.nix
     ../../nixos-modules/_1password.nix
     ../../nixos-modules/allowed-unfree.nix
+    ../../nixos-modules/sshd.nix
     ./hardware-configuration.nix
   ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";

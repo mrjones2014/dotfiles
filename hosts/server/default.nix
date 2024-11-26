@@ -29,6 +29,7 @@
     ./containers.nix
     ./wireguard.nix
     ./gotify.nix
+    ../../nixos-modules/sshd.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -38,18 +39,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
-    };
-  };
-  services = {
-    fail2ban.enable = true;
-    openssh = {
-      enable = true;
-      settings = {
-        # only allow SSH key auth
-        PasswordAuthentication = false;
-        PermitRootLogin = "no";
-        AllowUsers = [ "mat" ];
-      };
     };
   };
 
