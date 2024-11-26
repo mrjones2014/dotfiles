@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, isThinkpad, ... }:
 let
   monitor_config = pkgs.writeText "gdm_monitors.xml"
     (builtins.readFile ../conf.d/gnome-monitors.xml);
@@ -22,10 +22,7 @@ in {
       });
     })
   ];
-  # make GDM use the same monitor config as GNOME;
-  # see: https://discourse.nixos.org/t/set-external-monitor-as-primary-display-before-login/37844/4
-  systemd.tmpfiles.rules =
-    [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitor_config}" ];
+
   services = {
     displayManager.defaultSession = "gnome-xorg";
     xserver = {
@@ -61,4 +58,9 @@ in {
     package = pkgs.gnomeExtensions.gsconnect;
   };
   programs.dconf.enable = true;
+} // lib.attrsets.optionalAttrs (!isThinkpad) {
+  # make GDM use the same monitor config as GNOME;
+  # see: https://discourse.nixos.org/t/set-external-monitor-as-primary-display-before-login/37844/4
+  systemd.tmpfiles.rules =
+    [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitor_config}" ];
 }

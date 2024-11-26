@@ -1,8 +1,7 @@
-{ isLinux, pkgs, ... }:
+{ isLinux, isThinkpad, lib, pkgs, ... }:
 if isLinux then {
   imports = [ ./dconf.nix ];
   xdg.configFile = {
-    "monitors.xml".source = ../../../conf.d/gnome-monitors.xml;
     # workaround for https://github.com/nix-community/home-manager/issues/3447
     # autostart 1Password in the background so I can use the SSH agent without manually opening the app first
     "autostart/1password.desktop".text = ''
@@ -30,6 +29,9 @@ if isLinux then {
       MimeType=x-scheme-handler/sgnl;x-scheme-handler/signalcaptcha;
       Categories=Network;InstantMessaging;Chat;
     '';
+  } // lib.attrsets.optionalAttrs (!isThinkpad) {
+    # On desktop, statically configure monitors
+    "monitors.xml".source = ../../../conf.d/gnome-monitors.xml;
   };
 } else
   { }
