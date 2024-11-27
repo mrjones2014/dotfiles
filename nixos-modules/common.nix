@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
   nix = {
-    package = lib.mkDefault pkgs.nix;
+    package = lib.mkDefault pkgs.lix;
     settings.trusted-users = [ "mat" ];
     extraOptions = ''
       keep-outputs = true

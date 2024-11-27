@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
   nix = {
-    package = lib.mkDefault pkgs.nix;
+    package = lib.mkDefault pkgs.lix;
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
