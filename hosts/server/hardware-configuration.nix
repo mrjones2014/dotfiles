@@ -1,4 +1,4 @@
-{ config, lib, modulesPath, ... }:
+{ pkgs, config, lib, modulesPath, ... }:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -50,4 +50,19 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # enable hardware transcoding stuff for jellyfin
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver # previously vaapiIntel
+      vaapiVdpau
+      intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
+      vpl-gpu-rt # QSV on 11th gen or newer
+    ];
+  };
 }
