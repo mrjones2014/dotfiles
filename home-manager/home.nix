@@ -48,6 +48,7 @@
         r2modman
         parsec-bin
         notesnook
+        anytype
         ungoogled-chromium
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''

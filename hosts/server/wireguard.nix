@@ -55,7 +55,7 @@ in {
           }
           {
             publicKey = "0XXP3UgA67bcImCB4UOvyno3fhiBx7v6ufd4y4MH1xE=";
-            allowedIPs = [ "10.0.0.2/28" "fdc9:281f:04d7:9ee9::2/64" ];
+            allowedIPs = [ "10.0.0.16/28" "fdc9:281f:04d7:9ee9::2/64" ];
           }
         ];
       };

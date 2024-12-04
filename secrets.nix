@@ -11,7 +11,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUa3f8x3mb2fHF5JXjGKdWF5EUX8GQj7hMhEUn7LffI root@nixos-server"
   ];
 in {
-  "mullvad_wireguard.age".publicKeys = users ++ systems;
-  "homepage.age".publicKeys = users ++ systems;
-  "wireguard_server.age".publicKeys = users ++ systems;
+  "secrets/mullvad_wireguard.age".publicKeys = users ++ systems;
+  "secrets/homepage.age".publicKeys = users ++ systems;
+  "secrets/wireguard_server.age".publicKeys = users ++ systems;
 }
