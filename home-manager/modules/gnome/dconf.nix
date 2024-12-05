@@ -33,7 +33,7 @@ in {
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
         "org.wezfurlong.wezterm.desktop"
-        "notesnook.desktop"
+        "anytype.desktop"
         "spotify.desktop"
         "1password.desktop"
         "signal-desktop.desktop"
