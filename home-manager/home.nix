@@ -49,6 +49,7 @@
         parsec-bin
         notesnook
         anytype
+        jan
         ungoogled-chromium
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
