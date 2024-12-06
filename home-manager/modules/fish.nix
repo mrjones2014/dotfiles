@@ -223,6 +223,7 @@
   };
 
   home.packages = with pkgs;
-    [ tealdeer tokei cachix jq ] ++ lib.lists.optionals isLinux [ xclip ];
+    [ tealdeer tokei cachix jq ripgrep ]
+    ++ lib.lists.optionals isLinux [ xclip ];
 
 }
