@@ -47,7 +47,6 @@
         # cura
         r2modman
         parsec-bin
-        notesnook
         anytype
         jan
         ungoogled-chromium
