@@ -1,4 +1,5 @@
 { config, ... }: {
+  age.secrets.homepage.file = ../../secrets/homepage.age;
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;

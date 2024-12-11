@@ -4,6 +4,7 @@
     ./deluge.nix
     # port 8082
     ./homepage.nix
+    ./cleanuperr.nix
   ];
   services = {
     jellyfin = {
