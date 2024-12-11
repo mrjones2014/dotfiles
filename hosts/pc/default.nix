@@ -10,6 +10,8 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
+    # setup udev rules for ZSA keyboard firmware flashing
+    keyboard.zsa.enable = true;
     # use proprietary nvidia drivers
     graphics.enable = true;
     nvidia = {
@@ -54,6 +56,7 @@
     parsec-bin
     mullvad-vpn
     prismlauncher
+    wally-cli
     # dolphinEmu # dolphin build is suuuuper slow and also broken rn
     # rpcs3 # broken right now
   ];
