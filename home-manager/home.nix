@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, lib, isDarwin, isLinux, ... }: {
+{ inputs, config, pkgs, lib, isDarwin, isLinux, isThinkpad, ... }: {
   nixpkgs.overlays = [
     (final: prev:
       (import ../packages {
@@ -50,7 +50,7 @@
         anytype
         jan
         ungoogled-chromium
-      ];
+      ] ++ lib.lists.optionals isThinkpad [ moonlight-qt ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';

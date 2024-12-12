@@ -62,12 +62,18 @@
   ];
 
   services = {
-    # Enable the X11 windowing system.
-    xserver.enable = true;
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+    };
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;
+    sunshine = {
+      enable = true;
+      autoStart = true;
+      openFirewall = true;
+    };
   };
 
   # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
