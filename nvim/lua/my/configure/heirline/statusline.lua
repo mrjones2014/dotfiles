@@ -2,6 +2,7 @@ local conditions = require('heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 local path = require('my.utils.path')
 local clipboard = require('my.utils.clipboard')
+local editor = require('my.utils.editor')
 
 local M = {}
 
@@ -228,7 +229,7 @@ M.LspFormatToggle = {
     name = 'heirline_LSP',
   },
   {
-    provider = 'auto-format',
+    provider = '󰗈 auto-format',
     hl = { bg = 'surface0' },
   },
   {
@@ -239,6 +240,25 @@ M.LspFormatToggle = {
       end
       return '  '
     end,
+    hl = { bg = 'surface0' },
+  },
+}
+
+M.SpellCheckToggle = {
+  provider = function()
+    if editor.spellcheck_enabled() then
+      return '   '
+    else
+      return '   '
+    end
+  end,
+  hl = { bg = 'surface0' },
+  on_click = {
+    callback = editor.toggle_spellcheck,
+    name = 'heirline_Spellcheck',
+  },
+  {
+    provider = '󰓆 Spellcheck  ',
     hl = { bg = 'surface0' },
   },
 }

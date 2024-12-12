@@ -64,14 +64,7 @@ function M.default_keymaps()
 
     {
       '<leader>s',
-      function()
-        if vim.o.spell then
-          vim.opt.spell = false
-        else
-          vim.opt.spelloptions = { 'camel', 'noplainbuffer' }
-          vim.opt.spell = true
-        end
-      end,
+      require('my.utils.editor').toggle_spellcheck,
       description = 'Toggle spellcheck',
     },
 

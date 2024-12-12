@@ -40,6 +40,7 @@ return {
           sl.UnsavedChanges,
           sl.Align,
           sl.RecordingMacro,
+          sl.SpellCheckToggle,
           sl.LspFormatToggle,
           sl.LazyStats,
           sl.OnePassword,
