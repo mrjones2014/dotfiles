@@ -23,7 +23,6 @@
 
   imports = [
     ./hardware-configuration.nix
-    ./secrets.nix
     ./content.nix
     ./nas.nix
     ./containers.nix

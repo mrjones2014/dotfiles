@@ -14,4 +14,5 @@ in {
   "secrets/mullvad_wireguard.age".publicKeys = users ++ systems;
   "secrets/homepage.age".publicKeys = users ++ systems;
   "secrets/wireguard_server.age".publicKeys = users ++ systems;
+  "secrets/cleanuperr_env.age".publicKeys = users ++ systems;
 }
