@@ -15,6 +15,8 @@ return {
       --
       -- TODO with a very long
       --      multiline comment
+      --
+      -- SAFETY: a safety comment for a Rust `unsafe { }` block
       highlight = {
         -- change pattern to not require a colon after the keyword
         pattern = [[.*<(KEYWORDS)\s*]],
@@ -22,6 +24,9 @@ return {
         comments_only = true,
       },
       search = { pattern = [[.*<(KEYWORDS)\s*]] },
+      keywords = {
+        SAFETY = { icon = '󰲉 ', color = 'warning' },
+      },
     },
   },
   {
