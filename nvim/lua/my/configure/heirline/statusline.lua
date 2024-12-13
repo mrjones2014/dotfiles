@@ -229,7 +229,7 @@ M.LspFormatToggle = {
     name = 'heirline_LSP',
   },
   {
-    provider = '󰗈 auto-format',
+    provider = '󰗈  auto-format',
     hl = { bg = 'surface0' },
   },
   {
@@ -258,7 +258,7 @@ M.SpellCheckToggle = {
     name = 'heirline_Spellcheck',
   },
   {
-    provider = '󰓆 Spellcheck  ',
+    provider = '󰓆  Spellcheck  ',
     hl = { bg = 'surface0' },
   },
 }
