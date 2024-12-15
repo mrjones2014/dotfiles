@@ -30,8 +30,16 @@ if isLinux then {
       Categories=Network;InstantMessaging;Chat;
     '';
   } // lib.attrsets.optionalAttrs (!isThinkpad) {
-    # On desktop, statically configure monitors
-    "monitors.xml".source = ../../../conf.d/gnome-monitors.xml;
+    "monitors.xml" = {
+      # On desktop, statically configure monitors
+      source = ../../../conf.d/gnome-monitors.xml;
+      # for whatever reason home-manager has issues with this
+      # and thinks it will clobber the file, but it's the one
+      # generating the file; just delete the backup as a workaround
+      onChange = ''
+        rm -f /home/mat/.config/monitors.xml.backup /home/mat/.config/monitors.xml~
+      '';
+    };
   };
 } else
   { }
