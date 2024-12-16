@@ -50,7 +50,7 @@
         anytype
         jan
         ungoogled-chromium
-      ] ++ lib.lists.optionals isThinkpad [ moonlight-qt ];
+      ] ++ lib.lists.optionals isThinkpad [ ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';

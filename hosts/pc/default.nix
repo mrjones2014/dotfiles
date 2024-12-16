@@ -69,11 +69,6 @@
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;
-    sunshine = {
-      enable = true;
-      autoStart = true;
-      openFirewall = true;
-    };
   };
 
   # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
