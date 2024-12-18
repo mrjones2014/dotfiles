@@ -50,7 +50,8 @@
         anytype
         jan
         ungoogled-chromium
-      ] ++ lib.lists.optionals isThinkpad [ ];
+      ] ++ lib.lists.optionals isThinkpad [ ]
+      ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';
