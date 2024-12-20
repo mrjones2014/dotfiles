@@ -110,6 +110,11 @@
     askubuntu.com##.js-consent-banner
 
 - GitHub: |
+    ! Block all GitHub Copilot shit in the header
+    github.com##.AppHeader-CopilotChat
+    ! Copilot shit in the header on the mobile layout
+    github.com##copilot-dashboard-entrypoint
+
     ! Block "Code 55% faster with GitHub Copilot" (lmao)
     github.com##button:has-text(with GitHub Copilot)
 
@@ -147,7 +152,7 @@
     ! Block "Super" reactions, paid emojis lmao
     discord.com##div[class*="reactionInner"][aria-label*="super"]
 
-    ! Block "Download Apps" button, I uninstalled Discord for a reason
+    ! Block "Download Apps" button
     discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
 
     ! Block "Buy Boosts" bar
