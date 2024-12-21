@@ -2,9 +2,12 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! Block YouTube's absolutely disgusting, disrespectful, abusive,
-! and probably illegal artificial 5 second delay for Firefox users
+! Google sometimes adds an artifical 5 second delay on youtube
+! for Firefox users...
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
+
+! Block "Members Only" videos
+www.youtube.com##ytd-rich-item-renderer.ytd-rich-grid-renderer:has(.badge-style-type-members-only)
 
 ! Block "ambient mode" garbage
 youtube.com###cinematics.ytd-watch-flexy:remove()
@@ -118,7 +121,13 @@ askubuntu.com##.js-consent-banner
 !! GitHub                              !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! Block "Code 55% faster with GitHub Copilot" (lmao)
+! Block all GitHub Copilot shit in the header
+github.com##.AppHeader-CopilotChat
+
+! Copilot shit in the header on the mobile layout
+github.com##copilot-dashboard-entrypoint
+
+! Block "Code 55% faster with GitHub Copilot" (lmao, stop lying)
 github.com##button:has-text(with GitHub Copilot)
 
 ! Block GitHub's cringe algorithmic social media style feed
@@ -167,7 +176,7 @@ discord.com##div[class*="birthdayFeatureBorder"]
 ! Block "Super" reactions, paid emojis lmao
 discord.com##div[class*="reactionInner"][aria-label*="super"]
 
-! Block "Download Apps" button, I uninstalled Discord for a reason
+! Block "Download Apps" button
 discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
 
 ! Block "Buy Boosts" bar
