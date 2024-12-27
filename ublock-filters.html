@@ -178,6 +178,9 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! block "Join" button
+www.youtube.com##div#sponsor-button
+
 ! Google sometimes adds an artifical 5 second delay on youtube
 ! for Firefox users...
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
@@ -375,7 +378,10 @@ discord.com##button[aria-label="Start an Activity"]
 <li><a href="#discord">Discord</a></li>
 </ul>
 <h2 id="youtube"><a class="header" href="#youtube">YouTube</a></h2>
-<pre><code class="language-adblock">! Google sometimes adds an artifical 5 second delay on youtube
+<pre><code class="language-adblock">! block "Join" button
+www.youtube.com##div#sponsor-button
+
+! Google sometimes adds an artifical 5 second delay on youtube
 ! for Firefox users...
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
 

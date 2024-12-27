@@ -2,6 +2,9 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! block "Join" button
+www.youtube.com##div#sponsor-button
+
 ! Google sometimes adds an artifical 5 second delay on youtube
 ! for Firefox users...
 www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
