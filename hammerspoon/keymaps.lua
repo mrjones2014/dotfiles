@@ -12,7 +12,7 @@
 --   :start()
 
 -- bind shift+ctrl+option+l to lock screen
-hs.hotkey.bind({ 'alt', 'ctrl', 'shift' }, 'L', function()
+hs.hotkey.bind({ 'alt', 'ctrl', 'shift' }, ';', function()
   hs.caffeinate.lockScreen()
 end)
 
