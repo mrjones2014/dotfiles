@@ -29,6 +29,7 @@ in {
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;
+      disable-extension-version-validation = true;
       favorite-apps = [
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
