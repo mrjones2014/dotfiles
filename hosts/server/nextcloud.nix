@@ -6,6 +6,7 @@ in {
     owner = "nextcloud";
     group = "nextcloud";
   };
+  environment.systemPackages = [ pkgs.ffmpeg_6 ];
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud30;
@@ -15,6 +16,7 @@ in {
     };
     extraAppsEnable = true;
     autoUpdateApps.enable = true;
+    phpOptions."opcache.interned_strings_buffer" = "23";
     configureRedis = true;
     maxUploadSize = "1G";
     hostName = "192.168.189.2";
@@ -29,11 +31,14 @@ in {
         "OC\\Preview\\Krita"
         "OC\\Preview\\MarkDown"
         "OC\\Preview\\MP3"
+        "OC\\Preview\\MP4"
         "OC\\Preview\\OpenDocument"
         "OC\\Preview\\PNG"
         "OC\\Preview\\TXT"
         "OC\\Preview\\XBitmap"
         "OC\\Preview\\HEIC"
+        "OC\\Preview\\Image"
+        "OC\\Preview\\Movie"
       ];
       maintenance_window_start = 6;
       default_timezone = "America/New_York";
