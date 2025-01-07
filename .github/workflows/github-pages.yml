@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@latest
+      - uses: cachix/install-nix-action@30
       - name: Build mdbook site
         run: nix build ./docs/
       - name: Deploy
