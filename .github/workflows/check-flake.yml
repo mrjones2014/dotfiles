@@ -10,11 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
-        with:
-          extra_nix_config: |
-            extra-platforms = ${{ matrix.extraPlatforms }}
-            accept-flake-config = true
+      - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: cachix/cachix-action@v15
         with:
@@ -28,4 +24,4 @@ jobs:
           fail-mode: true
           send-statistics: false
       - name: Run nix flake check
-        run: nix flake check
+        run: nix flake check --accept-flake-config
