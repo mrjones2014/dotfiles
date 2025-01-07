@@ -33,11 +33,11 @@ jobs:
       with:
         extra_nix_config: |
           extra-platforms = ${{ matrix.extraPlatforms }}
+
     - uses: cachix/cachix-action@v15
       with:
         name: mrjones2014-dotfiles
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - name: Add nix-community cache
-      run: cachix use nix-community
+
     - name: build all definitions
-      run: nix run github:Mic92/nix-fast-build -L -- --skip-cached --no-download --no-nom --eval-workers 1 --eval-max-memory-size 2048 --flake .#checks.${{ matrix.system }} --accept-flake-config
+      run: nix run github:Mic92/nix-fast-build -L -- --skip-cached --no-download --no-nom --eval-workers 1 --eval-max-memory-size 2048 --flake .#checks.${{ matrix.system }}
