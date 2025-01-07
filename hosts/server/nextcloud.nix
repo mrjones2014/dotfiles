@@ -36,6 +36,7 @@ in {
         "OC\\Preview\\HEIC"
       ];
       maintenance_window_start = 6;
+      default_timezone = "America/New_York";
     };
   };
   # see https://nixos.wiki/wiki/Nextcloud#Change_default_listening_port
