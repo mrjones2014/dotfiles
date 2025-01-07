@@ -37,6 +37,7 @@ in {
       ];
       maintenance_window_start = 6;
       default_timezone = "America/New_York";
+      force_locale = "en_US";
     };
   };
   # see https://nixos.wiki/wiki/Nextcloud#Change_default_listening_port
