@@ -1,9 +1,13 @@
 { pkgs, lib, ... }: {
   nix = {
     package = lib.mkDefault pkgs.lix;
-    # setting this here because it causes issues on Darwin;
-    # https://github.com/NixOS/nix/issues/7273
-    settings.auto-optimise-store = true;
+    settings.trusted-users = [ "mat" ];
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+      auto-optimise-store = true
+      experimental-features = nix-command flakes
+    '';
   };
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
