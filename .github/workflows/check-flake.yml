@@ -12,10 +12,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: cachix/cachix-action@v15
+        with:
+          name: mrjones2014-dotfiles
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Add nix-community cache
+        run: cachix use nix-community
       - name: Check Nix flake inputs
         uses: DeterminateSystems/flake-checker-action@v9
         with:
           fail-mode: true
           send-statistics: false
       - name: Run nix flake check
-        run: nix flake check
+        run: nix flake check --accept-flake-config
