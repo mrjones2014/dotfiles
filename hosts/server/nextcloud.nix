@@ -21,10 +21,7 @@ in {
     maxUploadSize = "1G";
     hostName = "192.168.189.2";
     home = "/mnt/nextcloud";
-    config = {
-      adminpassFile = config.age.secrets.nextcloud_admin_pass.path;
-      dbtype = "sqlite";
-    };
+    config = { adminpassFile = config.age.secrets.nextcloud_admin_pass.path; };
     settings = {
       default_phone_region = "EN";
       enabled_preview_providers = [
