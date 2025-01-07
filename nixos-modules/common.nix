@@ -11,11 +11,12 @@
   };
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
-  # going to use pipewire instead
-  hardware.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services = {
     mullvad-vpn.enable = true;
+    # going to use pipewire instead
+    pulseaudio.enable = false;
 
     # Configure keymap in X11
     xserver = {
