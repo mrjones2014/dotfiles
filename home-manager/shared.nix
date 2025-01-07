@@ -1,13 +1,5 @@
 { pkgs, lib, ... }: {
-  nix = {
-    package = lib.mkDefault pkgs.lix;
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-    '';
-  };
+  nix.package = lib.mkDefault pkgs.lix;
   theme = "tokyonight";
   imports = [
     ../nixos-modules/theme.nix
