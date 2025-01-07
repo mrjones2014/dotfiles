@@ -92,11 +92,11 @@
             ${if isDarwin then
               "home-manager switch --flake ~/git/dotfiles/.#mac"
             else if isServer then
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server --accept-nix-config"
+              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
             else if isThinkpad then
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop --accept-nix-config"
+              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
             else
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc --accept-nix-config"}
+              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}
           '';
         };
         nix-clean = {
