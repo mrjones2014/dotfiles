@@ -15,7 +15,6 @@ jobs:
           extra_nix_config: |
             extra-platforms = ${{ matrix.extraPlatforms }}
             accept-flake-config = true
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: cachix/cachix-action@v15
         with:
           name: mrjones2014-dotfiles
