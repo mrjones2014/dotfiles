@@ -1,14 +1,5 @@
-{ pkgs, lib, ... }: {
-  nix = {
-    package = lib.mkDefault pkgs.lix;
-    settings.trusted-users = [ "mat" ];
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-    '';
-  };
+{ pkgs, ... }: {
+  imports = [ ../nix-conf.nix ];
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
 
