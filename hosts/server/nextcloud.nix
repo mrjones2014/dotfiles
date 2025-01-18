@@ -1,5 +1,7 @@
 { pkgs, config, ... }:
-let port = 8888;
+let
+  port = 8888;
+  ip = import ./ip.nix;
 in {
   age.secrets.nextcloud_admin_pass = {
     file = ../../secrets/nextcloud_admin_pass.age;
@@ -19,7 +21,7 @@ in {
     phpOptions."opcache.interned_strings_buffer" = "23";
     configureRedis = true;
     maxUploadSize = "1G";
-    hostName = "192.168.189.2";
+    hostName = ip;
     home = "/mnt/nextcloud";
     config = {
       adminpassFile = config.age.secrets.nextcloud_admin_pass.path;
@@ -49,7 +51,7 @@ in {
     };
   };
   # see https://nixos.wiki/wiki/Nextcloud#Change_default_listening_port
-  services.nginx.virtualHosts."192.168.189.2".listen = [{
+  services.nginx.virtualHosts."${ip}".listen = [{
     addr = "0.0.0.0";
     inherit port;
   }];

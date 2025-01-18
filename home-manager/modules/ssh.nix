@@ -13,7 +13,7 @@ in {
     enable = true;
     forwardAgent = true;
     matchBlocks = {
-      "nixos-server".hostname = "192.168.189.2";
+      "nixos-server".hostname = import ../../hosts/server/ip.nix;
       "gitlab.1password.io" = {
         port = 2227;
         hostname = "ssh.gitlab.1password.io";
