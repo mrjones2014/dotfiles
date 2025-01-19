@@ -1,10 +1,11 @@
-{
+let port = 9898;
+in {
   services.gotify = {
     enable = true;
-    environment.GOTIFY_SERVER_PORT = "9999";
+    environment.GOTIFY_SERVER_PORT = builtins.toString port;
   };
   networking.firewall = {
-    allowedTCPPorts = [ 9999 ];
-    allowedUDPPorts = [ 9999 ];
+    allowedTCPPorts = [ port ];
+    allowedUDPPorts = [ port ];
   };
 }
