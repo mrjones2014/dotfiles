@@ -52,6 +52,7 @@ M.config = {
   },
   ['swift'] = {
     lspconfig = 'sourcekit',
+    formatter = 'swiftfmt',
     treesitter = false, -- requires treesitter-cli and only really works on mac
   },
   ['nix'] = {
