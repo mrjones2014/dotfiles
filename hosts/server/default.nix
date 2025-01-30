@@ -27,7 +27,6 @@
     ./nas.nix
     ./containers.nix
     ./wireguard.nix
-    ./gotify.nix
     ./nextcloud.nix
     ../../nixos-modules/sshd.nix
   ];
