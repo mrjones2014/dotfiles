@@ -24,6 +24,7 @@ in {
   ];
 
   services = {
+    gnome.gnome-keyring.enable = true;
     displayManager.defaultSession = "gnome-xorg";
     xserver = {
       enable = true;
