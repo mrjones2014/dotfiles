@@ -14,7 +14,6 @@ in {
     # Enable NAT
     nat = {
       enable = true;
-      enableIPv6 = true;
       externalInterface = external_interface;
       internalInterfaces = [ wireguard_interface ];
     };
@@ -26,8 +25,8 @@ in {
     wg-quick.interfaces = {
       # the network interface name. You can name the interface arbitrarily.
       "${wireguard_interface}" = {
-        # Determines the IP/IPv6 address and subnet of the client's end of the tunnel interface
-        address = [ "10.0.0.1/24" "fdc9:281f:04d7:9ee9::1/64" ];
+        # Determines the IP address and subnet of the client's end of the tunnel interface
+        address = [ "10.0.0.1/24" ];
         # The port that WireGuard listens to - recommended that this be changed from default
         listenPort = wireguard_port;
         # Path to the server's private key
