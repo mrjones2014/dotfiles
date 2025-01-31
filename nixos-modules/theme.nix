@@ -47,9 +47,10 @@ in {
           name = "Tokyonight-Dark";
         };
       };
-      dconf.settings = {
-        "org/gnome/shell/extensions/user-theme" = { name = "Tokyonight-Dark"; };
-      };
+
+      dconf.settings."org/gnome/shell/extensions/user-theme".name =
+        "Tokyonight-Dark";
+
       xdg.configFile = { } // lib.optionalAttrs isLinux {
         "gtk-4.0/assets".source =
           "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";

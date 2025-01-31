@@ -49,11 +49,11 @@
           installation_mode = "force_installed";
         };
         # Disable built-in search engines
-        "amazondotcom@search.mozilla.org" = { installation_mode = "blocked"; };
-        "bing@search.mozilla.org" = { installation_mode = "blocked"; };
-        "ddg@search.mozilla.org" = { installation_mode = "blocked"; };
-        "ebay@search.mozilla.org" = { installation_mode = "blocked"; };
-        "google@search.mozilla.org" = { installation_mode = "blocked"; };
+        "amazondotcom@search.mozilla.org".installation_mode = "blocked";
+        "bing@search.mozilla.org".installation_mode = "blocked";
+        "ddg@search.mozilla.org".installation_mode = "blocked";
+        "ebay@search.mozilla.org".installation_mode = "blocked";
+        "google@search.mozilla.org".installation_mode = "blocked";
       };
       Preferences = {
         # use 1Password for this

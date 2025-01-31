@@ -69,7 +69,7 @@ in {
       running-indicator-style = "DOTS";
       apply-custom-theme = false;
     };
-    "org/gnome/shell/extensions/trayIconsReloaded" = { icons-limit = 10; };
+    "org/gnome/shell/extensions/trayIconsReloaded".icons-limit = 10;
     "org/gnome/shell/extensions/quick-settings-tweaks" = {
       output-show-selected = true;
       input-show-selected = true;
@@ -79,14 +79,14 @@ in {
     "org/gnome/desktop/background" = {
       picture-uri = "file://${wallpaperImg}";
     };
-    "org/gnome/desktop/datetime" = { automatic-timezone = true; };
+    "org/gnome/desktop/datetime".automatic-timezone = true;
     "org/gnome/desktop/wm/keybindings" = {
       move-to-monitor-left = [ "<Shift><Control><Alt>h" ];
       move-to-monitor-right = [ "<Shift><Control><Alt>l" ];
       move-to-monitor-up = [ "<Shift><Control><Alt>k" ];
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
-    "org/gnome/desktop/peripherals/touchpad" = { send-events = "enabled"; };
+    "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
     "org/gnome/shell/extensions/search-light" = {
       shortcut-search = [ "<Super>space" ];
     };

@@ -7,15 +7,15 @@
     NEXT_TELEMETRY_DISABLED = "1";
   };
   programs = {
-    btop = { enable = true; };
+    btop.enable = true;
 
     lsd = {
       enable = true;
       enableAliases = true;
       settings = {
-        sorting = { dir-grouping = "first"; };
-        icons = { when = "always"; };
-        color = { when = "always"; };
+        sorting.dir-grouping = "first";
+        icons.when = "always";
+        color.when = "always";
       };
     };
 

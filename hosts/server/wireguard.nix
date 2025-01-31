@@ -8,7 +8,7 @@ in {
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   services.dnsmasq = {
     enable = true;
-    settings = { interface = wireguard_interface; };
+    settings.interface = wireguard_interface;
   };
   networking = {
     # Enable NAT

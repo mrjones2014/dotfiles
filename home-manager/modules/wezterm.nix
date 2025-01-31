@@ -3,7 +3,7 @@ let fish_path_lua_str = "'${pkgs.fish}/bin/fish'";
 in {
   home = {
     packages = with pkgs; [ maple-mono nerd-fonts.symbols-only ];
-    sessionVariables = { TERM = "wezterm"; };
+    sessionVariables.TERM = "wezterm";
   };
   programs.wezterm = {
     enable = true;

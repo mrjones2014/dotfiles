@@ -24,7 +24,7 @@ in {
       };
     } // lib.optionalAttrs (!isServer) {
       # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
-      "*" = { extraOptions = { IdentityAgent = ''"${sshAuthSock}"''; }; };
+      "*".extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
     };
   };
 }

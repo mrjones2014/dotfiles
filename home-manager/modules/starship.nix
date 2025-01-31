@@ -30,8 +30,8 @@
         "$character"
       ];
       right_format = "$cmd_duration";
-      username = { show_always = isServer; };
-      hostname = { ssh_only = !isServer; };
+      username.show_always = isServer;
+      hostname.ssh_only = !isServer;
       character = {
         success_symbol = "[ I ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
         error_symbol = "[ I ](bold bg:#f38ba8 fg:#000000)[](fg:#f38ba8)";
@@ -52,10 +52,10 @@
         format = "[ $duration]($style)";
         style = "bold #586068";
       };
-      directory = { read_only = " 󰌾"; };
-      git_commit = { disabled = true; };
-      git_state = { disabled = true; };
-      git_metrics = { disabled = true; };
+      directory.read_only = " 󰌾";
+      git_commit.disabled = true;
+      git_state.disabled = true;
+      git_metrics.disabled = true;
       python = {
         format = "[\${symbol}\${virtualenv}]($style)";
         symbol = " ";

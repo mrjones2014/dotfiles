@@ -45,9 +45,9 @@ in {
         signingKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
       };
-      pull = { rebase = false; };
-      push = { autoSetupRemote = true; };
-      commit = { gpgsign = true; };
+      pull.rebase = false;
+      push.autoSetupRemote = true;
+      commit.gpgsign = true;
       gpg = {
         format = "ssh";
       } // pkgs.lib.optionalAttrs (!isServer) {
@@ -64,8 +64,8 @@ in {
         fsmonitor = true;
         untrackedcache = true;
       };
-      interactive = { diffFilter = "${pkgs.delta}/bin/delta --color-only"; };
-      init = { defaultBranch = "master"; };
+      interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
+      init.defaultBranch = "master";
       delta = {
         enable = true;
         line-numbers = true;
@@ -89,11 +89,11 @@ in {
           whitespace = "red reverse";
         };
       };
-      fetch = { prune = true; };
-      checkout = { defaultRemote = "origin"; };
+      fetch.prune = true;
+      checkout.defaultRemote = "origin";
       # faster git server communications
       # https://git-scm.com/docs/protocol-v2
-      protocol = { version = 2; };
+      protocol.version = 2;
       url = {
         "git@gitlab.1password.io:" = {
           insteadOf = "https://gitlab.1password.io/";
