@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../nix-conf.nix ];
+  imports = [ ../nixos-modules/nix-conf.nix ];
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
 

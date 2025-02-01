@@ -1,7 +1,7 @@
 {
   theme = "tokyonight";
   imports = [
-    ../nix-conf.nix
+    ../nixos-modules/nix-conf.nix
     ../nixos-modules/theme.nix
     ./modules/fish.nix
     ./modules/nvim.nix
