@@ -8,6 +8,7 @@
   };
   programs = {
     btop.enable = true;
+    carapace.enable = true;
 
     lsd = {
       enable = true;
@@ -18,7 +19,6 @@
         color.when = "always";
       };
     };
-
     fish = {
       enable = true;
 
