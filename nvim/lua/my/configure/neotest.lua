@@ -5,7 +5,7 @@ return {
     'nvim-neotest/neotest-plenary',
     'nvim-neotest/neotest-go',
     'nvim-neotest/neotest-jest',
-    'rouge8/neotest-rust',
+    'mrcjkb/rustaceanvim',
   },
   config = function()
     require('neotest').setup({
@@ -34,7 +34,7 @@ return {
       adapters = {
         require('neotest-plenary'),
         require('neotest-go'),
-        require('neotest-rust'),
+        require('rustaceanvim.neotest'),
         require('neotest-jest')({
           jestCommand = 'pnpm jest',
           env = { CI = true },

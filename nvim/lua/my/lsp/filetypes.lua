@@ -26,10 +26,6 @@ M.config = {
     linter = 'luacheck',
     treesitter = { 'lua', 'luadoc' },
   },
-  ['rust'] = {
-    patterns = { '*.rs' },
-    lspconfig = 'rust_analyzer',
-  },
   ['go'] = {
     patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
