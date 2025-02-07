@@ -89,6 +89,16 @@
           description =
             "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
+            git fetch
+            set -l current_branch (git symbolic-ref --short HEAD)
+            # Get the current and upstream commit hashes, suppressing output
+            set -l upstream_commit (git rev-parse "$current_branch"@{u} 2>/dev/null)
+            set -l local_commit (git rev-parse "$current_branch" 2>/dev/null)
+            # Check if upstream is set and if the commits are different
+            if test -n "$upstream_commit" -a "$upstream_commit" != "$local_commit"
+                echo "Error: Your branch is not up to date with remote branch. Do a git pull first."
+                return 1
+            end
             ${if isDarwin then
               "home-manager switch --flake ~/git/dotfiles/.#mac"
             else if isServer then
