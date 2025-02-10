@@ -26,6 +26,12 @@ M.config = {
     linter = 'luacheck',
     treesitter = { 'lua', 'luadoc' },
   },
+  ['rust'] = {
+    -- let rustaceanvim set this up for us
+    lspconfig = false,
+    -- we just want auto formatting
+    formatter = 'rustfmt',
+  },
   ['go'] = {
     patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
