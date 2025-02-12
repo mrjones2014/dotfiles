@@ -20,7 +20,7 @@
     # release notes.
     stateVersion = "22.11";
     packages = with pkgs;
-      [ spotify gnumake jujutsu ] ++ lib.lists.optionals isDarwin [
+      [ spotify gnumake ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         # xcodes
       ] ++ lib.lists.optionals isLinux [
@@ -80,6 +80,7 @@
     ./modules/librewolf.nix
     ./modules/gnome
     ./modules/recyclarr.nix
+    ./modules/jujutsu.nix
     ../nixos-modules/allowed-unfree.nix
   ];
 
