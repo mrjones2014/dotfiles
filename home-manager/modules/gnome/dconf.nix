@@ -34,7 +34,6 @@ in {
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
         "org.wezfurlong.wezterm.desktop"
-        "anytype.desktop"
         "spotify.desktop"
         "1password.desktop"
         "signal-desktop.desktop"

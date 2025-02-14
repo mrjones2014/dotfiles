@@ -47,7 +47,6 @@
         # cura
         r2modman
         parsec-bin
-        anytype
         jan
         ungoogled-chromium
         nextcloud-client
