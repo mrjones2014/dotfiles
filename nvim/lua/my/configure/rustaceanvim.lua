@@ -5,6 +5,7 @@ return {
   depenencies = { 'folke/neoconf.nvim' },
   init = function()
     local neoconf = require('neoconf')
+    require('my.lsp.snippets').rust()
     vim.g.rustaceanvim = {
       server = {
         default_settings = {
