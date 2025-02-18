@@ -35,11 +35,11 @@ return {
       custom_highlights = function(colors)
         return {
           WinBar = { bg = colors.surface2 },
-          TelescopeNormal = { bg = colors.crust },
-          TelescopeBorder = { bg = colors.crust, fg = colors.crust },
-          TelescopePromptBorder = { bg = colors.base, fg = colors.base },
-          TelescopePromptNormal = { bg = colors.base },
-          TelescopePromptPrefix = { bg = colors.base },
+          PickerNormal = { bg = colors.crust },
+          PickerBorder = { bg = colors.crust, fg = colors.crust },
+          PickerPromptBorder = { bg = colors.base, fg = colors.base },
+          PickerPromptNormal = { bg = colors.base },
+          PickerPromptPrefix = { bg = colors.base },
         }
       end,
       integrations = {
@@ -61,7 +61,6 @@ return {
         treesitter = true,
         rainbow_delimiters = true,
         octo = true,
-        telescope = { enabled = true, style = 'nvchad' },
         lsp_trouble = true,
       },
     },
@@ -90,32 +89,35 @@ return {
             hl[key] = { bg = hl.WinBar.bg, fg = get_tokyonight_hl_fg(hl, key) }
           end
         end
-        -- borderless telescope
+        -- borderless pickers
         local prompt = '#2d3149'
-        hl.TelescopeNormal = {
-          bg = c.bg,
+        hl.SnacksPickerInput = {
+          bg = prompt,
           fg = c.fg_dark,
         }
-        hl.TelescopeBorder = {
-          bg = c.bg,
-          fg = c.bg,
-        }
-        hl.TelescopePromptNormal = {
-          bg = prompt,
-        }
-        hl.TelescopePromptBorder = {
+        hl.SnacksPickerInputBorder = {
           bg = prompt,
           fg = prompt,
         }
-        hl.TelescopePromptTitle = {
-          bg = c.bg_dark,
-          fg = c.fg,
-        }
-        hl.TelescopePreviewTitle = {
+        hl.SnacksPickerBorder = {
           bg = c.bg,
           fg = c.bg,
         }
-        hl.TelescopeResultsTitle = {
+        hl.SnacksPickerPrompt = {
+          bg = prompt,
+        }
+        hl.NormalFloat = {
+          bg = c.bg,
+        }
+        hl.SnacksPickerPreviewTitle = {
+          bg = c.bg,
+          fg = c.bg,
+        }
+        hl.SnacksPickerResultsTitle = {
+          bg = c.bg,
+          fg = c.bg,
+        }
+        hl.SnacksPickerListTitle = {
           bg = c.bg,
           fg = c.bg,
         }

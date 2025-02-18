@@ -1,12 +1,15 @@
-local nvim_navbuddy_telescope
 local formatters_by_ft = require('my.lsp.filetypes').formatters_by_ft
 local linters_by_ft = require('my.lsp.filetypes').linters_by_ft
 return {
   {
-    -- disable stuff like LSP and Treesitter from attaching if the file is massive
     'folke/snacks.nvim',
     lazy = false,
-    opts = { bigfile = { enabled = true } },
+    opts = {
+      -- open the file right away and do stuff like Treesitter/LSP lazily
+      quickfile = { enabled = true },
+      -- disable stuff like LSP and Treesitter from attaching if the file is massive
+      bigfile = { enabled = true },
+    },
   },
   {
     'stevearc/conform.nvim',
@@ -68,25 +71,6 @@ return {
         opts = {
           lsp = { auto_attach = true },
           window = { sections = { right = { preview = 'always' } } },
-          mappings = {
-            -- structured like this to avoid having to `require('nvim-navbuddy')` during startup
-            ['/'] = {
-              callback = function(display)
-                if nvim_navbuddy_telescope == nil then
-                  nvim_navbuddy_telescope = require('nvim-navbuddy.actions').telescope({
-                    layout_strategy = 'horizontal',
-                    layout_config = {
-                      height = 0.60,
-                      width = 0.60,
-                      preview_width = 0.50,
-                    },
-                  })
-                end
-                return nvim_navbuddy_telescope.callback(display)
-              end,
-              description = 'Fuzzy search current level with telescope',
-            },
-          },
         },
         keys = {
           {

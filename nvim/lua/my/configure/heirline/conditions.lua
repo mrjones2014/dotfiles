@@ -6,11 +6,10 @@ function M.should_show_filename(bufname)
   return (not bt or bt == '')
     and ft ~= 'nofile'
     and ft ~= 'Trouble'
-    and ft ~= 'Telescope'
+    and ft ~= 'snacks_picker_input'
     and ft ~= 'help'
     and bufname
     and bufname ~= ''
-    and not vim.startswith(bufname, 'component://')
 end
 
 function M.is_floating_window(win_id)

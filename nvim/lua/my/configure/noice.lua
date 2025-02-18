@@ -44,8 +44,8 @@ return {
         },
         win_options = {
           winhighlight = {
-            Normal = 'TelescopeNormal',
-            FloatBorder = 'TelescopeBorder',
+            Normal = 'SnacksPickerInput',
+            FloatBorder = 'SnacksPickerInputBorder',
           },
         },
       },
