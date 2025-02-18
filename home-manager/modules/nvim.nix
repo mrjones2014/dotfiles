@@ -86,6 +86,7 @@
       clippy
       glow
       mariadb
+      imagemagick
     ];
   };
 }

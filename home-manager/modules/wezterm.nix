@@ -10,7 +10,7 @@ in {
     package = if isLinux then
       inputs.wezterm-nightly.packages.x86_64-linux.default
     else
-      inputs.wezterm-nightly.packages.aarch64-darwin.default;
+      pkgs.wezterm;
     extraConfig = ''
       local wezterm = require('wezterm')
       local config = wezterm.config_builder()
