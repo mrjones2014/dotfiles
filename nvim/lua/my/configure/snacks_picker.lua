@@ -20,11 +20,8 @@ return {
     { 'fh', pick('recent'), desc = 'Find oldfiles' },
     { 'fb', pick('buffers'), desc = 'Find buffers' },
     { 'ft', pick('grep'), desc = 'Find text' },
+    { 'fs', pick('lsp_workspace_symbols'), desc = 'Find LSP symbols in the workspace' },
     { 'fr', pick('resume'), desc = 'Resume last finder' },
-    { '<leader>f', pick('files', vim.cmd.vsp), desc = 'Split vertically, then find files' },
-    { '<leader>h', pick('recent', vim.cmd.vsp), desc = 'Split vertically, then find oldfiles' },
-    { '<leader>t', pick('grep', vim.cmd.vsp), desc = 'Split vertically, then find text' },
-    { '<leader>b', pick('buffers', vim.cmd.vsp), desc = 'Split vertically, then find buffers' },
   },
   opts = {
     input = { enabled = true },
