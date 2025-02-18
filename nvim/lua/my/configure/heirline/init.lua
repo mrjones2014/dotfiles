@@ -23,9 +23,19 @@ return {
       local sl = require('my.configure.heirline.statusline')
       local wb = require('my.configure.heirline.winbar')
 
+      local colors = require('tokyonight.colors').setup()
       require('heirline').setup({
         opts = {
-          colors = require('my.utils.theme').heirline_colors,
+          colors = {
+            black = colors.bg_dark,
+            gray = colors.dark5,
+            green = colors.green,
+            blue = colors.blue,
+            base = colors.bg,
+            surface0 = colors.fg_gutter,
+            surface1 = colors.dark3,
+            surface2 = colors.blue7,
+          },
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
             return conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))

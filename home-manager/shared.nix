@@ -1,5 +1,4 @@
 {
-  theme = "tokyonight";
   imports = [
     ../nixos-modules/nix-conf.nix
     ../nixos-modules/theme.nix

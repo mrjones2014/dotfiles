@@ -19,113 +19,61 @@ end
 local colorscheme = vim.env.COLORSCHEME or 'tokyonight'
 
 return {
-  {
-    'catppuccin/nvim',
-    enabled = colorscheme == 'catppuccin',
-    name = 'catppuccin',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      flavour = 'mocha',
-      dim_inactive = { enabled = true, percentage = 0.000001 },
-      styles = {
-        loops = { 'italic' },
-        keyword = { 'italic' },
-      },
-      custom_highlights = function(colors)
-        return {
-          WinBar = { bg = colors.surface2 },
-          PickerNormal = { bg = colors.crust },
-          PickerBorder = { bg = colors.crust, fg = colors.crust },
-          PickerPromptBorder = { bg = colors.base, fg = colors.base },
-          PickerPromptNormal = { bg = colors.base },
-          PickerPromptPrefix = { bg = colors.base },
-        }
-      end,
-      integrations = {
-        gitsigns = true,
-        indent_blankline = { enabled = true },
-        lsp_saga = true,
-        markdown = true,
-        mini = { enabled = true },
-        neotest = true,
-        notify = true,
-        cmp = true,
-        native_lsp = { enabled = true },
-        navic = {
-          enabled = true,
-          -- TODO if I use 'surface2' here I get an error
-          custom_bg = '#585b70', ---@diagnostic disable-line: assign-type-mismatch
-        },
-        semantic_tokens = true,
-        treesitter = true,
-        rainbow_delimiters = true,
-        octo = true,
-        lsp_trouble = true,
-      },
-    },
-    config = function(_, opts)
-      require('catppuccin').setup(opts)
-      vim.cmd.colorscheme('catppuccin')
-    end,
-  },
-  {
-    'folke/tokyonight.nvim',
-    enabled = colorscheme == 'tokyonight',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = 'night',
-      dim_inactive = true,
-      plugins = { auto = true },
-      on_highlights = function(hl, c)
-        hl.WinBar = { bg = c.fg_gutter }
-        hl.WinBarNC = hl.WinBar
-        -- navic in winbar
-        hl.NavicText.bg = c.fg_gutter
-        hl.NavicSeparator.bg = c.fg_gutter
-        for key, _ in pairs(hl) do
-          if vim.startswith(key, 'NavicIcons') then
-            hl[key] = { bg = hl.WinBar.bg, fg = get_tokyonight_hl_fg(hl, key) }
-          end
+  'folke/tokyonight.nvim',
+  enabled = colorscheme == 'tokyonight',
+  lazy = false,
+  priority = 1000,
+  opts = {
+    style = 'night',
+    dim_inactive = true,
+    plugins = { auto = true },
+    on_highlights = function(hl, c)
+      hl.WinBar = { bg = c.fg_gutter }
+      hl.WinBarNC = hl.WinBar
+      -- navic in winbar
+      hl.NavicText.bg = c.fg_gutter
+      hl.NavicSeparator.bg = c.fg_gutter
+      for key, _ in pairs(hl) do
+        if vim.startswith(key, 'NavicIcons') then
+          hl[key] = { bg = hl.WinBar.bg, fg = get_tokyonight_hl_fg(hl, key) }
         end
-        -- borderless pickers
-        local prompt = '#2d3149'
-        hl.SnacksPickerInput = {
-          bg = prompt,
-          fg = c.fg_dark,
-        }
-        hl.SnacksPickerInputBorder = {
-          bg = prompt,
-          fg = prompt,
-        }
-        hl.SnacksPickerBorder = {
-          bg = c.bg,
-          fg = c.bg,
-        }
-        hl.SnacksPickerPrompt = {
-          bg = prompt,
-        }
-        hl.NormalFloat = {
-          bg = c.bg,
-        }
-        hl.SnacksPickerPreviewTitle = {
-          bg = c.bg,
-          fg = c.bg,
-        }
-        hl.SnacksPickerResultsTitle = {
-          bg = c.bg,
-          fg = c.bg,
-        }
-        hl.SnacksPickerListTitle = {
-          bg = c.bg,
-          fg = c.bg,
-        }
-      end,
-    },
-    config = function(_, opts)
-      require('tokyonight').setup(opts)
-      vim.cmd.colorscheme('tokyonight-night')
+      end
+      -- borderless pickers
+      local prompt = '#2d3149'
+      hl.SnacksPickerInput = {
+        bg = prompt,
+        fg = c.fg_dark,
+      }
+      hl.SnacksPickerInputBorder = {
+        bg = prompt,
+        fg = prompt,
+      }
+      hl.SnacksPickerBorder = {
+        bg = c.bg,
+        fg = c.bg,
+      }
+      hl.SnacksPickerPrompt = {
+        bg = prompt,
+      }
+      hl.NormalFloat = {
+        bg = c.bg,
+      }
+      hl.SnacksPickerPreviewTitle = {
+        bg = c.bg,
+        fg = c.bg,
+      }
+      hl.SnacksPickerResultsTitle = {
+        bg = c.bg,
+        fg = c.bg,
+      }
+      hl.SnacksPickerListTitle = {
+        bg = c.bg,
+        fg = c.bg,
+      }
     end,
   },
+  config = function(_, opts)
+    require('tokyonight').setup(opts)
+    vim.cmd.colorscheme('tokyonight-night')
+  end,
 }
