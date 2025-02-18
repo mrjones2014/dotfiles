@@ -25,6 +25,7 @@ return {
   },
   opts = {
     input = { enabled = true },
+    image = { enabled = true },
     picker = {
       layout = {
         preset = 'telescope',
