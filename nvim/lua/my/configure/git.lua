@@ -1,38 +1,30 @@
 local clipboard = require('my.utils.clipboard')
 return {
   {
-    'linrongbin16/gitlinker.nvim',
-    cmd = { 'GitLink' },
+    'folke/snacks.nvim',
+    keys = {
+      {
+        '<leader>gy',
+        function()
+          clipboard.copy(require('snacks.gitbrowse').get_url())
+        end,
+        desc = 'Copy git permalink',
+        silent = true,
+      },
+    },
     opts = {
-      action_callback = clipboard.copy,
-      router = {
-        browse = {
-          ['gitlab%.1password%.io'] = function(data)
-            local url = string.format(
-              'https://gitlab.1password.io/%s/%s/-/blob/%s/%s',
-              data.org,
-              data.repo:gsub('%.git', ''),
-              data.current_branch,
-              data.file
-            )
-            clipboard.copy(url)
-            return url
-          end,
-          ['^github%.com'] = function(data)
-            local url = string.format(
-              'https://github.com/%s/%s/blob/%s/%s',
-              data.org,
-              data.repo:gsub('%.git', ''),
-              data.current_branch,
-              data.file
-            )
-            clipboard.copy(url)
-            return url
-          end,
+      gitbrowse = {
+        what = 'permalink',
+        url_patterns = {
+          ['gitlab%.1password%.io'] = {
+            branch = '/-/tree/{branch}',
+            file = '/-/blob/{branch}/{file}#L{line_start}-L{line_end}',
+            permalink = '/-/blob/{commit}/{file}#L{line_start}-L{line_end}',
+            commit = '/-/commit/{commit}',
+          },
         },
       },
     },
-    keys = { { '<leader>gy', '<cmd>GitLink<cr>', desc = 'Copy GitHub link', silent = true } },
   },
   {
     'lewis6991/gitsigns.nvim',
