@@ -45,7 +45,12 @@ function M.default_keymaps()
     -- <ESC> clears hlsearch highlighting in normal mode
     { '<ESC>', ':noh<CR>', mode = 'n' },
     -- <leader>jk to clear notifications
-    { '<leader>jk', ':Dismiss<CR>' },
+    {
+      '<leader>jk',
+      function()
+        require('notify').dismiss({ silent = true, pending = true })
+      end,
+    },
 
     -- allow moving the cursor through wrapped lines using j and k,
     -- note that I have line wrapping turned off but turned on only for Markdown
