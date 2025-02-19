@@ -9,6 +9,7 @@ return {
       quickfile = { enabled = true },
       -- disable stuff like LSP and Treesitter from attaching if the file is massive
       bigfile = { enabled = true },
+      words = { enabled = true },
     },
   },
   {
