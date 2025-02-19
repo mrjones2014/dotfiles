@@ -20,6 +20,16 @@ local colorscheme = vim.env.COLORSCHEME or 'tokyonight'
 
 return {
   'folke/tokyonight.nvim',
+  dependencies = {
+    {
+      'folke/snacks.nvim',
+      opts = {
+        indent = {
+          animate = { enabled = false },
+        },
+      },
+    },
+  },
   enabled = colorscheme == 'tokyonight',
   lazy = false,
   priority = 1000,
