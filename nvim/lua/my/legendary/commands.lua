@@ -46,40 +46,6 @@ function M.default_commands()
       end,
       description = 'Open directory containing current file',
     },
-    {
-      ':Dismiss',
-      function()
-        require('notify').dismiss({ pending = true, silent = true })
-      end,
-      description = 'Dismiss notifications',
-    },
-
-    -- keymaps come from Comment.nvim
-    {
-      ':Comment',
-      {
-        n = 'gcc',
-        v = 'gc',
-      },
-      description = 'Toggle comment',
-    },
-
-    {
-      ':Plugins',
-      function()
-        local plugin_shorthands = vim.iter(require('lazy').plugins()):map(function(plugin)
-          return plugin[1]
-        end)
-        vim.ui.select(plugin_shorthands, { prompt = 'Select Plugin' }, function(selected)
-          if not selected then
-            return
-          end
-
-          vim.ui.open(selected)
-        end)
-      end,
-      description = 'Search installed plugins and open the repo in browser',
-    },
   }
 end
 
@@ -112,22 +78,6 @@ function M.lsp_commands(bufnr)
           require('conform').format({ async = true, lsp_fallback = true })
         end,
         description = 'Format the current document with LSP',
-        opts = { buffer = bufnr },
-      },
-      {
-        ':DisableFormatting',
-        function()
-          require('my.utils.lsp').toggle_formatting_enabled(false)
-        end,
-        description = 'Disable LSP formatting',
-        opts = { buffer = bufnr },
-      },
-      {
-        ':EnableFormatting',
-        function()
-          require('my.utils.lsp').toggle_formatting_enabled(true)
-        end,
-        description = 'Enable LSP formatting',
         opts = { buffer = bufnr },
       },
     })
