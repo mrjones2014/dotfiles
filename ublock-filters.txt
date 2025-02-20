@@ -2,6 +2,9 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! block YouTube Shorts
+www.youtube.com##.shortsLockupViewModelHost
+
 ! block "Join" button
 www.youtube.com##div#sponsor-button
 
