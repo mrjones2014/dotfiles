@@ -3,7 +3,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! block YouTube Shorts
-www.youtube.com##.shortsLockupViewModelHost
+www.youtube.com##.ytdRichGridGroupHost
 
 ! block "Join" button
 www.youtube.com##div#sponsor-button
