@@ -75,7 +75,6 @@
     ./modules/_1password-shell.nix
     ./modules/espanso.nix
     ./modules/wezterm.nix
-    ./modules/librewolf.nix
     ./modules/gnome
     ./modules/recyclarr.nix
     ./modules/jujutsu.nix
