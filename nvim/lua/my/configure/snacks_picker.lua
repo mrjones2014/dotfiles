@@ -24,6 +24,11 @@ return {
     { 'fr', pick('resume'), desc = 'Resume last finder' },
   },
   opts = {
+    styles = {
+      input = {
+        relative = 'cursor',
+      },
+    },
     input = { enabled = true },
     image = { enabled = true },
     picker = {
