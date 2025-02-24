@@ -75,7 +75,7 @@ function M.lsp_commands(bufnr)
       {
         ':Format',
         function()
-          require('conform').format({ async = true, lsp_fallback = true })
+          require('conform').format({ async = true, lsp_format = 'fallback' })
         end,
         description = 'Format the current document with LSP',
         opts = { buffer = bufnr },

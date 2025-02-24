@@ -22,7 +22,7 @@ return {
         if not require('my.utils.lsp').is_formatting_enabled() then
           return
         end
-        return { lsp_fallback = true }
+        return { lsp_format = 'fallback' }
       end,
     },
   },
