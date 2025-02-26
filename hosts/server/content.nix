@@ -2,8 +2,6 @@
   imports = [
     # port 8112
     ./deluge.nix
-    # port 8082
-    ./homepage.nix
     ./cleanuperr.nix
   ];
   services = {
