@@ -45,7 +45,7 @@ in {
     };
     services.uptime-kuma-disk-usage.serviceConfig = {
       Type = "oneshot";
-      ExecStart = disk_usage_script;
+      ExecStart = "${disk_usage_script}/bin/uptime-kuma-disk-usage-ping";
     };
 
   };
