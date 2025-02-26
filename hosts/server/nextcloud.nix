@@ -8,7 +8,7 @@ in {
     owner = "nextcloud";
     group = "nextcloud";
   };
-  environment.systemPackages = [ pkgs.ffmpeg_6 ];
+  environment.systemPackages = [ pkgs.ffmpeg_6 config.services.nextcloud.occ ];
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud30;
