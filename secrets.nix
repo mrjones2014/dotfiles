@@ -10,9 +10,14 @@ let
   systems = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUa3f8x3mb2fHF5JXjGKdWF5EUX8GQj7hMhEUn7LffI root@nixos-server"
   ];
-in {
-  "secrets/mullvad_wireguard.age".publicKeys = users ++ systems;
-  "secrets/wireguard_server.age".publicKeys = users ++ systems;
-  "secrets/cleanuperr_env.age".publicKeys = users ++ systems;
-  "secrets/nextcloud_admin_pass.age".publicKeys = users ++ systems;
-}
+  secrets = [
+    "secrets/mullvad_wireguard.age"
+    "secrets/wireguard_server.age"
+    "secrets/cleanuperr_env.age"
+    "secrets/nextcloud_admin_pass.age"
+    "secrets/homarr_env.age"
+  ];
+in builtins.listToAttrs (map (secret: {
+  name = secret;
+  value = { publicKeys = users ++ systems; };
+}) secrets)

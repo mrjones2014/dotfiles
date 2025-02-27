@@ -1,15 +1,30 @@
+{ config, ... }:
 let
-  dashdotPort = 9090;
+  homarrStateDir = "/var/lib/homarr";
+  homarrPort = 9090;
+  dashdotPort = 9091;
   uptimeKumaPort = 3001;
 in {
   networking.firewall = {
-    allowedTCPPorts = [ dashdotPort uptimeKumaPort ];
-    allowedUDPPorts = [ dashdotPort uptimeKumaPort ];
+    allowedTCPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
+    allowedUDPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
   };
+
   services.uptime-kuma = {
     enable = true;
     settings.HOST = import ./ip.nix;
   };
+
+  systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
+  age.secrets.homarr_env.file = ../../secrets/homarr_env.age;
+  virtualisation.oci-containers.containers.homarr = {
+    autoStart = true;
+    image = "ghcr.io/homarr-labs/homarr:latest";
+    ports = [ "${builtins.toString homarrPort}:7575" ];
+    volumes = [ "${homarrStateDir}:/appdata" ];
+    environmentFiles = [ config.age.secrets.homarr_env.path ];
+  };
+
   virtualisation.oci-containers.containers.dashdot = {
     image = "mauricenino/dashdot";
     ports = [ "${builtins.toString dashdotPort}:3001" ];
