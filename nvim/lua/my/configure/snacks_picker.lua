@@ -42,6 +42,7 @@ return {
           filter = {
             paths = {
               [vim.uv.cwd()] = true,
+              [string.format('%s/.git', vim.uv.cwd())] = false,
             },
           },
         },
