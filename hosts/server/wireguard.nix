@@ -49,9 +49,15 @@ in {
             publicKey = "klCZN17QW/0ZtAlmj24R6ftBRozXUGn3hvWjF9ledC4=";
             allowedIPs = [ "10.0.0.2/32" ];
           }
+          # Robby/Megan
           {
             publicKey = "0XXP3UgA67bcImCB4UOvyno3fhiBx7v6ufd4y4MH1xE=";
             allowedIPs = [ "10.0.0.3/32" ];
+          }
+          # Andrew
+          {
+            publicKey = "30hYSNSsFVjTmi4553kdbucg5laEkGvERgHxgqnDGkE=";
+            allowedIPs = [ "10.0.0.4/32" ];
           }
         ];
       };
