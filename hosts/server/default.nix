@@ -28,7 +28,7 @@
     ./containers.nix
     ./wireguard.nix
     ./nextcloud.nix
-    ./uptime-kuma.nix
+    ./observability.nix
     ../../nixos-modules/sshd.nix
   ];
 

@@ -14,6 +14,7 @@ let
         done
   '';
 in {
+  virtualisation.oci-containers.backend = "podman";
   environment.systemPackages = [ update-containers ];
   # update oci-containers every Monday
   systemd = {
