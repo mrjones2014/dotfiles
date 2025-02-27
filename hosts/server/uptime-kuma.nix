@@ -2,11 +2,13 @@
 let
   ip = import ./ip.nix;
   disk_usage_script = pkgs.writeShellScriptBin "uptime-kuma-disk-usage-ping" ''
+    #!${pkgs.bash}/bin/bash
+
     disk="/dev/sdc1"
 
-    percentage=$(df -hl --total $disk | tail -1 | awk '{printf $5}')
+    percentage=$(df -hl --total $disk | tail -1 | ${pkgs.gawk}/bin/awk '{printf $5}')
 
-    threshold="80"  # 80% seems reasonable, but YMMV
+    threshold="90"
 
     number=''${percentage%\%*}
 
@@ -14,13 +16,17 @@ let
 
     push_url="http://${ip}:3001/api/push/o4c9CaUnVo"
 
-    if [ $number -lt $threshold ]; then
+    echo "threshold: $threshold"
+    echo "number:    $number"
+    echo "$message"
+
+    if [ ''${number:-0} -lt ''${threshold:-0} ]; then
         service_status="up"
     else
         service_status="down"
     fi
 
-    curl \
+    ${pkgs.curlMinimal}/bin/curl \
         --get \
         --data-urlencode "status=$service_status" \
         --data-urlencode "msg=$message" \
