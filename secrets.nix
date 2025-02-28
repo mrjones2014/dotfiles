@@ -14,8 +14,8 @@ let
     "secrets/mullvad_wireguard.age"
     "secrets/wireguard_server.age"
     "secrets/cleanuperr_env.age"
-    "secrets/nextcloud_admin_pass.age"
     "secrets/homarr_env.age"
+    "secrets/bewcloud_env.age"
   ];
 in builtins.listToAttrs (map (secret: {
   name = secret;

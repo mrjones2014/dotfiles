@@ -27,7 +27,7 @@
     ./nas.nix
     ./containers.nix
     ./wireguard.nix
-    ./nextcloud.nix
+    ./bewcloud.nix
     ./observability.nix
     ../../nixos-modules/sshd.nix
   ];

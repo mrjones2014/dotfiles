@@ -48,7 +48,6 @@
         parsec-bin
         jan
         ungoogled-chromium
-        nextcloud-client
       ] ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
