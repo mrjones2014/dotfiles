@@ -13,7 +13,7 @@ in {
     allowedUDPPorts = [ bewcloud_port ];
   };
   systemd.tmpfiles.rules =
-    [ "d ${data_home} 0750 root root -" "d ${db_home} 0750 root root -" ];
+    [ "d ${data_home} 777 root root -" "d ${db_home} 777 root root -" ];
   virtualisation.oci-containers.containers = {
     bewcloud = {
       autoStart = true;
