@@ -32,8 +32,8 @@
       device = "/dev/disk/by-label/media";
       fsType = "ext4";
     };
-    "/mnt/nextcloud" = {
-      device = "/dev/disk/by-label/nextcloud";
+    "/mnt/extra-storage" = {
+      device = "/dev/disk/by-label/extra-storage";
       fsType = "ext4";
     };
   };
