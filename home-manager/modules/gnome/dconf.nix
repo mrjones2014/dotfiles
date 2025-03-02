@@ -35,6 +35,7 @@ in {
         "org.gnome.Nautilus.desktop"
         "org.wezfurlong.wezterm.desktop"
         "spotify.desktop"
+        "standard-notes.desktop"
         "1password.desktop"
         "signal-desktop.desktop"
         "firefox.desktop"
