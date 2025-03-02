@@ -46,8 +46,8 @@
         # cura
         r2modman
         parsec-bin
-        jan
         ungoogled-chromium
+        standardnotes
       ] ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
