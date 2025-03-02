@@ -39,17 +39,21 @@
   };
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # static IP on ethernet interface
-  networking.interfaces.enp0s31f6.ipv4.addresses = [{
-    address = import ./ip.nix;
-    prefixLength = 24;
-  }];
+  networking = {
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    useDHCP = lib.mkDefault true;
+    hostName = "nixos-server";
+    defaultGateway = "192.168.189.1";
+    nameservers = [ "45.90.28.117" "45.90.30.117" ];
+    # static IP on ethernet interface
+    interfaces.enp0s31f6.ipv4.addresses = [{
+      address = import ./ip.nix;
+      prefixLength = 24;
+    }];
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode =

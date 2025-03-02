@@ -50,7 +50,6 @@
 
   networking = {
     wireguard.enable = true;
-    networkmanager.enable = true;
     firewall.enable = true;
   };
 
@@ -92,13 +91,7 @@
         hashedPassword =
           "$y$j9T$L.RrmE3CRSB.lQayiw2ZN/$vA4XkSR13yL016t3HaZ11uCN/sCmXqBcuUcSBxMjiPD";
         home = "/home/mat";
-        extraGroups = [
-          "wheel"
-          "networkmanager"
-          "oci"
-          "podman"
-          "dialout" # to connect to arduino
-        ];
+        extraGroups = [ "wheel" "networkmanager" "oci" "podman" ];
       };
     };
   };

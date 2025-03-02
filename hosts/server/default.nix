@@ -32,7 +32,6 @@
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
-  networking.hostName = "nixos-server";
   boot = {
     loader = {
       systemd-boot.enable = true;
