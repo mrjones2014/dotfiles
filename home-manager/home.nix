@@ -69,7 +69,7 @@
   };
 
   imports = [
-    ./modules/arkenfox.nix
+    ./modules/betterfox.nix
     ./shared.nix
     ./modules/_1password-shell.nix
     ./modules/espanso.nix

@@ -1,11 +1,8 @@
 { inputs, isLinux, ... }: {
-  imports = [ inputs.arkenfox.hmModules.default ];
+  imports = [ inputs.betterfox.homeManagerModules.betterfox ];
   programs.firefox = {
     enable = isLinux;
-    arkenfox = {
-      enable = true;
-      version = "118.0";
-    };
+    betterfox.enable = true;
     policies = {
       DisableTelemetry = true;
       DisablePocket = true;
@@ -92,21 +89,9 @@
           "Wikipedia (en)".metaData.hidden = true;
         };
       };
-      arkenfox = {
-        enable = isLinux;
-        "0000".enable = true;
-        "0100".enable = true;
-        "0200".enable = true;
-        "0300".enable = true;
-        "0400".enable = true;
-        "0600".enable = true;
-        "0800".enable = true;
-        "0900".enable = true;
-        "1200".enable = true;
-        "1600".enable = true;
-        "2600".enable = true;
-        "2700".enable = true;
-        "2800".enable = true;
+      betterfox = {
+        enable = true;
+        enableAllSections = true;
       };
     };
   };

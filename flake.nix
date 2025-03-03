@@ -12,8 +12,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    arkenfox = {
-      url = "github:dwarfmaster/arkenfox-nixos";
+    betterfox = {
+      url = "github:HeitorAugustoLN/betterfox-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     _1password-shell-plugins = {
