@@ -69,12 +69,13 @@ sonarr:
           - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
         quality_profiles:
           - name: 1080p-2160p
+            score: 0
 
       - trash_ids:
           - 2016d1676f5ee13a5b7257ff86ac9a93 # SDR
         quality_profiles:
           - name: 1080p-2160p
-            # score: 0 # Uncomment this line to enable SDR releases
+            score: 0 # Uncomment this line to enable SDR releases
 
 radarr:
   radarr-1080p-2160p:
@@ -175,4 +176,4 @@ radarr:
           - 9c38ebb7384dada637be8899efa68e6f # SDR
         quality_profiles:
           - name: Remux + WEB 2160p
-            # score: 0 # Uncomment this line to allow SDR releases
+            score: 0 # Uncomment this line to allow SDR releases
