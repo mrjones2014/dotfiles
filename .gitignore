@@ -8,3 +8,6 @@ book/
 docs/theme/
 ublock-mdbook/.direnv
 .direnv
+
+# recyclarr tmp file created by `op inject`
+recyclarr-tmp.yml
