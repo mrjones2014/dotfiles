@@ -38,13 +38,22 @@ in {
       bc =
         "!export MASTER_BRANCH=$(git branch -r | grep -Po 'HEAD -> \\K.*$') && git diff --name-only $MASTER_BRANCH | ${pkgs.fzf}/bin/fzf --ansi --preview 'git diff --color=always $MASTER_BRANCH {}' --bind 'enter:become($EDITOR {})'";
     };
-    extraConfig = {
-      user = {
-        name = "Mat Jones";
-        email = "mat@mjones.network";
-        signingKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
+    userName = "Mat Jones";
+    userEmail = "mat@mjones.network";
+    signing = {
+      key =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
+      signByDefault = true;
+    };
+    delta = {
+      enable = true;
+      options = {
+        line-numbers = true;
+        navigate = true;
       };
+    };
+    extraConfig = {
+      rerere.enabled = true;
       pull.rebase = false;
       push.autoSetupRemote = true;
       commit.gpgsign = true;
@@ -60,17 +69,10 @@ in {
       };
       core = {
         autocrlf = false;
-        pager = "${pkgs.delta}/bin/delta";
         fsmonitor = true;
         untrackedcache = true;
       };
-      interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
       init.defaultBranch = "master";
-      delta = {
-        enable = true;
-        line-numbers = true;
-        navigate = true;
-      };
       color = {
         ui = true;
         "diff-highlight" = {

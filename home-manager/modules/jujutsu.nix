@@ -12,11 +12,11 @@
           "builtin_immutable_heads() | (trunk().. & ~mine())";
       };
       user = {
-        inherit (config.programs.git.extraConfig.user) name;
-        inherit (config.programs.git.extraConfig.user) email;
+        name = config.programs.git.userName;
+        email = config.programs.git.userEmail;
       };
       signing = {
-        key = config.programs.git.extraConfig.user.signingKey;
+        inherit (config.programs.git.signing) key;
         sign-all = true;
         backend = "ssh";
         backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
