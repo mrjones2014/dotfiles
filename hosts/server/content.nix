@@ -1,9 +1,5 @@
 {
-  imports = [
-    # port 8112
-    ./deluge.nix
-    ./cleanuperr.nix
-  ];
+  imports = [ ./torrent_client.nix ./cleanuperr.nix ];
   services = {
     jellyfin = {
       enable = true;
