@@ -1,12 +1,5 @@
 { config, pkgs, isLinux, ... }: {
-  home.sessionVariables = {
-    MANPAGER = "nvim -c 'Man!' -o -";
-    LIBSQLITE = if isLinux then
-      "${pkgs.sqlite.out}/lib/libsqlite3.so"
-    else
-      "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
-  };
-
+  home.sessionVariables.MANPAGER = "nvim -c 'Man!' -o -";
   xdg.configFile = {
     ripgrep_ignore.text = ''
       .git/
@@ -44,7 +37,12 @@
       "--set"
       "NVIM_RUST_ANALYZER"
       "${pkgs.rust-analyzer}/bin/rust-analyzer"
-    ];
+      "--set"
+      "LIBSQLITE"
+    ] ++ (if isLinux then
+      [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
+    else
+      [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]);
 
     extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [
