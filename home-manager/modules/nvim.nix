@@ -40,6 +40,12 @@
     defaultEditor = true;
     coc.enable = false;
 
+    extraWrapperArgs = [
+      "--set"
+      "NVIM_RUST_ANALYZER"
+      "${pkgs.rust-analyzer}/bin/rust-analyzer"
+    ];
+
     extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [
       # for compiling Treesitter parsers

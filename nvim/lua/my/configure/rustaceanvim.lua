@@ -8,6 +8,7 @@ return {
     require('my.lsp.snippets').rust()
     vim.g.rustaceanvim = {
       server = {
+        cmd = { vim.env.NVIM_RUST_ANALYZER },
         default_settings = {
           ['rust-analyzer'] = {
             cargo = { allFeatures = true, targetDir = true },
