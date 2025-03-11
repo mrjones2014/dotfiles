@@ -32,6 +32,11 @@
   programs = {
     fish.enable = true;
 
+    coolercontrol = {
+      enable = true;
+      nvidiaSupport = true;
+    };
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
