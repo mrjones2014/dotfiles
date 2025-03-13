@@ -70,7 +70,10 @@ return {
         },
       },
       formatters = {
-        filename_first = true,
+        file = {
+          filename_first = true,
+          truncate = 85,
+        },
       },
     },
   },
