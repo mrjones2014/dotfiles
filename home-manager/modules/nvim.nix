@@ -1,4 +1,4 @@
-{ config, pkgs, isLinux, ... }: {
+{ config, pkgs, inputs, isLinux, ... }: {
   home.sessionVariables.MANPAGER = "nvim -c 'Man!' -o -";
   xdg.configFile = {
     ripgrep_ignore.text = ''

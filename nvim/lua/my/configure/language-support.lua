@@ -53,7 +53,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
       {
         'folke/neoconf.nvim',
         opts = {
@@ -136,7 +135,7 @@ return {
       local function setup_lsp_for_filetype(filetype, server_name)
         local has_config, config = pcall(require, 'my.lsp.' .. filetype)
         config = has_config and config or {}
-        config.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+        config.capabilities = require('blink.cmp').get_lsp_capabilities()
 
         require('lspconfig')[server_name].setup(config)
         local snippets = require('my.lsp.snippets')[filetype]
