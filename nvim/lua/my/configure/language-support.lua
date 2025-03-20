@@ -143,7 +143,7 @@ return {
               vim.lsp.buf.hover()
               vim.api.nvim_create_autocmd('CursorMoved', {
                 command = ':set eventignore-=CursorHold',
-                pettern = '<buffer>',
+                pattern = '<buffer>',
                 once = true,
               })
             end,
