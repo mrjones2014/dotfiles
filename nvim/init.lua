@@ -27,6 +27,15 @@ end
 require('my.settings')
 require('my.plugins')
 
+vim.api.nvim_create_user_command('H', function()
+  vim.cmd.help(vim.fn.expand('<cword>'))
+end, { desc = 'Help for cursorword' })
+vim.api.nvim_create_user_command('Filepath', function()
+  require('my.utils.clipboard').copy(
+    vim.fn.simplify(require('my.utils.path').relative(vim.fn.expand('%') --[[@as string]]))
+  )
+end, { desc = 'Copy relateive filepath' })
+
 vim.api.nvim_create_autocmd('UiEnter', {
   callback = function()
     local bufs = vim.api.nvim_list_bufs()
@@ -44,6 +53,25 @@ vim.api.nvim_create_autocmd('UiEnter', {
     end
   end,
   once = true,
+})
+
+-- if I'm editing my nvim config, make sure I'm `cd`d into `nvim`
+vim.api.nvim_create_autocmd('BufEnter', {
+  once = true,
+  callback = function()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    if
+      string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.loop.cwd()--[[@as string]], '/nvim')
+    then
+      vim.cmd.cd('./nvim')
+      vim.schedule(vim.cmd.e)
+    end
+  end,
+})
+
+-- open files to last location
+vim.api.nvim_create_autocmd('BufReadPost', {
+  command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif]],
 })
 
 -- custom URL handling to open GitHub shorthands

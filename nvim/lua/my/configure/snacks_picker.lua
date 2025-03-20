@@ -84,7 +84,7 @@ return {
       keys = {
         { '<leader>d', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Toggle diagnostics list' },
         { '<leader>q', '<cmd>Trouble qflist toggle<cr>', desc = 'Toggle quickfix list' },
-        { '<leader>r', '<cmd>Trouble lsp toggle win.position=right<cr>' },
+        { '<leader>l', '<cmd>Trouble symbols toggle win.position=right<cr>', desc = 'Show LSP symbol tree' },
       },
       opts = { action_keys = { hover = {} } },
     },

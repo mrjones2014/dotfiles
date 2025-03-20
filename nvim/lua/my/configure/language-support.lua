@@ -1,5 +1,6 @@
 local formatters_by_ft = require('my.lsp.filetypes').formatters_by_ft
 local linters_by_ft = require('my.lsp.filetypes').linters_by_ft
+local lsp_util = require('my.utils.lsp')
 return {
   {
     'folke/snacks.nvim',
@@ -129,7 +130,38 @@ return {
     },
     event = 'BufReadPre',
     init = function()
-      require('my.utils.lsp').on_attach(require('my.utils.lsp').on_attach_default)
+      lsp_util.on_attach(require('my.utils.lsp').on_attach_default)
+      lsp_util.on_attach(function(_, bufnr)
+        require('which-key').add({
+          {
+            'gh',
+            function()
+              -- I have diagnostics float on CursorHold,
+              -- disable that if I've manually shown the hover window
+              -- see require('my.utils.lsp').on_attach_default
+              vim.cmd.set('eventignore+=CursorHold')
+              vim.lsp.buf.hover()
+              vim.api.nvim_create_autocmd('CursorMoved', {
+                command = ':set eventignore-=CursorHold',
+                pettern = '<buffer>',
+                once = true,
+              })
+            end,
+            desc = 'Show LSP hover menu',
+            buffer = bufnr,
+          },
+          { 'gs', vim.lsp.buf.signature_help, desc = 'Show signature help', buffer = bufnr },
+          { 'gr', vim.lsp.buf.references, desc = 'Find references', buffer = bufnr },
+          { 'gd', vim.lsp.buf.definition, desc = 'Go to definition', buffer = bufnr },
+          { 'gi', vim.lsp.buf.implementation, desc = 'Go to implementation', buffer = bufnr },
+          { 'gt', vim.lsp.buf.type_definition, desc = 'Go to type definition', buffer = bufnr },
+          { '<leader>rn', vim.lsp.buf.rename, desc = 'Rename symbol', buffer = bufnr },
+          { 'F', vim.lsp.buf.code_action, desc = 'Show code actions', buffer = bufnr },
+        })
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
+          require('conform').format({ async = true, lsp_format = 'fallback' })
+        end, { desc = 'Format file' })
+      end)
     end,
     config = function()
       local function setup_lsp_for_filetype(filetype, server_name)

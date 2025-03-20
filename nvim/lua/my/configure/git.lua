@@ -29,17 +29,40 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
+    init = function()
+      vim.api.nvim_create_user_command('GitBranch', function()
+        if vim.g.gitsigns_head or vim.b.gitsigns_head then
+          clipboard.copy(vim.g.gitsigns_head or vim.b.gitsigns_head)
+        else
+          vim.notify('Not in a git repo.')
+        end
+      end, { desc = 'Copy git branch' })
+      vim.api.nvim_create_autocmd({ 'InsertLeave', 'InsertEnter' }, {
+        callback = function()
+          local ok, gitsigns_config = pcall(require, 'gitsigns.config')
+          if not ok then
+            return
+          end
+
+          local enabled = gitsigns_config.config.current_line_blame
+          local mode = vim.fn.mode()
+          if (mode == 'i' and enabled) or (mode ~= 'i' and not enabled) then
+            pcall(vim.cmd --[[@as function]], 'Gitsigns toggle_current_line_blame')
+          end
+        end,
+      })
+    end,
     opts = {
-      -- see also: autocmds.lua
       -- this gets toggled off in insert mode
       -- and back on when leaving insert mode
-      signcolumn = true,
+      -- by the autocmd above
       current_line_blame = true,
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = 'eol',
         delay = 100,
       },
+      signcolumn = true,
       current_line_blame_formatter = ' <abbrev_sha> | <author>, <author_time> - <summary>',
       on_attach = function()
         vim.cmd.redrawstatus()

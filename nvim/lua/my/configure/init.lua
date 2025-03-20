@@ -14,7 +14,22 @@ return {
     keys = { '<C-a>', '<C-x>' },
     opts = { mappings = { increment = '<C-a>', decrement = '<C-x>' } },
   },
-  { 'mrjones2014/iconpicker.nvim' },
+  {
+    'mrjones2014/iconpicker.nvim',
+    cmds = { 'Icons' },
+    init = function()
+      vim.api.nvim_create_user_command('Icons', function()
+        require('iconpicker').pick(function(icon)
+          if not icon or #icon == 0 then
+            return
+          end
+
+          require('my.utils.clipboard').copy(icon)
+          vim.notify('Copied icon to clipboard.', vim.log.levels.INFO)
+        end)
+      end, { desc = 'Pick NerdFont icons and copy to clipboard' })
+    end,
+  },
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   {
     'echasnovski/mini.splitjoin',
