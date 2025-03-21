@@ -54,6 +54,7 @@ return {
   opts = {
     preset = 'helix',
     win = { col = 0 },
+    expand = 2,
     triggers = {
       { '<auto>', mode = 'nixsotc' },
       { 'f', mode = 'n' },
