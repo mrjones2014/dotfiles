@@ -53,8 +53,9 @@ return {
   },
   opts = {
     preset = 'helix',
-    win = {
-      col = 0,
+    win = { col = 0 },
+    triggers = {
+      { 'f', mode = 'n' },
     },
     spec = {
       { '<ESC>', ':noh<CR>', desc = 'Clear highlighting on <ESC> in normal mode', hidden = true },
