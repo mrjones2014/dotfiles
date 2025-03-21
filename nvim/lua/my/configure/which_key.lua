@@ -55,6 +55,7 @@ return {
     preset = 'helix',
     win = { col = 0 },
     triggers = {
+      { '<auto>', mode = 'nixsotc' },
       { 'f', mode = 'n' },
     },
     spec = {
