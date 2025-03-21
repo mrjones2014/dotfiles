@@ -80,7 +80,15 @@ vim.ui.open = function(uri) ---@diagnostic disable-line: duplicate-set-field
   -- GitHub shorthand pattern, e.g. mrjones2014/dotfiles
   if not string.match(uri, '[a-z]*://[^ >,;]*') and string.match(uri, '[%w%p\\-]*/[%w%p\\-]*') then
     uri = string.format('https://github.com/%s', uri)
+  elseif
+    vim.api.nvim_get_option_value('filetype', { buf = 0 }) == 'rust'
+    and not string.match(uri, '^https?://[%w-_%.%?%.:/%+=&]+')
+  then
+    -- if the cursorword is not a URL, see if we can open the docs page with rustaceanvim
+    vim.cmd.RustLsp('openDocs')
+    return
   end
+
   open(uri)
 end
 
