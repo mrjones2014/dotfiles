@@ -3,7 +3,22 @@ return {
   ft = 'rust',
   version = '^5',
   depenencies = { 'folke/neoconf.nvim' },
-  keys = { { '<leader>rd', ':RustLsp relatedDiagnostics<CR>', desc = 'Open related diagnostics', silent = true } },
+  keys = {
+    {
+      '<leader>rd',
+      function()
+        vim.cmd.RustLsp('relatedDiagnostics')
+      end,
+      desc = 'Open related diagnostics',
+    },
+    {
+      '<leader>oc',
+      function()
+        vim.cmd.vsp()
+        vim.cmd.RustLsp('openCargo')
+      end,
+    },
+  },
   init = function()
     local neoconf = require('neoconf')
     require('my.lsp.snippets').rust()
