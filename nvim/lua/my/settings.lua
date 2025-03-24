@@ -75,3 +75,5 @@ vim.filetype.add({
     ['tsconfig*.json'] = 'jsonc',
   },
 })
+
+vim.opt.exrc = true
