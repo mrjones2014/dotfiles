@@ -132,6 +132,13 @@ return {
     init = function()
       lsp_util.on_attach(require('my.utils.lsp').on_attach_default)
       lsp_util.on_attach(function(_, bufnr)
+        local function vsplit_then(callback)
+          return function()
+            vim.cmd.vsp()
+            callback()
+          end
+        end
+
         require('which-key').add({
           {
             'gh',
@@ -155,6 +162,19 @@ return {
           { 'gd', vim.lsp.buf.definition, desc = 'Go to definition', buffer = bufnr },
           { 'gi', vim.lsp.buf.implementation, desc = 'Go to implementation', buffer = bufnr },
           { 'gt', vim.lsp.buf.type_definition, desc = 'Go to type definition', buffer = bufnr },
+          { '<leader>gd', vsplit_then(vim.lsp.buf.definition), desc = 'Go to definition in new split', buffer = bufnr },
+          {
+            '<leader>gi',
+            vsplit_then(vim.lsp.buf.implementation),
+            desc = 'Go to implementation in new split',
+            buffer = bufnr,
+          },
+          {
+            '<leader>gt',
+            vsplit_then(vim.lsp.buf.type_definition),
+            desc = 'Go to type definition in new split',
+            buffer = bufnr,
+          },
           { '<leader>rn', vim.lsp.buf.rename, desc = 'Rename symbol', buffer = bufnr },
           { 'F', vim.lsp.buf.code_action, desc = 'Show code actions', buffer = bufnr },
         })
