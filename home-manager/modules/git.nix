@@ -22,7 +22,7 @@ in {
     aliases = {
       s = "status";
       newbranch = "checkout -b";
-      commit-amend = "commit -a --amend --no-edit";
+      commit-amend = "commit --amend --no-edit";
       prune-branches = ''
         !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
       ch = "!${git_checkout_fzf_script}";
