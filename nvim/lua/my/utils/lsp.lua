@@ -115,16 +115,4 @@ function M.get_formatter_name(buf)
   return nil
 end
 
----@param buf number|nil defaults to 0 (current buffer)
----@return boolean
-function M.is_formatting_supported(buf)
-  buf = buf or vim.api.nvim_get_current_buf()
-  if not formatting_enabled then
-    return false
-  end
-
-  local clients = vim.lsp.get_clients({ bufnr = buf, method = Methods.textDocument_formatting })
-  return #clients > 0
-end
-
 return M

@@ -215,7 +215,7 @@ M.OnePassword = {
 
 M.LspFormatToggle = {
   provider = function()
-    if require('my.utils.lsp').is_formatting_supported(0) then
+    if require('my.utils.lsp').get_formatter_name(0) and require('my.utils.lsp').is_formatting_enabled() then
       return '   '
     else
       return '   '
