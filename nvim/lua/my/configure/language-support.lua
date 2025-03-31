@@ -224,6 +224,11 @@ return {
         end
       end
 
+      -- set up ast-grep LSP for all languages
+      if vim.fn.executable('ast-grep') ~= 0 then
+        require('lspconfig').ast_grep.setup()
+      end
+
       -- lazy-load the rest of the configs with
       -- an autocommand that runs only once
       -- for each lsp config
