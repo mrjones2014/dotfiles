@@ -17,6 +17,7 @@ return {
         vim.cmd.vsp()
         vim.cmd.RustLsp('openCargo')
       end,
+      desc = 'Open Cargo.toml in vert split',
     },
   },
   init = function()
