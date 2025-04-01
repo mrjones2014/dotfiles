@@ -15,7 +15,7 @@ M.config = {
     treesitter = { 'json', 'jsonc' },
   },
   ['typescript'] = {
-    patterns = { '*.ts', '*.tsx', '*.js', '*.jsx' },
+    patterns = { '*.ts', '*.tsx', '*.js', '*.jsx', '*.mjs' },
     lspconfig = { 'ts_ls', 'eslint' },
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
