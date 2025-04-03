@@ -28,6 +28,7 @@
     ./containers.nix
     ./wireguard.nix
     ./observability.nix
+    ./vikunja.nix
     ../../nixos-modules/sshd.nix
   ];
 
