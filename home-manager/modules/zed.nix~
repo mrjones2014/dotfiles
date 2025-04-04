@@ -1,4 +1,0 @@
-{ isLinux, pkgs, ... }:
-{
-
-} // pkgs.lib.optionalAttrs isLinux { home.packages = [ pkgs.zed-editor ]; }
