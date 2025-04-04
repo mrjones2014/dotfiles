@@ -48,6 +48,7 @@
         parsec-bin
         ungoogled-chromium
         standardnotes
+        waterfox-bin
       ] ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
@@ -69,7 +70,6 @@
   };
 
   imports = [
-    ./modules/betterfox.nix
     ./shared.nix
     ./modules/_1password-shell.nix
     ./modules/espanso.nix

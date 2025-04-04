@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    betterfox = {
-      url = "github:HeitorAugustoLN/betterfox-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";

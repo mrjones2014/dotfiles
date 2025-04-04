@@ -44,26 +44,6 @@
         "type": "github"
       }
     },
-    "betterfox": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1740603755,
-        "narHash": "sha256-w3HfH5D8lfcpHtt7LLJmoeYJy4I3ERMHlPFSKsyFjF4=",
-        "owner": "HeitorAugustoLN",
-        "repo": "betterfox-nix",
-        "rev": "726415968213b2ea3c3ea9f19aa61789b96fa99c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "HeitorAugustoLN",
-        "repo": "betterfox-nix",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -234,7 +214,6 @@
       "inputs": {
         "_1password-shell-plugins": "_1password-shell-plugins",
         "agenix": "agenix",
-        "betterfox": "betterfox",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs",
         "tokyonight": "tokyonight",
