@@ -21,7 +21,7 @@
         "$hostname"
         "$directory"
         "\${custom.git_server_icon}"
-        "$git_branch"
+        " $git_branch"
         "$git_status"
         "\${custom.nix_shell}"
         "\${custom.direnv} "

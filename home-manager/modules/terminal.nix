@@ -11,6 +11,7 @@
         "font-family" = "Victor Mono";
         "font-feature" = "ss02,ss06";
         "font-size" = "14";
+        "font-style-italic" = "Victor Mono, Semibold Oblique";
         "window-decoration" = "server";
         "cursor-style" = "block";
         "cursor-style-blink" = false;
