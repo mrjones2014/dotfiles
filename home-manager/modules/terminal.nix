@@ -1,14 +1,13 @@
 {
-  xdg.configFile."zellij/config.kdl".source = ../../conf.d/config.kdl;
+  imports = [ ./zellij.nix ];
   programs = {
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-    };
     ghostty = {
       enable = true;
       clearDefaultKeybinds = true;
-      settings.theme = "tokyonight_night";
+      settings = {
+        theme = "tokyonight_night";
+        title = "Ghostty";
+      };
     };
   };
 }

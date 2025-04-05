@@ -4,6 +4,7 @@
       (import ../packages {
         inherit inputs;
         inherit pkgs;
+        inherit (prev) system;
       }))
   ];
   home = {

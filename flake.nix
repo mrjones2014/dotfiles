@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight.url = "github:mrjones2014/tokyonight.nix";
+    zjstatus.url = "github:dj95/zjstatus";
     wezterm-nightly = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
