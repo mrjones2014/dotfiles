@@ -71,6 +71,7 @@
 
   imports = [
     ./shared.nix
+    ./modules/terminal.nix
     ./modules/_1password-shell.nix
     ./modules/espanso.nix
     ./modules/wezterm.nix

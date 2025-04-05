@@ -29,19 +29,6 @@ vim.opt.laststatus = 3
 vim.opt.virtualedit = 'onemore'
 vim.opt.splitkeep = 'screen'
 vim.opt.clipboard = 'unnamedplus'
-vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  -- TODO for some reason, you have to hit ctrl+c after
-  -- pasting for the text to actually appear, but it still works.
-  paste = {
-    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  },
-}
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
