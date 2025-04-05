@@ -99,8 +99,8 @@
                 color_red1 "#db4b4b"
 
                 // Updated format with mode moved to right and session removed
-                format_left   "#[bg=$bg_dark] {tabs}"
-                format_center "{notifications}"
+                format_left   "#[bg=$bg_dark]{notifications}"
+                format_center "{tabs}"
                 format_right  "{mode}#[bg=$bg_dark]"
                 format_space  "#[bg=$bg_dark]"
                 format_hide_on_overlength "true"
@@ -136,7 +136,7 @@
                 tab_active              "#[bg=$bg,fg=$green]#[bg=$bg_dark,fg=$green,bold]#[bg=$green,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$green,bold] {name}{floating_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
                 tab_active_fullscreen   "#[bg=$bg,fg=$green]#[bg=$bg_dark,fg=$green,bold]#[bg=$green,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$green,bold] {name}{fullscreen_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
                 tab_active_sync         "#[bg=$bg,fg=$green]#[bg=$bg_dark,fg=$green,bold]#[bg=$green,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$green,bold] {name}{sync_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
-                tab_separator           "#[bg=$bg] "
+                tab_separator           "#[bg=$bg_dark] "
 
                 tab_sync_indicator       " "
                 tab_fullscreen_indicator " 󰊓"
