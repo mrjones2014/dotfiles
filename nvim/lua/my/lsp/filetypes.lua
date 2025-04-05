@@ -120,6 +120,7 @@ M.treesitter_parsers = (function()
   -- insert extra parsers here
   table.insert(result, 'regex')
   table.insert(result, 'just')
+  table.insert(result, 'kdl')
 
   return result
 end)()
