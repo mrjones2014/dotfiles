@@ -95,8 +95,11 @@
             set -l local_commit (git rev-parse "$current_branch" 2>/dev/null)
             # Check if upstream is set and if the commits are different
             if test -n "$upstream_commit" -a "$upstream_commit" != "$local_commit"
-                echo "Error: Your branch is not up to date with remote branch. Do a git pull first."
-                return 1
+                set -l base_commit (git merge-base "$current_branch" "$current_branch"@{u})
+                if test "$base_commit" = "$local_commit" -a "$local_commit" != "$upstream_commit"
+                    echo "Error: Your branch is behind the remote branch. Do a git pull first."
+                    return 1
+                end
             end
             ${if isDarwin then
               "home-manager switch --flake ~/git/dotfiles/.#mac"
