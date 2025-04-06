@@ -24,7 +24,7 @@
                 };
             }
 
-            bind "Ctrl b" { SwitchToMode "pane"; }
+            bind "Ctrl b" { SwitchToMode "tmux"; }
 
             bind "Super t" { ToggleFloatingPanes; }
 
@@ -34,10 +34,12 @@
             bind "Alt Right" { GoToNextTab; }
         }
 
-        pane {
+        tmux {
             bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
             bind "-" { NewPane "Down"; SwitchToMode "normal"; }
             bind "Esc" { SwitchToMode "normal"; }
+
+            bind "e" { EditScrollback; }
         }
 
         renametab {
