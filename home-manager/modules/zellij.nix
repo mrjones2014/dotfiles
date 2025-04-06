@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   programs = {
     zellij = {
       enable = true;
@@ -21,7 +21,6 @@
                 end
 
                 set -l tab_title "$repo_name$current_branch"
-                echo "$tab_title"
                 if test -n "$ZELLIJ"
                     command nohup zellij action rename-tab "$tab_title" >/dev/null 2>&1
                 end
@@ -56,7 +55,11 @@
 
             bind "Super t" { ToggleFloatingPanes; }
 
-            bind "Alt n" { NewTab; }
+            bind "Alt n" {
+                NewTab {
+                    cwd "${config.home.homeDirectory}"
+                }
+            }
             bind "Super r" { SwitchToMode "RenameTab"; TabNameInput 0; }
             bind "Alt Left" { GoToPreviousTab; }
             bind "Alt Right" { GoToNextTab; }
