@@ -31,8 +31,8 @@
         ":q" = "exit";
         ":Q" = "exit";
         ":e" = "nvim";
-        ":vsp" = "zellij action new-pane right";
-        ":sp" = "zellij action new-pane down";
+        ":vsp" = "zellij action new-pane --direction right";
+        ":sp" = "zellij action new-pane --direction down";
 
         copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
         paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
