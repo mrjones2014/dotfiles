@@ -33,7 +33,7 @@ in {
       favorite-apps = [
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
-        "org.wezfurlong.wezterm.desktop"
+        "ghostty.desktop"
         "spotify.desktop"
         "waterfox.desktop"
         "standard-notes.desktop"

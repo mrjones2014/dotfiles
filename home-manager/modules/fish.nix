@@ -31,10 +31,9 @@
         ":q" = "exit";
         ":Q" = "exit";
         ":e" = "nvim";
-        ":vsp" = "wezterm cli split-pane --right";
-        ":sp" = "wezterm cli split-pane --bottom";
+        ":vsp" = "zellij action new-pane right";
+        ":sp" = "zellij action new-pane down";
 
-        f = "wezterm cli get-text | fzf | copy";
         copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
         paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
         cat = "bat";
