@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, isThinkpad, ... }: {
   imports = [ ./zellij.nix ];
   home.packages = [ pkgs.victor-mono ];
   programs = {
@@ -19,6 +19,7 @@
         "macos-option-as-alt" = true;
         "link-url" = true;
         "command" = "zellij";
+        "maximize" = isThinkpad;
       };
     };
   };
