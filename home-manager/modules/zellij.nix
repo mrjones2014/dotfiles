@@ -4,14 +4,19 @@
     enableFishIntegration = true;
   };
   xdg.configFile."zellij/config.kdl".text = ''
+    theme "tokyo-night-dark"
+    pane_frames false
+    copy_on_select true
+    scroll_buffer_size 10000
+    show_startup_tips false
+    ui {
+        pane_frames {
+            rounded_corners true
+            hide_session_name true
+        }
+    }
     keybinds clear-defaults=true {
         normal {
-            // Pane navigation with Ctrl+h/j/k/l
-            bind "Ctrl h" { MoveFocus "Left"; }
-            bind "Ctrl j" { MoveFocus "Down"; }
-            bind "Ctrl k" { MoveFocus "Up"; }
-            bind "Ctrl l" { MoveFocus "Right"; }
-
             bind "Super p" {
                 LaunchOrFocusPlugin "plugin-manager" {
                     floating true
@@ -23,12 +28,6 @@
 
             // Toggle floating terminal with Super+t
             bind "Super t" { ToggleFloatingPanes; }
-
-            // Pane resizing with Alt+h/j/k/l
-            bind "Alt h" { Resize "Left"; }
-            bind "Alt j" { Resize "Down"; }
-            bind "Alt k" { Resize "Up"; }
-            bind "Alt l" { Resize "Right"; }
 
             // Tab management
             bind "Alt n" { NewTab; }
@@ -48,17 +47,72 @@
             bind "Esc" { SwitchToMode "Normal"; }
             bind "Enter" { SwitchToMode "Normal"; }
         }
-    }
 
-    theme "tokyo-night-dark"
-    pane_frames false
-    copy_on_select true
-    scroll_buffer_size 10000
-    show_startup_tips false
-    ui {
-        pane_frames {
-            rounded_corners false
-            hide_session_name false
+        shared_except "locked" {
+            bind "Ctrl h" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "move_focus_or_tab";
+                    payload "left";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Ctrl j" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "move_focus";
+                    payload "down";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Ctrl k" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "move_focus";
+                    payload "up";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Ctrl l" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "move_focus_or_tab";
+                    payload "right";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Alt h" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "resize";
+                    payload "left";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Alt j" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "resize";
+                    payload "down";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Alt k" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "resize";
+                    payload "up";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
+            bind "Alt l" {
+                MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                    name "resize";
+                    payload "right";
+                    move_mod "ctrl";
+                    resize_mod "alt";
+                };
+            }
         }
     }
   '';
