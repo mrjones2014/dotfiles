@@ -16,6 +16,7 @@
         "window-decoration" = "server";
         "cursor-style" = "block";
         "cursor-style-blink" = false;
+        "macos-option-as-alt" = true;
       };
     };
   };
