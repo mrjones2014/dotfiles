@@ -26,10 +26,8 @@
 
             bind "Ctrl b" { SwitchToMode "pane"; }
 
-            // Toggle floating terminal with Super+t
             bind "Super t" { ToggleFloatingPanes; }
 
-            // Tab management
             bind "Alt n" { NewTab; }
             bind "Super r" { SwitchToMode "RenameTab"; TabNameInput 0; }
             bind "Alt Left" { GoToPreviousTab; }
@@ -42,7 +40,6 @@
             bind "Esc" { SwitchToMode "normal"; }
         }
 
-        // Minimal mode for tab renaming
         renametab {
             bind "Esc" { SwitchToMode "Normal"; }
             bind "Enter" { SwitchToMode "Normal"; }
@@ -115,13 +112,19 @@
             }
         }
     }
+    load_plugins {
+      "file:${pkgs.zjstatus}/bin/zjframes.wasm}" {
+        hide_frame_except_for_search     "true"
+        hide_frame_except_for_scroll     "true"
+        hide_frame_except_for_fullscreen "true"
+      }
+    }
   '';
   xdg.configFile."zellij/layouts/default.kdl".text = ''
     layout {
       default_tab_template {
         pane size=1 borderless=true {
               plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
-                // -- Tokyo Night Colors --
                 color_bg_dark "#1a1b26"
                 color_bg "#24283b"
                 color_bg_highlight "#292e42"
@@ -152,7 +155,6 @@
                 color_red "#f7768e"
                 color_red1 "#db4b4b"
 
-                // Updated format with mode moved to right and session removed
                 format_left   "#[bg=$bg_dark]{notifications}"
                 format_center "{tabs}"
                 format_right  "{mode}#[bg=$bg_dark]"
@@ -165,9 +167,6 @@
                 border_format   "#[bg=$bg]{char}"
                 border_position "top"
 
-                hide_frame_for_single_pane "true"
-
-                // Updated mode indicators with Tokyo Night colors
                 mode_normal        "#[fg=$green,bg=$bg_dark,bold]#[bg=$green,fg=$bg_dark,bold] NORMAL #[bg=$bg,fg=$green]"
                 mode_tmux          "#[fg=$purple,bg=$bg_dark,bold]#[bg=$purple,fg=$bg_dark,bold] TMUX #[bg=$bg,fg=$purple]"
                 mode_locked        "#[fg=$red,bg=$bg_dark,bold]#[bg=$red,fg=$bg_dark,bold] LOCKED #[bg=$bg,fg=$red]"
@@ -183,7 +182,6 @@
                 mode_session       "#[fg=$magenta,bg=$bg_dark,bold]#[bg=$magenta,fg=$bg_dark,bold] SESSION #[bg=$bg,fg=$magenta]"
                 mode_prompt        "#[fg=$magenta,bg=$bg_dark,bold]#[bg=$magenta,fg=$bg_dark,bold] PROMPT #[bg=$bg,fg=$magenta]"
 
-                // Updated tab styling with green for active tabs
                 tab_normal              "#[bg=$bg,fg=$blue]#[bg=$bg_dark,fg=$blue,bold]#[bg=$blue,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$blue,bold] {name}{floating_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
                 tab_normal_fullscreen   "#[bg=$bg,fg=$blue]#[bg=$bg_dark,fg=$blue,bold]#[bg=$blue,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$blue,bold] {name}{fullscreen_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
                 tab_normal_sync         "#[bg=$bg,fg=$blue]#[bg=$bg_dark,fg=$blue,bold]#[bg=$blue,fg=$bg_dark,bold]{index} #[bg=$bg_highlight,fg=$blue,bold] {name}{sync_indicator}#[bg=$bg_dark,fg=$bg_highlight]#[bg=$bg_dark,fg=$bg_highlight]"
