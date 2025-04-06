@@ -18,6 +18,7 @@
         "cursor-style-blink" = false;
         "macos-option-as-alt" = true;
         "link-url" = true;
+        "command" = "zellij";
       };
     };
   };
