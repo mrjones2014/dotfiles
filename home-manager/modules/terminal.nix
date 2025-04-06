@@ -17,6 +17,7 @@
         "cursor-style" = "block";
         "cursor-style-blink" = false;
         "macos-option-as-alt" = true;
+        "link-url" = true;
       };
     };
   };
