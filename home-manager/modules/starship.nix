@@ -10,7 +10,7 @@
         "$(starship module username)$(starship module hostname)"
       else
         ""
-    }$dir $icon$branch $(printf "\e[1;32m❯\e[0m ")"
+    }$dir $icon $branch $(printf "\e[1;32m❯\e[0m ")"
   '';
   programs.starship = {
     enable = true;
