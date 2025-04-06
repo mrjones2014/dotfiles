@@ -8,6 +8,7 @@
       # force the function to load so it starts watching PWD
       shellInitLast = "_update_zellij_tab_name";
       functions."_update_zellij_tab_name" = {
+        onEvent = "fish_prompt";
         onVariable = "PWD";
         body = ''
           if string match -q "$HOME/git/*" $PWD
@@ -22,7 +23,7 @@
                 set -l tab_title "$repo_name$current_branch"
                 echo "$tab_title"
                 if test -n "$ZELLIJ"
-                    printf "%s\n" "zellij action rename-tab '$tab_title'" | source
+                    command nohup zellij action rename-tab "$tab_title" >/dev/null 2>&1
                 end
               end
           end
