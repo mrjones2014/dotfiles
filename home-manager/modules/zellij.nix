@@ -1,7 +1,34 @@
 { pkgs, ... }: {
-  programs.zellij = {
-    enable = true;
-    enableFishIntegration = true;
+  programs = {
+    zellij = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    fish = {
+      # force the function to load so it starts watching PWD
+      shellInitLast = "_update_zellij_tab_name";
+      functions."_update_zellij_tab_name" = {
+        onVariable = "PWD";
+        body = ''
+          if string match -q "$HOME/git/*" $PWD
+              if test -d .git; or git rev-parse --git-dir > /dev/null 2>&1
+                set -l repo_name (basename $PWD)
+                set -l current_branch (git branch --show-current)
+
+                if test -n current_branch
+                    set current_branch ":$current_branch"
+                end
+
+                set -l tab_title "$repo_name$current_branch"
+                echo "$tab_title"
+                if test -n "$ZELLIJ"
+                    printf "%s\n" "zellij action rename-tab '$tab_title'" | source
+                end
+              end
+          end
+        '';
+      };
+    };
   };
   xdg.configFile."zellij/config.kdl".text = ''
     theme "tokyo-night-dark"
