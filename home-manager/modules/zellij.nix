@@ -156,6 +156,7 @@
   xdg.configFile."zellij/layouts/default.kdl".text = ''
     layout {
       default_tab_template {
+        children
         pane size=1 borderless=true {
               plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
                 color_bg_dark "#1a1b26"
@@ -188,8 +189,8 @@
                 color_red "#f7768e"
                 color_red1 "#db4b4b"
 
-                format_left   "#[bg=$bg_dark]{tabs}"
-                format_center "{notifications}"
+                format_left   "#[bg=$bg_dark]{notifications}"
+                format_center "{tabs}"
                 format_right  "{mode}#[bg=$bg_dark]"
                 format_space  "#[bg=$bg_dark]"
                 format_hide_on_overlength "true"
@@ -232,7 +233,6 @@
                 notification_show_interval "10"
             }
         }
-        children
       }
     }
   '';
