@@ -81,72 +81,56 @@
         shared_except "locked" {
             bind "Ctrl h" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                    name "move_focus_or_tab";
+                    name "move_focus";
                     payload "left";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Ctrl j" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "move_focus";
                     payload "down";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Ctrl k" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "move_focus";
                     payload "up";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Ctrl l" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
-                    name "move_focus_or_tab";
+                    name "move_focus";
                     payload "right";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Alt h" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "resize";
                     payload "left";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Alt j" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "resize";
                     payload "down";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Alt k" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "resize";
                     payload "up";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
             bind "Alt l" {
                 MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
                     name "resize";
                     payload "right";
-                    move_mod "ctrl";
-                    resize_mod "alt";
                 };
             }
         }
     }
     load_plugins {
-      "file:${pkgs.zjstatus}/bin/zjframes.wasm}" {
+      "file:${pkgs.zjstatus}/bin/zjframes.wasm" {
         hide_frame_except_for_search     "true"
         hide_frame_except_for_scroll     "true"
         hide_frame_except_for_fullscreen "true"
