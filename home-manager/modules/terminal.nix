@@ -28,6 +28,11 @@
       "command" = ''
         env PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
       "maximize" = isThinkpad;
+      "keybind" = [
+        "super+v=paste_from_clipboard"
+        "super+c=copy_to_clipboard"
+        "super+q=quit"
+      ];
     };
   };
 }
