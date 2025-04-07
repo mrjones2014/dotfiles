@@ -23,6 +23,7 @@
       "cursor-style" = "block";
       "cursor-style-blink" = false;
       "macos-option-as-alt" = true;
+      "shell-integration-features" = "no-cursor";
       "link-url" = true;
       # NB: workaround for zellij not having the right PATH on macOS
       "command" = ''
