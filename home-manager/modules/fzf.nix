@@ -115,7 +115,7 @@ in {
         function _project_jump_get_readme
           set -l dir $(_project_jump_parse_project "$argv[1]")
           if test -f "$dir/README.md"
-            ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
+            CLICOLOR_FORCE=1 COLORTERM=truecolor ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
           else
             echo
             echo $(set_color --bold) "README.md not found"
