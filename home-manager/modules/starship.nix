@@ -33,9 +33,9 @@
       username.show_always = isServer;
       hostname.ssh_only = !isServer;
       character = {
-        success_symbol = "[ I ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
+        success_symbol = "[ I ](bold bg:#9ece6a fg:#000000)[](fg:#9ece6a)";
         error_symbol = "[ I ](bold bg:#f38ba8 fg:#000000)[](fg:#f38ba8)";
-        vicmd_symbol = "[ N ](bold bg:#40a02b fg:#000000)[](fg:#40a02b)";
+        vicmd_symbol = "[ N ](bold bg:#9ece6a fg:#000000)[](fg:#9ece6a)";
         vimcmd_replace_one_symbol =
           "[ R ](bold bg:#cba6f8 fg:#000000)[](fg:#cba6f8)";
         vimcmd_replace_symbol =
