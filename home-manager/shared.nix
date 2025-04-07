@@ -8,6 +8,5 @@
     ./modules/starship.nix
     ./modules/git.nix
     ./modules/fzf.nix
-    ./modules/bat.nix
   ];
 }
