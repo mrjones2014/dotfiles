@@ -9,6 +9,7 @@
   programs = {
     btop.enable = true;
     carapace.enable = true;
+    bat.enable = true;
 
     lsd = {
       enable = true;
