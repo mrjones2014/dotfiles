@@ -3,6 +3,8 @@
     zellij = {
       enable = true;
       enableFishIntegration = true;
+      exitShellOnExit = true;
+      attachExistingSession = true;
     };
     fish = {
       # force the function to load so it starts watching PWD

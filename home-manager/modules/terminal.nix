@@ -1,4 +1,4 @@
-{ pkgs, isThinkpad, isDarwin, ... }: {
+{ pkgs, config, isThinkpad, isDarwin, ... }: {
   imports = [ ./zellij.nix ];
   home.packages = [ pkgs.victor-mono ];
   programs.ghostty = {
@@ -24,7 +24,9 @@
       "cursor-style-blink" = false;
       "macos-option-as-alt" = true;
       "link-url" = true;
-      "command" = "${pkgs.zellij}/bin/zellij";
+      # NB: workaround for zellij not having the right PATH on macOS
+      "command" = ''
+        env PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
       "maximize" = isThinkpad;
     };
   };
