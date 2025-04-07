@@ -11,7 +11,7 @@
         onEvent = "fish_prompt";
         onVariable = "PWD";
         body = ''
-          if string match -q "$HOME/git/*" $PWD
+          if string match -q "$HOME/git/*" "$PWD" || string match -q "$HOME/go/*" "$PWD"
               if test -d .git; or git rev-parse --git-dir > /dev/null 2>&1
                 set -l repo_name (basename $PWD)
                 set -l current_branch (git branch --show-current)
