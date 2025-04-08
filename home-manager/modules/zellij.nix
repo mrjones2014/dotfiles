@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, isServer, ... }: {
   programs = {
     zellij = {
       enable = true;
@@ -177,7 +177,9 @@
 
                 format_left   "#[bg=$bg]{tabs}"
                 format_center "{notifications}"
-                format_right  "{mode}#[bg=$bg]"
+                format_right  "{mode}${
+                  if isServer then "  mat@nixos-server" else ""
+                }#[bg=$bg]"
                 format_space  "#[bg=$bg]"
                 format_hide_on_overlength "true"
                 format_precedence "lrc"
