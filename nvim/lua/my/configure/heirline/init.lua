@@ -31,6 +31,7 @@ return {
             gray = colors.dark5,
             green = colors.green,
             blue = colors.blue,
+            yellow = colors.terminal.yellow_bright,
             base = colors.bg,
             surface0 = colors.fg_gutter,
             surface1 = colors.dark3,
@@ -53,7 +54,6 @@ return {
           sl.SpellCheckToggle,
           sl.LspFormatToggle,
           sl.LazyStats,
-          sl.OnePassword,
           shared.Diagnostics(false),
         },
         winbar = { ---@diagnostic disable-line:missing-fields

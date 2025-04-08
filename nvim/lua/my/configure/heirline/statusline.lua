@@ -194,25 +194,6 @@ M.LazyStats = {
   hl = { bg = 'surface0' },
 }
 
-M.OnePassword = {
-  provider = sep.rounded_left,
-  hl = { fg = 'blue', bg = 'surface0' },
-  {
-    provider = function()
-      if not vim.g.op_nvim_remote_loaded then
-        return ' 1P: Signed Out'
-      end
-
-      return require('op.statusline').component()
-    end,
-    hl = { bg = 'blue', fg = 'black' },
-  },
-  {
-    provider = string.format(' %s', sep.rounded_left),
-    hl = { fg = 'surface0', bg = 'blue' },
-  },
-}
-
 M.LspFormatToggle = {
   provider = function()
     if require('my.utils.lsp').get_formatter_name(0) and require('my.utils.lsp').is_formatting_enabled() then
