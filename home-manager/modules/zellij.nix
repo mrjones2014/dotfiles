@@ -211,8 +211,8 @@
                 tab_separator           "#[bg=$bg] "
 
                 tab_sync_indicator       " "
-                tab_fullscreen_indicator " 󰊓"
-                tab_floating_indicator   " 󰹙"
+                tab_fullscreen_indicator " 󰊓 "
+                tab_floating_indicator   " 󰹙 "
 
                 notification_format_unread "#[bg=$bg,fg=$yellow]#[bg=$yellow,fg=$bg_dark] #[bg=$bg_highlight,fg=$yellow] {message}#[bg=$bg,fg=$yellow]"
                 notification_format_no_notifications ""
