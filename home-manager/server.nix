@@ -25,5 +25,5 @@
     stateVersion = "22.11";
   };
   xdg.enable = true;
-  imports = [ ./shared.nix ];
+  imports = [ ./shared.nix ./modules/zellij.nix ];
 }
