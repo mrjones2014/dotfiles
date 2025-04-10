@@ -60,6 +60,9 @@ return {
     { 'folke/lazydev.nvim' },
   },
   opts = {
+    enabled = function()
+      return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
+    end,
     snippets = { preset = 'luasnip' },
     signature = { enabled = true },
     keymap = {
