@@ -60,6 +60,31 @@ return {
       { 'f', mode = 'n' },
     },
     spec = {
+      {
+        '<C-p>',
+        function()
+          local buf = vim.api.nvim_get_current_buf()
+          local win = vim.api.nvim_get_current_win()
+          vim.ui.select(require('my.cmd_palette'), {
+            prompt = 'Command Palette',
+            format_item = function(
+              item --[[@as PaletteEntry]]
+            )
+              if type(item.text) == 'function' then
+                return item.text(buf, win)
+              end
+              return item.text
+            end,
+          }, function(
+            choice --[[@as PaletteEntry]]
+          )
+            local callback = vim.tbl_get(choice or {}, 'on_selected')
+            if type(callback) == 'function' then
+              callback(buf, win)
+            end
+          end)
+        end,
+      },
       { '<ESC>', ':noh<CR>', desc = 'Clear highlighting on <ESC> in normal mode', hidden = true },
       {
         '<leader>jk',

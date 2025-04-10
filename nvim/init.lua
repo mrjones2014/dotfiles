@@ -30,11 +30,6 @@ require('my.plugins')
 vim.api.nvim_create_user_command('H', function()
   vim.cmd.help(vim.fn.expand('<cword>'))
 end, { desc = 'Help for cursorword' })
-vim.api.nvim_create_user_command('Filepath', function()
-  require('my.utils.clipboard').copy(
-    vim.fn.simplify(require('my.utils.path').relative(vim.fn.expand('%') --[[@as string]]))
-  )
-end, { desc = 'Copy relateive filepath' })
 
 vim.api.nvim_create_autocmd('UiEnter', {
   callback = function()

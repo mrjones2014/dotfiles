@@ -38,15 +38,6 @@ return {
         desc = 'Toggle inline git blame',
       },
     },
-    init = function()
-      vim.api.nvim_create_user_command('GitBranch', function()
-        if vim.g.gitsigns_head or vim.b.gitsigns_head then
-          clipboard.copy(vim.g.gitsigns_head or vim.b.gitsigns_head)
-        else
-          vim.notify('Not in a git repo.')
-        end
-      end, { desc = 'Copy git branch' })
-    end,
     opts = {
       current_line_blame = false,
       current_line_blame_opts = {
