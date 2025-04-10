@@ -56,15 +56,15 @@ vim.api.nvim_create_autocmd('UiEnter', {
 })
 
 -- if I'm editing my nvim config, make sure I'm `cd`d into `nvim`
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('BufRead', {
   once = true,
+  pattern = '*',
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
     if
       string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.loop.cwd()--[[@as string]], '/nvim')
     then
       vim.cmd.cd('./nvim')
-      vim.schedule(vim.cmd.e)
     end
   end,
 })

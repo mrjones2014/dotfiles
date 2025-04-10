@@ -8,7 +8,7 @@ if string.find(assert(vim.loop.cwd()), 'hammerspoon') then
 end
 
 return {
-  root_dir = require('lspconfig.util').root_pattern('.git', '.luacheckrc', 'stylua.toml'),
+  root_dir = require('lspconfig.util').root_pattern('.luacheckrc', 'stylua.toml'),
   settings = {
     Lua = {
       completion = {
