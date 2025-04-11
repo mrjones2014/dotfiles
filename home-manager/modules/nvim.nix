@@ -53,7 +53,7 @@
       lldb # comes with lldb-vscode
 
       # formatters and linters
-      nixfmt
+      nixpkgs-fmt
       rustfmt
       shfmt
       stylua
@@ -62,7 +62,7 @@
       prettierd
 
       # LSP servers
-      nil
+      nixd
       rust-analyzer
       cargo # sometimes required for rust-analyzer to work
       taplo
