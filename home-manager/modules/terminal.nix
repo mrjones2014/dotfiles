@@ -12,7 +12,6 @@
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {
-      theme = "tokyonight_night";
       title = "Ghostty";
       "font-family" = "Victor Mono Semibold";
       "font-family-italic" = "Victor Mono Medium Oblique";
