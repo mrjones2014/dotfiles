@@ -2,7 +2,8 @@
 let
   monitor_config = pkgs.writeText "gdm_monitors.xml"
     (builtins.readFile ../conf.d/gnome-monitors.xml);
-in {
+in
+{
   nixpkgs.overlays = [
     # GNOME 46: triple-buffering-v4-46
     # See:

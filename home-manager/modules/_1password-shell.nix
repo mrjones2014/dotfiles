@@ -12,7 +12,8 @@ let
 
     echo $PASSWORD
   '';
-in {
+in
+{
   home.packages = with pkgs; [ _1password-cli ];
   imports = [ inputs._1password-shell-plugins.hmModules.default ];
   programs = {

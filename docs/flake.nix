@@ -9,7 +9,8 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         ublock-mdbook = import ../ublock-mdbook { inherit pkgs; };
-      in {
+      in
+      {
         packages.default = pkgs.callPackage ./. {
           inherit pkgs;
           inherit system;

@@ -23,7 +23,8 @@ let
       rhs = "fzf-history-widget-wrapped";
     }
   ];
-in {
+in
+{
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.ripgrep}/bin/rg --files";

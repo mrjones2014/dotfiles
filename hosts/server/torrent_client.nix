@@ -4,7 +4,8 @@ let
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
   tcpPorts = [ 8080 8118 9118 58946 ];
   udpPorts = [ 58946 ];
-in {
+in
+{
   age.secrets.mullvad_wireguard.file = ../../secrets/mullvad_wireguard.age;
 
   systemd.tmpfiles.rules = [
@@ -25,7 +26,7 @@ in {
       [ "--sysctl=net.ipv4.conf.all.src_valid_mark=1" "--privileged=true" ];
     ports =
       builtins.map (port: "${builtins.toString port}:${builtins.toString port}")
-      tcpPorts;
+        tcpPorts;
     volumes = [
       "/mnt/jellyfin:/data"
       "${configDir}:/config"

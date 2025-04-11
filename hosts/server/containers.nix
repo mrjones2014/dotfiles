@@ -13,7 +13,8 @@ let
           $SUDO ${pkgs.podman}/bin/podman pull $image
         done
   '';
-in {
+in
+{
   virtualisation.oci-containers.backend = "podman";
   environment.systemPackages = [ update-containers ];
   # update oci-containers every Monday

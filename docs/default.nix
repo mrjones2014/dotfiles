@@ -6,7 +6,8 @@ let
     rev = "67aebab";
     hash = "sha256-EmeiP7TAdb7n6KOHJ8qhGzSL0TGkoVuQIkijnrAj5RQ=";
   };
-in pkgs.stdenv.mkDerivation {
+in
+pkgs.stdenv.mkDerivation {
   pname = "mdbook-docs-site";
   version = "0.1.0";
   src = pkgs.lib.cleanSource ./.;

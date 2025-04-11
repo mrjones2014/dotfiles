@@ -12,7 +12,8 @@ let
       git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | grep -v "origin" | sort | uniq | ${pkgs.fzf}/bin/fzf | xargs git checkout
     fi
   '';
-in {
+in
+{
   programs.git = {
     enable = true;
     package = pkgs.git.override {
@@ -61,10 +62,11 @@ in {
         format = "ssh";
       } // pkgs.lib.optionalAttrs (!isServer) {
         ssh = {
-          program = if isLinux then
-            "/run/current-system/sw/bin/op-ssh-sign"
-          else
-            "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          program =
+            if isLinux then
+              "/run/current-system/sw/bin/op-ssh-sign"
+            else
+              "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         };
       };
       core = {

@@ -3,7 +3,8 @@ let
   wireguard_port = 9999;
   wireguard_interface = "wgvpn";
   external_interface = "enp0s31f6";
-in {
+in
+{
   age.secrets.wireguard_server.file = ../../secrets/wireguard_server.age;
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   services.dnsmasq = {

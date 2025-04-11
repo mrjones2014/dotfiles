@@ -4,7 +4,8 @@ let
   homarrPort = 9090;
   dashdotPort = 9091;
   uptimeKumaPort = 3001;
-in {
+in
+{
   networking.firewall = {
     allowedTCPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
     allowedUDPPorts = [ homarrPort dashdotPort uptimeKumaPort ];

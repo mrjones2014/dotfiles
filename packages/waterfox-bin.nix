@@ -1,9 +1,48 @@
-{ lib, stdenv, fetchurl, wrapGAppsHook3, alsa-lib, at-spi2-atk, at-spi2-core
-, atk, cairo, cups, dbus-glib, libnotify, libdrm, libxkbcommon, mesa, nspr, nss
-, pango, systemd, libpulseaudio, gdk-pixbuf, gtk3, makeDesktopItem, unzip
-, libX11, libXScrnSaver, libXcomposite, libXcursor, libXdamage, libXext
-, libXfixes, libXi, libXrandr, libXrender, libXtst, libxcb, writeText, patchelf
-, makeWrapper, libGL, ffmpeg, glib, pciutils, }:
+{ lib
+, stdenv
+, fetchurl
+, wrapGAppsHook3
+, alsa-lib
+, at-spi2-atk
+, at-spi2-core
+, atk
+, cairo
+, cups
+, dbus-glib
+, libnotify
+, libdrm
+, libxkbcommon
+, mesa
+, nspr
+, nss
+, pango
+, systemd
+, libpulseaudio
+, gdk-pixbuf
+, gtk3
+, makeDesktopItem
+, unzip
+, libX11
+, libXScrnSaver
+, libXcomposite
+, libXcursor
+, libXdamage
+, libXext
+, libXfixes
+, libXi
+, libXrandr
+, libXrender
+, libXtst
+, libxcb
+, writeText
+, patchelf
+, makeWrapper
+, libGL
+, ffmpeg
+, glib
+, pciutils
+,
+}:
 
 let
   version = "6.5.6";
@@ -33,7 +72,8 @@ let
     pref("browser.crashReports.unsubmittedCheck.enabled", false);
   '';
 
-in stdenv.mkDerivation (finalAttrs: {
+in
+stdenv.mkDerivation (finalAttrs: {
   pname = "waterfox";
   inherit version;
 

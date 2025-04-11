@@ -6,7 +6,8 @@ let
       else
         "Library/Group Containers/2BUA8C4S2C.com.1password/t"
     }/agent.sock";
-in {
+in
+{
   home.sessionVariables = { }
     // lib.optionalAttrs (!isServer) { SSH_AUTH_SOCK = sshAuthSock; };
   programs.ssh = {

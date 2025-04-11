@@ -16,7 +16,10 @@ let
     "secrets/cleanuperr_env.age"
     "secrets/homarr_env.age"
   ];
-in builtins.listToAttrs (map (secret: {
-  name = secret;
-  value = { publicKeys = users ++ systems; };
-}) secrets)
+in
+builtins.listToAttrs (map
+  (secret: {
+    name = secret;
+    value = { publicKeys = users ++ systems; };
+  })
+  secrets)
