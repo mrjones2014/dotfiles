@@ -116,6 +116,9 @@
     askubuntu.com##.js-consent-banner
 
 - GitHub: |
+    ! Block Copilot Workspace button
+    github.com##[class*="CopilotWorkspaceButton"]
+
     ! Block all GitHub Copilot shit in the header
     github.com##.AppHeader-CopilotChat
 
