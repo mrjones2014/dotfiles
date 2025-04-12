@@ -303,6 +303,9 @@ askubuntu.com##.js-consent-banner
 !! GitHub                              !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! Block Copilot Workspace button
+github.com##[class*="CopilotWorkspaceButton"]
+
 ! Block all GitHub Copilot shit in the header
 github.com##.AppHeader-CopilotChat
 
@@ -498,7 +501,10 @@ stackoverflow.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
 </code></pre>
 <h2 id="github"><a class="header" href="#github">GitHub</a></h2>
-<pre><code class="language-adblock">! Block all GitHub Copilot shit in the header
+<pre><code class="language-adblock">! Block Copilot Workspace button
+github.com##[class*="CopilotWorkspaceButton"]
+
+! Block all GitHub Copilot shit in the header
 github.com##.AppHeader-CopilotChat
 
 ! Copilot shit in the header on the mobile layout
