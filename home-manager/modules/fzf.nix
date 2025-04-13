@@ -1,26 +1,27 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, isDarwin, isServer, ... }:
 let
   key-bindings = [
     # you can use the command `fish_key_reader` to get the key codes to use
     {
-      # ctrl+e
-      lhs = "\\ce";
+      lhs = "ctrl-e";
       rhs = "fzf-vim-widget";
     }
     {
-      # ctrl+g
-      lhs = "\\a";
+      lhs = "ctrl-g";
       rhs = "fzf-project-widget";
     }
     {
-      # ctrl+f
-      lhs = "\\cf";
+      lhs = "ctrl-f";
       rhs = "fzf-file-widget-wrapped";
     }
     {
-      # ctrl+r
-      lhs = "\\cR";
+      lhs = "ctrl-r";
       rhs = "fzf-history-widget-wrapped";
+    }
+  ] ++ lib.lists.optionals (!isServer) [
+    {
+      lhs = "ctrl-p";
+      rhs = "fzf-cmdp";
     }
   ];
 in
@@ -51,6 +52,7 @@ in
       end
     '';
     functions = {
+
       fzf-history-widget-wrapped = ''
         history merge # make FZF search history from all sessions
         fzf-history-widget
@@ -171,6 +173,54 @@ in
         commandline -f repaint
         $EDITOR $result
       '';
+    } // lib.optionalAttrs (!isServer) {
+      fzf-cmdp = {
+        description = "Command Palette";
+        body = ''
+          set tmpdir (set -q TMPDIR; and echo $TMPDIR; or mktemp -d)
+          set fifo_path "$tmpdir/cmdp_result"
+          set options_path "$tmpdir/cmdp_options"
+
+          if not test -p $fifo_path
+              mkfifo $fifo_path
+          end
+
+          set -l display_options "  SSH to nixos-server"
+          set -l commands "ghostty -e ssh mat@nixos-server"
+
+          # add 'copy git branch' only if in git repo
+          if test -d .git
+              set display_options $display_options "󰊢  Copy git branch"
+              set commands $commands "git branch --show-current | tr -d '\n' | ${if isDarwin then "pbcopy" else "xclip -selection clipboard"}"
+          end
+
+          printf "%s\n" $display_options >"$options_path"
+          zellij run -f -c --name "Command Palette" -y "2%" -- fish -c "
+              cat $options_path | fzf --layout reverse > '$fifo_path'
+          "
+
+          set selected (cat $fifo_path)
+          rm -f "$fifo_path"
+          rm -f "$options_path"
+
+          # find the index of the selected option
+          set -l index -1
+          for i in (seq (count $display_options))
+              if test "$selected" = "$display_options[$i]"
+                  set index $i
+                  break
+              end
+          end
+
+          set -l cmd $(string split ' ' $commands[$index])
+          if test $index -gt 0
+              nohup bash -c "$cmd" >/dev/null 2>&1 &
+              disown
+          else
+              return 1
+          end
+        '';
+      };
     };
   };
 }

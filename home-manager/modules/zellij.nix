@@ -1,4 +1,5 @@
-{ pkgs, config, isServer, ... }: {
+{ pkgs, config, isServer, ... }:
+{
   programs = {
     zellij = {
       enable = true;
