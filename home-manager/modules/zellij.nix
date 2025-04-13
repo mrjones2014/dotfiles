@@ -1,7 +1,4 @@
-{ pkgs, config, isServer, isDarwin, ... }:
-let
-  cmdp = import ./fzf_cmd_palette.nix { inherit pkgs; inherit isDarwin; };
-in
+{ pkgs, config, isServer, ... }:
 {
   programs = {
     zellij = {
@@ -57,14 +54,6 @@ in
                       floating true
                       move_to_focused_tab true
                   };
-              }
-
-              bind "Super k" {
-                Run "${cmdp}/bin/cmdp" {
-                    name "Command Palette"
-                    floating true;
-                    close_on_exit true;
-                }
               }
 
               bind "Ctrl b" { SwitchToMode "tmux"; }
