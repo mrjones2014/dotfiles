@@ -15,15 +15,7 @@ let
   '';
 in
 {
-  virtualisation = {
-    oci-containers.backend = "podman";
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
+  virtualisation.oci-containers.backend = "podman";
   environment.systemPackages = [ update-containers ];
   # update oci-containers every Monday
   systemd = {
