@@ -145,7 +145,9 @@
     "zellij/layouts/default.kdl".text = ''
       layout {
         default_tab_template {
-          children
+          pane {
+            cwd "${config.home.homeDirectory}"
+          }
           pane size=1 borderless=true {
               plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
                   color_bg_dark "#1a1b26"
