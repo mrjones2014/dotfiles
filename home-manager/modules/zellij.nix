@@ -9,7 +9,7 @@
     };
     fish = {
       # force the function to load so it starts watching PWD
-      shellInitLast = "_update_zellij_tab_name";
+      interactiveShellInit = "_update_zellij_tab_name";
       functions."_update_zellij_tab_name" = {
         onEvent = "fish_prompt";
         onVariable = "PWD";
@@ -226,14 +226,6 @@
           }
         }
       }
-    '';
-    "zellij/layouts/ssh.kdl".text = ''
-      layout {
-        pane command="ssh" {
-            args "mat@nixos-server"
-        }
-      }
-      default_mode "locked"
     '';
   };
 
