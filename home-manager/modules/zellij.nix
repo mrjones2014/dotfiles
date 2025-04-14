@@ -63,6 +63,7 @@
               bind "Alt n" {
                   NewTab {
                       cwd "${config.home.homeDirectory}"
+                      name "~"
                   }
               }
               bind "Super r" { SwitchToMode "RenameTab"; TabNameInput 0; }
