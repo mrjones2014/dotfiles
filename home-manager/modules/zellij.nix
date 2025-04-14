@@ -181,7 +181,7 @@
                   format_left   "#[bg=$bg]{tabs}"
                   format_center "{notifications}"
                   format_right  "{mode}${
-                    if isServer then "  mat@nixos-server" else ""
+                    if isServer then "#[bg=$green,fg=$bg]  mat@nixos-server " else ""
                   }#[bg=$bg]"
                   format_space  "#[bg=$bg]"
                   format_hide_on_overlength "true"
