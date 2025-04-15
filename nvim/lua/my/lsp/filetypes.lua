@@ -58,7 +58,7 @@ M.config = {
     treesitter = false, -- requires treesitter-cli and only really works on mac
   },
   ['nix'] = {
-    lspconfig = 'nixd',
+    lspconfig = { 'nixd', 'nil_ls' },
     linter = 'statix',
     formatter = 'nixpkgs_fmt',
   },

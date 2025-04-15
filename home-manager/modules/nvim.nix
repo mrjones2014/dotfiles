@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, isLinux, ... }: {
+{ config, pkgs, isLinux, ... }: {
   home.sessionVariables.MANPAGER = "nvim -c 'Man!' -o -";
   xdg.configFile = {
     ripgrep_ignore.text = ''
@@ -63,6 +63,7 @@
 
       # LSP servers
       nixd
+      nil
       rust-analyzer
       cargo # sometimes required for rust-analyzer to work
       taplo

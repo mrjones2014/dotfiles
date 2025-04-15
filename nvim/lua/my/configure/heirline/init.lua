@@ -3,7 +3,10 @@ return {
     'SmiteshP/nvim-navic',
     init = function()
       require('my.utils.lsp').on_attach(function(client, bufnr)
-        if client.server_capabilities.documentSymbolProvider then
+        if
+          client.server_capabilities.documentSymbolProvider
+          and client.name ~= 'nil_ls' -- don't attach to both nil_ls and nixd
+        then
           require('nvim-navic').attach(client, bufnr)
         end
       end)
