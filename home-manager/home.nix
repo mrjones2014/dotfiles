@@ -49,7 +49,7 @@
         parsec-bin
         ungoogled-chromium
         standardnotes
-        waterfox-bin
+        zen-browser
       ] ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
     file."${config.home.homeDirectory}/.xprofile".text = ''

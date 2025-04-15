@@ -52,6 +52,7 @@ in
       atomix # puzzle game
       gnome-contacts
       gnome-initial-setup
+      gnome-software
     ];
   };
 

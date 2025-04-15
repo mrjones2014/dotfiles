@@ -35,7 +35,7 @@ in
         "org.gnome.Settings.desktop"
         "org.gnome.Nautilus.desktop"
         "spotify.desktop"
-        "waterfox.desktop"
+        "zen.desktop"
         "com.mitchellh.ghostty.desktop"
         "standard-notes.desktop"
         "1password.desktop"

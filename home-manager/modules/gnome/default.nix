@@ -1,4 +1,4 @@
-{ isLinux, isThinkpad, lib, pkgs, ... }:
+{ isLinux, isThinkpad, lib, ... }:
 if isLinux then {
   imports = [ ./dconf.nix ];
   xdg.configFile = {

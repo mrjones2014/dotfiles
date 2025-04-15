@@ -17,6 +17,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -30,7 +34,7 @@
     ];
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, agenix, ... }: {
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {

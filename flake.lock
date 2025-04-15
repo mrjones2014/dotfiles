@@ -158,6 +158,27 @@
         "type": "github"
       }
     },
+    "home-manager_3": {
+      "inputs": {
+        "nixpkgs": [
+          "zen-browser",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743604125,
+        "narHash": "sha256-ZD61DNbsBt1mQbinAaaEqKaJk2RFo9R/j+eYWeGMx7A=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "180fd43eea296e62ae68e079fcf56aba268b9a1a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1744232761,
@@ -197,6 +218,7 @@
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs",
         "tokyonight": "tokyonight",
+        "zen-browser": "zen-browser",
         "zjstatus": "zjstatus"
       }
     },
@@ -314,6 +336,27 @@
       "original": {
         "owner": "folke",
         "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": "home-manager_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1744657060,
+        "narHash": "sha256-XOPpnwypaigN7TnRcIkk8PIoWIWg6ZGEWaGYL5e5ShA=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "3c15b3d88648349acbbf5a1c0564edd35544e4d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     },
