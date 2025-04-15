@@ -65,7 +65,7 @@ return {
         function()
           local buf = vim.api.nvim_get_current_buf()
           local win = vim.api.nvim_get_current_win()
-          vim.ui.select(require('my.cmd_palette'), {
+          vim.ui.select(require('my.cmd-palette'), {
             prompt = 'Command Palette',
             format_item = function(
               item --[[@as PaletteEntry]]
