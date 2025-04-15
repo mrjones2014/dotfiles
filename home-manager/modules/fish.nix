@@ -213,15 +213,6 @@
             ${if isLinux then "xdg-open" else "open"} "$fill_session_url"
           '';
         };
-        kg = {
-          description = "Search with Kagi";
-          body = ''
-            set -l query "$(string escape --style=url $(string join ' ' $argv))"
-            ${
-              if isDarwin then "open" else "xdg-open"
-            } "https://kagi.com/search?token=$(op item get 'Kagi' --fields 'token')&q=$query"
-          '';
-        };
       };
     };
   };
