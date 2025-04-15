@@ -108,7 +108,7 @@
                 end
             end
             ${if isDarwin then
-              "darwin-rebuild --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
+              "darwin-rebuild switch --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
             else if isServer then
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
             else if isThinkpad then
