@@ -108,7 +108,7 @@
                 end
             end
             ${if isDarwin then
-              "home-manager switch --flake ~/git/dotfiles/.#mac"
+              "darwin-rebuild --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
             else if isServer then
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
             else if isThinkpad then

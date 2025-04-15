@@ -5,6 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight.url = "github:mrjones2014/tokyonight.nix";
     zjstatus.url = "github:dj95/zjstatus";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,18 +27,7 @@
     };
   };
 
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://mrjones2014-dotfiles.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "mrjones2014-dotfiles.cachix.org-1:c66wfzthG6KZEWnltlzW/EjhlH9FwUVi5jM4rVD1Rw4="
-    ];
-  };
-
-  outputs = inputs@{ nixpkgs, home-manager, agenix, ... }: {
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, agenix, ... }: {
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -129,18 +122,29 @@
         ];
       };
     };
-    homeConfigurations = {
-      "mac" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {
+    darwinConfigurations."Mats-MacBook-Pro" =
+      let
+        specialArgs = {
           inherit inputs;
           isServer = false;
           isDarwin = true;
           isLinux = false;
           isThinkpad = false;
         };
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./home-manager/home.nix ];
+      in
+      nix-darwin.lib.darwinSystem {
+        inherit specialArgs;
+        pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+        modules = [
+          ./hosts/darwin
+          home-manager.darwinModules.default
+          {
+            home-manager = {
+              users.mat = import ./home-manager/home.nix;
+              extraSpecialArgs = specialArgs;
+            };
+          }
+        ];
       };
-    };
   };
 }

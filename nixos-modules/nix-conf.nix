@@ -2,6 +2,11 @@
   nix = {
     package = lib.mkDefault pkgs.lix;
     settings = {
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-users = [ "root" "mat" ];
       keep-outputs = true;
       keep-derivations = true;
       auto-optimise-store =
