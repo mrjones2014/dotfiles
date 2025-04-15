@@ -22,8 +22,7 @@
     packages = with pkgs;
       [ spotify gnumake ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
-        # xcodes
-        inputs.nix-darwin.packages."aarch64-darwin".default
+        darwin-rebuild
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         # vesktop discord client, I don't like
