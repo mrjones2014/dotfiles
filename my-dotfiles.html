@@ -180,27 +180,16 @@ git clone git@github.com:mrjones2014/dotfiles.git
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.</p>
 <p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).
-After the first time, you won't need the <code>NIX_CONFIG=</code> part, as the flake will set that up in <code>$XDG_CONFIG_HOME/nix/nix.conf</code>.</p>
+After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
-<p>On macOS, you will need to <a href="https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone">install the <code>home-manager</code> CLI manually</a>.
-Then, you can run <code>home-manager switch --flake ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).</p>
-<p>On macOS, you should then also run the following:</p>
-<pre><code class="language-sh"># configure Hammerspoon.app to look for its config file in `$XDG_CONFIG_HOME/hammerspoon` instead of `$HOME/.hammerspoon`
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:-$HOME/.config}/hammerspoon/init.lua"
-# Run a script to set up a lot of macOS settings to more sensible defaults
-~/git/dotfiles/conf.d/setup-macos-defaults.bash
+<p>On macOS, for the first install, you'll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
+<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles
 </code></pre>
-<p>On macOS, you also have to manually change the default shell to Fish.</p>
-<ul>
-<li>Run <code>which fish</code> to get the filepath to the Fish binary (should be something like <code>$HOME/.nix-profile/bin/fish</code>)</li>
-<li>Run <code>sudo vi /etc/shells</code> and add the output of <code>which fish</code> (usually this should be something like <code>$HOME/.nix-profile/bin/fish</code>) as an entry, then write the file and quit</li>
-<li>Run <code>chsh -s $(which fish)</code></li>
-<li>Log out and back in</li>
-</ul>
+<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
 <p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
 On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
-<code>home-manager</code> config. On macOS, you only have <code>nix</code> and <code>home-manager</code> so use the <code>home-manager</code> CLI directly.</p>
+<code>home-manager</code> config. On macOS, the same behavior is achieved via <a href="https://github.com/nix-darwin/nix-darwin">nix-darwin</a>.</p>
 
                     </main>
 
