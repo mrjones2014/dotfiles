@@ -1,4 +1,8 @@
-{ pkgs, config, isServer, ... }:
+{ pkgs, lib, config, isServer, ... }:
+let
+  starship = "${config.programs.starship.package}/bin/starship";
+  to_plaintext = "sed -e 's/\x1b\[[0-9;]*m//g' | string trim";
+in
 {
   programs = {
     zellij = {
@@ -7,28 +11,20 @@
       exitShellOnExit = true;
       attachExistingSession = true;
     };
-    fish = {
+    fish = lib.mkIf config.programs.starship.enable {
       # force the function to load so it starts watching PWD
       interactiveShellInit = "_update_zellij_tab_name";
       functions."_update_zellij_tab_name" = {
         onEvent = "fish_prompt";
         onVariable = "PWD";
         body = ''
-          if string match -q "$HOME/git/*" "$PWD" || string match -q "$HOME/go/*" "$PWD"
-              if test -d .git; or git rev-parse --git-dir > /dev/null 2>&1
-                set -l repo_name (basename $PWD)
-                set -l current_branch (git branch --show-current)
-
-                if test -n current_branch
-                    set current_branch ":$current_branch"
-                end
-
-                set -l tab_title "$repo_name$current_branch"
-                if test -n "$ZELLIJ"
-                    command nohup zellij action rename-tab "$tab_title" >/dev/null 2>&1
-                end
-              end
+          set -l dir (${starship} module directory | ${to_plaintext})
+          set -l branch (${starship} module git_branch | ${to_plaintext})
+          set -l title "$dir"
+          if test branch != ""
+            set title "$title:$branch"
           end
+          command nohup zellij action rename-tab "$tab_title" >/dev/null 2>&1
         '';
       };
     };
@@ -231,5 +227,4 @@
       }
     '';
   };
-
 }
