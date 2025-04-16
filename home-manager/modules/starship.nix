@@ -17,7 +17,7 @@
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
-        (if isServer then "[ ](bg:#ff9e64)[](bg:#ff9e64 fg:#1a1b26)[ ](bg:#ff9e64)[](bg:#ff9e64)" else "")
+        (if isServer then "[ ](bg:#ff9e64)[](bg:#ff9e64 fg:#1a1b26)[  ](bg:#ff9e64)" else "")
         "$character"
         "$directory"
         "\${custom.dir_sep}"
