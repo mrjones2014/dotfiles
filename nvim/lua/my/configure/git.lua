@@ -28,7 +28,7 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    event = 'BufReadPre',
+    lazy = false,
     keys = {
       {
         '<leader>bl',
