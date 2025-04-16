@@ -36,7 +36,7 @@
       character = {
         format = "$symbol";
         success_symbol = "[  ](bold bg:#9ece6a fg:#1a1b26)[](fg:#9ece6a bg:#7aa2f7)";
-        error_symbol = "[  ](bold bg:#f38ba8 fg:#1a1b26)[](fg:#f38ba8 bg:#7aa2f7)";
+        error_symbol = "[  ](bold bg:#f38ba8 fg:#1a1b26)[](fg:#f38ba8 bg:#7aa2f7)";
         vicmd_symbol = "[  ](bold bg:#9ece6a fg:#1a1b26)[](fg:#9ece6a bg:#7aa2f7)";
         vimcmd_replace_one_symbol =
           "[  ](bold bg:#cba6f8 fg:#1a1b26)[](fg:#cba6f8 bg:#7aa2f7)";
