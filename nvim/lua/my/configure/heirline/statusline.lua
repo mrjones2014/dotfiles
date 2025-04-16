@@ -88,12 +88,24 @@ M.Mode = {
 }
 
 local function git_branch()
-  return vim.tbl_get(vim.b.gitsigns_status_dict or {}, 'head')
+  return vim.g.gitsigns_head or vim.b.gitsigns_head
 end
 
 M.Branch = {
+  init = function(self)
+    local result = vim.system({ 'git', 'remote', 'get-url', 'origin' }, { text = true }):wait()
+    local url = result.stdout or ''
+    if string.find(url, 'github.com') then
+      self.icon = ' '
+    elseif string.find(url, 'gitlab') then
+      self.icon = '󰮠 '
+    else
+      self.icon = ' '
+    end
+  end,
   condition = function()
-    return git_branch() ~= nil
+    local branch = git_branch()
+    return branch ~= nil and branch ~= ''
   end,
   on_click = {
     callback = function()
@@ -106,8 +118,8 @@ M.Branch = {
     name = 'heirline_copy_git_branch',
   },
   {
-    provider = function()
-      return string.format('  %s', git_branch())
+    provider = function(self)
+      return string.format(' %s %s', self.icon, git_branch())
     end,
     hl = { fg = 'green', bg = 'gray' },
   },
