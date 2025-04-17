@@ -78,7 +78,7 @@ M.Mode = {
     provider = sep.rounded_right,
     hl = function(self)
       local mode = self.mode:sub(1, 1)
-      if conditions.is_git_repo() then
+      if conditions.is_git_repo() or vim.fs.root(assert(vim.uv.cwd()), '.git') then
         return { fg = self.mode_colors[mode], bg = 'gray' }
       else
         return { fg = self.mode_colors[mode], bg = 'surface0' }
@@ -87,13 +87,21 @@ M.Mode = {
   },
 }
 
+local _cached_branch
 local function git_branch()
-  return vim.g.gitsigns_head or vim.b.gitsigns_head
+  local branch = vim.g.gitsigns_head or vim.g.gitsigns_head or vim.b.gitsigns_head
+  if branch then
+    return branch
+  end
+  if not _cached_branch then
+    _cached_branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }, { text = true }):wait().stdout or '')
+  end
+  return _cached_branch
 end
 
 M.Branch = {
   init = function(self)
-    local result = vim.system({ 'git', 'remote', 'get-url', 'origin' }, { text = true }):wait()
+    local result = vim.system({ 'git', 'ls-remote', '--get-url' }, { text = true }):wait()
     local url = result.stdout or ''
     if string.find(url, 'github.com') then
       self.icon = ' '
