@@ -35,6 +35,8 @@ let
   git_fg = fg;
   dir_bg = dark5;
   flake_bg = terminal_black;
+  server_bg = teal;
+  server_sep = color: if isServer then "[](fg:${server_bg} bg:${color})" else "";
 in
 {
   programs.starship = {
@@ -42,7 +44,7 @@ in
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
-        (if isServer then "[ ](bg:${orange})[](bg:${orange} fg:${bg_dark})[  ](bg:${orange})" else "")
+        (if isServer then "[ ](bg:${server_bg})[](bg:${server_bg} fg:${bg_dark})[  ](bg:${server_bg})" else "")
         "$character"
         "$directory"
         "\${custom.dir_sep}"
@@ -60,15 +62,15 @@ in
       right_format = "$cmd_duration";
       character = {
         format = "$symbol";
-        success_symbol = "[  ](bold bg:${green} fg:${bg_dark})[](fg:${green} bg:${dir_bg})";
-        error_symbol = "[  ](bold bg:${red} fg:${bg_dark})[](fg:${red} bg:${dir_bg})";
-        vicmd_symbol = "[  ](bold bg:${blue} fg:${bg_dark})[](fg:${blue} bg:${dir_bg})";
+        success_symbol = "${server_sep green}[  ](bold bg:${green} fg:${bg_dark})[](fg:${green} bg:${dir_bg})";
+        error_symbol = "${server_sep red}[  ](bold bg:${red} fg:${bg_dark})[](fg:${red} bg:${dir_bg})";
+        vicmd_symbol = "${server_sep blue}[  ](bold bg:${blue} fg:${bg_dark})[](fg:${blue} bg:${dir_bg})";
         vimcmd_replace_one_symbol =
-          "[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
+          "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
         vimcmd_replace_symbol =
-          "[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
+          "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
         vimcmd_visual_symbol =
-          "[  ](bold bg:${yellow} fg:${bg_dark})[](fg:${yellow} bg:${dir_bg})";
+          "${server_sep yellow}[  ](bold bg:${yellow} fg:${bg_dark})[](fg:${yellow} bg:${dir_bg})";
       };
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bold bg:${dir_bg} fg:${green})";
