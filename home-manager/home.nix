@@ -23,7 +23,6 @@
       [ spotify gnumake ] ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         darwin-rebuild
-        taskwarrior3
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         # vesktop discord client, I don't like
