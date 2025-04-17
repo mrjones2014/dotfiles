@@ -1,10 +1,5 @@
 { pkgs, lib, config, isServer, ... }:
-let
-  starship = "${config.programs.starship.package}/bin/starship";
-  to_plaintext = "sed -e 's/\x1b\[[0-9;]*m//g' | string trim";
-  palette = import ./tokyonight_palette.nix;
-in
-with palette;
+with import ./tokyonight_palette.nix;
 {
   programs = {
     zellij = {
@@ -20,13 +15,26 @@ with palette;
         onEvent = "fish_prompt";
         onVariable = "PWD";
         body = ''
-          set -l dir (${starship} module directory | ${to_plaintext})
-          set -l branch (${starship} module git_branch | ${to_plaintext})
-          set -l title "$dir"
-          if test branch != ""
+          set -l branch (string trim $(git branch --show-current 2> /dev/null))
+          set -l cwd (pwd)
+          if test "$branch" != ""
+            # just show basename if inside branch
+            set cwd (basename "$cwd")
+          else
+            # otherwise, replace $HOME with ~ and truncate if needed
+            set cwd (string replace "$HOME" "~" "$cwd")
+            if test (string length "$cwd") -gt 30
+                set -l parts (string split / "$cwd")
+                set -l first (string join / $parts[1])
+                set -l last (string join / $parts[-1])
+                set cwd "$first/…/$last"
+            end
+          end
+          set -l title "$cwd"
+          if test "$branch" != ""
             set title "$title:$branch"
           end
-          command nohup zellij action rename-tab "$tab_title" >/dev/null 2>&1
+          command nohup zellij action rename-tab "$title" >/dev/null 2>&1
         '';
       };
     };
