@@ -45,7 +45,7 @@
             environment.systemPackages =
               [ agenix.packages.x86_64-linux.default ];
           }
-          ./nixos-modules/common.nix
+          ./nixos/common.nix
           ./hosts/server
           {
             home-manager = {
@@ -73,7 +73,7 @@
         };
         system = "x86_64-linux";
         modules = [
-          ./nixos-modules/common.nix
+          ./nixos/common.nix
           ./hosts/pc
           home-manager.nixosModules.home-manager
           {
@@ -102,7 +102,7 @@
         };
         system = "x86_64-linux";
         modules = [
-          ./nixos-modules/common.nix
+          ./nixos/common.nix
           ./hosts/laptop
           home-manager.nixosModules.home-manager
           {

@@ -16,7 +16,7 @@ let
   enabled-extensions = (map (ext: ext.extensionUuid) gnomeExtensions)
     # gsconnect requires a systemd service so it needs to be installed
     # via environment.systemPackages
-    # This is done in ../../../nixos-modules/desktop_environment.nix
+    # This is done in ../../../nixos/desktop_environment.nix
     ++ [ pkgs.gnomeExtensions.gsconnect.extensionUuid ];
 in
 {

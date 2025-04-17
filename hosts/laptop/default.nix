@@ -18,9 +18,9 @@
   };
 
   imports = [
-    ../../nixos-modules/desktop_environment.nix
-    ../../nixos-modules/_1password.nix
-    ../../nixos-modules/allowed-unfree.nix
+    ../../nixos/desktop_environment.nix
+    ../../nixos/_1password.nix
+    ../../nixos/allowed-unfree.nix
     ./hardware-configuration.nix
   ];
 

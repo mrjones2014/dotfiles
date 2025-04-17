@@ -78,7 +78,7 @@
     ./modules/gnome
     ./modules/recyclarr.nix
     ./modules/jujutsu.nix
-    ../nixos-modules/allowed-unfree.nix
+    ../nixos/allowed-unfree.nix
   ];
 
   programs = {

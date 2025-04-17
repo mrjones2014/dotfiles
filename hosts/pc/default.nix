@@ -1,10 +1,10 @@
 { pkgs, config, ... }: {
   networking.hostName = "nixos-pc";
   imports = [
-    ../../nixos-modules/desktop_environment.nix
-    ../../nixos-modules/_1password.nix
-    ../../nixos-modules/allowed-unfree.nix
-    ../../nixos-modules/sshd.nix
+    ../../nixos/desktop_environment.nix
+    ../../nixos/_1password.nix
+    ../../nixos/allowed-unfree.nix
+    ../../nixos/sshd.nix
     ./hardware-configuration.nix
   ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";

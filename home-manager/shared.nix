@@ -1,7 +1,7 @@
 {
   imports = [
-    ../nixos-modules/nix-conf.nix
-    ../nixos-modules/theme.nix
+    ../nixos/nix-conf.nix
+    ../nixos/theme.nix
     ./modules/fish.nix
     ./modules/nvim.nix
     ./modules/ssh.nix
