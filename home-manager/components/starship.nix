@@ -23,9 +23,18 @@ with palette; {
         "$git_branch"
         "$git_status"
         "$line_break"
+        "$shlvl"
         "[❯](bg:${bg_dark} fg:${green}) "
       ];
       right_format = "$cmd_duration";
+      shlvl = {
+        disabled = false;
+        symbol = "❯";
+        format = "[$symbol]($style)";
+        repeat = true;
+        repeat_offset = 1;
+        threshold = 0;
+      };
       character = {
         format = "$symbol";
         success_symbol = "${server_sep green}[  ](bold bg:${green} fg:${bg_dark})[](fg:${green} bg:${dir_bg})";
