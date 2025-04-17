@@ -1,12 +1,12 @@
 {
   imports = [
-    ../nixos-modules/nix-conf.nix
-    ../nixos-modules/theme.nix
-    ./modules/fish.nix
-    ./modules/nvim.nix
-    ./modules/ssh.nix
-    ./modules/starship.nix
-    ./modules/git.nix
-    ./modules/fzf.nix
+    ../nixos/nix-conf.nix
+    ../nixos/theme.nix
+    ./components/fish.nix
+    ./components/nvim.nix
+    ./components/ssh.nix
+    ./components/starship.nix
+    ./components/git.nix
+    ./components/fzf.nix
   ];
 }

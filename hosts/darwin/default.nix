@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [ ../../nixos-modules/nix-conf.nix ];
+  imports = [ ../../nixos/nix-conf.nix ];
   nixpkgs.hostPlatform = "aarch64-darwin";
   programs.fish.enable = true;
   users.users.mat = {

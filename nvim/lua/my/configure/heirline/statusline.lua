@@ -101,7 +101,7 @@ end
 
 M.Branch = {
   init = function(self)
-    local result = vim.system({ 'git', 'remote', 'get-url', 'origin' }, { text = true }):wait()
+    local result = vim.system({ 'git', 'ls-remote', '--get-url' }, { text = true }):wait()
     local url = result.stdout or ''
     if string.find(url, 'github.com') then
       self.icon = ' '

@@ -25,7 +25,7 @@
     ./wireguard.nix
     ./observability.nix
     ./vikunja.nix
-    ../../nixos-modules/sshd.nix
+    ../../nixos/sshd.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
