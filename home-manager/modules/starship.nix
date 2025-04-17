@@ -1,23 +1,26 @@
-{ lib, isServer, ... }: {
-  # programs.fish.functions.starship_transient_prompt_func = ''
-  #   set -l dir $(starship module directory)
-  #   set -l dir $(string trim "$dir")
-  #   set -l branch $(starship module git_branch)
-  #   set -l branch $(string trim "$branch")
-  #   set -l icon $(starship module custom.git_server_icon)
-  #   echo "${
-  #     if isServer then
-  #       "$(starship module username)$(starship module hostname)"
-  #     else
-  #       ""
-  #   }$dir $icon $branch $(printf "\e[1;32m❯\e[0m ")"
-  # '';
+{ lib, isServer, ... }:
+let
+  # Define Tokyo Night color scheme variables
+  bg = "#1a1b26"; # Background
+  fg = "#c0caf5"; # Foreground
+  blue = "#7aa2f7"; # Blue
+  green = "#9ece6a"; # Green
+  yellow = "#f9e2af"; # Yellow
+  red = "#f38ba8"; # Red
+  purple = "#cba6f8"; # Purple
+  cyan = "#89ddff"; # Cyan
+  orange = "#ff9e64"; # Orange
+  comment = "#737aa2"; # Comment
+  dark_blue = "#414868"; # Dark Blue
+  gray = "#586068"; # Gray
+in
+{
   programs.starship = {
     enable = true;
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
-        (if isServer then "[ ](bg:#ff9e64)[](bg:#ff9e64 fg:#1a1b26)[  ](bg:#ff9e64)" else "")
+        (if isServer then "[ ](bg:${orange})[](bg:${orange} fg:${bg})[  ](bg:${orange})" else "")
         "$character"
         "$directory"
         "\${custom.dir_sep}"
@@ -30,28 +33,28 @@
         "\${custom.branch_sep_nix_shell}"
         "\${custom.nix_shell}"
         "$line_break"
-        "[❯](bg:#1a1b26 fg:#9ece6a) "
+        "[❯](bg:${bg} fg:${green}) "
       ];
       right_format = "$cmd_duration";
       character = {
         format = "$symbol";
-        success_symbol = "[  ](bold bg:#9ece6a fg:#1a1b26)[](fg:#9ece6a bg:#7aa2f7)";
-        error_symbol = "[  ](bold bg:#f38ba8 fg:#1a1b26)[](fg:#f38ba8 bg:#7aa2f7)";
-        vicmd_symbol = "[  ](bold bg:#9ece6a fg:#1a1b26)[](fg:#9ece6a bg:#7aa2f7)";
+        success_symbol = "[  ](bold bg:${green} fg:${bg})[](fg:${green} bg:${blue})";
+        error_symbol = "[  ](bold bg:${red} fg:${bg})[](fg:${red} bg:${blue})";
+        vicmd_symbol = "[  ](bold bg:${green} fg:${bg})[](fg:${green} bg:${blue})";
         vimcmd_replace_one_symbol =
-          "[  ](bold bg:#cba6f8 fg:#1a1b26)[](fg:#cba6f8 bg:#7aa2f7)";
+          "[  ](bold bg:${purple} fg:${bg})[](fg:${purple} bg:${blue})";
         vimcmd_replace_symbol =
-          "[  ](bold bg:#cba6f8 fg:#1a1b26)[](fg:#cba6f8 bg:#7aa2f7)";
+          "[  ](bold bg:${purple} fg:${bg})[](fg:${purple} bg:${blue})";
         vimcmd_visual_symbol =
-          "[  ](bold bg:#f9e2af fg:#1a1b26)[](fg:#f9e2af bg:#7aa2f7)";
+          "[  ](bold bg:${yellow} fg:${bg})[](fg:${yellow} bg:${blue})";
       };
-      git_branch.format = "[ ](bg:#737aa2)[$branch](bg:#737aa2 fg:#9ece6a)[ ](bg:#737aa2)";
-      git_status.format = "[$all_status$ahead_behind](bg:#737aa2 fg:#9ece6a)";
-      directory.format = "[ ](bg:#7aa2f7 fg:#7aa2f7)[$path](bold bg:#7aa2f7 fg:#1a1b26)";
+      git_branch.format = "[ ](bg:${comment})[$branch](bg:${comment} fg:${green})[ ](bg:${comment})";
+      git_status.format = "[$all_status$ahead_behind](bg:${comment} fg:${green})";
+      directory.format = "[ ](bg:${blue} fg:${blue})[$path](bold bg:${blue} fg:${bg})";
       git_commit.disabled = true;
       git_state.disabled = true;
       git_metrics.disabled = true;
-      cmd_duration.format = "[ $duration](bold #586068)";
+      cmd_duration.format = "[ $duration](bold ${gray})";
       custom = {
         git_server_icon = {
           description =
@@ -60,32 +63,32 @@
           command = ''
             GIT_REMOTE=$(git ls-remote --get-url 2> /dev/null); if [[ "$GIT_REMOTE" =~ "github" ]]; then printf ""; elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then echo "󰮠"; else echo "󰊢"; fi'';
           shell = [ "bash" "--noprofile" "--norc" ];
-          format = "[ ](bg:#737aa2)[$output](bg:#737aa2 fg:#9ece6a)[ ](bg:#737aa2)";
+          format = "[ ](bg:${comment})[$output](bg:${comment} fg:${green})[ ](bg:${comment})";
         };
         dir_sep = {
-          format = "[](fg:#7aa2f7 bg:#1a1b26)";
+          format = "[](fg:${blue} bg:${bg})";
           # not git and not nix
           when = ''! git rev-parse --is-inside-work-tree 2> /dev/null && [ "$IN_NIX_SHELL" = "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
         };
         dir_sep_git = {
-          format = "[](fg:#7aa2f7 bg:#737aa2)";
+          format = "[](fg:${blue} bg:${comment})";
           when = ''git rev-parse --is-inside-work-tree 2> /dev/null'';
           shell = [ "bash" "--noprofile" "--norc" ];
         };
         dir_sep_nix = {
-          format = "[](fg:#7aa2f7 bg:#414868)";
+          format = "[](fg:${blue} bg:${dark_blue})";
           # not git but yes nix shell
           when = ''! git rev-parse --is-inside-work-tree 2> /dev/null && [ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
         };
         branch_sep = {
-          format = "[](fg:#737aa2)";
+          format = "[](fg:${comment})";
           when = ''git rev-parse --is-inside-work-tree 2> /dev/null && [ "$IN_NIX_SHELL" = "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
         };
         branch_sep_nix_shell = {
-          format = "[](fg:#737aa2 bg:#414868)";
+          format = "[](fg:${comment} bg:${dark_blue})";
           when = ''git rev-parse --is-inside-work-tree 2> /dev/null && [ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
         };
@@ -93,7 +96,7 @@
           description = "Show an indicator when inside a Nix ephemeral shell";
           when = ''[ "$IN_NIX_SHELL" != "" ]'';
           shell = [ "bash" "--noprofile" "--norc" ];
-          format = "[ ](bg:#414868)[](bg:#414868 fg:#89ddff)[ ](bg:#414868)[](fg:#414868 bg:#1a1b26)";
+          format = "[ ](bg:${dark_blue})[](bg:${dark_blue} fg:${cyan})[ ](bg:${dark_blue})[](fg:${dark_blue} bg:${bg})";
         };
       };
     };
