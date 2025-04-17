@@ -2,7 +2,6 @@ local M = {}
 
 M.config = {
   ['css'] = {
-    patterns = { '*.css', '*.scss' },
     formatter = 'prettierd',
     lspconfig = { 'cssls' },
   },
@@ -10,12 +9,10 @@ M.config = {
     lspconfig = { 'html' },
   },
   ['json'] = {
-    patterns = { '*.json', '*.jsonc' },
     lspconfig = 'jsonls',
     treesitter = { 'json', 'jsonc' },
   },
   ['typescript'] = {
-    patterns = { '*.ts', '*.tsx', '*.js', '*.jsx', '*.mjs' },
     lspconfig = { 'ts_ls', 'eslint' },
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
@@ -33,12 +30,10 @@ M.config = {
     formatter = 'rustfmt',
   },
   ['go'] = {
-    patterns = { '*.go', 'go.mod' },
     lspconfig = 'gopls',
     formatter = 'gofmt',
   },
   ['markdown'] = {
-    patterns = { '*.md', '*.markdown' },
     lspconfig = 'marksman',
     formatter = {
       'prettierd',
@@ -47,7 +42,6 @@ M.config = {
     treesitter = { 'markdown', 'markdown_inline' },
   },
   ['sh'] = {
-    patterns = { '*.sh', '*.bash', '*.zsh' },
     treesitter = { 'bash' },
     -- shellcheck and shellfmt are run through the LSP
     lspconfig = 'bashls',

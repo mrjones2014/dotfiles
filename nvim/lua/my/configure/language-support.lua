@@ -196,32 +196,8 @@ return {
         end
       end
 
-      local function current_buf_matches_file_patterns(patterns)
-        local bufname = vim.api.nvim_buf_get_name(0)
-        for _, pattern in ipairs(patterns) do
-          if string.match(bufname, string.format('.%s', pattern)) then
-            return true
-          end
-        end
-
-        return false
-      end
-
-      local function setup_server(filetype, file_patterns, server_name)
-        -- since we're lazy loading lspconfig itself,
-        -- check if we need to start LSP immediately or not
-        if current_buf_matches_file_patterns(file_patterns) then
-          setup_lsp_for_filetype(filetype, server_name)
-        else
-          -- if not, set up an autocmd to lazy load the rest
-          vim.api.nvim_create_autocmd('BufReadPre', {
-            callback = function()
-              setup_lsp_for_filetype(filetype, server_name)
-            end,
-            pattern = file_patterns,
-            once = true,
-          })
-        end
+      local function setup_server(filetype, server_name)
+        setup_lsp_for_filetype(filetype, server_name)
       end
 
       -- set up ast-grep LSP for all languages
@@ -229,19 +205,15 @@ return {
         require('lspconfig').ast_grep.setup({})
       end
 
-      -- lazy-load the rest of the configs with
-      -- an autocommand that runs only once
-      -- for each lsp config
       for filetype, filetype_config in pairs(require('my.lsp.filetypes').config) do
-        local file_patterns = filetype_config.patterns or { string.format('*.%s', filetype) }
         local server_name = filetype_config.lspconfig
-        if file_patterns and server_name then
+        if server_name then
           if type(server_name) == 'table' then
             for _, server in ipairs(server_name) do
-              setup_server(filetype, file_patterns, server)
+              setup_server(filetype, server)
             end
           else
-            setup_server(filetype, file_patterns, server_name)
+            setup_server(filetype, server_name)
           end
         end
       end
