@@ -1,4 +1,4 @@
-{ pkgs, lib, isLinux, ... }: {
+{ pkgs, lib, inputs, isLinux, ... }: {
   nix = {
     package = lib.mkDefault pkgs.lix;
     settings = {
@@ -17,5 +17,10 @@
 
       experimental-features = "nix-command flakes";
     };
+    # enable `nix-shell -p nixpkgs#something` without using channels
+    # also use the exact version of nixpkgs from the flake the system is built from
+    # to avoid cache misses
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    registry.nixpkgs.flake = inputs.nixpkgs;
   };
 }
