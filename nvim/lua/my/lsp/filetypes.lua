@@ -48,9 +48,9 @@ M.config = {
   },
   ['sh'] = {
     patterns = { '*.sh', '*.bash', '*.zsh' },
-    linter = 'shellcheck',
-    formatter = 'shfmt',
     treesitter = { 'bash' },
+    -- shellcheck and shellfmt are run through the LSP
+    lspconfig = 'bashls',
   },
   ['swift'] = {
     lspconfig = 'sourcekit',
