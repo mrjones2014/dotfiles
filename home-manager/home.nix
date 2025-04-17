@@ -72,12 +72,12 @@
 
   imports = [
     ./shared.nix
-    ./modules/terminal.nix
-    ./modules/_1password-shell.nix
-    ./modules/espanso.nix
-    ./modules/gnome
-    ./modules/recyclarr.nix
-    ./modules/jujutsu.nix
+    ./components/terminal.nix
+    ./components/_1password-shell.nix
+    ./components/espanso.nix
+    ./components/gnome
+    ./components/recyclarr.nix
+    ./components/jujutsu.nix
     ../nixos/allowed-unfree.nix
   ];
 
