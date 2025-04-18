@@ -72,7 +72,6 @@ with import ./tokyonight_palette.nix;
                       name "~"
                   }
               }
-              bind "Super r" { SwitchToMode "RenameTab"; TabNameInput 0; }
               bind "Alt Left" { GoToPreviousTab; }
               bind "Alt Right" { GoToNextTab; }
           }
