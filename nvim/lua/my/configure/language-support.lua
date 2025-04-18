@@ -54,15 +54,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      {
-        'folke/neoconf.nvim',
-        opts = {
-          import = {
-            coc = false,
-            nlsp = false,
-          },
-        },
-      },
+      { 'folke/neoconf.nvim' },
       {
         'SmiteshP/nvim-navbuddy',
         dependencies = {
@@ -110,6 +102,7 @@ return {
       },
       {
         'chrisgrieser/nvim-rulebook',
+        dev = true,
         keys = {
           {
             '<leader>ri',
@@ -184,6 +177,7 @@ return {
       end)
     end,
     config = function()
+      require('neoconf').setup({}) -- ensure neoconf loads first
       local function setup_lsp_for_filetype(filetype, server_name)
         local has_config, config = pcall(require, 'my.lsp.' .. filetype)
         config = has_config and config or {}
