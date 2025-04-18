@@ -20,7 +20,7 @@
     # enable `nix-shell -p nixpkgs#something` without using channels
     # also use the exact version of nixpkgs from the flake the system is built from
     # to avoid cache misses
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = lib.mkForce [ "nixpkgs=${inputs.nixpkgs}" ];
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
 }
