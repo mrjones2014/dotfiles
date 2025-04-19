@@ -42,16 +42,17 @@
           ];
         }))
         signal-desktop
-        qbittorrent
         vlc
-        # cura
-        r2modman
         parsec-bin
         ungoogled-chromium
         standardnotes
         zen-browser
       ] ++ lib.lists.optionals isThinkpad [ ]
-      ++ lib.lists.optionals (isLinux && (!isThinkpad)) [ obs-studio ];
+      ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
+        # desktop only packages
+        obs-studio
+        r2modman
+      ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';
