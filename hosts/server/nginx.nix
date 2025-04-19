@@ -37,7 +37,8 @@ let cfg = config.services.nginx.subdomains; in {
         email = "certs@mjones.network";
         domain = "*.mjones.network";
         dnsProvider = "cloudflare";
-        environmentFile = config.age.secrets.cloudflare_certbot_token.file;
+        dnsResolver = "1.1.1.1:53";
+        environmentFile = config.age.secrets.cloudflare_certbot_token.path;
       };
     };
   };
