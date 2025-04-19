@@ -11,6 +11,11 @@ in
     allowedUDPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
   };
 
+  services.nginx.subdomains = {
+    uptime = uptimeKumaPort;
+    homarr = homarrPort;
+  };
+
   services.uptime-kuma = {
     enable = true;
     settings.HOST = import ./ip.nix;

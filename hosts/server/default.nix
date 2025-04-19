@@ -19,6 +19,7 @@
 
   imports = [
     ./hardware-configuration.nix
+    ./nginx.nix
     ./content.nix
     ./nas.nix
     ./containers.nix

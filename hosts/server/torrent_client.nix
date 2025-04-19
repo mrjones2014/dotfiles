@@ -7,6 +7,7 @@ let
 in
 {
   age.secrets.mullvad_wireguard.file = ../../secrets/mullvad_wireguard.age;
+  services.nginx.subdomains.qbittorrent = 8080;
 
   systemd.tmpfiles.rules = [
     "d ${configDir} 055 qbittorrentvpn qbittorrentvpn - -"

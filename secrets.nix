@@ -15,6 +15,7 @@ let
     "secrets/wireguard_server.age"
     "secrets/cleanuperr_env.age"
     "secrets/homarr_env.age"
+    "secrets/cloudflare_certbot_token.age"
   ];
 in
 builtins.listToAttrs (map

@@ -1,5 +1,13 @@
 {
   imports = [ ./torrent_client.nix ./cleanuperr.nix ];
+  services.nginx.subdomains = {
+    jellyfin = 8096;
+    jellyseerr = 5055;
+    prowlarr = 9696;
+    sonarr = 8989;
+    radarr = 7878;
+    bazarr = 6767;
+  };
   services = {
     jellyfin = {
       enable = true;
