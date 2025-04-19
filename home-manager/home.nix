@@ -83,6 +83,7 @@
   ];
 
   programs = {
+    nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     # Direnv integration for flakes
