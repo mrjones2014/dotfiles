@@ -18,6 +18,8 @@ let cfg = config.services.nginx.subdomains; in {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+      # increase timeout for *arr searches
+      proxyTimeout = "180s";
 
       virtualHosts = lib.foldl'
         (acc: subdomain: acc // {
