@@ -1,9 +1,6 @@
 return {
   'MagicDuck/grug-far.nvim',
   cmd = { 'GrugFar', 'GrugFarWithin' },
-  init = function()
-    vim.g.maplocalleader = ';'
-  end,
   keys = {
     {
       '<leader><leader>s',
