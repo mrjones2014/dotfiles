@@ -1,4 +1,5 @@
-{
+{ pkgs, ... }: {
+  home.packages = [ pkgs.nix-search-cli ];
   imports = [
     ../nixos/nix-conf.nix
     ../nixos/theme.nix
