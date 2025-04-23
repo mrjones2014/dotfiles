@@ -27,6 +27,7 @@ let cfg = config.services.nginx.subdomains; in {
             forceSSL = true;
             locations."/".proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}}";
             useACMEHost = "mjones.network";
+            default = subdomain == "_";
           };
         })
         { }

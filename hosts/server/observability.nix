@@ -14,11 +14,13 @@ in
   services.nginx.subdomains = {
     uptime = uptimeKumaPort;
     homarr = homarrPort;
+    # use homarr as default/404 page
+    _ = homarrPort;
   };
 
   services.uptime-kuma = {
     enable = true;
-    settings.HOST = import ./ip.nix;
+    settings.HOST = "127.0.0.1";
   };
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
@@ -28,6 +30,7 @@ in
     image = "ghcr.io/homarr-labs/homarr:latest";
     ports = [ "${builtins.toString homarrPort}:7575" ];
     volumes = [ "${homarrStateDir}:/appdata" ];
+    environment.DEFAULT_COLOR_SCHEME = "dark";
     environmentFiles = [ config.age.secrets.homarr_env.path ];
   };
 
