@@ -120,6 +120,29 @@ return {
           },
         },
       },
+      {
+        'dnlhc/glance.nvim',
+        -- for whatever reason, these options don't apply
+        -- using `opts = {}`, so use `config` ¯\_(ツ)_/¯
+        config = function()
+          require('glance').setup({
+            border = { enable = false },
+            theme = { mode = 'darken' },
+            mappings = {
+              list = {
+                ['<C-h>'] = function()
+                  require('glance').actions.enter_win('preview')()
+                end,
+              },
+              prview = {
+                ['<C-l>'] = function()
+                  require('glance').actions.enter_win('list')()
+                end,
+              },
+            },
+          })
+        end,
+      },
     },
     event = 'BufReadPre',
     init = function()
@@ -152,8 +175,32 @@ return {
           },
           { 'gs', vim.lsp.buf.signature_help, desc = 'Show signature help', buffer = bufnr },
           { 'gr', vim.lsp.buf.references, desc = 'Find references', buffer = bufnr },
+          {
+            'gR',
+            function()
+              require('glance').open('references')
+            end,
+            desc = 'Peek references',
+            buffer = bufnr,
+          },
           { 'gd', vim.lsp.buf.definition, desc = 'Go to definition', buffer = bufnr },
+          {
+            'gD',
+            function()
+              require('glance').open('definitions')
+            end,
+            desc = 'Peek definition',
+            buffer = bufnr,
+          },
           { 'gi', vim.lsp.buf.implementation, desc = 'Go to implementation', buffer = bufnr },
+          {
+            'gI',
+            function()
+              require('glance').open('implementations')
+            end,
+            desc = 'Peek implementation',
+            buffer = bufnr,
+          },
           { 'gt', vim.lsp.buf.type_definition, desc = 'Go to type definition', buffer = bufnr },
           { '<leader>gd', vsplit_then(vim.lsp.buf.definition), desc = 'Go to definition in new split', buffer = bufnr },
           {
