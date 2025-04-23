@@ -80,6 +80,7 @@ in
     };
     "org/gnome/desktop/background" = {
       picture-uri = "file://${wallpaperImg}";
+      picture-uri-dark = "file://${wallpaperImg}";
     };
     "org/gnome/desktop/datetime".automatic-timezone = true;
     "org/gnome/desktop/wm/keybindings" = {
