@@ -25,22 +25,6 @@
         darwin-rebuild
       ] ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        # vesktop discord client, I don't like
-        # vesktop's icon, so override it
-        (vesktop.overrideAttrs (oldAttrs: {
-          desktopItems = [
-            (makeDesktopItem {
-              name = "vesktop";
-              desktopName = "Discord";
-              exec = "vesktop %U";
-              icon = "discord";
-              startupWMClass = "Vesktop";
-              genericName = "Internet Messenger";
-              keywords = [ "discord" "vencord" "electron" "chat" ];
-              categories = [ "Network" "InstantMessaging" "Chat" ];
-            })
-          ];
-        }))
         signal-desktop
         vlc
         parsec-bin
@@ -57,19 +41,7 @@
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
     '';
   };
-  xdg = {
-    enable = true;
-    # for discord app icon
-    dataFile."icons/discord.png".source = ./discord.png;
-    # link config files, if a dedicated module exists (below)
-    # it will handle its own config
-    configFile = {
-      "hammerspoon" = {
-        source = ../hammerspoon;
-        recursive = true;
-      };
-    };
-  };
+  xdg.enable = true;
 
   imports = [
     ./shared.nix
@@ -79,6 +51,7 @@
     ./components/gnome
     ./components/recyclarr.nix
     ./components/jujutsu.nix
+    ./components/vencord.nix
     ../nixos/allowed-unfree.nix
   ];
 
