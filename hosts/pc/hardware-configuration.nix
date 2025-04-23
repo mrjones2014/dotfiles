@@ -8,19 +8,25 @@
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" "coretemp" ];
+    kernelModules = [ "kvm-amd" "coretemp" ];
     extraModulePackages = [ ];
   };
+  
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/d6f1cc32-5216-43eb-a22c-339f1e0ebabf";
+      fsType = "ext4";
+    };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c44ad60a-7caf-494f-b98b-ea06d9ab1363";
-    fsType = "ext4";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/264C-1D31";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/8CE2-0CDB";
-    fsType = "vfat";
-  };
+  fileSystems."/mnt/storage" =
+    { device = "/dev/disk/by-uuid/aad56a7c-b586-4e16-b91f-58fbd796f400";
+      fsType = "ext4";
+    };
 
   swapDevices = [ ];
   networking = {
@@ -39,7 +45,7 @@
   powerManagement.powertop.enable = true;
 
   hardware = {
-    cpu.intel.updateMicrocode = true;
+    cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
     enableAllHardware = true;
   };

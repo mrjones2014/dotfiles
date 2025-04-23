@@ -7,19 +7,12 @@
     ../../nixos/sshd.nix
     ./hardware-configuration.nix
   ];
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot";
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
     # setup udev rules for ZSA keyboard firmware flashing
     keyboard.zsa.enable = true;
-    # use proprietary nvidia drivers
     graphics.enable = true;
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-      open = false;
-      modesetting.enable = true;
-      nvidiaPersistenced = true;
-    };
 
     # logitech mouse support
     logitech.wireless = {
@@ -32,10 +25,7 @@
   programs = {
     fish.enable = true;
 
-    coolercontrol = {
-      enable = true;
-      nvidiaSupport = true;
-    };
+    coolercontrol.enable = true;
 
     steam = {
       enable = true;
@@ -68,10 +58,7 @@
   ];
 
   services = {
-    xserver = {
-      enable = true;
-      videoDrivers = [ "nvidia" ];
-    };
+    xserver.enable = true;
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;
