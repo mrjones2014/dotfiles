@@ -32,10 +32,6 @@
       device = "/dev/disk/by-label/media";
       fsType = "ext4";
     };
-    "/mnt/extra-storage" = {
-      device = "/dev/disk/by-label/extra-storage";
-      fsType = "ext4";
-    };
   };
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
