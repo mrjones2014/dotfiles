@@ -64,6 +64,11 @@
         fish_vi_key_bindings
         bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
+        # restore old ctrl+c behavior; it should not clear the line in case I want to copy it or something
+        # the new default behavior is stupid and bad, it just clears the current prompt
+        # https://github.com/fish-shell/fish-shell/issues/11327
+        bind -M insert -m insert ctrl-c cancel-commandline
+
         set fish_cursor_default block
         set fish_cursor_insert block
         set fish_cursor_replace_one underscore
