@@ -17,6 +17,8 @@ let
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
     "secrets/duckdns_token.age"
+    "secrets/authelia_enc_key.age"
+    "secrets/authelia_jwt.age"
   ];
 in
 builtins.listToAttrs (map

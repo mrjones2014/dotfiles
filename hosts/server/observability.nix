@@ -14,8 +14,6 @@ in
   services.nginx.subdomains = {
     uptime = uptimeKumaPort;
     homarr = homarrPort;
-    # use homarr as default/404 page
-    _ = homarrPort;
   };
 
   services.uptime-kuma = {
