@@ -37,6 +37,7 @@
 
     coolercontrol.enable = true;
 
+    gamemode.enable = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -63,6 +64,7 @@
     mullvad-vpn
     prismlauncher
     wally-cli
+    protonup-qt
     # dolphinEmu # dolphin build is suuuuper slow and also broken rn
     # rpcs3 # broken right now
   ];
