@@ -39,8 +39,10 @@
   };
 
   services = {
-    # Enable the X11 windowing system.
-    xserver.enable = true;
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+    };
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;

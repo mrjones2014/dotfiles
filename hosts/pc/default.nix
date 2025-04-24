@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   networking.hostName = "nixos-pc";
   imports = [
     ../../nixos/desktop_environment.nix
@@ -10,9 +10,18 @@
   boot.loader.efi.efiSysMountPoint = "/boot";
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    amdgpu.amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
+
     # setup udev rules for ZSA keyboard firmware flashing
     keyboard.zsa.enable = true;
-    graphics.enable = true;
 
     # logitech mouse support
     logitech.wireless = {
@@ -20,6 +29,7 @@
       # installs solaar for configuring mouse buttons
       enableGraphical = true;
     };
+
   };
 
   programs = {
