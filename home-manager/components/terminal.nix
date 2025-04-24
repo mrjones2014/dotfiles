@@ -27,7 +27,7 @@
       "link-url" = true;
       # NB: workaround for zellij not having the right PATH on macOS
       "command" = ''
-        env PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
+        env EDITOR="nvim" PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
       "maximize" = isThinkpad;
       "keybind" = [
         "super+v=paste_from_clipboard"
