@@ -62,9 +62,12 @@ in
         (acc: subdomain: acc // {
           "${subdomain}.mjones.network" = {
             forceSSL = true;
-            locations."/".proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}.port}";
             useACMEHost = "mjones.network";
             default = cfg.${subdomain}.default or false;
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}.port}";
+              proxyWebsockets = true;
+            };
           };
         })
         { }
