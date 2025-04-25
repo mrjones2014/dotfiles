@@ -3,7 +3,6 @@ let
   configDir = "/var/lib/qbittorrentvpn";
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
   tcpPorts = [ 8080 8118 9118 58946 ];
-  udpPorts = [ 58946 ];
 in
 {
   age.secrets.mullvad_wireguard.file = ../../secrets/mullvad_wireguard.age;
@@ -16,10 +15,6 @@ in
   system.activationScripts.copyWireguardConfigIntoContainer.text = ''
     mkdir -p ${configDir}/wireguard && cp ${wireguardConfigPath} ${configDir}/wireguard/mullvad_wireguard.conf
   '';
-  networking.firewall = {
-    allowedTCPPorts = tcpPorts;
-    allowedUDPPorts = udpPorts;
-  };
   virtualisation.oci-containers.containers.qbittorrentvpn = {
     autoStart = true;
     image = "ghcr.io/binhex/arch-qbittorrentvpn";

@@ -1,9 +1,5 @@
 { config, ... }: {
-  networking.firewall = {
-    allowedTCPPorts = [ config.services.vikunja.port ];
-    allowedUDPPorts = [ config.services.vikunja.port ];
-  };
-  services.nginx.subdomains.vikunja = 3456;
+  services.nginx.subdomains.vikunja = config.services.vikunja.port;
   services.vikunja = {
     enable = true;
     frontendScheme = "http";

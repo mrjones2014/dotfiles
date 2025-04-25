@@ -1,47 +1,22 @@
-{
+{ config, ... }: {
   imports = [ ./torrent_client.nix ./cleanuperr.nix ];
   services.nginx.subdomains = {
+    # jellyfin doesn't let you configure port via Nix, so just use the default value here
+    # see: https://jellyfin.org/docs/general/networking/index.html
     jellyfin = 8096;
-    jellyseerr = 5055;
-    prowlarr = 9696;
-    sonarr = 8989;
-    radarr = 7878;
-    bazarr = 6767;
+    jellyseerr = config.services.jellyseerr.port;
+    prowlarr = config.services.prowlarr.settings.server.port;
+    sonarr = config.services.sonarr.settings.server.port;
+    radarr = config.services.radarr.settings.server.port;
+    bazarr = config.services.bazarr.listenPort;
   };
   services = {
-    jellyfin = {
-      enable = true;
-      # see: https://jellyfin.org/docs/general/networking/index.html
-      # ports are:
-      # TCP: 8096, 8920
-      # UDP: 1900 7359
-      openFirewall = true;
-    };
-    # port 5055
-    jellyseerr = {
-      enable = true;
-      openFirewall = true;
-    };
-    # port 9696
-    prowlarr = {
-      enable = true;
-      openFirewall = true;
-    };
-    # port 8989
-    sonarr = {
-      enable = true;
-      openFirewall = true;
-    };
-    # port 7878
-    radarr = {
-      enable = true;
-      openFirewall = true;
-    };
-    # port 6767
-    bazarr = {
-      enable = true;
-      openFirewall = true;
-    };
+    jellyfin.enable = true;
+    jellyseerr.enable = true;
+    prowlarr.enable = true;
+    sonarr.enable = true;
+    radarr.enable = true;
+    bazarr.enable = true;
   };
   # TODO remove this when this is resolved https://github.com/NixOS/nixpkgs/issues/360592
   nixpkgs.config.permittedInsecurePackages = [

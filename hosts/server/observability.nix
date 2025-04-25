@@ -6,11 +6,6 @@ let
   uptimeKumaPort = 3001;
 in
 {
-  networking.firewall = {
-    allowedTCPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
-    allowedUDPPorts = [ homarrPort dashdotPort uptimeKumaPort ];
-  };
-
   services.nginx.subdomains = {
     uptime = uptimeKumaPort;
     homarr = {
