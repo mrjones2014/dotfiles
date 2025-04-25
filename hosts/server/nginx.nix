@@ -1,14 +1,52 @@
 { config, lib, ... }:
-let cfg = config.services.nginx.subdomains; in {
+let
+  # Accept either an int or an attrset with at least a 'port' field
+  subdomainType = lib.types.coercedTo
+    lib.types.int
+    (port: { inherit port; })
+    (lib.types.submodule {
+      options = {
+        port = lib.mkOption {
+          type = lib.types.port;
+          description = "Port to proxy to.";
+        };
+        default = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Whether this is the default subdomain.";
+        };
+      };
+    });
+
+  cfg = config.services.nginx.subdomains;
+
+  # Get all subdomain names where default = true
+  defaultSubdomains = lib.filterAttrs (_: v: v.default or false) cfg;
+in
+{
   options.services.nginx.subdomains = lib.mkOption {
-    type = lib.types.attrsOf lib.types.port;
-    description = "Proxy the given subdomain to the specified port.";
+    type = lib.types.attrsOf subdomainType;
+    description = ''
+      Proxy the given subdomain to the specified port.
+      You can specify either a port number, or an attribute set with a port and an optional "default" boolean.
+    '';
     example = {
-      "myapp" = 8080;
-      "api" = 9090;
+      "api" = 8080;
+      "myapp" = {
+        port = 9090;
+        default = true;
+      };
     };
   };
+
   config = lib.mkIf (cfg != { }) {
+    assertions = [
+      {
+        assertion = (lib.length (lib.attrNames defaultSubdomains)) <= 1;
+        message = "Only one subdomain may have default = true.";
+      }
+    ];
+
     networking.firewall = {
       allowedTCPPorts = [ 80 443 ];
       allowedUDPPorts = [ 80 443 ];
@@ -18,15 +56,15 @@ let cfg = config.services.nginx.subdomains; in {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      # increase timeout for *arr searches
       proxyTimeout = "180s";
 
       virtualHosts = lib.foldl'
         (acc: subdomain: acc // {
           "${subdomain}.mjones.network" = {
             forceSSL = true;
-            locations."/".proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}}";
+            locations."/".proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}.port}";
             useACMEHost = "mjones.network";
+            default = cfg.${subdomain}.default or false;
           };
         })
         { }

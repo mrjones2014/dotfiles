@@ -13,7 +13,10 @@ in
 
   services.nginx.subdomains = {
     uptime = uptimeKumaPort;
-    homarr = homarrPort;
+    homarr = {
+      port = homarrPort;
+      default = true;
+    };
   };
 
   services.uptime-kuma = {
