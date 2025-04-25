@@ -17,7 +17,6 @@ let
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
     "secrets/duckdns_token.age"
-    "secrets/keycloak_db_pw.age"
   ];
 in
 builtins.listToAttrs (map
