@@ -27,7 +27,7 @@
     ./observability.nix
     ./vikunja.nix
     ./duckdns.nix
-    ./authelia.nix
+    ./keycloak.nix
     ../../nixos/sshd.nix
   ];
 
