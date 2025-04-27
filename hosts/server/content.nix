@@ -33,15 +33,11 @@ in
   ];
 
   systemd.tmpfiles.rules = [ "d ${huntarr_data} 0750 root root -" ];
-  virtualisation.oci-containers = {
-    containers = {
-      huntarr = {
-        image = "huntarr/huntarr:latest";
-        autoStart = true;
-        ports = [ "${toString huntarr_port}:${toString  huntarr_port}" ];
-        volumes = [ "/var/lib/huntarr:/config" ];
-        environment = { TZ = "America/New_York"; };
-      };
-    };
+  virtualisation.oci-containers.containers.huntarr = {
+    image = "huntarr/huntarr:latest";
+    autoStart = true;
+    ports = [ "${toString huntarr_port}:${toString  huntarr_port}" ];
+    volumes = [ "/var/lib/huntarr:/config" ];
+    environment.TZ = "America/New_York";
   };
 }

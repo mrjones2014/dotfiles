@@ -17,6 +17,7 @@ let
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
     "secrets/duckdns_token.age"
+    "secrets/silverbullet_env.age"
   ];
 in
 builtins.listToAttrs (map

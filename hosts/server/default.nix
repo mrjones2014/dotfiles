@@ -26,7 +26,7 @@
     ./wireguard.nix
     ./observability.nix
     ./vikunja.nix
-    ./trilium.nix
+    ./silverbullet.nix
     ./duckdns.nix
     ../../nixos/sshd.nix
   ];
