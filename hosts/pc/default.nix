@@ -59,6 +59,7 @@
 
   environment.systemPackages = with pkgs; [
     steam-run
+    winetricks
     steamtinkerlaunch
     parsec-bin
     mullvad-vpn
