@@ -14,7 +14,7 @@ in
     environment = {
       SB_HOSTNAME = "0.0.0.0";
       SB_PORT = toString port;
-      SB_INDEX_PAGE = "Home";
+      SB_INDEX_PAGE = "A: Home";
     };
   };
 
