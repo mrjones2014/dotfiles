@@ -5,7 +5,7 @@ in
 {
   systemd.tmpfiles.rules = [ "d /var/lib/silverbullet 0770 root podman - -" ];
   age.secrets.silverbullet_env.file = ../../secrets/silverbullet_env.age;
-  services.nginx.subdomains.silverbullet = port;
+  services.nginx.subdomains.silverbullet.port = port;
   virtualisation.oci-containers.containers.silverbullet = {
     image = "ghcr.io/silverbulletmd/silverbullet:v2";
     autoStart = true;
