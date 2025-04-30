@@ -15,14 +15,6 @@ in
     forwardAgent = true;
     matchBlocks = {
       "nixos-server".hostname = import ../../hosts/server/ip.nix;
-      "gitlab.1password.io" = {
-        port = 2227;
-        hostname = "ssh.gitlab.1password.io";
-      };
-      "*.gitlab.1password.io" = {
-        port = 2227;
-        hostname = "ssh.gitlab.1password.io";
-      };
     } // lib.optionalAttrs (!isServer) {
       # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
       "*".extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
