@@ -7,7 +7,7 @@ let
 in
 {
   services.nginx.subdomains = {
-    uptime = uptimeKumaPort;
+    uptime.port = uptimeKumaPort;
     homarr = {
       port = homarrPort;
       default = true;

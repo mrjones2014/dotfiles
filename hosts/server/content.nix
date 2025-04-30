@@ -8,13 +8,28 @@ in
   services.nginx.subdomains = {
     # jellyfin doesn't let you configure port via Nix, so just use the default value here
     # see: https://jellyfin.org/docs/general/networking/index.html
-    jellyfin = 8096;
-    jellyseerr = config.services.jellyseerr.port;
-    prowlarr = config.services.prowlarr.settings.server.port;
-    sonarr = config.services.sonarr.settings.server.port;
-    radarr = config.services.radarr.settings.server.port;
-    bazarr = config.services.bazarr.listenPort;
-    huntarr = huntarr_port;
+    jellyfin.port = 8096;
+    jellyseerr.port = config.services.jellyseerr.port;
+    prowlarr = {
+      inherit (config.services.prowlarr.settings.server) port;
+      useLongerTimeout = true;
+    };
+    sonarr = {
+      inherit (config.services.sonarr.settings.server) port;
+      useLongerTimeout = true;
+    };
+    radarr = {
+      inherit (config.services.radarr.settings.server) port;
+      useLongerTimeout = true;
+    };
+    bazarr = {
+      port = config.services.bazarr.listenPort;
+      useLongerTimeout = true;
+    };
+    huntarr = {
+      port = huntarr_port;
+      useLongerTimeout = true;
+    };
   };
   services = {
     jellyfin.enable = true;
