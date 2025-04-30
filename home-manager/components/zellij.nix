@@ -79,9 +79,11 @@ with import ./tokyonight_palette.nix;
           tmux {
               bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
               bind "-" { NewPane "Down"; SwitchToMode "normal"; }
+
+              bind "e" { EditScrollback; SwitchToMode "normal"; }
+
               bind "Esc" { SwitchToMode "normal"; }
 
-              bind "e" { EditScrollback; }
           }
 
           renametab {
