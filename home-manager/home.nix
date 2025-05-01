@@ -31,6 +31,7 @@
         ungoogled-chromium
         standardnotes
         zen-browser
+        joplin-desktop
       ] ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
         # desktop only packages

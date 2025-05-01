@@ -16,6 +16,7 @@ let
 in
 {
   virtualisation.oci-containers.backend = "podman";
+  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
   environment.systemPackages = [ update-containers ];
   # update oci-containers every Monday
   systemd = {
