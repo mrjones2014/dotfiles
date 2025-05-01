@@ -18,21 +18,21 @@ with import ./tokyonight_palette.nix;
           set -l branch (string trim $(git branch --show-current 2> /dev/null))
           set -l cwd (pwd)
           if test "$branch" != ""
-            # just show basename if inside branch
-            set cwd (basename "$cwd")
+              # just show basename if inside branch
+              set cwd (basename "$cwd")
           else
-            # otherwise, replace $HOME with ~ and truncate if needed
-            set cwd (string replace "$HOME" "~" "$cwd")
-            if test (string length "$cwd") -gt 30
-                set -l parts (string split / "$cwd")
-                set -l first (string join / $parts[1])
-                set -l last (string join / $parts[-1])
-                set cwd "$first/…/$last"
-            end
+              # otherwise, replace $HOME with ~ and truncate if needed
+              set cwd (string replace "$HOME" "~" "$cwd")
+              if test (string length "$cwd") -gt 30
+                  set -l parts (string split / "$cwd")
+                  set -l first (string join / $parts[1])
+                  set -l last (string join / $parts[-1])
+                  set cwd "$first/…/$last"
+              end
           end
           set -l title "$cwd"
           if test "$branch" != ""
-            set title "$title:$branch"
+              set title "$title:$branch"
           end
           command nohup zellij action rename-tab "$title" >/dev/null 2>&1
         '';

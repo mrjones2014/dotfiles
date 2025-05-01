@@ -64,78 +64,78 @@ in
       '';
       fzf-project-widget = ''
         function _project_jump_get_icon
-          set -l remote "$(git --work-tree $argv[1] --git-dir $argv[1]/.git ls-remote --get-url 2> /dev/null)"
-          if string match -r "github.com" "$remote" >/dev/null
-            set_color --bold normal
-            echo -n 
-          else if string match -r gitlab "$remote" >/dev/null
-            set_color --bold FC6D26
-            echo -n 
-          else
-            set_color --bold F74E27
-            echo -n 󰊢
-          end
+            set -l remote "$(git --work-tree $argv[1] --git-dir $argv[1]/.git ls-remote --get-url 2> /dev/null)"
+            if string match -r "github.com" "$remote" >/dev/null
+                set_color --bold normal
+                echo -n 
+            else if string match -r gitlab "$remote" >/dev/null
+                set_color --bold FC6D26
+                echo -n 
+            else
+                set_color --bold F74E27
+                echo -n 󰊢
+            end
         end
 
         function _project_jump_format_project
-          set -l repo "$HOME/git/$argv[1]"
-          set -l branch $(git --work-tree $repo --git-dir $repo/.git branch --show-current)
-          set_color --bold cyan
-          echo -n "$argv[1]"
-          echo -n " $(_project_jump_get_icon $repo)"
-          set_color --bold f74e27
-          echo "  $branch"
+            set -l repo "$HOME/git/$argv[1]"
+            set -l branch $(git --work-tree $repo --git-dir $repo/.git branch --show-current)
+            set_color --bold cyan
+            echo -n "$argv[1]"
+            echo -n " $(_project_jump_get_icon $repo)"
+            set_color --bold f74e27
+            echo "  $branch"
         end
 
         function _project_jump_parse_project
-          # check args
-          set -f selected $argv[1]
+            # check args
+            set -f selected $argv[1]
 
-          # if not coming from args
-          if [ "$selected" = "" ]
-            # check pipe
-            read -f selected
-          end
+            # if not coming from args
+            if [ "$selected" = "" ]
+                # check pipe
+                read -f selected
+            end
 
-          # if still empty, return
-          if [ "$selected" = "" ]
-            return
-          end
+            # if still empty, return
+            if [ "$selected" = "" ]
+                return
+            end
 
-          set -l dir $(string trim "$(string match -r ".*(?=\s*󰊢||)" "$selected")")
-          echo "$HOME/git/$dir"
+            set -l dir $(string trim "$(string match -r ".*(?=\s*󰊢||)" "$selected")")
+            echo "$HOME/git/$dir"
         end
 
         function _project_jump_get_projects
-          # make sure to use built-in ls, not exa
-          for dir in $(command ls "$HOME/git")
-            if test -d "$HOME/git/$dir"
-              echo "$(_project_jump_format_project $dir)"
+            # make sure to use built-in ls, not exa
+            for dir in $(command ls "$HOME/git")
+                if test -d "$HOME/git/$dir"
+                    echo "$(_project_jump_format_project $dir)"
+                end
             end
-          end
         end
 
         function _project_jump_get_readme
-          set -l dir $(_project_jump_parse_project "$argv[1]")
-          if test -f "$dir/README.md"
-            CLICOLOR_FORCE=1 COLORTERM=truecolor ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
-          else
-            echo
-            echo $(set_color --bold) "README.md not found"
-            echo
-            ${pkgs.lsd}/bin/lsd -F $dir
-          end
+            set -l dir $(_project_jump_parse_project "$argv[1]")
+            if test -f "$dir/README.md"
+                CLICOLOR_FORCE=1 COLORTERM=truecolor ${pkgs.glow}/bin/glow -p -s dark -w 150 "$dir/README.md"
+            else
+                echo
+                echo $(set_color --bold) "README.md not found"
+                echo
+                ${pkgs.lsd}/bin/lsd -F $dir
+            end
         end
 
         argparse 'format=' -- $argv
         if set -ql _flag_format
-          _project_jump_get_readme $_flag_format
+            _project_jump_get_readme $_flag_format
         else
-          set -l selected $(_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}")
-          if test -n "$selected"
-            cd $(_project_jump_parse_project "$selected")
-          end
-          commandline -f repaint
+            set -l selected $(_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}")
+            if test -n "$selected"
+                cd $(_project_jump_parse_project "$selected")
+            end
+            commandline -f repaint
         end
       '';
       fzf-vim-widget = ''
@@ -155,19 +155,21 @@ in
 
         test -n "$FZF_TMUX_HEIGHT"; or set FZF_TMUX_HEIGHT 40%
         begin
-          set -lx FZF_DEFAULT_OPTS "--height $FZF_TMUX_HEIGHT --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS"
-          eval "$FZF_CTRL_T_COMMAND | "(__fzfcmd)' -m --query "'$fzf_query'"' | while read -l r; set result $result $r; end
+            set -lx FZF_DEFAULT_OPTS "--height $FZF_TMUX_HEIGHT --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS"
+            eval "$FZF_CTRL_T_COMMAND | "(__fzfcmd)' -m --query "'$fzf_query'"' | while read -l r
+                set result $result $r
+            end
         end
         if [ -z "$result" ]
-          _prompt_move_to_bottom
-          commandline -f repaint
-          return
+            _prompt_move_to_bottom
+            commandline -f repaint
+            return
         end
         set -l filepath_result
         for i in $result
-          set filepath_result "$filepath_result$prefix"
-          set filepath_result "$filepath_result$(string escape $i)"
-          set filepath_result "$filepath_result "
+            set filepath_result "$filepath_result$prefix"
+            set filepath_result "$filepath_result$(string escape $i)"
+            set filepath_result "$filepath_result "
         end
         _prompt_move_to_bottom
         commandline -f repaint

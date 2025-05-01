@@ -56,7 +56,7 @@
         # Source nix files, required to set fish as default shell, otherwise
         # it doesn't have the nix env vars
         if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
-          fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+            fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
         end
       '';
 
@@ -119,8 +119,7 @@
             else if isThinkpad then
               "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
             else
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}
-          '';
+              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}'';
         };
         nix-clean = {
           description =
@@ -128,10 +127,10 @@
           body = ''
             # NixOS-specific steps
             if test -f /etc/NIXOS
-              sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
-              for link in /nix/var/nix/gcroots/auto/*
-                  rm $(readlink "$link")
-              end
+                sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+                for link in /nix/var/nix/gcroots/auto/*
+                    rm $(readlink "$link")
+                end
             end
             nix-env --delete-generations old
             nix-store --gc
@@ -145,20 +144,20 @@
           body = ''
             set -l git_repo_root_dir (git rev-parse --show-toplevel 2>/dev/null)
             if test -n "$git_repo_root_dir"
-              cd "$git_repo_root_dir"
-              echo -e ""
-              echo -e "      \e[1m\e[38;5;112m\^V//"
-              echo -e "      \e[38;5;184m|\e[37m· ·\e[38;5;184m|      \e[94mI AM GROOT !"
-              echo -e "    \e[38;5;112m- \e[38;5;184m\ - /"
-              echo -e "     \_| |_/\e[38;5;112m¯"
-              echo -e "       \e[38;5;184m\ \\"
-              echo -e "     \e[38;5;124m__\e[38;5;184m/\e[38;5;124m_\e[38;5;184m/\e[38;5;124m__"
-              echo -e "    |_______|"
-              echo -e "     \     /"
-              echo -e "      \___/\e[39m\e[00m"
-              echo -e ""
+                cd "$git_repo_root_dir"
+                echo -e ""
+                echo -e "      \e[1m\e[38;5;112m\^V//"
+                echo -e "      \e[38;5;184m|\e[37m· ·\e[38;5;184m|      \e[94mI AM GROOT !"
+                echo -e "    \e[38;5;112m- \e[38;5;184m\ - /"
+                echo -e "     \_| |_/\e[38;5;112m¯"
+                echo -e "       \e[38;5;184m\ \\"
+                echo -e "     \e[38;5;124m__\e[38;5;184m/\e[38;5;124m_\e[38;5;184m/\e[38;5;124m__"
+                echo -e "    |_______|"
+                echo -e "     \     /"
+                echo -e "      \___/\e[39m\e[00m"
+                echo -e ""
             else
-              echo "Not in a git repository."
+                echo "Not in a git repository."
             end
           '';
         };
@@ -166,10 +165,10 @@
           wraps = "nix-shell";
           body = ''
             for ARG in $argv
-              if [ "$ARG" = --run ]
-                command nix-shell $argv
-                return $status
-              end
+                if [ "$ARG" = --run ]
+                    command nix-shell $argv
+                    return $status
+                end
             end
             command nix-shell $argv --run "exec fish"
           '';
@@ -190,7 +189,7 @@
           set -l MASTER_BRANCH (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
           if test -z "$GIT_BRANCH"
-            echo "Error: not a git repository"
+              echo "Error: not a git repository"
           else
             ${
               if isLinux then "xdg-open" else "open"
@@ -203,17 +202,17 @@
           body = ''
             set -l selected (op item list --categories login --format json | ${pkgs.jq}/bin/jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | ${pkgs.jq}/bin/jq -r '.id, .urls[0].href')
             if [ -z "$selected" ]
-              commandline -f repaint
-              return
+                commandline -f repaint
+                return
             end
             set -l id $selected[1]
             set -l url $selected[2]
             # if it has a ? then append query string with &
             if string match -e -- '\?' "$url"
-              set -f fill_session_url "$url&$id=$id"
+                set -f fill_session_url "$url&$id=$id"
             else
-              # otherwise append query string with ?
-              set -f fill_session_url "$url?$id=$id"
+                # otherwise append query string with ?
+                set -f fill_session_url "$url?$id=$id"
             end
             ${if isLinux then "xdg-open" else "open"} "$fill_session_url"
           '';
