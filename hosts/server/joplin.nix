@@ -23,6 +23,7 @@ in
     '';
   };
   virtualisation.containers.containersConf.settings.network.dns_bind_port = podman_dns_port;
+  # the postres password and MAILER_* config variables are in the encrypted environment file
   virtualisation.oci-containers.containers = {
     joplin-db = {
       autoStart = true;
