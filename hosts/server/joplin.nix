@@ -52,6 +52,7 @@ in
         POSTGRES_PORT = toString config.services.postgresql.settings.port;
         POSTGRES_HOST = "joplin-db";
         SIGNUP_ENABLED = "1";
+        ACCOUNT_TYPES_ENABLED = "1";
       };
     };
   };
