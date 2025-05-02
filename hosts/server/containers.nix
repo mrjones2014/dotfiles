@@ -12,6 +12,9 @@ let
         do
           $SUDO ${pkgs.podman}/bin/podman pull $image
         done
+
+        # restart all running containers
+        $SUDO ${pkgs.podman} container restart --running
   '';
 in
 {
