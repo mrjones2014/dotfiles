@@ -1,13 +1,14 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   configDir = "/var/lib/qbittorrentvpn";
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
-  tcpPorts = [ 8080 8118 9118 58946 ];
+  qbittorrent_port = 8080;
+  vuetorrent_port = 8081;
+  tcpPorts = [ qbittorrent_port 8118 9118 58946 ];
+  podman_network = "qbittorrent";
 in
 {
   age.secrets.mullvad_wireguard.file = ../../secrets/mullvad_wireguard.age;
-  services.nginx.subdomains.qbittorrent.port = 8080;
-
   systemd.tmpfiles.rules = [
     "d ${configDir} 055 qbittorrentvpn qbittorrentvpn - -"
     "d ${configDir}/wireguard 055 qbittorrentvpn qbittorrentvpn - -"
@@ -15,9 +16,18 @@ in
   system.activationScripts.copyWireguardConfigIntoContainer.text = ''
     mkdir -p ${configDir}/wireguard && cp ${wireguardConfigPath} ${configDir}/wireguard/mullvad_wireguard.conf
   '';
+  systemd.services.qbittorrent-podman-network-create = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "podman-qbittorrentvpn.service" "podman-vuetorrent.service" ];
+    script = ''
+      ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
+    '';
+  };
+  services.nginx.subdomains.qbittorrent.port = qbittorrent_port;
   virtualisation.oci-containers.containers.qbittorrentvpn = {
     autoStart = true;
     image = "ghcr.io/binhex/arch-qbittorrentvpn";
+    networks = [ podman_network ];
     extraOptions =
       [ "--sysctl=net.ipv4.conf.all.src_valid_mark=1" "--privileged=true" ];
     ports =
@@ -45,6 +55,21 @@ in
       UMASK = "000";
       PUID = "0";
       PGID = "0";
+    };
+  };
+  # prettier web UI
+  services.nginx.subdomains.vuetorrent.port = vuetorrent_port;
+  virtualisation.oci-containers.containers.vuetorrent = {
+    autoStart = true;
+    image = "ghcr.io/vuetorrent/vuetorrent-backend:latest";
+    networks = [ podman_network ];
+    ports = [ "${toString  vuetorrent_port}:${toString  vuetorrent_port}" ];
+    environment = {
+      PORT = toString vuetorrent_port;
+      QBIT_BASE = "http://qbittorrentvpn:${toString  qbittorrent_port}";
+      RELEASE_TYPE = "stable";
+      # every Sunday
+      UPDATE_VT_CRON = "0 0 * * 0";
     };
   };
 }
