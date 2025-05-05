@@ -47,12 +47,14 @@ in
     "dotnet-sdk-wrapped-6.0.428"
   ];
 
-  systemd.tmpfiles.rules = [ "d ${huntarr_data} 0750 root root -" ];
+  systemd.tmpfiles.rules = [
+    "d ${huntarr_data} 0777 root podman -"
+  ];
   virtualisation.oci-containers.containers.huntarr = {
-    image = "huntarr/huntarr:latest";
+    image = "ghcr.io/plexguide/huntarr:latest";
     autoStart = true;
     ports = [ "${toString huntarr_port}:${toString  huntarr_port}" ];
-    volumes = [ "/var/lib/huntarr:/config" ];
+    volumes = [ "${huntarr_data}:/config" ];
     environment.TZ = "America/New_York";
   };
 }
