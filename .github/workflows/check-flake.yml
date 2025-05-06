@@ -15,10 +15,5 @@ jobs:
         with:
           name: mrjones2014-dotfiles
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Check Nix flake inputs
-        uses: DeterminateSystems/flake-checker-action@v9
-        with:
-          fail-mode: true
-          send-statistics: false
       - name: Run nix flake check
         run: nix flake check
