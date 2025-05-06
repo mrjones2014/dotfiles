@@ -10,8 +10,8 @@ let
 in
 {
   systemd.tmpfiles.rules = [
-    "d ${db_data} 0770 root podman - -"
-    "d ${app_data} 0770 root podman - -"
+    "d ${db_data} 0777 root podman - -"
+    "d ${app_data} 0777 root podman - -"
   ];
   age.secrets.joplin_env.file = ../../secrets/joplin_env.age;
   services.nginx.subdomains.joplin.port = app_port;

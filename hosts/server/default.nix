@@ -20,7 +20,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nixosModules/nginx.nix
-    ./content.nix
+    ./media.nix
     ./nas.nix
     ./containers.nix
     ./wireguard.nix
