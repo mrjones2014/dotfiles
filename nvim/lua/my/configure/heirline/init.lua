@@ -6,6 +6,7 @@ return {
         if
           client.server_capabilities.documentSymbolProvider
           and client.name ~= 'nil_ls' -- don't attach to both nil_ls and nixd
+          and not vim.startswith(client.name, 'otter-ls') -- don't attach to otter-ls
         then
           require('nvim-navic').attach(client, bufnr)
         end

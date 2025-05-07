@@ -13,3 +13,8 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     end
   end,
 })
+
+local ok, otter = pcall(require, 'otter')
+if ok then
+  otter.activate()
+end

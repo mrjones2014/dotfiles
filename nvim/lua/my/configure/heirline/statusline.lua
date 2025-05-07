@@ -172,6 +172,7 @@ local function unsaved_count()
           and vim.bo[buf].bt ~= 'acwrite'
           and vim.bo[buf].modifiable
           and vim.bo[buf].modified
+          and vim.bo[buf].buflisted
       end)
       :totable()
   end
