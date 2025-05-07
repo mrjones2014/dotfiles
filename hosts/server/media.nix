@@ -51,7 +51,7 @@ in
     "d ${huntarr_data} 0777 root podman -"
   ];
   virtualisation.oci-containers.containers.huntarr = {
-    image = "ghcr.io/plexguide/huntarr:latest";
+    image = "huntarr/huntarr:latest";
     autoStart = true;
     ports = [ "${toString huntarr_port}:${toString  huntarr_port}" ];
     volumes = [ "${huntarr_data}:/config" ];
