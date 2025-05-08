@@ -1,22 +1,70 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   homarrStateDir = "/var/lib/homarr";
   homarrPort = 9090;
   dashdotPort = 9091;
-  uptimeKumaPort = 3001;
+  gatusPort = 3001;
+
+  # dynamically configure gatus status pages
+  toTitleCase = str:
+    let
+      firstChar = builtins.substring 0 1 str;
+      restChars = builtins.substring 1 (builtins.stringLength str) str;
+    in
+    lib.strings.toUpper firstChar + restChars;
+  applyOverrides = overrides: subdomain:
+    if lib.hasAttr subdomain overrides then
+      overrides.${subdomain}
+    else
+      toTitleCase subdomain;
+  nginxSubdomains = config.services.nginx.subdomains;
+  subdomainOverrides = {
+    # By default it will just capitalize the first letter
+    # of the subdomain. Customize subdomain -> Title mapping here.
+    qbittorrent = "qBitTorrent";
+    joplin = "Joplin Sync Server";
+  };
+
+  # Generate the Gatus endpoints configuration
+  gatusEndpoints = lib.attrsets.mapAttrsToList
+    (name: _:
+      let title = applyOverrides subdomainOverrides name; in {
+        name = title;
+        url = "https://${name}.mjones.network";
+        interval = "10s";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+        alerts = [{
+          enabled = true;
+          type = "discord";
+          failure-threshold = 1;
+          success-threshold = 1;
+          send-on-resolved = true;
+          description = title;
+        }];
+      })
+    nginxSubdomains;
 in
 {
   services.nginx.subdomains = {
-    uptime.port = uptimeKumaPort;
+    uptime.port = gatusPort;
     homarr = {
       port = homarrPort;
       default = true;
     };
   };
 
-  services.uptime-kuma = {
+  age.secrets.gatus_discord_webhook_env.file = ../../secrets/gatus_discord_webhook_env.age;
+  services.gatus = {
     enable = true;
-    settings.HOST = "127.0.0.1";
+    environmentFile = config.age.secrets.gatus_discord_webhook_env.path;
+    settings = {
+      web.port = gatusPort;
+      endpoints = gatusEndpoints;
+      alerting.discord.webhook-url = "\${DISCORD_WEBHOOK_URL}";
+    };
   };
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];

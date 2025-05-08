@@ -18,6 +18,7 @@ let
     "secrets/cloudflare_certbot_token.age"
     "secrets/duckdns_token.age"
     "secrets/joplin_env.age"
+    "secrets/gatus_discord_webhook_env.age"
   ];
 in
 builtins.listToAttrs (map
