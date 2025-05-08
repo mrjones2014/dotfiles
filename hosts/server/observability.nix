@@ -6,17 +6,16 @@ let
   gatusPort = 3001;
 
   # dynamically configure gatus status pages
-  toTitleCase = str:
+  toTitleCase =
+    str:
     let
       firstChar = builtins.substring 0 1 str;
       restChars = builtins.substring 1 (builtins.stringLength str) str;
     in
     lib.strings.toUpper firstChar + restChars;
-  applyOverrides = overrides: subdomain:
-    if lib.hasAttr subdomain overrides then
-      overrides.${subdomain}
-    else
-      toTitleCase subdomain;
+  applyOverrides =
+    overrides: subdomain:
+    if lib.hasAttr subdomain overrides then overrides.${subdomain} else toTitleCase subdomain;
   nginxSubdomains = config.services.nginx.subdomains;
   subdomainOverrides = {
     # By default it will just capitalize the first letter
@@ -26,26 +25,31 @@ let
   };
 
   # Generate the Gatus endpoints configuration
-  gatusEndpoints = lib.attrsets.mapAttrsToList
-    (name: _:
-      let title = applyOverrides subdomainOverrides name; in {
-        name = title;
-        url = "https://${name}.mjones.network";
-        interval = "10s";
-        conditions = [
-          "[STATUS] == 200"
-          "[RESPONSE_TIME] < 300"
-        ];
-        alerts = [{
+  gatusEndpoints = lib.attrsets.mapAttrsToList (
+    name: _:
+    let
+      title = applyOverrides subdomainOverrides name;
+    in
+    {
+      name = title;
+      url = "https://${name}.mjones.network";
+      interval = "10s";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+      alerts = [
+        {
           enabled = true;
           type = "discord";
           failure-threshold = 1;
           success-threshold = 1;
           send-on-resolved = true;
           description = title;
-        }];
-      })
-    nginxSubdomains;
+        }
+      ];
+    }
+  ) nginxSubdomains;
 in
 {
   services.nginx.subdomains = {

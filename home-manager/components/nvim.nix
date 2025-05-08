@@ -1,4 +1,10 @@
-{ config, pkgs, isLinux, ... }: {
+{
+  config,
+  pkgs,
+  isLinux,
+  ...
+}:
+{
   home.sessionVariables.MANPAGER = "nvim -c 'Man!' -o -";
   xdg.configFile = {
     ripgrep_ignore.text = ''
@@ -16,8 +22,7 @@
       /vendor
     '';
     nvim = {
-      source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/git/dotfiles/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
       recursive = true;
     };
   };
@@ -33,16 +38,20 @@
     defaultEditor = true;
     coc.enable = false;
 
-    extraWrapperArgs = [
-      "--set"
-      "NVIM_RUST_ANALYZER"
-      "${pkgs.rust-analyzer}/bin/rust-analyzer"
-      "--set"
-      "LIBSQLITE"
-    ] ++ (if isLinux then
-      [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
-    else
-      [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]);
+    extraWrapperArgs =
+      [
+        "--set"
+        "NVIM_RUST_ANALYZER"
+        "${pkgs.rust-analyzer}/bin/rust-analyzer"
+        "--set"
+        "LIBSQLITE"
+      ]
+      ++ (
+        if isLinux then
+          [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
+        else
+          [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]
+      );
 
     extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [

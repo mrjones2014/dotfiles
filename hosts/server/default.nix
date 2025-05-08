@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -51,7 +52,6 @@
   };
   programs = {
     fish.enable = true;
-    dconf.enable =
-      true; # TODO this shouldn't be needed but home-manager complains without it
+    dconf.enable = true; # TODO this shouldn't be needed but home-manager complains without it
   };
 }

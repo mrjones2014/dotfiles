@@ -11,7 +11,10 @@ pkgs.stdenv.mkDerivation {
   pname = "mdbook-docs-site";
   version = "0.1.0";
   src = pkgs.lib.cleanSource ./.;
-  buildInputs = [ pkgs.mdbook ublock-mdbook ];
+  buildInputs = [
+    pkgs.mdbook
+    ublock-mdbook
+  ];
   buildPhase = ''
     mkdir $out
     mdbook build -d $out

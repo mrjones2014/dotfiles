@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   networking.hostName = "nixos-pc";
   imports = [
     ../../nixos/desktop_environment.nix

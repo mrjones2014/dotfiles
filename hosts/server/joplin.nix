@@ -17,7 +17,10 @@ in
   services.nginx.subdomains.joplin.port = app_port;
   systemd.services.joplin-podman-network-create = {
     serviceConfig.Type = "oneshot";
-    wantedBy = [ "podman-joplin-server.service" "podman-joplin-db.service" ];
+    wantedBy = [
+      "podman-joplin-server.service"
+      "podman-joplin-db.service"
+    ];
     script = ''
       ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
     '';

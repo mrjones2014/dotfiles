@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   system.defaults = {
     screencapture = {
       # store screenshots in ~/Downloads by default

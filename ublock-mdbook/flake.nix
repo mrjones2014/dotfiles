@@ -6,10 +6,19 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-darwin" ] (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-darwin" ] (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
         packages.default = pkgs.callPackage ./. { inherit pkgs; };
         devShell = pkgs.mkShell {
           CARGO_INSTALL_ROOT = "${toString ./.}/.cargo";
@@ -22,5 +31,6 @@
             libiconv
           ];
         };
-      });
+      }
+    );
 }

@@ -1,4 +1,13 @@
-{ pkgs, lib, isDarwin, isLinux, isServer, isThinkpad, ... }: {
+{
+  pkgs,
+  lib,
+  isDarwin,
+  isLinux,
+  isServer,
+  isThinkpad,
+  ...
+}:
+{
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     HOMEBREW_NO_ANALYTICS = "1";
@@ -23,32 +32,35 @@
     fish = {
       enable = true;
 
-      plugins = [{
-        name = "foreign-env";
-        inherit (pkgs.fishPlugins.foreign-env) src;
-      }];
+      plugins = [
+        {
+          name = "foreign-env";
+          inherit (pkgs.fishPlugins.foreign-env) src;
+        }
+      ];
 
-      shellAliases = {
-        ":q" = "exit";
-        ":Q" = "exit";
-        ":e" = "nvim";
-        ":vsp" = "zellij action new-pane --direction right";
-        ":sp" = "zellij action new-pane --direction down";
+      shellAliases =
+        {
+          ":q" = "exit";
+          ":Q" = "exit";
+          ":e" = "nvim";
+          ":vsp" = "zellij action new-pane --direction right";
+          ":sp" = "zellij action new-pane --direction down";
 
-        copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
-        paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
-        cat = "bat";
-        gogit = "cd ~/git";
-        "!!" = "eval \\$history[1]";
-        clear = "clear && _prompt_move_to_bottom";
-        oplocal =
-          "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
-        # inspect $PATH
-        pinspect = ''echo "$PATH" | tr ":" "\n"'';
-      } // pkgs.lib.optionalAttrs isLinux {
-        cfgnix = "sudo nvim /etc/nixos/configuration.nix";
-        restart-gui = "sudo systemctl restart display-manager.service";
-      };
+          copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
+          paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
+          cat = "bat";
+          gogit = "cd ~/git";
+          "!!" = "eval \\$history[1]";
+          clear = "clear && _prompt_move_to_bottom";
+          oplocal = "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
+          # inspect $PATH
+          pinspect = ''echo "$PATH" | tr ":" "\n"'';
+        }
+        // pkgs.lib.optionalAttrs isLinux {
+          cfgnix = "sudo nvim /etc/nixos/configuration.nix";
+          restart-gui = "sudo systemctl restart display-manager.service";
+        };
 
       shellInit = ''
         set -g fish_prompt_pwd_dir_length 20
@@ -96,8 +108,7 @@
           '';
         };
         nix-apply = {
-          description =
-            "Apply latest Nix configuration; checks if you need to do a git pull first";
+          description = "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
             git fetch
             set -l current_branch (git symbolic-ref --short HEAD)
@@ -112,18 +123,19 @@
                     return 1
                 end
             end
-            ${if isDarwin then
-              "darwin-rebuild switch --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
-            else if isServer then
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
-            else if isThinkpad then
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
-            else
-              "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"}'';
+            ${
+              if isDarwin then
+                "darwin-rebuild switch --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
+              else if isServer then
+                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
+              else if isThinkpad then
+                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
+              else
+                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"
+            }'';
         };
         nix-clean = {
-          description =
-            "Run Nix garbage collection and remove old kernels to free up space in boot partition";
+          description = "Run Nix garbage collection and remove old kernels to free up space in boot partition";
           body = ''
             # NixOS-specific steps
             if test -f /etc/NIXOS
@@ -197,8 +209,7 @@
           end
         '';
         login = {
-          description =
-            "Select a 1Password item via fzf and open it in browser";
+          description = "Select a 1Password item via fzf and open it in browser";
           body = ''
             set -l selected (op item list --categories login --format json | ${pkgs.jq}/bin/jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | ${pkgs.jq}/bin/jq -r '.id, .urls[0].href')
             if [ -z "$selected" ]
@@ -221,8 +232,16 @@
     };
   };
 
-  home.packages = with pkgs;
-    [ tealdeer tokei cachix jq ripgrep gnused ]
+  home.packages =
+    with pkgs;
+    [
+      tealdeer
+      tokei
+      cachix
+      jq
+      ripgrep
+      gnused
+    ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
 }

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   age.secrets.duckdns_token.file = ../../secrets/duckdns_token.age;
   services.duckdns = {
     enable = true;

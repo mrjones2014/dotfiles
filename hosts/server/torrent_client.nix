@@ -4,7 +4,12 @@ let
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
   qbittorrent_port = 8080;
   vuetorrent_port = 8081;
-  tcpPorts = [ qbittorrent_port 8118 9118 58946 ];
+  tcpPorts = [
+    qbittorrent_port
+    8118
+    9118
+    58946
+  ];
   podman_network = "qbittorrent";
 in
 {
@@ -18,7 +23,10 @@ in
   '';
   systemd.services.qbittorrent-podman-network-create = {
     serviceConfig.Type = "oneshot";
-    wantedBy = [ "podman-qbittorrentvpn.service" "podman-vuetorrent.service" ];
+    wantedBy = [
+      "podman-qbittorrentvpn.service"
+      "podman-vuetorrent.service"
+    ];
     script = ''
       ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
     '';
@@ -28,11 +36,11 @@ in
     autoStart = true;
     image = "ghcr.io/binhex/arch-qbittorrentvpn";
     networks = [ podman_network ];
-    extraOptions =
-      [ "--sysctl=net.ipv4.conf.all.src_valid_mark=1" "--privileged=true" ];
-    ports =
-      builtins.map (port: "${builtins.toString port}:${builtins.toString port}")
-        tcpPorts;
+    extraOptions = [
+      "--sysctl=net.ipv4.conf.all.src_valid_mark=1"
+      "--privileged=true"
+    ];
+    ports = builtins.map (port: "${builtins.toString port}:${builtins.toString port}") tcpPorts;
     volumes = [
       "/mnt/jellyfin:/data"
       "${configDir}:/config"
@@ -63,10 +71,10 @@ in
     autoStart = true;
     image = "ghcr.io/vuetorrent/vuetorrent-backend:latest";
     networks = [ podman_network ];
-    ports = [ "${toString  vuetorrent_port}:${toString  vuetorrent_port}" ];
+    ports = [ "${toString vuetorrent_port}:${toString vuetorrent_port}" ];
     environment = {
       PORT = toString vuetorrent_port;
-      QBIT_BASE = "http://qbittorrentvpn:${toString  qbittorrent_port}";
+      QBIT_BASE = "http://qbittorrentvpn:${toString qbittorrent_port}";
       RELEASE_TYPE = "stable";
       # every Sunday
       UPDATE_VT_CRON = "0 0 * * 0";

@@ -1,4 +1,10 @@
-{ pkgs, lib, config, isServer, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  isServer,
+  ...
+}:
 with import ./tokyonight_palette.nix;
 {
   programs = {

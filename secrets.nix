@@ -21,9 +21,11 @@ let
     "secrets/gatus_discord_webhook_env.age"
   ];
 in
-builtins.listToAttrs (map
-  (secret: {
+builtins.listToAttrs (
+  map (secret: {
     name = secret;
-    value = { publicKeys = users ++ systems; };
-  })
-  secrets)
+    value = {
+      publicKeys = users ++ systems;
+    };
+  }) secrets
+)

@@ -1,8 +1,12 @@
-{ pkgs, lib, isThinkpad, ... }:
+{
+  pkgs,
+  lib,
+  isThinkpad,
+  ...
+}:
 let
   wallpaperImg = pkgs.fetchurl {
-    url =
-      "https://www.triplemonitorbackgrounds.com/albums/thewarners777/synthwave.jpg";
+    url = "https://www.triplemonitorbackgrounds.com/albums/thewarners777/synthwave.jpg";
     hash = "sha256-BvFwyMa4Oub8yMRlgIZOuYgtI3UYHlbEf9rebEfEMDY=";
   };
   gnomeExtensions = with pkgs.gnomeExtensions; [
@@ -13,7 +17,8 @@ let
     user-themes
     quick-settings-tweaker
   ];
-  enabled-extensions = (map (ext: ext.extensionUuid) gnomeExtensions)
+  enabled-extensions =
+    (map (ext: ext.extensionUuid) gnomeExtensions)
     # gsconnect requires a systemd service so it needs to be installed
     # via environment.systemPackages
     # This is done in ../../../nixos/desktop_environment.nix
@@ -94,8 +99,7 @@ in
       shortcut-search = [ "<Super>space" ];
     };
     "org/gnome/mutter/keybindings" = {
-      switch-monitor =
-        [ ]; # disable stupid ass default <Super>+p defautl shortcut
+      switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
     };
   };
 }

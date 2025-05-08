@@ -1,11 +1,23 @@
-{ inputs, config, pkgs, lib, isDarwin, isLinux, isThinkpad, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  isDarwin,
+  isLinux,
+  isThinkpad,
+  ...
+}:
+{
   nixpkgs.overlays = [
-    (final: prev:
+    (
+      final: prev:
       (import ../packages {
         inherit inputs;
         inherit pkgs;
         inherit (prev) system;
-      }))
+      })
+    )
   ];
   home = {
     username = "mat";
@@ -19,11 +31,17 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     stateVersion = "22.11";
-    packages = with pkgs;
-      [ spotify gnumake ] ++ lib.lists.optionals isDarwin [
+    packages =
+      with pkgs;
+      [
+        spotify
+        gnumake
+      ]
+      ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         darwin-rebuild
-      ] ++ lib.lists.optionals isLinux [
+      ]
+      ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         signal-desktop
         vlc
@@ -32,7 +50,8 @@
         standardnotes
         zen-browser
         joplin-desktop
-      ] ++ lib.lists.optionals isThinkpad [ ]
+      ]
+      ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
         # desktop only packages
         obs-studio

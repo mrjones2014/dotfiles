@@ -4,7 +4,10 @@ let
   huntarr_data = "/var/lib/huntarr";
 in
 {
-  imports = [ ./torrent_client.nix ./cleanuperr.nix ];
+  imports = [
+    ./torrent_client.nix
+    ./cleanuperr.nix
+  ];
   services.nginx.subdomains = {
     # jellyfin doesn't let you configure port via Nix, so just use the default value here
     # see: https://jellyfin.org/docs/general/networking/index.html
@@ -53,7 +56,7 @@ in
   virtualisation.oci-containers.containers.huntarr = {
     image = "huntarr/huntarr:latest";
     autoStart = true;
-    ports = [ "${toString huntarr_port}:${toString  huntarr_port}" ];
+    ports = [ "${toString huntarr_port}:${toString huntarr_port}" ];
     volumes = [ "${huntarr_data}:/config" ];
     environment.TZ = "America/New_York";
   };

@@ -1,4 +1,10 @@
-{ isLinux, pkgs, lib, ... }: {
+{
+  isLinux,
+  pkgs,
+  lib,
+  ...
+}:
+{
   xdg.dataFile."icons/discord.png".source = ./discord.png;
   home.packages = lib.lists.optionals isLinux [
     # vesktop discord client, I don't like
@@ -12,8 +18,17 @@
           icon = "discord";
           startupWMClass = "Vesktop";
           genericName = "Internet Messenger";
-          keywords = [ "discord" "vencord" "electron" "chat" ];
-          categories = [ "Network" "InstantMessaging" "Chat" ];
+          keywords = [
+            "discord"
+            "vencord"
+            "electron"
+            "chat"
+          ];
+          categories = [
+            "Network"
+            "InstantMessaging"
+            "Chat"
+          ];
         })
       ];
     }))

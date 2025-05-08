@@ -1,11 +1,14 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
   nixpkgs.overlays = [
-    (final: prev:
+    (
+      final: prev:
       (import ../packages {
         inherit inputs;
         inherit pkgs;
         inherit (prev) system;
-      }))
+      })
+    )
   ];
   home = {
     username = "mat";
@@ -25,5 +28,8 @@
     stateVersion = "22.11";
   };
   xdg.enable = true;
-  imports = [ ./shared.nix ./components/zellij.nix ];
+  imports = [
+    ./shared.nix
+    ./components/zellij.nix
+  ];
 }

@@ -1,4 +1,10 @@
-{ pkgs, isDarwin, isLinux, isServer, ... }:
+{
+  pkgs,
+  isDarwin,
+  isLinux,
+  isServer,
+  ...
+}:
 let
   git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
     #!${pkgs.bash}/bin/bash
@@ -19,31 +25,30 @@ in
     package = pkgs.git.override {
       guiSupport = false; # gui? never heard of her.
     };
-    ignores = [ "Session.vim" ".DS_Store" ".direnv/" ];
+    ignores = [
+      "Session.vim"
+      ".DS_Store"
+      ".direnv/"
+    ];
     aliases = {
       s = "status";
       newbranch = "checkout -b";
       commit-amend = "commit --amend --no-edit";
-      prune-branches = ''
-        !git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
+      prune-branches = ''!git branch --merged | grep -v \"master\" | grep -v \"main\" | grep -v \"$(git branch --show-current)\" | grep -v "[*]" >/tmp/merged-branches && vim /tmp/merged-branches && xargs git branch -d </tmp/merged-branches && git fetch --prune'';
       ch = "!${git_checkout_fzf_script}";
-      mm = ''
-        !git fetch && git merge "origin/$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"'';
-      add-ignore-whitespace =
-        "!git diff --ignore-all-space | git apply --cached";
+      mm = ''!git fetch && git merge "origin/$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"'';
+      add-ignore-whitespace = "!git diff --ignore-all-space | git apply --cached";
       copy-branch = "!git branch --show-current | ${
-          if isDarwin then "pbcopy" else "xclip -selection clipboard"
-        }";
+        if isDarwin then "pbcopy" else "xclip -selection clipboard"
+      }";
       pending = "!git log $(git describe --tags --abbrev=0)..HEAD --oneline";
       # bc = "branch changes"
-      bc =
-        "!export MASTER_BRANCH=$(git branch -r | grep -Po 'HEAD -> \\K.*$') && git diff --name-only $MASTER_BRANCH | ${pkgs.fzf}/bin/fzf --ansi --preview 'git diff --color=always $MASTER_BRANCH {}' --bind 'enter:become($EDITOR {})'";
+      bc = "!export MASTER_BRANCH=$(git branch -r | grep -Po 'HEAD -> \\K.*$') && git diff --name-only $MASTER_BRANCH | ${pkgs.fzf}/bin/fzf --ansi --preview 'git diff --color=always $MASTER_BRANCH {}' --bind 'enter:become($EDITOR {})'";
     };
     userName = "Mat Jones";
     userEmail = "mat@mjones.network";
     signing = {
-      key =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
       signByDefault = true;
     };
     delta = {
@@ -58,17 +63,19 @@ in
       pull.rebase = false;
       push.autoSetupRemote = true;
       commit.gpgsign = true;
-      gpg = {
-        format = "ssh";
-      } // pkgs.lib.optionalAttrs (!isServer) {
-        ssh = {
-          program =
-            if isLinux then
-              "/run/current-system/sw/bin/op-ssh-sign"
-            else
-              "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      gpg =
+        {
+          format = "ssh";
+        }
+        // pkgs.lib.optionalAttrs (!isServer) {
+          ssh = {
+            program =
+              if isLinux then
+                "/run/current-system/sw/bin/op-ssh-sign"
+              else
+                "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          };
         };
-      };
       core = {
         autocrlf = false;
         fsmonitor = true;

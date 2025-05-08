@@ -11,7 +11,10 @@ in
     enable = true;
     settings = {
       interface = wireguard_interface;
-      server = [ "45.90.28.117" "45.90.30.117" ];
+      server = [
+        "45.90.28.117"
+        "45.90.30.117"
+      ];
     };
   };
   networking = {
@@ -24,7 +27,10 @@ in
     # Open ports in the firewall
     firewall = {
       allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [ 53 wireguard_port ];
+      allowedUDPPorts = [
+        53
+        wireguard_port
+      ];
     };
     wg-quick.interfaces = {
       # the network interface name. You can name the interface arbitrarily.

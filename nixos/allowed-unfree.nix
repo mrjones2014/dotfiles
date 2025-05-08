@@ -1,7 +1,11 @@
-{ lib, ... }: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    let name = lib.getName pkg;
-    in builtins.elem name [
+{ lib, ... }:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    let
+      name = lib.getName pkg;
+    in
+    builtins.elem name [
       "spotify"
       "1password"
       "1password-cli"
@@ -16,4 +20,3 @@
       "vscode"
     ];
 }
-

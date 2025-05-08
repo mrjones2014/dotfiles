@@ -1,11 +1,23 @@
-{ pkgs, config, lib, modulesPath, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
 
-    initrd.availableKernelModules =
-      [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+      "sr_mod"
+    ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
@@ -18,7 +30,12 @@
     "/boot" = {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" "uid=0" "gid=0" ];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+        "uid=0"
+        "gid=0"
+      ];
     };
     "/mnt/fileshare" = {
       device = "/dev/disk/by-label/fileshare";
@@ -34,7 +51,7 @@
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
   networking = {
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -43,17 +60,21 @@
     useDHCP = lib.mkDefault true;
     hostName = "nixos-server";
     defaultGateway = "192.168.189.1";
-    nameservers = [ "45.90.28.117" "45.90.30.117" ];
+    nameservers = [
+      "45.90.28.117"
+      "45.90.30.117"
+    ];
     # static IP on ethernet interface
-    interfaces.enp0s31f6.ipv4.addresses = [{
-      address = import ./ip.nix;
-      prefixLength = 24;
-    }];
+    interfaces.enp0s31f6.ipv4.addresses = [
+      {
+        address = import ./ip.nix;
+        prefixLength = 24;
+      }
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # enable hardware transcoding stuff for jellyfin
   nixpkgs.config.packageOverrides = pkgs: {

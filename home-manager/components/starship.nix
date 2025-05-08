@@ -8,13 +8,19 @@ let
   server_bg = palette.teal;
   server_sep = color: if isServer then "[](fg:${server_bg} bg:${color})" else "";
 in
-with palette; {
+with palette;
+{
   programs.starship = {
     enable = true;
     enableTransience = true;
     settings = {
       format = lib.concatStrings [
-        (if isServer then "[ ](bg:${server_bg})[](bg:${server_bg} fg:${bg_dark})[  ](bg:${server_bg})" else "")
+        (
+          if isServer then
+            "[ ](bg:${server_bg})[](bg:${server_bg} fg:${bg_dark})[  ](bg:${server_bg})"
+          else
+            ""
+        )
         "$character"
         "$directory"
         "\${env_var.IN_NIX_SHELL}"
@@ -40,12 +46,9 @@ with palette; {
         success_symbol = "${server_sep green}[  ](bold bg:${green} fg:${bg_dark})[](fg:${green} bg:${dir_bg})";
         error_symbol = "${server_sep red}[  ](bold bg:${red} fg:${bg_dark})[](fg:${red} bg:${dir_bg})";
         vicmd_symbol = "${server_sep blue}[  ](bold bg:${blue} fg:${bg_dark})[](fg:${blue} bg:${dir_bg})";
-        vimcmd_replace_one_symbol =
-          "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
-        vimcmd_replace_symbol =
-          "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
-        vimcmd_visual_symbol =
-          "${server_sep yellow}[  ](bold bg:${yellow} fg:${bg_dark})[](fg:${yellow} bg:${dir_bg})";
+        vimcmd_replace_one_symbol = "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
+        vimcmd_replace_symbol = "${server_sep purple}[  ](bold bg:${purple} fg:${bg_dark})[](fg:${purple} bg:${dir_bg})";
+        vimcmd_visual_symbol = "${server_sep yellow}[  ](bold bg:${yellow} fg:${bg_dark})[](fg:${yellow} bg:${dir_bg})";
       };
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bold bg:${dir_bg} fg:${green})";
@@ -53,18 +56,24 @@ with palette; {
       git_branch.format = "([ ](bg:${git_bg})[$branch](bg:${git_bg} fg:${git_fg})[ ](bg:${git_bg}))";
       git_status.format = "[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
       custom.git_server_icon = {
-        description =
-          "Show a GitLab or GitHub icon depending on current git remote";
+        description = "Show a GitLab or GitHub icon depending on current git remote";
         when = "git rev-parse --is-inside-work-tree 2> /dev/null";
-        command = ''
-          GIT_REMOTE=$(git ls-remote --get-url 2> /dev/null); if [[ "$GIT_REMOTE" =~ "github" ]]; then printf ""; elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then echo "󰮠"; else echo "󰊢"; fi'';
-        shell = [ "bash" "--noprofile" "--norc" ];
+        command = ''GIT_REMOTE=$(git ls-remote --get-url 2> /dev/null); if [[ "$GIT_REMOTE" =~ "github" ]]; then printf ""; elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then echo "󰮠"; else echo "󰊢"; fi'';
+        shell = [
+          "bash"
+          "--noprofile"
+          "--norc"
+        ];
         format = "([](fg:${dir_bg} bg:${git_bg})[ ](bg:${git_bg})[$output](bg:${git_bg} fg:${git_fg})[ ](bg:${git_bg}))";
       };
       custom.dir_sep_no_git = {
         format = "[](fg:${dir_bg} bg:${bg_dark})";
         when = "! git rev-parse --is-inside-work-tree 2> /dev/null";
-        shell = [ "bash" "--noprofile" "--norc" ];
+        shell = [
+          "bash"
+          "--noprofile"
+          "--norc"
+        ];
       };
     };
   };

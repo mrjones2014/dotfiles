@@ -53,8 +53,14 @@ in
     ];
 
     networking.firewall = {
-      allowedTCPPorts = [ 80 443 ];
-      allowedUDPPorts = [ 80 443 ];
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        80
+        443
+      ];
     };
     age.secrets.cloudflare_certbot_token.file = ../../../secrets/cloudflare_certbot_token.age;
     services.nginx = {
@@ -63,8 +69,10 @@ in
       recommendedTlsSettings = true;
       proxyTimeout = "180s";
 
-      virtualHosts = lib.foldl'
-        (acc: subdomain: acc // {
+      virtualHosts = lib.foldl' (
+        acc: subdomain:
+        acc
+        // {
           "${subdomain}.mjones.network" = {
             inherit (cfg.${subdomain}) default;
             forceSSL = true;
@@ -79,9 +87,8 @@ in
               '';
             };
           };
-        })
-        { }
-        (lib.attrNames cfg);
+        }
+      ) { } (lib.attrNames cfg);
     };
     security.acme = {
       acceptTerms = true;

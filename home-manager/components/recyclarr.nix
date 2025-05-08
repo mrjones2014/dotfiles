@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = [
     pkgs.recyclarr
     (pkgs.writeScriptBin "recyclarr-sync" ''
@@ -8,4 +9,3 @@
     '')
   ];
 }
-
