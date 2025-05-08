@@ -36,7 +36,7 @@ let
       interval = "10s";
       conditions = [
         "[STATUS] == 200"
-        "[RESPONSE_TIME] < 300"
+        "[RESPONSE_TIME] < 1500"
       ];
       alerts = [
         {
