@@ -54,7 +54,7 @@ M.config = {
   ['nix'] = {
     lspconfig = { 'nixd', 'nil_ls' },
     linter = 'statix',
-    formatter = { 'nixpkgs_fmt', 'injected' },
+    formatter = { 'nixfmt', 'injected' },
   },
   ['toml'] = {
     lspconfig = 'taplo',

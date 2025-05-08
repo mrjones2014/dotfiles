@@ -53,7 +53,7 @@
       lldb # comes with lldb-vscode
 
       # formatters and linters
-      nixpkgs-fmt
+      nixfmt-rfc-style
       rustfmt
       shfmt
       stylua
