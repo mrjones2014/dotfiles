@@ -1,4 +1,4 @@
 local ok, otter = pcall(require, 'otter')
 if ok then
-  otter.activate()
+  pcall(otter.activate)
 end
