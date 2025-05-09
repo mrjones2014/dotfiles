@@ -4,22 +4,19 @@ local ripgrep_ignore_file_path = (
   path.join(vim.env.XDG_CONFIG_HOME or path.join(vim.env.HOME, '.config'), 'ripgrep_ignore')
 )
 
-local function pick(which, pre_hook)
+local function pick(which, opts)
   return function()
-    if pre_hook then
-      pre_hook()
-    end
-    return require('snacks.picker')[which]()
+    return require('snacks.picker')[which](opts)
   end
 end
 
 return {
   'folke/snacks.nvim',
   keys = {
-    { 'ff', pick('files'), desc = 'Find files' },
+    { 'ff', pick('files', { hidden = true }), desc = 'Find files' },
     { 'fh', pick('recent'), desc = 'Find oldfiles' },
     { 'fb', pick('buffers'), desc = 'Find buffers' },
-    { 'ft', pick('grep'), desc = 'Find text' },
+    { 'ft', pick('grep', { hidden = true }), desc = 'Find text' },
     { 'fs', pick('lsp_workspace_symbols'), desc = 'Find LSP symbols in the workspace' },
     { 'fr', pick('resume'), desc = 'Resume last finder' },
   },
