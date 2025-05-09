@@ -1,8 +1,13 @@
 let
   filterLists = [
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt" # The Big List of Hacked Malware Web Sites
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt" # malicious url blocklist
+    # The Big List of Hacked Malware Web Sites
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
+    # malicious url blocklist
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt"
+    # https://oisd.nl, "passes the girlfriend test"
     "https://big.oisd.nl"
+    # Native trackers (Windows, Apple, etc.)
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.plus.txt"
   ];
   webuiPort = 9003;
 in
