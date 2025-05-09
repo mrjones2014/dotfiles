@@ -36,14 +36,14 @@ let
       interval = "10s";
       conditions = [
         "[STATUS] == 200"
-        "[RESPONSE_TIME] < 300"
+        "[RESPONSE_TIME] < 1500"
       ];
       alerts = [
         {
           enabled = true;
           type = "discord";
-          failure-threshold = 1;
-          success-threshold = 1;
+          failure-threshold = 2;
+          success-threshold = 2;
           send-on-resolved = true;
           description = title;
         }
