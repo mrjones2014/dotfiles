@@ -42,7 +42,7 @@ let
         {
           enabled = true;
           type = "discord";
-          failure-threshold = 2;
+          failure-threshold = 4;
           success-threshold = 2;
           send-on-resolved = true;
           description = title;
