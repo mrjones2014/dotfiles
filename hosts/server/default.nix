@@ -30,6 +30,7 @@
     ./joplin.nix
     ./duckdns.nix
     ./paperless.nix
+    ./adguard.nix
     ../../nixos/sshd.nix
   ];
 
