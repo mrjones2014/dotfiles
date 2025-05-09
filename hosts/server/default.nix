@@ -29,6 +29,7 @@
     ./vikunja.nix
     ./joplin.nix
     ./duckdns.nix
+    ./paperless.nix
     ../../nixos/sshd.nix
   ];
 
