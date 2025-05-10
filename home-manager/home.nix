@@ -48,7 +48,6 @@
         parsec-bin
         ungoogled-chromium
         standardnotes
-        zen-browser
         joplin-desktop
       ]
       ++ lib.lists.optionals isThinkpad [ ]
@@ -73,9 +72,11 @@
     ./components/jujutsu.nix
     ./components/vencord.nix
     ../nixos/allowed-unfree.nix
+    inputs.zen-browser.homeModules.default
   ];
 
   programs = {
+    zen-browser.enable = true;
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
