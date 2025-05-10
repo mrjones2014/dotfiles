@@ -33,7 +33,7 @@ let
     {
       name = title;
       url = "https://${name}.mjones.network";
-      interval = "10s";
+      interval = "2m";
       conditions = [
         "[STATUS] == 200"
         "[RESPONSE_TIME] < 1500"
