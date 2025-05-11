@@ -40,10 +40,7 @@
   };
 
   services = {
-    xserver = {
-      enable = true;
-      videoDrivers = [ "amdgpu" ];
-    };
+    xserver.enable = true;
     mullvad-vpn.enable = true;
     tailscale.enable = true;
     flatpak.enable = true;
