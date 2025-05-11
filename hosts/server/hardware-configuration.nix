@@ -9,16 +9,29 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
+    initrd = {
+      luks.devices = {
+        "cryptroot" = {
+          device = "/dev/disk/by-partlabel/root"; # Use partition label, not filesystem label
+          preLVM = true;
+        };
 
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "ahci"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-      "sr_mod"
-    ];
-    initrd.kernelModules = [ ];
+        "cryptswap" = {
+          device = "/dev/disk/by-partlabel/swap"; # Partition label for swap
+          preLVM = true;
+        };
+      };
+
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+      ];
+      kernelModules = [ ];
+    };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
   };

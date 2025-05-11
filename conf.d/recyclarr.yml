@@ -1,7 +1,7 @@
 # Instance Definition: https://recyclarr.dev/wiki/yaml/config-reference/basic/
 sonarr:
   sonarr-main:
-    base_url: http://192.168.189.2:8989
+    base_url: https://sonarr.mjones.network
     api_key: "op://Homelab/6q2dhrv2auqa2dvkv7ga5wqnwm/Sonarr API Key"
 
     include:
@@ -116,7 +116,7 @@ sonarr:
 
 radarr:
   radarr-main:
-    base_url: http://192.168.189.2:7878
+    base_url: https://radarr.mjones.network
     api_key: "op://Homelab/6q2dhrv2auqa2dvkv7ga5wqnwm/Radarr API Key"
 
     include:
