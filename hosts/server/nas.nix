@@ -32,6 +32,5 @@
       enable = true;
       openFirewall = true;
     };
-    gvfs.enable = true;
   };
 }
