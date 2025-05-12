@@ -54,6 +54,7 @@ in
 {
   services.nginx.subdomains = {
     uptime.port = gatusPort;
+    dashdot.port = dashdotPort;
     homarr = {
       port = homarrPort;
       default = true;
