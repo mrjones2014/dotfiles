@@ -9,16 +9,29 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
+    initrd = {
+      luks.devices = {
+        "cryptroot" = {
+          device = "/dev/disk/by-partlabel/root"; # Use partition label, not filesystem label
+          preLVM = true;
+        };
 
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "ahci"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-      "sr_mod"
-    ];
-    initrd.kernelModules = [ ];
+        "cryptswap" = {
+          device = "/dev/disk/by-partlabel/swap"; # Partition label for swap
+          preLVM = true;
+        };
+      };
+
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+      ];
+      kernelModules = [ ];
+    };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
   };
@@ -61,8 +74,8 @@
     hostName = "nixos-server";
     defaultGateway = "192.168.189.1";
     nameservers = [
-      "45.90.28.117"
-      "45.90.30.117"
+      "127.0.0.1" # local AdGuard Home
+      "9.9.9.9"
     ];
     # static IP on ethernet interface
     interfaces.enp0s31f6.ipv4.addresses = [

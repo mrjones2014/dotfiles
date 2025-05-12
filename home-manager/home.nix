@@ -48,7 +48,6 @@
         parsec-bin
         ungoogled-chromium
         standardnotes
-        zen-browser
         joplin-desktop
       ]
       ++ lib.lists.optionals isThinkpad [ ]
@@ -56,6 +55,7 @@
         # desktop only packages
         obs-studio
         r2modman
+        qbittorrent
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
@@ -73,9 +73,11 @@
     ./components/jujutsu.nix
     ./components/vencord.nix
     ../nixos/allowed-unfree.nix
+    inputs.zen-browser.homeModules.default
   ];
 
   programs = {
+    zen-browser.enable = true;
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;

@@ -7,16 +7,6 @@ in
 {
   age.secrets.wireguard_server.file = ../../secrets/wireguard_server.age;
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      interface = wireguard_interface;
-      server = [
-        "45.90.28.117"
-        "45.90.30.117"
-      ];
-    };
-  };
   networking = {
     # Enable NAT
     nat = {
@@ -24,14 +14,7 @@ in
       externalInterface = external_interface;
       internalInterfaces = [ wireguard_interface ];
     };
-    # Open ports in the firewall
-    firewall = {
-      allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [
-        53
-        wireguard_port
-      ];
-    };
+    firewall.allowedUDPPorts = [ wireguard_port ];
     wg-quick.interfaces = {
       # the network interface name. You can name the interface arbitrarily.
       "${wireguard_interface}" = {
@@ -46,12 +29,19 @@ in
         postUp = ''
           ${pkgs.iptables}/bin/iptables -A FORWARD -i ${wireguard_interface} -j ACCEPT
           ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.0.0.1/24 -o ${external_interface} -j MASQUERADE
+          # Force all DNS traffic through local AdGuard Home
+          ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ${wireguard_interface} -p udp --dport 53 -j DNAT --to-destination 10.0.0.1:53
+          ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ${wireguard_interface} -p tcp --dport 53 -j DNAT --to-destination 10.0.0.1:53
         '';
 
         # Undo the above
         preDown = ''
           ${pkgs.iptables}/bin/iptables -D FORWARD -i ${wireguard_interface} -j ACCEPT
           ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.0.0.1/24 -o ${external_interface} -j MASQUERADE
+
+          # Remove DNS redirection rules
+          ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ${wireguard_interface} -p udp --dport 53 -j DNAT --to-destination 10.0.0.1:53
+          ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ${wireguard_interface} -p tcp --dport 53 -j DNAT --to-destination 10.0.0.1:53
         '';
 
         peers = [

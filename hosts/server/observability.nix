@@ -33,7 +33,7 @@ let
     {
       name = title;
       url = "https://${name}.mjones.network";
-      interval = "10s";
+      interval = "2m";
       conditions = [
         "[STATUS] == 200"
         "[RESPONSE_TIME] < 1500"
@@ -42,7 +42,7 @@ let
         {
           enabled = true;
           type = "discord";
-          failure-threshold = 2;
+          failure-threshold = 4;
           success-threshold = 2;
           send-on-resolved = true;
           description = title;

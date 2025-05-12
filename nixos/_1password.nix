@@ -4,4 +4,10 @@
     enable = true;
     polkitPolicyOwners = [ "mat" ];
   };
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = ''
+      zen
+    '';
+    mode = "0755";
+  };
 }
