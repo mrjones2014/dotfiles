@@ -26,7 +26,7 @@ in
           "https://dns.quad9.net/dns-query"
           "https://cloudflare-dns.com/dns-query"
         ];
-        anonymize_client_ip = true;
+        anonymize_client_ip = false;
       };
       tls = {
         enabled = true;
