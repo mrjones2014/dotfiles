@@ -21,7 +21,6 @@ let
     # By default it will just capitalize the first letter
     # of the subdomain. Customize subdomain -> Title mapping here.
     qbittorrent = "qBitTorrent";
-    joplin = "Joplin Sync Server";
   };
 
   # Generate the Gatus endpoints configuration
@@ -54,6 +53,7 @@ in
 {
   services.nginx.subdomains = {
     uptime.port = gatusPort;
+    dashdot.port = dashdotPort;
     homarr = {
       port = homarrPort;
       default = true;

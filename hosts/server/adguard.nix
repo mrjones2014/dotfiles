@@ -26,7 +26,7 @@ in
           "https://dns.quad9.net/dns-query"
           "https://cloudflare-dns.com/dns-query"
         ];
-        anonymize_client_ip = true;
+        anonymize_client_ip = false;
       };
       tls = {
         enabled = true;
@@ -43,6 +43,10 @@ in
         inherit url;
         enabled = true;
       }) filterLists;
+      user_rules = [
+        "||telemetry.affine.run^"
+        "||comparative-mollusk-y0a4rcrnmuyekxc7u0ajsvh7.herokudns.com^"
+      ];
     };
   };
 }
