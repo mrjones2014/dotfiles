@@ -14,44 +14,42 @@ let
   podman_dns_port = 8053;
 in
 {
-  # Create required directories
-  systemd.tmpfiles.rules = [
-    "d ${upload_location} 0777 root podman - -"
-    "d ${config_location} 0777 root podman - -"
-    "d ${db_data_location} 0777 root podman - -"
-  ];
-
-  age.secrets.affine_env.file = ../../secrets/affine_env.age;
-  services.nginx.subdomains.affine.port = port;
-
-  # Create network for containers
-  systemd.services.affine-podman-network-create = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [
-      "podman-affine-server.service"
-      "podman-affine-migration.service"
-      "podman-affine-redis.service"
-      "podman-affine-postgres.service"
+  systemd = {
+    # Create required directories
+    tmpfiles.rules = [
+      "d ${upload_location} 0777 root podman - -"
+      "d ${config_location} 0777 root podman - -"
+      "d ${db_data_location} 0777 root podman - -"
     ];
-    script = ''
-      ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
-    '';
-  };
 
-  # Configure Podman DNS
-  virtualisation.containers.containersConf.settings.network.dns_bind_port = podman_dns_port;
+    # Create network for containers
+    services.affine-podman-network-create = {
+      serviceConfig.Type = "oneshot";
+      wantedBy = [
+        "podman-affine-server.service"
+        "podman-affine-migration.service"
+        "podman-affine-redis.service"
+        "podman-affine-postgres.service"
+      ];
+      script = ''
+        ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
+      '';
+    };
 
-  # Modify the systemd service for migration to run once and not restart
-  systemd.services.podman-affine-migration = {
-    serviceConfig = {
-      # Run once and don't restart
-      Type = lib.mkForce "oneshot";
-      Restart = lib.mkForce "on-failure";
-      RemainAfterExit = true;
+    # Modify the systemd service for migration to run once and not restart
+    services.podman-affine-migration = {
+      serviceConfig = {
+        # Run once and don't restart
+        Type = lib.mkForce "oneshot";
+        Restart = lib.mkForce "on-failure";
+        RemainAfterExit = true;
+      };
     };
   };
 
-  # Container definitions
+  age.secrets.affine_env.file = ../../secrets/affine_env.age;
+  services.nginx.subdomains.affine.port = port;
+  virtualisation.containers.containersConf.settings.network.dns_bind_port = podman_dns_port;
   virtualisation.oci-containers.containers = {
     affine-postgres = {
       autoStart = true;
