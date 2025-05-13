@@ -43,6 +43,9 @@ in
         inherit url;
         enabled = true;
       }) filterLists;
+      user_rules = [
+        "||telemetry.affine.run^"
+      ];
     };
   };
 }
