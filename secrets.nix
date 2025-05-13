@@ -17,7 +17,6 @@ let
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
     "secrets/duckdns_token.age"
-    "secrets/joplin_env.age"
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
     "secrets/affine_env.age"

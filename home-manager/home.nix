@@ -47,8 +47,7 @@
         vlc
         parsec-bin
         ungoogled-chromium
-        standardnotes
-        joplin-desktop
+        affine-bin
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
