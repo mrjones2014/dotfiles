@@ -15,7 +15,7 @@
     # I'll install manually on macOS and use Nix to generate the config.
     # For now, shim the package with pkgs.emptyDirectory to trick nix
     # into still generating the config.
-    package = if isDarwin then pkgs.emptyDirectory else pkgs.ghostty;
+    package = if isDarwin then null else pkgs.ghostty;
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {
