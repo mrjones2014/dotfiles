@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   isDarwin,
@@ -8,13 +9,17 @@
   ...
 }:
 {
-  home.sessionVariables = {
-    DOTNET_CLI_TELEMETRY_OPTOUT = "1";
-    HOMEBREW_NO_ANALYTICS = "1";
-    CARGO_NET_GIT_FETCH_WITH_CLI = "true";
-    GIT_MERGE_AUTOEDIT = "no";
-    NEXT_TELEMETRY_DISABLED = "1";
-  };
+  home.sessionVariables =
+    {
+      DOTNET_CLI_TELEMETRY_OPTOUT = "1";
+      HOMEBREW_NO_ANALYTICS = "1";
+      CARGO_NET_GIT_FETCH_WITH_CLI = "true";
+      GIT_MERGE_AUTOEDIT = "no";
+      NEXT_TELEMETRY_DISABLED = "1";
+    }
+    // lib.optionalAttrs isDarwin {
+      ANDROID_HOME = "${config.home.homeDirectory}/Library/Android/sdk/";
+    };
   programs = {
     btop.enable = true;
     carapace.enable = true;
