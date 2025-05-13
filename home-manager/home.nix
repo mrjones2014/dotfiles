@@ -76,7 +76,7 @@
   ];
 
   programs = {
-    zen-browser.enable = true;
+    zen-browser.enable = !isDarwin;
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
