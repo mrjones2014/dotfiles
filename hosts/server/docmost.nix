@@ -79,6 +79,7 @@ in
       environment = {
         APP_URL = "http://localhost:${toString port}";
         REDIS_URL = "redis://docmost-redis:6379";
+        DISABLE_TELEMETRY = "true";
       };
       dependsOn = [
         "docmost-db"
