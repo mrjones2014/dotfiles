@@ -27,7 +27,7 @@
     ./wireguard.nix
     ./observability.nix
     ./vikunja.nix
-    ./affine.nix
+    ./docmost.nix
     ./duckdns.nix
     ./paperless.nix
     ./adguard.nix

@@ -20,6 +20,7 @@ let
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
     "secrets/affine_env.age"
+    "secrets/docmost_env.age"
   ];
 in
 builtins.listToAttrs (
