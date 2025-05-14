@@ -47,7 +47,6 @@
         vlc
         parsec-bin
         ungoogled-chromium
-        affine
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
