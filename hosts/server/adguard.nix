@@ -38,6 +38,12 @@ in
       filtering = {
         protection_enabled = true;
         filtering_enabled = true;
+        rewrites = [
+          {
+            domain = "*.mjones.network";
+            answer = import ./ip.nix;
+          }
+        ];
       };
       filters = map (url: {
         inherit url;
