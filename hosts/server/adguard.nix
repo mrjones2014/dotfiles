@@ -24,7 +24,7 @@ in
       dns = {
         upstream_dns = [
           "https://dns.quad9.net/dns-query"
-          "https://cloudflare-dns.com/dns-query"
+          "https://base.dns.mullvad.net/dns-query"
         ];
         anonymize_client_ip = false;
       };
