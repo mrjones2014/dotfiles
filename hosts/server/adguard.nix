@@ -21,6 +21,14 @@ in
     enable = true;
     port = webuiPort;
     settings = {
+      users = [
+        {
+          name = "mat";
+          # generated with `nix-shell -p apacheHttpd` followed by `htpasswd -B -C 10 -n -b mat [password here]`
+          # NB: Remember to put a space before the command so it doesn't go into shell history!
+          password = "$2y$10$BKjlLZTCAgsfEO1L/TJFG.BiirZaHCE8NximCOdD7U5gCq9cz1x1C";
+        }
+      ];
       dns = {
         upstream_dns = [
           "https://dns.quad9.net/dns-query"
