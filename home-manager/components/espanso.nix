@@ -2,7 +2,10 @@
 {
   services.espanso = {
     enable = isLinux;
-    configs.default.search_shortcut = "OFF";
+    configs.default = {
+      search_shortcut = "OFF";
+      show_notifications = false;
+    };
     matches = {
       base = {
         matches = [
