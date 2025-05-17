@@ -66,7 +66,7 @@
     prismlauncher
     wally-cli
     protonup-qt
-    # dolphinEmu # dolphin build is suuuuper slow and also broken rn
+    dolphin-emu
     # rpcs3 # broken right now
   ];
 
