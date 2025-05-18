@@ -44,7 +44,7 @@ in
         "com.mitchellh.ghostty.desktop"
         "standard-notes.desktop"
         "1password.desktop"
-        "signal-desktop.desktop"
+        "signal.desktop"
         "firefox.desktop"
         "vesktop.desktop"
       ] ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
