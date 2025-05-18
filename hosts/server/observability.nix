@@ -51,25 +51,31 @@ let
   ) nginxSubdomains;
 in
 {
-  services.nginx.subdomains = {
-    uptime.port = gatusPort;
-    dashdot.port = dashdotPort;
-    homarr = {
-      port = homarrPort;
-      default = true;
+  services = {
+    nginx.subdomains = {
+      uptime.port = gatusPort;
+      dashdot.port = dashdotPort;
+      glances.port = config.services.glances.port;
+      homarr = {
+        port = homarrPort;
+        default = true;
+      };
     };
+
+    gatus = {
+      enable = true;
+      environmentFile = config.age.secrets.gatus_discord_webhook_env.path;
+      settings = {
+        web.port = gatusPort;
+        endpoints = gatusEndpoints;
+        alerting.discord.webhook-url = "\${DISCORD_WEBHOOK_URL}";
+      };
+    };
+
+    glances.enable = true;
   };
 
   age.secrets.gatus_discord_webhook_env.file = ../../secrets/gatus_discord_webhook_env.age;
-  services.gatus = {
-    enable = true;
-    environmentFile = config.age.secrets.gatus_discord_webhook_env.path;
-    settings = {
-      web.port = gatusPort;
-      endpoints = gatusEndpoints;
-      alerting.discord.webhook-url = "\${DISCORD_WEBHOOK_URL}";
-    };
-  };
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
   age.secrets.homarr_env.file = ../../secrets/homarr_env.age;

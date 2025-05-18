@@ -36,6 +36,8 @@
 
   powerManagement.cpuFreqGovernor = "performance";
   boot = {
+    # less aggressive swap usage
+    kernel.sysctl."vm.swappiness" = 25;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
