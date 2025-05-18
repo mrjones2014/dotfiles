@@ -110,18 +110,32 @@
         nix-apply = {
           description = "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
-            git fetch
-            set -l current_branch (git symbolic-ref --short HEAD)
-            # Get the current and upstream commit hashes, suppressing output
-            set -l upstream_commit (git rev-parse "$current_branch"@{u} 2>/dev/null)
-            set -l local_commit (git rev-parse "$current_branch" 2>/dev/null)
-            # Check if upstream is set and if the commits are different
-            if test -n "$upstream_commit" -a "$upstream_commit" != "$local_commit"
-                set -l base_commit (git merge-base "$current_branch" "$current_branch"@{u})
-                if test "$base_commit" = "$local_commit" -a "$local_commit" != "$upstream_commit"
-                    echo "Error: Your branch is behind the remote branch. Do a git pull first."
-                    return 1
+            # Check for offline flag
+            set -l offline 0
+            for arg in $argv
+                if test "$arg" = -o -o "$arg" = --offline
+                    set offline 1
+                    break
                 end
+            end
+
+            # Skip git checks if offline mode is enabled
+            if test $offline -eq 0
+                git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles fetch
+                set -l current_branch (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles symbolic-ref --short HEAD)
+                # Get the current and upstream commit hashes, suppressing output
+                set -l upstream_commit (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles rev-parse "$current_branch"@{u} 2>/dev/null)
+                set -l local_commit (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles rev-parse "$current_branch" 2>/dev/null)
+                # Check if upstream is set and if the commits are different
+                if test -n "$upstream_commit" -a "$upstream_commit" != "$local_commit"
+                    set -l base_commit (git merge-base "$current_branch" "$current_branch"@{u})
+                    if test "$base_commit" = "$local_commit" -a "$local_commit" != "$upstream_commit"
+                        echo "Error: Your branch is behind the remote branch. Do a git pull first."
+                        return 1
+                    end
+                end
+            else
+                echo "Running in offline mode, skipping git status checks."
             end
             ${
               if isDarwin then
