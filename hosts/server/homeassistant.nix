@@ -16,6 +16,7 @@
         "adguard"
         "sonos"
         "nanoleaf"
+        "api"
       ];
       config = {
         recorder.db_url = "postgresql://@/hass";
