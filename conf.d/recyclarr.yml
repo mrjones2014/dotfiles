@@ -73,22 +73,32 @@ sonarr:
     # ===== CUSTOM FORMATS =====
     # These define specific characteristics to look for and how they're scored
     custom_formats:
-      # ENGLISH LANGUAGE ONLY
-      # Ensures only English language content is downloaded
-      - name: "Language: Not English"  # This matches non-English content
-        include_custom_format_when_renaming: false
-        specifications:
-          - name: "Not English Language"
-            implementation: "LanguageSpecification"
-            negate: true
-            required: false
-            fields:
-              value: 1  # 1 = English
+      # LANGUAGE RESTRICTION
+      # Block common non-English languages with trash IDs
+      - trash_ids:
+          - 5b42402c8e359900018a43c9 # Multi Languages
+          - 0f12c086e289cf966fa5948eac571f44 # German
+          - a7a9d7c1cec3d04ad810fce6fdea38c2 # German (Main)
+          - af94e0fe497124d1f1f3a2f6e240694a # Dutch
+          - 7a3a0e3dda906eb38a5c23779be3c161 # French
+          - 417400fd1f2df78b2968842a5cfce526 # Italian
+          - fde0d392868dadd190da1c374290a857 # Spanish
+          - d99891b2bc27a1972f98427949c3c5d6 # Turkish
+          - b785e50b5e14fbd0e261134fa6e7fb5c # Polish
         quality_profiles:
           - name: 720p-2160p
-            score: -10000  # Strong negative score makes non-English undownloadable
+            score: -10000
           - name: 1080p-2160p
             score: -10000
+
+      # PRIORITIZE ENGLISH
+      - trash_ids:
+          - 88ee7edbf89acc03cb5bf3ec4b271410 # English
+        quality_profiles:
+          - name: 720p-2160p
+            score: 1000  # High score for English
+          - name: 1080p-2160p
+            score: 1000
 
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space compared to x264
@@ -163,22 +173,30 @@ radarr:
           - name: Bluray-2160p
 
     custom_formats:
-      # ENGLISH LANGUAGE ONLY
-      # Ensures only English language content is downloaded
-      - name: "Language: Not English"  # This matches non-English content
-        include_custom_format_when_renaming: false
-        specifications:
-          - name: "Not English Language"
-            implementation: "LanguageSpecification"
-            negate: true
-            required: false
-            fields:
-              value: 1  # 1 = English
+      # LANGUAGE RESTRICTION
+      # Block common non-English languages with trash IDs
+      - trash_ids:
+          - e26437a13ed15ad4646b828ed9a3ef74 # Multi Audio
+          - e0c07d59beb37348e975a930d5e50319 # Multi-Language Subs
+          - c3a8f4fb2df3e1fda5fd7b3d7e7ad29b # German Audio
+          - 3a3ff47579026e76d6504bb56b687b45 # French Audio
+          - 57a891339f99b8fd8f22b7cbc97e63d8 # Italian Audio
+          - b26eeabef55c7bb0c1e4ade5cd534e10 # Spanish Audio
+          - 5cdffeca4d5cbb68c67cca625b99d9cc # Russian Audio
         quality_profiles:
           - name: 720p-2160p
-            score: -10000  # Strong negative score makes non-English undownloadable
+            score: -10000
           - name: 1080p-2160p
             score: -10000
+
+      # PRIORITIZE ENGLISH
+      - trash_ids:
+          - 1c7d7b04b15cc53ea61204bebbcc1ee2 # English Language
+        quality_profiles:
+          - name: 720p-2160p
+            score: 1000  # High score for English
+          - name: 1080p-2160p
+            score: 1000
 
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space
