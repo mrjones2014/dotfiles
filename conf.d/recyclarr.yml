@@ -77,7 +77,9 @@ sonarr:
           # - 385e9e8581d33133c3961bdcdeffb7b4 # DV HDR10+ Boost
         quality_profiles:
           - name: 1080p-2160p
+            score: 200
           - name: 720p-2160p
+            score: 200
 
       # Optional
       - trash_ids:
@@ -95,24 +97,24 @@ sonarr:
           - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
         quality_profiles:
           - name: 1080p-2160p
-            score: 0
+            score: 400
           - name: 720p-2160p
-            score: 0
+            score: 400
       - trash_ids:
           - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
         quality_profiles:
           - name: 1080p-2160p
-            score: 0
+            score: 400
           - name: 720p-2160p
-            score: 0
+            score: 400
 
       - trash_ids:
           - 2016d1676f5ee13a5b7257ff86ac9a93 # SDR
         quality_profiles:
           - name: 1080p-2160p
-            score: 0 # Uncomment this line to enable SDR releases
+            score: 100
           - name: 720p-2160p
-            score: 0
+            score: 100
 
 radarr:
   radarr-main:
@@ -222,9 +224,9 @@ radarr:
           - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
         quality_profiles:
           - name: 1080p-2160p
-            score: 0
+            score: 400
           - name: 720p-2160p
-            score: 0
+            score: 400
       - trash_ids:
           - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         quality_profiles:
@@ -240,12 +242,23 @@ radarr:
           # - 55a5b50cb416dea5a50c4955896217ab # DV HDR10+ Boost
         quality_profiles:
           - name: 1080p-2160p
+            score: 200
           - name: 720p-2160p
+            score: 200
 
       - trash_ids:
           - 9c38ebb7384dada637be8899efa68e6f # SDR
         quality_profiles:
           - name: 1080p-2160p
-            score: 0 # Uncomment this line to allow SDR releases
+            score: 100
           - name: 720p-2160p
-            score: 0
+            score: 100
+      # Deprioritize remuxes, they are very inefficient disk-space wise
+      - trash_ids:
+          - ed38b889b31be83fda192888e2286d83 # BR-DISK
+          - 9d27d9d2181838f76dee150882bdc58c # BR-DISK Remux
+        quality_profiles:
+          - name: 1080p-2160p
+            score: -10000  # Add negative score to avoid these large files
+          - name: 720p-2160p
+            score: -10000
