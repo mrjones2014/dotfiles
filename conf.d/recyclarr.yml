@@ -73,6 +73,23 @@ sonarr:
     # ===== CUSTOM FORMATS =====
     # These define specific characteristics to look for and how they're scored
     custom_formats:
+      # ENGLISH LANGUAGE ONLY
+      # Ensures only English language content is downloaded
+      - name: "Language: Not English"  # This matches non-English content
+        include_custom_format_when_renaming: false
+        specifications:
+          - name: "Not English Language"
+            implementation: "LanguageSpecification"
+            negate: true
+            required: false
+            fields:
+              value: 1  # 1 = English
+        quality_profiles:
+          - name: 720p-2160p
+            score: -10000  # Strong negative score makes non-English undownloadable
+          - name: 1080p-2160p
+            score: -10000
+
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space compared to x264
       - trash_ids:
@@ -146,6 +163,23 @@ radarr:
           - name: Bluray-2160p
 
     custom_formats:
+      # ENGLISH LANGUAGE ONLY
+      # Ensures only English language content is downloaded
+      - name: "Language: Not English"  # This matches non-English content
+        include_custom_format_when_renaming: false
+        specifications:
+          - name: "Not English Language"
+            implementation: "LanguageSpecification"
+            negate: true
+            required: false
+            fields:
+              value: 1  # 1 = English
+        quality_profiles:
+          - name: 720p-2160p
+            score: -10000  # Strong negative score makes non-English undownloadable
+          - name: 1080p-2160p
+            score: -10000
+
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space
       - trash_ids:
