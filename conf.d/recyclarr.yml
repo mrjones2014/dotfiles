@@ -1,32 +1,55 @@
+# ===== INSTANCE DEFINITIONS =====
+# These sections define the connections to Sonarr and Radarr instances
 sonarr:
   sonarr-main:
     base_url: https://sonarr.mjones.network
     api_key: "op://Homelab/6q2dhrv2auqa2dvkv7ga5wqnwm/Sonarr API Key"
 
+    # ===== TEMPLATE INCLUDES =====
+    # These pull in pre-configured settings from TRaSH guides
     include:
-      - template: sonarr-quality-definition-series
+      - template: sonarr-quality-definition-series  # Sets up ideal bitrates and quality definitions
+      - template: sonarr-v4-custom-formats-web-2160p  # Adds 4K-specific custom formats and scoring
+      - template: sonarr-v4-custom-formats-web-1080p  # Adds 1080p-specific custom formats and scoring
+                                                     # Both templates include negative scores for bad releases
 
+    # ===== QUALITY PROFILES =====
+    # These define what quality levels are acceptable and their relative preferences
     quality_profiles:
-      # Profile 1: 720p-2160p for older content
+      # Profile 1: Allows 720p through 4K (for older/rare content that might only be available in 720p)
       - name: 720p-2160p
-        reset_unmatched_scores: { enabled: true }
+        reset_unmatched_scores:
+          enabled: true  # Ensures custom formats not explicitly defined get a score of 0
         upgrade:
-          allowed: true
-          until_quality: 2160p
-          until_score: 10000
-        min_format_score: 0
-        quality_sort: top
+          allowed: true  # Allows upgrading to better quality when available
+          until_quality: 2160p  # Highest resolution to seek
+          until_score: 10000  # Keeps upgrading until this custom format score
+        min_format_score: 0  # Downloads anything with score ≥ 0
+        quality_sort: top  # Orders quality groups from highest to lowest
         qualities:
+          # Defines the hierarchy of quality, from least preferred to most preferred
           - name: 720p
-            qualities: [WEBDL-720p, WEBRip-720p, Bluray-720p]
+            qualities:  # These qualities are considered equivalent within this group
+              - WEBDL-720p  # Streaming source at 720p
+              - WEBRip-720p  # Web captures at 720p
+              - Bluray-720p  # Blu-ray source at 720p
           - name: 1080p
-            qualities: [WEBDL-1080p, WEBRip-1080p, Bluray-1080p, Bluray-1080p Remux]
+            qualities:
+              - WEBDL-1080p  # Streaming source at 1080p
+              - WEBRip-1080p  # Web captures at 1080p
+              - Bluray-1080p  # Standard Blu-ray rips at 1080p
+              - Bluray-1080p Remux  # Untouched Blu-ray streams in MKV container (very large)
           - name: 2160p
-            qualities: [WEBDL-2160p, WEBRip-2160p, Bluray-2160p, Bluray-2160p Remux]
+            qualities:
+              - WEBDL-2160p  # Streaming source at 4K
+              - WEBRip-2160p  # Web captures at 4K
+              - Bluray-2160p  # Standard 4K Blu-ray rips
+              - Bluray-2160p Remux  # Untouched 4K Blu-ray streams (extremely large)
 
-      # Profile 2: 1080p-2160p for newer content
+      # Profile 2: Starts at 1080p minimum (for newer content where 720p isn't needed)
       - name: 1080p-2160p
-        reset_unmatched_scores: { enabled: true }
+        reset_unmatched_scores:
+          enabled: true
         upgrade:
           allowed: true
           until_quality: 2160p
@@ -35,42 +58,48 @@ sonarr:
         quality_sort: top
         qualities:
           - name: 1080p
-            qualities: [WEBDL-1080p, WEBRip-1080p, Bluray-1080p, Bluray-1080p Remux]
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+              - Bluray-1080p Remux
           - name: 2160p
-            qualities: [WEBDL-2160p, WEBRip-2160p, Bluray-2160p, Bluray-2160p Remux]
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
+              - Bluray-2160p Remux
 
+    # ===== CUSTOM FORMATS =====
+    # These define specific characteristics to look for and how they're scored
     custom_formats:
-      # Space-saving and quality formats
+      # SPACE-SAVING FORMATS
+      # Prioritize x265/HEVC which typically saves 40-50% space compared to x264
       - trash_ids:
           - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
           - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
         quality_profiles:
           - name: 720p-2160p
-            score: 400  # Prioritize x265 for space saving
+            score: 400  # High positive score strongly prefers x265 encoding
           - name: 1080p-2160p
             score: 400
 
-      # Visual enhancements (with moderate preference)
-      - trash_ids:
-          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
-        quality_profiles:
-          - name: 720p-2160p
-            score: 200
-          - name: 1080p-2160p
-            score: 200
-
+# ===== RADARR CONFIGURATION =====
+# Similar structure as Sonarr but for movies
 radarr:
   radarr-main:
     base_url: https://radarr.mjones.network
     api_key: "op://Homelab/6q2dhrv2auqa2dvkv7ga5wqnwm/Radarr API Key"
 
     include:
-      - template: radarr-quality-definition-movie
+      - template: radarr-quality-definition-movie  # Optimal bitrates for movie qualities
+      - template: radarr-custom-formats-remux-web-2160p  # Includes all the negative scores for bad releases
 
     quality_profiles:
-      # Profile 1: 720p-2160p for older movies
+      # Profile 1: Allows 720p through 4K (for older/rare movies)
       - name: 720p-2160p
-        reset_unmatched_scores: { enabled: true }
+        reset_unmatched_scores:
+          enabled: true
         upgrade:
           allowed: true
           until_quality: WEB 2160p
@@ -79,18 +108,25 @@ radarr:
         quality_sort: top
         qualities:
           - name: WEB 720p
-            qualities: [WEBDL-720p, WEBRip-720p]
-          - name: Bluray-720p
+            qualities:
+              - WEBDL-720p  # Streaming source at 720p
+              - WEBRip-720p  # Web captures at 720p
+          - name: Bluray-720p  # Blu-ray source at 720p
           - name: WEB 1080p
-            qualities: [WEBDL-1080p, WEBRip-1080p]
-          - name: Bluray-1080p
+            qualities:
+              - WEBDL-1080p  # Streaming source at 1080p
+              - WEBRip-1080p  # Web captures at 1080p
+          - name: Bluray-1080p  # Blu-ray source at 1080p
           - name: WEB 2160p
-            qualities: [WEBDL-2160p, WEBRip-2160p]
-          - name: Bluray-2160p
+            qualities:
+              - WEBDL-2160p  # Streaming source at 4K
+              - WEBRip-2160p  # Web captures at 4K
+          - name: Bluray-2160p  # Blu-ray source at 4K
 
-      # Profile 2: 1080p-2160p for newer movies
+      # Profile 2: Starts at 1080p minimum (for newer movies)
       - name: 1080p-2160p
-        reset_unmatched_scores: { enabled: true }
+        reset_unmatched_scores:
+          enabled: true
         upgrade:
           allowed: true
           until_quality: WEB 2160p
@@ -99,38 +135,45 @@ radarr:
         quality_sort: top
         qualities:
           - name: WEB 1080p
-            qualities: [WEBDL-1080p, WEBRip-1080p]
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
           - name: Bluray-1080p
           - name: WEB 2160p
-            qualities: [WEBDL-2160p, WEBRip-2160p]
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
           - name: Bluray-2160p
 
     custom_formats:
-      # Space-saving formats
+      # SPACE-SAVING FORMATS
+      # Prioritize x265/HEVC which typically saves 40-50% space
       - trash_ids:
           - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
           - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
         quality_profiles:
           - name: 720p-2160p
-            score: 400  # Strongly prefer x265
+            score: 400  # Strong preference for space-efficient encoding
           - name: 1080p-2160p
             score: 400
 
-      # Visual enhancements
+      # SPECIAL VERSIONS
+      # Prefer IMAX Enhanced editions which usually have more image visible
       - trash_ids:
           - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         quality_profiles:
           - name: 720p-2160p
-            score: 200
+            score: 200  # Moderate preference for IMAX versions
           - name: 1080p-2160p
             score: 200
 
-      # Avoid disk space hogs
+      # AVOID HUGE FILES
+      # Strongly avoid raw Blu-ray rips which consume massive space
       - trash_ids:
-          - ed38b889b31be83fda192888e2286d83 # BR-DISK
-          - 9d27d9d2181838f76dee150882bdc58c # BR-DISK Remux
+          - ed38b889b31be83fda192888e2286d83 # BR-DISK - Raw Blu-ray
+          - 9d27d9d2181838f76dee150882bdc58c # BR-DISK Remux - Untouched Blu-ray streams
         quality_profiles:
           - name: 720p-2160p
-            score: -1000
+            score: -1000  # Strong negative score to avoid these formats
           - name: 1080p-2160p
-            score: -1000
+            score: -1000  # Strong negative score to avoid these formats
