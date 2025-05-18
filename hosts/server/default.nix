@@ -31,6 +31,7 @@
     ./duckdns.nix
     ./paperless.nix
     ./adguard.nix
+    ./homeassistant.nix
     ../../nixos/sshd.nix
   ];
 

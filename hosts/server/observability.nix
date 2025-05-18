@@ -21,6 +21,7 @@ let
     # By default it will just capitalize the first letter
     # of the subdomain. Customize subdomain -> Title mapping here.
     qbittorrent = "qBitTorrent";
+    home = "Home Assistant";
   };
 
   # Generate the Gatus endpoints configuration
