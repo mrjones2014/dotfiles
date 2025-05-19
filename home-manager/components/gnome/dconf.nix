@@ -17,12 +17,7 @@ let
     user-themes
     quick-settings-tweaker
   ];
-  enabled-extensions =
-    (map (ext: ext.extensionUuid) gnomeExtensions)
-    # gsconnect requires a systemd service so it needs to be installed
-    # via environment.systemPackages
-    # This is done in ../../../nixos/desktop_environment.nix
-    ++ [ pkgs.gnomeExtensions.gsconnect.extensionUuid ];
+  enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
 {
   home.packages = gnomeExtensions;
