@@ -4,7 +4,11 @@
     nginx.subdomains.home.port = config.services.home-assistant.config.http.server_port;
     home-assistant = {
       enable = true;
-      extraPackages = ps: with ps; [ psycopg2 ];
+      extraPackages =
+        ps: with ps; [
+          psycopg2
+          pyatv
+        ];
       extraComponents = [
         "default_config"
         "met"
