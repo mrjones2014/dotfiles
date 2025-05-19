@@ -8,6 +8,7 @@
         ps: with ps; [
           psycopg2
           pyatv
+          universal-silabs-flasher
         ];
       extraComponents = [
         "default_config"
