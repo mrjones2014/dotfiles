@@ -19,6 +19,7 @@
         "api"
       ];
       config = {
+        default_config = { };
         recorder.db_url = "postgresql://@/hass";
         homeassistant = {
           unit_system = "us_customary";
