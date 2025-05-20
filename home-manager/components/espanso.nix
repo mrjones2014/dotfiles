@@ -1,7 +1,6 @@
-{ isLinux, ... }:
 {
   services.espanso = {
-    enable = isLinux;
+    enable = true;
     configs.default = {
       search_shortcut = "OFF";
       show_notifications = false;
