@@ -59,6 +59,7 @@ in
       }) filterLists;
       user_rules = [
         "||comparative-mollusk-y0a4rcrnmuyekxc7u0ajsvh7.herokudns.com^"
+        "||telemetry.affine.run^"
       ];
     };
   };
