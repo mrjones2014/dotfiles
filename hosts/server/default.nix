@@ -28,6 +28,7 @@
     ./observability.nix
     ./vikunja.nix
     ./docmost.nix
+    ./affine.nix
     ./duckdns.nix
     ./paperless.nix
     ./adguard.nix
