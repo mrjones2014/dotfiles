@@ -72,7 +72,7 @@
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     useDHCP = lib.mkDefault true;
     hostName = "nixos-server";
-    defaultGateway = "192.168.189.1";
+    defaultGateway = "192.168.1.1";
     nameservers = [ config.networking.defaultGateway.address ];
     # static IP on ethernet interface
     interfaces.enp0s31f6.ipv4.addresses = [

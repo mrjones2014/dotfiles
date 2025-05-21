@@ -53,7 +53,7 @@ in
       USERSPACE_WIREGUARD = "no";
       STRICT_PORT_FORWARD = "yes";
       ENABLE_PRIVOXY = "yes";
-      LAN_NETWORK = "192.168.189.0/24";
+      LAN_NETWORK = "192.168.1.0/24";
       NAME_SERVERS = "1.1.1.1,1.0.0.1";
       ENABLE_STARTUP_SCRIPTS = "yes";
       ENABLE_SOCKS = "yes";
