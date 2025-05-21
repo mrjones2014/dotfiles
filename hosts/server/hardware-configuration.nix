@@ -73,10 +73,7 @@
     useDHCP = lib.mkDefault true;
     hostName = "nixos-server";
     defaultGateway = "192.168.189.1";
-    nameservers = [
-      "127.0.0.1" # local AdGuard Home
-      "9.9.9.9"
-    ];
+    nameservers = [ config.networking.defaultGateway.address ];
     # static IP on ethernet interface
     interfaces.enp0s31f6.ipv4.addresses = [
       {
