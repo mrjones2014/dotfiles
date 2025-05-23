@@ -1,6 +1,7 @@
+{ isServer, ... }:
 {
   services.espanso = {
-    enable = true;
+    enable = !isServer;
     configs.default = {
       search_shortcut = "OFF";
       show_notifications = false;
