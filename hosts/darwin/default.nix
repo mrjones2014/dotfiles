@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../../nixos/nix-conf.nix
@@ -18,5 +18,6 @@
     taps = [ "kiraum/tap" ];
     brews = [ "kiraum/tap/cody" ];
   };
+  system.primaryUser = config.users.users.mat.name;
   system.stateVersion = 6;
 }
