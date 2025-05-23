@@ -37,6 +37,10 @@
           name = "foreign-env";
           inherit (pkgs.fishPlugins.foreign-env) src;
         }
+        {
+          name = "auto-pairs";
+          inherit (pkgs.fishPlugins.autopair) src;
+        }
       ];
 
       shellAliases =
