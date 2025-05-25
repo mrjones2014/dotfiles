@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   isDarwin,
@@ -197,8 +198,8 @@ in
                 mkfifo $fifo_path
             end
 
-            set -l display_options "  SSH to nixos-server"
-            set -l commands "ghostty -e ssh mat@nixos-server"
+            set -l display_options "  SSH to ${config.networking.hostName}.local"
+            set -l commands "ghostty -e ssh mat@${config.networking.hostName}.local"
 
             # add 'copy git branch' only if in git repo
             if test -d .git

@@ -8,7 +8,7 @@ let
   ];
   # server host key
   systems = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXHRx83f5MWdhcEHXduTINyUu6yqd2eOgZHE0XNYFlO root@nixos-server"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXHRx83f5MWdhcEHXduTINyUu6yqd2eOgZHE0XNYFlO root@homelab"
   ];
   secrets = [
     "secrets/mullvad_wireguard.age"
