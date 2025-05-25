@@ -16,9 +16,7 @@ in
     enable = true;
     forwardAgent = true;
     matchBlocks =
-      {
-        "nixos-server".hostname = import ../../hosts/server/ip.nix;
-      }
+      { }
       // lib.optionalAttrs (!isServer) {
         # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
         "*".extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
