@@ -5,6 +5,23 @@
   environment.systemPackages = [ pkgs.mullvad-vpn ];
 
   security.rtkit.enable = true;
+  networking = {
+    wireguard.enable = true;
+    firewall = {
+      enable = true;
+      allowPing = true;
+    };
+  };
+  # enable mDNS for stuff like NAS and SSH
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
   services = {
     mullvad-vpn.enable = true;
     # going to use pipewire instead
@@ -48,11 +65,6 @@
   systemd.user.extraConfig = ''
     DefaultTimeoutStopSec=10s
   '';
-
-  networking = {
-    wireguard.enable = true;
-    firewall.enable = true;
-  };
 
   security = {
     sudo.enable = true;
