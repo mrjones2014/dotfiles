@@ -73,7 +73,12 @@
     useDHCP = lib.mkDefault true;
     hostName = "homelab";
     defaultGateway = "192.168.1.1";
-    nameservers = [ config.networking.defaultGateway.address ];
+    nameservers = [
+      # TODO temporary. Works around a stupid ass issue with AmpliFi router.
+      # Remove when I get my new UniFi router replacement.
+      "127.0.0.1"
+      config.networking.defaultGateway.address
+    ];
     # static IP on ethernet interface
     interfaces.enp0s31f6.ipv4.addresses = [
       {
