@@ -1,7 +1,8 @@
 {
+  osConfig,
+  config,
   pkgs,
   lib,
-  config,
   isServer,
   ...
 }:
@@ -167,7 +168,7 @@ with import ./tokyonight_palette.nix;
                   format_left   "#[bg=${bg}]{tabs}"
                   format_center "{notifications}"
                   format_right  "{mode}${
-                    if isServer then "#[bg=${green},fg=${bg}]  mat@nixos-server " else ""
+                    if isServer then "#[bg=${green},fg=${bg}]  mat@${osConfig.networking.hostName}.local " else ""
                   }#[bg=${bg}]"
                   format_space  "#[bg=${bg}]"
                   format_hide_on_overlength "true"

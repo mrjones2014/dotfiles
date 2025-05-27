@@ -1,6 +1,5 @@
 {
   # these are NOT exposed to the internet
-  networking.firewall.allowPing = true;
   services = {
     # samba share, allow guest users full access
     # it's only reachable via LAN anyway

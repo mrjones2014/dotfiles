@@ -42,7 +42,6 @@
   services = {
     xserver.enable = true;
     mullvad-vpn.enable = true;
-    tailscale.enable = true;
     flatpak.enable = true;
   };
 

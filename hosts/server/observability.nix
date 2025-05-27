@@ -100,7 +100,7 @@ in
       DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
       DASHDOT_OVERRIDE_OS = "NixOS";
       DASHDOT_OVERRIDE_ARCH = "x86";
-      DASHDOT_CUSTOM_HOST = "nixos-server";
+      DASHDOT_CUSTOM_HOST = config.networking.hostName;
       DASHDOT_SHOW_HOST = "true";
     };
   };
