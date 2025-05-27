@@ -1,6 +1,4 @@
 {
-  osConfig,
-  config,
   pkgs,
   lib,
   isDarwin,
@@ -199,8 +197,8 @@ in
                 mkfifo $fifo_path
             end
 
-            set -l display_options "  SSH to ${osConfig.networking.hostName}.local"
-            set -l commands "ghostty -e ssh mat@${osConfig.networking.hostName}.local"
+            set -l display_options "  SSH to homelab.local"
+            set -l commands "ghostty -e ssh mat@homelab.local"
 
             # add 'copy git branch' only if in git repo
             if test -d .git
