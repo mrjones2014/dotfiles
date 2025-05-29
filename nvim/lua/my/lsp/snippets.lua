@@ -129,4 +129,23 @@ function M.rust()
   })
 end
 
+function M.nix()
+  local ls = require('luasnip')
+  local p = ls.parser.parse_snippet
+  ls.add_snippets('nix', {
+    p(
+      'flake',
+      [[{
+  description = "$1";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";$2
+  };
+  outputs = inputs@{ nixpkgs, ... }: {
+    $0
+  };
+}]]
+    ),
+  })
+end
+
 return M
