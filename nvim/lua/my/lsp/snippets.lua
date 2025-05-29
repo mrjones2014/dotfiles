@@ -18,6 +18,9 @@ function M.lua()
   local function get_returned_mod_name()
     local query = vim.treesitter.query.parse('lua', LUA_MODULE_RETURN_TS_QUERY)
     local parser = vim.treesitter.get_parser(0, 'lua')
+    if parser == nil then
+      error('Install Lua treesitter parser')
+    end
     local tree = parser:parse()[1]
     local num_lines = #vim.api.nvim_buf_get_lines(0, 0, -1, false)
     for _, node, _ in query:iter_captures(tree:root(), 0, num_lines - 3, num_lines) do
@@ -73,13 +76,13 @@ function M.lua()
       })
     ),
     -- create a module structure, allowing you to customize the module name
-    p('mod', 'local $1 = {}\n\n$0\n\nreturn $1', {}),
+    p('mod', 'local $1 = {}\n\n$0\n\nreturn $1'),
     -- require without assigning to a local
-    p('rq', "require('$0')", {}),
+    p('rq', "require('$0')"),
     -- inline global function
-    p('fn', 'function($1)\n  $0\nend', {}),
+    p('fn', 'function($1)\n  $0\nend'),
     -- inline local function
-    p('lfn', 'local function $1($2)\n  $0\nend', {}),
+    p('lfn', 'local function $1($2)\n  $0\nend'),
   })
 end
 
@@ -95,9 +98,9 @@ function M.typescript()
   local p = ls.parser.parse_snippet
 
   local snippets = {
-    p('fn', 'function $1($2)$3 {\n  $0\n}', {}),
-    p('afn', 'const $1 = ($2)$3 => {\n  $0\n}', {}),
-    p('ifn', '($1)$2 => {\n  $0\n}', {}),
+    p('fn', 'function $1($2)$3 {\n  $0\n}'),
+    p('afn', 'const $1 = ($2)$3 => {\n  $0\n}'),
+    p('ifn', '($1)$2 => {\n  $0\n}'),
   }
 
   ls.add_snippets('typescript', snippets)
@@ -116,16 +119,18 @@ function M.rust()
   local p = ls.parser.parse_snippet
   ls.add_snippets('rust', {
     p('deny', '#![deny(clippy::all, clippy::pedantic, rust_2018_idioms, clippy::unwrap_used)]\n\n', {}),
-    p('fn', 'fn $1($2)$3 {\n  $0\n}', {}),
-    p('res', 'Result<$1, $2>$0', {}),
-    p('opt', 'Option<$1>$0', {}),
-    p('const', 'const $1: $2 = $0;', {}),
-    p('enum', '#[derive(Debug)]\nenum $1 {\n  $0\n}', {}),
-    p('derive', '#[derive($0)]', {}),
-    p('tst', '#[test]', {}),
-    p('impl', 'impl $1 {\n  $0\n}', {}),
-    p('for', 'for $1 in $2 {\n  $0\n}', {}),
-    p('ifl', 'if let Some($1) = $1 {\n  $0\n}', {}),
+    p('fn', 'fn $1($2)$3 {\n  $0\n}'),
+    p('res', 'Result<$1, $2>$0'),
+    p('opt', 'Option<$1>$0'),
+    p('const', 'const $1: $2 = $0;'),
+    p('enum', '#[derive(Debug)]\nenum $1 {\n  $0\n}'),
+    p('derive', '#[derive($0)]'),
+    p('tst', '#[test]'),
+    p('impl', 'impl $1 {\n  $0\n}'),
+    p('for', 'for $1 in $2 {\n  $0\n}'),
+    p('ifl', 'if let Some($1) = $1 {\n  $0\n}'),
+    p('lets', 'let Some($1) = $1 else {\n  $0\n};'),
+    p('leto', 'let Ok($1) = $1 else {\n  $0\n};'),
   })
 end
 
