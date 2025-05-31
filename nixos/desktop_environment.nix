@@ -22,14 +22,12 @@
     })
   ];
 
+  # Make electron apps detect wayland properly
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services = {
     gnome.gnome-keyring.enable = true;
-    displayManager.defaultSession = "gnome-xorg";
-    xserver = {
-      enable = true;
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
-    };
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
   environment = {
     # don't install GNOME crap like Contacts, Photos, etc.
