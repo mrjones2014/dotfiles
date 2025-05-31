@@ -25,7 +25,6 @@
       "font-family-bold-italic" = "Victor Mono Bold Oblique";
       "font-feature" = "ss02,ss06";
       "font-size" = "16";
-      "window-decoration" = "server";
       "cursor-style" = "block";
       "cursor-style-blink" = false;
       "macos-option-as-alt" = true;
