@@ -6,8 +6,8 @@
 }:
 let
   wallpaperImg = pkgs.fetchurl {
-    url = "https://www.triplemonitorbackgrounds.com/albums/thewarners777/synthwave.jpg";
-    hash = "sha256-BvFwyMa4Oub8yMRlgIZOuYgtI3UYHlbEf9rebEfEMDY=";
+    url = "https://w.wallhaven.cc/full/z8/wallhaven-z8g6wv.jpg";
+    hash = "sha256-AJLXmM86rnuoT0I93ewFocxFKwikIOt1h+JDOmWzQzg=";
   };
   gnomeExtensions = with pkgs.gnomeExtensions; [
     dash-to-dock
