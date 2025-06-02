@@ -139,19 +139,16 @@ in
 
             # Skip git checks if offline mode is enabled
             if test $offline -eq 0
-                git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles fetch
-                set -l current_branch (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles symbolic-ref --short HEAD)
-                # Get the current and upstream commit hashes, suppressing output
-                set -l upstream_commit (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles rev-parse "$current_branch"@{u} 2>/dev/null)
-                set -l local_commit (git --git-dir $HOME/git/dotfiles/.git --work-tree $HOME/git/dotfiles rev-parse "$current_branch" 2>/dev/null)
-                # Check if upstream is set and if the commits are different
-                if test -n "$upstream_commit" -a "$upstream_commit" != "$local_commit"
-                    set -l base_commit (git merge-base "$current_branch" "$current_branch"@{u})
-                    if test "$base_commit" = "$local_commit" -a "$local_commit" != "$upstream_commit"
-                        echo "Error: Your branch is behind the remote branch. Do a git pull first."
-                        return 1
-                    end
+                pushd $HOME/git/dotfiles >/dev/null 2>&1
+                git fetch
+                if test (git rev-list --left-right --count origin/master...@ | cut -f1) -gt 0
+                    echo "Current revision is behind origin/master"
+                    echo "Affected files:"
+                    git diff --stat @..origin/master
+                    popd >/dev/null 2>&1
+                    return 1
                 end
+                popd >/dev/null 2>&1
             else
                 echo "Running in offline mode, skipping git status checks."
             end
