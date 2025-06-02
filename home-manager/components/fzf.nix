@@ -184,8 +184,8 @@ in
             # parse the bookmark name out of the full bookmark info line
             set -l bookmark_name (string split ":" "$selected_bookmark" | head -n 1 | string trim)
             commandline -i " $bookmark_name "
-            commandline -f repaint
         end
+        commandline -f repaint
       '';
     };
   };
