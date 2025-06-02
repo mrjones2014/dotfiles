@@ -183,7 +183,7 @@ in
         $EDITOR $result
       '';
       fzf-jj-bookmarks = ''
-        set -l selected_bookmark (jj bookmark list | fzf --reverse --height 40%)
+        set -l selected_bookmark (jj bookmark list | fzf --height 40%)
         if test -n "$selected_bookmark"
             # parse the bookmark name out of the full bookmark info line
             set -l bookmark_name (string split ":" "$selected_bookmark" | head -n 1 | string trim)
