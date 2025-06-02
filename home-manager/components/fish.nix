@@ -18,10 +18,9 @@ let
     else
       "pc";
   rebuild-cmd = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
-  rebuild-script = pkgs.writeShellScriptBin "nom-rebuild" ''
-    # get sudo auth upfront to avoid passing password through pipe
+  rebuild-script = ''
     sudo echo
-    sudo -A ${rebuild-cmd} switch --flake ~/git/dotfiles/.#${host} |& ${pkgs.nix-output-monitor}/bin/nom
+    sudo ${rebuild-cmd} switch --flake ~/git/dotfiles/.#${host} &| ${pkgs.nix-output-monitor}/bin/nom
   '';
 in
 {
@@ -156,7 +155,7 @@ in
             else
                 echo "Running in offline mode, skipping git status checks."
             end
-            ${rebuild-script}/bin/nom-rebuild'';
+            ${rebuild-script}'';
         };
         nix-clean = {
           description = "Run Nix garbage collection and remove old kernels to free up space in boot partition";
