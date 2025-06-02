@@ -28,7 +28,7 @@
       };
       signing = {
         inherit (config.programs.git.signing) key;
-        behavior = "own";
+        behavior = "force";
         backend = "ssh";
         backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
       };
