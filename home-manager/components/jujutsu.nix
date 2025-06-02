@@ -10,6 +10,17 @@
         # This prevents me from mutating any commit that isn't authored by me
         "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())";
       };
+      aliases = {
+        # https://shaddy.dev/notes/jj-tug/
+        tug = [
+          "bookmark"
+          "move"
+          "--from"
+          "heads(::@- & bookmarks())"
+          "--to"
+          "@-"
+        ];
+      };
       user = {
         name = config.programs.git.userName;
         email = config.programs.git.userEmail;
