@@ -7,6 +7,23 @@
   isThinkpad,
   ...
 }:
+let
+  host =
+    if isDarwin then
+      "Mats-MacBook-Pro"
+    else if isServer then
+      "server"
+    else if isThinkpad then
+      "laptop"
+    else
+      "pc";
+  rebuild-cmd = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
+  rebuild-script = pkgs.writeShellScriptBin "nom-rebuild" ''
+    # get sudo auth upfront to avoid passing password through pipe
+    sudo echo
+    sudo -A ${rebuild-cmd} switch --flake ~/git/dotfiles/.#${host} |& ${pkgs.nix-output-monitor}/bin/nom
+  '';
+in
 {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
@@ -137,16 +154,7 @@
             else
                 echo "Running in offline mode, skipping git status checks."
             end
-            ${
-              if isDarwin then
-                "sudo darwin-rebuild switch --flake ~/git/dotfiles/.#Mats-MacBook-Pro"
-              else if isServer then
-                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#server"
-              else if isThinkpad then
-                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#laptop"
-              else
-                "sudo nixos-rebuild switch --flake ~/git/dotfiles/.#pc"
-            }'';
+            ${rebuild-script}/bin/nom-rebuild'';
         };
         nix-clean = {
           description = "Run Nix garbage collection and remove old kernels to free up space in boot partition";
@@ -249,6 +257,7 @@
   home.packages =
     with pkgs;
     [
+      nix-output-monitor
       tealdeer
       tokei
       cachix
