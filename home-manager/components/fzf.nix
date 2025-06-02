@@ -1,36 +1,32 @@
 {
   pkgs,
   lib,
-  isServer,
   ...
 }:
 let
-  key-bindings =
-    [
-      # you can use the command `fish_key_reader` to get the key codes to use
-      {
-        lhs = "ctrl-e";
-        rhs = "fzf-vim-widget";
-      }
-      {
-        lhs = "ctrl-g";
-        rhs = "fzf-project-widget";
-      }
-      {
-        lhs = "ctrl-f";
-        rhs = "fzf-file-widget-wrapped";
-      }
-      {
-        lhs = "ctrl-r";
-        rhs = "fzf-history-widget-wrapped";
-      }
-    ]
-    ++ lib.lists.optionals (!isServer) [
-      {
-        lhs = "ctrl-p";
-        rhs = "fzf-jj-bookmarks";
-      }
-    ];
+  key-bindings = [
+    # you can use the command `fish_key_reader` to get the key codes to use
+    {
+      lhs = "ctrl-e";
+      rhs = "fzf-vim-widget";
+    }
+    {
+      lhs = "ctrl-g";
+      rhs = "fzf-project-widget";
+    }
+    {
+      lhs = "ctrl-f";
+      rhs = "fzf-file-widget-wrapped";
+    }
+    {
+      lhs = "ctrl-r";
+      rhs = "fzf-history-widget-wrapped";
+    }
+    {
+      lhs = "ctrl-p";
+      rhs = "fzf-jj-bookmarks";
+    }
+  ];
 in
 {
   programs.fzf = {
