@@ -80,6 +80,8 @@ in
         };
 
       shellInit = ''
+        # put Nix profile *first* on my PATH
+        export PATH="$HOME/.nix-profile/bin:$PATH"
         set -g fish_prompt_pwd_dir_length 20
 
         # Source nix files, required to set fish as default shell, otherwise

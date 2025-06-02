@@ -40,6 +40,7 @@
       ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         darwin-rebuild
+        bash # macOS ships with a very old version of bash for whatever reason
       ]
       ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
