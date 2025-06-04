@@ -24,7 +24,7 @@ with import ./tokyonight_palette.nix;
         body = ''
           set -l branch (string trim $(git branch --show-current 2> /dev/null))
           set -l cwd (pwd)
-          if (git rev-parse --is-inside-worktree 2> /dev/null)
+          if git rev-parse --is-inside-worktree >/dev/null 2>&1
               # just show basename if inside branch
               set cwd (basename "$cwd")
           else
