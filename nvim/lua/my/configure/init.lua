@@ -49,8 +49,12 @@ return {
     event = 'InsertEnter',
     opts = {
       mappings = {
+        -- do not map jj because I use jujutsu and the command is jj
         i = {
-          -- do not map jj because I use jujutsu and the command is jj
+          j = { k = '<Esc>', j = false },
+          k = { k = '<Esc>', j = '<Esc>' },
+        },
+        c = {
           j = { k = '<Esc>', j = false },
           k = { k = '<Esc>', j = '<Esc>' },
         },
