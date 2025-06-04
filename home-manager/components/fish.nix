@@ -122,8 +122,7 @@ in
           body = ''
             echo "cd ~/git/"
             cd $HOME/git
-            git clone $argv && cd $(basename $argv .git)
-            jj git init --colocate
+            git clone $argv && cd $(basename $argv .git) && jj git init --colocate
           '';
         };
         nix-apply = {
