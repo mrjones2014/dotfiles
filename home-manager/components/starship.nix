@@ -1,8 +1,9 @@
 { lib, isServer, ... }:
 let
-  palette = import ./tokyonight_palette.nix;
+  palette = import ./tokyonight_palette.nix { inherit lib; };
 
   git_bg = palette.fg_gutter;
+  git_bg_ansi = palette.hexToAnsiRgb git_bg;
   git_fg = palette.fg;
   dir_bg = palette.dark5;
   server_bg = palette.teal;
@@ -28,6 +29,7 @@ with palette;
         "\${custom.dir_sep_no_git}"
         "\${custom.git_server_icon}"
         "$git_branch"
+        "\${custom.jj_log}"
         "$git_status"
         "$line_break"
         "$shlvl"
@@ -61,6 +63,24 @@ with palette;
         ignore_branches = [ "HEAD" ];
       };
       custom = {
+        jj_log = {
+          description = "Show info from jj about current change set";
+          when = true;
+          require_repo = true;
+          # NB: --ignore-working-copy, do not snapshot the repo when generating status for prompt, its too slow and not necessary;
+          # all my git operations/changes will be from manually run jj commands which will snapshot the repo at that time
+          # The `sed` part is to modify the ANSI color codes so that the background color matches
+          # I'll need to update this
+          command = ''jj log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id(self.change_id()), self.bookmarks())" | sed "s/\x1b\[\([0-9;]*\)m/\x1b[\1;48;2;${git_bg_ansi}m/g"'';
+          # Render ANSI colors directly from the `jj log` output
+          unsafe_no_escape = true;
+          format = "([ ](bg:${git_bg})[$output](bg:${git_bg})[ ](bg:${git_bg}))";
+          shell = [
+            "bash"
+            "--noprofile"
+            "--norc"
+          ];
+        };
         git_server_icon = {
           description = "Show a GitLab or GitHub icon depending on current git remote";
           when = "git rev-parse --is-inside-work-tree 2> /dev/null";
@@ -73,6 +93,7 @@ with palette;
           format = "([](fg:${dir_bg} bg:${git_bg})[ ](bg:${git_bg})[$output](bg:${git_bg} fg:${git_fg})[ ](bg:${git_bg}))";
         };
         dir_sep_no_git = {
+          description = "Show rounded separator when not in a git repo";
           format = "[](fg:${dir_bg} bg:${bg_dark})";
           when = "! git rev-parse --is-inside-work-tree 2> /dev/null";
           shell = [

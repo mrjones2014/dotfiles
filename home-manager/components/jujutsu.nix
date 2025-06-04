@@ -1,4 +1,7 @@
 { config, lib, ... }:
+let
+  palette = import ./tokyonight_palette.nix { inherit lib; };
+in
 {
   programs.jujutsu = {
     enable = true;
@@ -12,6 +15,11 @@
         # only among commits that are not in `trunk()`
         # This prevents me from mutating any commit that isn't authored by me
         "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())";
+      };
+      colors = {
+        # lighten these up a bit for statusline integration
+        "change_id rest" = palette.dark3;
+        "commit_id rest" = palette.dark3;
       };
       aliases = {
         # https://shaddy.dev/notes/jj-tug/

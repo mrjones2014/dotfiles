@@ -6,7 +6,7 @@
   isServer,
   ...
 }:
-with import ./tokyonight_palette.nix;
+with import ./tokyonight_palette.nix { inherit lib; };
 {
   programs = {
     zellij = {
