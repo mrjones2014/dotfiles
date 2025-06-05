@@ -6,10 +6,10 @@ let
     PASSWORD="$(op read "op://Private/System Password/password")"
     if [[ -z "$PASSWORD" ]]; then
       echo "Failed to get password from 1Password."
-      read -s -p "Password: " PASSWORD
+      read -r -s -p "󰌾 Password: " PASSWORD
     fi
 
-    echo $PASSWORD
+    echo "$PASSWORD"
   '';
 in
 {
