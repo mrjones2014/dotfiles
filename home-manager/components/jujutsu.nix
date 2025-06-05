@@ -10,6 +10,13 @@ in
         private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
         push-bookmark-prefix = lib.mkDefault "mrj/";
       };
+      experimental-advance-branches = {
+        enabled-branches = [ "glob:*" ];
+        disabled-branches = [
+          "master"
+          "main"
+        ];
+      };
       revset-aliases = lib.mkDefault {
         # The `trunk().. &` bit is an optimization to scan for non-`mine()` commits
         # only among commits that are not in `trunk()`
