@@ -67,7 +67,7 @@ return {
   opts = {
     content = {
       filter = function(entry)
-        return entry.name ~= '.DS_Store' and entry.name ~= '.git' and entry.name ~= '.direnv'
+        return entry.name ~= '.DS_Store' and entry.name ~= '.git' and entry.name ~= '.direnv' and entry.name ~= '.jj'
       end,
       sort = function(entries)
         -- technically can filter entries here too, and checking gitignore for _every entry individually_
