@@ -1,7 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  op_sudo_password_script = pkgs.writeScript "opsudo.bash" ''
-    #!${pkgs.bash}/bin/bash
+  op_sudo_password_script = pkgs.writeShellScriptBin "opsudo.bash" ''
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
     # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
     PASSWORD="$(op read "op://Private/System Password/password")"

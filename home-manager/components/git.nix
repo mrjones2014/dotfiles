@@ -6,7 +6,7 @@
   ...
 }:
 let
-  git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
+  git_checkout_fzf_script = pkgs.writeShellScriptBin "git-ch.bash" ''
     if test "$#" -ne 0; then
       if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then
         git checkout "$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"
