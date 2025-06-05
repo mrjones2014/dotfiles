@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html" class="active">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html">Useful uBlock Origin Filters</a></li><li class="chapter-item expanded affix "><li class="part-title">Articles</li><li class="chapter-item expanded "><a href="articles/github-neovim-1password-cli.html"><strong aria-hidden="true">1.</strong> Bringing my GitHub workflow into Neovim using 1Password CLI</a></li><li class="chapter-item expanded "><a href="articles/declarative-desktop-env-config-with-nix.html"><strong aria-hidden="true">2.</strong> Declarative Desktop Environment Configuration on NixOS</a></li><li class="chapter-item expanded "><a href="articles/linux-isnt-for-nerds-anymore.html"><strong aria-hidden="true">3.</strong> It's 2024 and Linux Isn't Just for Nerds Anymore</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html" class="active">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html">Useful uBlock Origin Filters</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -174,18 +174,21 @@
 <pre><code class="language-bash">mkdir -p "$HOME/git"
 cd "$HOME/git"
 git clone git@github.com:mrjones2014/dotfiles.git
+cd "dotfiles/"
+jj git init --colocate # if you use Jujutsu
 </code></pre>
 <h2 id="nixos"><a class="header" href="#nixos">NixOS</a></h2>
 <p>If you're installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.</p>
+<p>Make sure to set up full disk encryption.</p>
 <p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).
 After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
 <p>On macOS, for the first install, you'll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
-<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles
+<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro
 </code></pre>
-<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles</code> (or the <code>nix-apply</code> shell alias).</p>
+<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
 <p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
 On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
