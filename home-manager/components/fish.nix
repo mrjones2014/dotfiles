@@ -47,28 +47,21 @@ in
     };
     fish = {
       enable = true;
-      shellAliases =
-        {
-          ":q" = "exit";
-          ":Q" = "exit";
-          ":e" = "nvim";
-          ":vsp" = "zellij action new-pane --direction right";
-          ":sp" = "zellij action new-pane --direction down";
+      shellAliases = {
+        ":q" = "exit";
+        ":Q" = "exit";
+        ":e" = "nvim";
+        ":vsp" = "zellij action new-pane --direction right";
+        ":sp" = "zellij action new-pane --direction down";
 
-          copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
-          paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
-          cat = "bat";
-          gogit = "cd ~/git";
-          "!!" = "eval \\$history[1]";
-          clear = "clear && _prompt_move_to_bottom";
-          oplocal = "./js/oph/dist/mac-arm64/1Password.app/Contents/MacOS/1Password";
-          # inspect $PATH
-          pinspect = ''echo "$PATH" | tr ":" "\n"'';
-        }
-        // pkgs.lib.optionalAttrs isLinux {
-          cfgnix = "sudo nvim /etc/nixos/configuration.nix";
-          restart-gui = "sudo systemctl restart display-manager.service";
-        };
+        copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
+        paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
+        cat = "bat";
+        "!!" = "eval \\$history[1]";
+        clear = "clear && _prompt_move_to_bottom";
+        # inspect $PATH
+        pinspect = ''echo "$PATH" | tr ":" "\n"'';
+      };
 
       shellInit = ''
         # put Nix profile *first* on my PATH
