@@ -7,7 +7,6 @@
 }:
 let
   git_checkout_fzf_script = pkgs.writeScript "git-ch.bash" ''
-    #!${pkgs.bash}/bin/bash
     if test "$#" -ne 0; then
       if [[ "$*" = "master" ]] || [[ "$*" = "main" ]]; then
         git checkout "$(git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1)"
@@ -18,8 +17,59 @@ let
       git branch -a --format="%(refname:short)" | sed 's|origin/||g' | grep -v "HEAD" | grep -v "origin" | sort | uniq | ${pkgs.fzf}/bin/fzf | xargs git checkout
     fi
   '';
+  repo-config = pkgs.writeShellScriptBin "repo-config" ''
+    set -euo pipefail
+
+    url="$(git remote get-url origin)"
+    if [[ "$url" == *"gitlab.1password.io"* ]]; then
+      work_email="mat.jones@agilebits.com"
+      work_signing_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAjOfOY+u3Ei+idMfwQ/KD/X1S+JNrsc7ffN/NY8kqX"
+
+      git config --local user.email "$work_email"
+      git config --local user.signingKey "$work_signing_key"
+      jj config set --repo user.email "$work_email"
+      jj config set --repo signing.key "$work_signing_key"
+
+      echo "Updated repo-local configs to use work email and signing key"
+    else
+      echo "Nothing to do"
+    fi
+  '';
+
+  clone = pkgs.writeShellScriptBin "clone" ''
+    set -euo pipefail
+
+    if [[ $# -eq 0 ]]; then
+      echo "Usage: clone <git-url>"
+      exit 1
+    fi
+
+    url="$1"
+    [[ "$url" == git@*:* || "$url" == ssh://git@* ]] || {
+      echo "Error: Not an SSH git URL format"
+      exit 1
+    }
+
+    mkdir -p "$HOME/git"
+    cd "$HOME/git"
+
+    repo_name="$(basename "$url" .git)"
+    if [[ -d "$repo_name" ]]; then
+      echo "Error: Directory $repo_name already exists"
+      exit 1
+    fi
+    echo "Cloning to ~/git/$repo_name"
+    git clone "$url"
+    cd "$repo_name"
+    jj git init --colocate
+    ${repo-config}/bin/repo-config
+  '';
 in
 {
+  home.packages = [
+    repo-config
+    clone
+  ];
   programs.git = {
     enable = true;
     package = pkgs.git.override {

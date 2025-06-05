@@ -117,14 +117,6 @@ in
           onEvent = "fish_postexec";
           body = "tput cup $LINES";
         };
-        clone = {
-          description = "Clone a git repository, then cd into it.";
-          body = ''
-            echo "cd ~/git/"
-            cd $HOME/git
-            git clone $argv && cd $(basename $argv .git) && jj git init --colocate
-          '';
-        };
         nix-apply = {
           description = "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
