@@ -4,6 +4,8 @@
 mkdir -p "$HOME/git"
 cd "$HOME/git"
 git clone git@github.com:mrjones2014/dotfiles.git
+cd "dotfiles/"
+jj git init --colocate # if you use Jujutsu
 ```
 
 ## NixOS
@@ -11,6 +13,8 @@ git clone git@github.com:mrjones2014/dotfiles.git
 If you're installing on a server, see the [NixOS manual](https://nixos.org/manual/nixos/stable/#ch-installation) for headless NixOS installation instructions first.
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.
+
+Make sure to set up full disk encryption.
 
 Simply run `NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc` (replacing `.#pc` with your desired flake output target).
 After the first time, you can just run `sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc` (or the `nix-apply` shell alias).
@@ -20,10 +24,10 @@ After the first time, you can just run `sudo nixos-rebuild switch --flake $HOME/
 On macOS, for the first install, you'll need to run `nix-darwin` via `nix run`:
 
 ```bash
-nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles
+nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro
 ```
 
-After that, you can just run `darwin-rebuild switch --flake $HOME/git/dotfiles` (or the `nix-apply` shell alias).
+After that, you can just run `darwin-rebuild switch --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro` (or the `nix-apply` shell alias).
 
 ## Managing Dotfiles
 
