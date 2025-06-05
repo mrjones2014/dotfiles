@@ -20,6 +20,11 @@ let
   repo-config = pkgs.writeShellScriptBin "repo-config" ''
     set -euo pipefail
 
+    large_repo=false
+    if [[ $# -gt 0 && "$1" == "--large" ]]; then
+      large_repo=true
+    fi
+
     url="$(git remote get-url origin)"
     if [[ "$url" == *"gitlab.1password.io"* ]]; then
       work_email="mat.jones@agilebits.com"
@@ -29,8 +34,14 @@ let
       git config --local user.signingKey "$work_signing_key"
       jj config set --repo user.email "$work_email"
       jj config set --repo signing.key "$work_signing_key"
-
       echo "Updated repo-local configs to use work email and signing key"
+
+      if [[ "$large_repo" == true ]]; then
+        git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
+        git config --local --add remote.origin.fetch "+refs/heads/mrj/*:refs/remotes/origin/mrj/*"
+        git config --local remote.origin.tagOpt "--no-tags"
+        echo "Configured optimized refspec for large repository"
+      fi
     else
       echo "Nothing to do"
     fi
@@ -40,29 +51,59 @@ let
     set -euo pipefail
 
     if [[ $# -eq 0 ]]; then
-      echo "Usage: clone <git-url>"
+      echo "Usage: clone [--large] <git-url>"
+      echo "    --large will configure optimized refspec before cloning"
       exit 1
     fi
 
-    url="$1"
+    large_repo=false
+    url=""
+
+    while [[ $# -gt 0 ]]; do
+      case $1 in
+        --large)
+          large_repo=true
+          shift
+          ;;
+        *)
+          if [[ -z "$url" ]]; then
+            url="$1"
+          else
+            echo "Error: Multiple URLs provided"
+            exit 1
+          fi
+          shift
+          ;;
+      esac
+    done
+
     [[ "$url" == git@*:* || "$url" == ssh://git@* ]] || {
       echo "Error: Not an SSH git URL format"
       exit 1
     }
 
-    mkdir -p "$HOME/git"
-    cd "$HOME/git"
-
     repo_name="$(basename "$url" .git)"
-    if [[ -d "$repo_name" ]]; then
+    repo_path="$HOME/git/$repo_name"
+    if [[ -d "$repo_path" ]]; then
       echo "Error: Directory $repo_name already exists"
       exit 1
     fi
-    echo "Cloning to ~/git/$repo_name"
-    git clone "$url"
-    cd "$repo_name"
-    jj git init --colocate
-    ${repo-config}/bin/repo-config
+    mkdir -p "$repo_path"
+    cd "$repo_path"
+    echo "Setting up repository in ~/git/$repo_name"
+    if [[ "$large_repo" == true ]];
+      git init
+      git remote add origin "$url"
+      jj git init --colocate
+      ${repo-config}/bin/repo-config
+      git fetch
+      jj new main
+    else
+      git clone "$url"
+      cd "$repo_name"
+      jj git init --colocate
+      ${repo-config}/bin/repo-config
+    fi
   '';
 in
 {
