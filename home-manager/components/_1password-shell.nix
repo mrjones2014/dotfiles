@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  op_sudo_password_script = pkgs.writeShellScriptBin "opsudo.bash" ''
+  op_sudo_password_script = pkgs.writeShellScriptBin "opsudo" ''
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
     # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
     PASSWORD="$(op read "op://Private/System Password/password")"
@@ -18,7 +18,7 @@ in
   programs = {
     fish = {
       interactiveShellInit = ''
-        export SUDO_ASKPASS="${op_sudo_password_script}"
+        export SUDO_ASKPASS="${op_sudo_password_script}/bin/opsudo"
         alias sudo="sudo -A"
       '';
     };
