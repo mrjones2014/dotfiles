@@ -50,14 +50,8 @@ return {
     opts = {
       mappings = {
         -- do not map jj because I use jujutsu and the command is jj
-        i = {
-          j = { k = '<Esc>', j = false },
-          k = { k = '<Esc>', j = '<Esc>' },
-        },
-        c = {
-          j = { k = '<Esc>', j = false },
-          k = { k = '<Esc>', j = '<Esc>' },
-        },
+        i = { j = { k = '<Esc>', j = false } },
+        c = { j = { k = '<Esc>', j = false } },
       },
     },
   },
