@@ -47,14 +47,6 @@ in
     };
     fish = {
       enable = true;
-
-      plugins = [
-        {
-          name = "foreign-env";
-          inherit (pkgs.fishPlugins.foreign-env) src;
-        }
-      ];
-
       shellAliases =
         {
           ":q" = "exit";
@@ -82,12 +74,6 @@ in
         # put Nix profile *first* on my PATH
         export PATH="$HOME/.nix-profile/bin:$PATH"
         set -g fish_prompt_pwd_dir_length 20
-
-        # Source nix files, required to set fish as default shell, otherwise
-        # it doesn't have the nix env vars
-        if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
-            fenv source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-        end
       '';
 
       interactiveShellInit = ''
