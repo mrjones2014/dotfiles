@@ -91,7 +91,7 @@ let
     mkdir -p "$repo_path"
     cd "$repo_path"
     echo "Setting up repository in ~/git/$repo_name"
-    if [[ "$large_repo" == true ]];
+    if [[ "$large_repo" == true ]]; then
       git init
       git remote add origin "$url"
       jj git init --colocate
