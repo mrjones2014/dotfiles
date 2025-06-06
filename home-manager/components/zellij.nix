@@ -62,16 +62,9 @@ with import ./tokyonight_palette.nix { inherit lib; };
       }
       keybinds clear-defaults=true {
           normal {
-              bind "Super p" {
-                  LaunchOrFocusPlugin "plugin-manager" {
-                      floating true
-                      move_to_focused_tab true
-                  };
-              }
-
               bind "Ctrl b" { SwitchToMode "tmux"; }
 
-              bind "Super t" { ToggleFloatingPanes; }
+              bind "Ctrl t" { ToggleFloatingPanes; }
 
               bind "Alt n" {
                   NewTab {
@@ -88,6 +81,13 @@ with import ./tokyonight_palette.nix { inherit lib; };
               bind "-" { NewPane "Down"; SwitchToMode "normal"; }
 
               bind "e" { EditScrollback; SwitchToMode "normal"; }
+
+              bind "p" {
+                LaunchOrFocusPlugin "plugin-manager" {
+                    floating true
+                    move_to_focused_tab true
+                }
+              }
 
               bind "Esc" { SwitchToMode "normal"; }
 
