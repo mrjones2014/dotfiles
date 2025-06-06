@@ -7,7 +7,7 @@
 {
   nix = {
     package = lib.mkDefault pkgs.lix;
-    optimize.automatic = true;
+    optimise.automatic = true;
     settings = {
       substituters = [
         "https://cache.nixos.org"
