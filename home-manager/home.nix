@@ -80,7 +80,10 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     # Direnv integration for flakes
-    direnv.enable = true;
-    direnv.nix-direnv.enable = true;
+    direnv = {
+      enable = true;
+      settings.hide_env_diff = true;
+      nix-direnv.enable = true;
+    };
   };
 }
