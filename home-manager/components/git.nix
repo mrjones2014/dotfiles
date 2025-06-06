@@ -91,6 +91,13 @@ let
     mkdir -p "$repo_path"
     cd "$repo_path"
     echo "Setting up repository in ~/git/$repo_name"
+
+    if [[ "$repo_name" == "dotfiles" ]]; then
+      jj config set --repo experimental-advance-branches.enabled_branches "[\"glob:*\"]"
+      jj config set --repo experimental-advance-branches.disabled-branches []
+      jj bookmark track master@origin
+    fi
+
     if [[ "$large_repo" == true ]]; then
       git init
       git remote add origin "$url"
