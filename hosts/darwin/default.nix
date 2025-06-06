@@ -4,6 +4,7 @@
     ../../nixos/nix-conf.nix
     ./settings.nix
   ];
+  nix.optimise.automatic = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
   programs.fish.enable = true;
   users.users.mat = {
