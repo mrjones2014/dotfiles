@@ -179,8 +179,15 @@ in
         mr = ''
           set -l GITLAB_BASE_URL "https://gitlab.1password.io"
           set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
-          set -l CURRENT_BRANCH_NAME (git branch --show-current)
-          set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$CURRENT_BRANCH_NAME"
+          set -l GIT_BRANCH (git branch --show-current)
+          if test -z "$GIT_BRANCH"
+              set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
+          end
+          if test -z "$GIT_BRANCH"
+              echo "Error: not a git repo"
+              return 1
+          end
+          set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$GIT_BRANCH"
           ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
         '';
         pr = ''
@@ -192,12 +199,16 @@ in
           set -l MASTER_BRANCH (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
           if test -z "$GIT_BRANCH"
-              echo "Error: not a git repository"
-          else
-            ${
-              if isLinux then "xdg-open" else "open"
-            } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
+              set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
           end
+
+          if test -z "$GIT_BRANCH"
+              echo "Error: not a git repository"
+              return 1
+          end
+          ${
+            if isLinux then "xdg-open" else "open"
+          } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
         '';
         login = {
           description = "Select a 1Password item via fzf and open it in browser";
