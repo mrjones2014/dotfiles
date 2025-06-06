@@ -26,6 +26,21 @@ let
     fi
 
     url="$(git remote get-url origin)"
+
+    repo_name="$(basename "$(pwd)")"
+    if [[ "$repo_name" == "dotfiles" ]]; then
+      jj config set --repo experimental-advance-branches.enabled-branches "[\"glob:*\"]"
+      jj config set --repo experimental-advance-branches.disabled-branches []
+      jj bookmark track master@origin
+    fi
+
+    if [[ "$large_repo" == true ]]; then
+      git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
+      git config --local --add remote.origin.fetch "+refs/heads/mrj/*:refs/remotes/origin/mrj/*"
+      git config --local remote.origin.tagOpt "--no-tags"
+      echo "Configured optimized refspec for large repository"
+    fi
+
     if [[ "$url" == *"gitlab.1password.io"* ]]; then
       work_email="mat.jones@agilebits.com"
       work_signing_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAjOfOY+u3Ei+idMfwQ/KD/X1S+JNrsc7ffN/NY8kqX"
@@ -34,16 +49,9 @@ let
       git config --local user.signingKey "$work_signing_key"
       jj config set --repo user.email "$work_email"
       jj config set --repo signing.key "$work_signing_key"
+      # we just changed the author config and I configure jj to configure non-mine commits as immutable
+      jj describe --reset-author --no-edit -r @ --ignore-immutable
       echo "Updated repo-local configs to use work email and signing key"
-
-      if [[ "$large_repo" == true ]]; then
-        git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
-        git config --local --add remote.origin.fetch "+refs/heads/mrj/*:refs/remotes/origin/mrj/*"
-        git config --local remote.origin.tagOpt "--no-tags"
-        echo "Configured optimized refspec for large repository"
-      fi
-    else
-      echo "Nothing to do"
     fi
   '';
 
@@ -92,12 +100,6 @@ let
     cd "$repo_path"
     echo "Setting up repository in ~/git/$repo_name"
 
-    if [[ "$repo_name" == "dotfiles" ]]; then
-      jj config set --repo experimental-advance-branches.enabled-branches "[\"glob:*\"]"
-      jj config set --repo experimental-advance-branches.disabled-branches []
-      jj bookmark track master@origin
-    fi
-
     if [[ "$large_repo" == true ]]; then
       git init
       git remote add origin "$url"
@@ -106,8 +108,8 @@ let
       git fetch
       jj new main
     else
-      git clone "$url"
-      cd "$repo_name"
+      git clone "$url" "$repo_path"
+      cd "$repo_path"
       jj git init --colocate
       ${repo-config}/bin/repo-config
     fi
