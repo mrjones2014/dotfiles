@@ -54,7 +54,7 @@ with palette;
         vimcmd_visual_symbol = "${server_sep yellow}[  ](bold bg:${yellow} fg:${bg_dark})[](fg:${yellow} bg:${dir_bg})";
       };
       cmd_duration.format = "[ $duration](bold ${dark3})";
-      directory.format = "[ ](bg:${dir_bg})[$path](bold bg:${dir_bg} fg:${green})";
+      directory.format = "[ ](bg:${dir_bg})[$path](bg:${dir_bg} fg:${green})";
       env_var.IN_NIX_SHELL.format = "[ ](bg:${dir_bg})[](bg:${dir_bg} fg:${blue5})[ ](bg:${dir_bg})";
       git_status.format = "[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
       git_branch = {
