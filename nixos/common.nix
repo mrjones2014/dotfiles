@@ -4,6 +4,8 @@
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
 
+  nix.optimise.automatic = true;
+
   security.rtkit.enable = true;
   networking = {
     wireguard.enable = true;
