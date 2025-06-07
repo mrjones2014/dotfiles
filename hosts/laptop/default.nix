@@ -19,7 +19,7 @@
   };
 
   imports = [
-    ../../nixos/desktop_environment.nix
+    ../../nixos/gnome.nix
     ../../nixos/_1password.nix
     ../../nixos/allowed-unfree.nix
     ./hardware-configuration.nix

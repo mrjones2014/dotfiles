@@ -2,7 +2,7 @@
 {
   networking.hostName = "nixos-pc";
   imports = [
-    ../../nixos/desktop_environment.nix
+    ../../nixos/gnome.nix
     ../../nixos/_1password.nix
     ../../nixos/allowed-unfree.nix
     ../../nixos/sshd.nix
