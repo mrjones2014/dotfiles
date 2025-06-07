@@ -10,9 +10,11 @@ let
     hash = "sha256-AJLXmM86rnuoT0I93ewFocxFKwikIOt1h+JDOmWzQzg=";
   };
   gnomeExtensions = with pkgs.gnomeExtensions; [
+    user-themes
     dash-to-dock
     tray-icons-reloaded
     gtile
+    quick-settings-audio-panel
     # TODO undo this when nixpkgs version is updated
     (search-light.overrideAttrs (_: {
       src = pkgs.fetchFromGitHub {
@@ -22,8 +24,6 @@ let
         sha256 = "sha256-pLMENXul50yvdiOf03xd9hculypd4zXuMX24Yv8Tk0I=";
       };
     }))
-    user-themes
-    quick-settings-tweaker
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
@@ -77,6 +77,11 @@ in
       show-show-apps-button = false;
       running-indicator-style = "DOTS";
       apply-custom-theme = false;
+    };
+    "org/gnome/shell/extensions/quick-settings-audio-panel" = {
+      merged-panel = true;
+      merged-panel-position = "top";
+      add-button-applications-output-reset-to-default = true;
     };
     "org/gnome/shell/extensions/trayIconsReloaded".icons-limit = 10;
     "org/gnome/shell/extensions/quick-settings-tweaks" = {
