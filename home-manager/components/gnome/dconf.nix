@@ -13,7 +13,15 @@ let
     dash-to-dock
     tray-icons-reloaded
     gtile
-    search-light
+    # TODO undo this when nixpkgs version is updated
+    (search-light.overrideAttrs (_: {
+      src = pkgs.fetchFromGitHub {
+        owner = "icedman";
+        repo = "search-light";
+        rev = "c05538e6bf4f52b8225a264da800af1770720059";
+        sha256 = "sha256-pLMENXul50yvdiOf03xd9hculypd4zXuMX24Yv8Tk0I=";
+      };
+    }))
     user-themes
     quick-settings-tweaker
   ];
