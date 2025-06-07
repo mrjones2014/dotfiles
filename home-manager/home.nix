@@ -66,7 +66,8 @@
     ./components/terminal.nix
     ./components/_1password-shell.nix
     ./components/espanso.nix
-    ./components/gnome
+    # ./components/gnome
+    ./components/hyprland.nix
     ./components/recyclarr.nix
     ./components/jujutsu.nix
     ./components/vencord.nix

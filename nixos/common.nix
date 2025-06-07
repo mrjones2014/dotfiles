@@ -110,6 +110,10 @@
           "networkmanager"
           "oci"
           "podman"
+          "audio"
+          "video"
+          "input"
+          "render"
         ];
       };
     };
