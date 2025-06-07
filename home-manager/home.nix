@@ -82,7 +82,7 @@
     # Direnv integration for flakes
     direnv = {
       enable = true;
-      settings.hide_env_diff = true;
+      config.hide_env_diff = true;
       nix-direnv.enable = true;
     };
   };
