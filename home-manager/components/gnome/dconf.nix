@@ -90,6 +90,7 @@ in
       apply-custom-theme = false;
     };
     "org/gnome/shell/extensions/quick-settings-audio-panel" = {
+      panel-type = "merged-panel";
       merged-panel = true;
       merged-panel-position = "top";
       add-button-applications-output-reset-to-default = true;
