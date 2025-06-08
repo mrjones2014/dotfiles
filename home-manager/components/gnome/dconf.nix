@@ -123,7 +123,8 @@ in
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
     "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
-    "org/gnome/shell/extensions/search-light".shortcut-search = [ "<Super>space" ];
+    "org/gnome/shell/extensions/search-light".shortcut-search =
+      if isThinkpad then [ "<Control>space" ] else [ "<Super>space" ];
     "org/gnome/shell/extensions/quickwebsearch".search-engine = 5; # Kagi
     "org/gnome/mutter".overlay-key = "F11";
     "org/gnome/mutter/keybindings" = {
