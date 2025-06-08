@@ -113,6 +113,7 @@ in
     "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
     "org/gnome/shell/extensions/search-light".shortcut-search = [ "<Super>space" ];
     "org/gnome/shell/extensions/quickwebsearch".search-engine = 5; # Kagi
+    "org/gnome/mutter".overlay-key = "F11";
     "org/gnome/mutter/keybindings" = {
       switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
       # disable Super+Space default keybind, I use that for search-light

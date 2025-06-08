@@ -30,6 +30,8 @@
         o = C-o
         # New
         n = C-n
+        # Quit
+        q = C-q
 
         # Find
         f = C-f
@@ -40,8 +42,6 @@
         w = C-w
         # Refresh/Reload
         r = C-r
-        # Location/Address Bar
-        l = C-l
 
         # Alternative Redo
         shift+z = C-S-z

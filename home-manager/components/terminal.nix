@@ -37,9 +37,14 @@
         ''env EDITOR="nvim" PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
       "maximize" = isThinkpad;
       "keybind" = [
+        "super+q=quit"
         "super+v=paste_from_clipboard"
         "super+c=copy_to_clipboard"
-        "super+q=quit"
+        # see ../../hosts/pc/macos-style-keymap.nix
+        # compatiblity with that for copy/paste and quit
+        "ctrl+q=quit"
+        "shift+insert=paste_from_clipboard"
+        "ctrl+insert=copy_to_clipboard"
       ];
     };
   };
