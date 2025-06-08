@@ -107,6 +107,9 @@ in
     };
     "org/gnome/mutter/keybindings" = {
       switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
+      # disable Super+Space default keybind, I use that for search-light
+      switch-input-source = [ ];
+      switch-input-source-backward = [ ];
     };
   };
 }
