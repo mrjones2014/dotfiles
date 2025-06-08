@@ -6,6 +6,7 @@
     ../../nixos/_1password.nix
     ../../nixos/allowed-unfree.nix
     ../../nixos/sshd.nix
+    ./macos-style-keymap.nix
     ./hardware-configuration.nix
   ];
   boot.loader.efi.efiSysMountPoint = "/boot";
