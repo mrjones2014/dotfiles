@@ -15,6 +15,7 @@ let
     tray-icons-reloaded
     gtile
     quick-settings-audio-panel
+    just-perfection
     # TODO undo this when nixpkgs version is updated
     (search-light.overrideAttrs (_: {
       src = pkgs.fetchFromGitHub {
@@ -98,6 +99,16 @@ in
       input-show-selected = true;
       input-always-show = true;
       volume-mixer-enabled = true;
+    };
+    "org/gnome/shell/extensions/just-perfection" = {
+      keyboard-layout = false;
+      quick-settings-airplane-mode = false;
+      quick-settings-dark-mode = false;
+      quick-settings-night-light = false;
+      startup-status = 0; # disable Overview
+      support-notifier-showed-version = 9999999; # Never show the "Support" popup
+      support-notifier-type = 0;
+      world-clock = false;
     };
     "org/gnome/desktop/background" = {
       picture-uri = "file://${wallpaperImg}";
