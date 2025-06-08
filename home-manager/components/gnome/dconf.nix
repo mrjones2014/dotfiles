@@ -24,6 +24,15 @@ let
         sha256 = "sha256-pLMENXul50yvdiOf03xd9hculypd4zXuMX24Yv8Tk0I=";
       };
     }))
+    # TODO undo this when nixpkgs version is updated
+    (quick-web-search.overrideAttrs (_: {
+      src = pkgs.fetchFromGitLab {
+        owner = "chet-buddy";
+        repo = "quick-web-search";
+        rev = "8383593630d417d675b3f4b3946c160e43ffcab5";
+        sha256 = "sha256-yi+KNo0Ap7Tm6NXPutBmtoQ5eAZLBbYGsZSEy4EpkOA=";
+      };
+    }))
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
@@ -102,9 +111,8 @@ in
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
     "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
-    "org/gnome/shell/extensions/search-light" = {
-      shortcut-search = [ "<Super>space" ];
-    };
+    "org/gnome/shell/extensions/search-light".shortcut-search = [ "<Super>space" ];
+    "org/gnome/shell/extensions/quickwebsearch".search-engine = 5; # Kagi
     "org/gnome/mutter/keybindings" = {
       switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
       # disable Super+Space default keybind, I use that for search-light
