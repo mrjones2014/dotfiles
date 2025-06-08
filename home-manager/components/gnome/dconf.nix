@@ -46,6 +46,7 @@ in
       # window button order may be in there
       button-layout = "close,minimize,maximize,appmenu:";
     };
+    "org/gnome/settings-daemon/plugins/media-keys".screensaver = [ ]; # Disable "Lock Screen" shortcut
     "org/gnome/shell" = {
       disable-user-extensions = false;
       disable-extension-version-validation = true;
