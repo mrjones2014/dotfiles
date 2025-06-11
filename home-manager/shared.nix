@@ -9,6 +9,7 @@
     ./components/ssh.nix
     ./components/starship.nix
     ./components/git.nix
+    ./components/jujutsu.nix
     ./components/fzf.nix
   ];
 }

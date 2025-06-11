@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  isServer,
+  ...
+}:
 let
   palette = import ./tokyonight_palette.nix { inherit lib; };
 in
@@ -43,12 +48,15 @@ in
         name = config.programs.git.userName;
         email = config.programs.git.userEmail;
       };
-      signing = {
-        inherit (config.programs.git.signing) key;
-        behavior = "force";
-        backend = "ssh";
-        backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
-      };
+      signing =
+        {
+          inherit (config.programs.git.signing) key;
+          behavior = "force";
+          backend = "ssh";
+        }
+        // lib.optionalAttrs (!isServer) {
+          backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
+        };
     };
   };
 }
