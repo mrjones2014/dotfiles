@@ -22,6 +22,7 @@ let
     # of the subdomain. Customize subdomain -> Title mapping here.
     qbittorrent = "qBitTorrent";
     home = "Home Assistant";
+    zwave = "Z-Wave Network";
   };
 
   # Generate the Gatus endpoints configuration
