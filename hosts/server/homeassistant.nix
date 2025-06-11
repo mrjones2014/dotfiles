@@ -1,7 +1,18 @@
 { config, ... }:
+let
+  zwave_ui_port = 8998;
+in
 {
   services = {
-    nginx.subdomains.home.port = config.services.home-assistant.config.http.server_port;
+    nginx.subdomains = {
+      home.port = config.services.home-assistant.config.http.server_port;
+      zwave.port = zwave_ui_port;
+    };
+    zwave-js-ui = {
+      enable = true;
+      serialPort = "/dev/ttyACM0";
+      settings.PORT = toString zwave_ui_port;
+    };
     home-assistant = {
       enable = true;
       extraPackages =
@@ -22,6 +33,7 @@
         "sonos"
         "nanoleaf"
         "api"
+        "zwave_js"
       ];
       config = {
         default_config = { };
