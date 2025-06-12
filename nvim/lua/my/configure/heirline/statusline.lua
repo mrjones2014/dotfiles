@@ -89,26 +89,32 @@ M.Mode = {
 
 local _cached_branch
 local _cached_jj_bookmark
+local _jj_last_call_time = os.time()
 local function git_branch()
   if require('my.configure.heirline.conditions').is_jj_repo() then
-    vim.system({
-      'jj',
-      'log',
-      '--ignore-working-copy',
-      '-r',
-      '@-',
-      '-n',
-      '1',
-      '--no-graph',
-      '--no-pager',
-      '-T',
-      "separate(' ', format_short_change_id(self.change_id()), self.bookmarks())",
-    }, { text = true }, function(out)
-      local trimmed = vim.trim(out.stdout or '')
-      if trimmed ~= '' then
-        _cached_jj_bookmark = trimmed
-      end
-    end)
+    local now = os.time()
+    -- refresh jj info at most once per second
+    if not _cached_jj_bookmark or os.difftime(now, _jj_last_call_time) > 1 then
+      vim.system({
+        'jj',
+        'log',
+        '--ignore-working-copy',
+        '-r',
+        '@-',
+        '-n',
+        '1',
+        '--no-graph',
+        '--no-pager',
+        '-T',
+        "separate(' ', format_short_change_id(self.change_id()), self.bookmarks())",
+      }, { text = true }, function(out)
+        local trimmed = vim.trim(out.stdout or '')
+        if trimmed ~= '' then
+          _cached_jj_bookmark = trimmed
+        end
+      end)
+    end
+
     return _cached_jj_bookmark
   end
   local branch = vim.g.gitsigns_head or vim.g.gitsigns_head or vim.b.gitsigns_head
