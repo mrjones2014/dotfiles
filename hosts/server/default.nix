@@ -24,11 +24,9 @@
     ./media.nix
     ./nas.nix
     ./containers.nix
-    ./wireguard.nix
     ./observability.nix
     ./vikunja.nix
     ./docmost.nix
-    ./duckdns.nix
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix

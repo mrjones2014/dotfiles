@@ -12,11 +12,9 @@ let
   ];
   secrets = [
     "secrets/mullvad_wireguard.age"
-    "secrets/wireguard_server.age"
     "secrets/cleanuperr_env.age"
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
-    "secrets/duckdns_token.age"
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
     "secrets/docmost_env.age"
