@@ -6,6 +6,8 @@
     ../../nixos/_1password.nix
     ../../nixos/allowed-unfree.nix
     ../../nixos/sshd.nix
+    ../../nixos/containers.nix
+    ../../nixos/torrent_client.nix
     ./macos-style-keymap.nix
     ./hardware-configuration.nix
   ];

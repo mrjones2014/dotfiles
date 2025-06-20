@@ -53,7 +53,6 @@
         # desktop only packages
         obs-studio
         r2modman
-        qbittorrent
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"

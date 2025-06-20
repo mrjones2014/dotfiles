@@ -4,7 +4,7 @@
 let
   # my public key
   users = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhIkQh2Viqa519kFJjIPUrz3jrwkSljezVlLU5GP0uh mat@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhIkQh2Viqa519kFJjIPUrz3jrwkSljezVlLU5GP0uh mat@homelab"
   ];
   # server host key
   systems = [
@@ -20,11 +20,18 @@ let
     "secrets/docmost_env.age"
   ];
 in
-builtins.listToAttrs (
+(builtins.listToAttrs (
   map (secret: {
     name = secret;
     value = {
       publicKeys = users ++ systems;
     };
   }) secrets
-)
+))
+// {
+  # Secrets for desktop PC, not server
+  "secrets/mullvad_wireguard_desktop.age".publicKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8nnsz9p+mUYkyY1LXwvEoql74kFLA36EkUtDAWhkBV mat@nixos-pc"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDIUVIPYhK2pYTVroHvCqChkc0JL7YGfes4teME5Vb1 root@nixos-pc"
+  ];
+}

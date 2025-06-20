@@ -23,7 +23,6 @@
     ./nixosModules/nginx.nix
     ./media.nix
     ./nas.nix
-    ./containers.nix
     ./observability.nix
     ./vikunja.nix
     ./docmost.nix
@@ -31,6 +30,7 @@
     ./adguard.nix
     ./homeassistant.nix
     ../../nixos/sshd.nix
+    ../../nixos/containers.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";

@@ -80,6 +80,10 @@
           };
           system = "x86_64-linux";
           modules = [
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+            }
             ./nixos/common.nix
             ./hosts/pc
             home-manager.nixosModules.home-manager

@@ -123,7 +123,14 @@ in
             else
                 echo "Running in offline mode, skipping git status checks."
             end
-            ${rebuild-script}'';
+            ${rebuild-script}
+            for s in $pipestatus
+                if test $s -ne 0
+                    echo "Pipeline failed with status $s"
+                    return $s
+                end
+            end
+          '';
         };
         nix-clean = {
           description = "Run Nix garbage collection and remove old kernels to free up space in boot partition";
