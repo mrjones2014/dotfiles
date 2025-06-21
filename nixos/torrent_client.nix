@@ -19,10 +19,10 @@ let
   podman_network = "qbittorrent";
 in
 lib.optionalAttrs isServer {
+  age.secrets.mullvad_wireguard.file = ../secrets/mullvad_wireguard.age;
   services.nginx.subdomains = {
     qbittorrent.port = qbittorrent_port;
     vuetorrent.port = vuetorrent_port;
-    age.secrets.mullvad_wireguard.file = ../secrets/mullvad_wireguard.age;
   };
   systemd.services.qbittorrent-podman-network-create = {
     serviceConfig.Type = "oneshot";
