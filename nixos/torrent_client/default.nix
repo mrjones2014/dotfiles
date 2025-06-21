@@ -1,7 +1,5 @@
 {
   config,
-  lib,
-  pkgs,
   isServer,
   ...
 }:
@@ -18,42 +16,15 @@ let
   ];
   podman_network = "qbittorrent";
 in
-lib.optionalAttrs isServer {
-  age.secrets.mullvad_wireguard.file = ../secrets/mullvad_wireguard.age;
-  services.nginx.subdomains = {
-    qbittorrent.port = qbittorrent_port;
-    vuetorrent.port = vuetorrent_port;
-  };
-  systemd.services.qbittorrent-podman-network-create = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [
-      "podman-qbittorrentvpn.service"
-      "podman-vuetorrent.service"
-    ];
-    script = ''
-      ${pkgs.podman}/bin/podman network inspect ${podman_network} > /dev/null 2>&1 || ${pkgs.podman}/bin/podman network create ${podman_network}
-    '';
-  };
-  virtualisation.oci-containers.containers.qbittorrentvpn.networks = [ podman_network ];
-  # prettier web UI
-  virtualisation.oci-containers.containers.vuetorrent = {
-    autoStart = true;
-    image = "ghcr.io/vuetorrent/vuetorrent-backend:latest";
-    networks = [ podman_network ];
-    ports = [ "${toString vuetorrent_port}:${toString vuetorrent_port}" ];
-    environment = {
-      PORT = toString vuetorrent_port;
-      QBIT_BASE = "http://qbittorrentvpn:${toString qbittorrent_port}";
-      RELEASE_TYPE = "stable";
-      # every Sunday
-      UPDATE_VT_CRON = "0 0 * * 0";
-    };
-  };
-}
-// lib.optionalAttrs (!isServer) {
-  age.secrets.mullvad_wireguard.file = ../secrets/mullvad_wireguard_desktop.age;
-}
-// {
+{
+  imports = [
+    (import ./server.nix {
+      inherit podman_network;
+      inherit vuetorrent_port;
+      inherit qbittorrent_port;
+    })
+    ./desktop.nix
+  ];
   systemd.tmpfiles.rules = [
     "d ${configDir} 055 qbittorrentvpn qbittorrentvpn - -"
     "d ${configDir}/wireguard 055 qbittorrentvpn qbittorrentvpn - -"

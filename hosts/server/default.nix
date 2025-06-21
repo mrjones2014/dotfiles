@@ -24,7 +24,6 @@
     ./media.nix
     ./nas.nix
     ./observability.nix
-    ./vikunja.nix
     ./docmost.nix
     ./paperless.nix
     ./adguard.nix

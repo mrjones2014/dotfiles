@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    ../../nixos/torrent_client.nix
+    ../../nixos/torrent_client
     ./cleanuperr.nix
   ];
   services.nginx.subdomains = {

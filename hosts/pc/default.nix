@@ -7,7 +7,7 @@
     ../../nixos/allowed-unfree.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
-    ../../nixos/torrent_client.nix
+    ../../nixos/torrent_client
     ./macos-style-keymap.nix
     ./hardware-configuration.nix
   ];
