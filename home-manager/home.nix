@@ -54,6 +54,7 @@
         obs-studio
         r2modman
         openrct2
+        boilr
       ];
     file."${config.home.homeDirectory}/.xprofile".text = ''
       export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/mat/.nix-profile/share"
