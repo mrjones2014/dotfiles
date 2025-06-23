@@ -17,7 +17,10 @@
   homebrew = {
     enable = true;
     taps = [ "kiraum/tap" ];
-    brews = [ "kiraum/tap/cody" ];
+    brews = [
+      "kiraum/tap/cody"
+      "espanso"
+    ];
   };
   system.primaryUser = config.users.users.mat.name;
   system.stateVersion = 6;
