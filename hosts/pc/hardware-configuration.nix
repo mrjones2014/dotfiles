@@ -17,6 +17,7 @@
     kernelModules = [
       "kvm-amd"
       "coretemp"
+      "rtw89_8851be"
     ];
     extraModulePackages = [ ];
   };
