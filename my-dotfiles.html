@@ -182,13 +182,13 @@ jj git init --colocate # if you use Jujutsu
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.</p>
 <p>Make sure to set up full disk encryption.</p>
-<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).
-After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc</code> (or the <code>nix-apply</code> shell alias).</p>
+<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower</code> (replacing <code>.#tower</code> with your desired flake output target).
+After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
 <p>On macOS, for the first install, you'll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
-<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro
+<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#darwin
 </code></pre>
-<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro</code> (or the <code>nix-apply</code> shell alias).</p>
+<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
 <p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
 On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
