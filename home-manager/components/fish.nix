@@ -3,24 +3,13 @@
   lib,
   isDarwin,
   isLinux,
-  isServer,
-  isThinkpad,
   ...
 }:
 let
-  host =
-    if isDarwin then
-      "Mats-MacBook-Pro"
-    else if isServer then
-      "server"
-    else if isThinkpad then
-      "laptop"
-    else
-      "pc";
   rebuild-cmd = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
   rebuild-script = ''
     sudo echo
-    sudo ${rebuild-cmd} switch --flake ~/git/dotfiles/.#${host} &| ${pkgs.nix-output-monitor}/bin/nom
+    sudo ${rebuild-cmd} switch --flake ~/git/dotfiles/.# &| ${pkgs.nix-output-monitor}/bin/nom
   '';
 in
 {

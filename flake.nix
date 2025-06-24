@@ -37,7 +37,7 @@
     }:
     {
       nixosConfigurations = {
-        server = nixpkgs.lib.nixosSystem {
+        homelab = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             isServer = true;
@@ -70,7 +70,7 @@
             }
           ];
         };
-        pc = nixpkgs.lib.nixosSystem {
+        tower = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             isServer = false;
@@ -103,7 +103,7 @@
             }
           ];
         };
-        laptop = nixpkgs.lib.nixosSystem {
+        nixbook = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             isServer = false;
@@ -133,7 +133,7 @@
           ];
         };
       };
-      darwinConfigurations."Mats-MacBook-Pro" =
+      darwinConfigurations."darwin" =
         let
           specialArgs = {
             inherit inputs;

@@ -7,6 +7,7 @@
   nix.optimise.automatic = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
   programs.fish.enable = true;
+  networking.hostName = "darwin";
   users.users.mat = {
     name = "mat.jones"; # username is set by MDM on work mac :/
     home = "/Users/mat.jones";

@@ -16,18 +16,18 @@ since we'll be installing GNOME anyway.
 
 Make sure to set up full disk encryption.
 
-Simply run `NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc` (replacing `.#pc` with your desired flake output target).
-After the first time, you can just run `sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc` (or the `nix-apply` shell alias).
+Simply run `NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower` (replacing `.#tower` with your desired flake output target).
+After the first time, you can just run `sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#` (or the `nix-apply` shell alias).
 
 ## macOS
 
 On macOS, for the first install, you'll need to run `nix-darwin` via `nix run`:
 
 ```bash
-nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro
+nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#darwin
 ```
 
-After that, you can just run `darwin-rebuild switch --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro` (or the `nix-apply` shell alias).
+After that, you can just run `darwin-rebuild switch --flake $HOME/git/dotfiles/.#` (or the `nix-apply` shell alias).
 
 ## Managing Dotfiles
 
