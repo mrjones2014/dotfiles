@@ -106,6 +106,7 @@ let
       jj git init --colocate
       ${repo-config}/bin/repo-config --large
       git fetch
+      jj bookmark track main@origin
       jj new main
     else
       git clone "$url" "$repo_path"
