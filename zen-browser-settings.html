@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>My Dotfiles - mjones.network</title>
+        <title>Zen Browser Settings - mjones.network</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html" class="active">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html">Useful uBlock Origin Filters</a></li><li class="chapter-item expanded affix "><a href="zen-browser-settings.html">Zen Browser Settings</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README.md</a></li><li class="chapter-item expanded affix "><a href="my-dotfiles.html">My Dotfiles</a></li><li class="chapter-item expanded affix "><a href="ublock-filters.html">Useful uBlock Origin Filters</a></li><li class="chapter-item expanded affix "><a href="zen-browser-settings.html" class="active">Zen Browser Settings</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -170,41 +170,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-on-a-new-system"><a class="header" href="#installing-on-a-new-system">Installing on a New System</a></h1>
-<pre><code class="language-bash">mkdir -p "$HOME/git"
-cd "$HOME/git"
-git clone git@github.com:mrjones2014/dotfiles.git
-cd "dotfiles/"
-jj git init --colocate # if you use Jujutsu
-</code></pre>
-<h2 id="nixos"><a class="header" href="#nixos">NixOS</a></h2>
-<p>If you're installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
-Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
-since we'll be installing GNOME anyway.</p>
-<p>Make sure to set up full disk encryption.</p>
-<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#pc</code> (replacing <code>.#pc</code> with your desired flake output target).
-After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#pc</code> (or the <code>nix-apply</code> shell alias).</p>
-<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
-<p>On macOS, for the first install, you'll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
-<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro
-</code></pre>
-<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#Mats-MacBook-Pro</code> (or the <code>nix-apply</code> shell alias).</p>
-<h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
-<p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
-On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
-<code>home-manager</code> config. On macOS, the same behavior is achieved via <a href="https://github.com/nix-darwin/nix-darwin">nix-darwin</a>.</p>
+                        <h1 id="zen-browser-settings"><a class="header" href="#zen-browser-settings">Zen browser settings</a></h1>
+<p>Change these settings I can't set via Nix in <code>about:config</code>:</p>
+<ul>
+<li><code>zen.urlbar.behavior: normal</code></li>
+<li><code>zen.urlbar.replace-newtab: false</code></li>
+<li><code>zen.urlbar.use-single-toolbar: false</code></li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ublock-filters.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="ublock-filters.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -212,13 +193,10 @@ On NixOS, the <code>home-manager</code> configuration is managed as a NixOS modu
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ublock-filters.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="ublock-filters.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
