@@ -24,6 +24,7 @@
       "waterfox"
       "rectangle-pro"
       "alfred"
+      "xcodes-app"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
