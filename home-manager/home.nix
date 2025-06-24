@@ -20,8 +20,8 @@
     )
   ];
   home = {
-    username = "mat";
-    homeDirectory = if isLinux then "/home/mat" else "/Users/mat";
+    username = if isLinux then "mat" else "mat.jones"; # username is set by MDM on work mac :/
+    homeDirectory = if isLinux then "/home/mat" else "/Users/mat.jones";
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release

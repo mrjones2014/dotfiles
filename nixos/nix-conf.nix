@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  isDarwin,
   ...
 }:
 {
@@ -18,7 +19,7 @@
       ];
       trusted-users = [
         "root"
-        "mat"
+        (if isDarwin then "mat.jones" else "mat") # username is set by MDM on work mac :/
       ];
       keep-outputs = true;
       keep-derivations = true;

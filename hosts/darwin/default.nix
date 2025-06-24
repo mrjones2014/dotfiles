@@ -8,17 +8,20 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
   programs.fish.enable = true;
   users.users.mat = {
-    name = "mat";
-    home = "/Users/mat";
+    name = "mat.jones"; # username is set by MDM on work mac :/
+    home = "/Users/mat.jones";
     shell = pkgs.fish;
   };
   environment.variables.HOMEBREW_NO_ANALYTICS = "1";
   environment.systemPath = [ "/opt/homebrew/bin" ];
   homebrew = {
     enable = true;
-    taps = [ "kiraum/tap" ];
-    brews = [ "kiraum/tap/cody" ];
-    casks = [ "espanso" ];
+    casks = [
+      "espanso"
+      "ghostty"
+      "zen"
+      "waterfox"
+    ];
   };
   system.primaryUser = config.users.users.mat.name;
   system.stateVersion = 6;
