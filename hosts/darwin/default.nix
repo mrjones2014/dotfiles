@@ -22,6 +22,7 @@
       "zen"
       "waterfox"
       "rectangle-pro"
+      "alfred"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
