@@ -104,7 +104,7 @@ let
       git init
       git remote add origin "$url"
       jj git init --colocate
-      ${repo-config}/bin/repo-config
+      ${repo-config}/bin/repo-config --large
       git fetch
       jj new main
     else

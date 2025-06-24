@@ -21,6 +21,7 @@
       "ghostty"
       "zen"
       "waterfox"
+      "rectangle-pro"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
