@@ -20,23 +20,23 @@
     clearDefaultKeybinds = true;
     settings = {
       title = "Ghostty";
-      "font-family" = "Victor Mono Semibold";
-      "font-family-italic" = "Victor Mono Medium Oblique";
-      "font-family-bold-italic" = "Victor Mono Bold Oblique";
-      "font-family-bold" = "Victor Mono Bold";
-      "font-feature" = "ss02,ss06";
-      "font-size" = "16";
-      "cursor-style" = "block";
-      "cursor-style-blink" = false;
-      "macos-option-as-alt" = true;
-      "shell-integration-features" = "no-cursor";
-      "mouse-hide-while-typing" = true;
-      "link-url" = true;
+      font-family = "Victor Mono Semibold";
+      font-family-italic = "Victor Mono Medium Oblique";
+      font-family-bold-italic = "Victor Mono Bold Oblique";
+      font-family-bold = "Victor Mono Bold";
+      font-feature = "ss02,ss06";
+      font-size = "16";
+      cursor-style = "block";
+      cursor-style-blink = false;
+      macos-option-as-alt = true;
+      shell-integration-features = "no-cursor";
+      mouse-hide-while-typing = true;
+      link-url = true;
+      window-decoration = "server";
       # NB: workaround for zellij not having the right PATH on macOS
-      "command" =
-        ''env EDITOR="nvim" PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
-      "maximize" = isThinkpad;
-      "keybind" = [
+      command = ''env EDITOR="nvim" PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
+      maximize = isThinkpad;
+      keybind = [
         "super+q=quit"
         "super+v=paste_from_clipboard"
         "super+c=copy_to_clipboard"
