@@ -93,8 +93,9 @@ local _jj_last_call_time = os.time()
 local function git_branch()
   if require('my.configure.heirline.conditions').is_jj_repo() then
     local now = os.time()
-    -- refresh jj info at most once per second
-    if not _cached_jj_bookmark or os.difftime(now, _jj_last_call_time) > 1 then
+    -- refresh jj info at most once per few seconds
+    if not _cached_jj_bookmark or os.difftime(now, _jj_last_call_time) > 2 then
+      _jj_last_call_time = now
       vim.system({
         'jj',
         'log',
