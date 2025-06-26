@@ -6,16 +6,24 @@ return {
       {
         '<leader>gy',
         function()
-          clipboard.copy(require('snacks.gitbrowse').get_url())
+          ---@diagnostic disable-next-line: missing-fields
+          require('snacks.gitbrowse').open({ open = clipboard.copy, notify = false })
+          vim.notify('Copied permalink')
         end,
         desc = 'Copy git permalink',
-        silent = true,
+        mode = { 'n', 'v' },
       },
     },
     opts = {
       gitbrowse = {
         what = 'permalink',
         url_patterns = {
+          ['github%.com'] = {
+            branch = '/tree/{branch}',
+            file = '/blob/{branch}/{file}#L{line_start}-L{line_end}',
+            permalink = '/blob/{commit}/{file}#L{line_start}-L{line_end}',
+            commit = '/commit/{commit}',
+          },
           ['gitlab%.1password%.io'] = {
             branch = '/-/tree/{branch}',
             file = '/-/blob/{branch}/{file}#L{line_start}-L{line_end}',
