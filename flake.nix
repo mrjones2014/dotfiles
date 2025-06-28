@@ -2,6 +2,10 @@
   description = "My dotfiles managed with nix as a flake";
 
   inputs = {
+    # TODO amdgpu driver is broken currently, remove this and the overlay below when this PR
+    # is on nixos-unstable: https://github.com/NixOS/nixpkgs/pull/420231
+    # https://nixpk.gs/pr-tracker.html?pr=420231
+    nixpkgs-pr420231.url = "github:NixOS/nixpkgs/pull/420231/head";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight.url = "github:mrjones2014/tokyonight.nix";
     zjstatus.url = "github:dj95/zjstatus";
@@ -80,6 +84,14 @@
           };
           system = "x86_64-linux";
           modules = [
+            {
+              # TODO remove this overlay when the PR is available in nixos-unstable, see comment at top
+              nixpkgs.overlays = [
+                (final: prev: {
+                  inherit (inputs.nixpkgs-pr420231.legacyPackages.x86_64-linux) linux-firmware;
+                })
+              ];
+            }
             agenix.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
