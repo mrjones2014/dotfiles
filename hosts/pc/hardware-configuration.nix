@@ -13,13 +13,20 @@
       "nvme"
       "usbhid"
     ];
-    initrd.kernelModules = [ ];
     kernelModules = [
       "kvm-amd"
       "coretemp"
-      "rtl8831"
+      # WiFi and Bluetooth drivers for PCIe WiFi card
+      "iwlwifi"
+      "btusb"
+      "bluetooth"
+      "btintel"
     ];
-    extraModulePackages = [ ];
+    # do not load driver for motherboard's WiFi+Bluetooth chip, it sucks ass,
+    # ensure the PCIe WiFi+Bluetooth card is used instead
+    blacklistedKernelModules = [
+      "mt7921e"
+    ];
   };
   fileSystems = {
     "/" = {
