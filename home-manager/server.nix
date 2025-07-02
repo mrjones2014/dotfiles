@@ -3,7 +3,7 @@
   nixpkgs.overlays = [
     (
       final: prev:
-      (import ../packages {
+      (import ../pkgs {
         inherit inputs;
         inherit pkgs;
         inherit (prev) system;
