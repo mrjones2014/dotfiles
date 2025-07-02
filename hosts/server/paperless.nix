@@ -1,6 +1,9 @@
 { config, ... }:
 {
-  services.nginx.subdomains.paperless.port = config.services.paperless.port;
+  services.nginx.subdomains.paperless = {
+    inherit (config.services.paperless) port;
+    allowLargeUploads = true;
+  };
   age.secrets.paperless_admin_pw.file = ../../secrets/paperless_admin_pw.age;
   services.paperless = {
     enable = true;

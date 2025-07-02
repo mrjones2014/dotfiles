@@ -17,6 +17,11 @@ let
         default = false;
         description = "Whether to use longer proxy timeout settings for this subdomain.";
       };
+      allowLargeUploads = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to allow large file uploads for this subdomain.";
+      };
     };
   };
 
@@ -40,6 +45,7 @@ in
       "myapp" = {
         port = 9090;
         default = true;
+        allowLargeUploads = true;
       };
     };
   };
@@ -80,11 +86,16 @@ in
             locations."/" = {
               proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}.port}";
               proxyWebsockets = true;
-              extraConfig = lib.optionalString cfg.${subdomain}.useLongerTimeout ''
-                proxy_read_timeout 120s;
-                proxy_connect_timeout 60s;
-                proxy_send_timeout 60s;
-              '';
+              extraConfig =
+                (lib.optionalString cfg.${subdomain}.useLongerTimeout ''
+                  proxy_read_timeout 120s;
+                  proxy_connect_timeout 60s;
+                  proxy_send_timeout 60s;
+                '')
+                + (lib.optionalString cfg.${subdomain}.allowLargeUploads ''
+                  client_max_body_size 1G;
+                  proxy_request_buffering off;
+                '');
             };
           };
         }
