@@ -11,10 +11,8 @@ in
   programs.jujutsu = {
     enable = true;
     settings = {
-      git = {
-        private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
-        push-bookmark-prefix = lib.mkDefault "mrj/";
-      };
+      templates.git_push_bookmarks = ''"<prefix>" ++ change_id.short()'';
+      git.private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
       experimental-advance-branches = {
         enabled-branches = [ "glob:*" ];
         disabled-branches = [
