@@ -25,6 +25,7 @@
       "rectangle-pro"
       "alfred"
       "xcodes-app"
+      "spotify"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
