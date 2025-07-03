@@ -3,6 +3,7 @@
   imports = [ ../nixos/nix-conf.nix ];
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
+  environment.variables.PAGER = "less -FRX";
 
   nix.optimise.automatic = true;
 
