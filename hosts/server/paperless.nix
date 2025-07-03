@@ -30,7 +30,7 @@
   systemd.timers.paperless-backup = {
     timerConfig = {
       Unit = "paperless-backup.service";
-      OnCalendar = "weekly";
+      OnCalendar = "Sun 03:00:00";
     };
     wantedBy = [ "timers.target" ];
   };
@@ -39,6 +39,8 @@
     serviceConfig = {
       Type = "oneshot";
       EnvironmentFile = config.age.secrets.paperless_backups_1password_token_env.path;
+      # prevents service from running every time I nixos-rebuild: https://wiki.nixos.org/wiki/Systemd/timers
+      RemainAfterExit = true;
     };
     wantedBy = [ "multi-user.target" ];
     script = ''

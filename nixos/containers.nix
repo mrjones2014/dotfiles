@@ -35,6 +35,8 @@ in
         serviceConfig = {
           Type = "oneshot";
           ExecStart = "update-containers";
+          # prevents service from running every time I nixos-rebuild: https://wiki.nixos.org/wiki/Systemd/timers
+          RemainAfterExit = true;
         };
       };
     };
