@@ -71,7 +71,7 @@ in
 
     docmost-app = {
       autoStart = true;
-      image = "docmost/docmost:latest";
+      image = "vito0912/forkmost:latest";
       volumes = [ "${storage_location}:/app/data/storage" ];
       ports = [ "${toString port}:${toString port}" ];
       networks = [ podman_network ];
