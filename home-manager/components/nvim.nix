@@ -5,7 +5,10 @@
   ...
 }:
 {
-  home.sessionVariables.MANPAGER = "nvim -c 'Man!' -o -";
+  home.sessionVariables = {
+    MANPAGER = "nvim -c 'Man!' -o -";
+    PAGER = "less -FRX";
+  };
   xdg.configFile = {
     ripgrep_ignore.text = ''
       .git/
