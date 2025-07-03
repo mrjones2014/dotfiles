@@ -44,7 +44,7 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d ${huntarr_data} 0777 root podman -"
+    "d ${huntarr_data} 0755 root root -"
   ];
   virtualisation.oci-containers.containers.huntarr = {
     image = "huntarr/huntarr:latest";
