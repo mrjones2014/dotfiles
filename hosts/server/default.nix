@@ -25,6 +25,7 @@
     ./nas.nix
     ./observability.nix
     ./docmost.nix
+    ./donetick.nix
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix
