@@ -15,9 +15,9 @@ in
   systemd = {
     # Create required directories
     tmpfiles.rules = [
-      "d ${storage_location} 0777 root podman - -"
-      "d ${db_data_location} 0777 root podman - -"
-      "d ${redis_data_location} 0777 root podman - -"
+      "d ${storage_location} 0755 root root - -"
+      "d ${db_data_location} 0755 root root - -"
+      "d ${redis_data_location} 0755 root root - -"
     ];
 
     # Create network for containers
