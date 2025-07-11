@@ -8,6 +8,7 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  environment.systemPackages = [ pkgs.mergerfs ];
   boot = {
     initrd = {
       luks.devices = {
@@ -58,9 +59,29 @@
       device = "/mnt/fileshare";
       options = [ "bind" ];
     };
-    "/mnt/jellyfin" = {
+    "/mnt/media1" = {
       device = "/dev/disk/by-label/media";
       fsType = "ext4";
+    };
+    "/mnt/media2" = {
+      device = "/dev/disk/by-label/media2";
+      fsType = "ext4";
+    };
+
+    "/mnt/jellyfin" = {
+      device = "/mnt/media1:/mnt/media2";
+      fsType = "fuse.mergerfs";
+      depends = [
+        "/mnt/media1"
+        "/mnt/media2"
+      ];
+      options = [
+        "defaults"
+        "allow_other"
+        "dropcacheonclose=true"
+        "category.create=mfs"
+        "moveonenospc=true"
+      ];
     };
   };
 
