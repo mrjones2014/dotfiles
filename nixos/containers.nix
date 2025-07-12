@@ -3,7 +3,7 @@ let
   update-containers = pkgs.writeShellScriptBin "update-containers" ''
     	SUDO=""
     	if [[ $(id -u) -ne 0 ]]; then
-    		SUDO="sudo"
+    	  SUDO="sudo"
     	fi
 
         images=$($SUDO ${pkgs.podman}/bin/podman ps -a --format="{{.Image}}" | sort -u)
@@ -14,7 +14,7 @@ let
         done
 
         # restart all running containers
-        $SUDO ${pkgs.podman} container restart --running
+        $SUDO ${pkgs.podman}/bin/podman container restart --running
   '';
 in
 {
