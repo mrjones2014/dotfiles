@@ -81,6 +81,7 @@
         "dropcacheonclose=true"
         "category.create=mfs"
         "moveonenospc=true"
+        "fsname=media-pool"
       ];
     };
   };

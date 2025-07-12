@@ -104,6 +104,12 @@ in
       DASHDOT_OVERRIDE_ARCH = "x86";
       DASHDOT_CUSTOM_HOST = config.networking.hostName;
       DASHDOT_SHOW_HOST = "true";
+      # Show media drives as combined MergerFS storage capacity
+      DASHDOT_FS_DEVICE_FILTER = "sdc,sdd";
+      # first column of `df` output to get this name
+      DASHDOT_FS_VIRTUAL_MOUNTS = "media-pool";
+      # un-ignore fuse.mergerfs filesystem type
+      DASHDOT_FS_TYPE_FILTER = "cifs,9p,fuse.rclone,nfs4,iso9660,fuse.shfs,autofs";
     };
   };
 }
