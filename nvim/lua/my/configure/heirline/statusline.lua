@@ -89,13 +89,68 @@ M.Mode = {
 
 local _cached_branch
 local _cached_jj_bookmark
-local _jj_last_call_time = os.time()
+local _git_watcher
+local _jj_watcher
+
+local function setup_git_watcher()
+  if _git_watcher then
+    _git_watcher:stop()
+    _git_watcher = nil
+  end
+
+  local git_dir = vim.fn.finddir('.git', '.;')
+  if git_dir == '' then
+    return
+  end
+
+  _git_watcher = vim.uv.new_fs_event()
+  if _git_watcher == nil then
+    return
+  end
+  _git_watcher:start(git_dir, { recursive = true }, function(err, filename)
+    if err then
+      return
+    end
+    -- Invalidate cache on HEAD or refs changes
+    if filename and (filename:match('HEAD') or filename:match('refs/')) then
+      _cached_branch = nil
+      vim.schedule(vim.cmd.redrawstatus)
+    end
+  end)
+end
+
+local function setup_jj_watcher()
+  if _jj_watcher then
+    _jj_watcher:stop()
+    _jj_watcher = nil
+  end
+
+  local jj_dir = vim.fn.finddir('.jj', '.;')
+  if jj_dir == '' then
+    return
+  end
+
+  _jj_watcher = vim.uv.new_fs_event()
+  if _jj_watcher == nil then
+    return
+  end
+  _jj_watcher:start(jj_dir, { recursive = true }, function(err)
+    if err then
+      return
+    end
+    -- Invalidate cache on any .jj directory changes
+    _cached_jj_bookmark = nil
+    vim.schedule(vim.cmd.redrawstatus)
+  end)
+end
+
 local function git_branch()
   if require('my.configure.heirline.conditions').is_jj_repo() then
-    local now = os.time()
-    -- refresh jj info at most once per few seconds
-    if not _cached_jj_bookmark or os.difftime(now, _jj_last_call_time) > 2 then
-      _jj_last_call_time = now
+    if not _jj_watcher then
+      setup_jj_watcher()
+    end
+
+    if not _cached_jj_bookmark then
       vim.system({
         'jj',
         'log',
@@ -112,21 +167,46 @@ local function git_branch()
         local trimmed = vim.trim(out.stdout or '')
         if trimmed ~= '' then
           _cached_jj_bookmark = trimmed
+          vim.schedule(vim.cmd.redrawstatus)
         end
       end)
     end
 
     return _cached_jj_bookmark
   end
-  local branch = vim.g.gitsigns_head or vim.g.gitsigns_head or vim.b.gitsigns_head
+
+  local branch = vim.g.gitsigns_head or vim.b.gitsigns_head
   if branch then
     return branch
   end
+
+  if not _git_watcher then
+    setup_git_watcher()
+  end
+
   if not _cached_branch then
     _cached_branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }, { text = true }):wait().stdout or '')
   end
+
   return _cached_branch
 end
+
+-- Cleanup function to stop watchers when needed
+local function cleanup_watchers()
+  if _git_watcher then
+    _git_watcher:stop()
+    _git_watcher = nil
+  end
+  if _jj_watcher then
+    _jj_watcher:stop()
+    _jj_watcher = nil
+  end
+end
+
+-- Auto-cleanup on VimLeavePre
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  callback = cleanup_watchers,
+})
 
 M.Branch = {
   init = function(self)
