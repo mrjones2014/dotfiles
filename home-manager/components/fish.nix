@@ -85,6 +85,16 @@ in
           onEvent = "fish_postexec";
           body = "tput cup $LINES";
         };
+        spc = {
+          description = "Print a separator to help visually separate long outputs.";
+          body = ''
+            echo
+            echo
+            string repeat -n (tput cols) '─'
+            echo
+            echo
+          '';
+        };
         nix-apply = {
           description = "Apply latest Nix configuration; checks if you need to do a git pull first";
           body = ''
