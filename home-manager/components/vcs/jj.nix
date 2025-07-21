@@ -11,7 +11,7 @@ in
   programs.jujutsu = {
     enable = true;
     settings = {
-      templates.git_push_bookmark = ''"mrj/" ++ change_id.short()'';
+      templates.git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
       git.private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
       experimental-advance-branches = {
         enabled-branches = [ "glob:*" ];
