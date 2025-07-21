@@ -5,7 +5,7 @@
   ...
 }:
 let
-  palette = import ./tokyonight_palette.nix { inherit lib; };
+  palette = import ../tokyonight_palette.nix { inherit lib; };
 in
 {
   programs.jujutsu = {

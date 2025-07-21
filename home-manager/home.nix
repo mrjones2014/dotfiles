@@ -69,7 +69,6 @@
     ./components/espanso.nix
     ./components/gnome
     ./components/recyclarr.nix
-    ./components/jujutsu.nix
     ./components/vencord.nix
     ../nixos/allowed-unfree.nix
     inputs.zen-browser.homeModules.default

@@ -12,8 +12,7 @@
     ./components/nvim.nix
     ./components/ssh.nix
     ./components/starship.nix
-    ./components/git.nix
-    ./components/jujutsu.nix
+    ./components/vcs
     ./components/fzf.nix
   ];
 }
