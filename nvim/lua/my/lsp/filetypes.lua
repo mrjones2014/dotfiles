@@ -1,39 +1,39 @@
 local M = {}
 
 M.config = {
-  ['css'] = {
+  css = {
     formatter = 'prettierd',
     lspconfig = { 'cssls' },
   },
-  ['html'] = {
+  html = {
     lspconfig = { 'html' },
   },
-  ['json'] = {
+  json = {
     lspconfig = 'jsonls',
     treesitter = { 'json', 'jsonc' },
   },
-  ['typescript'] = {
+  typescript = {
     lspconfig = { 'ts_ls', 'eslint' },
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
   },
-  ['lua'] = {
+  lua = {
     lspconfig = 'lua_ls',
     formatter = 'stylua',
     linter = 'luacheck',
     treesitter = { 'lua', 'luadoc' },
   },
-  ['rust'] = {
+  rust = {
     -- let rustaceanvim set this up for us
     lspconfig = false,
     -- we just want auto formatting
     formatter = 'rustfmt',
   },
-  ['go'] = {
+  go = {
     lspconfig = 'gopls',
     formatter = 'gofmt',
   },
-  ['markdown'] = {
+  markdown = {
     lspconfig = 'marksman',
     formatter = {
       'prettierd',
@@ -41,31 +41,34 @@ M.config = {
     },
     treesitter = { 'markdown', 'markdown_inline' },
   },
-  ['sh'] = {
+  sh = {
     treesitter = { 'bash' },
     -- shellcheck and shellfmt are run through the LSP
     lspconfig = 'bashls',
   },
-  ['swift'] = {
+  swift = {
     lspconfig = 'sourcekit',
     formatter = 'swiftfmt',
     treesitter = false, -- requires treesitter-cli and only really works on mac
   },
-  ['nix'] = {
+  nix = {
     lspconfig = { 'nixd', 'nil_ls' },
     linter = 'statix',
     formatter = { 'nixfmt', 'injected' },
   },
-  ['toml'] = {
+  toml = {
     lspconfig = 'taplo',
   },
-  ['fish'] = {
+  fish = {
     formatter = 'fish_indent',
     linter = 'fish',
   },
-  ['yaml'] = {
+  yaml = {
     lspconfig = 'yamlls',
     treesitter = { 'yaml' },
+  },
+  vim = {
+    treesitter = { 'vim' },
   },
 }
 

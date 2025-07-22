@@ -56,6 +56,7 @@
     extraPackages = with pkgs; [
       # for compiling Treesitter parsers
       gcc
+      tree-sitter
 
       # debuggers
       lldb # comes with lldb-vscode
