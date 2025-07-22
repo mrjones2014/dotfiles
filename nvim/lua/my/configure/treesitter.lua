@@ -40,19 +40,6 @@ return {
       opts = {},
     },
     'andymass/vim-matchup',
-    {
-      'ziontee113/query-secretary',
-      keys = {
-        {
-          '<leader>qs',
-          function()
-            require('query-secretary').query_window_initiate()
-          end,
-          desc = 'Open Query Secretary',
-        },
-      },
-      opts = {},
-    },
   },
   event = 'BufRead',
   cmd = { 'TSInstall', 'TSUpdate', 'TSUpdateSync' },
@@ -71,13 +58,6 @@ return {
     }
   end,
   config = function()
-    vim.filetype.add({
-      extension = {
-        mdx = 'mdx',
-      },
-    })
-    -- highlight mdx with markdown -- it's close enough. We also do JSX injection via ./after/queries/markdown/injections.scm
-    vim.treesitter.language.register('markdown', 'mdx')
     require('nvim-treesitter.configs').setup({ ---@diagnostic disable-line:missing-fields
       ensure_installed = require('my.lsp.filetypes').treesitter_parsers,
       highlight = {
