@@ -82,6 +82,9 @@ return {
     },
   },
   config = function(plug)
+    if vim.fn.executable('tree-sitter') ~= 1 then
+      error('tree-sitter CLI is not installed!')
+    end
     -- ensure this comes first on runtimepath; see: https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
     vim.opt.rtp:prepend(plug.dir)
     require('nvim-treesitter').install(require('my.lsp.filetypes').treesitter_parsers)
