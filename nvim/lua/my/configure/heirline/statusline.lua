@@ -87,8 +87,10 @@ M.Mode = {
   },
 }
 
-local _cached_branch
-local _cached_jj_bookmark
+local _cached_branch = ''
+local _cached_jj_bookmark = ''
+local _branch_cache_valid = false
+local _jj_cache_valid = false
 local _git_watcher
 local _jj_watcher
 
@@ -113,7 +115,7 @@ local function setup_git_watcher()
     end
     -- Invalidate cache on HEAD or refs changes
     if filename and (filename:match('HEAD') or filename:match('refs/')) then
-      _cached_branch = nil
+      _branch_cache_valid = false
       vim.schedule(vim.cmd.redrawstatus)
     end
   end)
@@ -139,7 +141,7 @@ local function setup_jj_watcher()
       return
     end
     -- Invalidate cache on any .jj directory changes
-    _cached_jj_bookmark = nil
+    _jj_cache_valid = false
     vim.schedule(vim.cmd.redrawstatus)
   end)
 end
@@ -150,7 +152,7 @@ local function git_branch()
       setup_jj_watcher()
     end
 
-    if not _cached_jj_bookmark then
+    if not _jj_cache_valid then
       vim.system({
         'jj',
         'log',
@@ -167,6 +169,7 @@ local function git_branch()
         local trimmed = vim.trim(out.stdout or '')
         if trimmed ~= '' then
           _cached_jj_bookmark = trimmed
+          _jj_cache_valid = true
           vim.schedule(vim.cmd.redrawstatus)
         end
       end)
@@ -184,8 +187,9 @@ local function git_branch()
     setup_git_watcher()
   end
 
-  if not _cached_branch then
+  if not _branch_cache_valid then
     _cached_branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }, { text = true }):wait().stdout or '')
+    _branch_cache_valid = true
   end
 
   return _cached_branch
