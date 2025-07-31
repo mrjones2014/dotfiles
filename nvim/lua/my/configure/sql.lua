@@ -1,5 +1,10 @@
 return {
-  'kristijanhusak/vim-dadbod-ui',
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    init = function()
+      vim.g.db_ui_disable_mappings_sql = 1
+    end,
+  },
   dependencies = {
     { 'tpope/vim-dadbod', lazy = true },
     { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
