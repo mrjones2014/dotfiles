@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 let
   op_sudo_password_script = pkgs.writeShellScriptBin "opsudo" ''
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
@@ -14,7 +14,7 @@ let
 in
 {
   home.packages = with pkgs; [ _1password-cli ];
-  imports = [ inputs._1password-shell-plugins.hmModules.default ];
+  imports = [ ../modules/_1password-shell-plugins.nix ];
   programs = {
     fish = {
       interactiveShellInit = ''
