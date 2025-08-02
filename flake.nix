@@ -3,11 +3,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    tokyonight = {
-      url = "github:mrjones2014/tokyonight.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    tokyonight.url = "github:mrjones2014/tokyonight.nix";
     zjstatus = {
       url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
