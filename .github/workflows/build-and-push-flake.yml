@@ -14,7 +14,7 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           extra_nix_config: |
-            download-buffer-size = 134217728
+            download-buffer-size = 268435456
       - uses: nix-community/cache-nix-action@v5
         with:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
@@ -26,6 +26,6 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build all configurations
         run: |
-          nix develop .#ci --command nix-fast-build --skip-cached --no-nom --systems x86_64-linux,aarch64-darwin
+          nix --accept-flake-config develop .#ci --command nix-fast-build --skip-cached --no-nom --systems x86_64-linux,aarch64-darwin
           # track how much disk space the action uses
           df -h
