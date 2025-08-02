@@ -1,14 +1,11 @@
 name: Check Nix flake
 on:
   pull_request:
-  push:
-    branches:
-      - master
-  workflow_dispatch: # allow manual trigger
 jobs:
   check-flake:
     runs-on: ubuntu-latest
     steps:
+      - uses: wimpysworld/nothing-but-nix@main
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
       - uses: cachix/cachix-action@v16
