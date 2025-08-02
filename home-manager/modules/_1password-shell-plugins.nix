@@ -8,15 +8,6 @@ with lib;
 let
   cfg = config.programs._1password-shell-plugins;
 
-  supported_plugins = splitString "\n" (
-    lib.readFile "${
-      # get the list of supported plugin executable names
-      pkgs.runCommand "op-plugin-list" { }
-        # 1Password CLI tries to create the config directory automatically, so set a temp XDG_CONFIG_HOME
-        # since we don't actually need it for this
-        "mkdir $out && XDG_CONFIG_HOME=$out ${pkgs._1password-cli}/bin/op plugin list | cut -d ' ' -f1 | tail -n +2 > $out/plugins.txt"
-    }/plugins.txt"
-  );
   getExeName =
     package:
     # SAFETY: This is okay because the `packages` list is also referred
@@ -30,7 +21,6 @@ in
   options = {
     programs._1password-shell-plugins = {
       enable = mkEnableOption "1Password Shell Plugins";
-      package = mkPackageOption pkgs "_1password-cli" { nullable = true; };
       plugins = mkOption {
         type = types.listOf types.package;
         default = [ ];
@@ -41,19 +31,7 @@ in
             cachix
           ]
         '';
-        description = "CLI Packages to enable 1Password Shell Plugins for; ensure that a Shell Plugin exists by checking the docs: https://developer.1password.com/docs/cli/shell-plugins/";
-        # this is a bit of a hack to do option validation;
-        # ensure that the list of packages include only packages
-        # for which the executable has a supported 1Password Shell Plugin
-        apply =
-          package_list:
-          map (
-            package:
-            if (elem (getExeName package) supported_plugins) then
-              package
-            else
-              abort "${getExeName package} is not a valid 1Password Shell Plugin. A list of supported plugins can be found by running `op plugin list` or at: https://developer.1password.com/docs/cli/shell-plugins/"
-          ) package_list;
+        description = "CLI Packages to enable 1Password Shell Plugins for";
       };
     };
   };
@@ -74,7 +52,7 @@ in
           value = "op plugin run -- ${package}";
         }) pkg-exe-names
       );
-      packages = lib.optional (cfg.package != null) cfg.package ++ cfg.plugins;
+      packages = [ pkgs._1password-cli ] ++ cfg.plugins;
     in
     mkIf cfg.enable (mkMerge [
       {
