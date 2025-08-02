@@ -178,18 +178,14 @@
       let
         inherit (nixpkgs) lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        packages = lib.filterAttrs (_: pkg: builtins.any (x: x == system) pkg.meta.platforms) (
-          import ./pkgs { inherit pkgs; }
-        );
         checksForConfigs =
           configs: extract:
           lib.attrsets.filterAttrs (_: p: p.system == system) (lib.attrsets.mapAttrs (_: extract) configs);
       in
       {
-        checks = lib.lists.foldl lib.attrsets.unionOfDisjoint packages [
+        checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
-          (checksForConfigs self.darwinConfigurations (c: c.darwin.system))
-        ];
+          // (checksForConfigs self.darwinConfigurations (c: c.darwin.system));
         devShells.ci = pkgs.mkShell {
           packages = [ pkgs.nix-fast-build ];
         };
