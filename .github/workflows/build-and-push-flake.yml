@@ -1,57 +1,42 @@
-name: Build All Flake Outputs & Push to Cachix
+name: Build All Flake Outputs
 on:
   push:
     branches: [master]
   workflow_dispatch:
 
 jobs:
-  build-nixos:
+  build-and-cache:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        config: [homelab, tower, nixbook]
     steps:
       - uses: actions/checkout@v4
-      - name: Free disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          df -h
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: nix-community/cache-nix-action@v5
-        with:
-          primary-key: nix-${{ runner.os }}-${{ matrix.config }}-${{ hashFiles('flake.lock') }}
-          restore-prefixes-first-match: |
-            nix-${{ runner.os }}-${{ matrix.config }}-
-            nix-${{ runner.os }}-
-      - uses: cachix/cachix-action@v12
-        with:
-          name: your-cache-name
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build configuration
-        run: nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel
 
-  build-darwin:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
       - name: Free disk space
         run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
           df -h
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: nix-community/cache-nix-action@v5
         with:
-          primary-key: nix-${{ runner.os }}-darwin-${{ hashFiles('flake.lock') }}
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
           restore-prefixes-first-match: |
-            nix-${{ runner.os }}-darwin-
             nix-${{ runner.os }}-
+
       - uses: cachix/cachix-action@v12
         with:
-          name: your-cache-name
+          name: mrjones2014-dotfiles
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build Darwin configuration
-        run: nix build .#darwinConfigurations.darwin.system
+
+      - name: Build all configurations
+        run: |
+          nix develop .#ci --command nix-fast-build --skip-cached --no-nom --systems x86_64-linux,aarch64-darwin
+          # track how much disk space the action uses
+          df -h
+

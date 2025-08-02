@@ -6,6 +6,7 @@
     # is on nixos-unstable: https://github.com/NixOS/nixpkgs/pull/420231
     # https://nixpk.gs/pr-tracker.html?pr=420231
     nixpkgs-pr420231.url = "github:NixOS/nixpkgs/pull/420231/head";
+    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight.url = "github:mrjones2014/tokyonight.nix";
     zjstatus.url = "github:dj95/zjstatus";
@@ -33,7 +34,9 @@
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
+      flake-utils,
       nix-darwin,
       home-manager,
       agenix,
@@ -169,5 +172,27 @@
             }
           ];
         };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        inherit (nixpkgs) lib;
+        pkgs = nixpkgs.legacyPackages.${system};
+        packages = lib.filterAttrs (_: pkg: builtins.any (x: x == system) pkg.meta.platforms) (
+          import ./pkgs { inherit pkgs; }
+        );
+        checksForConfigs =
+          configs: extract:
+          lib.attrsets.filterAttrs (_: p: p.system == system) (lib.attrsets.mapAttrs (_: extract) configs);
+      in
+      {
+        checks = lib.lists.foldl lib.attrsets.unionOfDisjoint packages [
+          (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
+          (checksForConfigs self.darwinConfigurations (c: c.darwin.system))
+        ];
+        devShells.ci = pkgs.mkShell {
+          packages = [ pkgs.nix-fast-build ];
+        };
+      }
+    );
 }
