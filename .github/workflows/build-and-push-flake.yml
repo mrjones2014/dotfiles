@@ -1,0 +1,29 @@
+name: Build All Flake Outputs
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: # for allowing manual dispatch
+
+jobs:
+  build-and-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: mrjones2014-dotfiles
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build and push to Cachix
+        run: |
+          # Build each NixOS config and push
+          for config in homelab tower nixbook; do
+            echo "Building nixosConfigurations.$config"
+            nix build .#nixosConfigurations.$config.config.system.build.toplevel
+          done
+
+          echo "Building Darwin configuration"
+          nix build .#darwinConfigurations.darwin.system
