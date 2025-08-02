@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../nixos/nix-conf.nix
+    (import ../../nixos/nix-conf.nix { isHomeManager = false; })
     ./settings.nix
   ];
   nix.optimise.automatic = true;

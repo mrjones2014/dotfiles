@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ ../nixos/nix-conf.nix ];
+  imports = [ (import ../nixos/nix-conf.nix { isHomeManager = false; }) ];
 
   environment.systemPackages = [ pkgs.mullvad-vpn ];
   environment.variables.PAGER = "less -FRX";

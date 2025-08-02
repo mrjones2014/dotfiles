@@ -1,12 +1,11 @@
+{ isHomeManager }:
 {
   pkgs,
   lib,
   inputs,
-  osConfig ? null,
   ...
 }:
 let
-  isHomeManager = osConfig != null;
   cachix = {
     url = "https://mrjones2014-dotfiles.cachix.org";
     public-key = "mrjones2014-dotfiles.cachix.org-1:c66wfzthG6KZEWnltlzW/EjhlH9FwUVi5jM4rVD1Rw4=";

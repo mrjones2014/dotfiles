@@ -6,7 +6,7 @@
   };
   home.packages = [ pkgs.nix-search-cli ];
   imports = [
-    ../nixos/nix-conf.nix
+    (import ../nixos/nix-conf.nix { isHomeManager = true; })
     ../nixos/theme.nix
     ./components/fish.nix
     ./components/nvim.nix
