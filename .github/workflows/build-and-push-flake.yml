@@ -1,29 +1,57 @@
-name: Build All Flake Outputs
+name: Build All Flake Outputs & Push to Cachix
 on:
   push:
     branches: [master]
-  workflow_dispatch: # for allowing manual dispatch
+  workflow_dispatch:
 
 jobs:
-  build-and-cache:
+  build-nixos:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [homelab, tower, nixbook]
     steps:
       - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          df -h
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: nix-community/cache-nix-action@v5
+        with:
+          primary-key: nix-${{ runner.os }}-${{ matrix.config }}-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: |
+            nix-${{ runner.os }}-${{ matrix.config }}-
+            nix-${{ runner.os }}-
       - uses: cachix/cachix-action@v12
         with:
-          name: mrjones2014-dotfiles
+          name: your-cache-name
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build configuration
+        run: nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel
 
-      - name: Build and push to Cachix
+  build-darwin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
         run: |
-          # Build each NixOS config and push
-          for config in homelab tower nixbook; do
-            echo "Building nixosConfigurations.$config"
-            nix build .#nixosConfigurations.$config.config.system.build.toplevel
-          done
-
-          echo "Building Darwin configuration"
-          nix build .#darwinConfigurations.darwin.system
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          df -h
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: nix-community/cache-nix-action@v5
+        with:
+          primary-key: nix-${{ runner.os }}-darwin-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: |
+            nix-${{ runner.os }}-darwin-
+            nix-${{ runner.os }}-
+      - uses: cachix/cachix-action@v12
+        with:
+          name: your-cache-name
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build Darwin configuration
+        run: nix build .#darwinConfigurations.darwin.system
