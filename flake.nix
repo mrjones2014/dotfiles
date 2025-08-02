@@ -29,7 +29,12 @@
     };
   };
 
-  nixConfig.extra-substituters = [ "https://mrjones2014-dotfiles.cachix.org" ];
+  nixConfig = {
+    extra-substituters = [ "https://mrjones2014-dotfiles.cachix.org" ];
+    extra-trusted-public-keys = [
+      "mrjones2014-dotfiles.cachix.org-1:c66wfzthG6KZEWnltlzW/EjhlH9FwUVi5jM4rVD1Rw4="
+    ];
+  };
 
   outputs =
     inputs@{
