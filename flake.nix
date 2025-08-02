@@ -179,7 +179,7 @@
       {
         checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
-          // (checksForConfigs self.darwinConfigurations (c: c.darwin.system));
+          // (checksForConfigs self.darwinConfigurations (c: c.system));
         devShells.ci = pkgs.mkShell {
           packages = [ pkgs.nix-fast-build ];
         };
