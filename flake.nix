@@ -34,6 +34,8 @@
     };
   };
 
+  nixConfig.extra-substituters = [ "https://mrjones2014-dotfiles.cachix.org" ];
+
   outputs =
     inputs@{
       self,
