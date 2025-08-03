@@ -46,15 +46,14 @@ in
         name = config.programs.git.userName;
         email = config.programs.git.userEmail;
       };
-      signing =
-        {
-          inherit (config.programs.git.signing) key;
-          behavior = "force";
-          backend = "ssh";
-        }
-        // lib.optionalAttrs (!isServer) {
-          backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
-        };
+      signing = {
+        inherit (config.programs.git.signing) key;
+        behavior = "force";
+        backend = "ssh";
+      }
+      // lib.optionalAttrs (!isServer) {
+        backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
+      };
     };
   };
 }

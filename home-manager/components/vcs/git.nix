@@ -62,19 +62,18 @@ in
       pull.rebase = false;
       push.autoSetupRemote = true;
       commit.gpgsign = true;
-      gpg =
-        {
-          format = "ssh";
-        }
-        // pkgs.lib.optionalAttrs (!isServer) {
-          ssh = {
-            program =
-              if isLinux then
-                "/run/current-system/sw/bin/op-ssh-sign"
-              else
-                "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-          };
+      gpg = {
+        format = "ssh";
+      }
+      // pkgs.lib.optionalAttrs (!isServer) {
+        ssh = {
+          program =
+            if isLinux then
+              "/run/current-system/sw/bin/op-ssh-sign"
+            else
+              "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         };
+      };
       core = {
         autocrlf = false;
         fsmonitor = true;

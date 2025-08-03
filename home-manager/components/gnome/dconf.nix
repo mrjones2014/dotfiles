@@ -60,7 +60,8 @@ in
         "1password.desktop"
         "signal.desktop"
         "vesktop.desktop"
-      ] ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
+      ]
+      ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
       inherit enabled-extensions;
     };
     "org/gnome/desktop/interface" = {

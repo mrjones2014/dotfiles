@@ -1,8 +1,8 @@
 use clap::{Arg, ArgMatches, Command};
 use mdbook::{
+    BookItem,
     book::Book,
     preprocess::{CmdPreprocessor, Preprocessor, PreprocessorContext},
-    BookItem,
 };
 use regex::Regex;
 use std::io::prelude::*;

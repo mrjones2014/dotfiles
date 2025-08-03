@@ -108,13 +108,11 @@
 
     ! youtube shorts in sidebar on video player page
     youtube.com##ytd-reel-shelf-renderer
-
 - Stack Overflow / Stack Exchange: |
     ! Block the cookie banner that covers the entire bottom left corner even with JS disabled
     stackexchange.com##.js-consent-banner
     stackoverflow.com##.js-consent-banner
     askubuntu.com##.js-consent-banner
-
 - GitHub: |
     ! Block Copilot Workspace button
     github.com##[class*="CopilotWorkspaceButton"]
@@ -141,15 +139,12 @@
     ! Block "achievements"
     github.com##.d-block:has(a[href*="?tab=achievements"])
     github.com##.d-md-block:has(a[href*="?tab=achievements"])
-
 - Glassdoor: |
     ! Block the "hard sell" overlay that tries to force you to pay money just to read a review
     www.glassdoor.com##.hardsellOverlay
-
 - PayPal: |
     ! Block the cookie banner, same as rejecting cookies
     www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
-
 - Discord: |
     ! Block "Add super reaction" button
     discord.com##div[aria-label="Add Super Reaction"]
