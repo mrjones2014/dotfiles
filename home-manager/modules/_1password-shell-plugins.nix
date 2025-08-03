@@ -4,7 +4,6 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.programs._1password-shell-plugins;
 
@@ -15,16 +14,16 @@ let
     # depending on if it's using `home-manager` or not; this means that Nix can still
     # compute the dependency tree, even though we're discarding string context here,
     # since the packages are still referred to below without discarding string context.
-    strings.unsafeDiscardStringContext (baseNameOf (getExe package));
+    lib.strings.unsafeDiscardStringContext (baseNameOf (lib.getExe package));
 in
 {
   options = {
     programs._1password-shell-plugins = {
-      enable = mkEnableOption "1Password Shell Plugins";
-      plugins = mkOption {
-        type = types.listOf types.package;
+      enable = lib.mkEnableOption "1Password Shell Plugins";
+      plugins = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
         default = [ ];
-        example = literalExpression ''
+        example = lib.literalExpression ''
           with pkgs; [
             gh
             awscli2
@@ -38,35 +37,25 @@ in
 
   config =
     let
-      # executable names as strings, e.g. `pkgs.gh` => `"gh"`, `pkgs.awscli2` => `"aws"`
       pkg-exe-names = map getExeName cfg.plugins;
-      # Explanation:
-      # Map over `cfg.plugins` (the value of the `plugins` option provided by the user)
-      # and for each package specified, get the executable name, then create a shell alias
-      # of the form:
-      # `alias {pkg}="op plugin run -- {pkg}"`
-      # where `{pkg}` is the executable name of the package
-      aliases = listToAttrs (
-        map (package: {
-          name = package;
-          value = "op plugin run -- ${package}";
-        }) pkg-exe-names
-      );
+      fish-functions = lib.map (package: {
+        wraps = package;
+        description = "1Password Shell Plugin for ${package}";
+        body = "op plugin run -- ${package}";
+      }) pkg-exe-names;
       packages = [ pkgs._1password-cli ] ++ cfg.plugins;
     in
-    mkIf cfg.enable (mkMerge [
-      {
-        programs = {
-          bash.shellAliases = aliases;
-          zsh.shellAliases = aliases;
-          fish.shellAliases = aliases;
-        };
-        home = {
-          inherit packages;
-          sessionVariables = {
-            OP_PLUGINS_SOURCED = "1";
+    lib.mkIf cfg.enable (
+      lib.mkMerge [
+        {
+          programs.fish.functions = fish-functions;
+          home = {
+            inherit packages;
+            sessionVariables = {
+              OP_PLUGINS_SOURCED = "1";
+            };
           };
-        };
-      }
-    ]);
+        }
+      ]
+    );
 }
