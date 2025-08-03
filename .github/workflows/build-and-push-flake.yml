@@ -16,11 +16,6 @@ jobs:
           extra_nix_config: |
             download-buffer-size = 268435456
             accept-flake-config = true
-      - uses: nix-community/cache-nix-action@v5
-        with:
-          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
-          restore-prefixes-first-match: |
-            nix-${{ runner.os }}-
       - uses: cachix/cachix-action@v12
         with:
           name: mrjones2014-dotfiles
