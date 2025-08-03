@@ -37,20 +37,19 @@
     defaultEditor = true;
     coc.enable = false;
 
-    extraWrapperArgs =
-      [
-        "--set"
-        "NVIM_RUST_ANALYZER"
-        "${pkgs.rust-analyzer}/bin/rust-analyzer"
-        "--set"
-        "LIBSQLITE"
-      ]
-      ++ (
-        if isLinux then
-          [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
-        else
-          [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]
-      );
+    extraWrapperArgs = [
+      "--set"
+      "NVIM_RUST_ANALYZER"
+      "${pkgs.rust-analyzer}/bin/rust-analyzer"
+      "--set"
+      "LIBSQLITE"
+    ]
+    ++ (
+      if isLinux then
+        [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
+      else
+        [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]
+    );
 
     extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [
@@ -69,6 +68,7 @@
       statix
       luajitPackages.luacheck
       prettierd
+      yamlfmt
 
       # LSP servers
       nixd

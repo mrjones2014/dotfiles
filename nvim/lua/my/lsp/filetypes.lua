@@ -66,6 +66,7 @@ M.config = {
   yaml = {
     lspconfig = 'yamlls',
     treesitter = { 'yaml' },
+    formatter = { 'yamlfmt' },
   },
   vim = {
     treesitter = { 'vim' },

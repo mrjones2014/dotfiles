@@ -145,6 +145,7 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "tokyonight": "tokyonight",
+        "treefmt-nix": "treefmt-nix",
         "zen-browser": "zen-browser",
         "zjstatus": "zjstatus"
       }
@@ -248,6 +249,26 @@
       "original": {
         "owner": "folke",
         "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754061284,
+        "narHash": "sha256-ONcNxdSiPyJ9qavMPJYAXDNBzYobHRxw0WbT38lKbwU=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "58bd4da459f0a39e506847109a2a5cfceb837796",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     },
