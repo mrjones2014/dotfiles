@@ -15,7 +15,7 @@ jobs:
           extra_nix_config: |
             download-buffer-size = 268435456
             accept-flake-config = true
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v16
         with:
           name: mrjones2014-dotfiles
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
