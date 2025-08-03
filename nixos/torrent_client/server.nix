@@ -3,7 +3,12 @@
   vuetorrent_port,
   qbittorrent_port,
 }:
-{ pkgs, isServer, ... }:
+{
+  pkgs,
+  isServer,
+  config,
+  ...
+}:
 if isServer then
   {
     age.secrets.mullvad_wireguard.file = ../../secrets/mullvad_wireguard.age;
@@ -34,6 +39,24 @@ if isServer then
         RELEASE_TYPE = "stable";
         # every Sunday
         UPDATE_VT_CRON = "0 0 * * 0";
+      };
+    };
+    age.secrets.cross-seed-cfg.file = ../../secrets/cross_seed_cfg.age;
+    services.cross-seed = {
+      enable = true;
+      # this gets merged with the `settings` nixos option
+      settingsFile = config.age.secrets.cross-seed-cfg.path;
+      settings = {
+        host = "127.0.0.1";
+        action = "inject";
+        useClientTorrents = true;
+        matchMode = "partial";
+        seasonFromEpisodes = 0.5;
+        linkDirs = [
+          "/mnt/jellyfin/incomplete/cross-seed"
+          "/mnt/jellyfin/media/cross-seed"
+        ];
+        duplicateCategories = true;
       };
     };
   }
