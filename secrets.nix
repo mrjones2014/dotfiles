@@ -18,7 +18,6 @@ let
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
     "secrets/docmost_env.age"
-    "secrets/donetick_config.age"
     "secrets/paperless_backups_1password_token_env.age"
   ];
 in

@@ -23,7 +23,6 @@ let
     qbittorrent = "qBitTorrent";
     home = "Home Assistant";
     zwave = "Z-Wave Network";
-    todo = "Donetick";
   };
 
   # Generate the Gatus endpoints configuration
