@@ -20,6 +20,7 @@ in
           psycopg2
           pyatv
           universal-silabs-flasher
+          pyipp
         ];
       extraComponents = [
         "default_config"
