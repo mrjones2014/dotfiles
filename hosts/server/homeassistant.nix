@@ -21,6 +21,7 @@ in
           pyatv
           universal-silabs-flasher
           pyipp
+          ical
         ];
       extraComponents = [
         "default_config"
