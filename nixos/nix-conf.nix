@@ -14,17 +14,15 @@ in
 {
   nix = {
     package = lib.mkDefault pkgs.lixPackageSets.latest.lix;
-    settings = {
-      extra-substituters = [ cachix.url ];
-      extra-trusted-public-keys = [ cachix.public-key ];
-      keep-outputs = true;
-      keep-derivations = true;
-      experimental-features = "nix-command flakes";
-    }
-    // lib.optionalAttrs (!isHomeManager) {
-      trusted-substituters = [ cachix.url ];
-      trusted-public-keys = [ cachix.public-key ];
-    };
+    settings =
+      { }
+      // lib.optionalAttrs (!isHomeManager) {
+        experimental-features = "nix-command flakes";
+        keep-derivations = true;
+        keep-outputs = true;
+        trusted-substituters = [ cachix.url ];
+        trusted-public-keys = [ cachix.public-key ];
+      };
     # enable `nix-shell -p nixpkgs#something` without using channels
     # also use the exact version of nixpkgs from the flake the system is built from
     # to avoid cache misses
