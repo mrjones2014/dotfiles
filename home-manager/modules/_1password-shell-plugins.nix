@@ -38,11 +38,18 @@ in
   config =
     let
       pkg-exe-names = map getExeName cfg.plugins;
-      fish-functions = lib.map (package: {
-        wraps = package;
-        description = "1Password Shell Plugin for ${package}";
-        body = "op plugin run -- ${package}";
-      }) pkg-exe-names;
+
+      fish-functions = lib.listToAttrs (
+        map (exe: {
+          name = exe;
+          value = {
+            wraps = exe;
+            description = "1Password Shell Plugin for ${exe}";
+            body = "op plugin run -- ${exe}";
+          };
+        }) pkg-exe-names
+      );
+
       packages = [ pkgs._1password-cli ] ++ cfg.plugins;
     in
     lib.mkIf cfg.enable (
