@@ -71,6 +71,10 @@ M.config = {
   vim = {
     treesitter = { 'vim' },
   },
+  graphql = {
+    treesitter = { 'graphql', 'http' },
+    lspconfig = 'graphql',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)

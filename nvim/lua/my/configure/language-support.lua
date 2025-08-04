@@ -241,7 +241,7 @@ return {
     end,
     config = function()
       require('neoconf').setup({}) -- ensure neoconf loads first
-      local function setup_lsp_for_filetype(filetype, server_name)
+      local function setup_server(filetype, server_name)
         local has_config, config = pcall(require, 'my.lsp.' .. filetype)
         config = has_config and config or {}
         config.capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -251,10 +251,6 @@ return {
         if snippets then
           snippets()
         end
-      end
-
-      local function setup_server(filetype, server_name)
-        setup_lsp_for_filetype(filetype, server_name)
       end
 
       -- set up ast-grep LSP for all languages

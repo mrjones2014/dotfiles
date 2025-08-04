@@ -84,13 +84,13 @@
       nodePackages_latest.typescript-language-server
       yaml-language-server
       bash-language-server
+      graphql-language-service-cli
 
       # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
       gnumake
-      src-cli
       ripgrep
       fd
       sqlite
@@ -102,6 +102,9 @@
       glow
       mariadb
       imagemagick
+      jq
+      openssl
+      curl
     ];
   };
 }
