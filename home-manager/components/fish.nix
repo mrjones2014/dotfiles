@@ -9,7 +9,7 @@ let
   rebuild-cmd = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
   rebuild-script = ''
     sudo echo
-    sudo ${rebuild-cmd} switch --accept-flake-config --flake ~/git/dotfiles/.# &| ${pkgs.nix-output-monitor}/bin/nom
+    sudo ${rebuild-cmd} switch --flake ~/git/dotfiles/.# &| ${pkgs.nix-output-monitor}/bin/nom
   '';
 in
 {
