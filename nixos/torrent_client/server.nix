@@ -56,6 +56,7 @@ if isServer then
           "/mnt/jellyfin/incomplete/cross-seed"
           "/mnt/jellyfin/media/cross-seed"
         ];
+        outputDir = "/mnt/jellyfin/torrents/cross-seed";
         duplicateCategories = true;
       };
     };
