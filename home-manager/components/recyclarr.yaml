@@ -120,47 +120,47 @@ radarr:
           enabled: true
         upgrade:
           allowed: true
-          until_quality: WEB 2160p
+          until_quality: 2160p
           until_score: 10000
         min_format_score: 0
         quality_sort: top
         qualities:
-          - name: WEB 720p
+          - name: 720p
             qualities:
-              - WEBDL-720p # Streaming source at 720p
-              - WEBRip-720p # Web captures at 720p
-          - name: Bluray-720p # Blu-ray source at 720p
-          - name: WEB 1080p
+              - WEBDL-720p
+              - WEBRip-720p
+              - Bluray-720p
+          - name: 1080p
             qualities:
-              - WEBDL-1080p # Streaming source at 1080p
-              - WEBRip-1080p # Web captures at 1080p
-          - name: Bluray-1080p # Blu-ray source at 1080p
-          - name: WEB 2160p
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+          - name: 2160p
             qualities:
-              - WEBDL-2160p # Streaming source at 4K
-              - WEBRip-2160p # Web captures at 4K
-          - name: Bluray-2160p # Blu-ray source at 4K
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
       # Profile 2: Starts at 1080p minimum (for newer movies)
       - name: 1080p-2160p
         reset_unmatched_scores:
           enabled: true
         upgrade:
           allowed: true
-          until_quality: WEB 2160p
+          until_quality: 2160p
           until_score: 10000
         min_format_score: 0
         quality_sort: top
         qualities:
-          - name: WEB 1080p
+          - name: 1080p
             qualities:
               - WEBDL-1080p
               - WEBRip-1080p
-          - name: Bluray-1080p
-          - name: WEB 2160p
+              - Bluray-1080p
+          - name: 2160p
             qualities:
               - WEBDL-2160p
               - WEBRip-2160p
-          - name: Bluray-2160p
+              - Bluray-2160p
     custom_formats:
       # LANGUAGE RESTRICTION
       # Block common non-English languages with trash IDs
