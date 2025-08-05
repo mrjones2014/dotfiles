@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>My Dotfiles - mjones.network</title>
+        <title>Steam Quirks - mjones.network</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> README.md</a></li><li class="chapter-item expanded "><a href="my-dotfiles.html" class="active"><strong aria-hidden="true">2.</strong> My Dotfiles</a></li><li class="chapter-item expanded "><a href="ublock-filters.html"><strong aria-hidden="true">3.</strong> Useful uBlock Origin Filters</a></li><li class="chapter-item expanded "><a href="zen-browser-settings.html"><strong aria-hidden="true">4.</strong> Zen Browser Settings</a></li><li class="chapter-item expanded "><a href="home_assistant/index.html"><strong aria-hidden="true">5.</strong> Home Assistant</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="home_assistant/z_wave.html"><strong aria-hidden="true">5.1.</strong> Z Wave</a></li></ol></li><li class="chapter-item expanded "><a href="steam_quirks.html"><strong aria-hidden="true">6.</strong> Steam Quirks</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> README.md</a></li><li class="chapter-item expanded "><a href="my-dotfiles.html"><strong aria-hidden="true">2.</strong> My Dotfiles</a></li><li class="chapter-item expanded "><a href="ublock-filters.html"><strong aria-hidden="true">3.</strong> Useful uBlock Origin Filters</a></li><li class="chapter-item expanded "><a href="zen-browser-settings.html"><strong aria-hidden="true">4.</strong> Zen Browser Settings</a></li><li class="chapter-item expanded "><a href="home_assistant/index.html"><strong aria-hidden="true">5.</strong> Home Assistant</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="home_assistant/z_wave.html"><strong aria-hidden="true">5.1.</strong> Z Wave</a></li></ol></li><li class="chapter-item expanded "><a href="steam_quirks.html" class="active"><strong aria-hidden="true">6.</strong> Steam Quirks</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -170,41 +170,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-on-a-new-system"><a class="header" href="#installing-on-a-new-system">Installing on a New System</a></h1>
-<pre><code class="language-bash">mkdir -p "$HOME/git"
-cd "$HOME/git"
-git clone git@github.com:mrjones2014/dotfiles.git
-cd "dotfiles/"
-jj git init --colocate # if you use Jujutsu
+                        <h1 id="steam-on-linux-quirks"><a class="header" href="#steam-on-linux-quirks">Steam on Linux Quirks</a></h1>
+<h2 id="vulkan-shader-processing"><a class="header" href="#vulkan-shader-processing">Vulkan Shader Processing</a></h2>
+<p>On NixOS it seems to default to using only 1 core; you can speed it up by editing <code>~/.steam/steam/steam_dev.cfg</code>:</p>
+<pre><code class="language-bash">unShaderBackgroundProcessingThreads 8 # or however many threads you have
 </code></pre>
-<h2 id="nixos"><a class="header" href="#nixos">NixOS</a></h2>
-<p>If you're installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
-Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
-since we'll be installing GNOME anyway.</p>
-<p>Make sure to set up full disk encryption.</p>
-<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower</code> (replacing <code>.#tower</code> with your desired flake output target).
-After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
-<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
-<p>On macOS, for the first install, you'll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
-<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#darwin
-</code></pre>
-<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
-<h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
-<p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
-On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
-<code>home-manager</code> config. On macOS, the same behavior is achieved via <a href="https://github.com/nix-darwin/nix-darwin">nix-darwin</a>.</p>
+<p>Source: <a href="https://steamcommunity.com/discussions/forum/1/4423184732111747107/">https://steamcommunity.com/discussions/forum/1/4423184732111747107/</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="home_assistant/z_wave.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="ublock-filters.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -212,13 +192,10 @@ On NixOS, the <code>home-manager</code> configuration is managed as a NixOS modu
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="home_assistant/z_wave.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="ublock-filters.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
