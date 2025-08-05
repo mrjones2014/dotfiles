@@ -1,12 +1,11 @@
-{ config, ... }:
 let
-  envFile = config.age.secrets.cleanuperr_env.path;
+  port = 11011;
 in
 {
-  age.secrets.cleanuperr_env.file = ../../secrets/cleanuperr_env.age;
-  virtualisation.oci-containers.containers.cleanuperr = {
+  services.nginx.subdomains.cleanuparr.port = port;
+  virtualisation.oci-containers.containers.cleanuparr = {
     autoStart = true;
-    image = "ghcr.io/flmorg/cleanuperr:latest";
-    environmentFiles = [ envFile ];
+    image = "ghcr.io/cleanuparr/cleanuparr:latest";
+    ports = [ "${builtins.toString port}:${builtins.toString port}" ];
   };
 }
