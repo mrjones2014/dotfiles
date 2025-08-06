@@ -23,6 +23,7 @@ in
           pyipp
           ical
           hap-python
+          base36
         ];
       extraComponents = [
         "default_config"
