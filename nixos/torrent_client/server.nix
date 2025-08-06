@@ -21,9 +21,12 @@ if isServer then
         useClientTorrents = true;
         matchMode = "partial";
         seasonFromEpisodes = 0.5;
+        dataDirs = [
+          "/mnt/jellyfin/incomplete"
+          "/mnt/jellyfin/media"
+        ];
         linkDirs = [
-          "/mnt/jellyfin/incomplete/cross-seed"
-          "/mnt/jellyfin/media/cross-seed"
+          "/mnt/jellyfin/cross-seed"
         ];
         outputDir = "/mnt/jellyfin/torrents/cross-seed";
         duplicateCategories = true;
