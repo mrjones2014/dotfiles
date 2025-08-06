@@ -22,6 +22,7 @@ in
           universal-silabs-flasher
           pyipp
           ical
+          hap-python
         ];
       extraComponents = [
         "default_config"
