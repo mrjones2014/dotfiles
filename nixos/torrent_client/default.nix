@@ -7,22 +7,16 @@ let
   configDir = "/var/lib/qbittorrentvpn";
   wireguardConfigPath = config.age.secrets.mullvad_wireguard.path;
   qbittorrent_port = 8080;
-  vuetorrent_port = 8081;
   tcpPorts = [
     qbittorrent_port
     8118
     9118
     58946
   ];
-  podman_network = "qbittorrent";
 in
 {
   imports = [
-    (import ./server.nix {
-      inherit podman_network;
-      inherit vuetorrent_port;
-      inherit qbittorrent_port;
-    })
+    (import ./server.nix { inherit qbittorrent_port; })
     ./desktop.nix
   ];
   systemd.tmpfiles.rules = [
