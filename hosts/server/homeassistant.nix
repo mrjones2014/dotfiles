@@ -24,6 +24,8 @@ in
           ical
           hap-python
           base36
+          zlib-ng
+          isal
         ];
       extraComponents = [
         "default_config"
