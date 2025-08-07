@@ -50,6 +50,9 @@ in
         clear = "clear && _prompt_move_to_bottom";
         # inspect $PATH
         pinspect = ''echo "$PATH" | tr ":" "\n"'';
+
+        sqlite3 = "litecli";
+        sqlite = "litecli";
       };
 
       shellInit = ''
@@ -243,6 +246,7 @@ in
   home.packages =
     with pkgs;
     [
+      litecli
       nix-output-monitor
       tealdeer
       tokei
