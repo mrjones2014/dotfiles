@@ -11,7 +11,10 @@ in
     zwave-js-ui = {
       enable = true;
       serialPort = "/dev/ttyACM0";
-      settings.PORT = toString zwave_ui_port;
+      settings = {
+        PORT = toString zwave_ui_port;
+        trustProxy = "true";
+      };
     };
     home-assistant = {
       enable = true;
