@@ -257,4 +257,34 @@ in
     ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
+  xdg.configFile."litecli/config".text = with import ./tokyonight_palette.nix { inherit lib; }; ''
+    [main]
+    key_bindings = vi
+    wider_completion_menu = True
+    prompt = ' \d\n󰧚 '
+    table_format = fancy_grid
+    multi_line = True
+
+    [colors]
+    completion-menu.completion.current = 'bg:${fg} ${bg_dark}'
+    completion-menu.completion = 'bg:${bg_highlight} ${fg}'
+    completion-menu.meta.completion.current = 'bg:${blue} ${bg_dark}'
+    completion-menu.meta.completion = 'bg:${fg_gutter} ${fg}'
+    completion-menu.multi-column-meta = 'bg:${blue7} ${fg}'
+    scrollbar.arrow = 'bg:${terminal_black}'
+    scrollbar = 'bg:${dark3}'
+    selected = '${bg_dark} bg:${blue}'
+    search = '${fg} bg:${magenta}'
+    search.current = '${bg_dark} bg:${green}'
+    bottom-toolbar = 'bg:${bg} ${fg_dark}'
+    bottom-toolbar.off = 'bg:${bg} ${comment}'
+    bottom-toolbar.on = 'bg:${bg} ${fg}'
+    search-toolbar = 'noinherit bold'
+    search-toolbar.text = 'nobold'
+    system-toolbar = 'noinherit bold'
+    arg-toolbar = 'noinherit bold'
+    arg-toolbar.text = 'nobold'
+    bottom-toolbar.transaction.valid = 'bg:${bg} ${green} bold'
+    bottom-toolbar.transaction.failed = 'bg:${bg} ${red} bold'
+  '';
 }
