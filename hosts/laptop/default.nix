@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   networking = {
     hostName = "nixbook";
@@ -40,7 +40,13 @@
   };
 
   services = {
-    xserver.enable = true;
+    xserver = {
+      enable = true;
+      displayManager.autoLogin = {
+        enable = true;
+        user = config.users.users.mat.name;
+      };
+    };
     mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
