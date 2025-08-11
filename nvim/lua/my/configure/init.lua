@@ -62,13 +62,5 @@ return {
   {
     'folke/lazy.nvim',
     lazy = false,
-    keys = {
-      {
-        '<leader>L',
-        function()
-          vim.cmd.Lazy()
-        end,
-      },
-    },
   },
 }

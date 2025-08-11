@@ -116,6 +116,34 @@ return {
         mode = { 'n', 'i' },
         desc = 'Toggle trailing comma',
       },
+      {
+        '<leader>L',
+        function()
+          vim.cmd.Lazy()
+        end,
+      },
+      {
+        '<PageUp>',
+        function()
+          if #vim.api.nvim_list_tabpages() > 1 then
+            vim.cmd.tabNext()
+          else
+            vim.cmd.tabnew()
+          end
+        end,
+        desc = 'Next tab',
+      },
+      {
+        '<PageDown>',
+        function()
+          if #vim.api.nvim_list_tabpages() > 1 then
+            vim.cmd.tabPrevious()
+          else
+            vim.cmd.tabnew()
+          end
+        end,
+        desc = 'Previous tab',
+      },
     },
   },
   keys = {
