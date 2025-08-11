@@ -4,7 +4,6 @@ return {
   { 'nvim-lua/plenary.nvim' },
   {
     'DaikyXendo/nvim-material-icon',
-    main = 'nvim-web-devicons',
     opts = {},
   },
   { 'tpope/vim-eunuch', cmd = { 'Delete', 'Move', 'Chmod', 'SudoWrite', 'Rename' } },
