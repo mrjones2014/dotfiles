@@ -11,6 +11,8 @@ return {
     'DBUIFindBuffer',
   },
   init = function()
+    -- the default built-in omnicompletion keybinds
+    -- are broken with dadbod-ui
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'sql',
       callback = function()
@@ -19,6 +21,5 @@ return {
       end,
     })
     vim.g.db_ui_use_nerd_fonts = 1
-    vim.g.db_ui_disable_mappings_sql = 1
   end,
 }
