@@ -54,6 +54,7 @@ return {
         statusline = { ---@diagnostic disable-line:missing-fields
           sl.Mode,
           sl.Branch,
+          sl.IsTmpFile,
           shared.FileIcon('surface0'),
           sl.FilePath,
           sl.Align,

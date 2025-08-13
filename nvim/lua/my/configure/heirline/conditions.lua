@@ -1,5 +1,3 @@
-local path = require('my.utils.path')
-
 local M = {}
 
 function M.should_show_filename(bufname)
@@ -10,6 +8,7 @@ function M.should_show_filename(bufname)
     and ft ~= 'Trouble'
     and ft ~= 'snacks_picker_input'
     and ft ~= 'help'
+    and ft ~= 'dbui'
     and bufname
     and bufname ~= ''
 end

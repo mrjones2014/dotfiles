@@ -250,9 +250,34 @@ M.Branch = {
   },
 }
 
+M.IsTmpFile = {
+  init = function(self)
+    self.bufname = vim.api.nvim_buf_get_name(0)
+    -- if its in the tmpdir just show the filename and an icon
+    if self.bufname:find(vim.fn.stdpath('run')) then
+      self.temporary = true
+    else
+      self.temporary = false
+    end
+  end,
+  hl = { bg = 'surface0' },
+  {
+    condition = function(self)
+      return self.temporary
+    end,
+    provider = ' 󰪺',
+  },
+}
+
 M.FilePath = {
   init = function(self)
     self.bufname = vim.api.nvim_buf_get_name(0)
+    -- if its in the tmpdir just show the filename and an icon
+    if self.bufname:find(vim.fn.stdpath('run')) then
+      self.temporary = true
+    else
+      self.temporary = false
+    end
   end,
   hl = { bg = 'surface0' },
   provider = ' ',
@@ -260,8 +285,12 @@ M.FilePath = {
     condition = function(self)
       return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
     end,
-    provider = function()
-      return path.relative(vim.api.nvim_buf_get_name(0))
+    provider = function(self)
+      local filepath = vim.api.nvim_buf_get_name(0)
+      if self.temporary then
+        filepath = path.filename(filepath)
+      end
+      return path.relative(filepath)
     end,
     on_click = {
       callback = function()

@@ -15,4 +15,11 @@ function M.relative(path)
   return vim.fn.fnamemodify(path, ':~:.') or path
 end
 
+---Get just the filename from a path
+---@param path string
+---@return string
+function M.filename(path)
+  return vim.fn.fnamemodify(path, ':t')
+end
+
 return M
