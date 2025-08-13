@@ -6,7 +6,11 @@ function M.FileIcon(bg_color)
   return {
     init = function(self)
       self.bufname = vim.api.nvim_buf_get_name(0)
-      local icon, hl = require('nvim-web-devicons').get_icon(self.bufname, vim.fn.fnamemodify(self.bufname, ':e'))
+      self.ft = vim.fn.fnamemodify(self.bufname, ':e')
+      if self.ft == '' or self.ft == nil then
+        self.ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+      end
+      local icon, hl = require('nvim-web-devicons').get_icon(self.bufname, self.ft, { default = true })
       self.icon = icon
       self.icon_hl = hl
     end,
