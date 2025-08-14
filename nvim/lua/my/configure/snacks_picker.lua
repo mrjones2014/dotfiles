@@ -19,6 +19,7 @@ return {
     { 'ft', pick('grep', { hidden = true }), desc = 'Find text' },
     { 'fs', pick('lsp_workspace_symbols'), desc = 'Find LSP symbols in the workspace' },
     { 'fr', pick('resume'), desc = 'Resume last finder' },
+    { 'fi', pick('icons', { icon_sources = { 'nerd_fonts' }, confirm = { 'copy', 'close' } }) },
   },
   opts = {
     styles = {
