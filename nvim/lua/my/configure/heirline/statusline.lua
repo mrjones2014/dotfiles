@@ -1,4 +1,5 @@
 local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 local sep = require('my.configure.heirline.separators')
 local path = require('my.utils.path')
 local clipboard = require('my.utils.clipboard')
@@ -336,7 +337,7 @@ M.UnsavedChanges = {
       },
       {
         provider = function(self)
-          return string.format(' %s Unsaved file%s', self.unsaved_count, self.unsaved_count > 1 and 's' or '')
+          return string.format(' %s', self.unsaved_count)
         end,
         hl = { bg = 'yellow', fg = 'black' },
       },
@@ -417,6 +418,27 @@ M.RecordingMacro = {
     return string.format(' Recording macro: %s  ', macro_reg)
   end,
   hl = { bg = 'surface0' },
+}
+
+local Tabpage = {
+  provider = function(self)
+    return '%' .. self.tabnr .. 'T ' .. self.tabpage .. ' %T'
+  end,
+  hl = function(self)
+    if self.is_active then
+      return { bg = 'cyan', fg = 'surface0' }
+    else
+      return { bg = 'surface1' }
+    end
+  end,
+}
+
+M.Tabs = {
+  -- only show this component if there's 2 or more tabpages
+  condition = function()
+    return #vim.api.nvim_list_tabpages() >= 2
+  end,
+  utils.make_tablist(Tabpage),
 }
 
 return M

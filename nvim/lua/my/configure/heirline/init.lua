@@ -40,6 +40,7 @@ return {
             gray = colors.dark5,
             green = colors.green,
             blue = colors.blue,
+            cyan = colors.cyan,
             yellow = colors.terminal.yellow_bright,
             base = colors.bg,
             surface0 = colors.fg_gutter,
@@ -52,6 +53,7 @@ return {
           end,
         },
         statusline = { ---@diagnostic disable-line:missing-fields
+          sl.Tabs,
           sl.Mode,
           sl.Branch,
           sl.IsTmpFile,
