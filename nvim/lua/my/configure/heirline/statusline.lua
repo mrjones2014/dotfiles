@@ -1,4 +1,5 @@
 local conditions = require('heirline.conditions')
+local my_conditions = require('my.configure.heirline.conditions')
 local utils = require('heirline.utils')
 local sep = require('my.configure.heirline.separators')
 local path = require('my.utils.path')
@@ -6,8 +7,6 @@ local clipboard = require('my.utils.clipboard')
 local editor = require('my.utils.editor')
 
 local M = {}
-
-M.Align = { provider = '%=', hl = { bg = 'surface0' } }
 
 M.Mode = {
   init = function(self)
@@ -148,7 +147,7 @@ local function setup_jj_watcher()
 end
 
 local function git_branch()
-  if require('my.configure.heirline.conditions').is_jj_repo() then
+  if my_conditions.is_jj_repo() then
     if not _jj_watcher then
       setup_jj_watcher()
     end
@@ -284,7 +283,7 @@ M.FilePath = {
   provider = ' ',
   {
     condition = function(self)
-      return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
+      return my_conditions.should_show_filename(self.bufname)
     end,
     provider = function(self)
       local filepath = vim.api.nvim_buf_get_name(0)
@@ -347,15 +346,6 @@ M.UnsavedChanges = {
       },
     },
   },
-}
-
-M.LazyStats = {
-  provider = function()
-    local icon = require('lazy.core.config').options.ui.icons.plugin
-    local stats = require('lazy').stats()
-    return string.format('%s %s/%s ', icon, stats.loaded, stats.count)
-  end,
-  hl = { bg = 'surface0' },
 }
 
 M.LspFormatToggle = {

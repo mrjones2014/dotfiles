@@ -1,4 +1,5 @@
 local conditions = require('heirline.conditions')
+local my_conditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 
 local special_filenames = { 'mod.rs', 'lib.rs' }
@@ -82,7 +83,7 @@ M.UniqueFilename = {
   end,
   {
     condition = function(self)
-      return require('my.configure.heirline.conditions').should_show_filename(self.bufname)
+      return my_conditions.should_show_filename(self.bufname)
     end,
     provider = function(self)
       return string.format(' %s ', self.bufname)
@@ -124,6 +125,35 @@ M.Navic = {
     return string.format(' %s', require('nvim-navic').get_location())
   end,
   hl = { bg = 'surface0' },
+}
+
+M.FilePosition = {
+  init = function(self)
+    self.bufname = vim.api.nvim_buf_get_name(0)
+  end,
+  static = {
+    sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
+  },
+  provider = '',
+  {
+    condition = function(self)
+      return my_conditions.should_show_filename(self.bufname)
+    end,
+    provider = ' 󰉸 %l/%3L% ',
+    hl = { bg = 'surface0' },
+  },
+  {
+    condition = function(self)
+      return my_conditions.should_show_filename(self.bufname)
+    end,
+    provider = function(self)
+      local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+      local lines = vim.api.nvim_buf_line_count(0)
+      local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+      return string.format(' %s ', string.rep(self.sbar[i], 2))
+    end,
+    hl = { bg = 'surface0', fg = 'blue' },
+  },
 }
 
 return M

@@ -2,6 +2,8 @@ local utils = require('heirline.utils')
 
 local M = {}
 
+M.Align = { provider = '%=', hl = { bg = 'surface0' } }
+
 function M.FileIcon(bg_color)
   return {
     init = function(self)
