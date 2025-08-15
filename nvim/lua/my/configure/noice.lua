@@ -57,6 +57,8 @@ return {
       {
         filter = {
           any = {
+            -- "filepath" 00L, 00B written messages when you save a file
+            { find = '"[^"]+"%s+%d+L,%s+%d+B%s+written' },
             { find = 'No active Snippet' },
             { find = 'No signature help available' },
             { find = '^<$' },
