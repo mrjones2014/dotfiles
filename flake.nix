@@ -62,7 +62,7 @@
               environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
             }
             ./nixos/common.nix
-            ./hosts/server
+            ./hosts/homelab
             {
               home-manager = {
                 backupFileExtension = "backup";
@@ -94,7 +94,7 @@
               environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
             }
             ./nixos/common.nix
-            ./hosts/pc
+            ./hosts/tower
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -123,7 +123,7 @@
           system = "x86_64-linux";
           modules = [
             ./nixos/common.nix
-            ./hosts/laptop
+            ./hosts/nixbook
             home-manager.nixosModules.home-manager
             {
               home-manager = {
