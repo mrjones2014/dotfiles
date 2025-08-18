@@ -1,6 +1,24 @@
 return {
   'kristijanhusak/vim-dadbod-ui',
-  dependencies = { 'tpope/vim-dadbod' },
+  dependencies = {
+    'tpope/vim-dadbod',
+    {
+      'kristijanhusak/vim-dadbod-completion',
+      dependencies = {
+        'saghen/blink.cmp',
+        opts = function(_, opts)
+          require('my.utils.completion').register_filetype_source(opts, 'sql', { 'snippets', 'dadbod', 'buffer' }, {
+            dadbod = {
+              name = 'Dadbod',
+              module = 'vim_dadbod_completion.blink',
+              -- boost sql schema suggestions to top
+              score_offset = 100,
+            },
+          })
+        end,
+      },
+    },
+  },
   cmd = {
     'DBUI',
     'DBUIToggle',

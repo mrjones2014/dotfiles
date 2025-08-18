@@ -58,7 +58,6 @@ return {
       },
     },
     { 'folke/lazydev.nvim' },
-    { 'kristijanhusak/vim-dadbod-completion' },
     { 'Kaiser-Yang/blink-cmp-avante' },
   },
   opts = {
@@ -95,7 +94,6 @@ return {
     sources = {
       default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
-        sql = { 'snippets', 'dadbod', 'buffer' },
         AvanteInput = { 'avante' },
         minifiles = {},
       },
@@ -104,12 +102,6 @@ return {
           name = 'LazyDev',
           module = 'lazydev.integrations.blink',
           -- boost lazydev suggestions to top
-          score_offset = 100,
-        },
-        dadbod = {
-          name = 'Dadbod',
-          module = 'vim_dadbod_completion.blink',
-          -- boost sql schema suggestions to top
           score_offset = 100,
         },
         avante = {
