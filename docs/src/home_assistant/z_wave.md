@@ -38,4 +38,8 @@ If a device becomes "dead" in Z-Wave JS UI, you probably just need to delete and
 
 Putting the device into "add" mode or "interview" mode varies by device. Here's some that I have:
 
-- Minoston Z-Wave Outdoor Smart Plug: Triple click the button
+| device                             | action              |
+| ---------------------------------- | ------------------- |
+| Minoston Z-Wave Outdoor Smart Plug | Triple click button |
+| Zooz ZAC38 Range Extender          | Triple click button |
+| Zooz ZEN04 Smart Plug              | Triple click button |
