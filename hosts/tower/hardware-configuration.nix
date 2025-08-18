@@ -7,6 +7,7 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
+    kernelParams = [ "amdgpu.gpu_recovery=1" ];
     initrd.availableKernelModules = [
       "xhci_pci"
       "ahci"
@@ -68,7 +69,10 @@
   powerManagement.cpuFreqGovernor = "performance";
   powerManagement.powertop.enable = true;
 
+  # See: https://wiki.nixos.org/wiki/AMD_GPU#Sporadic_Crashes
+  services.lact.enable = true;
   hardware = {
+    amdgpu.overdrive.enable = true;
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
     enableAllHardware = true;
