@@ -58,11 +58,10 @@ return {
       },
     },
     { 'folke/lazydev.nvim' },
+    { 'kristijanhusak/vim-dadbod-completion' },
+    { 'Kaiser-Yang/blink-cmp-avante' },
   },
   opts = {
-    enabled = function()
-      return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
-    end,
     snippets = { preset = 'luasnip' },
     signature = { enabled = true },
     keymap = {
@@ -97,6 +96,8 @@ return {
       default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
         sql = { 'snippets', 'dadbod', 'buffer' },
+        AvanteInput = { 'avante' },
+        minifiles = {},
       },
       providers = {
         lazydev = {
@@ -109,6 +110,12 @@ return {
           name = 'Dadbod',
           module = 'vim_dadbod_completion.blink',
           -- boost sql schema suggestions to top
+          score_offset = 100,
+        },
+        avante = {
+          name = 'Avante',
+          module = 'blink-cmp-avante',
+          -- show Avante commands first
           score_offset = 100,
         },
       },

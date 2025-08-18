@@ -1,10 +1,9 @@
 return {
   {
     'MeanderingProgrammer/markdown.nvim',
-    main = 'render-markdown',
     dependencies = { 'nvim-treesitter/nvim-treesitter', branch = 'main' },
-    opts = {},
-    ft = 'markdown',
+    opts = { file_types = { 'markdown', 'Avante' } },
+    ft = { 'markdown', 'Avante' },
   },
   {
     'OXY2DEV/helpview.nvim',
