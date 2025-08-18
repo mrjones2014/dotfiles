@@ -58,7 +58,6 @@ return {
       },
     },
     { 'folke/lazydev.nvim' },
-    { 'Kaiser-Yang/blink-cmp-avante' },
   },
   opts = {
     snippets = { preset = 'luasnip' },
@@ -94,7 +93,6 @@ return {
     sources = {
       default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
-        AvanteInput = { 'avante' },
         minifiles = {},
       },
       providers = {
@@ -102,12 +100,6 @@ return {
           name = 'LazyDev',
           module = 'lazydev.integrations.blink',
           -- boost lazydev suggestions to top
-          score_offset = 100,
-        },
-        avante = {
-          name = 'Avante',
-          module = 'blink-cmp-avante',
-          -- show Avante commands first
           score_offset = 100,
         },
       },
