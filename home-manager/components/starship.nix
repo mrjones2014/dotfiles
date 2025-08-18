@@ -71,7 +71,7 @@ with palette;
           # all my git operations/changes will be from manually run jj commands which will snapshot the repo at that time
           # The `sed` part is to modify the ANSI color codes so that the background color matches
           # I'll need to update this
-          command = ''jj log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id(self.change_id()), self.bookmarks())" | sed "s/\x1b\[\([0-9;]*\)m/\x1b[\1;48;2;${git_bg_ansi}m/g"'';
+          command = ''jj log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id_with_hidden_and_divergent_info(self), self.bookmarks())" | sed "s/\x1b\[\([0-9;]*\)m/\x1b[\1;48;2;${git_bg_ansi}m/g"'';
           # Render ANSI colors directly from the `jj log` output
           unsafe_no_escape = true;
           format = "([ ](bg:${git_bg})[$output](bg:${git_bg})[ ](bg:${git_bg}))";
