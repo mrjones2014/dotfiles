@@ -1,3 +1,11 @@
+local suggestion_keymaps = {
+  accept = '<C-CR>',
+  accept_line = '<C-l>',
+  next = '<C-n>',
+  prev = '<C-p>',
+  dismiss = '<C-d>',
+}
+
 local function register_lazy_op_secrets(secrets_map)
   local env_cache = {}
   local original_env = vim.env
@@ -56,9 +64,8 @@ local cody_models = {
   },
 }
 
-local models = vim.tbl_deep_extend('force', cody_models, {})
-
--- local is_work_project = vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
+local is_work_project =
+  not not vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
 
 return {
   'yetone/avante.nvim',
@@ -67,6 +74,7 @@ return {
     'MunifTanjim/nui.nvim',
     {
       'brewinski/avante-cody.nvim',
+      enabled = is_work_project,
       opts = { providers = cody_models },
     },
     {
@@ -81,6 +89,7 @@ return {
                 module = 'blink-cmp-avante',
                 -- show Avante commands first
                 score_offset = 100,
+                async = true,
               },
             })
           end,
@@ -88,6 +97,37 @@ return {
       },
     },
     { 'folke/snacks.nvim' },
+    {
+      'zbirenbaum/copilot.lua',
+      enabled = not is_work_project,
+      event = 'InsertEnter',
+      cmd = 'Copilot',
+      dependencies = {
+        {
+          'giuxtaposition/blink-cmp-copilot',
+          dependencies = {
+            'saghen/blink.cmp',
+            opts = function(_, opts)
+              require('my.utils.completion').register_filetype_source(opts, nil, { 'copilot' }, {
+                copilot = {
+                  name = 'Copilot',
+                  module = 'blink-cmp-copilot',
+                  -- show Copilot suggestions first
+                  score_offset = 100,
+                  async = true,
+                },
+              })
+            end,
+          },
+        },
+      },
+      opts = {
+        suggestion = {
+          auto_trigger = true,
+          keymap = suggestion_keymaps,
+        },
+      },
+    },
   },
   build = 'make',
   version = false,
@@ -99,12 +139,19 @@ return {
     'AvanteClear',
     'AvanteToggle',
   },
+  event = 'InsertEnter',
   ---@module 'avante'
   ---@type avante.Config
   opts = {
     -- default provider
-    provider = 'avante-cody-claude-sonnet',
-    providers = models,
+    provider = is_work_project and 'avante-cody-claude-sonnet' or 'copilot',
+    -- use copilot.lua for personal stuff
+    auto_suggestions_provider = is_work_project and 'avante-cody-claude-sonnet' or nil,
+    providers = is_work_project and cody_models or nil,
+    behavior = { auto_suggestions = is_work_project },
+    mappings = {
+      suggestion = is_work_project and suggestion_keymaps or nil,
+    },
     input = { provider = 'snacks' },
     -- Recommended settings to avoid rate limits
     mode = 'legacy',

@@ -3,7 +3,7 @@ let
   op_sudo_password_script = pkgs.writeShellScriptBin "opsudo" ''
     # TODO figure out a way to do this without silently depending on `op` being on $PATH
     # using `$\{pkgs._1password}/bin/op` results in unable to connect to desktop app
-    PASSWORD="$(op read "op://Private/System Password/password")"
+    PASSWORD="$(op read "op://Private/System Password/password" --account ZE3GMX56H5CV5J5IU5PLLFG4KQ)"
     if [[ -z "$PASSWORD" ]]; then
       echo "Failed to get password from 1Password."
       read -r -s -p "󰌾 Password: " PASSWORD
