@@ -1,4 +1,53 @@
-local models = {
+local function register_lazy_op_secrets(secrets_map)
+  local env_cache = {}
+  local original_env = vim.env
+
+  vim.env = setmetatable({}, {
+    __index = function(_, key)
+      if secrets_map[key] then
+        if not env_cache[key] then
+          local ref = secrets_map[key]
+          local account = nil
+          if type(ref) == 'table' then
+            account = ref.account
+            ref = ref.item
+          end
+          local secret, err = require('op').get_secret(ref, account)
+          if secret then
+            env_cache[key] = secret
+          else
+            vim.notify('Failed to get ' .. key .. ': ' .. (err or 'unknown error'), vim.log.levels.ERROR)
+            return nil
+          end
+        end
+        vim.fn.setenv(key, env_cache[key])
+        return env_cache[key]
+      else
+        return original_env[key]
+      end
+    end,
+    __newindex = function(_, key, value)
+      original_env[key] = value
+    end,
+    __pairs = function()
+      return pairs(original_env)
+    end,
+  })
+end
+
+-- Register the secrets we need
+register_lazy_op_secrets({
+  OPENAI_API_KEY = {
+    item = 'op://3oblw6ndkgz2fgujm4jqq5jvfe/wvsh6k7w6t742vh3n3ghuevkqu/API Keys/Avante.nvim API Key',
+    account = 'ZE3GMX56H5CV5J5IU5PLLFG4KQ',
+  },
+  SRC_ACCESS_TOKEN = {
+    item = 'op://dvqle3hea253riyk5gatbxf3o4/dd46jdd5tvwm5uk375lm3pujwm/credential',
+    account = 'S2EWWY7HCZDGFOQ7WOPBGAC2LY',
+  },
+})
+
+local cody_models = {
   ['avante-cody-claude-sonnet'] = {
     endpoint = 'https://1password.sourcegraphcloud.com',
     api_key_name = 'SRC_ACCESS_TOKEN',
@@ -11,6 +60,16 @@ local models = {
   },
 }
 
+local models = vim.tbl_deep_extend('force', cody_models, {
+  ['openai-gpt5-mini'] = {
+    __inherited_from = 'openai',
+    model = 'gpt-5-mini-2025-08-07',
+    api_key_name = 'OPENAI_API_KEY',
+  },
+})
+
+local is_work_project = vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
+
 return {
   'yetone/avante.nvim',
   dependencies = {
@@ -18,26 +77,12 @@ return {
     'MunifTanjim/nui.nvim',
     {
       'brewinski/avante-cody.nvim',
-      config = function()
-        local secret, err = require('op.api').read({
-          'op://Employee/SourceGraph API Token/credential',
-          '--account',
-          'S2EWWY7HCZDGFOQ7WOPBGAC2LY',
-        })
-        if secret ~= nil and #secret > 0 then
-          vim.env.SRC_ACCESS_TOKEN = secret[1]
-        elseif err ~= nil then
-          vim.notify(err, vim.log.levels.ERROR)
-          error(err)
-        end
-        require('avante-cody').setup({ providers = models })
-      end,
+      opts = { providers = cody_models },
     },
     {
       'Kaiser-Yang/blink-cmp-avante',
       dependencies = {
         {
-
           'saghen/blink.cmp',
           opts = function(_, opts)
             require('my.utils.completion').register_filetype_source(opts, 'AvanteInput', { 'avante' }, {
@@ -61,12 +106,13 @@ return {
     'AvanteChat',
     'AvanteChatNew',
     'AvanteClear',
+    'AvanteToggle',
   },
   ---@module 'avante'
   ---@type avante.Config
   opts = {
     -- default provider
-    provider = 'avante-cody-claude-opus',
+    provider = is_work_project and 'avante-cody-claude-sonnet' or 'openai-gpt5-mini',
     providers = models,
     -- Recommended settings to avoid rate limits
     mode = 'legacy',
