@@ -86,6 +86,7 @@
       bash-language-server
       graphql-language-service-cli
       copilot-language-server
+      nodejs
 
       # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       nodePackages_latest.vscode-langservers-extracted
