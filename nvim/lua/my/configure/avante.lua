@@ -19,8 +19,7 @@ local cody_models = {
   },
 }
 
-local is_work_project =
-  not not vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
+local is_work_project = require('my.utils.git').is_work_repo()
 
 return {
   'yetone/avante.nvim',

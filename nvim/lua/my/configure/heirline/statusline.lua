@@ -214,8 +214,7 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
 
 M.Branch = {
   init = function(self)
-    local result = vim.system({ 'git', 'ls-remote', '--get-url' }, { text = true }):wait()
-    local url = result.stdout or ''
+    local url = require('my.utils.git').git_remote()
     if string.find(url, 'github.com') then
       self.icon = ' '
     elseif string.find(url, 'gitlab') then
