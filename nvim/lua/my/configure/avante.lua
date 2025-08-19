@@ -37,10 +37,6 @@ end
 
 -- Register the secrets we need
 register_lazy_op_secrets({
-  OPENAI_API_KEY = {
-    item = 'op://3oblw6ndkgz2fgujm4jqq5jvfe/wvsh6k7w6t742vh3n3ghuevkqu/API Keys/Avante.nvim API Key',
-    account = 'ZE3GMX56H5CV5J5IU5PLLFG4KQ',
-  },
   SRC_ACCESS_TOKEN = {
     item = 'op://dvqle3hea253riyk5gatbxf3o4/dd46jdd5tvwm5uk375lm3pujwm/credential',
     account = 'S2EWWY7HCZDGFOQ7WOPBGAC2LY',
@@ -60,16 +56,9 @@ local cody_models = {
   },
 }
 
-local models = vim.tbl_deep_extend('force', cody_models, {
-  ['openai-gpt5-mini'] = {
-    __inherited_from = 'openai',
-    model = 'gpt-5-mini-2025-08-07',
-    api_key_name = 'OPENAI_API_KEY',
-    extra_request_body = { temperature = 1 },
-  },
-})
+local models = vim.tbl_deep_extend('force', cody_models, {})
 
-local is_work_project = vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
+-- local is_work_project = vim.trim(vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait().stdout):find('1password')
 
 return {
   'yetone/avante.nvim',
@@ -114,7 +103,7 @@ return {
   ---@type avante.Config
   opts = {
     -- default provider
-    provider = is_work_project and 'avante-cody-claude-sonnet' or 'openai-gpt5-mini',
+    provider = 'avante-cody-claude-sonnet',
     providers = models,
     input = { provider = 'snacks' },
     -- Recommended settings to avoid rate limits
