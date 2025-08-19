@@ -65,6 +65,7 @@ local models = vim.tbl_deep_extend('force', cody_models, {
     __inherited_from = 'openai',
     model = 'gpt-5-mini-2025-08-07',
     api_key_name = 'OPENAI_API_KEY',
+    extra_request_body = { temperature = 1 },
   },
 })
 
@@ -97,6 +98,7 @@ return {
         },
       },
     },
+    { 'folke/snacks.nvim' },
   },
   build = 'make',
   version = false,
@@ -114,6 +116,7 @@ return {
     -- default provider
     provider = is_work_project and 'avante-cody-claude-sonnet' or 'openai-gpt5-mini',
     providers = models,
+    input = { provider = 'snacks' },
     -- Recommended settings to avoid rate limits
     mode = 'legacy',
     disabled_tools = {
