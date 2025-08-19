@@ -1,55 +1,10 @@
 local suggestion_keymaps = {
   accept = '<C-CR>',
-  accept_line = '<C-l>',
+  accept_line = '<C-t>',
   next = '<C-n>',
   prev = '<C-p>',
   dismiss = '<C-d>',
 }
-
-local function register_lazy_op_secrets(secrets_map)
-  local env_cache = {}
-  local original_env = vim.env
-
-  vim.env = setmetatable({}, {
-    __index = function(_, key)
-      if secrets_map[key] then
-        if not env_cache[key] then
-          local ref = secrets_map[key]
-          local account = nil
-          if type(ref) == 'table' then
-            account = ref.account
-            ref = ref.item
-          end
-          local secret, err = require('op').get_secret(ref, account)
-          if secret then
-            env_cache[key] = secret
-          else
-            vim.notify('Failed to get ' .. key .. ': ' .. (err or 'unknown error'), vim.log.levels.ERROR)
-            return nil
-          end
-        end
-        vim.fn.setenv(key, env_cache[key])
-        return env_cache[key]
-      else
-        return original_env[key]
-      end
-    end,
-    __newindex = function(_, key, value)
-      original_env[key] = value
-    end,
-    __pairs = function()
-      return pairs(original_env)
-    end,
-  })
-end
-
--- Register the secrets we need
-register_lazy_op_secrets({
-  SRC_ACCESS_TOKEN = {
-    item = 'op://dvqle3hea253riyk5gatbxf3o4/dd46jdd5tvwm5uk375lm3pujwm/credential',
-    account = 'S2EWWY7HCZDGFOQ7WOPBGAC2LY',
-  },
-})
 
 local cody_models = {
   ['avante-cody-claude-sonnet'] = {
@@ -75,7 +30,21 @@ return {
     {
       'brewinski/avante-cody.nvim',
       enabled = is_work_project,
-      opts = { providers = cody_models },
+      config = function()
+        local token, err = require('op').get_secret(
+          'op://dvqle3hea253riyk5gatbxf3o4/dd46jdd5tvwm5uk375lm3pujwm/credential',
+          'S2EWWY7HCZDGFOQ7WOPBGAC2LY'
+        )
+        if not token then
+          local msg = 'Failed to get SRC_ACCESS_TOKEN: ' .. (err or 'unknown error')
+          vim.notify(msg, vim.log.levels.ERROR)
+          error(msg)
+        end
+        vim.env.SRC_ACCESS_TOKEN = token
+        require('avante-cody').setup({
+          models = cody_models,
+        })
+      end,
     },
     {
       'Kaiser-Yang/blink-cmp-avante',
@@ -139,16 +108,16 @@ return {
     'AvanteClear',
     'AvanteToggle',
   },
-  event = 'InsertEnter',
   ---@module 'avante'
   ---@type avante.Config
   opts = {
     -- default provider
     provider = is_work_project and 'avante-cody-claude-sonnet' or 'copilot',
-    -- use copilot.lua for personal stuff
-    auto_suggestions_provider = is_work_project and 'avante-cody-claude-sonnet' or nil,
     providers = is_work_project and cody_models or nil,
-    behavior = { auto_suggestions = is_work_project },
+    behavior = {
+      -- using copilot for this
+      auto_suggestions = false,
+    },
     mappings = {
       suggestion = is_work_project and suggestion_keymaps or nil,
     },
