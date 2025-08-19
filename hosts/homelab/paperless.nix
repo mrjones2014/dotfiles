@@ -22,11 +22,6 @@
   };
 
   # once a week, upload backups to 1Password
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "1password-cli"
-    ];
   systemd.timers.paperless-backup = {
     timerConfig = {
       Unit = "paperless-backup.service";
