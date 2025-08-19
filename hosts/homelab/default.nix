@@ -22,9 +22,6 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "1password-cli"
-      # open-webui is essentially free, just has a fair-use
-      # branding protection clause against abuse
-      "open-webui"
     ];
 
   imports = [
@@ -37,7 +34,6 @@
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix
-    ./open-webui.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
   ];
