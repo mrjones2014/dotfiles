@@ -1,4 +1,3 @@
-{ lib, ... }:
 {
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -18,13 +17,6 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11";
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "1password-cli"
-      "copilot-language-server"
-    ];
-
   imports = [
     ./hardware-configuration.nix
     ./nixosModules/nginx.nix
@@ -37,6 +29,7 @@
     ./homeassistant.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
+    ../../nixos/nixpkgs-config.nix
   ];
 
   powerManagement.cpuFreqGovernor = "performance";

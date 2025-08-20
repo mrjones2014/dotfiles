@@ -1,15 +1,4 @@
-{ inputs, pkgs, ... }:
 {
-  nixpkgs.overlays = [
-    (
-      final: prev:
-      (import ../pkgs {
-        inherit inputs;
-        inherit pkgs;
-        inherit (prev) system;
-      })
-    )
-  ];
   home = {
     username = "mat";
     homeDirectory = "/home/mat";

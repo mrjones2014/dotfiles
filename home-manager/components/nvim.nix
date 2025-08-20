@@ -87,12 +87,7 @@
       graphql-language-service-cli
       # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       vscode-langservers-extracted
-      (copilot-language-server.overrideAttrs (oldAttrs: {
-        # FIXME for whatever reason, specifically only this package
-        # does not work in allowUnfreePredicate....
-        # https://discourse.nixos.org/t/specifically-only-copilot-language-server-doesnt-work-in-allowunfreepredicate/68228
-        meta.license.free = true;
-      }))
+      copilot-language-server
       nodejs
 
       # other utils and plugin dependencies

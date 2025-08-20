@@ -66,6 +66,7 @@
             {
               home-manager = {
                 backupFileExtension = "backup";
+                useGlobalPkgs = true;
                 useUserPackages = true;
                 users.mat = import ./home-manager/server.nix;
                 extraSpecialArgs = {
@@ -99,6 +100,7 @@
             {
               home-manager = {
                 backupFileExtension = "backup";
+                useGlobalPkgs = true;
                 useUserPackages = true;
                 users.mat = import ./home-manager/home.nix;
                 extraSpecialArgs = {
@@ -128,6 +130,7 @@
             {
               home-manager = {
                 backupFileExtension = "backup";
+                useGlobalPkgs = true;
                 useUserPackages = true;
                 users.mat = import ./home-manager/home.nix;
                 extraSpecialArgs = {

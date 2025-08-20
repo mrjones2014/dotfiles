@@ -21,7 +21,7 @@
   imports = [
     ../../nixos/desktop_environment.nix
     ../../nixos/_1password.nix
-    ../../nixos/allowed-unfree.nix
+    ../../nixos/nixpkgs-config.nix
     ./hardware-configuration.nix
   ];
 

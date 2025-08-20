@@ -4,7 +4,7 @@
   imports = [
     ../../nixos/desktop_environment.nix
     ../../nixos/_1password.nix
-    ../../nixos/allowed-unfree.nix
+    ../../nixos/nixpkgs-config.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
     ../../nixos/torrent_client

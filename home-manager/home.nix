@@ -9,16 +9,6 @@
   ...
 }:
 {
-  nixpkgs.overlays = [
-    (
-      final: prev:
-      (import ../pkgs {
-        inherit inputs;
-        inherit pkgs;
-        inherit (prev) system;
-      })
-    )
-  ];
   home = {
     username = if isLinux then "mat" else "mat.jones"; # username is set by MDM on work mac :/
     homeDirectory = if isLinux then "/home/mat" else "/Users/mat.jones";
@@ -70,7 +60,6 @@
     ./components/gnome
     ./components/recyclarr.nix
     ./components/vencord.nix
-    ../nixos/allowed-unfree.nix
     inputs.zen-browser.homeModules.default
   ];
 
