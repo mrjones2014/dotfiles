@@ -63,6 +63,7 @@ return {
           sl.UnsavedChanges,
           shared.Align,
           sl.RecordingMacro,
+          sl.CopilotStatus,
           sl.SpellCheckToggle,
           sl.LspFormatToggle,
           shared.Diagnostics(false),

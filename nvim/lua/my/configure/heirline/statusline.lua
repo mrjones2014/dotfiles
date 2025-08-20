@@ -430,4 +430,28 @@ M.Tabs = {
   utils.make_tablist(Tabpage),
 }
 
+M.CopilotStatus = {
+  condition = function()
+    local ok, copilot_status = pcall(require, 'copilot.client')
+    if not ok then
+      return false
+    end
+    return copilot_status.buf_is_attached(0)
+  end,
+  {
+    provider = function()
+      local info = require('copilot.auth').get_creds()
+      if not info then
+        return ''
+      end
+      for _, config in pairs(info) do
+        if config.githubAppId == 'Iv1.b507a08c87ecfe98' then
+          return string.format('  %s ', config.user)
+        end
+      end
+    end,
+    hl = { bg = 'surface0' },
+  },
+}
+
 return M

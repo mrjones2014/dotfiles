@@ -80,8 +80,8 @@ return {
                 copilot = {
                   name = 'Copilot',
                   module = 'blink-cmp-copilot',
-                  -- show Copilot suggestions first
-                  score_offset = 100,
+                  -- slight boost to copilot suggestions
+                  score_offset = 20,
                   async = true,
                 },
               })
