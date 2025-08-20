@@ -85,6 +85,8 @@
       yaml-language-server
       bash-language-server
       graphql-language-service-cli
+      # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
+      vscode-langservers-extracted
       (copilot-language-server.overrideAttrs (oldAttrs: {
         # FIXME for whatever reason, specifically only this package
         # does not work in allowUnfreePredicate....
@@ -92,9 +94,6 @@
         meta.license.free = true;
       }))
       nodejs
-
-      # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
-      nodePackages_latest.vscode-langservers-extracted
 
       # other utils and plugin dependencies
       gnumake
