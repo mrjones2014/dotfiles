@@ -140,4 +140,7 @@ return {
       'replace_in_file',
     },
   },
+  prompt_logger = {
+    enabled = false,
+  },
 }
