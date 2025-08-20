@@ -151,7 +151,6 @@
         in
         nix-darwin.lib.darwinSystem {
           inherit specialArgs;
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             ./hosts/darwin
             home-manager.darwinModules.default
