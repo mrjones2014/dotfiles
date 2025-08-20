@@ -85,7 +85,12 @@
       yaml-language-server
       bash-language-server
       graphql-language-service-cli
-      copilot-language-server
+      (copilot-language-server.overrideAttrs (oldAttrs: {
+        # FIXME for whatever reason, specifically only this package
+        # does not work in allowUnfreePredicate....
+        # https://discourse.nixos.org/t/specifically-only-copilot-language-server-doesnt-work-in-allowunfreepredicate/68228
+        meta.license.free = true;
+      }))
       nodejs
 
       # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
