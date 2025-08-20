@@ -108,11 +108,11 @@ return {
     'AvanteToggle',
   },
   keys = {
-    { '<leader>aa', desc = 'avante: ask', mode = { 'n', 'v' } },
+    { '<leader>aa', vim.cmd.AvanteAsk, desc = 'avante: ask', mode = { 'n', 'v' } },
     { '<leader>aB', desc = 'avante: add all open buffers' },
     { '<leader>ac', desc = 'avante: add current buffer' },
     { '<leader>aC', desc = 'avante: toggle selection' },
-    { '<leader>af', desc = 'avante: focus' },
+    { '<leader>af', vim.cmd.AvanteFocus, desc = 'avante: focus' },
     { '<leader>ah', desc = 'avante: select history' },
     { '<leader>an', desc = 'avante: new ask' },
     { '<leader>at', vim.cmd.AvanteToggle, desc = 'Avante: toggle' },
