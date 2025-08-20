@@ -131,10 +131,6 @@ return {
             -- LSP suggestions should be near top
             score_offset = 50,
           },
-          snippets = {
-            -- boost snippets suggestions to top
-            score_offset = 100,
-          },
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
