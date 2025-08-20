@@ -11,25 +11,28 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+        "rtsx_pci_sdmmc"
+      ];
+      kernelModules = [ ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "usb_storage"
-    "sd_mod"
-    "rtsx_pci_sdmmc"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+      luks.devices."luks-478962df-c7d5-4e0c-9f30-f5435e27612a".device =
+        "/dev/disk/by-uuid/478962df-c7d5-4e0c-9f30-f5435e27612a";
+    };
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/71f0a300-d3af-4d9c-bcae-4da7b2cb7cdd";
     fsType = "ext4";
   };
-
-  boot.initrd.luks.devices."luks-478962df-c7d5-4e0c-9f30-f5435e27612a".device =
-    "/dev/disk/by-uuid/478962df-c7d5-4e0c-9f30-f5435e27612a";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/EFA5-597E";
