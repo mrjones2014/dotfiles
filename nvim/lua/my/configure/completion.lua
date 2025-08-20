@@ -129,7 +129,7 @@ return {
         providers = {
           lsp = {
             -- LSP suggestions should be near top
-            score_offset = 50,
+            score_offset = 70,
           },
           lazydev = {
             name = 'LazyDev',
