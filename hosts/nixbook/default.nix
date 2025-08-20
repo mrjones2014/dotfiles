@@ -40,13 +40,11 @@
   };
 
   services = {
-    xserver = {
+    displayManager.autoLogin = {
       enable = true;
-      displayManager.autoLogin = {
-        enable = true;
-        user = config.users.users.mat.name;
-      };
+      user = config.users.users.mat.name;
     };
+    xserver.enable = true;
     mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
