@@ -17,11 +17,11 @@ rec {
     }
     // overrides;
 
-  mkNixOsHost =
+  mkHost =
     {
       name,
-      isServer,
-      isThinkpad,
+      isServer ? false,
+      isThinkpad ? false,
       homePath,
     }:
     let
@@ -52,7 +52,7 @@ rec {
         }
       ];
     };
-  mkDarwinConfig =
+  mkDarwinHost =
     { name, homePath }:
     let
       specialArgs = mkSpecialArgs {

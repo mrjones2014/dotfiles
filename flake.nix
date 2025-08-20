@@ -52,31 +52,27 @@
         inherit nix-darwin;
         inherit inputs;
       };
-      inherit (my_lib) mkNixOsHost;
-      inherit (my_lib) mkDarwinConfig;
+      inherit (my_lib) mkHost;
+      inherit (my_lib) mkDarwinHost;
     in
     {
       nixosConfigurations = {
-        homelab = mkNixOsHost {
+        homelab = mkHost {
           name = "homelab";
           isServer = true;
-          isThinkpad = false;
           homePath = ./home-manager/server.nix;
         };
-        tower = mkNixOsHost {
+        tower = mkHost {
           name = "tower";
-          isServer = false;
-          isThinkpad = false;
           homePath = ./home-manager/home.nix;
         };
-        nixbook = mkNixOsHost {
+        nixbook = mkHost {
           name = "nixbook";
-          isServer = false;
           isThinkpad = true;
           homePath = ./home-manager/home.nix;
         };
       };
-      darwinConfigurations."darwin" = mkDarwinConfig {
+      darwinConfigurations."darwin" = mkDarwinHost {
         name = "darwin";
         homePath = ./home-manager/home.nix;
       };
@@ -102,9 +98,7 @@
           };
         devShells = {
           default = pkgs.mkShell { packages = [ formatter ]; };
-          ci = pkgs.mkShell {
-            packages = [ pkgs.nix-fast-build ];
-          };
+          ci = pkgs.mkShell { packages = [ pkgs.nix-fast-build ]; };
         };
       }
     );
