@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../nixos/nix-conf.nix
+    ../../nixos/nixpkgs-config.nix
     (import ../../nixos/nix-conf.nix { isHomeManager = false; })
     ./settings.nix
   ];
