@@ -44,127 +44,42 @@
       agenix,
       ...
     }:
+    let
+      my_lib = import ./lib {
+        inherit nixpkgs;
+        inherit agenix;
+        inherit home-manager;
+        inherit nix-darwin;
+        inherit inputs;
+      };
+      inherit (my_lib) mkNixOsHost;
+      inherit (my_lib) mkDarwinConfig;
+    in
     {
       nixosConfigurations = {
-        homelab =
-          let
-            specialArgs = {
-              inherit inputs;
-              isServer = true;
-              isLinux = true;
-              isThinkpad = false;
-              isDarwin = false;
-            };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-            modules = [
-              home-manager.nixosModules.home-manager
-              agenix.nixosModules.default
-              {
-                environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-              }
-              ./nixos/common.nix
-              ./hosts/homelab
-              {
-                home-manager = {
-                  backupFileExtension = "backup";
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.mat = import ./home-manager/server.nix;
-                  extraSpecialArgs = specialArgs;
-                };
-              }
-            ];
-          };
-        tower =
-          let
-            specialArgs = {
-              inherit inputs;
-              isServer = false;
-              isDarwin = false;
-              isLinux = true;
-              isThinkpad = false;
-            };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-            modules = [
-              agenix.nixosModules.default
-              {
-                environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-              }
-              ./nixos/common.nix
-              ./hosts/tower
-              home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  backupFileExtension = "backup";
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.mat = import ./home-manager/home.nix;
-                  extraSpecialArgs = specialArgs;
-                };
-              }
-            ];
-          };
-        nixbook =
-          let
-            specialArgs = {
-              inherit inputs;
-              isServer = false;
-              isDarwin = false;
-              isLinux = true;
-              isThinkpad = true;
-            };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-            modules = [
-              ./nixos/common.nix
-              ./hosts/nixbook
-              home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  backupFileExtension = "backup";
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.mat = import ./home-manager/home.nix;
-                  extraSpecialArgs = specialArgs;
-                };
-              }
-            ];
-          };
-      };
-      darwinConfigurations."darwin" =
-        let
-          specialArgs = {
-            inherit inputs;
-            isServer = false;
-            isDarwin = true;
-            isLinux = false;
-            isThinkpad = false;
-          };
-        in
-        nix-darwin.lib.darwinSystem {
-          inherit specialArgs;
-          modules = [
-            ./hosts/darwin
-            home-manager.darwinModules.default
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.mat = import ./home-manager/home.nix;
-                extraSpecialArgs = specialArgs;
-              };
-            }
-          ];
+        homelab = mkNixOsHost {
+          name = "homelab";
+          isServer = true;
+          isThinkpad = false;
+          homePath = ./home-manager/server.nix;
         };
+        tower = mkNixOsHost {
+          name = "tower";
+          isServer = false;
+          isThinkpad = false;
+          homePath = ./home-manager/home.nix;
+        };
+        nixbook = mkNixOsHost {
+          name = "nixbook";
+          isServer = false;
+          isThinkpad = true;
+          homePath = ./home-manager/home.nix;
+        };
+      };
+      darwinConfigurations."darwin" = mkDarwinConfig {
+        name = "darwin";
+        homePath = ./home-manager/home.nix;
+      };
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
