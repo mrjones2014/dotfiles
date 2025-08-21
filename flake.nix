@@ -97,17 +97,15 @@
         inherit formatter;
         checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
-          //
-            (checksForConfigs self.darwinConfigurations (c: c.system))
-
-              {
-                formatting = treefmtEval.config.build.check self;
-                nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
-                  inherit lib;
-                  inherit pkgs;
-                  nix-auto-follow = nix-auto-follow.packages.${system}.default;
-                };
-              };
+          // (checksForConfigs self.darwinConfigurations (c: c.system))
+          // {
+            formatting = treefmtEval.config.build.check self;
+            nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
+              inherit lib;
+              inherit pkgs;
+              nix-auto-follow = nix-auto-follow.packages.${system}.default;
+            };
+          };
 
         devShells = {
           default = pkgs.mkShell {
