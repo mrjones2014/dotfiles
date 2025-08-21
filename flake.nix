@@ -105,7 +105,7 @@
                 nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
                   inherit lib;
                   inherit pkgs;
-                  nix-auto-follow = nix-auto-follow.packages.${system};
+                  nix-auto-follow = nix-auto-follow.packages.${system}.default;
                 };
               };
 
@@ -113,13 +113,13 @@
           default = pkgs.mkShell {
             packages = [
               formatter
-              nix-auto-follow.packages.default
+              nix-auto-follow.packages.${system}.default
             ];
           };
           ci = pkgs.mkShell {
             packages = [
               pkgs.nix-fast-build
-              nix-auto-follow.packages.default
+              nix-auto-follow.packages.${system}.default
             ];
           };
         };
