@@ -6,7 +6,6 @@ nvim/lazy-lock.json
 book/
 # mdbook theme, only used at build time in CI
 docs/theme/
-ublock-mdbook/.direnv
 .direnv
 
 # recyclarr tmp file created by `op inject`

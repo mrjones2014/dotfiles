@@ -36,9 +36,6 @@ pkgs.stdenv.mkDerivation {
     cp -r . build-dir
     cd build-dir
     
-    # Update book.toml to use our script instead of the Rust binary
-    sed -i 's/command = "ublock-mdbook"/command = "ublock-mdbook"/' book.toml
-    
     # Build the book
     mdbook build -d $out
     
