@@ -127,10 +127,6 @@ return {
           minifiles = {},
         },
         providers = {
-          lsp = {
-            -- LSP suggestions should be near top
-            score_offset = 70,
-          },
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
