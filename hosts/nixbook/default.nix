@@ -39,6 +39,7 @@
     EDITOR = "nvim";
   };
 
+  security.pam.services.login.enableGnomeKeyring = true;
   services = {
     displayManager.autoLogin = {
       enable = true;
