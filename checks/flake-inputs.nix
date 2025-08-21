@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  auto-follow,
+  nix-auto-follow,
 }:
 
 stdenv.mkDerivation {
@@ -14,7 +14,7 @@ stdenv.mkDerivation {
   ];
 
   nativeBuildInputs = [
-    auto-follow
+    nix-auto-follow
   ];
 
   buildPhase = ''

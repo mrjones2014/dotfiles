@@ -104,7 +104,7 @@
             formatting = treefmtEval.config.build.check self;
             nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
               inherit lib;
-              inherit pkgs;
+              inherit (pkgs) stdenv;
               nix-auto-follow = nix-auto-follow.packages.${system}.default;
             };
           };
