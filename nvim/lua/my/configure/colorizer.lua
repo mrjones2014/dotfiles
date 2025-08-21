@@ -1,5 +1,5 @@
 ---@diagnostic disable-next-line -- optional parameters omitted
-local filetypes = vim.list_extend(vim.deepcopy(require('my.lsp.filetypes').filetypes), { 'conf', 'tmux', 'Onedarkpro' })
+local filetypes = vim.list_extend(vim.deepcopy(require('my.ftconfig').filetypes), { 'conf', 'tmux', 'Onedarkpro' })
 
 return {
   'NvChad/nvim-colorizer.lua',

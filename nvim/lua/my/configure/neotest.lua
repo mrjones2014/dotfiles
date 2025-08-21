@@ -91,7 +91,7 @@ return {
           jestCommand = 'pnpm jest',
           env = { CI = true },
           cwd = function(path)
-            return require('lspconfig.util').root_pattern('package.json', 'jest.config.js')(path)
+            return vim.fs.root(path, { 'package.json', 'jest.config.js' })
           end,
         }),
       },

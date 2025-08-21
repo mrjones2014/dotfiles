@@ -1,4 +1,4 @@
-local M = {}
+local Snippets = {}
 
 local LUA_MODULE_RETURN_TS_QUERY = [[
 (return_statement
@@ -6,7 +6,7 @@ local LUA_MODULE_RETURN_TS_QUERY = [[
 		(identifier) @return-value-name))
 ]]
 
-function M.lua()
+function Snippets.lua()
   local ls = require('luasnip')
   local s = ls.s
   local i = ls.insert_node
@@ -89,7 +89,7 @@ end
 -- since these snippets are shared between 4 filetypes,
 -- ensure we're only registering them once
 local ts_snippets_added = false
-function M.typescript()
+function Snippets.typescript()
   if ts_snippets_added then
     return
   end
@@ -110,11 +110,11 @@ function M.typescript()
 
   ts_snippets_added = true
 end
-M.typescriptreact = M.typescript
-M.javascript = M.typescript
-M.javascriptreact = M.typescript
+Snippets.typescriptreact = Snippets.typescript
+Snippets.javascript = Snippets.typescript
+Snippets.javascriptreact = Snippets.typescript
 
-function M.rust()
+function Snippets.rust()
   local ls = require('luasnip')
   local p = ls.parser.parse_snippet
   ls.add_snippets('rust', {
@@ -134,7 +134,7 @@ function M.rust()
   })
 end
 
-function M.nix()
+function Snippets.nix()
   local ls = require('luasnip')
   local p = ls.parser.parse_snippet
   ls.add_snippets('nix', {
@@ -153,4 +153,63 @@ function M.nix()
   })
 end
 
-return M
+return {
+  'L3MON4D3/LuaSnip',
+  version = 'v2.*',
+  keys = {
+    {
+      '<C-h>',
+      function()
+        require('luasnip').jump(-1)
+      end,
+      mode = { 'i', 's' },
+      desc = 'Jump to previous snippet node',
+    },
+    {
+      '<C-l>',
+      function()
+        local ls = require('luasnip')
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end,
+      mode = { 'i', 's' },
+      desc = 'Expand or jump to next snippet node',
+    },
+    {
+      '<C-j>',
+      function()
+        local ls = require('luasnip')
+        if ls.choice_active() then
+          ls.change_choice(-1)
+        end
+      end,
+      mode = { 'i', 's' },
+      desc = 'Select previous choice in snippet choice nodes',
+    },
+    {
+      '<C-k>',
+      function()
+        local ls = require('luasnip')
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end,
+      mode = { 'i', 's' },
+      desc = 'Select next choice in snippet choice nodes',
+    },
+    {
+      '<C-s>',
+      function()
+        require('luasnip').unlink_current()
+      end,
+      mode = { 'i', 'n' },
+      desc = 'Clear snippet jumps',
+    },
+  },
+  config = function()
+    for _, snippets in pairs(Snippets) do
+      snippets()
+    end
+  end,
+}

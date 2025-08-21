@@ -38,6 +38,77 @@ function M.on_attach_default(client, bufnr)
     end,
     buffer = bufnr,
   })
+
+  local function vsplit_then(callback)
+    return function()
+      vim.cmd.vsp()
+      callback()
+    end
+  end
+
+  require('which-key').add({
+    {
+      'gh',
+      function()
+        -- I have diagnostics float on CursorHold,
+        -- disable that if I've manually shown the hover window
+        -- see require('my.utils.lsp').on_attach_default
+        vim.cmd.set('eventignore+=CursorHold')
+        vim.lsp.buf.hover()
+        vim.api.nvim_create_autocmd('CursorMoved', {
+          command = ':set eventignore-=CursorHold',
+          pattern = '<buffer>',
+          once = true,
+        })
+      end,
+      desc = 'Show LSP hover menu',
+      buffer = bufnr,
+    },
+    { 'gs', vim.lsp.buf.signature_help, desc = 'Show signature help', buffer = bufnr },
+    { 'gr', vim.lsp.buf.references, desc = 'Find references', buffer = bufnr },
+    {
+      'gR',
+      function()
+        require('glance').open('references')
+      end,
+      desc = 'Peek references',
+      buffer = bufnr,
+    },
+    { 'gd', vim.lsp.buf.definition, desc = 'Go to definition', buffer = bufnr },
+    {
+      'gD',
+      function()
+        require('glance').open('definitions')
+      end,
+      desc = 'Peek definition',
+      buffer = bufnr,
+    },
+    { 'gi', vim.lsp.buf.implementation, desc = 'Go to implementation', buffer = bufnr },
+    {
+      'gI',
+      function()
+        require('glance').open('implementations')
+      end,
+      desc = 'Peek implementation',
+      buffer = bufnr,
+    },
+    { 'gt', vim.lsp.buf.type_definition, desc = 'Go to type definition', buffer = bufnr },
+    { '<leader>gd', vsplit_then(vim.lsp.buf.definition), desc = 'Go to definition in new split', buffer = bufnr },
+    {
+      '<leader>gi',
+      vsplit_then(vim.lsp.buf.implementation),
+      desc = 'Go to implementation in new split',
+      buffer = bufnr,
+    },
+    {
+      '<leader>gt',
+      vsplit_then(vim.lsp.buf.type_definition),
+      desc = 'Go to type definition in new split',
+      buffer = bufnr,
+    },
+    { '<leader>rn', vim.lsp.buf.rename, desc = 'Rename symbol', buffer = bufnr },
+    { 'F', vim.lsp.buf.code_action, desc = 'Show code actions', buffer = bufnr },
+  })
 end
 
 function M.apply_ui_tweaks()
@@ -101,7 +172,7 @@ function M.get_formatter_name(buf)
   buf = buf or tonumber(vim.g.actual_curbuf or vim.api.nvim_get_current_buf())
 
   -- if it uses conform.nvim, grab the formatter name
-  local formatter = require('my.lsp.filetypes').formatters_by_ft[vim.bo[buf].ft]
+  local formatter = require('my.ftconfig').formatters_by_ft[vim.bo[buf].ft]
   if formatter then
     return type(formatter) == 'table' and table.concat(formatter, ', ') or formatter
   end

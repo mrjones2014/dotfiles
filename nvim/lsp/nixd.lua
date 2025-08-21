@@ -1,4 +1,10 @@
 return {
+  cmd = { 'nixd' },
+  filetypes = { 'nix' },
+  root_markers = { 'flake.nix', 'default.nix', '.git' },
+  on_init = function(client)
+    client.server_capabilities.renameProvider = false
+  end,
   settings = {
     nixd = {
       options = {

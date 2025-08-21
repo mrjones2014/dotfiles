@@ -1,40 +1,25 @@
 local M = {}
 
 M.config = {
-  css = {
-    formatter = 'prettierd',
-    lspconfig = { 'cssls' },
-  },
-  html = {
-    lspconfig = { 'html' },
-  },
   json = {
-    lspconfig = 'jsonls',
     treesitter = { 'json', 'jsonc' },
   },
   typescript = {
-    lspconfig = { 'ts_ls', 'eslint' },
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
   },
   lua = {
-    lspconfig = 'lua_ls',
     formatter = 'stylua',
     linter = 'luacheck',
     treesitter = { 'lua', 'luadoc' },
   },
   rust = {
-    -- let rustaceanvim set this up for us
-    lspconfig = false,
-    -- we just want auto formatting
     formatter = 'rustfmt',
   },
   go = {
-    lspconfig = 'gopls',
     formatter = 'gofmt',
   },
   markdown = {
-    lspconfig = 'marksman',
     formatter = {
       'prettierd',
       'injected', -- see :h conform-formatters, formats injected code blocks
@@ -43,28 +28,20 @@ M.config = {
   },
   sh = {
     treesitter = { 'bash' },
-    -- shellcheck and shellfmt are run through the LSP
-    lspconfig = 'bashls',
   },
   swift = {
-    lspconfig = 'sourcekit',
     formatter = 'swiftfmt',
     treesitter = false, -- requires treesitter-cli and only really works on mac
   },
   nix = {
-    lspconfig = { 'nixd', 'nil_ls' },
     linter = 'statix',
     formatter = { 'nixfmt', 'injected' },
-  },
-  toml = {
-    lspconfig = 'taplo',
   },
   fish = {
     formatter = 'fish_indent',
     linter = 'fish',
   },
   yaml = {
-    lspconfig = 'yamlls',
     treesitter = { 'yaml' },
     formatter = { 'yamlfmt' },
   },
@@ -73,17 +50,10 @@ M.config = {
   },
   graphql = {
     treesitter = { 'graphql', 'http' },
-    lspconfig = 'graphql',
   },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
-
-if vim.fn.filereadable('./tailwind.config.js') ~= 0 then
-  table.insert(M.config['css'].lspconfig, 'tailwindcss')
-  table.insert(M.config['typescript'].lspconfig, 'tailwindcss')
-  table.insert(M.config['html'].lspconfig, 'tailwindcss')
-end
 
 -- these all use the same config
 M.config['javascript'] = M.config['typescript']

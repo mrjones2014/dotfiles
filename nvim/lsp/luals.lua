@@ -2,13 +2,19 @@ local runtime_path = vim.split(package.path, ';', {})
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-local globals = { 'vim' }
-if string.find(assert(vim.loop.cwd()), 'hammerspoon') then
-  globals = { 'hs' }
-end
-
 return {
-  root_dir = require('lspconfig.util').root_pattern('.luacheckrc', 'stylua.toml'),
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = {
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
+  },
   settings = {
     Lua = {
       completion = {
@@ -21,7 +27,7 @@ return {
         path = runtime_path,
       },
       diagnostics = {
-        globals = globals,
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files

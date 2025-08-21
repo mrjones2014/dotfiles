@@ -87,7 +87,7 @@ return {
     end
     -- ensure this comes first on runtimepath; see: https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
     vim.opt.rtp:prepend(plug.dir)
-    require('nvim-treesitter').install(require('my.lsp.filetypes').treesitter_parsers)
+    require('nvim-treesitter').install(require('my.ftconfig').treesitter_parsers)
     vim.api.nvim_create_autocmd('FileType', {
       pattern = '*',
       callback = function(ev)
