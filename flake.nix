@@ -94,6 +94,8 @@
         formatter = treefmtEval.config.build.wrapper;
       in
       {
+        packages.book = pkgs.callPackage ./docs { };
+
         inherit formatter;
         checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
@@ -111,6 +113,7 @@
           default = pkgs.mkShell {
             packages = [
               formatter
+              pkgs.mdbook
               nix-auto-follow.packages.${system}.default
             ];
           };

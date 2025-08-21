@@ -14,6 +14,3 @@ site-url = "https://mjones.network"
 
 [output.html.print]
 enable = false
-
-[preprocessor.ublock-mdbook]
-command = "ublock-mdbook"

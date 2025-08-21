@@ -1,4 +1,4 @@
-{ pkgs, ublock-mdbook, ... }:
+{ pkgs, ... }:
 let
   highlightJsNix = pkgs.fetchFromGitHub {
     owner = "mrjones2014";
@@ -11,14 +11,10 @@ pkgs.stdenv.mkDerivation {
   pname = "mdbook-docs-site";
   version = "0.1.0";
   src = pkgs.lib.cleanSource ./.;
-  buildInputs = [
-    pkgs.mdbook
-    ublock-mdbook
-  ];
+  buildInputs = [ pkgs.mdbook ];
   buildPhase = ''
     mkdir $out
     mdbook build -d $out
     rm $out/highlight.js && cp ${highlightJsNix}/highlight.js $out/highlight.js
-    ublock-mdbook gen-filter-list $out/ublock-filters.txt
   '';
 }
