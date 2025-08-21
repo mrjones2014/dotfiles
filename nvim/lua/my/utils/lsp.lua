@@ -5,7 +5,7 @@ local M = {}
 local formatting_enabled = true
 
 ---Set up a callback to run on LSP attach
----@param callback fun(client:table,bufnr:number)
+---@param callback fun(client:vim.lsp.Client,bufnr:number)
 function M.on_attach(callback)
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
