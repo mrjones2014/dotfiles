@@ -349,7 +349,7 @@ M.UnsavedChanges = {
 
 M.LspFormatToggle = {
   provider = function()
-    if require('my.utils.lsp').get_formatter_name(0) and require('my.utils.lsp').is_formatting_enabled() then
+    if require('my.utils.lsp').has_formatter() and require('my.utils.lsp').is_formatting_enabled() then
       return '   '
     else
       return '   '
@@ -363,17 +363,7 @@ M.LspFormatToggle = {
     name = 'heirline_LSP',
   },
   {
-    provider = '󰗈  auto-format',
-    hl = { bg = 'surface0' },
-  },
-  {
-    provider = function()
-      local name = require('my.utils.lsp').get_formatter_name(0)
-      if name then
-        return string.format(' (%s)  ', name)
-      end
-      return '  '
-    end,
+    provider = '󰗈 Formatting ',
     hl = { bg = 'surface0' },
   },
 }
@@ -392,7 +382,7 @@ M.SpellCheckToggle = {
     name = 'heirline_Spellcheck',
   },
   {
-    provider = '󰓆  Spellcheck  ',
+    provider = '󰓆 Spellcheck ',
     hl = { bg = 'surface0' },
   },
 }
@@ -432,11 +422,9 @@ M.Tabs = {
 
 M.CopilotStatus = {
   condition = function()
-    local ok, copilot_status = pcall(require, 'copilot.client')
-    if not ok then
-      return false
-    end
-    return copilot_status.buf_is_attached(0)
+    -- don't cause copilot to load with `require` just for statusline
+    local loaded = package.loaded.copilot
+    return loaded and loaded.setup_done
   end,
   {
     provider = function()

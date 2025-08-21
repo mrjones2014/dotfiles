@@ -68,7 +68,8 @@ return {
     {
       'zbirenbaum/copilot.lua',
       enabled = not is_work_project,
-      event = 'InsertEnter',
+      -- Trick to load Copilot for relevant filetypes
+      event = 'LspAttach',
       cmd = 'Copilot',
       dependencies = {
         {

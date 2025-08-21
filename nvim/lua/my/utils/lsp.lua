@@ -167,23 +167,18 @@ function M.is_formatting_enabled()
 end
 
 ---@param buf number|nil defaults to 0 (current buffer)
----@return string|nil
-function M.get_formatter_name(buf)
+---@return boolean
+function M.has_formatter(buf)
   buf = buf or tonumber(vim.g.actual_curbuf or vim.api.nvim_get_current_buf())
 
-  -- if it uses conform.nvim, grab the formatter name
   local formatter = require('my.ftconfig').formatters_by_ft[vim.bo[buf].ft]
   if formatter then
-    return type(formatter) == 'table' and table.concat(formatter, ', ') or formatter
+    return #formatter > 0
   end
 
   -- otherwise just return the LSP server name
   local clients = vim.lsp.get_clients({ bufnr = buf, method = Methods.textDocument_formatting })
-  if #clients > 0 then
-    return clients[1].name
-  end
-
-  return nil
+  return #clients > 0
 end
 
 return M
