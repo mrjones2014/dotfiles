@@ -1,6 +1,6 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! YouTube                             !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####              YouTube               ####
+############################################
 
 ! youtube begging me to pay for premium and youtube TV
 www.youtube.com##.yt-mealbar-promo-renderer
@@ -115,20 +115,18 @@ youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[c
 ! youtube shorts in sidebar on video player page
 youtube.com##ytd-reel-shelf-renderer
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Stack Overflow / Stack Exchange     !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####         Stack Overflow             ####
+############################################
 
 ! Block the cookie banner that covers the entire bottom left corner even with JS disabled
 stackexchange.com##.js-consent-banner
 stackoverflow.com##.js-consent-banner
 askubuntu.com##.js-consent-banner
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! GitHub                              !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####             GitHub                 ####
+############################################
 
 ! Block GitHub's cringe algorithmic social media style feed
 github.com###feed-next
@@ -144,26 +142,23 @@ github.com##.js-notice
 github.com##.d-block:has(a[href*="?tab=achievements"])
 github.com##.d-md-block:has(a[href*="?tab=achievements"])
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Glassdoor                           !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####            Glassdoor               ####
+############################################
 
 ! Block the "hard sell" overlay that tries to force you to pay money just to read a review
 www.glassdoor.com##.hardsellOverlay
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! PayPal                              !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####             PayPal                 ####
+############################################
 
 ! Block the cookie banner, same as rejecting cookies
 www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Discord                             !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+############################################
+####            Discord                 ####
+############################################
 
 ! Block "Add super reaction" button
 discord.com##div[aria-label="Add Super Reaction"]
@@ -187,3 +182,4 @@ discord.com##li[role="listitem"]:has-text("Discord's Birthday")
 
 ! Block "Start an Activity" button
 discord.com##button[aria-label="Start an Activity"]
+
