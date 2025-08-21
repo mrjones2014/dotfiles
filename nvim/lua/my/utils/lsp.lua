@@ -144,9 +144,6 @@ function M.apply_ui_tweaks()
     update_in_insert = false,
     severity_sort = true,
   })
-
-  -- enable virtual text diagnostics for Neotest only
-  vim.diagnostic.config({ virtual_text = true }, vim.api.nvim_create_namespace('neotest'))
 end
 
 function M.toggle_formatting_enabled(enable)
