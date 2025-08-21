@@ -21,6 +21,4 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build all configurations
         run: |
-          nix --accept-flake-config develop .#ci --command nix-fast-build --eval-workers 1 --skip-cached --no-nom --systems x86_64-linux,aarch64-darwin
-          # track how much disk space the action uses
-          df -h
+          nix develop .#ci --command nix-fast-build --eval-workers 1 --skip-cached --no-nom --systems x86_64-linux,aarch64-darwin

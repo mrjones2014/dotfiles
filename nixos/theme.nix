@@ -8,7 +8,7 @@
   ...
 }:
 {
-  imports = [ inputs.tokyonight.homeManagerModules.default ];
+  imports = [ inputs.tokyonight-nix.homeManagerModules.default ];
   home.sessionVariables.COLORSCHEME = "tokyonight";
   # enable globally for all supported programs
   tokyonight = {

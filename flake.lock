@@ -100,6 +100,26 @@
         "type": "github"
       }
     },
+    "nix-auto-follow": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754073254,
+        "narHash": "sha256-CQp/v2HQ7AtGJQqFGRZLHt4MZAK3NF94I6GDaRyhbsc=",
+        "owner": "fzakaria",
+        "repo": "nix-auto-follow",
+        "rev": "5baa00b79d4cc46523da0b8b3532c5163d151be4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fzakaria",
+        "repo": "nix-auto-follow",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -142,9 +162,10 @@
         "agenix": "agenix",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "nix-auto-follow": "nix-auto-follow",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "tokyonight": "tokyonight",
+        "tokyonight-nix": "tokyonight-nix",
         "treefmt-nix": "treefmt-nix",
         "zen-browser": "zen-browser",
         "zjstatus": "zjstatus"
@@ -202,8 +223,24 @@
       }
     },
     "tokyonight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718132322,
+        "narHash": "sha256-KaGzxJGiNGziDT8vLZcLjU26//OcL3/tmmu5dYB6w1c=",
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "rev": "024621763d91bb48f2b486df529c7aaeb8d6d355",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
+    "tokyonight-nix": {
       "inputs": {
-        "tokyonight": "tokyonight_2",
+        "tokyonight": "tokyonight",
         "tokyonight-rofi": "tokyonight-rofi"
       },
       "locked": {
@@ -233,22 +270,6 @@
       "original": {
         "owner": "w8ste",
         "repo": "Tokyonight-rofi-theme",
-        "type": "github"
-      }
-    },
-    "tokyonight_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718132322,
-        "narHash": "sha256-KaGzxJGiNGziDT8vLZcLjU26//OcL3/tmmu5dYB6w1c=",
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
-        "rev": "024621763d91bb48f2b486df529c7aaeb8d6d355",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
         "type": "github"
       }
     },

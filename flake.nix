@@ -3,7 +3,11 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    tokyonight.url = "github:mrjones2014/tokyonight.nix";
+    tokyonight-nix.url = "github:mrjones2014/tokyonight.nix";
+    nix-auto-follow = {
+      url = "github:fzakaria/nix-auto-follow";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +46,7 @@
       nix-darwin,
       home-manager,
       agenix,
+      nix-auto-follow,
       ...
     }:
     let
@@ -92,13 +97,31 @@
         inherit formatter;
         checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
-          // (checksForConfigs self.darwinConfigurations (c: c.system))
-          // {
-            formatting = treefmtEval.config.build.check self;
-          };
+          //
+            (checksForConfigs self.darwinConfigurations (c: c.system))
+
+              {
+                formatting = treefmtEval.config.build.check self;
+                nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
+                  inherit lib;
+                  inherit pkgs;
+                  nix-auto-follow = nix-auto-follow.packages.${system};
+                };
+              };
+
         devShells = {
-          default = pkgs.mkShell { packages = [ formatter ]; };
-          ci = pkgs.mkShell { packages = [ pkgs.nix-fast-build ]; };
+          default = pkgs.mkShell {
+            packages = [
+              formatter
+              nix-auto-follow.packages.default
+            ];
+          };
+          ci = pkgs.mkShell {
+            packages = [
+              pkgs.nix-fast-build
+              nix-auto-follow.packages.default
+            ];
+          };
         };
       }
     );
