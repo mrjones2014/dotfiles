@@ -5,6 +5,7 @@ M.config = {
     treesitter = { 'json', 'jsonc' },
   },
   typescript = {
+    linter = 'eslint_d',
     formatter = 'prettierd',
     treesitter = { 'typescript', 'javascript', 'tsx' },
   },

@@ -68,6 +68,7 @@
       statix
       luajitPackages.luacheck
       prettierd
+      eslint_d
       yamlfmt
 
       # LSP servers
