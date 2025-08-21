@@ -2,6 +2,9 @@
 !! YouTube                             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+! youtube begging me to pay for premium and youtube TV
+www.youtube.com##.yt-mealbar-promo-renderer
+
 ! block YouTube Shorts
 www.youtube.com##.ytdRichGridGroupHost
 
