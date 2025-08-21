@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: cachix/install-nix-action@v31
       - name: Build mdbook site
-        run: nix build ./docs/
+        run: nix build .#book
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:

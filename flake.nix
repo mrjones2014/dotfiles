@@ -95,6 +95,12 @@
       in
       {
         inherit formatter;
+        
+        packages = pkgs.callPackage ./pkgs {
+          inherit inputs;
+          inherit system;
+        };
+        
         checks =
           (checksForConfigs self.nixosConfigurations (c: c.config.system.build.toplevel))
           //
