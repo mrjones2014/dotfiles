@@ -97,11 +97,18 @@ return {
         },
       },
       opts = {
+        copilot_model = 'claude-sonnet-4',
         suggestion = {
           auto_trigger = true,
           keymap = suggestion_keymaps,
         },
-        copilot_model = 'claude-sonnet-4',
+        server_opts_overrides = {
+          settings = {
+            telemetry = {
+              telemetryLevel = 'off',
+            },
+          },
+        },
       },
     },
   },
