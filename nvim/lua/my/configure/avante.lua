@@ -1,3 +1,5 @@
+local is_work_project = require('my.utils.git').is_work_repo()
+
 local suggestion_keymaps = {
   accept = '<C-CR>',
   accept_line = '<C-t>',
@@ -6,7 +8,7 @@ local suggestion_keymaps = {
   dismiss = '<C-d>',
 }
 
-local cody_models = {
+local cody_providers = {
   ['avante-cody-claude-sonnet'] = {
     endpoint = 'https://1password.sourcegraphcloud.com',
     api_key_name = 'SRC_ACCESS_TOKEN',
@@ -19,7 +21,11 @@ local cody_models = {
   },
 }
 
-local is_work_project = require('my.utils.git').is_work_repo()
+local providers = vim.tbl_deep_extend('force', {
+  copilot = {
+    model = 'claude-sonnet-4',
+  },
+}, is_work_project and cody_providers or {})
 
 return {
   'yetone/avante.nvim',
@@ -41,7 +47,7 @@ return {
         end
         vim.env.SRC_ACCESS_TOKEN = token
         require('avante-cody').setup({
-          models = cody_models,
+          models = cody_providers,
         })
       end,
     },
@@ -81,6 +87,8 @@ return {
                 copilot = {
                   name = 'Copilot',
                   module = 'blink-cmp-copilot',
+                  -- push copilot suggestions lower than LSP suggestions
+                  score_offset = -20,
                   async = true,
                 },
               })
@@ -93,6 +101,7 @@ return {
           auto_trigger = true,
           keymap = suggestion_keymaps,
         },
+        copilot_model = 'claude-sonnet-4',
       },
     },
   },
@@ -121,7 +130,7 @@ return {
   opts = {
     -- default provider
     provider = is_work_project and 'avante-cody-claude-sonnet' or 'copilot',
-    providers = is_work_project and cody_models or nil,
+    providers = providers,
     behavior = {
       -- using copilot for this
       auto_suggestions = false,
