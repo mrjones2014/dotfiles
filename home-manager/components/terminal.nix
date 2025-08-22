@@ -34,7 +34,7 @@
       link-url = true;
       window-decoration = "server";
       # NB: workaround for zellij not having the right PATH on macOS
-      command = ''env EDITOR="nvim" PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin" ${pkgs.zellij}/bin/zellij'';
+      command = ''env EDITOR="nvim" PATH="$PATH:/etc/profiles/per-user/${config.home.username}/bin" ${pkgs.zellij}/bin/zellij'';
       maximize = isThinkpad;
       keybind = [
         "super+q=quit"

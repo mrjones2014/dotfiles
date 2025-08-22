@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   isDarwin,
@@ -57,7 +58,7 @@ in
 
       shellInit = ''
         # put Nix profile *first* on my PATH
-        export PATH="$HOME/.nix-profile/bin:$PATH"
+        export PATH="/etc/profiles/per-user/${config.home.username}/bin:$PATH"
         set -g fish_prompt_pwd_dir_length 20
       '';
 
