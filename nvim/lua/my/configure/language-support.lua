@@ -88,31 +88,6 @@ return {
     },
   },
   {
-    'DNLHC/glance.nvim',
-    event = 'LspAttach',
-    config = function()
-      local glance = require('glance')
-      glance.setup({ ---@diagnostic disable-line:missing-fields
-        border = {
-          enable = true,
-        },
-        theme = {
-          enable = true,
-          mode = 'darken',
-        },
-        -- make win navigation mappings consistent with my default ones
-        mappings = {
-          list = {
-            ['<C-h>'] = glance.actions.enter_win('preview'),
-          },
-          preview = {
-            ['<C-l>'] = glance.actions.enter_win('list'),
-          },
-        },
-      })
-    end,
-  },
-  {
     'chrisgrieser/nvim-rulebook',
     dev = true,
     keys = {
