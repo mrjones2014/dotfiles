@@ -112,16 +112,16 @@ return {
     -- for whatever reason, these options don't apply
     -- using `opts = {}`, so use `config` ¯\_(ツ)_/¯
     config = function()
-      require('glance').setup({
+      require('glance').setup({ ---@diagnostic disable-line: missing-fields
         border = { enable = false },
-        theme = { mode = 'darken' },
+        theme = { enable = true, mode = 'darken' },
         mappings = {
           list = {
             ['<C-h>'] = function()
               require('glance').actions.enter_win('preview')()
             end,
           },
-          prview = {
+          preview = {
             ['<C-l>'] = function()
               require('glance').actions.enter_win('list')()
             end,
