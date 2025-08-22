@@ -23,9 +23,8 @@ function Snippets.lua()
     end
     local tree = parser:parse()[1]
     local num_lines = #vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    for _, node, _ in query:iter_captures(tree:root(), 0, num_lines - 3, num_lines) do
-      return vim.treesitter.get_node_text(node, 0, {})
-    end
+    local _, node = query:iter_captures(tree:root(), 0, num_lines - 3, num_lines)()
+    return vim.treesitter.get_node_text(node, 0, {})
   end
 
   local function get_req_module(req_path)
@@ -85,34 +84,6 @@ function Snippets.lua()
     p('lfn', 'local function $1($2)\n  $0\nend'),
   })
 end
-
--- since these snippets are shared between 4 filetypes,
--- ensure we're only registering them once
-local ts_snippets_added = false
-function Snippets.typescript()
-  if ts_snippets_added then
-    return
-  end
-
-  local ls = require('luasnip')
-  local p = ls.parser.parse_snippet
-
-  local snippets = {
-    p('fn', 'function $1($2)$3 {\n  $0\n}'),
-    p('afn', 'const $1 = ($2)$3 => {\n  $0\n}'),
-    p('ifn', '($1)$2 => {\n  $0\n}'),
-  }
-
-  ls.add_snippets('typescript', snippets)
-  ls.add_snippets('typescriptreact', snippets)
-  ls.add_snippets('javascript', snippets)
-  ls.add_snippets('javascriptreact', snippets)
-
-  ts_snippets_added = true
-end
-Snippets.typescriptreact = Snippets.typescript
-Snippets.javascript = Snippets.typescript
-Snippets.javascriptreact = Snippets.typescript
 
 function Snippets.rust()
   local ls = require('luasnip')
