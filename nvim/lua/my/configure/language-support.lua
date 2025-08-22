@@ -11,60 +11,11 @@ vim.lsp.enable(vim
   end)
   :totable())
 
-local function complete_client(arg)
-  return vim
-    .iter(vim.lsp.get_clients())
-    :map(function(client)
-      return client.name
-    end)
-    :filter(function(name)
-      return name:sub(1, #arg) == arg
-    end)
-    :totable()
-end
-
 vim.api.nvim_create_user_command('LspLog', function()
   vim.cmd(string.format('tabnew %s', vim.lsp.log.get_filename()))
 end, {
   desc = 'Opens the Nvim LSP client log.',
 })
-
-vim.api.nvim_create_user_command('LspRestart', function(info)
-  local clients = info.fargs
-
-  -- Default to restarting all active servers
-  if #clients == 0 then
-    clients = vim
-      .iter(vim.lsp.get_clients())
-      :map(function(client)
-        return client.name
-      end)
-      :totable()
-  end
-
-  for _, name in ipairs(clients) do
-    if vim.lsp.config[name] == nil then
-      vim.notify(("Invalid server name '%s'"):format(name))
-    else
-      vim.lsp.enable(name, false)
-    end
-  end
-
-  local timer = assert(vim.uv.new_timer())
-  timer:start(500, 0, function()
-    for _, name in ipairs(clients) do
-      vim.schedule_wrap(function(x)
-        vim.lsp.enable(x)
-      end)(name)
-    end
-  end)
-end, {
-  desc = 'Restart the given client',
-  nargs = '?',
-  complete = complete_client,
-})
-
-vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 
 return {
   {
