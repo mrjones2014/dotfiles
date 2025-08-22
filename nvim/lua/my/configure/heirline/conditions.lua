@@ -9,6 +9,7 @@ function M.should_show_filename(bufname)
     and ft ~= 'snacks_picker_input'
     and ft ~= 'help'
     and ft ~= 'dbui'
+    and ft ~= 'jjdescription'
     and bufname
     and bufname ~= ''
 end
