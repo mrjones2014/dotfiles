@@ -124,6 +124,7 @@ return {
   },
   keys = {
     { '<leader>aa', vim.cmd.AvanteAsk, desc = 'avante: ask', mode = { 'n', 'v' } },
+    { '<leader>ae', vim.cmd.AvanteAsk, desc = 'avante: edit', mode = { 'v' } },
     { '<leader>aB', desc = 'avante: add all open buffers' },
     { '<leader>ac', desc = 'avante: add current buffer' },
     { '<leader>aC', desc = 'avante: toggle selection' },
