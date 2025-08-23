@@ -60,7 +60,7 @@ return {
       { 'f', mode = 'n' },
     },
     spec = {
-      { '<ESC>', ':noh<CR>', desc = 'Clear highlighting on <ESC> in normal mode', hidden = true },
+      { '<ESC>', vim.cmd.noh, desc = 'Clear highlighting on <ESC> in normal mode', hidden = true },
       {
         '<leader>jk',
         function()
@@ -72,8 +72,8 @@ return {
       -- note that I have line wrapping turned off but turned on only for Markdown
       { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', expr = true, mode = { 'n', 'v' }, hidden = true },
       { 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', expr = true, mode = { 'n', 'v' }, hidden = true },
-      { '<Tab>', ':bn<CR>', desc = 'Move to next buffer' },
-      { '<S-Tab>', ':bp<CR>', desc = 'Move to previous buffer' },
+      { '<Tab>', vim.cmd.bnext, desc = 'Move to next buffer' },
+      { '<S-Tab>', vim.cmd.bprevious, desc = 'Move to previous buffer' },
       {
         '<leader>s',
         require('my.utils.editor').toggle_spellcheck,
