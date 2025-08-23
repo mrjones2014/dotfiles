@@ -92,6 +92,25 @@ return {
         },
       },
     },
+    {
+      'Kaiser-Yang/blink-cmp-avante',
+      dependencies = {
+        {
+          'saghen/blink.cmp',
+          opts = function(_, opts)
+            require('my.utils.completion').register_filetype_source(opts, 'AvanteInput', { 'avante' }, {
+              avante = {
+                name = 'Avante',
+                module = 'blink-cmp-avante',
+                -- show Avante commands first
+                score_offset = 100,
+                async = true,
+              },
+            })
+          end,
+        },
+      },
+    },
   },
   build = 'make',
   version = false,
