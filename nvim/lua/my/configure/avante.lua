@@ -61,8 +61,8 @@ return {
               avante = {
                 name = 'Avante',
                 module = 'blink-cmp-avante',
-                -- show Avante commands first
-                score_offset = 100,
+                -- make sure copilot suggestions are lower than LSP suggestions
+                score_offset = -20,
                 async = true,
               },
             })
