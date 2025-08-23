@@ -10,42 +10,19 @@ local M = {}
 
 M.Mode = {
   init = function(self)
-    self.mode = vim.fn.mode(1)
+    self.mode = vim.fn.mode(0):lower()
   end,
   static = {
     mode_icons = {
       n = '',
-      no = '',
-      nov = '',
-      noV = '',
-      ['no\22'] = '',
-      niI = '',
-      niR = '',
-      niV = '',
-      nt = '',
       v = '',
-      vs = '',
-      V = '',
-      Vs = '',
       ['\22'] = '',
       ['\22s'] = '',
       s = '󱐁',
-      S = '󱐁',
       ['\19'] = '󱐁',
       i = '',
-      ic = '',
-      ix = '',
-      R = '',
-      Rc = '',
-      Rx = '',
-      Rv = '',
-      Rvc = '',
-      Rvx = '',
-      c = '',
-      cv = '',
       r = '',
-      rm = '',
-      ['r?'] = '',
+      c = '',
       ['!'] = '',
       t = '',
     },
@@ -53,13 +30,10 @@ M.Mode = {
       n = 'green',
       i = 'blue',
       v = 'yellow',
-      V = 'yellow',
       ['\22'] = 'cyan',
       c = 'orange',
       s = 'yellow',
-      S = 'yellow',
       ['\19'] = 'orange',
-      R = 'purple',
       r = 'purple',
       ['!'] = 'green',
       t = 'green',
@@ -67,6 +41,7 @@ M.Mode = {
   },
   {
     provider = function(self)
+      dbg_schedule(self.mode)
       return string.format(' %s ', self.mode_icons[self.mode])
     end,
     hl = function(self)
