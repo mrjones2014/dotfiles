@@ -96,6 +96,7 @@ return {
         function()
           vim.cmd.Lazy()
         end,
+        desc = 'Show lazy.nvim menu',
       },
     },
   },
