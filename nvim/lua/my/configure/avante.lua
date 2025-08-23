@@ -1,4 +1,4 @@
-local is_work_project = require('my.utils.git').is_work_repo()
+local is_work_project = require('my.utils.vcs').is_work_repo()
 
 local suggestion_keymaps = {
   accept = '<C-CR>',
