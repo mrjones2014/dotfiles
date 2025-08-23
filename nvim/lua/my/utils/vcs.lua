@@ -18,37 +18,11 @@ end
 
 local _cached_branch = ''
 local _cache_valid = false
-local _watcher
-
-local function setup_vcs_watcher()
-  if _watcher then
-    return
-  end
-
-  local vcs_dir = vim.fn.finddir('.jj', '.;')
-  if not vcs_dir or vcs_dir == '' then
-    vcs_dir = vim.fn.finddir('.git', '.;')
-  end
-  if not vcs_dir or vcs_dir == '' then
-    return
-  end
-  vcs_dir = vim.fn.fnamemodify(vcs_dir, ':p:h')
-
-  _watcher = vim.uv.new_fs_event()
-  if _watcher then
-    _watcher:start(vcs_dir, { recursive = true }, function()
-      _cache_valid = false
-      vim.schedule(vim.cmd.redrawstatus)
-    end)
-  end
-end
 
 function M.jj_bookmark_or_git_branch()
-  setup_vcs_watcher()
-
   if not _cache_valid then
     if vim.fs.root(vim.uv.cwd(), '.jj') then
-      _cached_branch = vim.trim(vim
+      local result = vim
         .system({
           'jj',
           'log',
@@ -62,7 +36,8 @@ function M.jj_bookmark_or_git_branch()
           '-T',
           "separate(' ', format_short_change_id(self.change_id()), self.bookmarks())",
         }, { text = true })
-        :wait().stdout or '')
+        :wait()
+      _cached_branch = vim.trim(result.stdout or '')
     else
       _cached_branch = vim.g.gitsigns_head
         or vim.b.gitsigns_head
@@ -74,11 +49,11 @@ function M.jj_bookmark_or_git_branch()
   return _cached_branch
 end
 
-vim.api.nvim_create_autocmd('VimLeavePre', {
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'GitSignsUpdate',
   callback = function()
-    if _watcher then
-      _watcher:stop()
-    end
+    _cache_valid = false
+    vim.schedule(vim.cmd.redrawstatus)
   end,
 })
 
