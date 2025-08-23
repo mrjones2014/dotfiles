@@ -25,10 +25,14 @@ local function setup_vcs_watcher()
     return
   end
 
-  local vcs_dir = vim.fs.root(vim.uv.cwd(), { '.jj', '.git' })
-  if not vcs_dir then
+  local vcs_dir = vim.fn.finddir('.jj', '.;')
+  if not vcs_dir or vcs_dir == '' then
+    vcs_dir = vim.fn.finddir('.git', '.;')
+  end
+  if not vcs_dir or vcs_dir == '' then
     return
   end
+  vcs_dir = vim.fn.fnamemodify(vcs_dir, ':p:h')
 
   _watcher = vim.uv.new_fs_event()
   if _watcher then

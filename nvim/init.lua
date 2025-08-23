@@ -1,9 +1,19 @@
 -- use Neovim's experimental Lua module loader that does byte-caching of Lua modules
 vim.loader.enable()
+
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
 _G.dbg = function(...)
   require('snacks.debug').inspect(...)
+end
+
+---Debug Lua stuff and print a nice debug message via `vim.inspect`,
+---wrapped in `vim.schedule`, so you can call it from fast-events.
+_G.dbg_schedule = function(...)
+  local args = { ... }
+  vim.schedule(function()
+    require('snacks.debug').inspect(unpack(args))
+  end)
 end
 
 require('my.settings')
