@@ -119,16 +119,13 @@ M.Branch = {
   },
 }
 
+local function file_init(self)
+  self.bufname = vim.api.nvim_buf_get_name(0)
+  self.temporary = self.bufname:find(vim.fn.stdpath('run')) ~= nil
+end
+
 M.IsTmpFile = {
-  init = function(self)
-    self.bufname = vim.api.nvim_buf_get_name(0)
-    -- if its in the tmpdir just show the filename and an icon
-    if self.bufname:find(vim.fn.stdpath('run')) then
-      self.temporary = true
-    else
-      self.temporary = false
-    end
-  end,
+  init = file_init,
   hl = { bg = 'surface0' },
   {
     condition = function(self)
@@ -139,15 +136,7 @@ M.IsTmpFile = {
 }
 
 M.FilePath = {
-  init = function(self)
-    self.bufname = vim.api.nvim_buf_get_name(0)
-    -- if its in the tmpdir just show the filename and an icon
-    if self.bufname:find(vim.fn.stdpath('run')) then
-      self.temporary = true
-    else
-      self.temporary = false
-    end
-  end,
+  init = file_init,
   hl = { bg = 'surface0' },
   provider = ' ',
   {
@@ -199,7 +188,6 @@ M.UnsavedChanges = {
     end,
     {
       {
-
         provider = sep.rounded_left,
         hl = { fg = 'yellow', bg = 'surface0' },
       },
@@ -217,45 +205,24 @@ M.UnsavedChanges = {
   },
 }
 
-M.LspFormatToggle = {
-  provider = function()
-    if require('my.utils.lsp').has_formatter() and require('my.utils.lsp').is_formatting_enabled() then
-      return '   '
-    else
-      return '   '
-    end
-  end,
-  hl = { bg = 'surface0' },
-  on_click = {
-    callback = function()
-      require('my.utils.lsp').toggle_formatting_enabled()
+local function toggle_component(text, check_fn, toggle_fn)
+  return {
+    provider = function()
+      return check_fn() and '  ' or '  '
     end,
-    name = 'heirline_LSP',
-  },
-  {
-    provider = '󰗈 Formatting ',
     hl = { bg = 'surface0' },
-  },
-}
+    on_click = { callback = toggle_fn, name = 'heirline_toggle_' .. text:lower():gsub('%s+', '_') },
+    { provider = text, hl = { bg = 'surface0' } },
+  }
+end
 
-M.SpellCheckToggle = {
-  provider = function()
-    if editor.spellcheck_enabled() then
-      return '   '
-    else
-      return '   '
-    end
-  end,
-  hl = { bg = 'surface0' },
-  on_click = {
-    callback = editor.toggle_spellcheck,
-    name = 'heirline_Spellcheck',
-  },
-  {
-    provider = '󰓆 Spellcheck ',
-    hl = { bg = 'surface0' },
-  },
-}
+M.LspFormatToggle = toggle_component('󰗈 Formatting ', function()
+  return require('my.utils.lsp').has_formatter() and require('my.utils.lsp').is_formatting_enabled()
+end, function()
+  require('my.utils.lsp').toggle_formatting_enabled()
+end)
+
+M.SpellCheckToggle = toggle_component('󰓆 Spellcheck ', editor.spellcheck_enabled, editor.toggle_spellcheck)
 
 M.RecordingMacro = {
   provider = function()
