@@ -424,10 +424,14 @@ M.CopilotStatus = {
   condition = function()
     -- don't cause copilot to load with `require` just for statusline
     local loaded = package.loaded.copilot
-    return loaded and loaded.setup_done
+    return not not loaded
   end,
   {
     provider = function()
+      local auth = require('copilot.auth')
+      if not auth.is_authenticated() then
+        return ''
+      end
       local info = require('copilot.auth').get_creds()
       if not info then
         return ''

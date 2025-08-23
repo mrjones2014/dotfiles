@@ -3,16 +3,7 @@ return {
     'SmiteshP/nvim-navic',
     init = function()
       require('my.utils.lsp').on_attach(function(client, bufnr)
-        local ft = vim.bo[bufnr].ft
-        if
-          client.server_capabilities.documentSymbolProvider
-          -- don't attach to both nil_ls and nixd
-          and client.name ~= 'nil_ls'
-          -- don't attach to otter-ls
-          and not vim.startswith(client.name, 'otter-ls')
-          -- don't attch to graphql in kulala buffers, attach to kulala lsp instead
-          and not (ft == 'http' and client.name == 'graphql')
-        then
+        if client.server_capabilities.documentSymbolProvider then
           require('nvim-navic').attach(client, bufnr)
         end
       end)

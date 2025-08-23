@@ -130,20 +130,4 @@ return {
       })
     end,
   },
-  {
-    -- otter is activated by ftplugins, see ftplugin/*
-    'jmbuhr/otter.nvim',
-    opts = {
-      lsp = {
-        root_dir = function(_, bufnr)
-          return vim.fs.root(bufnr or 0, {
-            '.git',
-            'Cargo.lock',
-            'package.json',
-            'flake.nix',
-          }) or vim.fn.getcwd(0)
-        end,
-      },
-    },
-  },
 }
