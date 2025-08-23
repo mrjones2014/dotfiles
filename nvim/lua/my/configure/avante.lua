@@ -51,25 +51,6 @@ return {
         })
       end,
     },
-    {
-      'Kaiser-Yang/blink-cmp-avante',
-      dependencies = {
-        {
-          'saghen/blink.cmp',
-          opts = function(_, opts)
-            require('my.utils.completion').register_filetype_source(opts, 'AvanteInput', { 'avante' }, {
-              avante = {
-                name = 'Avante',
-                module = 'blink-cmp-avante',
-                -- make sure copilot suggestions are lower than LSP suggestions
-                score_offset = -20,
-                async = true,
-              },
-            })
-          end,
-        },
-      },
-    },
     { 'folke/snacks.nvim' },
     {
       'zbirenbaum/copilot.lua',
