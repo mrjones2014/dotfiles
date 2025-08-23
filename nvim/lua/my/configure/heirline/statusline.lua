@@ -41,7 +41,6 @@ M.Mode = {
   },
   {
     provider = function(self)
-      dbg_schedule(self.mode)
       return string.format(' %s ', self.mode_icons[self.mode])
     end,
     hl = function(self)
