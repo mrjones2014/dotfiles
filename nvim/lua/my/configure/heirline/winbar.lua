@@ -1,8 +1,9 @@
 local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 local my_conditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
 
-local special_filenames = { 'mod.rs', 'lib.rs' }
+local special_filenames = { 'mod.rs', 'lib.rs', 'init.lua' }
 
 local function get_current_filenames()
   local listed_buffers = vim
@@ -101,19 +102,58 @@ M.UniqueFilename = {
   {
     provider = sep.rounded_right,
     hl = function()
-      return { bg = conditions.has_diagnostics() and 'surface1' or 'surface2', fg = 'base' }
+      return { bg = conditions.has_diagnostics() and 'surface1' or 'surface0', fg = 'base' }
     end,
   },
+}
+
+local diagnostics_order = {
+  vim.diagnostic.severity.HINT,
+  vim.diagnostic.severity.INFO,
+  vim.diagnostic.severity.WARN,
+  vim.diagnostic.severity.ERROR,
+}
+
+local severity_name = {
+  [vim.diagnostic.severity.HINT] = 'Hint',
+  [vim.diagnostic.severity.INFO] = 'Info',
+  [vim.diagnostic.severity.WARN] = 'Warn',
+  [vim.diagnostic.severity.ERROR] = 'Error',
 }
 
 M.Diagnostics = {
   provider = ' ',
   hl = { bg = 'surface1' },
   condition = conditions.has_diagnostics,
-  require('my.configure.heirline.shared').Diagnostics(true, 'surface1'),
+  {
+    update = { 'DiagnosticChanged', 'BufEnter' },
+    init = function(self)
+      self.counts = vim.diagnostic.count(0)
+    end,
+    unpack(vim
+      .iter(diagnostics_order)
+      :map(function(severity)
+        return {
+          provider = function(self)
+            local sign = vim.diagnostic.config().signs.text[severity]
+            return string.format('%s%s ', sign, self.counts[severity] or 0)
+          end,
+          condition = function(self)
+            return (self.counts[severity] or 0) > 0
+          end,
+          hl = function()
+            return {
+              fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_name[severity])).fg,
+              bg = 'surface1',
+            }
+          end,
+        }
+      end)
+      :totable()),
+  },
   {
     provider = sep.rounded_right,
-    hl = { fg = 'surface1', bg = 'surface2' },
+    hl = { fg = 'surface1', bg = 'surface0' },
   },
 }
 

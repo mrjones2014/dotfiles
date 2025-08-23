@@ -57,7 +57,6 @@ return {
           sl.CopilotStatus,
           sl.SpellCheckToggle,
           sl.LspFormatToggle,
-          shared.Diagnostics(false),
         },
         winbar = { ---@diagnostic disable-line:missing-fields
           shared.FileIcon('base'),

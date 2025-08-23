@@ -34,52 +34,6 @@ function M.FileIcon(bg_color)
   }
 end
 
-local diagnostics_order = {
-  vim.diagnostic.severity.HINT,
-  vim.diagnostic.severity.INFO,
-  vim.diagnostic.severity.WARN,
-  vim.diagnostic.severity.ERROR,
-}
-local severity_name = {
-  [vim.diagnostic.severity.HINT] = 'Hint',
-  [vim.diagnostic.severity.INFO] = 'Info',
-  [vim.diagnostic.severity.WARN] = 'Warn',
-  [vim.diagnostic.severity.ERROR] = 'Error',
-}
-local diagnostics_base = {
-  update = { 'DiagnosticChanged', 'BufEnter' },
-  init = function(self)
-    self.counts = vim.diagnostic.count(0)
-  end,
-}
-
-function M.Diagnostics(is_winbar, bg)
-  bg = bg or 'surface0'
-  return utils.insert(
-    diagnostics_base,
-    unpack(vim
-      .iter(diagnostics_order)
-      :map(function(severity)
-        local component = {
-          provider = function(self)
-            local sign = vim.diagnostic.config().signs.text[severity]
-            return string.format('%s%s ', sign, self.counts[severity] or 0)
-          end,
-          hl = function()
-            return { fg = utils.get_highlight(string.format('DiagnosticSign%s', severity_name[severity])).fg, bg = bg }
-          end,
-        }
-        if is_winbar then
-          component.condition = function(self)
-            return (self.counts[severity] or 0) > 0
-          end
-        end
-        return component
-      end)
-      :totable())
-  )
-end
-
 M.Trunc = {
   provider = '%<',
 }
