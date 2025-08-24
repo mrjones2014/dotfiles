@@ -153,6 +153,7 @@ return {
       'str_replace',
       'replace_in_file',
     },
+    windows = { spinner = { generating = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' } } },
     prompt_logger = {
       enabled = false,
     },
