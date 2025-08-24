@@ -131,6 +131,9 @@ return {
     { '<leader>an', desc = 'avante: new ask' },
     { '<leader>at', vim.cmd.AvanteToggle, desc = 'Avante: toggle' },
   },
+  init = function()
+    vim.env.SEARXNG_URL = 'https://search.disroot.org/'
+  end,
   ---@module 'avante'
   ---@type avante.Config
   opts = {
@@ -153,6 +156,7 @@ return {
       'str_replace',
       'replace_in_file',
     },
+    web_search_engine = { provider = 'searxng' },
     windows = { spinner = { generating = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' } } },
     prompt_logger = {
       enabled = false,
