@@ -66,11 +66,62 @@ sonarr:
               - WEBRip-2160p
               - Bluray-2160p
               - Bluray-2160p Remux
+      # Profile 3: 720p through 4K allowing non-English content
+      - name: 720p-2160p allow non-English
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+              - Bluray-720p
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+              - Bluray-1080p Remux
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
+              - Bluray-2160p Remux
+      # Profile 4: 1080p minimum allowing non-English content
+      - name: 1080p-2160p allow non-English
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+              - Bluray-1080p Remux
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
+              - Bluray-2160p Remux
     # ===== CUSTOM FORMATS =====
     # These define specific characteristics to look for and how they're scored
     custom_formats:
       # LANGUAGE RESTRICTION
-      # Block common non-English languages with trash IDs
+      # Block common non-English languages with trash IDs (applies only to the English-only profiles)
       - trash_ids:
           - 5b42402c8e359900018a43c9 # Multi Languages
           - 0f12c086e289cf966fa5948eac571f44 # German
@@ -86,7 +137,7 @@ sonarr:
             score: -10000
           - name: 1080p-2160p
             score: -10000
-      # PRIORITIZE ENGLISH
+      # PRIORITIZE ENGLISH (only for the English-only profiles)
       - trash_ids:
           - 88ee7edbf89acc03cb5bf3ec4b271410 # English
         quality_profiles:
@@ -103,6 +154,10 @@ sonarr:
           - name: 720p-2160p
             score: 400 # High positive score strongly prefers x265 encoding
           - name: 1080p-2160p
+            score: 400
+          - name: 720p-2160p allow non-English
+            score: 400
+          - name: 1080p-2160p allow non-English
             score: 400
 # ===== RADARR CONFIGURATION =====
 # Similar structure as Sonarr but for movies
@@ -161,9 +216,56 @@ radarr:
               - WEBDL-2160p
               - WEBRip-2160p
               - Bluray-2160p
+      # Profile 3: 720p through 4K allowing non-English movies
+      - name: 720p-2160p allow non-English
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+              - Bluray-720p
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
+      # Profile 4: 1080p minimum allowing non-English movies
+      - name: 1080p-2160p allow non-English
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
     custom_formats:
       # LANGUAGE RESTRICTION
-      # Block common non-English languages with trash IDs
+      # Block common non-English languages with trash IDs (applies only to English-only profiles)
       - trash_ids:
           - e26437a13ed15ad4646b828ed9a3ef74 # Multi Audio
           - e0c07d59beb37348e975a930d5e50319 # Multi-Language Subs
@@ -177,7 +279,7 @@ radarr:
             score: -10000
           - name: 1080p-2160p
             score: -10000
-      # PRIORITIZE ENGLISH
+      # PRIORITIZE ENGLISH (only for English-only profiles)
       - trash_ids:
           - 1c7d7b04b15cc53ea61204bebbcc1ee2 # English Language
         quality_profiles:
@@ -194,6 +296,10 @@ radarr:
           - name: 720p-2160p
             score: 400 # Strong preference for space-efficient encoding
           - name: 1080p-2160p
+            score: 400
+          - name: 720p-2160p allow non-English
+            score: 400
+          - name: 1080p-2160p allow non-English
             score: 400
       # SPECIAL VERSIONS
       # Prefer IMAX Enhanced editions which usually have more image visible
@@ -214,3 +320,7 @@ radarr:
             score: -1000 # Strong negative score to avoid these formats
           - name: 1080p-2160p
             score: -1000 # Strong negative score to avoid these formats
+          - name: 720p-2160p allow non-English
+            score: -1000
+          - name: 1080p-2160p allow non-English
+            score: -1000
