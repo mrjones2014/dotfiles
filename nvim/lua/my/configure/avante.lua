@@ -153,8 +153,8 @@ return {
       'str_replace',
       'replace_in_file',
     },
-  },
-  prompt_logger = {
-    enabled = false,
+    prompt_logger = {
+      enabled = false,
+    },
   },
 }
