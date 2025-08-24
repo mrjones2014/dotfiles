@@ -22,9 +22,7 @@ local cody_providers = {
 }
 
 local providers = vim.tbl_deep_extend('force', {
-  copilot = {
-    model = 'claude-sonnet-4',
-  },
+  copilot = { model = 'gpt-5' },
 }, is_work_project and cody_providers or {})
 
 return {
@@ -60,14 +58,14 @@ return {
       cmd = 'Copilot',
       dependencies = {
         {
-          'giuxtaposition/blink-cmp-copilot',
+          'fang2hou/blink-copilot',
           dependencies = {
             'saghen/blink.cmp',
             opts = function(_, opts)
               require('my.utils.completion').register_filetype_source(opts, nil, { 'copilot' }, {
                 copilot = {
                   name = 'Copilot',
-                  module = 'blink-cmp-copilot',
+                  module = 'blink-copilot',
                   -- push copilot suggestions lower than LSP suggestions
                   score_offset = -20,
                   async = true,
@@ -78,7 +76,7 @@ return {
         },
       },
       opts = {
-        copilot_model = 'claude-sonnet-4',
+        copilot_model = 'gpt-5',
         suggestion = {
           auto_trigger = true,
           keymap = suggestion_keymaps,
