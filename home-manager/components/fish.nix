@@ -6,13 +6,6 @@
   isLinux,
   ...
 }:
-let
-  rebuild-cmd = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
-  rebuild-script = ''
-    sudo echo
-    sudo ${rebuild-cmd} switch --flake ~/git/dotfiles/.# &| ${pkgs.nix-output-monitor}/bin/nom
-  '';
-in
 {
   home.sessionVariables = {
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
@@ -97,59 +90,6 @@ in
             string repeat -n (tput cols) '─'
             echo
             echo
-          '';
-        };
-        nix-apply = {
-          description = "Apply latest Nix configuration; checks if you need to do a git pull first";
-          body = ''
-            # Check for offline flag
-            set -l offline 0
-            for arg in $argv
-                if test "$arg" = -o -o "$arg" = --offline
-                    set offline 1
-                    break
-                end
-            end
-
-            # Skip git checks if offline mode is enabled
-            if test $offline -eq 0
-                pushd $HOME/git/dotfiles >/dev/null 2>&1
-                git fetch
-                if test (git rev-list --left-right --count origin/master...@ | cut -f1) -gt 0
-                    echo "Current revision is behind origin/master"
-                    echo "Affected files:"
-                    git diff --stat @..origin/master
-                    popd >/dev/null 2>&1
-                    return 1
-                end
-                popd >/dev/null 2>&1
-            else
-                echo "Running in offline mode, skipping git status checks."
-            end
-            ${rebuild-script}
-            for s in $pipestatus
-                if test $s -ne 0
-                    echo "Pipeline failed with status $s"
-                    return $s
-                end
-            end
-          '';
-        };
-        nix-clean = {
-          description = "Run Nix garbage collection and remove old kernels to free up space in boot partition";
-          body = ''
-            # NixOS-specific steps
-            if test -f /etc/NIXOS
-                sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
-                for link in /nix/var/nix/gcroots/auto/*
-                    rm $(readlink "$link")
-                end
-            end
-            nix-env --delete-generations old
-            nix-store --gc
-            nix-channel --update
-            nix-env -u --always
-            nix-collect-garbage -d
           '';
         };
         groot = {
