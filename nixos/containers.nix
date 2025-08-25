@@ -1,5 +1,6 @@
 { pkgs, ... }:
 let
+  podman_dns_port = 8053;
   update-containers = pkgs.writeShellScriptBin "update-containers" ''
     	SUDO=""
     	if [[ $(id -u) -ne 0 ]]; then
@@ -18,8 +19,11 @@ let
   '';
 in
 {
-  virtualisation.oci-containers.backend = "podman";
-  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+  virtualisation = {
+    oci-containers.backend = "podman";
+    podman.defaultNetwork.settings.dns_enabled = true;
+    containers.containersConf.settings.network.dns_bind_port = podman_dns_port;
+  };
   environment.systemPackages = [ update-containers ];
   # update oci-containers every Monday
   systemd = {

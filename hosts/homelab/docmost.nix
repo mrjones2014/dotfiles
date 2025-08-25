@@ -9,7 +9,6 @@ let
   db_data_location = "/var/lib/docmost/db-data";
   redis_data_location = "/var/lib/docmost/redis-data";
   podman_network = "docmost";
-  podman_dns_port = 8053;
 in
 {
   systemd = {
@@ -36,7 +35,6 @@ in
 
   age.secrets.docmost_env.file = ../../secrets/docmost_env.age;
   services.nginx.subdomains.docs.port = port;
-  virtualisation.containers.containersConf.settings.network.dns_bind_port = podman_dns_port;
   virtualisation.oci-containers.containers = {
     docmost-db = {
       autoStart = true;
