@@ -19,6 +19,7 @@ let
     "secrets/docmost_env.age"
     "secrets/paperless_backups_1password_token_env.age"
     "secrets/cross_seed_cfg.age"
+    "secrets/kaneo_env.age"
   ];
 in
 (builtins.listToAttrs (

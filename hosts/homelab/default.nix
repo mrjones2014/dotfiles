@@ -27,6 +27,7 @@
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix
+    ./kaneo.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix
