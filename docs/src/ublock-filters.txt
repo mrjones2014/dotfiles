@@ -2,6 +2,9 @@
 ####              YouTube               ####
 ############################################
 
+! Ask AI for videos taking up a whole grid row
+www.youtube.com##.ytdTalkToRecsFlowRendererFlowContent
+
 ! youtube begging me to pay for premium and youtube TV
 www.youtube.com##.yt-mealbar-promo-renderer
 
