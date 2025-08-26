@@ -13,7 +13,7 @@ function M.git_remote()
 end
 
 function M.is_work_repo()
-  return M.git_remote():find('1password.gitlab.io') ~= nil
+  return M.git_remote():find('gitlab.1password.io') ~= nil
 end
 
 local _cached_branch = ''
