@@ -52,7 +52,6 @@ return {
     { 'folke/snacks.nvim' },
     {
       'zbirenbaum/copilot.lua',
-      enabled = not is_work_project,
       -- Trick to load Copilot for relevant filetypes
       event = 'LspAttach',
       cmd = 'Copilot',
