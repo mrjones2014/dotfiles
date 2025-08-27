@@ -45,7 +45,7 @@ in
           value = {
             wraps = exe;
             description = "1Password Shell Plugin for ${exe}";
-            body = "op plugin run -- ${exe}";
+            body = "op plugin run -- ${exe} $argv";
           };
         }) pkg-exe-names
       );
