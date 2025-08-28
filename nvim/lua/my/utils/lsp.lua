@@ -55,7 +55,7 @@ function M.on_attach_default(client, bufnr)
         -- see require('my.utils.lsp').on_attach_default
         vim.cmd.set('eventignore+=CursorHold')
         vim.lsp.buf.hover()
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'WinEnter' }, {
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'WinEnter', 'BufEnter' }, {
           command = ':set eventignore-=CursorHold',
           pattern = '<buffer>',
           once = true,
