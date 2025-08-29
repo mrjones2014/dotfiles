@@ -212,7 +212,7 @@ M.RecordingMacro = {
 
 local Tabpage = {
   provider = function(self)
-    return '%' .. self.tabnr .. 'T ' .. self.tabpage .. ' %T'
+    return string.format(' 󱥟 %s ', self.tabpage)
   end,
   hl = function(self)
     if self.is_active then
@@ -221,6 +221,14 @@ local Tabpage = {
       return { bg = 'surface1' }
     end
   end,
+  on_click = {
+    callback = function(self)
+      vim.api.nvim_set_current_tabpage(self.tabnr)
+    end,
+    name = function(self)
+      return 'heirline_switch_tab_' .. tostring(self.tabnr)
+    end,
+  },
 }
 
 M.Tabs = {
