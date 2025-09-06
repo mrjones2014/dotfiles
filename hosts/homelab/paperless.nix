@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   services.nginx.subdomains.paperless = {
     inherit (config.services.paperless) port;
@@ -17,7 +12,7 @@
     enable = true;
     passwordFile = config.age.secrets.paperless_admin_pw.path;
     database.createLocally = true;
-    settings.PAPERLESS_URL = "https://paperless.mjones.network";
+    domain = "paperless.mjones.network";
     exporter.enable = true;
   };
 
