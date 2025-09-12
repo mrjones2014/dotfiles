@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -50,7 +49,7 @@ in
         }) pkg-exe-names
       );
 
-      packages = [ pkgs._1password-cli ] ++ cfg.plugins;
+      packages = cfg.plugins;
     in
     lib.mkIf cfg.enable (
       lib.mkMerge [

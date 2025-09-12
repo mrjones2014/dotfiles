@@ -16,6 +16,7 @@
   };
   environment.variables.HOMEBREW_NO_ANALYTICS = "1";
   environment.systemPath = [ "/opt/homebrew/bin" ];
+  programs._1password.enable = true;
   homebrew = {
     enable = true;
     onActivation = {
