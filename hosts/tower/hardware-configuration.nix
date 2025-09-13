@@ -7,7 +7,11 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
-    kernelParams = [ "amdgpu.gpu_recovery=1" ];
+    kernelParams = [
+      "amdgpu.gpu_recovery=1"
+      "amdgpu.ppfeaturemask=0xfffd3fff"
+      "split_lock_detect=off"
+    ];
     initrd.availableKernelModules = [
       "xhci_pci"
       "ahci"
