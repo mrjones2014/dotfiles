@@ -131,6 +131,9 @@ askubuntu.com##.js-consent-banner
 ####             GitHub                 ####
 ############################################
 
+! Block "Ask Copilot" header
+github.com##.news>.copilotPreview__container
+
 ! Block GitHub's cringe algorithmic social media style feed
 github.com###feed-next
 github.com##[aria-labelledby="feed-next"]
