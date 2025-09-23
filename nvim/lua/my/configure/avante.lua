@@ -55,25 +55,6 @@ return {
       -- Trick to load Copilot for relevant filetypes
       event = 'LspAttach',
       cmd = 'Copilot',
-      dependencies = {
-        {
-          'fang2hou/blink-copilot',
-          dependencies = {
-            'saghen/blink.cmp',
-            opts = function(_, opts)
-              require('my.utils.completion').register_filetype_source(opts, nil, { 'copilot' }, {
-                copilot = {
-                  name = 'Copilot',
-                  module = 'blink-copilot',
-                  -- push copilot suggestions lower than LSP suggestions
-                  score_offset = -20,
-                  async = true,
-                },
-              })
-            end,
-          },
-        },
-      },
       opts = {
         copilot_model = 'gpt-5',
         suggestion = {
