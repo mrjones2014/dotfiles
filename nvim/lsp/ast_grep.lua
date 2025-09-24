@@ -25,4 +25,7 @@ return {
     config.cmd_cwd = config.root_dir
     return client.config.cmd_cwd == config.cmd_cwd
   end,
+  on_init = function(client)
+    client.server_capabilities.hoverProvider = false
+  end,
 }
