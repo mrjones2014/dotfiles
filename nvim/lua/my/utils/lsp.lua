@@ -66,6 +66,12 @@ function M.on_attach_default(client, bufnr)
     desc = 'Restart one or more LSP clients (all if none specified)',
   })
 
+  vim.api.nvim_create_user_command('LspLog', function()
+    vim.cmd(string.format('tabnew %s', vim.lsp.log.get_filename()))
+  end, {
+    desc = 'Opens the Nvim LSP client log.',
+  })
+
   require('which-key').add({
     {
       'gh',
