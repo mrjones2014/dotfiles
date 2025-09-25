@@ -4,6 +4,18 @@ local M = {}
 
 local formatting_enabled = true
 
+local function complete_clients(arg)
+  return vim
+    .iter(vim.lsp.get_clients())
+    :map(function(client)
+      return client.name
+    end)
+    :filter(function(name)
+      return name:sub(1, #arg) == arg
+    end)
+    :totable()
+end
+
 ---Set up a callback to run on LSP attach
 ---@param callback fun(client:vim.lsp.Client,bufnr:number)
 function M.on_attach(callback)
@@ -45,6 +57,14 @@ function M.on_attach_default(client, bufnr)
       callback()
     end
   end
+
+  vim.api.nvim_create_user_command('LspRestart', function(info)
+    M.lsp_restart(info)
+  end, {
+    nargs = '*',
+    complete = complete_clients,
+    desc = 'Restart one or more LSP clients (all if none specified)',
+  })
 
   require('which-key').add({
     {
@@ -176,6 +196,37 @@ function M.has_formatter(buf)
   -- otherwise just return the LSP server name
   local clients = vim.lsp.get_clients({ bufnr = buf, method = Methods.textDocument_formatting })
   return #clients > 0
+end
+
+function M.lsp_restart(info)
+  local clients = info.fargs
+
+  -- Default to restarting all active servers
+  if #clients == 0 then
+    clients = vim
+      .iter(vim.lsp.get_clients())
+      :map(function(client)
+        return client.name
+      end)
+      :totable()
+  end
+
+  for _, name in ipairs(clients) do
+    if vim.lsp.config[name] == nil then
+      vim.notify(("Invalid server name '%s'"):format(name))
+    else
+      vim.lsp.enable(name, false)
+    end
+  end
+
+  local timer = assert(vim.uv.new_timer())
+  timer:start(500, 0, function()
+    for _, name in ipairs(clients) do
+      vim.schedule_wrap(function(x)
+        vim.lsp.enable(x)
+      end)(name)
+    end
+  end)
 end
 
 return M
