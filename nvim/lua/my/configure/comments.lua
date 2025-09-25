@@ -19,16 +19,18 @@ return {
       -- SAFETY: a safety comment for a Rust `unsafe { }` block
       --
       -- NB: nota bene
+      --
+      -- N.B. another nota bene
       highlight = {
         -- change pattern to not require a colon after the keyword
         pattern = [[.*<(KEYWORDS)\s*]],
         keyword = 'bg',
         comments_only = true,
       },
-      search = { pattern = [[.*<(KEYWORDS)\s*]] },
+      -- search = { pattern = [[.*<(KEYWORDS)\s*]] },
       keywords = {
         SAFETY = { icon = '󰲉 ', color = 'warning' },
-        NB = { icon = '󰴄 ', color = 'info' },
+        NB = { icon = '󰴄 ', color = 'info', alt = { 'N.B.' } },
       },
     },
   },
