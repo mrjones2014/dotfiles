@@ -15,7 +15,7 @@ return {
   },
   { 'mrjones2014/lua-gf.nvim', dev = true, ft = 'lua' },
   {
-    'echasnovski/mini.splitjoin',
+    'nvim-mini/mini.splitjoin',
     keys = {
       {
         'gS',
@@ -26,7 +26,7 @@ return {
       },
     },
   },
-  { 'echasnovski/mini.trailspace', event = 'BufRead', opts = {} },
+  { 'nvim-mini/mini.trailspace', event = 'BufRead', opts = {} },
   {
     'max397574/better-escape.nvim',
     event = 'InsertEnter',

@@ -1,5 +1,5 @@
 return {
-  'echasnovski/mini.move',
+  'nvim-mini/mini.move',
   keys = {
     { '<S-h>', desc = 'Move text left', mode = { 'n', 'v', 'x' } },
     { '<S-l>', desc = 'Move text right', mode = { 'n', 'v', 'x' } },

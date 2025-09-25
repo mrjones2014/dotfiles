@@ -1,5 +1,5 @@
 return {
-  'echasnovski/mini.bracketed',
+  'nvim-mini/mini.bracketed',
   keys = {
     { '[c', desc = 'Jump to previous comment block' },
     { ']c', desc = 'Jump to next comment block' },
