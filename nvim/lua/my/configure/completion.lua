@@ -35,8 +35,9 @@ return {
     'L3MON4D3/LuaSnip',
     'folke/lazydev.nvim',
   },
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = function(_, opts)
-    deep_merge_with_list_append(opts, {
+    local new_opts = {
       snippets = { preset = 'luasnip' },
       signature = { enabled = true },
       keymap = {
@@ -81,6 +82,14 @@ return {
           },
         },
       },
-    })
+    }
+
+    -- If opts exists, deep-merge into it. Otherwise just return the new table.
+    if opts ~= nil then
+      deep_merge_with_list_append(opts, new_opts)
+      return opts
+    else
+      return new_opts
+    end
   end,
 }
