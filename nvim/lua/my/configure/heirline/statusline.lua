@@ -181,12 +181,15 @@ M.UnsavedChanges = {
 
 local function toggle_component(text, check_fn, toggle_fn)
   return {
-    provider = function()
-      return check_fn() and '  ' or '  '
-    end,
+    provider = text,
     hl = { bg = 'surface0' },
-    on_click = { callback = toggle_fn, name = 'heirline_toggle_' .. text:lower():gsub('%s+', '_') },
-    { provider = text, hl = { bg = 'surface0' } },
+    {
+      provider = function()
+        return check_fn() and '  ' or '  '
+      end,
+      hl = { bg = 'surface0' },
+      on_click = { callback = toggle_fn, name = 'heirline_toggle_' .. text:lower():gsub('%s+', '_') },
+    },
   }
 end
 
