@@ -19,6 +19,12 @@ end, {
 
 return {
   {
+    'mrjones2014/neoconf.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    dev = true,
+  },
+  {
     'folke/snacks.nvim',
     lazy = false,
     opts = {
