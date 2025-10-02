@@ -1,4 +1,6 @@
-return {
+local codesettings = require('codesettings')
+
+return codesettings.with_vscode_settings('yaml', {
   cmd = { 'yaml-language-server', '--stdio' },
   filetypes = { 'yaml' },
   root_markers = { '.git' },
@@ -21,4 +23,4 @@ return {
       },
     },
   },
-}
+})

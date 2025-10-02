@@ -18,10 +18,9 @@ end, {
 })
 
 return {
+  -- used to merge .vscode/settings.json into LSP settings
   {
-    'mrjones2014/neoconf.nvim',
-    event = 'VeryLazy',
-    opts = {},
+    'mrjones2014/codesettings.nvim',
     dev = true,
   },
   {

@@ -19,12 +19,13 @@ return {
       desc = 'Open Cargo.toml in vert split',
     },
   },
+  dependencies = { 'mrjones2014/codesettings.nvim' },
   init = function()
     vim.g.rustaceanvim = {
       server = {
         cmd = { vim.env.NVIM_RUST_ANALYZER },
         default_settings = {
-          ['rust-analyzer'] = {
+          ['rust-analyzer'] = require('codesettings').with_vscode_settings('rust-analyzer', {
             cargo = { allFeatures = true, targetDir = true },
             check = {
               allTargets = true,
@@ -43,7 +44,7 @@ return {
                 '.git',
               },
             },
-          },
+          }),
         },
       },
     }
