@@ -24,8 +24,15 @@ return {
     vim.g.rustaceanvim = {
       server = {
         cmd = { vim.env.NVIM_RUST_ANALYZER },
-        -- the global hook doesn't work when configuring with rustaceanvim
-        default_settings = require('codesettings').with_vscode_settings('rust-analyzer', {
+        -- I want VS Code settings to override my settings,
+        -- not the other way around, so use codesettings.nvim
+        -- instead of rustaceanvim's built-in vscode settings loader
+        load_vscode_settings = false,
+        -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
+        settings = function(_, config)
+          return require('codesettings').with_vscode_settings('rust-analyzer', config)
+        end,
+        default_settings = {
           ['rust-analyzer'] = {
             cargo = { allFeatures = true, targetDir = true },
             check = {
@@ -46,7 +53,7 @@ return {
               },
             },
           },
-        }),
+        },
       },
     }
   end,
