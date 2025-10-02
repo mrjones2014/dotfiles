@@ -24,8 +24,9 @@ return {
     vim.g.rustaceanvim = {
       server = {
         cmd = { vim.env.NVIM_RUST_ANALYZER },
-        default_settings = {
-          ['rust-analyzer'] = require('codesettings').with_vscode_settings('rust-analyzer', {
+        -- the global hook doesn't work when configuring with rustaceanvim
+        default_settings = require('codesettings').with_vscode_settings('rust-analyzer', {
+          ['rust-analyzer'] = {
             cargo = { allFeatures = true, targetDir = true },
             check = {
               allTargets = true,
@@ -44,8 +45,8 @@ return {
                 '.git',
               },
             },
-          }),
-        },
+          },
+        }),
       },
     }
   end,

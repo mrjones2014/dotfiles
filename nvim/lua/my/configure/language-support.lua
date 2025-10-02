@@ -11,6 +11,17 @@ vim.lsp.enable(vim
   end)
   :totable())
 
+vim.lsp.config('*', {
+  before_init = function(params, config)
+    -- merge .vscode/settings.json into LSP settings
+    local ok, codesettings = pcall(require, 'codesettings')
+    if ok then
+      config = codesettings.with_vscode_settings(config.name, config)
+    end
+    return params, config
+  end,
+})
+
 vim.api.nvim_create_user_command('LspLog', function()
   vim.cmd(string.format('tabnew %s', vim.lsp.log.get_filename()))
 end, {

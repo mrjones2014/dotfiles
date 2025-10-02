@@ -1,9 +1,8 @@
-local codesettings = require('codesettings')
 local runtime_path = vim.split(package.path, ';', {})
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-return codesettings.with_vscode_settings('lua_ls', {
+return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
   root_markers = {
@@ -42,4 +41,4 @@ return codesettings.with_vscode_settings('lua_ls', {
       },
     },
   },
-})
+}
