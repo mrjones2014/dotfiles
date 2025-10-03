@@ -131,7 +131,7 @@
           set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
           set -l GIT_BRANCH (git branch --show-current)
           if test -z "$GIT_BRANCH"
-              set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
+              set GIT_BRANCH (jj --ignore-working-copy log -r @- --no-graph --no-pager -T 'self.bookmarks()')
           end
           if test -z "$GIT_BRANCH"
               echo "Error: not a git repo"
