@@ -16,7 +16,7 @@ vim.lsp.config('*', {
     -- merge .vscode/settings.json into LSP settings
     local ok, codesettings = pcall(require, 'codesettings')
     if ok then
-      config = codesettings.with_vscode_settings(config.name, config)
+      config = codesettings.with_local_settings(config.name, config)
     end
     return params, config
   end,
@@ -33,6 +33,8 @@ return {
   {
     'mrjones2014/codesettings.nvim',
     dev = true,
+    event = 'VeryLazy',
+    opts = {},
   },
   {
     'folke/snacks.nvim',

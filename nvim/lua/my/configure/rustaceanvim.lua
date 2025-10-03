@@ -30,7 +30,7 @@ return {
         load_vscode_settings = false,
         -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
         settings = function(_, config)
-          return require('codesettings').with_vscode_settings('rust-analyzer', config)
+          return require('codesettings').with_local_settings('rust-analyzer', config)
         end,
         default_settings = {
           ['rust-analyzer'] = {

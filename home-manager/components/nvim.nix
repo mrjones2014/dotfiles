@@ -66,7 +66,7 @@
       shfmt
       stylua
       statix
-      luajitPackages.luacheck
+      selene
       prettierd
       eslint_d
       yamlfmt

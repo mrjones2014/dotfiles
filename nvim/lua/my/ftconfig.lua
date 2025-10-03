@@ -11,7 +11,7 @@ M.config = {
   },
   lua = {
     formatter = 'stylua',
-    linter = 'luacheck',
+    linter = 'selene',
     treesitter = { 'lua', 'luadoc' },
   },
   rust = {
