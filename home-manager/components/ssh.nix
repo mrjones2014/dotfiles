@@ -14,12 +14,12 @@ in
   home.sessionVariables = { } // lib.optionalAttrs (!isServer) { SSH_AUTH_SOCK = sshAuthSock; };
   programs.ssh = {
     enable = true;
-    forwardAgent = true;
-    matchBlocks =
-      { }
-      // lib.optionalAttrs (!isServer) {
-        # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
-        "*".extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
-      };
+    matchBlocks."*" = {
+      forwardAgent = true;
+    }
+    // lib.optionalAttrs (!isServer) {
+      # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
+      extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
+    };
   };
 }
