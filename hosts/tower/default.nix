@@ -19,11 +19,6 @@
       enable32Bit = true;
     };
 
-    amdgpu.amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
-    };
-
     # setup udev rules for ZSA keyboard firmware flashing
     keyboard.zsa.enable = true;
 
