@@ -33,6 +33,7 @@ return {
   {
     'mrjones2014/codesettings.nvim',
     dev = true,
+    cmd = 'Codesettings',
     event = 'VeryLazy',
     opts = {},
   },
