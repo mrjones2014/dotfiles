@@ -60,7 +60,15 @@
   ];
 
   programs = {
-    zen-browser.enable = !isDarwin;
+    zen-browser = {
+      enable = !isDarwin;
+      profiles.default.settings = {
+        "zen.urlbar.behavior" = "normal";
+        "zen.urlbar.replace-newtab" = false;
+        "zen.urlbar.use-single-toolbar" = false;
+        "zen.widget.mac.mono-window-controls" = false;
+      };
+    };
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
