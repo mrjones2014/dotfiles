@@ -2,6 +2,7 @@
 {
   imports = [
     ../../nixos/nixpkgs-config.nix
+    ../../nixos/_1password.nix
     (import ../../nixos/nix-conf.nix { isHomeManager = false; })
     ./settings.nix
   ];
