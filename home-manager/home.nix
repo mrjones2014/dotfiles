@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   isDarwin,
@@ -56,11 +55,10 @@
     ./components/gnome
     ./components/recyclarr.nix
     ./components/vencord.nix
-    inputs.zen-browser.homeModules.default
+    ./components/zen.nix
   ];
 
   programs = {
-    zen-browser.enable = !isDarwin;
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
