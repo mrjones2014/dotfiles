@@ -24,7 +24,7 @@
           "zen.urlbar.use-single-toolbar" = false;
           "zen.widget.mac.mono-window-controls" = false;
           "zen.welcome-screen.seen" = true;
-          "browser.toolbars.bookmarks.visibility" = "always";
+          "browser.toolbars.bookmarks.visibility" = "newtab";
           # I only want to use Kagi
           "browser.search.searchEnginesURL" = "";
         };
