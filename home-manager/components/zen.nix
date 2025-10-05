@@ -35,7 +35,7 @@
           order = [ "Kagi" ];
           engines = {
             Kagi = {
-              iconUpdateURL = "https://kagi.com/favicon.ico";
+              icon = "https://kagi.com/favicon.ico";
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = [
                 "@k"
