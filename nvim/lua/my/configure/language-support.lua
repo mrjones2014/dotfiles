@@ -55,6 +55,13 @@ return {
     -- also load on LSP attach because it has LSP fallback formatting
     event = 'LspAttach',
     opts = {
+      formatters = {
+        rustfmt = {
+          options = {
+            default_edition = '2024',
+          },
+        },
+      },
       formatters_by_ft = formatters_by_ft,
       format_after_save = function()
         if not require('my.utils.lsp').is_formatting_enabled() then
