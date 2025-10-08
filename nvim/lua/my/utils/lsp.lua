@@ -154,7 +154,12 @@ function M.apply_ui_tweaks()
   }
 
   local function diagnostic_format(diagnostic)
-    return string.format('%s %s (%s)', icon_map[diagnostic.severity], diagnostic.message, diagnostic.code)
+    return string.format(
+      '%s %s%s',
+      icon_map[diagnostic.severity],
+      diagnostic.message,
+      diagnostic.code and (' (%s)'):format(diagnostic.code) or ''
+    )
   end
 
   vim.diagnostic.config({
