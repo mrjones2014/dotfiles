@@ -41,7 +41,6 @@
         # desktop only packages
         obs-studio
         r2modman
-        openrct2
         sgdboop
       ];
   };
