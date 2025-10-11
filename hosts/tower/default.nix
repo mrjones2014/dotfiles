@@ -65,6 +65,7 @@
     wally-cli
     protonup-qt
     dolphin-emu
+    godot
     # rpcs3 # broken right now
   ];
 
