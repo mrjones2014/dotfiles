@@ -58,6 +58,7 @@ in
         enabled = true;
       }) filterLists;
       user_rules = [
+        "@@||godotengine.org^$important,document"
         "||comparative-mollusk-y0a4rcrnmuyekxc7u0ajsvh7.herokudns.com^"
         "||telemetry.affine.run^"
       ];
