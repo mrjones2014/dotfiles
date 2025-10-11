@@ -195,6 +195,7 @@
       jq
       ripgrep
       gnused
+      tree
     ]
     ++ lib.lists.optionals isLinux [ xclip ];
 
