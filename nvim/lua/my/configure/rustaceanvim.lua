@@ -1,7 +1,7 @@
 return {
   'mrcjkb/rustaceanvim',
   ft = 'rust',
-  version = '^5',
+  version = '^6',
   keys = {
     {
       '<leader>rd',
@@ -29,8 +29,8 @@ return {
         -- instead of rustaceanvim's built-in vscode settings loader
         load_vscode_settings = false,
         -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
-        settings = function(_, config)
-          return require('codesettings').with_local_settings('rust-analyzer', config)
+        settings = function(params, config)
+          return params, require('codesettings').with_local_settings('rust-analyzer', config)
         end,
         default_settings = {
           ['rust-analyzer'] = {
