@@ -22,10 +22,9 @@ with import ./tokyonight_palette.nix { inherit lib; };
         onEvent = "fish_prompt";
         onVariable = "PWD";
         body = ''
-          set -l branch (string trim $(git branch --show-current 2> /dev/null))
           set -l cwd (pwd)
           if git rev-parse --is-inside-worktree >/dev/null 2>&1
-              # just show basename if inside branch
+              # just show basename if inside a git worktree
               set cwd (basename "$cwd")
           else
               # otherwise, replace $HOME with ~ and truncate if needed
@@ -38,9 +37,6 @@ with import ./tokyonight_palette.nix { inherit lib; };
               end
           end
           set -l title "$cwd"
-          if test "$branch" != ""
-              set title "$title:$branch"
-          end
           command nohup zellij action rename-tab "$title" >/dev/null 2>&1
         '';
       };
