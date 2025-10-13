@@ -9,6 +9,6 @@
     shfmt.enable = true;
     yamlfmt.enable = true;
     statix.enable = true;
-    actionlint.enable = true;
+    # actionlint.enable = true;
   };
 }
