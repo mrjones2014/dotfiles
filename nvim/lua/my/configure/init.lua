@@ -40,6 +40,10 @@ return {
   },
   {
     'saecki/crates.nvim',
+    -- work project has big Cargo.toml files with lots of dependencies
+    -- that use `thing.path = "../../etc"` which breaks crates.nvim
+    -- and makes the buffer become unresponsive
+    enabled = not require('my.utils.vcs').is_work_repo(),
     event = { 'BufRead Cargo.toml' },
     opts = {},
   },

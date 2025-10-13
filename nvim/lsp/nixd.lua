@@ -2,6 +2,8 @@ return {
   cmd = { 'nixd' },
   filetypes = { 'nix' },
   root_markers = { 'flake.nix', 'default.nix', '.git' },
+  ---@module 'codesettings'
+  ---@type lsp.nixd
   settings = {
     nixd = {
       options = {

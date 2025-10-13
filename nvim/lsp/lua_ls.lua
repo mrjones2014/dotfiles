@@ -23,11 +23,13 @@ return {
         autoRequire = false,
       },
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
         path = {
           'lua/?.lua',
           'lua/?/init.lua',
+          'lua/?/?.lua',
+          'plugin/?.lua',
+          'ftplugin/?.lua',
         },
       },
       diagnostics = {
