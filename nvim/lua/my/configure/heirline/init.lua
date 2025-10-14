@@ -3,9 +3,23 @@ return {
     'SmiteshP/nvim-navic',
     init = function()
       require('my.utils.lsp').on_attach(function(client, bufnr)
-        if client.server_capabilities.documentSymbolProvider then
-          require('nvim-navic').attach(client, bufnr)
+        if not client.server_capabilities.documentSymbolProvider then
+          return
         end
+
+        if
+          (
+            vim.bo[bufnr].filetype == 'typescript'
+            or vim.bo[bufnr].filetype == 'typescriptreact'
+            or vim.bo[bufnr].filetype == 'javascript'
+            or vim.bo[bufnr].filetype == 'javascriptreact'
+          ) and client.name == 'graphql'
+        then
+          -- prefer attaching to ts_ls than graphql for typescript and javascript files
+          return
+        end
+
+        require('nvim-navic').attach(client, bufnr)
       end)
     end,
     config = function()
