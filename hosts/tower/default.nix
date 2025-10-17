@@ -62,8 +62,8 @@
     parsec-bin
     mullvad-vpn
     prismlauncher
-    wally-cli
     protonup-qt
+    keymapp
     dolphin-emu
     godot
     # rpcs3 # broken right now
