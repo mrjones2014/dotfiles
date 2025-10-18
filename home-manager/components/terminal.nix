@@ -40,11 +40,6 @@
         "super+q=quit"
         "super+v=paste_from_clipboard"
         "super+c=copy_to_clipboard"
-        # see ../../hosts/tower/macos-style-keymap.nix
-        # compatiblity with that for copy/paste and quit
-        "ctrl+q=quit"
-        "shift+insert=paste_from_clipboard"
-        "ctrl+insert=copy_to_clipboard"
       ];
     };
   };

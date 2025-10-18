@@ -67,7 +67,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
 
               bind "Ctrl b" { SwitchToMode "tmux"; }
 
-              bind "Super t" { ToggleFloatingPanes; }
+              bind "Alt t" { ToggleFloatingPanes; }
 
               bind "Alt n" {
                   NewTab {
