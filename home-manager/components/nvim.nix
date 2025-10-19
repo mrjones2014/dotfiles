@@ -90,6 +90,8 @@
       vscode-langservers-extracted
       copilot-language-server
       nodejs
+      llvmPackages.clang-tools
+      qmk
 
       # other utils and plugin dependencies
       gnumake
