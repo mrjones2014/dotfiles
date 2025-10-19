@@ -26,7 +26,6 @@
       upgrade = true;
     };
     casks = [
-      "espanso"
       "ghostty"
       "zen"
       "waterfox"

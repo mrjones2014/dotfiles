@@ -50,7 +50,6 @@
     ./shared.nix
     ./components/terminal.nix
     ./components/_1password-shell.nix
-    ./components/espanso.nix
     ./components/gnome
     ./components/recyclarr.nix
     ./components/vencord.nix
