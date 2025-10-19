@@ -62,7 +62,6 @@
     mullvad-vpn
     prismlauncher
     protonup-qt
-    keymapp
     dolphin-emu
     godot
     # rpcs3 # broken right now

@@ -34,7 +34,6 @@
       "alfred"
       "xcodes-app"
       "spotify"
-      "keymapp"
     ];
   };
   system.primaryUser = config.users.users.mat.name;

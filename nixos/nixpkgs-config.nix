@@ -32,7 +32,6 @@
           "steam-original"
           "steam-unwrapped"
           "parsec-bin"
-          "keymapp"
         ]
       );
   };
