@@ -62,9 +62,11 @@
     mullvad-vpn
     prismlauncher
     protonup-qt
-    dolphin-emu
     godot
-    # rpcs3 # broken right now
+
+    ## broken packages :(
+    # dolphin-emu
+    # rpcs3
   ];
 
   services = {
