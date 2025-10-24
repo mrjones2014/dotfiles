@@ -43,8 +43,8 @@ in
         ];
       };
       user = {
-        name = config.programs.git.userName;
-        email = config.programs.git.userEmail;
+        inherit (config.programs.git.settings.user) name;
+        inherit (config.programs.git.settings.user) email;
       };
       signing = {
         inherit (config.programs.git.signing) key;
