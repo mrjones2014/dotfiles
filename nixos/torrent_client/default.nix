@@ -19,6 +19,15 @@ in
     (import ./server.nix { inherit qbittorrent_port; })
     ./desktop.nix
   ];
+  boot.kernelModules = [
+    "tun"
+    "wireguard"
+    "iptables_filter"
+    "iptables_mangle"
+    "iptables_nat"
+    "nf_nat"
+    "nf_conntrack"
+  ];
   systemd.tmpfiles.rules = [
     "d ${configDir} 055 qbittorrentvpn qbittorrentvpn - -"
     "d ${configDir}/wireguard 055 qbittorrentvpn qbittorrentvpn - -"

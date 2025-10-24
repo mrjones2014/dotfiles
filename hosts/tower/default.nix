@@ -77,7 +77,11 @@
   # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
 
   # to autoload at boot:
-  boot.kernelModules = [ "gcadapter_oc" ];
+  boot.kernelModules = [
+    "gcadapter_oc"
+    "tun"
+    "wireguard"
+  ];
   # services.udev.packages = [ pkgs.dolphinEmu ];
 
   # This value determines the NixOS release from which the default
