@@ -30,6 +30,9 @@ return {
           'lua/?/?.lua',
           'plugin/?.lua',
           'ftplugin/?.lua',
+          'after/?.lua',
+          'after/?/?.lua',
+          'spec/?.lua',
         },
       },
       diagnostics = {
