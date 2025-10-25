@@ -14,6 +14,9 @@
         "zen.widget.mac.mono-window-controls" = false;
         "zen.welcome-screen.seen" = true;
         "browser.toolbars.bookmarks.visibility" = "newtab";
+        "extensions.formautofill.creditCards.enabled" = false;
+        "extensions.formautofill.addresses.enabled" = false;
+        "extensions.formautofill.available" = false;
         # I only want to use Kagi
         "browser.search.searchEnginesURL" = "";
       };
