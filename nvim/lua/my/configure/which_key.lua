@@ -62,6 +62,24 @@ return {
     spec = {
       { '<ESC>', vim.cmd.noh, desc = 'Clear highlighting on <ESC> in normal mode', hidden = true },
       {
+        '<C-v>',
+        mode = 'i',
+        function()
+          vim.cmd.normal('"+p')
+          -- place the cursor at the end of the pasted region
+          local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+          local lines = vim.split(vim.fn.getreg('+'), '\n')
+          if #lines == 1 then
+            col = col + #lines[1]
+          else
+            row = row + #lines - 1
+            col = #lines[#lines]
+          end
+          vim.api.nvim_win_set_cursor(0, { row, col })
+        end,
+        desc = 'Paste from system clipboard in insert mode',
+      },
+      {
         '<leader>jk',
         function()
           require('notify').dismiss({ silent = true, pending = true })
