@@ -63,6 +63,7 @@
           "eBay"
           "Ecosia"
           "Wikipedia (en)"
+          "Perplexity"
         ];
       };
       ExtensionSettings =
@@ -80,6 +81,14 @@
             installation_mode = "force_installed";
             default_area = "navbar"; # pinned
           };
+          "amazon@search.mozilla.org".installation_mode = "blocked";
+          "bing@search.mozilla.org".installation_mode = "blocked";
+          "ddg@search.mozilla.org".installation_mode = "blocked";
+          "ebay@search.mozilla.org".installation_mode = "blocked";
+          "ecosia@search.mozilla.org".installation_mode = "blocked";
+          "google@search.mozilla.org".installation_mode = "blocked";
+          "wikipedia@search.mozilla.org".installation_mode = "blocked";
+          "perplexity@search.mozilla.org".installation_mode = "blocked";
         };
     };
   };
