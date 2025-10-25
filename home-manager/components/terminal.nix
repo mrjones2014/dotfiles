@@ -39,7 +39,6 @@
       keybind = [
         "super+q=quit"
         "super+v=paste_from_clipboard"
-        "ctrl+v=paste_from_clipboard"
         "super+c=copy_to_clipboard"
       ];
     };
