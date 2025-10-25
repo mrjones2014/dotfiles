@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   isServer,
   ...
@@ -42,6 +43,25 @@ in
           "@-"
         ];
       };
+      # https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-13902914
+      diff.tool = "${pkgs.delta}/bin/delta";
+      ui = {
+        diff-formatter = ":git";
+        pager = [
+          "delta"
+          "--pager"
+          "less -FRX"
+        ];
+      };
+      scope = [
+        {
+          "--when.commands" = [
+            "diff"
+            "show"
+          ];
+        }
+      ];
+      "--scope.ui".pager = "delta";
       user = {
         inherit (config.programs.git.settings.user) name;
         inherit (config.programs.git.settings.user) email;
