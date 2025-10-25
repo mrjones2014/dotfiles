@@ -72,7 +72,7 @@ in
         backend = "ssh";
       }
       // lib.optionalAttrs (!isServer) {
-        backends.ssh.program = config.programs.git.extraConfig.gpg.ssh.program;
+        backends.ssh.program = config.programs.git.settings.gpg.ssh.program;
       };
     };
   };

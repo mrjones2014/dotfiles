@@ -244,11 +244,11 @@
         "tokyonight-rofi": "tokyonight-rofi"
       },
       "locked": {
-        "lastModified": 1759545159,
-        "narHash": "sha256-rEJe3e8CO5AgIigktczeYTag5Ot9w5kYxlcGYuk7gLs=",
+        "lastModified": 1761421180,
+        "narHash": "sha256-GK01kbPh1rsDEcMXcNcuh4dsTqSTrfMuYmykqQYEVYY=",
         "owner": "mrjones2014",
         "repo": "tokyonight.nix",
-        "rev": "59d22b401b235eed0341b7f3263bd8daec429428",
+        "rev": "59302ecd9a01df13c4eab0b8b09741f383f2f778",
         "type": "github"
       },
       "original": {
