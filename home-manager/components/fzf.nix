@@ -82,12 +82,23 @@ in
 
         function _project_jump_format_project
             set -l repo "$HOME/git/$argv[1]"
-            set -l branch $(git --work-tree $repo --git-dir $repo/.git branch --show-current)
+            set -l branch ""
+
+            if test -d "$repo/.jj"
+                set branch (jj -R $repo log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id_with_hidden_and_divergent_info(self), self.bookmarks())" 2>/dev/null)
+            else if test -d "$repo/.git"
+                set branch (git --work-tree $repo --git-dir $repo/.git branch --show-current 2>/dev/null)
+            end
+
             set_color --bold cyan
             echo -n "$argv[1]"
             echo -n " $(_project_jump_get_icon $repo)"
             set_color --bold f74e27
-            echo "  $branch"
+            if test -n "$branch"
+                echo "  $branch"
+            else
+                echo
+            end
         end
 
         function _project_jump_parse_project
