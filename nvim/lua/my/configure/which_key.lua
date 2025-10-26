@@ -65,19 +65,28 @@ return {
         '<C-v>',
         mode = 'i',
         function()
-          vim.cmd.normal('"+p')
-          -- place the cursor at the end of the pasted region
+          local clip = vim.fn.getreg('+')
+          local lines = vim.split(clip, '\n', { plain = true, trimempty = true })
           local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-          local lines = vim.split(vim.fn.getreg('+'), '\n')
+          local cur_line = vim.api.nvim_get_current_line()
+
           if #lines == 1 then
-            col = col + #lines[1]
+            -- Single-line paste: insert inline
+            local new_line = cur_line:sub(1, col) .. lines[1] .. cur_line:sub(col + 1)
+            vim.api.nvim_set_current_line(new_line)
+            vim.api.nvim_win_set_cursor(0, { row, col + #lines[1] })
           else
-            row = row + #lines - 1
-            col = #lines[#lines]
+            -- Multi-line paste: respect current indentation
+            local indent = cur_line:match('^%s*') or ''
+            lines[1] = cur_line:sub(1, col) .. lines[1]
+            for i = 2, #lines do
+              lines[i] = indent .. lines[i]
+            end
+            vim.api.nvim_buf_set_lines(0, row - 1, row, true, lines)
+            vim.api.nvim_win_set_cursor(0, { row + #lines - 1, #lines[#lines] })
           end
-          vim.api.nvim_win_set_cursor(0, { row, col })
         end,
-        desc = 'Paste from system clipboard in insert mode',
+        desc = 'Paste from system clipboard with indentation',
       },
       {
         '<leader>jk',
