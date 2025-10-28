@@ -52,5 +52,28 @@
       # Show all processes
       ShowCategory = 100;
     };
+    CustomUserPreferences = {
+      # Set unicode hex input as an input source
+      # so my qmk firmware can send unicode inputs
+      "com.apple.HIToolbox" = {
+        # Add Unicode Hex Input to input sources
+        AppleEnabledInputSources = [
+          {
+            "InputSourceKind" = "Keyboard Layout";
+            "KeyboardLayout Name" = "Unicode Hex Input";
+            "KeyboardLayout ID" = 0;
+          }
+        ];
+        # Optionally, select it as the active input source
+        AppleSelectedInputSources = [
+          {
+            "InputSourceKind" = "Keyboard Layout";
+            "KeyboardLayout Name" = "Unicode Hex Input";
+            "KeyboardLayout ID" = 0;
+          }
+        ];
+      };
+    };
+
   };
 }
