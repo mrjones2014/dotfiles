@@ -8,7 +8,7 @@
     enable = true;
     # Install via nix-darwin-brew on macOS; package build is broken on macOS
     # but I still want to generate the config
-    package = if isDarwin then null else inputs.zen-browser.packages.beta;
+    package = if isDarwin then null else inputs.zen-browser.packages.x86_64-linux.beta;
     profiles.default = {
       settings = {
         "zen.urlbar.behavior" = "normal";
