@@ -85,6 +85,9 @@ with import ./tokyonight_palette.nix { inherit lib; };
 
               bind "e" { EditScrollback; SwitchToMode "normal"; }
 
+              bind "h" { MoveTab "Left"; SwitchToMode "normal"; }
+              bind "l" { MoveTab "Right"; SwitchToMode "normal"; }
+
               bind "Esc" { SwitchToMode "normal"; }
 
           }
