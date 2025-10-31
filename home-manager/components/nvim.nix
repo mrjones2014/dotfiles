@@ -81,7 +81,7 @@
       lua
       shellcheck
       marksman
-      sumneko-lua-language-server
+      lua-language-server
       nodePackages_latest.typescript-language-server
       yaml-language-server
       bash-language-server
