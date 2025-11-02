@@ -16,24 +16,8 @@ let
     gtile
     quick-settings-audio-panel
     just-perfection
-    # TODO undo this when nixpkgs version is updated
-    (search-light.overrideAttrs (_: {
-      src = pkgs.fetchFromGitHub {
-        owner = "icedman";
-        repo = "search-light";
-        rev = "c05538e6bf4f52b8225a264da800af1770720059";
-        sha256 = "sha256-pLMENXul50yvdiOf03xd9hculypd4zXuMX24Yv8Tk0I=";
-      };
-    }))
-    # TODO undo this when nixpkgs version is updated
-    (quick-web-search.overrideAttrs (_: {
-      src = pkgs.fetchFromGitLab {
-        owner = "chet-buddy";
-        repo = "quick-web-search";
-        rev = "8383593630d417d675b3f4b3946c160e43ffcab5";
-        sha256 = "sha256-yi+KNo0Ap7Tm6NXPutBmtoQ5eAZLBbYGsZSEy4EpkOA=";
-      };
-    }))
+    search-light
+    quick-web-search
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
