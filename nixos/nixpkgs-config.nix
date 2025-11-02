@@ -8,14 +8,7 @@
 {
   nixpkgs = {
     overlays = [
-      (
-        final: prev:
-        (import ../pkgs {
-          inherit inputs;
-          inherit pkgs;
-          inherit (prev) system;
-        })
-      )
+      (final: prev: (import ../pkgs { inherit pkgs; }))
     ];
     config.allowUnfreePredicate =
       pkg:

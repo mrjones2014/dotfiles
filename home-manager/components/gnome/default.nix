@@ -1,6 +1,5 @@
 { isLinux, lib, ... }:
-{ }
-// lib.attrsets.optionalAttrs isLinux {
+lib.attrsets.optionalAttrs isLinux {
   imports = [ ./dconf.nix ];
   xdg.configFile = {
     # workaround for https://github.com/nix-community/home-manager/issues/3447

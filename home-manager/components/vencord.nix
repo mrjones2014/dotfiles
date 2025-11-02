@@ -4,9 +4,9 @@
   lib,
   ...
 }:
-{
+lib.optionalAttrs isLinux {
   xdg.dataFile."icons/discord.png".source = ./discord.png;
-  home.packages = lib.lists.optionals isLinux [
+  home.packages = [
     # vesktop discord client, I don't like
     # vesktop's icon, so override it
     (pkgs.vesktop.overrideAttrs (oldAttrs: {
