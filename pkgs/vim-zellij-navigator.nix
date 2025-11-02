@@ -3,10 +3,9 @@
   stdenv,
   fetchurl,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vim-zellij-navigator";
-  version = "0.2.1";
+  version = "0.3.0";
 
   src = fetchurl {
     url = "https://github.com/hiasr/vim-zellij-navigator/releases/download/${version}/vim-zellij-navigator.wasm";
