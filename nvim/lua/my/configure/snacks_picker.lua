@@ -13,7 +13,7 @@ end
 return {
   'folke/snacks.nvim',
   keys = {
-    { 'ff', pick('files', { hidden = true }), desc = 'Find files' },
+    { 'ff', pick('smart', { hidden = true }), desc = 'Find files' },
     { 'fh', pick('recent'), desc = 'Find oldfiles' },
     { 'fb', pick('buffers'), desc = 'Find buffers' },
     { 'ft', pick('grep', { hidden = true }), desc = 'Find text' },
