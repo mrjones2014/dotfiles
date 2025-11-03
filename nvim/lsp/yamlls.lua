@@ -9,7 +9,6 @@ return {
     --- autocmd's which check this capability
     client.server_capabilities.documentFormattingProvider = true
   end,
-  ---@module 'codesettings'
   ---@type lsp.yamlls
   settings = {
     redhat = {

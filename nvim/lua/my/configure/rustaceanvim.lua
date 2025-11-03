@@ -32,7 +32,6 @@ return {
         settings = function(_, config)
           return require('codesettings').with_local_settings('rust-analyzer', config)
         end,
-        ---@module 'codesettings'
         ---@type lsp.rust_analyzer
         default_settings = {
           ['rust-analyzer'] = {

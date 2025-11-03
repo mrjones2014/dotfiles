@@ -15,7 +15,6 @@ return {
     'selene.yml',
     '.git',
   },
-  ---@module 'codesettings'
   ---@type lsp.lua_ls
   settings = {
     Lua = {
