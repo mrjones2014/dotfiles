@@ -16,7 +16,7 @@ let
     }
     {
       lhs = "ctrl-f";
-      rhs = "fzf-file-widget-wrapped";
+      rhs = "fzf-oldfiles-widget";
     }
     {
       lhs = "ctrl-r";
@@ -27,6 +27,62 @@ let
       rhs = "fzf-jj-bookmarks";
     }
   ];
+  nvim_oldfiles_script = pkgs.writeText "oldfiles.lua" /* lua */ ''
+    -- Print MRU files from Neovim's ShaDa, filtered to real regular files under the current directory.
+    -- Usage:
+    --   nvim -l oldfiles.lua
+
+    local function is_regular_file(p)
+    	local st = vim.uv.fs_stat(p)
+    	return st and st.type == "file"
+    end
+
+    local function normalize(p)
+    	-- Expand ~/
+    	if p:sub(1, 2) == "~/" then
+    		p = vim.fn.expand(p)
+    	end
+    	return p
+    end
+
+    -- Get canonical CWD (so we handle symlinks)
+    local function realpath(p)
+    	return vim.uv.fs_realpath(p) or p
+    end
+
+    local cwd = realpath(".") .. "/"
+
+    local function under_cwd(p)
+    	local rp = realpath(p)
+    	return rp and rp:sub(1, #cwd) == cwd
+    end
+
+    local function relative(p)
+    	return p:gsub("^" .. vim.pesc(cwd), "")
+    end
+
+    -- Load ShaDa so v:oldfiles is populated
+    pcall(function()
+    	local shada_path = vim.fn.stdpath("state") .. "/shada/main.shada"
+    	vim.cmd("silent! rshada! " .. vim.fn.fnameescape(shada_path))
+    end)
+
+    local oldfiles = vim.v.oldfiles or {}
+    local seen = {}
+    local out = {}
+
+    for _, p in ipairs(oldfiles) do
+    	p = normalize(p)
+    	if not seen[p] and is_regular_file(p) and under_cwd(p) then
+    		out[#out + 1] = relative(p)
+    		seen[p] = true
+    	end
+    end
+
+    for i = 1, #out do
+    	io.stdout:write(out[i], "\n")
+    end
+  '';
 in
 {
   programs.fzf = {
@@ -61,8 +117,12 @@ in
         fzf-history-widget
         _prompt_move_to_bottom
       '';
-      fzf-file-widget-wrapped = ''
-        fzf-file-widget
+      fzf-oldfiles-widget = ''
+        set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
+        if test -n "$result"
+            commandline -it -- (string escape -- $result)
+        end
+        commandline -f repaint
         _prompt_move_to_bottom
       '';
       fzf-project-widget = ''
