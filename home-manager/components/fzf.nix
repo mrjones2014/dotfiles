@@ -118,7 +118,7 @@ in
         _prompt_move_to_bottom
       '';
       fzf-oldfiles-widget = ''
-        set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
+        set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview-window 'right,70%' --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
         if test -n "$result"
             commandline -it -- (string escape -- $result)
         end
