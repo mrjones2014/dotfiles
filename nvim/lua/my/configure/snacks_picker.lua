@@ -6,6 +6,13 @@ local ripgrep_ignore_file_path = (
 
 local function pick(which, opts)
   return function()
+    if vim.startswith(which, 'gh_') and vim.env.GH_TOKEN == nil then
+      local token = require('op').get_secret('op://Private/GitHub/token', 'ZE3GMX56H5CV5J5IU5PLLFG4KQ')
+      if not token then
+        error('GitHub token not found in 1Password')
+      end
+      vim.uv.os_setenv('GH_TOKEN', token)
+    end
     return require('snacks.picker')[which](opts)
   end
 end
@@ -24,6 +31,8 @@ return {
       pick('icons', { icon_sources = { 'nerd_fonts' }, confirm = { 'copy', 'close' } }),
       desc = 'Find nerdfont icons',
     },
+    { 'fgi', pick('gh_issue'), desc = 'Find GitHub issues' },
+    { 'fgp', pick('gh_pr'), desc = 'Find GitHub pull requests' },
   },
   opts = {
     styles = {
