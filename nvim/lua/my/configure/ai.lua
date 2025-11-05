@@ -1,3 +1,10 @@
+local window = require('my.utils.window')
+
+local copilot = {
+  name = 'copilot',
+  model = 'gpt-5-codex',
+}
+
 return {
   'olimorris/codecompanion.nvim',
   dependencies = {
@@ -7,8 +14,8 @@ return {
       'zbirenbaum/copilot.lua',
       event = 'LspAttach',
       cmd = 'Copilot',
-      opts = {
-        copilot_model = 'GPT-5-Codex',
+      config = {
+        copilot_model = 'gpt-5-codex',
         suggestion = {
           auto_trigger = true,
           keymap = {
@@ -54,7 +61,12 @@ return {
     {
       '<leader>af',
       function()
-        require('codecompanion').focus()
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          if vim.bo[buf].filetype == 'codecompanion' and not window.is_floating_window(win) then
+            vim.api.nvim_set_current_win(win)
+          end
+        end
       end,
       desc = 'codecompanion: focus',
     },
@@ -77,6 +89,13 @@ return {
             modes = { n = 'gX' },
           },
         },
+        adapter = copilot,
+      },
+      inline = {
+        adapter = copilot,
+      },
+      cmd = {
+        adapter = copilot,
       },
     },
   },

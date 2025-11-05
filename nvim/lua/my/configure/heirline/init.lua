@@ -69,8 +69,8 @@ return {
           shared.Align,
           sl.RecordingMacro,
           sl.CopilotStatus,
-          sl.SpellCheckToggle,
           sl.LspFormatToggle,
+          sl.SpellCheckToggle,
         },
         winbar = { ---@diagnostic disable-line:missing-fields
           shared.FileIcon('base'),

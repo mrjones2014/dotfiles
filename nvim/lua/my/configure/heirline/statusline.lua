@@ -249,34 +249,38 @@ M.Tabs = {
 }
 
 local copilot_enabled = true
+local copilot_user = nil
 M.CopilotStatus = {
   init = function(self)
-    -- don't cause copilot to load with `require` just for statusline
-    local loaded = package.loaded.copilot
-    if not loaded then
-      return
-    end
-    local auth = require('copilot.auth')
-    if not auth.is_authenticated() then
-      return
-    end
-    local info = require('copilot.auth').get_creds()
-    if not info then
-      return
-    end
-    for _, config in pairs(info) do
-      if config.githubAppId == 'Iv1.b507a08c87ecfe98' then
-        self.text = string.format('  %s ', config.user)
+    if not copilot_user then
+      -- don't cause copilot to load with `require` just for statusline
+      local loaded = package.loaded.copilot
+      if not loaded then
         return
       end
+      local auth = require('copilot.auth')
+      if not auth.is_authenticated() then
+        return
+      end
+      local info = require('copilot.auth').get_creds()
+      if not info then
+        return
+      end
+      for _, config in pairs(info) do
+        if config.githubAppId == 'Iv1.b507a08c87ecfe98' then
+          copilot_user = config.user
+          break
+        end
+      end
     end
+    self.user = copilot_user
   end,
   {
     condition = function(self)
-      return self.text ~= nil
+      return self.user ~= nil
     end,
     toggle_component(function(self)
-      return self.text
+      return string.format('  %s ', self.user)
     end, function()
       return copilot_enabled
     end, function()
