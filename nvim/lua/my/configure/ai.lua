@@ -1,8 +1,12 @@
 local window = require('my.utils.window')
 
+-- get available models with:
+-- first load codecompanion: <leader>aa to open the chat buffer
+-- dbg(vim.tbl_keys(require('codecompanion.adapters.http.copilot').schema.model:choices()))
+local copilot_model = 'claude-sonnet-4.5'
 local copilot = {
   name = 'copilot',
-  model = 'gpt-5-codex',
+  model = copilot_model,
 }
 
 return {
@@ -16,7 +20,7 @@ return {
       event = 'LspAttach',
       cmd = 'Copilot',
       config = {
-        copilot_model = 'gpt-5-codex',
+        copilot_model = copilot_model,
         suggestion = {
           auto_trigger = true,
           keymap = {
