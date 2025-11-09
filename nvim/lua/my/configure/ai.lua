@@ -14,6 +14,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'franco-ruggeri/codecompanion-spinner.nvim',
+    'ravitemer/codecompanion-history.nvim',
     { 'folke/snacks.nvim' },
     {
       'zbirenbaum/copilot.lua',
@@ -86,7 +87,25 @@ return {
     },
   },
   opts = {
-    extensions = { spinner = {} },
+    extensions = {
+      spinner = {},
+      history = {
+        picker = 'snacks',
+        expiration_days = 7,
+        continue_last_chat = true,
+        delete_on_clearing_chat = true,
+        title_generation_opts = {
+          adapter = 'copilot',
+          model = 'gpt-4o',
+        },
+        summary = {
+          generation_opts = {
+            adapter = 'copilot',
+            model = 'gpt-4o',
+          },
+        },
+      },
+    },
     strategies = {
       chat = {
         keymaps = {
