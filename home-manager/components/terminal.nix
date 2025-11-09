@@ -24,7 +24,10 @@
       font-family-italic = "Victor Mono Medium Oblique";
       font-family-bold-italic = "Victor Mono Bold Oblique";
       font-family-bold = "Victor Mono Bold";
-      font-feature = "ss02,ss06";
+      font-feature = [
+        "ss02"
+        "ss06"
+      ];
       font-size = "16";
       cursor-style = "block";
       cursor-style-blink = false;
