@@ -3,13 +3,13 @@ vim.loader.enable()
 
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
-_G.dbg = function(...)
+_G.dbg = function(...) ---@diagnostic disable-line: duplicate-set-field
   require('snacks.debug').inspect(...)
 end
 
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`,
 ---wrapped in `vim.schedule`, so you can call it from fast-events.
-_G.dbg_schedule = function(...)
+_G.dbg_schedule = function(...) ---@diagnostic disable-line: duplicate-set-field
   local args = { ... }
   vim.schedule(function()
     require('snacks.debug').inspect(unpack(args))
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd('BufRead', {
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
     if
-      string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.loop.cwd()--[[@as string]], '/nvim')
+      string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.uv.cwd()--[[@as string]], '/nvim')
     then
       vim.cmd.cd('./nvim')
     end

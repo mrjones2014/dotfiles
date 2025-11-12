@@ -3,22 +3,28 @@ local linters_by_ft = require('my.ftconfig').linters_by_ft
 local lsp_util = require('my.utils.lsp')
 lsp_util.on_attach(require('my.utils.lsp').on_attach_default)
 
--- enable all LSPs defined under lsp/
-vim.lsp.enable(vim
-  .iter(vim.api.nvim_get_runtime_file('lsp/*.lua', true))
-  :map(function(f)
-    return vim.fn.fnamemodify(f, ':t:r')
-  end)
-  :totable())
+-- wait for lazy to finish setting up runtime path before setting up LSPs
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LazyDone',
+  once = true,
+  callback = function()
+    -- enable all LSPs defined under lsp/
+    vim.lsp.enable(vim
+      .iter(vim.api.nvim_get_runtime_file('lsp/*.lua', true))
+      :map(function(f)
+        return vim.fn.fnamemodify(f, ':t:r')
+      end)
+      :totable())
 
-vim.lsp.config('*', {
-  before_init = function(params, config)
-    -- merge .vscode/settings.json into LSP settings
-    local ok, codesettings = pcall(require, 'codesettings')
-    if ok then
-      config = codesettings.with_local_settings(config.name, config)
-    end
-    return params, config
+    vim.lsp.config('*', {
+      before_init = function(_, config)
+        -- merge .vscode/settings.json into LSP settings
+        local ok, codesettings = pcall(require, 'codesettings')
+        if ok then
+          config = codesettings.with_local_settings(config.name, config)
+        end
+      end,
+    })
   end,
 })
 
