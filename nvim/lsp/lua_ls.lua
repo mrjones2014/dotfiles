@@ -1,7 +1,3 @@
-local runtime_path = vim.split(package.path, ';', {})
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
-
 ---@type vim.lsp.Config
 return {
   cmd = { 'lua-language-server' },
@@ -24,15 +20,12 @@ return {
       runtime = {
         version = 'LuaJIT',
         path = {
-          '?.lua',
           'lua/?.lua',
           'lua/?/init.lua',
-          'lua/?/?.lua',
-          'plugin/?.lua',
-          'ftplugin/?.lua',
-          'after/?.lua',
-          'after/?/?.lua',
-          'spec/?.lua',
+          '?/lua/?.lua',
+          '?/lua/?/init.lua',
+          '?/?.lua',
+          '?/init.lua',
         },
         pathStrict = false,
       },
@@ -41,10 +34,7 @@ return {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {
-          vim.env.VIMRUNTIME,
-          '${3rd}/luv/library',
-        },
+        library = vim.list_extend({ '${3rd}/luv/library' }, vim.api.nvim_list_runtime_paths()),
         -- disable annoying "do you need to configure your workspace as luassert" prompts
         checkThirdParty = false,
       },
