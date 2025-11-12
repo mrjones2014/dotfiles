@@ -19,11 +19,12 @@ return {
   settings = {
     Lua = {
       completion = {
-        autoRequire = false,
+        autoRequire = true,
       },
       runtime = {
         version = 'LuaJIT',
         path = {
+          '?.lua',
           'lua/?.lua',
           'lua/?/init.lua',
           'lua/?/?.lua',
@@ -33,6 +34,7 @@ return {
           'after/?/?.lua',
           'spec/?.lua',
         },
+        pathStrict = false,
       },
       diagnostics = {
         globals = { 'vim' },
@@ -41,6 +43,7 @@ return {
         -- Make the server aware of Neovim runtime files
         library = {
           vim.env.VIMRUNTIME,
+          '${3rd}/luv/library',
         },
         -- disable annoying "do you need to configure your workspace as luassert" prompts
         checkThirdParty = false,
