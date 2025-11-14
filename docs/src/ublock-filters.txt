@@ -2,6 +2,9 @@
 ####              YouTube               ####
 ############################################
 
+! the frosted glass header that covers the top of video thumbnails...
+www.youtube.com###frosted-glass
+
 ! AI generated video summary
 www.youtube.com###expandable-metadata>ytd-expandable-metadata-renderer[has-video-summary]
 
