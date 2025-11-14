@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   isServer,
   ...
 }:
@@ -25,6 +24,7 @@
           "steam-original"
           "steam-unwrapped"
           "parsec-bin"
+          "7zz"
         ]
       );
   };

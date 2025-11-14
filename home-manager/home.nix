@@ -42,6 +42,8 @@
         obs-studio
         r2modman
         sgdboop
+        # unfree just adds 7zip/rar support
+        nexusmods-app-unfree
       ];
   };
   xdg.enable = true;
