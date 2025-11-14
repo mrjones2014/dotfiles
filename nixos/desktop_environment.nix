@@ -1,12 +1,13 @@
 { pkgs, ... }:
 {
-  # Make electron apps detect wayland properly
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services = {
     gnome.gnome-keyring.enable = true;
-    displayManager.defaultSession = "gnome-xorg";
+    displayManager.defaultSession = "gnome";
     desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = false;
+    };
     xserver.enable = true;
   };
   environment = {
