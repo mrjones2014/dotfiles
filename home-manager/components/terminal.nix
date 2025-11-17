@@ -20,6 +20,7 @@
     clearDefaultKeybinds = true;
     settings = {
       title = "Ghostty";
+      adjust-cell-height = "-4%";
       font-family = "Victor Mono Semibold";
       font-family-italic = "Victor Mono Medium Oblique";
       font-family-bold-italic = "Victor Mono Bold Oblique";
