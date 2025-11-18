@@ -4,11 +4,11 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services = {
     gnome.gnome-keyring.enable = true;
-    displayManager.defaultSession = "gnome-xorg";
+    displayManager.defaultSession = "gnome";
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    xserver.enable = true;
   };
+  programs.xwayland.enable = true;
   environment = {
     # don't install GNOME crap like Contacts, Photos, etc.
     gnome.excludePackages = with pkgs; [
