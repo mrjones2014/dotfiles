@@ -52,6 +52,7 @@
     ./shared.nix
     ./components/terminal.nix
     ./components/_1password-shell.nix
+    ./components/gnome
     ./components/recyclarr.nix
     ./components/vencord.nix
     ./components/zen.nix

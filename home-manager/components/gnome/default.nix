@@ -1,4 +1,4 @@
-{ lib, isLinux, ... }:
+{ isLinux, lib, ... }:
 lib.attrsets.optionalAttrs isLinux {
   imports = [ ./dconf.nix ];
   xdg.configFile = {
