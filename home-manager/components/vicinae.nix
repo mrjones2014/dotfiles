@@ -1,4 +1,4 @@
-{ isLinux, ... }:
+{ isLinux, isThinkpad, ... }:
 if isLinux then
   {
     programs.vicinae = {
@@ -21,7 +21,7 @@ if isLinux then
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         name = "Vicinae";
-        binding = "<Super>space";
+        binding = if isThinkpad then "<Alt>space" else "<Super>space";
         command = "xdg-open vicinae://toggle";
       };
     };
