@@ -49,8 +49,9 @@
     };
 
     "/mnt/storage" = {
-      device = "/dev/disk/by-uuid/aad56a7c-b586-4e16-b91f-58fbd796f400";
+      device = "/dev/disk/by-uuid/4d8f9683-894f-4d13-a983-b4bb504242d4";
       fsType = "ext4";
+      options = [ "nofail" ];
     };
   };
 
@@ -66,17 +67,12 @@
       wifi.powersave = false;
     };
   };
-  # networking.interfaces.eno2.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = "performance";
-  powerManagement.powertop.enable = true;
 
-  # See: https://wiki.nixos.org/wiki/AMD_GPU#Sporadic_Crashes
   services.lact.enable = true;
   hardware = {
-    amdgpu.overdrive.enable = true;
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
     enableAllHardware = true;

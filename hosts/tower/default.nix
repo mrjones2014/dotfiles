@@ -10,9 +10,23 @@
     ../../nixos/torrent_client
     ./hardware-configuration.nix
   ];
-  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest; # ensure latest kernel for hardware support
+    loader.efi.efiSysMountPoint = "/boot";
+
+    # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
+    # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
+
+    # to autoload at boot:
+    kernelModules = [
+      "gcadapter_oc"
+      "tun"
+      "wireguard"
+    ];
+  };
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
+    firmware = [ pkgs.linux-firmware ]; # ensure latest firmware
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -74,16 +88,6 @@
     mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
-
-  # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
-  # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
-
-  # to autoload at boot:
-  boot.kernelModules = [
-    "gcadapter_oc"
-    "tun"
-    "wireguard"
-  ];
   # services.udev.packages = [ pkgs.dolphinEmu ];
 
   # This value determines the NixOS release from which the default
