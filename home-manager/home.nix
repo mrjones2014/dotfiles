@@ -35,6 +35,7 @@
         vlc
         parsec-bin
         ungoogled-chromium
+        vesktop
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
@@ -42,8 +43,6 @@
         obs-studio
         r2modman
         sgdboop
-        # unfree just adds 7zip/rar support
-        nexusmods-app-unfree
       ];
   };
   xdg.enable = true;
@@ -54,7 +53,7 @@
     ./components/_1password-shell.nix
     ./components/gnome
     ./components/recyclarr.nix
-    ./components/vencord.nix
+    ./components/vicinae.nix
     ./components/zen.nix
   ];
 
