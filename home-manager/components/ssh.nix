@@ -14,12 +14,15 @@ in
   home.sessionVariables = { } // lib.optionalAttrs (!isServer) { SSH_AUTH_SOCK = sshAuthSock; };
   programs.ssh = {
     enable = true;
-    matchBlocks."*" = {
-      forwardAgent = true;
-    }
-    // lib.optionalAttrs (!isServer) {
-      # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
-      extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
+    matchBlocks = {
+      "*" = {
+        forwardAgent = true;
+      }
+      // lib.optionalAttrs (!isServer) {
+        # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
+        extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
+      };
+      "gitlab.1password.io".port = 2227;
     };
   };
 }
