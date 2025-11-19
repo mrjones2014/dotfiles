@@ -12,7 +12,7 @@ let
   gnomeExtensions = with pkgs.gnomeExtensions; [
     user-themes
     dash-to-dock
-    tray-icons-reloaded
+    appindicator
     gtile
     quick-settings-audio-panel
     just-perfection
