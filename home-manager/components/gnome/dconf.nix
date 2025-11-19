@@ -16,7 +16,6 @@ let
     gtile
     quick-settings-audio-panel
     just-perfection
-    quick-web-search
     vicinae
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
@@ -109,7 +108,6 @@ in
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
     "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
-    "org/gnome/shell/extensions/quickwebsearch".search-engine = 5; # Kagi
     "org/gnome/mutter".overlay-key = "F11";
     "org/gnome/mutter/keybindings" = {
       switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
