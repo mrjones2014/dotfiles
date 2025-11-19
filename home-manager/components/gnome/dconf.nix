@@ -6,8 +6,8 @@
 }:
 let
   wallpaperImg = pkgs.fetchurl {
-    url = "https://w.wallhaven.cc/full/z8/wallhaven-z8g6wv.jpg";
-    hash = "sha256-AJLXmM86rnuoT0I93ewFocxFKwikIOt1h+JDOmWzQzg=";
+    url = "https://media.githubusercontent.com/media/pop-os/cosmic-wallpapers/refs/heads/master/original/orion_nebula_nasa_heic0601a.jpg";
+    hash = "sha256-dQD3AvBIjUqN8sWr63ypEHp8p5mOBEFyfLr3lGWwI4g=";
   };
   gnomeExtensions = with pkgs.gnomeExtensions; [
     user-themes
