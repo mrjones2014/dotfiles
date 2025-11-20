@@ -4,6 +4,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight-nix.url = "github:mrjones2014/tokyonight.nix";
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     nix-auto-follow = {
       url = "github:fzakaria/nix-auto-follow";
       inputs.nixpkgs.follows = "nixpkgs";

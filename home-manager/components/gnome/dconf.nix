@@ -115,5 +115,22 @@ in
       switch-input-source = [ ];
       switch-input-source-backward = [ ];
     };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Vicinae";
+      binding = if isThinkpad then "<Alt>space" else "<Super>space";
+      command = "xdg-open vicinae://toggle";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "1Password Quick Access";
+      binding = "<Shift><Control>space";
+      command = "1password --quick-access";
+    };
   };
 }

@@ -7,7 +7,7 @@
     ../../nixos/nixpkgs-config.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
-    ../../nixos/torrent_client
+    ../../nixos/qbittorrent.nix
     ./hardware-configuration.nix
   ];
   boot = {
@@ -16,13 +16,6 @@
 
     # for dolphin: https://nixos.wiki/wiki/Dolphin_Emulator
     # boot.extraModulePackages = [ config.boot.kernelPackages.gcadapter-oc-kmod ];
-
-    # to autoload at boot:
-    kernelModules = [
-      "gcadapter_oc"
-      "tun"
-      "wireguard"
-    ];
   };
   powerManagement.cpuFreqGovernor = "performance";
   hardware = {
