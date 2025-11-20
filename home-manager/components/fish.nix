@@ -37,8 +37,8 @@
         ":vsp" = "zellij action new-pane --direction right";
         ":sp" = "zellij action new-pane --direction down";
 
-        copy = if isDarwin then "pbcopy" else "xclip -selection clipboard";
-        paste = if isDarwin then "pbpaste" else "xlip -o -selection clipboard";
+        copy = if isDarwin then "pbcopy" else "wl-copy";
+        paste = if isDarwin then "pbpaste" else "wl-paste";
         cat = "bat";
         "!!" = "eval \\$history[1]";
         clear = "clear && _prompt_move_to_bottom";
@@ -197,7 +197,7 @@
       gnused
       tree
     ]
-    ++ lib.lists.optionals isLinux [ xclip ];
+    ++ lib.lists.optionals isLinux [ wl-clipboard ];
 
   xdg.configFile."litecli/config".text = with import ./tokyonight_palette.nix { inherit lib; }; ''
     [main]
