@@ -22,6 +22,11 @@ let
         default = false;
         description = "Whether to allow large file uploads for this subdomain.";
       };
+      address = lib.mkOption {
+        type = lib.types.str;
+        default = "127.0.0.1";
+        description = "Address to proxy to (default: 127.0.0.1)";
+      };
     };
   };
 
@@ -84,7 +89,7 @@ in
             forceSSL = true;
             useACMEHost = "mjones.network";
             locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString cfg.${subdomain}.port}";
+              proxyPass = "http://${cfg.${subdomain}.address}:${toString cfg.${subdomain}.port}";
               proxyWebsockets = true;
               extraConfig =
                 (lib.optionalString cfg.${subdomain}.useLongerTimeout ''

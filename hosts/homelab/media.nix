@@ -4,7 +4,7 @@ let
   huntarr_data = "/var/lib/huntarr";
 in
 {
-  imports = [ ../../nixos/torrent_client ];
+  imports = [ ../../nixos/qbittorrent.nix ];
   services.nginx.subdomains = {
     # jellyfin doesn't let you configure port via Nix, so just use the default value here
     # see: https://jellyfin.org/docs/general/networking/index.html
