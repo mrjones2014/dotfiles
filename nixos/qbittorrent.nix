@@ -1,3 +1,11 @@
+# verify that qbittorrent is running inside the network namespace with
+#
+# ps aux | grep qbittorrent # find the PID of qbittorrent
+# sudo ip netns identify <PID> # it should output qbt-wg
+#
+# verify that the network namespace is behind the VPN with
+#
+# sudo ip netns exec qbt-wg curl https://am.i.mullvad.net/connected
 {
   config,
   lib,
