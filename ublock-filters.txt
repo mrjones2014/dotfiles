@@ -204,3 +204,10 @@ discord.com##li[role="listitem"]:has-text("Discord's Birthday")
 ! Block "Start an Activity" button
 discord.com##button[aria-label="Start an Activity"]
 
+############################################
+####           Self Hosted              ####
+############################################
+
+## Allow my own self hosted things to be iframe'd into each other
+## e.g. for homarr dashboard
+@@||mjones.network^$third-party
