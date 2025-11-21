@@ -71,13 +71,13 @@ in
       vpnNamespace = network_namespace;
     };
   }
-  (lib.mkIf isServer {
+  (lib.optionalAttrs isServer {
     services.nginx.subdomains.qbittorrent = {
       address = config.vpnNamespaces.${network_namespace}.namespaceAddress;
       port = qbittorrent_port;
     };
   })
-  (lib.mkIf (!isServer) {
+  (lib.optionalAttrs (!isServer) {
     networking.hosts."${config.vpnNamespaces.${network_namespace}.namespaceAddress}" = [
       "qbittorrent.lan"
     ];
