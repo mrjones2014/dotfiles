@@ -63,9 +63,6 @@ in
           TempPathEnabled = true;
           AnonymousModeEnabled = true;
           GlobalMaxSeedingMinutes = if isServer then -1 else 0;
-        }
-        // lib.optionalAttrs isServer {
-          TorrentExportDirectory = "${data_dir}/torrents";
         };
       };
     };
