@@ -16,7 +16,6 @@ let
     "secrets/cloudflare_certbot_token.age"
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
-    "secrets/docmost_env.age"
     "secrets/paperless_backups_1password_token_env.age"
     "secrets/cross_seed_cfg.age"
   ];

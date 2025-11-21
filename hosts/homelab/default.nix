@@ -23,7 +23,6 @@
     ./media.nix
     ./nas.nix
     ./observability.nix
-    ./docmost.nix
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix
