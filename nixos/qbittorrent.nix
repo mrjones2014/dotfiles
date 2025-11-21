@@ -66,6 +66,14 @@ in
         };
       };
     };
+    assertions = [
+      {
+        # do not let qbittorrent run if we aren't sure we've quarantined it to the network namespace
+        # that is running behind the VPN
+        assertion = config.systemd.services ? qbittorrent;
+        message = "systemd service 'qbittorrent' not found - the qbittorrent service name may have changed";
+      }
+    ];
     systemd.services.qbittorrent.vpnConfinement = {
       enable = true;
       vpnNamespace = network_namespace;
