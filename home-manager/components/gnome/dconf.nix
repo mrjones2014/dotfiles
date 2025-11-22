@@ -39,10 +39,10 @@ in
         "spotify.desktop"
         "zen-beta.desktop"
         "com.mitchellh.ghostty.desktop"
-        "standard-notes.desktop"
         "1password.desktop"
         "signal.desktop"
         "vesktop.desktop"
+        "proton-mail.desktop"
       ]
       ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
       inherit enabled-extensions;

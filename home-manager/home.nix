@@ -36,6 +36,7 @@
         parsec-bin
         ungoogled-chromium
         vesktop
+        protonmail-desktop
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
