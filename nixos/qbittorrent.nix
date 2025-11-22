@@ -57,13 +57,20 @@ in
           # nix run git+https://codeberg.org/feathecutie/qbittorrent_password -- -p [password here]
           Password_PBKDF2 = "@ByteArray(ayWHE7QQHrTEJ+yPm1ymsA==:uyzO//xbRfCTABjdHl9L74Dz4rXFAW60iHxp3GnFVUtwIWDVanKj+yRO3QWEfe54A+3SI/SuTmdEVwYfI1vE2A==)";
         };
-        BitTorrent.Session = {
-          DefaultSavePath = "${data_dir}/media";
-          TempPath = "${data_dir}/incomplete";
-          TempPathEnabled = true;
-          AnonymousModeEnabled = true;
-          GlobalMaxSeedingMinutes = if isServer then -1 else 0;
-        };
+        BitTorrent.Session = lib.mkMerge [
+          {
+            DefaultSavePath = "${data_dir}/media";
+            TempPath = "${data_dir}/incomplete";
+            TempPathEnabled = true;
+            AnonymousModeEnabled = true;
+            GlobalMaxSeedingMinutes = if isServer then -1 else 0;
+          }
+          (lib.optionalAttrs isServer {
+            MaxActiveTorrents = -1;
+            MaxActiveDownloads = 8;
+            MaxActiveUploads = -1;
+          })
+        ];
       };
     };
     assertions = [
