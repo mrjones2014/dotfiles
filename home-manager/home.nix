@@ -34,7 +34,10 @@
         signal-desktop
         vlc
         parsec-bin
-        ungoogled-chromium
+        (ungoogled-chromium.override {
+          # Crashes on native wayland, use x11 backend
+          commandLineArgs = [ "--ozone-platform=x11" ];
+        })
         vesktop
         protonmail-desktop
       ]

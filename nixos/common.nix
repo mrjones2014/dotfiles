@@ -1,9 +1,13 @@
 { pkgs, ... }:
 {
   imports = [ (import ../nixos/nix-conf.nix { isHomeManager = false; }) ];
-
-  environment.systemPackages = [ pkgs.mullvad-vpn ];
-  environment.variables.PAGER = "less -FRX";
+  environment = {
+    systemPackages = [ pkgs.mullvad-vpn ];
+    variables = {
+      PAGER = "less -FRX";
+      NIXOS_OZONE_WL = "1";
+    };
+  };
 
   nix.optimise.automatic = true;
 
