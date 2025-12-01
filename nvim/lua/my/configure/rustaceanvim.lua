@@ -29,8 +29,8 @@ return {
         -- instead of rustaceanvim's built-in vscode settings loader
         load_vscode_settings = false,
         -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
-        settings = function(_, config)
-          return require('codesettings').with_local_settings('rust-analyzer', config)
+        settings = function(_, settings)
+          return require('codesettings').with_local_settings('rust-analyzer', { settings = settings })
         end,
         ---@type lsp.rust_analyzer
         default_settings = {
