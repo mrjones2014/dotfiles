@@ -17,6 +17,7 @@ let
     quick-settings-audio-panel
     just-perfection
     vicinae
+    smart-home
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
