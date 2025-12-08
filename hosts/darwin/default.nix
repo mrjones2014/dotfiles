@@ -33,6 +33,7 @@
       "alfred"
       "xcodes-app"
       "spotify"
+      "docker-desktop"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
