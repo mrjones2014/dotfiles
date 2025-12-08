@@ -20,6 +20,7 @@ return {
     },
   },
   cmd = {
+    'DB',
     'DBUI',
     'DBUIToggle',
     'DBUIAddConnection',
