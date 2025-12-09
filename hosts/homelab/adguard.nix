@@ -61,6 +61,8 @@ in
         "@@||godotengine.org^$important,document"
         "||comparative-mollusk-y0a4rcrnmuyekxc7u0ajsvh7.herokudns.com^"
         "||telemetry.affine.run^"
+        "||data.1passwordservices.com^"
+        "||telemetry.1passwordservices.com^"
       ];
     };
   };
