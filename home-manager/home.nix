@@ -39,7 +39,6 @@
           commandLineArgs = [ "--ozone-platform=x11" ];
         })
         vesktop
-        protonmail-desktop
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [

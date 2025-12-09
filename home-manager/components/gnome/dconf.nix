@@ -43,7 +43,6 @@ in
         "1password.desktop"
         "signal.desktop"
         "vesktop.desktop"
-        "proton-mail.desktop"
       ]
       ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
       inherit enabled-extensions;
