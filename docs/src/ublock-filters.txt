@@ -205,6 +205,16 @@ discord.com##li[role="listitem"]:has-text("Discord's Birthday")
 discord.com##button[aria-label="Start an Activity"]
 
 ############################################
+####           Wikipedia                ####
+############################################
+
+wikipedia.org##.nag-trigger
+wikipedia.org###centralNotice
+wikipedia.org##[id$=“banner-nag”]
+wikipedia.org##.cn-fundraising
+wikipedia.org###frb-inline
+
+############################################
 ####           Self Hosted              ####
 ############################################
 
