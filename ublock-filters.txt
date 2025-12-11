@@ -212,6 +212,7 @@ wikipedia.org##.nag-trigger
 wikipedia.org###centralNotice
 wikipedia.org##[id$=“banner-nag”]
 wikipedia.org##.cn-fundraising
+wikipedia.org###frb-inline
 
 ############################################
 ####           Self Hosted              ####
