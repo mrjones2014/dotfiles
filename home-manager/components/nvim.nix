@@ -106,6 +106,7 @@
       mariadb
       imagemagick
       jq
+      yq-go
       openssl
       curl
     ];
