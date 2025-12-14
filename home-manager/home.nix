@@ -46,6 +46,7 @@
         obs-studio
         r2modman
         sgdboop
+        cura-appimage
       ];
   };
   xdg.enable = true;
