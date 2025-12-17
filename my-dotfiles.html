@@ -183,7 +183,8 @@ jj git init --colocate # if you use Jujutsu
 <p>If you're installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.</p>
-<p>Make sure to set up full disk encryption.</p>
+<p>Make sure to set up full disk encryption, and update the <code>fileSystems</code> options for the disks that are on your machine,
+and <code>hardware-configuration.nix</code> as needed.</p>
 <p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower</code> (replacing <code>.#tower</code> with your desired flake output target).
 After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
 <h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
