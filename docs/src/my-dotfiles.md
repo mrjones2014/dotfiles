@@ -14,7 +14,8 @@ If you're installing on a server, see the [NixOS manual](https://nixos.org/manua
 Once you've got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we'll be installing GNOME anyway.
 
-Make sure to set up full disk encryption.
+Make sure to set up full disk encryption, and update the `fileSystems` options for the disks that are on your machine,
+and `hardware-configuration.nix` as needed.
 
 Simply run `NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower` (replacing `.#tower` with your desired flake output target).
 After the first time, you can just run `sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#` (or the `nix-apply` shell alias).
