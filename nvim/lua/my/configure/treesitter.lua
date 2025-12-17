@@ -58,7 +58,6 @@ return {
       end,
       opts = {},
     },
-    'andymass/vim-matchup',
     {
       'andymass/vim-matchup',
       init = function()
