@@ -56,7 +56,6 @@ return {
         },
       },
     },
-    config = function(plug)
     config = function()
       -- if Neovim is crashing, it might be due to corrupted parsers;
       -- try `:TSUninstall all` then restart nvim.
@@ -71,6 +70,8 @@ return {
           local lang = vim.treesitter.language.get_lang(ft)
           if lang and vim.treesitter.language.add(lang) then
             vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+            vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.wo[0][0].foldmethod = 'expr'
             vim.treesitter.start(ev.buf, lang)
           end
         end,
