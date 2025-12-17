@@ -25,8 +25,6 @@ return {
           keymap = {
             accept = '<C-CR>',
             accept_line = '<C-t>',
-            next = '<C-n>',
-            prev = '<C-p>',
             dismiss = '<C-d>',
           },
         },
