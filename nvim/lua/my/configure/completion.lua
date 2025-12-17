@@ -6,6 +6,7 @@ return {
     'folke/lazydev.nvim',
   },
   event = { 'BufReadPre', 'BufNewFile' },
+  ---@type blink.cmp.Config
   opts = {
     snippets = { preset = 'luasnip' },
     signature = { enabled = true },
@@ -40,9 +41,10 @@ return {
       },
     },
     sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
         minifiles = {},
+        lua = { inherit_defaults = true, 'lazydev' },
       },
       providers = {
         lazydev = {
