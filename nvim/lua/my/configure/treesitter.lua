@@ -26,32 +26,7 @@ return {
       end
     end,
     dependencies = {
-      {
-        'hiphish/rainbow-delimiters.nvim',
-        config = function()
-          local rainbow = require('rainbow-delimiters')
-          vim.g.rainbow_delimiters = {
-            strategy = {
-              [''] = rainbow.strategy['global'],
-              vim = rainbow.strategy['local'],
-            },
-            query = {
-              [''] = 'rainbow-delimiters',
-              lua = 'rainbow-blocks',
-              html = 'rainbow-tags',
-            },
-            highlight = {
-              'RainbowDelimiterRed',
-              'RainbowDelimiterYellow',
-              'RainbowDelimiterBlue',
-              'RainbowDelimiterOrange',
-              'RainbowDelimiterGreen',
-              'RainbowDelimiterViolet',
-              'RainbowDelimiterCyan',
-            },
-          }
-        end,
-      },
+      'hiphish/rainbow-delimiters.nvim',
       {
         'JoosepAlviste/nvim-ts-context-commentstring',
         init = function()
