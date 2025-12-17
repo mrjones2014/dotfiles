@@ -63,6 +63,8 @@ return {
         error('tree-sitter CLI is not installed!')
       end
       require('nvim-treesitter').install(require('my.ftconfig').treesitter_parsers)
+      -- don't fold anything by default
+      vim.opt.foldlevelstart = 99
       vim.api.nvim_create_autocmd('FileType', {
         pattern = '*',
         callback = function(ev)
