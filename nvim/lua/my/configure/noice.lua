@@ -3,6 +3,7 @@ return {
   dependencies = {
     'rcarriga/nvim-notify',
     'MunifTanjim/nui.nvim',
+    'nvim-treesitter/nvim-treesitter',
   },
   event = 'VeryLazy',
   opts = {
