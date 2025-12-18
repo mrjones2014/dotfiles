@@ -61,26 +61,14 @@ return {
     },
   },
   {
-    'sindrets/diffview.nvim',
-    cmd = {
-      'DiffviewLog',
-      'DiffviewOpen',
-      'DiffviewClose',
-      'DiffviewRefresh',
-      'DiffviewFocusFiles',
-      'DiffviewFileHistory',
-      'DiffviewToggleFiles',
-    },
-    opts = {
-      enhanced_diff_hl = true,
-      view = {
-        file_panel = {
-          win_config = {
-            position = 'right',
-          },
-        },
-      },
+    'esmuellert/vscode-diff.nvim',
+    branch = 'next',
+    cmd = { 'CodeDiff' },
+    keys = {
+      { '<leader>ct', desc = 'Choose theirs' },
+      { '<leader>cb', desc = 'Choose both' },
+      { '<leader>co', desc = 'Choose ours' },
+      { '<leader>cx', desc = 'Choose none' },
     },
   },
-  { 'NicolasGB/jj.nvim', cmd = 'J', opts = {} },
 }
