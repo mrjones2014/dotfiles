@@ -25,6 +25,7 @@
           "steam-unwrapped"
           "parsec-bin"
           "7zz"
+          "discord"
         ]
       );
   };

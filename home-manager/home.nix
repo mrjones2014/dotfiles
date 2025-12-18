@@ -38,7 +38,10 @@
           # Crashes on native wayland, use x11 backend
           commandLineArgs = [ "--ozone-platform=x11" ];
         })
-        vesktop
+        (discord.override {
+          withOpenASAR = true;
+          withVencord = true;
+        })
       ]
       ++ lib.lists.optionals isThinkpad [ ]
       ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
