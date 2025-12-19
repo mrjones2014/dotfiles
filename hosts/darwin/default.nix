@@ -34,6 +34,7 @@
       "xcodes-app"
       "spotify"
       "docker-desktop"
+      "home-assistant"
     ];
   };
   system.primaryUser = config.users.users.mat.name;
