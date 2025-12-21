@@ -47,12 +47,6 @@
         "dmask=0077"
       ];
     };
-
-    "/mnt/storage" = {
-      device = "/dev/disk/by-uuid/4d8f9683-894f-4d13-a983-b4bb504242d4";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
   };
 
   swapDevices = [ ];
