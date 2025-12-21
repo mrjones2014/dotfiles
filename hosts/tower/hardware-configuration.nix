@@ -47,6 +47,14 @@
         "dmask=0077"
       ];
     };
+    "/mnt/storage" = {
+      device = "/dev/disk/by-partlabel/storage";
+      fsType = "ext4";
+      options = [
+        "nofail"
+        "x-systemd.device-timeout=5s"
+      ];
+    };
   };
 
   swapDevices = [ ];
