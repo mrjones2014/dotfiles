@@ -14,9 +14,12 @@ in
   home.sessionVariables = { } // lib.optionalAttrs (!isServer) { SSH_AUTH_SOCK = sshAuthSock; };
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false; # defaults are going away, this is suggested by a build warning
     matchBlocks = {
       "*" = {
         forwardAgent = true;
+        addKeysToAgent = "no";
+        compression = false;
       }
       // lib.optionalAttrs (!isServer) {
         # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
