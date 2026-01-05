@@ -52,6 +52,7 @@ M.config = {
   graphql = {
     treesitter = { 'graphql', 'http' },
   },
+  toml = {},
 }
 
 M.filetypes = vim.tbl_keys(M.config)
