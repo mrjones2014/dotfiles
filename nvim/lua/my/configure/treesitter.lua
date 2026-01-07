@@ -58,7 +58,7 @@ return {
     },
     config = function()
       -- if Neovim is crashing, it might be due to corrupted parsers;
-      -- try `:TSUninstall all` then restart nvim.
+      -- uninstall via `nvim +'TSUninstall all'` then restart nvim.
       if vim.fn.executable('tree-sitter') ~= 1 then
         error('tree-sitter CLI is not installed!')
       end
