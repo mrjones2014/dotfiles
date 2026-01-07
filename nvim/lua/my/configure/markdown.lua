@@ -2,7 +2,6 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', branch = 'main' },
-    opts = { file_types = { 'markdown', 'codecompanion', 'codesettings-output' } },
     ft = { 'markdown', 'codecompanion', 'codesettings-output' },
   },
   {
