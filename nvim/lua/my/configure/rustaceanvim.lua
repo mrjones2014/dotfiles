@@ -1,7 +1,7 @@
 return {
   'mrcjkb/rustaceanvim',
   ft = 'rust',
-  version = '^6',
+  version = '^7',
   keys = {
     {
       '<leader>rd',
@@ -25,13 +25,9 @@ return {
       server = {
         cmd = { vim.env.NVIM_RUST_ANALYZER },
         -- I want VS Code settings to override my settings,
-        -- not the other way around, so use codesettings.nvim
+        -- not the other way around, so rely on codesettings.nvim
         -- instead of rustaceanvim's built-in vscode settings loader
         load_vscode_settings = false,
-        -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
-        settings = function(_, settings)
-          return require('codesettings').with_local_settings('rust-analyzer', { settings = settings }).settings
-        end,
         ---@type lsp.rust_analyzer
         default_settings = {
           ['rust-analyzer'] = {
