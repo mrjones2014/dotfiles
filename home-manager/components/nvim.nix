@@ -62,7 +62,7 @@
 
       # formatters and linters
       eslint_d
-      nixfmt-rfc-style
+      nixfmt
       prettierd
       rustfmt
       selene

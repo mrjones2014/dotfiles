@@ -191,7 +191,6 @@
       nix-output-monitor
       tealdeer
       tokei
-      cachix
       jq
       ripgrep
       gnused
