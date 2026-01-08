@@ -32,7 +32,6 @@
       ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
         signal-desktop
-        vlc
         parsec-bin
         (ungoogled-chromium.override {
           # Crashes on native wayland, use x11 backend
