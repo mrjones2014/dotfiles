@@ -61,54 +61,54 @@
       lldb # comes with lldb-vscode
 
       # formatters and linters
-      nixfmt-rfc-style
-      rustfmt
-      shfmt
-      stylua
-      statix
-      selene
-      prettierd
       eslint_d
+      nixfmt-rfc-style
+      prettierd
+      rustfmt
+      selene
+      shfmt
+      statix
+      stylua
       yamlfmt
 
       # LSP servers
-      nixd
-      nil
-      rust-analyzer
-      cargo # sometimes required for rust-analyzer to work
-      taplo
-      gopls
-      lua
-      shellcheck
-      marksman
-      lua-language-server
-      nodePackages_latest.typescript-language-server
-      yaml-language-server
       bash-language-server
-      graphql-language-service-cli
-      # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
-      vscode-langservers-extracted
+      cargo # sometimes required for rust-analyzer to work
       copilot-language-server
-      nodejs
+      gopls
+      graphql-language-service-cli
+      just-lsp
       llvmPackages.clang-tools
+      lua
+      lua-language-server
+      marksman
+      nil
+      nixd
+      nodePackages_latest.typescript-language-server
+      nodejs
+      rust-analyzer
+      shellcheck
+      taplo
+      vscode-langservers-extracted # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
+      yaml-language-server
 
       # other utils and plugin dependencies
-      gnumake
-      ripgrep
-      fd
-      sqlite
-      lemmy-help
-      fzf
       cargo
       cargo-nextest
       clippy
+      curl
+      fd
+      fzf
       glow
-      mariadb
+      gnumake
       imagemagick
       jq
-      yq-go
+      lemmy-help
+      mariadb
       openssl
-      curl
+      ripgrep
+      sqlite
+      yq-go
     ];
   };
 }
