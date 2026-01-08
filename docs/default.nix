@@ -15,6 +15,6 @@ pkgs.stdenv.mkDerivation {
   buildPhase = ''
     mkdir $out
     mdbook build -d $out
-    rm $out/highlight.js && cp ${highlightJsNix}/highlight.js $out/highlight.js
+    cp ${highlightJsNix}/highlight.js "$(find $out -name 'highlight-*.js')"
   '';
 }
