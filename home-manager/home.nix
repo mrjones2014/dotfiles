@@ -47,7 +47,7 @@
         # desktop only packages
         obs-studio
         r2modman
-        sgdboop
+        # sgdboop
         cura-appimage
       ];
   };
