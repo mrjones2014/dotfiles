@@ -55,10 +55,11 @@
 
   imports = [
     ./shared.nix
-    ./components/terminal.nix
     ./components/_1password-shell.nix
     ./components/gnome
+    ./components/opencode.nix
     ./components/recyclarr.nix
+    ./components/terminal.nix
     ./components/vicinae.nix
     ./components/zen.nix
   ];
