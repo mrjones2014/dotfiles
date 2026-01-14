@@ -30,20 +30,13 @@ return {
       'folke/snacks.nvim',
     },
     init = function()
-      vim.api.nvim_create_autocmd('BufWinEnter', {
-        callback = function()
-          if vim.bo.ft == 'opencode' or vim.bo.ft == 'opencode_output' then
-            vim.api.nvim_set_option_value('wrap', true, { win = 0 })
-            vim.api.nvim_set_option_value('linebreak', true, { win = 0 })
-          else
-            vim.api.nvim_set_option_value('wrap', false, { win = 0 })
-            vim.api.nvim_set_option_value('linebreak', false, { win = 0 })
-          end
-        end,
-      })
+      vim.treesitter.language.register('markdown', 'opencode')
     end,
     opts = {
       default_mode = 'plan',
+      ui = {
+        input = { text = { wrap = true } },
+      },
       keymap = {
         input_window = {
           -- only submit with enter in normal mode, not insert mode
