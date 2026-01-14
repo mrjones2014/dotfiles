@@ -45,8 +45,18 @@ return {
     opts = {
       default_mode = 'plan',
       keymap = {
-        -- only submit with enter in normal mode, not insert mode
-        ['<cr>'] = { 'submit_input_prompt', modes = { 'n' } },
+        input_window = {
+          -- only submit with enter in normal mode, not insert mode
+          ['<cr>'] = { 'submit_input_prompt', modes = { 'n' } },
+          -- don't close the window on `<esc>`,
+          -- too easily to close accidentally when trying to exit insert mode
+          ['<esc>'] = false,
+        },
+        output_window = {
+          -- don't close the window on `<esc>`,
+          -- too easily to close accidentally when trying to exit insert mode
+          ['<esc>'] = false,
+        },
       },
     },
   },
