@@ -2,23 +2,6 @@ return {
   'mrcjkb/rustaceanvim',
   ft = 'rust',
   version = '^7',
-  keys = {
-    {
-      '<leader>rd',
-      function()
-        vim.cmd.RustLsp('relatedDiagnostics')
-      end,
-      desc = 'Open related diagnostics',
-    },
-    {
-      '<leader>oc',
-      function()
-        vim.cmd.vsp()
-        vim.cmd.RustLsp('openCargo')
-      end,
-      desc = 'Open Cargo.toml in vert split',
-    },
-  },
   dependencies = { 'mrjones2014/codesettings.nvim' },
   init = function()
     vim.g.rustaceanvim = {
@@ -28,6 +11,25 @@ return {
         -- not the other way around, so rely on codesettings.nvim
         -- instead of rustaceanvim's built-in vscode settings loader
         load_vscode_settings = false,
+        on_attach = function()
+          require('which-key').add({
+            {
+              '<leader>rd',
+              function()
+                vim.cmd.RustLsp('relatedDiagnostics')
+              end,
+              desc = 'Open related diagnostics',
+            },
+            {
+              '<leader>oc',
+              function()
+                vim.cmd.vsp()
+                vim.cmd.RustLsp('openCargo')
+              end,
+              desc = 'Open Cargo.toml in vert split',
+            },
+          })
+        end,
         ---@type lsp.rust_analyzer
         default_settings = {
           ['rust-analyzer'] = {
