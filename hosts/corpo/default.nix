@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../../nix-darwin/common.nix ];
   networking.hostName = "corpo";
   users.users.mat = {
     name = "mat.jones"; # username is set by MDM on work mac :/

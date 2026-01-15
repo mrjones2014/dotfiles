@@ -69,6 +69,7 @@ rec {
       inherit specialArgs;
       modules = [
         ../hosts/${name}
+        ../nix-darwin/common.nix
         home-manager.darwinModules.default
         {
           home-manager = {

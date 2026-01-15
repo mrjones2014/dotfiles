@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../../nix-darwin/common.nix ];
   networking.hostName = "nomad";
   users.users.mat = {
     name = "mat";

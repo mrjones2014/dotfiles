@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/hiasr/vim-zellij-navigator/releases/download/${version}/vim-zellij-navigator.wasm";
-    sha256 = "sha256-wpIxPkmVpoAgOsdQKYuipSlDAbsD3/n6tTuOEriJHn0=";
+    sha256 = "sha256-d+Wi9i98GmmMryV0ST1ddVh+D9h3z7o0xIyvcxwkxY0=";
   };
 
   dontUnpack = true;

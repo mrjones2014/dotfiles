@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../nixos/nixpkgs-config.nix
@@ -9,9 +9,11 @@
   nix.optimise.automatic = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
   programs.fish.enable = true;
-  environment.shells = [ pkgs.fish ];
-  environment.variables.HOMEBREW_NO_ANALYTICS = "1";
-  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment = {
+    shells = [ pkgs.fish ];
+    variables.HOMEBREW_NO_ANALYTICS = "1";
+    systemPath = [ "/opt/homebrew/bin" ];
+  };
   programs._1password.enable = true;
   homebrew = {
     enable = true;
