@@ -14,6 +14,7 @@ rec {
       isDarwin = false;
       isThinkpad = false;
       isLinux = false;
+      isWorkMac = false;
     }
     // overrides;
 
@@ -22,7 +23,7 @@ rec {
       name,
       isServer ? false,
       isThinkpad ? false,
-      homePath,
+      homePath ? ../home-manager/home.nix,
     }:
     let
       specialArgs = mkSpecialArgs {
@@ -53,10 +54,15 @@ rec {
       ];
     };
   mkDarwinHost =
-    { name, homePath }:
+    {
+      name,
+      homePath ? ../home-manager/home.nix,
+      isWorkMac ? false,
+    }:
     let
       specialArgs = mkSpecialArgs {
         isDarwin = true;
+        inherit isWorkMac;
       };
     in
     nix-darwin.lib.darwinSystem {

@@ -65,17 +65,20 @@
         };
         tower = mkHost {
           name = "tower";
-          homePath = ./home-manager/home.nix;
         };
         nixbook = mkHost {
           name = "nixbook";
           isThinkpad = true;
-          homePath = ./home-manager/home.nix;
         };
       };
-      darwinConfigurations."darwin" = mkDarwinHost {
-        name = "darwin";
-        homePath = ./home-manager/home.nix;
+      darwinConfigurations = {
+        corpo = mkDarwinHost {
+          name = "corpo";
+          isWorkMac = true;
+        };
+        nomad = mkDarwinHost {
+          name = "nomad";
+        };
       };
     }
     // flake-utils.lib.eachDefaultSystem (

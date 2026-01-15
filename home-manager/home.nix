@@ -4,12 +4,17 @@
   isDarwin,
   isLinux,
   isThinkpad,
+  isWorkMac,
   ...
 }:
+let
+  username = if isWorkMac then "mat.jones" else "mat"; # username is set by MDM on work machine :/
+  homePrefix = if isLinux then "/home" else "/Users";
+in
 {
   home = {
-    username = if isLinux then "mat" else "mat.jones"; # username is set by MDM on work mac :/
-    homeDirectory = if isLinux then "/home/mat" else "/Users/mat.jones";
+    inherit username;
+    homeDirectory = "${homePrefix}/${username}";
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
