@@ -15,6 +15,7 @@
     systemPath = [ "/opt/homebrew/bin" ];
   };
   programs._1password.enable = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   homebrew = {
     enable = true;
     onActivation = {
