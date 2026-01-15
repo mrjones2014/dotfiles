@@ -58,16 +58,16 @@
     in
     {
       nixosConfigurations = {
-        homelab = mkHost {
-          name = "homelab";
+        mikoshi = mkHost {
+          name = "mikoshi";
           isServer = true;
           homePath = ./home-manager/server.nix;
         };
-        tower = mkHost {
-          name = "tower";
+        edgerunner = mkHost {
+          name = "edgerunner";
         };
-        nixbook = mkHost {
-          name = "nixbook";
+        kabuki = mkHost {
+          name = "kabuki";
           isThinkpad = true;
         };
       };
@@ -76,8 +76,8 @@
           name = "corpo";
           isWorkMac = true;
         };
-        nomad = mkDarwinHost {
-          name = "nomad";
+        aldecaldo = mkDarwinHost {
+          name = "aldecaldo";
         };
       };
     }
