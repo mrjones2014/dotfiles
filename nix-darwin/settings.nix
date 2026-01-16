@@ -30,6 +30,7 @@
       AppleShowAllFiles = true;
       AppleShowAllExtensions = true;
       ShowPathbar = true;
+      NewWindowTarget = "Home";
     };
     dock = {
       show-process-indicators = false;
