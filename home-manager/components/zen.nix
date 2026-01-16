@@ -20,6 +20,10 @@
         "extensions.formautofill.creditCards.enabled" = false;
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.available" = false;
+        "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
+        "browser.newtabpage.activity-stream.feeds.topsites" = false;
+        # I assume this is some telemetry shit so clear out ID
+        "browser.newtabpage.activity-stream.impressionId" = "";
         # I only want to use Kagi
         "browser.search.searchEnginesURL" = "";
       };
