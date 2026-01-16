@@ -26,6 +26,8 @@
         "browser.newtabpage.activity-stream.impressionId" = "";
         # I only want to use Kagi
         "browser.search.searchEnginesURL" = "";
+        "browser.urlbar.placeholderName" = "Kagi";
+        "browser.urlbar.placeholderName.private" = "Kagi";
       };
       search = {
         force = true;
@@ -65,6 +67,7 @@
       DisableFormHistory = true;
       OfferToSaveLogins = false;
       SearchEngines = {
+        Default = "Kagi";
         Remove = [
           "Google"
           "Bing"
