@@ -10,8 +10,9 @@
   homebrew.casks = [
     "signal"
     "vesktop"
-    "proton-mail-bridge"
     "unifi-identity-endpoint"
+    "proton-mail"
     "proton-drive"
+    "todoist-app"
   ];
 }
