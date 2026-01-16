@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  networking.hostName = "nomad";
   users.users.mat = {
     name = "mat";
     home = "/Users/mat";
@@ -11,5 +10,8 @@
   homebrew.casks = [
     "signal"
     "vesktop"
+    "proton-mail-bridge"
+    "unifi-identity-endpoint"
+    "proton-drive"
   ];
 }

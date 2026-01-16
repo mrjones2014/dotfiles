@@ -1,7 +1,6 @@
 { config, ... }:
 {
   networking = {
-    hostName = "nixbook";
     networkmanager.enable = true;
     firewall = {
       # if packets are still dropped, they will show up in dmesg

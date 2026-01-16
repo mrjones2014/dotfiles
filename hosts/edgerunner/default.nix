@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  networking.hostName = "tower";
   imports = [
     ../../nixos/desktop_environment.nix
     ../../nixos/_1password.nix

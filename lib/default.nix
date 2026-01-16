@@ -41,6 +41,7 @@ rec {
         }
         ../nixos/common.nix
         ../hosts/${name}
+        { networking.hostName = name; }
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -70,6 +71,7 @@ rec {
       modules = [
         ../hosts/${name}
         ../nix-darwin/common.nix
+        { networking.hostName = name; }
         home-manager.darwinModules.default
         {
           home-manager = {

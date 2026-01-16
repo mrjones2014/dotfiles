@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  networking.hostName = "corpo";
   users.users.mat = {
     name = "mat.jones"; # username is set by MDM on work mac :/
     home = "/Users/mat.jones";

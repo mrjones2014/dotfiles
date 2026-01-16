@@ -93,7 +93,6 @@
     # still possible to use this option, but it's recommended to use it in conjunction
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     useDHCP = lib.mkDefault true;
-    hostName = "homelab";
     defaultGateway = "192.168.1.1";
     nameservers = [ config.networking.defaultGateway.address ];
     # static IP on ethernet interface
