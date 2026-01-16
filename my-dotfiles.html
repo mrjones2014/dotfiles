@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-3245143a.js";
+            window.path_to_searchindex_js = "searchindex-90de14fe.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-cdd82fa0.js"></script>
@@ -178,23 +178,47 @@ git clone git@github.com:mrjones2014/dotfiles.git
 cd "dotfiles/"
 jj git init --colocate # if you use Jujutsu
 </code></pre>
+<h2 id="available-hosts"><a class="header" href="#available-hosts">Available Hosts</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Host</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>mikoshi</code></td><td>NixOS</td><td>Homelab server</td></tr>
+<tr><td><code>edgerunner</code></td><td>NixOS</td><td>Desktop PC</td></tr>
+<tr><td><code>kabuki</code></td><td>NixOS</td><td>Thinkpad laptop</td></tr>
+<tr><td><code>corpo</code></td><td>macOS</td><td>Work MacBook Pro</td></tr>
+<tr><td><code>aldecaldo</code></td><td>macOS</td><td>Personal MacBook Air</td></tr>
+</tbody>
+</table>
+</div>
 <h2 id="nixos"><a class="header" href="#nixos">NixOS</a></h2>
 <p>If you’re installing on a server, see the <a href="https://nixos.org/manual/nixos/stable/#ch-installation">NixOS manual</a> for headless NixOS installation instructions first.
 Once you’ve got your disks partitioned and NixOS installed, come back here and continue. For desktop computers, you can just use the graphical GNOME NixOS installer,
 since we’ll be installing GNOME anyway.</p>
 <p>Make sure to set up full disk encryption, and update the <code>fileSystems</code> options for the disks that are on your machine,
 and <code>hardware-configuration.nix</code> as needed.</p>
-<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#tower</code> (replacing <code>.#tower</code> with your desired flake output target).
-After the first time, you can just run <code>sudo nixos-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
+<p>Simply run <code>NIX_CONFIG="experimental-features = nix-command flakes" sudo nixos-rebuild switch ~/git/dotfiles/.#edgerunner</code>
+(replacing <code>.#edgerunner</code> with your desired flake output target). After the first time, you can just run <code>nh os switch</code>.
+This uses <a href="https://github.com/nix-community/nh">nix-community/nh</a>.</p>
 <h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
-<p>On macOS, for the first install, you’ll need to run <code>nix-darwin</code> via <code>nix run</code>:</p>
-<pre><code class="language-bash">nix run nix-darwin/master#darwin-rebuild -- switch --extra-experimental-features "nix-command flakes" --flake $HOME/git/dotfiles/.#darwin
+<p>On macOS, first install <a href="https://lix.systems/install/#on-any-other-linuxmacos-system">Lix</a>, and when asked,
+make sure to choose yes to enable flakes.
+Then, for the first install, you’ll need to run <code>nix-darwin</code> as <code>sudo</code> via <code>nix run</code>:</p>
+<pre><code class="language-bash">sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake $HOME/git/dotfiles/.#aldecaldo
 </code></pre>
-<p>After that, you can just run <code>darwin-rebuild switch --flake $HOME/git/dotfiles/.#</code> (or the <code>nix-apply</code> shell alias).</p>
+<p>After that, you can just run <code>nh darwin switch</code>.</p>
 <h2 id="managing-dotfiles"><a class="header" href="#managing-dotfiles">Managing Dotfiles</a></h2>
 <p>Dotfiles are managed via <a href="https://nixos.org/">Nix</a>, using <code>flake.nix</code> and <a href="https://github.com/nix-community/home-manager"><code>home-manager</code></a>.
 On NixOS, the <code>home-manager</code> configuration is managed as a NixOS module, so simply rebuilding your NixOS config also applies the new
 <code>home-manager</code> config. On macOS, the same behavior is achieved via <a href="https://github.com/nix-darwin/nix-darwin">nix-darwin</a>.</p>
+<p>On both, I use <code>nh</code>, which simplifies the CLI as well as automatically managing some things like better cleanup/garbage collection,
+as well as build tree visualization via <a href="https://github.com/maralorn/nix-output-monitor">nix-output-monitor</a>.</p>
+<ul>
+<li>NixOS: <code>nh os switch</code></li>
+<li>macOS: <code>nh darwin switch</code></li>
+</ul>
 
                     </main>
 
