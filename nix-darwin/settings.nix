@@ -6,6 +6,8 @@
       location = "${config.users.users.mat.home}/Downloads";
       # only copy screenshots to clipboard by default
       target = "clipboard";
+      # Don't remember last captured area
+      save-selections = false;
     };
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
