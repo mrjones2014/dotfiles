@@ -117,6 +117,39 @@ sonarr:
               - WEBRip-2160p
               - Bluray-2160p
               - Bluray-2160p Remux
+      # Profile 5: Any quality for extremely old/rare content (prefers English but accepts any language)
+      - name: Unrestricted (extremely old/rare)
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 480p
+            qualities:
+              - WEBDL-480p
+              - WEBRip-480p
+              - DVD
+          - name: 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+              - Bluray-720p
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+              - Bluray-1080p Remux
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
+              - Bluray-2160p Remux
     # ===== CUSTOM FORMATS =====
     # These define specific characteristics to look for and how they're scored
     custom_formats:
@@ -145,6 +178,8 @@ sonarr:
             score: 1000 # High score for English
           - name: 1080p-2160p
             score: 1000
+          - name: Unrestricted (extremely old/rare)
+            score: 1000 # High score for English
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space compared to x264
       - trash_ids:
@@ -159,6 +194,8 @@ sonarr:
             score: 400
           - name: 1080p-2160p allow non-English
             score: 400
+          - name: Unrestricted (extremely old/rare)
+            score: 400 # High positive score strongly prefers x265 encoding
 # ===== RADARR CONFIGURATION =====
 # Similar structure as Sonarr but for movies
 radarr:
@@ -263,6 +300,37 @@ radarr:
               - WEBDL-2160p
               - WEBRip-2160p
               - Bluray-2160p
+      # Profile 5: Any quality for extremely old/rare movies (prefers English but accepts any language)
+      - name: Unrestricted (extremely old/rare)
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: 2160p
+          until_score: 10000
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: 480p
+            qualities:
+              - WEBDL-480p
+              - WEBRip-480p
+              - DVD
+          - name: 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+              - Bluray-720p
+          - name: 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+              - Bluray-1080p
+          - name: 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+              - Bluray-2160p
     custom_formats:
       # LANGUAGE RESTRICTION
       # Block common non-English languages with trash IDs (applies only to English-only profiles)
@@ -287,6 +355,8 @@ radarr:
             score: 1000 # High score for English
           - name: 1080p-2160p
             score: 1000
+          - name: Unrestricted (extremely old/rare)
+            score: 1000 # High score for English
       # SPACE-SAVING FORMATS
       # Prioritize x265/HEVC which typically saves 40-50% space
       - trash_ids:
@@ -301,6 +371,8 @@ radarr:
             score: 400
           - name: 1080p-2160p allow non-English
             score: 400
+          - name: Unrestricted (extremely old/rare)
+            score: 400 # Strong preference for space-efficient encoding
       # SPECIAL VERSIONS
       # Prefer IMAX Enhanced editions which usually have more image visible
       - trash_ids:
@@ -324,3 +396,5 @@ radarr:
             score: -1000
           - name: 1080p-2160p allow non-English
             score: -1000
+          - name: Unrestricted (extremely old/rare)
+            score: -1000 # Strong negative score to avoid these formats
