@@ -50,6 +50,11 @@ return {
           -- too easily to close accidentally when trying to exit insert mode
           ['<esc>'] = false,
         },
+        session_picker = {
+          -- don't override <C-n>, that should be reserved for "next entry",
+          -- i.e. <C-n> and <C-p>
+          new_session = false,
+        },
       },
     },
   },
