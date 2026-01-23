@@ -51,7 +51,6 @@
         [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]
     );
 
-    extraLuaPackages = ps: [ ps.jsregexp ];
     extraPackages = with pkgs; [
       # for compiling Treesitter parsers
       gcc
