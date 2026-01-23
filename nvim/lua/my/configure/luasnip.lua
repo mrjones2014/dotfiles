@@ -126,6 +126,7 @@ end
 
 return {
   'L3MON4D3/LuaSnip',
+  submodules = false,
   version = 'v2.*',
   keys = {
     {
