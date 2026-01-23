@@ -42,7 +42,9 @@ return {
     cmd = 'Codesettings',
     ft = { 'json', 'jsonc', 'lua' },
     opts = {},
+    dependencies = {},
   },
+  { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codesettings-output' } },
   {
     'folke/snacks.nvim',
     lazy = false,

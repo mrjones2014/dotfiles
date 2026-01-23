@@ -21,17 +21,14 @@ return {
       },
     },
   },
+  { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'opencode', 'opencode_output' } },
   {
     'sudo-tee/opencode.nvim',
     keys = { '<leader>o' },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'MeanderingProgrammer/render-markdown.nvim',
       'folke/snacks.nvim',
     },
-    init = function()
-      vim.treesitter.language.register('markdown', 'opencode')
-    end,
     opts = {
       default_mode = 'plan',
       ui = {
