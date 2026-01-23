@@ -48,11 +48,6 @@
       protontricks.enable = true;
       gamescopeSession.enable = true;
     };
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
   };
 
   environment.variables = {

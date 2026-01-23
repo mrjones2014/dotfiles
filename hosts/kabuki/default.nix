@@ -23,16 +23,7 @@
     ../../nixos/nixpkgs-config.nix
     ./hardware-configuration.nix
   ];
-
-  programs = {
-    fish.enable = true;
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-  };
-
+  programs.fish.enable = true;
   environment.variables = {
     SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
