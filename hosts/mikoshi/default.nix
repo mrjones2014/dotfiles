@@ -27,6 +27,7 @@
     ./adguard.nix
     ./homeassistant.nix
     ./radicale.nix
+    ./open-webui.nix
     ../../nixos/sshd.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix

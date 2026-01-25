@@ -16,6 +16,9 @@
           "1password-cli"
           "copilot-language-server"
         ]
+        ++ lib.lists.optionals isServer [
+          "open-webui"
+        ]
         ++ lib.lists.optionals (!isServer) [
           "spotify"
           "1password"
