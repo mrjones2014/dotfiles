@@ -1,4 +1,8 @@
-{ lib, isWorkMac, ... }:
+{
+  lib,
+  isWorkMac,
+  ...
+}:
 {
   programs.opencode = {
     enable = true;
@@ -9,8 +13,12 @@
       }
       (lib.mkIf isWorkMac {
         # Use only compliant providers on work machine
-        enabled_providers = [ "github-copilot" ];
-        model = "github-copilot/claude-sonnet-4.5";
+        enabled_providers = [
+          "github-copilot"
+          "cursor"
+        ];
+        plugin = [ "yet-another-opencode-cursor-auth" ];
+        provider.cursor.name = "Cursor";
       })
     ];
   };
