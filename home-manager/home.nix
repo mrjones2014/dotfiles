@@ -5,6 +5,7 @@
   isLinux,
   isThinkpad,
   isWorkMac,
+  inputs,
   ...
 }:
 let
@@ -53,6 +54,7 @@ in
         obs-studio
         r2modman
         # sgdboop
+        inputs.hytale-launcher.packages.${stdenv.hostPlatform.system}.default
       ];
   };
   xdg.enable = true;

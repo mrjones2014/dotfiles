@@ -85,6 +85,29 @@
         "type": "github"
       }
     },
+    "hytale-launcher": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769634425,
+        "narHash": "sha256-kCXSCqb1pY53DtHmsSqfktmD/HiqnTMZEQi4uykJpeo=",
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "rev": "4fef04d921ff666f4e3fd8e1ff74c3ba8c13799f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "type": "github"
+      }
+    },
     "nix-auto-follow": {
       "inputs": {
         "nixpkgs": [
@@ -147,6 +170,7 @@
         "agenix": "agenix",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "hytale-launcher": "hytale-launcher",
         "nix-auto-follow": "nix-auto-follow",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
