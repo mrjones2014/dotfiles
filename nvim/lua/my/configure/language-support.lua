@@ -46,6 +46,31 @@ return {
   },
   { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codesettings-output' } },
   {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = { enabled = true },
+    dependencies = {
+      'saghen/blink.cmp',
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
+      opts = {
+        sources = {
+          per_filetype = {
+            lua = { inherit_defaults = true, 'lazydev' },
+          },
+          providers = {
+            lazydev = {
+              name = 'LazyDev',
+              module = 'lazydev.integrations.blink',
+              -- boost lazydev suggestions to top
+              score_offset = 100,
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     'folke/snacks.nvim',
     lazy = false,
     opts = {

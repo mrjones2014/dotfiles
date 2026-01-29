@@ -3,9 +3,9 @@ return {
   version = '*',
   dependencies = {
     'L3MON4D3/LuaSnip',
-    'folke/lazydev.nvim',
   },
   event = { 'BufReadPre', 'BufNewFile' },
+  ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     snippets = { preset = 'luasnip' },
@@ -44,15 +44,6 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       per_filetype = {
         minifiles = {},
-        lua = { inherit_defaults = true, 'lazydev' },
-      },
-      providers = {
-        lazydev = {
-          name = 'LazyDev',
-          module = 'lazydev.integrations.blink',
-          -- boost lazydev suggestions to top
-          score_offset = 100,
-        },
       },
     },
   },

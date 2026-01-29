@@ -6,6 +6,8 @@ return {
       'kristijanhusak/vim-dadbod-completion',
       dependencies = {
         'saghen/blink.cmp',
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
           sources = {
             per_filetype = {
