@@ -42,16 +42,16 @@ in
           "--to"
           "@-"
         ];
-        pull = [
+        sync = [
           "util"
           "exec"
           "--"
-          "sh"
+          "bash"
           "-c"
           ''
             set -euo pipefail
 
-            bookmarks=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name()')
+            bookmarks=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name() ++ "\n"' | head -n 1)
             count=$(echo "$bookmarks" | wc -l)
 
             if [ "$count" -eq 0 ]; then
@@ -59,14 +59,19 @@ in
               exit 1
             fi
 
-            if [ "$count" -gt 1 ]; then
-              echo "Error: Multiple bookmarks at @-: $bookmarks" >&2
-              exit 1
+            if [ -n "''${1:-}" ]; then
+              echo "Fetching $1@origin..."
+              jj git fetch -b "$1" && jj rebase -d "$1@origin"
+            else
+              echo "Fetching $bookmarks@origin..."
+              jj git fetch -b "$bookmarks" && jj rebase -d "$bookmarks@origin"
             fi
-
-            echo "Fetching $bookmarks@origin..."
-            jj git fetch -b "$bookmarks" && jj rebase -d "$bookmarks@origin"
           ''
+          # From jj docs:
+          # > This last empty string will become "$0" in bash, so your actual arguments
+          # > are all included in "$@" and start at "$1" as expected.
+          # https://docs.jj-vcs.dev/latest/config/#aliases
+          ""
         ];
       };
       # https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-13902914
