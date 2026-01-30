@@ -42,6 +42,32 @@ in
           "--to"
           "@-"
         ];
+        pull = [
+          "util"
+          "exec"
+          "--"
+          "sh"
+          "-c"
+          ''
+            set -euo pipefail
+
+            bookmarks=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name()')
+            count=$(echo "$bookmarks" | wc -l)
+
+            if [ "$count" -eq 0 ]; then
+              echo "Error: No bookmark at @-" >&2
+              exit 1
+            fi
+
+            if [ "$count" -gt 1 ]; then
+              echo "Error: Multiple bookmarks at @-: $bookmarks" >&2
+              exit 1
+            fi
+
+            echo "Fetching $bookmarks@origin..."
+            jj git fetch -b "$bookmarks" && jj rebase -d "$bookmarks@origin"
+          ''
+        ];
       };
       # https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-13902914
       diff.tool = "${pkgs.delta}/bin/delta";
