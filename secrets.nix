@@ -19,7 +19,7 @@ let
     "secrets/paperless_backups_1password_token_env.age"
     "secrets/cross_seed_cfg.age"
     "secrets/radicale_htpasswd.age"
-    "secrets/open_webui.age"
+    "secrets/anythingllm_env.age"
   ];
 in
 (builtins.listToAttrs (
