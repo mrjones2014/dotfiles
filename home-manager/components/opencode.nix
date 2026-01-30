@@ -17,6 +17,7 @@
           "github-copilot"
           "cursor"
         ];
+        model = "cursor/opus-4.5-thinking";
         plugin = [ "yet-another-opencode-cursor-auth" ];
         provider.cursor.name = "Cursor";
       })
