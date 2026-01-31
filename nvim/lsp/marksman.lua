@@ -1,5 +1,5 @@
 return {
-  cmd = { 'marksman', 'server' },
+  cmd = { 'markdown-oxide' },
   filetypes = { 'markdown', 'markdown.mdx' },
-  root_markers = { '.marksman.toml', '.git' },
+  root_markers = { '.git', '.jj' },
 }

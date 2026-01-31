@@ -80,7 +80,7 @@
       llvmPackages.clang-tools
       lua
       lua-language-server
-      marksman
+      markdown-oxide
       nil
       nixd
       nodePackages_latest.typescript-language-server
