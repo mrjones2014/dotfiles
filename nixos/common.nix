@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  isServer,
+  ...
+}:
 {
   imports = [ (import ../nixos/nix-conf.nix { isHomeManager = false; }) ];
   i18n = {
@@ -24,7 +29,6 @@
     };
   };
   environment = {
-    systemPackages = [ pkgs.mullvad-vpn ];
     variables = {
       PAGER = "less -FRX";
       NIXOS_OZONE_WL = "1";
@@ -41,44 +45,47 @@
       allowPing = true;
     };
   };
-  # enable mDNS for stuff like NAS and SSH
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      userServices = true;
-    };
-  };
-  services = {
-    mullvad-vpn.enable = true;
-    # going to use pipewire instead
-    pulseaudio.enable = false;
-
-    # Configure keymap in X11
-    xserver = {
-      xkb = {
-        layout = "us";
-        variant = "";
+  services = lib.mkMerge [
+    {
+      # enable mDNS for stuff like NAS and SSH
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+        publish = {
+          enable = true;
+          userServices = true;
+        };
       };
-    };
+    }
+    (lib.mkIf (!isServer) {
+      # going to use pipewire instead
+      pulseaudio.enable = false;
 
-    # Enable CUPS to print documents.
-    printing.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      # Configure keymap in X11
+      xserver = {
+        xkb = {
+          layout = "us";
+          variant = "";
+        };
+      };
 
-      # use the example session manager (no others are packaged yet so this is enabled by default,
-      # no need to redefine it in your config for now)
-      #media-session.enable = true;
-    };
-  };
+      # Enable CUPS to print documents.
+      printing.enable = true;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        # If you want to use JACK applications, uncomment this
+        #jack.enable = true;
+
+        # use the example session manager (no others are packaged yet so this is enabled by default,
+        # no need to redefine it in your config for now)
+        #media-session.enable = true;
+      };
+    })
+  ];
 
   boot = {
     loader = {
