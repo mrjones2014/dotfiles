@@ -38,6 +38,7 @@ return {
         input_window = {
           -- only submit with enter in normal mode, not insert mode
           ['<cr>'] = { 'submit_input_prompt', mode = { 'n' } },
+          ['<s-cr>'] = false,
           -- don't close the window on `<esc>`,
           -- too easily to close accidentally when trying to exit insert mode
           ['<esc>'] = false,
