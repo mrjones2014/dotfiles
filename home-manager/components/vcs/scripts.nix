@@ -24,7 +24,7 @@ let
       echo "Configured optimized refspec for large repository"
     fi
 
-    if [[ "$url" == *"gitlab.1password.io"* ]]; then
+    if [[ "$url" == *"gitlab.1password.io"* ]] || [[ "$url" == *"github.com:agilebits"* ]]; then
       work_email="mat.jones@agilebits.com"
       work_signing_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAjOfOY+u3Ei+idMfwQ/KD/X1S+JNrsc7ffN/NY8kqX"
 
