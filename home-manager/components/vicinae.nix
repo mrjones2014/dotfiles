@@ -11,7 +11,8 @@ if isLinux then
       # ```bash
       # VICINAE_CFG_PATH=$(readlink ~/.config/vicinae/settings.json) \
       #   rm ~/.config/vicinae/settings.json && \
-      #   cp $VICINAE_CFG_PATH ~/.config/vicinae/
+      #   cp $VICINAE_CFG_PATH ~/.config/vicinae/ && \
+      #   chmod +w ~/.config/vicinae/settings.json
       # ```
       # Then change settings through GUI,
       # copy the modified settings back into here,
