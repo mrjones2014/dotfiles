@@ -51,20 +51,31 @@ in
           ''
             set -euo pipefail
 
-            bookmarks=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name() ++ "\n"' | head -n 1)
-            count=$(echo "$bookmarks" | wc -l)
-
-            if [ "$count" -eq 0 ]; then
-              echo "Error: No bookmark at @-" >&2
+            # Detect which trunk branch exists (master or main)
+            if jj --ignore-working-copy bookmark list -r 'master@origin' &>/dev/null; then
+              trunk="master"
+            elif jj --ignore-working-copy bookmark list -r 'main@origin' &>/dev/null; then
+              trunk="main"
+            else
+              echo "Error: Could not detect trunk branch (master or main)" >&2
               exit 1
             fi
 
+            # Get the bookmark at @-
+            parent_bookmark=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name() ++ "\n"' 2>/dev/null | head -n 1)
+
             if [ -n "''${1:-}" ]; then
+              # fetch and rebase $1
               echo "Fetching $1@origin..."
               jj git fetch -b "$1" && jj rebase -d "$1@origin"
+            elif [ "$parent_bookmark" = "master" ] || [ "$parent_bookmark" = "main" ]; then
+              # fetch and rebase to bookmark
+              echo "Fetching $parent_bookmark@origin..."
+              jj git fetch -b "$parent_bookmark" && jj rebase -d "$parent_bookmark@origin"
             else
-              echo "Fetching $bookmarks@origin..."
-              jj git fetch -b "$bookmarks" && jj rebase -d "$bookmarks@origin"
+              # fetch and rebase to trunk
+              echo "Fetching $trunk@origin..."
+              jj git fetch -b "$trunk" && jj rebase -d "$trunk@origin"
             fi
           ''
           # From jj docs:
