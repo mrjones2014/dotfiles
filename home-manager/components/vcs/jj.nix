@@ -70,9 +70,19 @@ in
             echo "Fetching PR #$pr_num..."
             git fetch origin "refs/pull/$pr_num/head:refs/heads/$branch_name" --force
 
-            # Import the git ref into jj and checkout
+            # import the git ref into jj and checkout
             jj git import
             jj new "$branch_name"
+
+            # clean up old pr-* branches
+            for branch in $(git branch --list 'pr-*' --format='%(refname:short)'); do
+              if [ "$branch" = "$branch_name" ]; then
+                continue
+              fi
+              jj abandon "$branch" 2>/dev/null || true
+              git branch -D "$branch" 2>/dev/null || true
+            done
+            jj git import
           ''
           ""
         ];
