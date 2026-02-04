@@ -42,6 +42,40 @@ in
           "--to"
           "@-"
         ];
+        pr = [
+          "util"
+          "exec"
+          "--"
+          "bash"
+          "-c"
+          ''
+            set -euo pipefail
+
+            if [ ! -d .git ]; then
+              echo "Error: this relies on a colocated git repository; jj doesn't yet support fetching non-head refs" >&2
+              exit 1
+            fi
+
+            if [ -z "''${1:-}" ]; then
+              echo "Usage: jj pr <pr-number>" >&2
+              exit 1
+            fi
+
+            pr_num="$1"
+            branch_name="pr-$pr_num"
+
+            # jj does not yet have the ability to fetch arbitrary
+            # refs (it always fetches from `refs/head/*`) but we
+            # can rely on git for that part and do the rest in jj
+            echo "Fetching PR #$pr_num..."
+            git fetch origin "refs/pull/$pr_num/head:refs/heads/$branch_name" --force
+
+            # Import the git ref into jj and checkout
+            jj git import
+            jj new "$branch_name"
+          ''
+          ""
+        ];
         sync = [
           "util"
           "exec"
