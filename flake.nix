@@ -23,10 +23,7 @@
     };
     hytale-launcher = {
       url = "github:JPyke3/hytale-launcher-nix";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
