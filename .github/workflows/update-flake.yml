@@ -19,6 +19,8 @@ jobs:
         run: cachix use nix-community
       - name: update flake.lock
         run: nix flake update
+      - name: dedupe flake inputs
+        run: nix run github:fzakaria/nix-auto-follow -i
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         id: create-pr
