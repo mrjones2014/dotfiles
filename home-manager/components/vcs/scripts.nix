@@ -33,7 +33,7 @@ let
       jj config set --repo user.email "$work_email"
       jj config set --repo signing.key "$work_signing_key"
       # we just changed the author config and I configure jj to configure non-mine commits as immutable
-      jj describe --reset-author --no-edit -r @ --ignore-immutable
+      jj metaedit --update-author @- --ignore-immutable
       echo "Updated repo-local configs to use work email and signing key"
     fi
   '';
