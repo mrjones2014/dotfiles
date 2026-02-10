@@ -28,6 +28,10 @@
         "browser.search.searchEnginesURL" = "";
         "browser.urlbar.placeholderName" = "Kagi";
         "browser.urlbar.placeholderName.private" = "Kagi";
+        # honestly this feature is so so dumb, I am not sure
+        # who would ever want this behavior...
+        # https://github.com/zen-browser/desktop/discussions/12025
+        "zen.window-sync.enabled" = false;
       };
       search = {
         force = true;
