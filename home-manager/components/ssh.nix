@@ -12,6 +12,7 @@ let
     if isLinux then ".1password" else "Library/Group Containers/2BUA8C4S2C.com.1password/t"
   }/agent.sock";
   work_public_key = pkgs.writeText "agilebits.pub" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAjOfOY+u3Ei+idMfwQ/KD/X1S+JNrsc7ffN/NY8kqX";
+  personal_public_key = pkgs.writeText "personal.pub" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
 in
 {
   home.sessionVariables = { } // lib.optionalAttrs (!isServer) { SSH_AUTH_SOCK = sshAuthSock; };
@@ -36,6 +37,11 @@ in
         hostname = "github.com";
         user = "git";
         identityFile = "${work_public_key}";
+        identitiesOnly = true;
+      };
+      "github.com" = {
+        user = "git";
+        identityFile = "${personal_public_key}";
         identitiesOnly = true;
       };
     };
