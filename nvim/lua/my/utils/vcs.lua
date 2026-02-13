@@ -2,9 +2,10 @@ local _cached_remote
 
 local M = {}
 
+---@return string|nil
 function M.git_remote()
   if _cached_remote == nil or _cached_remote == '' then
-    local result = vim.system({ 'git', 'remote', 'get-url', 'origin' }, { text = true }):wait()
+    local result = vim.system({ 'git', 'config', '--get', 'remote.origin.url' }, { text = true }):wait()
     if result.signal == 0 then
       _cached_remote = vim.trim(result.stdout)
     end
@@ -12,16 +13,22 @@ function M.git_remote()
   return _cached_remote or ''
 end
 
+---@return boolean
 function M.is_work_repo()
-  return M.git_remote():find('gitlab.1password.io') ~= nil
+  local remote = M.git_remote()
+  if not remote or remote == '' then
+    return false
+  end
+  return remote:find('gitlab.1password.io', 1, true) ~= nil or remote:find('agilebits-inc', 1, true) ~= nil
 end
 
 local _cached_branch = ''
 local _cache_valid = false
 
+---@return string|nil
 function M.jj_bookmark_or_git_branch()
   if not _cache_valid then
-    if vim.fs.root(vim.uv.cwd(), '.jj') then
+    if vim.fs.root(assert(vim.uv.cwd()), '.jj') then
       local result = vim
         .system({
           'jj',

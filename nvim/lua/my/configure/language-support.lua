@@ -48,7 +48,6 @@ return {
   {
     'folke/lazydev.nvim',
     ft = 'lua',
-    opts = { enabled = true },
     dependencies = {
       'saghen/blink.cmp',
       ---@module 'blink.cmp'
@@ -67,6 +66,12 @@ return {
             },
           },
         },
+      },
+    },
+    opts = {
+      enabled = true,
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
   },

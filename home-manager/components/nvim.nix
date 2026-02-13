@@ -98,6 +98,7 @@
       curl
       fd
       fzf
+      gh
       glow
       gnumake
       imagemagick
