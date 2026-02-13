@@ -78,7 +78,12 @@ in
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+      recommendedBrotliSettings = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
       proxyTimeout = "180s";
+      # send access logs to journal instead of /var/log/nginx/access.log
+      commonHttpConfig = "access_log syslog:server=unix:/dev/log;";
 
       virtualHosts = lib.foldl' (
         acc: subdomain:
