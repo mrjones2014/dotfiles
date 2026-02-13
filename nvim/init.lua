@@ -48,9 +48,7 @@ vim.api.nvim_create_autocmd('BufRead', {
   pattern = '*',
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
-    if
-      string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(vim.uv.cwd()--[[@as string]], '/nvim')
-    then
+    if string.find(bufname, '/git/dotfiles/nvim') and not vim.endswith(assert(vim.uv.cwd()), '/nvim') then
       vim.cmd.cd('./nvim')
     end
   end,

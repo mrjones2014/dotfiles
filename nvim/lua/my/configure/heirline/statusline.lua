@@ -64,7 +64,7 @@ M.Mode = {
 M.Branch = {
   init = function(self)
     local vcs = require('my.utils.vcs')
-    local url = vcs.git_remote()
+    local url = vcs.git_remote() or ''
     if string.find(url, 'github.com') then
       self.icon = ' '
     elseif string.find(url, 'gitlab') then
