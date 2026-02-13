@@ -4,7 +4,6 @@
     ../../nixos/desktop_environment.nix
     ../../nixos/_1password.nix
     ../../nixos/nixpkgs-config.nix
-    ../../nixos/sshd.nix
     ../../nixos/containers.nix
     ../../nixos/qbittorrent.nix
     ./hardware-configuration.nix

@@ -28,7 +28,7 @@
     ./homeassistant.nix
     ./radicale.nix
     ./anythingllm.nix
-    ../../nixos/sshd.nix
+    ../../nixos/ssh-server.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix
   ];
