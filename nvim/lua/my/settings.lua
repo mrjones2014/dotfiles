@@ -29,7 +29,6 @@ vim.opt.sessionoptions = 'buffers,curdir,folds,winpos,winsize,localoptions'
 vim.opt.laststatus = 3
 vim.opt.virtualedit = 'onemore'
 vim.opt.splitkeep = 'screen'
-vim.opt.clipboard = 'unnamedplus'
 
 -- setting to 0 makes it default to value of tabstop
 vim.opt.shiftwidth = 0
@@ -65,3 +64,26 @@ vim.filetype.add({
 })
 
 vim.opt.exrc = true
+
+-- setup clipboard with support for OSC52 if in an SSH session
+-- see: https://github.com/neovim/neovim/discussions/28010#discussioncomment-9877494
+vim.opt.clipboard = 'unnamedplus'
+if vim.env.SSH_TTY ~= nil and vim.env.SSH_TTY ~= '' then
+  local function paste()
+    return {
+      vim.fn.split(vim.fn.getreg(''), '\n'),
+      vim.fn.getregtype(''),
+    }
+  end
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = paste,
+      ['*'] = paste,
+    },
+  }
+end
