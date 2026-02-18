@@ -48,7 +48,7 @@ in
           "--"
           "bash"
           "-c"
-          ''
+          /* bash */ ''
             set -euo pipefail
 
             if [ ! -d .git ]; then
@@ -104,7 +104,7 @@ in
             "--"
             "bash"
             "-c"
-            ''
+            /* bash */ ''
               set -euo pipefail
 
               # fetch PRs and format them with jq
@@ -147,7 +147,7 @@ in
           "--"
           "bash"
           "-c"
-          ''
+          /* bash */ ''
             set -euo pipefail
 
             # Detect which trunk branch exists (master or main)
