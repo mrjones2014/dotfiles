@@ -21,7 +21,7 @@ return {
               desc = 'Open related diagnostics',
             },
             {
-              '<leader>oc',
+              '<leader>rc',
               function()
                 vim.cmd.vsp()
                 vim.cmd.RustLsp('openCargo')
