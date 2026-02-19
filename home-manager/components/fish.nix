@@ -140,34 +140,50 @@
           set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$GIT_BRANCH"
           ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
         '';
-        pr = /* fish */ ''
-          set -l REMOTE_NAME origin
+        pr =
+          let
+            open = if isLinux then "xdg-open" else "open";
+          in
+          /* fish */ ''
+            set -l GIT_BRANCH (git branch --show-current 2>/dev/null || echo "")
 
-          # Check if upstream URL exists in config
-          if test -n (git config --get remote.upstream.url 2>/dev/null)
-              set REMOTE_NAME upstream
-          end
+            if test -z "$GIT_BRANCH"
+                set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
+            end
 
-          set -l PROJECT_PATH (git config --get remote.$REMOTE_NAME.url)
-          set -l PROJECT_PATH (string replace "git@github.com:" "" "$PROJECT_PATH")
-          set -l PROJECT_PATH (string replace "https://github.com/" "" "$PROJECT_PATH")
-          set -l PROJECT_PATH (string replace ".git" "" "$PROJECT_PATH")
-          set -l GIT_BRANCH (git branch --show-current || echo "")
+            if test -z "$GIT_BRANCH"
+                echo "Error: not a git repository"
+                return 1
+            end
 
-          if test -z "$GIT_BRANCH"
-              set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
-          end
+            set -l HAS_UPSTREAM (git config --get remote.upstream.url 2>/dev/null)
 
-          if test -z "$GIT_BRANCH"
-              echo "Error: not a git repository"
-              return 1
-          end
+            if test -n "$HAS_UPSTREAM"
+                set -l UPSTREAM_PATH (git config --get remote.upstream.url)
+                set UPSTREAM_PATH (string replace "git@github.com:" "" "$UPSTREAM_PATH")
+                set UPSTREAM_PATH (string replace "https://github.com/" "" "$UPSTREAM_PATH")
+                set UPSTREAM_PATH (string replace ".git" "" "$UPSTREAM_PATH")
 
-          set -l MASTER_BRANCH (git symbolic-ref refs/remotes/$REMOTE_NAME/HEAD | sed "s@^refs/remotes/$REMOTE_NAME/@@")
-          ${
-            if isLinux then "xdg-open" else "open"
-          } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
-        '';
+                set -l ORIGIN_PATH (git config --get remote.origin.url)
+                set ORIGIN_PATH (string replace "git@github.com:" "" "$ORIGIN_PATH")
+                set ORIGIN_PATH (string replace "https://github.com/" "" "$ORIGIN_PATH")
+                set ORIGIN_PATH (string replace ".git" "" "$ORIGIN_PATH")
+
+                set -l ORIGIN_OWNER (string split "/" "$ORIGIN_PATH")[1]
+                set -l ORIGIN_REPO (string split "/" "$ORIGIN_PATH")[2]
+
+                set -l MASTER_BRANCH (git symbolic-ref refs/remotes/upstream/HEAD | sed "s@^refs/remotes/upstream/@@")
+                ${open} "https://github.com/$UPSTREAM_PATH/compare/$MASTER_BRANCH...$ORIGIN_OWNER:$ORIGIN_REPO:$GIT_BRANCH"
+            else
+                set -l PROJECT_PATH (git config --get remote.origin.url)
+                set PROJECT_PATH (string replace "git@github.com:" "" "$PROJECT_PATH")
+                set PROJECT_PATH (string replace "https://github.com/" "" "$PROJECT_PATH")
+                set PROJECT_PATH (string replace ".git" "" "$PROJECT_PATH")
+
+                set -l MASTER_BRANCH (git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
+                ${open} "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
+            end
+          '';
       };
     };
   };
