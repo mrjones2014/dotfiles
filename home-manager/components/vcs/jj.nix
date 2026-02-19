@@ -164,9 +164,25 @@ in
             parent_bookmark=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name() ++ "\n"' 2>/dev/null | head -n 1)
 
             if [ -n "''${1:-}" ]; then
-              # fetch and rebase $1
-              echo "Fetching $1@origin..."
-              jj git fetch -b "$1" && jj rebase -d "$1@origin"
+              # Argument provided
+              input="''$1"
+
+              # Check if argument contains a remote suffix
+              if [[ "$input" == *@* ]]; then
+                # Parse remote and bookmark (e.g., main@upstream)
+                target="$input"
+                remote="''${input#*@}"
+                branch="''${input%%@*}"
+
+                echo "Fetching $branch from $remote..."
+                jj git fetch --remote "$remote" -b "$branch" && jj rebase -d "$target"
+              else
+                # No remote suffix, default to @origin
+                target="$input@origin"
+
+                echo "Fetching $input..."
+                jj git fetch -b "$input" && jj rebase -d "$target"
+              fi
             elif [ "$parent_bookmark" = "master" ] || [ "$parent_bookmark" = "main" ]; then
               # fetch and rebase to bookmark
               echo "Fetching $parent_bookmark@origin..."
