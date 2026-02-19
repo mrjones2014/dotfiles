@@ -49,13 +49,13 @@
         sqlite = "litecli";
       };
 
-      shellInit = ''
+      shellInit = /* fish */ ''
         # put Nix profile *first* on my PATH
         export PATH="/etc/profiles/per-user/${config.home.username}/bin:$PATH"
         set -g fish_prompt_pwd_dir_length 20
       '';
 
-      interactiveShellInit = ''
+      interactiveShellInit = /* fish */ ''
         fish_vi_key_bindings
         bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
@@ -84,7 +84,7 @@
         };
         spc = {
           description = "Print a separator to help visually separate long outputs.";
-          body = ''
+          body = /* fish */ ''
             echo
             echo
             string repeat -n (tput cols) '─'
@@ -94,7 +94,7 @@
         };
         groot = {
           description = "cd to the root of the current git repository";
-          body = ''
+          body = /* fish */ ''
             set -l git_repo_root_dir (git rev-parse --show-toplevel 2>/dev/null)
             if test -n "$git_repo_root_dir"
                 cd "$git_repo_root_dir"
@@ -116,7 +116,7 @@
         };
         nix-shell = {
           wraps = "nix-shell";
-          body = ''
+          body = /* fish */ ''
             for ARG in $argv
                 if [ "$ARG" = --run ]
                     command nix-shell $argv
@@ -126,7 +126,7 @@
             command nix-shell $argv --run "exec fish"
           '';
         };
-        mr = ''
+        mr = /* fish */ ''
           set -l GITLAB_BASE_URL "https://gitlab.1password.io"
           set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
           set -l GIT_BRANCH (git branch --show-current)
@@ -140,13 +140,19 @@
           set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$GIT_BRANCH"
           ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
         '';
-        pr = ''
-          set -l PROJECT_PATH (git config --get remote.origin.url)
+        pr = /* fish */ ''
+          set -l REMOTE_NAME origin
+
+          # Check if upstream URL exists in config
+          if test -n (git config --get remote.upstream.url 2>/dev/null)
+              set REMOTE_NAME upstream
+          end
+
+          set -l PROJECT_PATH (git config --get remote.$REMOTE_NAME.url)
           set -l PROJECT_PATH (string replace "git@github.com:" "" "$PROJECT_PATH")
           set -l PROJECT_PATH (string replace "https://github.com/" "" "$PROJECT_PATH")
           set -l PROJECT_PATH (string replace ".git" "" "$PROJECT_PATH")
           set -l GIT_BRANCH (git branch --show-current || echo "")
-          set -l MASTER_BRANCH (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
           if test -z "$GIT_BRANCH"
               set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
@@ -156,30 +162,12 @@
               echo "Error: not a git repository"
               return 1
           end
+
+          set -l MASTER_BRANCH (git symbolic-ref refs/remotes/$REMOTE_NAME/HEAD | sed "s@^refs/remotes/$REMOTE_NAME/@@")
           ${
             if isLinux then "xdg-open" else "open"
           } "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
         '';
-        login = {
-          description = "Select a 1Password item via fzf and open it in browser";
-          body = ''
-            set -l selected (op item list --categories login --format json | ${pkgs.jq}/bin/jq -r '.[].title' | fzf --height 40% --layout reverse | xargs op item get --format=json | ${pkgs.jq}/bin/jq -r '.id, .urls[0].href')
-            if [ -z "$selected" ]
-                commandline -f repaint
-                return
-            end
-            set -l id $selected[1]
-            set -l url $selected[2]
-            # if it has a ? then append query string with &
-            if string match -e -- '\?' "$url"
-                set -f fill_session_url "$url&$id=$id"
-            else
-                # otherwise append query string with ?
-                set -f fill_session_url "$url?$id=$id"
-            end
-            ${if isLinux then "xdg-open" else "open"} "$fill_session_url"
-          '';
-        };
       };
     };
   };
