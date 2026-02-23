@@ -1,4 +1,9 @@
 { config, ... }:
+let
+  cleanuparr_port = 11011;
+  cleanuparr_data_dir = "/var/lib/cleanuparr";
+  cleanuparr_guid = 1432;
+in
 {
   imports = [ ../../nixos/qbittorrent.nix ];
   services.nginx.subdomains = {
@@ -22,6 +27,7 @@
       port = config.services.bazarr.listenPort;
       useLongerTimeout = true;
     };
+    cleanuparr.port = cleanuparr_port;
   };
   services = {
     jellyfin.enable = true;
@@ -30,5 +36,33 @@
     sonarr.enable = true;
     radarr.enable = true;
     bazarr.enable = true;
+  };
+
+  # cleanuparr
+  users = {
+    users.cleanuparr = {
+      isSystemUser = true;
+      group = "cleanuparr";
+      uid = cleanuparr_guid;
+    };
+    groups.cleanuparr.gid = cleanuparr_guid;
+  };
+
+  systemd.tmpfiles.rules = [
+    "d ${cleanuparr_data_dir} 0750 cleanuparr cleanuparr -"
+  ];
+
+  virtualisation.oci-containers.containers.cleanuparr = {
+    image = "ghcr.io/cleanuparr/cleanuparr:latest";
+    autoStart = true;
+    ports = [ "${toString cleanuparr_port}:11011" ];
+    volumes = [ "${cleanuparr_data_dir}:/config" ];
+
+    environment = {
+      PORT = toString cleanuparr_port;
+      PUID = toString config.users.users.cleanuparr.uid;
+      PGID = toString config.users.groups.cleanuparr.gid;
+      TZ = "Etc/UTC";
+    };
   };
 }
