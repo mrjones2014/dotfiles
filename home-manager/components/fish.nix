@@ -140,50 +140,42 @@
           set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$GIT_BRANCH"
           ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
         '';
-        pr =
-          let
-            open = if isLinux then "xdg-open" else "open";
-          in
-          /* fish */ ''
-            set -l GIT_BRANCH (git branch --show-current 2>/dev/null || echo "")
+        pr = /* fish */ ''
+          function __pr_parse_gh_path
+              set -l url $argv[1]
+              string replace -r '^git@github\.com:' "" $url | string replace -r '^https://github\.com/' "" | string replace -r '\.git$' ""
+          end
 
-            if test -z "$GIT_BRANCH"
-                set GIT_BRANCH (jj log -r @- --no-graph --no-pager -T 'self.bookmarks()')
-            end
+          set -l branch (git branch --show-current 2>/dev/null)
+          if test -z "$branch"
+              set branch (jj --ignore-working-copy log -r @- --no-graph --no-pager -T 'self.bookmarks()')
+          end
+          if test -z "$branch"
+              echo "Error: no bookmark or branch found for current HEAD"
+              return 1
+          end
 
-            if test -z "$GIT_BRANCH"
-                echo "Error: not a git repository"
-                return 1
-            end
+          set -l default_branch main
+          if git show-ref --verify --quiet refs/remotes/origin/master 2>/dev/null
+              set default_branch master
+          end
 
-            set -l HAS_UPSTREAM (git config --get remote.upstream.url 2>/dev/null)
-
-            if test -n "$HAS_UPSTREAM"
-                set -l UPSTREAM_PATH (git config --get remote.upstream.url)
-                set UPSTREAM_PATH (string replace "git@github.com:" "" "$UPSTREAM_PATH")
-                set UPSTREAM_PATH (string replace "https://github.com/" "" "$UPSTREAM_PATH")
-                set UPSTREAM_PATH (string replace ".git" "" "$UPSTREAM_PATH")
-
-                set -l ORIGIN_PATH (git config --get remote.origin.url)
-                set ORIGIN_PATH (string replace "git@github.com:" "" "$ORIGIN_PATH")
-                set ORIGIN_PATH (string replace "https://github.com/" "" "$ORIGIN_PATH")
-                set ORIGIN_PATH (string replace ".git" "" "$ORIGIN_PATH")
-
-                set -l ORIGIN_OWNER (string split "/" "$ORIGIN_PATH")[1]
-                set -l ORIGIN_REPO (string split "/" "$ORIGIN_PATH")[2]
-
-                set -l MASTER_BRANCH (git symbolic-ref refs/remotes/upstream/HEAD | sed "s@^refs/remotes/upstream/@@")
-                ${open} "https://github.com/$UPSTREAM_PATH/compare/$MASTER_BRANCH...$ORIGIN_OWNER:$ORIGIN_REPO:$GIT_BRANCH"
-            else
-                set -l PROJECT_PATH (git config --get remote.origin.url)
-                set PROJECT_PATH (string replace "git@github.com:" "" "$PROJECT_PATH")
-                set PROJECT_PATH (string replace "https://github.com/" "" "$PROJECT_PATH")
-                set PROJECT_PATH (string replace ".git" "" "$PROJECT_PATH")
-
-                set -l MASTER_BRANCH (git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
-                ${open} "https://github.com/$PROJECT_PATH/compare/$MASTER_BRANCH...$GIT_BRANCH"
-            end
-          '';
+          set -l upstream_url (git config --get remote.upstream.url 2>/dev/null)
+          if test -n "$upstream_url"
+              set -l upstream_path (__pr_parse_gh_path $upstream_url)
+              set -l origin_path (__pr_parse_gh_path (git config --get remote.origin.url))
+              set -l origin_owner (string split "/" $origin_path)[1]
+              set -l origin_repo (string split "/" $origin_path)[2]
+              ${
+                if isLinux then "xdg-open" else "open"
+              } "https://github.com/$upstream_path/compare/$default_branch...$origin_owner:$origin_repo:$branch"
+          else
+              set -l project_path (__pr_parse_gh_path (git config --get remote.origin.url))
+              ${
+                if isLinux then "xdg-open" else "open"
+              } "https://github.com/$project_path/compare/$default_branch...$branch"
+          end
+        '';
       };
     };
   };
