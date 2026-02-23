@@ -1,8 +1,4 @@
 { config, ... }:
-let
-  huntarr_port = 9705;
-  huntarr_data = "/var/lib/huntarr";
-in
 {
   imports = [ ../../nixos/qbittorrent.nix ];
   services.nginx.subdomains = {
@@ -26,10 +22,6 @@ in
       port = config.services.bazarr.listenPort;
       useLongerTimeout = true;
     };
-    huntarr = {
-      port = huntarr_port;
-      useLongerTimeout = true;
-    };
   };
   services = {
     jellyfin.enable = true;
@@ -38,16 +30,5 @@ in
     sonarr.enable = true;
     radarr.enable = true;
     bazarr.enable = true;
-  };
-
-  systemd.tmpfiles.rules = [
-    "d ${huntarr_data} 0755 root root -"
-  ];
-  virtualisation.oci-containers.containers.huntarr = {
-    image = "huntarr/huntarr:latest";
-    autoStart = true;
-    ports = [ "${toString huntarr_port}:${toString huntarr_port}" ];
-    volumes = [ "${huntarr_data}:/config" ];
-    environment.TZ = "America/New_York";
   };
 }

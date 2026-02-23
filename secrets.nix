@@ -17,7 +17,6 @@ let
     "secrets/gatus_discord_webhook_env.age"
     "secrets/paperless_admin_pw.age"
     "secrets/paperless_backups_1password_token_env.age"
-    "secrets/cross_seed_cfg.age"
     "secrets/radicale_htpasswd.age"
     "secrets/anythingllm_env.age"
   ];
