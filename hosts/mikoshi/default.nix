@@ -27,7 +27,6 @@
     ./adguard.nix
     ./homeassistant.nix
     ./radicale.nix
-    ./anythingllm.nix
     ../../nixos/ssh-server.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix

@@ -18,7 +18,6 @@ let
     "secrets/paperless_admin_pw.age"
     "secrets/paperless_backups_1password_token_env.age"
     "secrets/radicale_htpasswd.age"
-    "secrets/anythingllm_env.age"
   ];
 in
 (builtins.listToAttrs (
