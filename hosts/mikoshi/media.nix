@@ -56,7 +56,10 @@ in
     image = "ghcr.io/cleanuparr/cleanuparr:latest";
     autoStart = true;
     ports = [ "${toString cleanuparr_port}:11011" ];
-    volumes = [ "${cleanuparr_data_dir}:/config" ];
+    volumes = [
+      "${cleanuparr_data_dir}:/config"
+      "/mnt/jellyfin/media:/mnt/jellyfin/media"
+    ];
 
     environment = {
       PORT = toString cleanuparr_port;
