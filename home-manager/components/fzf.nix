@@ -22,10 +22,6 @@ let
       lhs = "ctrl-r";
       rhs = "fzf-history-widget-wrapped";
     }
-    {
-      lhs = "ctrl-p";
-      rhs = "fzf-jj-bookmarks";
-    }
   ];
   nvim_oldfiles_script = pkgs.writeText "oldfiles.lua" /* lua */ ''
     -- Print MRU files from Neovim's ShaDa, filtered to real regular files under the current directory.
@@ -132,16 +128,6 @@ in
         if test -n "$result"
             $EDITOR $result
         end
-      '';
-      fzf-jj-bookmarks = ''
-        set -l selected_bookmark (jj bookmark list | fzf --height 40%)
-        if test -n "$selected_bookmark"
-            # parse the bookmark name out of the full bookmark info line
-            set -l bookmark_name (string split ":" "$selected_bookmark" | head -n 1 | string trim)
-            commandline -i " $bookmark_name "
-        end
-        commandline -f repaint
-        _prompt_move_to_bottom
       '';
       fzf-project-widget = ''
         function _project_jump_get_icon
