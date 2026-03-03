@@ -7,11 +7,12 @@ return {
   cmd = 'ColorizerAttachToBuffer',
   opts = {
     filetypes = filetypes,
-    user_default_options = {
-      names = false,
-      css = true,
-      sass = { enable = true, parsers = { 'css' } },
+    options = {
       always_update = true,
+      parsers = {
+        css = true,
+        names = { enable = false },
+      },
     },
   },
 }
