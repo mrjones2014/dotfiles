@@ -10,11 +10,7 @@
   home.packages = [ pkgs.victor-mono ];
   programs.ghostty = {
     enable = true;
-    # TODO remove eventually; Ghostty nixpkgs is broken
-    # on macOS but I still want to generate the config with nix.
-    # I'll install manually on macOS and use Nix to generate the config.
-    # For now, shim the package with pkgs.emptyDirectory to trick nix
-    # into still generating the config.
+    # GUI apps are installed via nix-darwin brew on macOS
     package = if isDarwin then null else pkgs.ghostty;
     installBatSyntax = false;
     clearDefaultKeybinds = true;
