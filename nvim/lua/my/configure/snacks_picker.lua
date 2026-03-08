@@ -33,6 +33,7 @@ return {
     },
     input = { enabled = true },
     image = { enabled = true },
+    ---@type snacks.picker.Config
     picker = {
       layout = {
         preset = 'telescope',
@@ -40,6 +41,15 @@ return {
       sources = {
         files = { args = { '--ignore-file', ripgrep_ignore_file_path } },
         grep = { args = { '--ignore-file', ripgrep_ignore_file_path } },
+        smart = {
+          ---@type snacks.picker.filter.Config
+          filter = {
+            filter = function(item)
+              -- hide minifiles:// buffers
+              return item.text:match('^minifiles://')
+            end,
+          },
+        },
         recent = {
           filter = {
             paths = {
