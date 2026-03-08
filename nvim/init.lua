@@ -3,12 +3,14 @@ vim.loader.enable()
 
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`.
 ---@param ... any
+-- selene: allow(global_usage)
 _G.dbg = function(...) ---@diagnostic disable-line: duplicate-set-field
   require('snacks.debug').inspect(...)
 end
 
 ---Debug Lua stuff and print a nice debug message via `vim.inspect`,
 ---wrapped in `vim.schedule`, so you can call it from fast-events.
+-- selene: allow(global_usage)
 _G.dbg_schedule = function(...) ---@diagnostic disable-line: duplicate-set-field
   local args = { ... }
   vim.schedule(function()

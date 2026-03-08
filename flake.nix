@@ -105,6 +105,8 @@
           // (checksForConfigs self.darwinConfigurations (c: c.system))
           // {
             formatting = treefmtEval.config.build.check self;
+            lint-nix = pkgs.callPackage ./checks/lint-nix.nix { inherit pkgs self; };
+            lint-lua = pkgs.callPackage ./checks/lint-lua.nix { inherit pkgs self; };
             nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
               inherit lib;
               inherit (pkgs) stdenv;
