@@ -163,6 +163,9 @@ github.com##.js-notice
 github.com##.d-block:has(a[href*="?tab=achievements"])
 github.com##.d-md-block:has(a[href*="?tab=achievements"])
 
+! Block "Groups by Copilot" on PR sidebar
+github.com##[class*="GroupsList-module__GroupsListContainer"]
+
 ############################################
 ####            Glassdoor               ####
 ############################################
