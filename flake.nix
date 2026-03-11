@@ -50,15 +50,15 @@
       ...
     }:
     let
-      my_lib = import ./lib {
+      myLib = import ./lib {
         inherit nixpkgs;
         inherit agenix;
         inherit home-manager;
         inherit nix-darwin;
         inherit inputs;
       };
-      inherit (my_lib) mkHost;
-      inherit (my_lib) mkDarwinHost;
+      inherit (myLib) mkHost;
+      inherit (myLib) mkDarwinHost;
     in
     {
       nixosConfigurations = {

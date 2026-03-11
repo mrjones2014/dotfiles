@@ -1,5 +1,15 @@
-{ isLinux, isThinkpad, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  isLinux,
+  isThinkpad,
+  ...
+}:
 if isLinux then
+  let
+    mkMutableJsonConfig = import ../../lib/mutable-json-config.nix { inherit config lib pkgs; };
+  in
   {
     programs.vicinae = {
       enable = true;
@@ -17,20 +27,22 @@ if isLinux then
       # Then change settings through GUI,
       # copy the modified settings back into here,
       # and rebuild.
-      settings = {
-        close_on_focus_loss = true;
-        pop_to_root_on_close = true;
-        theme.name = "tokyo-night";
-        faviconService = "twenty";
-        fallbacks = [ "shortcuts:kagi" ];
-        providers = {
-          core.entrypoints.sponsor.enabled = false;
-          applications = {
-            enabled = true;
-            preferences.defaultAction = "focus";
+      # Vicinae expects its config to be writable
+      imports = [
+        (mkMutableJsonConfig {
+          close_on_focus_loss = true;
+          pop_to_root_on_close = true;
+          theme.name = "tokyo-night";
+          faviconService = "twenty";
+          providers = {
+            core.entrypoints.sponsor.enabled = false;
+            applications = {
+              enabled = true;
+              preferences.defaultAction = "focus";
+            };
           };
-        };
-      };
+        })
+      ];
     };
     dconf.settings = {
       "org/gnome/settings-daemon/plugins/media-keys" = {

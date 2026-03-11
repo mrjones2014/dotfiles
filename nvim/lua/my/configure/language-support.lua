@@ -41,7 +41,6 @@ return {
     dev = true,
     cmd = 'Codesettings',
     ft = { 'json', 'jsonc', 'lua' },
-    dependencies = {},
   },
   { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codesettings-output' } },
   {
