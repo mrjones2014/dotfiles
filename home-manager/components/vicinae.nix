@@ -30,15 +30,19 @@ if isLinux then
       # Vicinae expects its config to be writable
       imports = [
         (mkMutableJsonConfig {
-          close_on_focus_loss = true;
-          pop_to_root_on_close = true;
-          theme.name = "tokyo-night";
-          faviconService = "twenty";
-          providers = {
-            core.entrypoints.sponsor.enabled = false;
-            applications = {
-              enabled = true;
-              preferences.defaultAction = "focus";
+          name = "vicinae";
+          target = "vicinae/settings.json";
+          managed = {
+            close_on_focus_loss = true;
+            pop_to_root_on_close = true;
+            theme.name = "tokyo-night";
+            faviconService = "twenty";
+            providers = {
+              core.entrypoints.sponsor.enabled = false;
+              applications = {
+                enabled = true;
+                preferences.defaultAction = "focus";
+              };
             };
           };
         })
