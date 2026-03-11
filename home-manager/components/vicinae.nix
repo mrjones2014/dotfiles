@@ -17,37 +17,33 @@ if isLinux then
         enable = true;
         autoStart = true;
       };
-      # easiest way to find these keys is:
-      # ```bash
-      # VICINAE_CFG_PATH=$(readlink ~/.config/vicinae/settings.json) \
-      #   rm ~/.config/vicinae/settings.json && \
-      #   cp $VICINAE_CFG_PATH ~/.config/vicinae/ && \
-      #   chmod +w ~/.config/vicinae/settings.json
-      # ```
-      # Then change settings through GUI,
-      # copy the modified settings back into here,
-      # and rebuild.
-      # Vicinae expects its config to be writable
-      imports = [
-        (mkMutableJsonConfig {
-          name = "vicinae";
-          target = "vicinae/settings.json";
-          managed = {
-            close_on_focus_loss = true;
-            pop_to_root_on_close = true;
-            theme.name = "tokyo-night";
-            faviconService = "twenty";
-            providers = {
-              core.entrypoints.sponsor.enabled = false;
-              applications = {
-                enabled = true;
-                preferences.defaultAction = "focus";
-              };
+    };
+    # easiest way to find these keys is to just
+    # change settings through GUI, then copy
+    # the relevant keys from the config file
+    # back into here.
+    # Vicinae expects its config to be writable,
+    # so we merge the existing config file (if it exists)
+    # with our nix-managed settings
+    imports = [
+      (mkMutableJsonConfig {
+        name = "vicinae";
+        target = "vicinae/settings.json";
+        managed = {
+          close_on_focus_loss = true;
+          pop_to_root_on_close = true;
+          theme.name = "tokyo-night";
+          faviconService = "twenty";
+          providers = {
+            core.entrypoints.sponsor.enabled = false;
+            applications = {
+              enabled = true;
+              preferences.defaultAction = "focus";
             };
           };
-        })
-      ];
-    };
+        };
+      })
+    ];
     dconf.settings = {
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = [
