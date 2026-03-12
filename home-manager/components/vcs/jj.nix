@@ -166,31 +166,14 @@ in
             if [ -n "''${1:-}" ]; then
               # Argument provided
               input="''$1"
-
-              # Check if argument contains a remote suffix
-              if [[ "$input" == *@* ]]; then
-                # Parse remote and bookmark (e.g., main@upstream)
-                target="$input"
-                remote="''${input#*@}"
-                branch="''${input%%@*}"
-
-                echo "Fetching $branch from $remote..."
-                jj git fetch --remote "$remote" -b "$branch" && jj rebase -d "$target"
-              else
-                # No remote suffix, default to @origin
-                target="$input@origin"
-
-                echo "Fetching $input..."
-                jj git fetch -b "$input" && jj rebase -d "$target"
-              fi
+              target="$input@origin"
+              jj git fetch && jj rebase -d "$target"
             elif [ "$parent_bookmark" = "master" ] || [ "$parent_bookmark" = "main" ]; then
               # fetch and rebase to bookmark
-              echo "Fetching $parent_bookmark@origin..."
-              jj git fetch -b "$parent_bookmark" && jj rebase -d "$parent_bookmark@origin"
+              jj git fetch && jj rebase -d "$parent_bookmark@origin"
             else
               # fetch and rebase to trunk
-              echo "Fetching $trunk@origin..."
-              jj git fetch -b "$trunk" && jj rebase -d "$trunk@origin"
+              jj git fetch && jj rebase -d "$trunk@origin"
             fi
           ''
           # From jj docs:
