@@ -19,6 +19,10 @@ return {
       }):with_pair(cond.before_regex('%a+:?:?$', 3)):with_move(function(opts)
         return opts.char == '>'
       end))
+
+      -- use autopairs to match bold, italic, etc. in markdown
+      npairs.add_rule(Rule('**', '**', 'markdown'):with_move())
+      npairs.add_rule(Rule('_', '_', 'markdown'):with_move())
     end,
   },
   {
