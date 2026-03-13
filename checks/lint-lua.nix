@@ -11,6 +11,6 @@ pkgs.runCommand "lint-lua"
   }
   ''
     selene ${self}/nvim --config ${self}/nvim/selene.toml
-    stylua check ${self}/nvim
+    stylua ${self}/nvim --config-path ${self}/nvim/stylua.toml
     touch $out
   ''
