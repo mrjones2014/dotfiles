@@ -28,6 +28,7 @@
           "parsec-bin"
           "7zz"
           "discord"
+          "claude-code"
         ]
       );
   };

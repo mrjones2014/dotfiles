@@ -64,6 +64,7 @@ in
     ./components/_1password-shell.nix
     ./components/gnome
     ./components/opencode.nix
+    ./components/claude-code.nix
     ./components/recyclarr.nix
     ./components/terminal.nix
     ./components/vicinae.nix
