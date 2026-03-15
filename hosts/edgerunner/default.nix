@@ -38,7 +38,7 @@
 
   programs = {
     fish.enable = true;
-    coolercontrol.enable = true;
+    # coolercontrol.enable = true;
     gamemode.enable = true;
     gamescope.enable = true;
     steam = {
