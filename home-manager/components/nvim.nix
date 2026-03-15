@@ -104,6 +104,7 @@
       imagemagick
       jq
       lemmy-help
+      lsof
       mariadb
       openssl
       ripgrep
