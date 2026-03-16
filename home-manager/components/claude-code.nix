@@ -6,14 +6,11 @@ let
       jq = "${pkgs.jq}/bin/jq";
     in
     pkgs.writeShellScript "claude-code-statusline" ''
-      #!/usr/bin/env bash
-
       # read json from stdin
       input="$(cat)"
-      model=$(echo "$input" | ${jq} -r '.model.display_name')
+      model=$(echo "$input" | ${jq} -r '.model.id')
       percent_context=$(echo "$input" | ${jq} -r '.context_window.used_percentage // 0' | cut -d. -f1)
-      total_cost=$(echo "$input" | ${jq} -r '.cost.total_cost_usd // 0')
-      session_id=$(echo "$input" | ${jq} -r '.session_id // ""')
+      total_cost=$(printf '%.2f' "$(echo "$input" | ${jq} -r '.cost.total_cost_usd // 0')")
       vim_mode=$(echo "$input" | ${jq} -r '.vim.mode // ""')
       # ANSI color helpers
       reset=$'\e[0m'
@@ -33,21 +30,20 @@ let
       fg="${palette.hexToAnsiRgb palette.fg}"
       # Separators
       sep_right=""
-      sep_left=""
       # Vim mode styling
       case "$vim_mode" in
-        normal|"")
-          mode_icon=""
-          mode_bg="$green"
-          ;;
-        insert)
-          mode_icon=""
-          mode_bg="$blue"
-          ;;
-        *)
-          mode_icon=""
-          mode_bg="$green"
-          ;;
+      NORMAL | "")
+        mode_icon=""
+        mode_bg="$green"
+        ;;
+      INSERT)
+        mode_icon=""
+        mode_bg="$blue"
+        ;;
+      *)
+        mode_icon=""
+        mode_bg="$green"
+        ;;
       esac
       # Context color based on percentage
       if [ "$percent_context" -lt 50 ]; then
@@ -63,20 +59,14 @@ let
       out+="$(bg_rgb "$mode_bg")$(fg_rgb "$black")$bold $mode_icon $reset"
       out+="$(fg_rgb "$mode_bg")$(bg_rgb "$gray")$sep_right$reset"
       # Model segment
-      out+="$(bg_rgb "$gray")$(fg_rgb "$fg")  $model $reset"
+      out+="$(bg_rgb "$gray")$(fg_rgb "$fg") $model $reset"
       out+="$(fg_rgb "$gray")$(bg_rgb "$surface0")$sep_right$reset"
       # Context segment
-      out+="$(bg_rgb "$surface0")$(fg_rgb "$ctx_color")  $percent_context%% $reset"
+      out+="$(bg_rgb "$surface0")$(fg_rgb "$ctx_color") 󰭹 Context: $percent_context%$reset"
       # Spacer (just reset background)
-      out+="$(bg_rgb "$surface0") $reset"
+      out+="$(bg_rgb "$surface0")$reset"
       # Cost segment (right side)
       out+="$(bg_rgb "$surface0")$(fg_rgb "$fg") \$$total_cost $reset"
-      # Session ID (truncated to 8 chars)
-      if [ -n "$session_id" ]; then
-        short_id="''${session_id:0:8}"
-        out+="$(fg_rgb "$surface0")$(bg_rgb "$gray")$sep_left$reset"
-        out+="$(bg_rgb "$gray")$(fg_rgb "$fg")  $short_id $reset"
-      fi
       printf '%s' "$out"
     '';
 in
@@ -113,9 +103,11 @@ in
       spinnerTipsEnabled = false;
       feedbackSurveyRate = 0;
       defaultMode = "plan";
-      statusline = {
+      vimMode = true;
+      statusLine = {
         type = "command";
-        command = "${statusline}/bin/claude-code-statusline";
+        command = "${statusline}";
+        padding = 0;
       };
     };
   };
