@@ -37,25 +37,6 @@
             url = "https://1password.sourcegraphcloud.com/.api/mcp";
           };
         };
-        # disable mcps globally
-        tools = {
-          "jira*" = false;
-          "notion*" = false;
-          "sourcegraph*" = false;
-        };
-        # enable on a custom agent
-        agent.toilbot = {
-          tools = {
-            "jira*" = true;
-            "notion*" = true;
-            "sourcegraph*" = true;
-          };
-          permissions = {
-            edit = "ask";
-            bash = "ask";
-            write = "ask";
-          };
-        };
       })
     ];
   };

@@ -54,6 +54,7 @@ return {
     'CodeCompanionNew',
     'CodeCompanionClear',
     'CodeCompanionToggle',
+    'CodeCompanionActions',
   },
   keys = {
     {
@@ -85,6 +86,11 @@ return {
     },
   },
   opts = {
+    prompt_library = {
+      markdown = {
+        dirs = { '~/git/dotfiles/prompts' },
+      },
+    },
     adapters = {
       acp = {
         claude_code = function()

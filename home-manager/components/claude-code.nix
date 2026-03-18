@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  isWorkMac,
+  ...
+}:
 {
   home.packages = with pkgs; [
     ast-grep
@@ -9,31 +14,38 @@
     sd
     yq-go
   ];
-  programs.claude-code = {
-    enable = true;
-    memory.text = ''
-      ## Installed CLI tools
-
-      - **ast-grep** is installed — use for structural code searches and transformations on supported languages
-      - **fd** is installed — prefer over `find` for file finding by name/pattern
-      - **GNU parallel** is installed — use for concurrent shell tasks when beneficial
-      - **jq** is installed — use for JSON processing in shell pipelines
-      - **ripgrep** (`rg`) is installed — prefer over `grep` for shell searches
-      - **sd** is installed — prefer over `sed` for find-and-replace in files
-      - **yq** is installed — use for YAML processing in shell pipelines
-    '';
-    settings = {
-      # do not ever commit anything on my behalf
-      includeGitInstructions = false;
-      attribution = {
-        commit = "";
-        pr = "";
+  programs.claude-code = lib.mkMerge [
+    {
+      enable = true;
+      settings = {
+        # do not ever commit anything on my behalf
+        includeGitInstructions = false;
+        attribution = {
+          commit = "";
+          pr = "";
+        };
+        spinnerTipsEnabled = false;
+        feedbackSurveyRate = 0;
+        permissions = {
+          defaultMode = "plan";
+        };
       };
-      spinnerTipsEnabled = false;
-      feedbackSurveyRate = 0;
-      permissions = {
-        defaultMode = "plan";
+    }
+    (lib.mkIf isWorkMac {
+      mcpServers = {
+        jira = {
+          url = "https://mcp.atlassian.com/v1/mcp";
+          type = "http";
+        };
+        notion = {
+          url = "https://mcp.notion.com/mcp";
+          type = "http";
+        };
+        sourcegraph = {
+          url = "https://1password.sourcegraphcloud.com/.api/mcp";
+          type = "http";
+        };
       };
-    };
-  };
+    })
+  ];
 }
