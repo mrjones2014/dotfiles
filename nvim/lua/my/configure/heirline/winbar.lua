@@ -404,7 +404,7 @@ local CodeCompanionSpinner = {
       provider = function(self)
         return string.format(' %s Processing... ', self.spinner_frames[codecompanion_state.spinner_idx])
       end,
-      hl = { bg = 'surface0', fg = 'yellow', bold = true },
+      hl = { bg = 'surface0', fg = 'gray', bold = true },
     },
   },
 }
@@ -428,7 +428,9 @@ local function setup_codecompanion_autocmds()
           0,
           100,
           vim.schedule_wrap(function()
-            codecompanion_state.spinner_idx = (codecompanion_state.spinner_idx % 10) + 1
+            codecompanion_state.spinner_idx = (
+              codecompanion_state.spinner_idx % #CodeCompanionSpinner.static.spinner_frames
+            ) + 1
             if codecompanion_state.winid and vim.api.nvim_win_is_valid(codecompanion_state.winid) then
               vim.api.nvim_win_call(codecompanion_state.winid, function()
                 vim.cmd('redrawstatus')
