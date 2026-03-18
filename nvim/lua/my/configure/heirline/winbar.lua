@@ -296,27 +296,31 @@ local CodeCompanionMode = {
       local current_mode_id = modes and modes.currentModeId or ''
 
       -- Find the full mode info
-      for _, mode in ipairs(modes and modes.availableModes or {}) do
-        if mode.id == current_mode_id then
-          self.mode_name = mode.name
-          self.mode_id = mode.id
-          break
-        end
+      local mode_info = vim.iter(modes and modes.availableModes or {}):find(function(mode)
+        return mode.id == current_mode_id
+      end)
+      if mode_info then
+        self.mode_name = mode_info.name
+        self.mode_id = mode_info.id
       end
     end
 
-    self.mode_name = self.mode_name or 'Default'
+    -- I have plan mode set as default in plugin settings,
+    -- and there is a small delay on startup before it resolves
+    -- the actual mode, so default to plan mode to avoid
+    -- UI jitter
+    self.mode_name = self.mode_name or 'Plan Mode'
     if self.mode_name == 'Default' then
       self.mode_name = 'Build Mode'
     end
-    self.mode_id = self.mode_id or 'default'
+    self.mode_id = self.mode_id or 'plan'
   end,
   static = {
     mode_icons = {
-      default = '󰙨',
-      acceptEdits = '󰄬',
-      plan = '󰓅',
-      dontAsk = '󰛑',
+      default = '',
+      acceptEdits = '',
+      plan = '󰙬',
+      dontAsk = '󱐋',
       bypassPermissions = '󰒃',
     },
   },
@@ -326,7 +330,7 @@ local CodeCompanionMode = {
   },
   {
     provider = function(self)
-      local icon = self.mode_icons[self.mode_id] or '󰙨'
+      local icon = self.mode_icons[self.mode_id] or ''
       return string.format(' %s %s ', icon, self.mode_name)
     end,
     hl = { bg = 'surface2', fg = 'blue', bold = true },

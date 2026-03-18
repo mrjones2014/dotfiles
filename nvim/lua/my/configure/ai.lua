@@ -49,11 +49,7 @@ return {
   version = false,
   cmd = {
     'CodeCompanionChat',
-    'CodeCompanionInline',
-    'CodeCompanionRefactor',
-    'CodeCompanionNew',
     'CodeCompanionClear',
-    'CodeCompanionToggle',
     'CodeCompanionActions',
   },
   keys = {
@@ -99,7 +95,7 @@ return {
             error('op.nvim is not installed, claude_code adapter will not work', vim.log.levels.ERROR)
           end
           return require('codecompanion.adapters').extend('claude_code', {
-            defaults = { mode = 'plan' },
+            defaults = { mode = 'plan', model = 'opus' },
             env = {
               CLAUDE_CODE_OAUTH_TOKEN = op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
             },
