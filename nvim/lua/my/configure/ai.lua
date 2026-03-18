@@ -1,4 +1,16 @@
 local window = require('my.utils.window')
+local vcs = require('my.utils.vcs')
+
+local is_work_repo = vcs.is_work_repo()
+
+-- UI tweaks
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'CodeCompanionChatOpened',
+  callback = function()
+    vim.wo.signcolumn = 'no'
+    vim.wo.number = false
+  end,
+})
 
 return {
   'olimorris/codecompanion.nvim',
@@ -49,10 +61,6 @@ return {
       desc = 'codecompanion: chat',
       mode = { 'n', 'v' },
     },
-    { '<leader>ae', desc = 'codecompanion: edit', mode = { 'v' } },
-    { '<leader>aB', desc = 'codecompanion: add all open buffers' },
-    { '<leader>ac', desc = 'codecompanion: add current buffer' },
-    { '<leader>aC', desc = 'codecompanion: toggle selection' },
     {
       '<leader>af',
       function()
@@ -65,8 +73,6 @@ return {
       end,
       desc = 'codecompanion: focus',
     },
-    { '<leader>ah', desc = 'codecompanion: select history' },
-    { '<leader>an', desc = 'codecompanion: new chat' },
     {
       '<leader>at',
       function()
@@ -77,15 +83,19 @@ return {
   },
   opts = {
     adapters = {
-      copilot = function()
-        return require('codecompanion.adapters').extend('copilot', {
-          schema = {
-            model = {
-              default = 'gpt-4o',
+      acp = {
+        claude_code = function()
+          local ok, op = pcall(require, 'op')
+          if not ok then
+            error('op.nvim is not installed, claude_code adapter will not work', vim.log.levels.ERROR)
+          end
+          return require('codecompanion.adapters').extend('claude_code', {
+            env = {
+              CLAUDE_CODE_OAUTH_TOKEN = op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
             },
-          },
-        })
-      end,
+          })
+        end,
+      },
     },
     extensions = {
       spinner = {},
@@ -94,11 +104,14 @@ return {
         opts = {
           picker = 'snacks',
           expiration_days = 7,
-          continue_last_chat = true,
+          -- this setting doesn't play nicely with ACP adapters
+          -- continue_last_chat = true,
           delete_on_clearing_chat = true,
           title_generation_opts = {
             adapter = 'copilot',
             model = 'gpt-4o',
+            refresh_every_n_prompts = 2,
+            max_refreshes = 3,
           },
           summary = {
             generation_opts = {
@@ -117,13 +130,13 @@ return {
             modes = { n = 'gX' },
           },
         },
-        adapter = 'opencode',
+        adapter = is_work_repo and 'opencode' or 'claude_code',
       },
       inline = {
-        adapter = 'opencode',
+        adapter = is_work_repo and 'opencode' or 'claude_code',
       },
       cmd = {
-        adapter = 'opencode',
+        adapter = is_work_repo and 'opencode' or 'claude_code',
       },
     },
   },

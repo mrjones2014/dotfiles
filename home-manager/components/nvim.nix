@@ -110,6 +110,17 @@
       ripgrep
       sqlite
       yq-go
+
+      # TODO this can be dropped when renamed upstream
+      # package was renamed and codecompanion.nvim
+      # looks for the new path
+      (pkgs.symlinkJoin {
+        name = "claude-agent-acp";
+        paths = [ pkgs.claude-code-acp ];
+        postBuild = ''
+          ln -s ${pkgs.claude-code-acp}/bin/claude-code-acp $out/bin/claude-agent-acp
+        '';
+      })
     ];
   };
 }
