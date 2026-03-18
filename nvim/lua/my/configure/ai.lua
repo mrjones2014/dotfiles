@@ -16,13 +16,12 @@ return {
   'olimorris/codecompanion.nvim',
   dev = true,
   dependencies = {
+    'folke/snacks.nvim',
     'nvim-lua/plenary.nvim',
-    'franco-ruggeri/codecompanion-spinner.nvim',
     -- TODO switch this back if/when the PR merges
     -- https://github.com/ravitemer/codecompanion-history.nvim/pull/74
     -- 'ravitemer/codecompanion-history.nvim',
     { 'cenk1cenk2/codecompanion-history.nvim', branch = 'patch-1' },
-    'folke/snacks.nvim',
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion' } },
     {
       'zbirenbaum/copilot.lua',
@@ -109,7 +108,6 @@ return {
       },
     },
     extensions = {
-      spinner = {},
       history = {
         enabled = true,
         opts = {
@@ -121,8 +119,7 @@ return {
           title_generation_opts = {
             adapter = 'copilot',
             model = 'gpt-4o',
-            -- otherwise it uses memory and doesn't generate good titles lol
-            refresh_every_n_prompts = 1,
+            refresh_every_n_prompts = 2,
             max_refreshes = 3,
           },
           summary = {
@@ -144,12 +141,8 @@ return {
         },
         adapter = is_work_repo and 'opencode' or 'claude_code',
       },
-      inline = {
-        adapter = is_work_repo and 'opencode' or 'claude_code',
-      },
-      cmd = {
-        adapter = is_work_repo and 'opencode' or 'claude_code',
-      },
+      inline = { adapter = 'copilot' },
+      cmd = { adapter = is_work_repo and 'opencode' or 'claude_code' },
     },
   },
 }
