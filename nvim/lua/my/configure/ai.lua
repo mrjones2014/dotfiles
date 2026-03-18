@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd('User', {
 
 return {
   'olimorris/codecompanion.nvim',
+  dev = true,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'franco-ruggeri/codecompanion-spinner.nvim',
@@ -99,6 +100,7 @@ return {
             error('op.nvim is not installed, claude_code adapter will not work', vim.log.levels.ERROR)
           end
           return require('codecompanion.adapters').extend('claude_code', {
+            defaults = { mode = 'plan' },
             env = {
               CLAUDE_CODE_OAUTH_TOKEN = op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
             },
