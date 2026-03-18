@@ -281,4 +281,183 @@ M.FilePosition = {
   },
 }
 
+local codecompanion_state = {
+  is_processing = false,
+  spinner_idx = 1,
+  timer = nil,
+}
+
+local CodeCompanionMode = {
+  init = function(self)
+    local chat = require('codecompanion').buf_get_chat(0)
+    if chat and chat.acp_connection and chat.acp_connection._modes then
+      local modes = chat.acp_connection._modes
+      local current_mode_id = modes and modes.currentModeId or ''
+
+      -- Find the full mode info
+      for _, mode in ipairs(modes and modes.availableModes or {}) do
+        if mode.id == current_mode_id then
+          self.mode_name = mode.name
+          self.mode_id = mode.id
+          break
+        end
+      end
+    end
+
+    self.mode_name = self.mode_name or 'Default'
+    if self.mode_name == 'Default' then
+      self.mode_name = 'Build Mode'
+    end
+    self.mode_id = self.mode_id or 'default'
+  end,
+  static = {
+    mode_icons = {
+      default = '󰙨',
+      acceptEdits = '󰄬',
+      plan = '󰓅',
+      dontAsk = '󰛑',
+      bypassPermissions = '󰒃',
+    },
+  },
+  {
+    provider = sep.rounded_left,
+    hl = { fg = 'surface2', bg = 'surface0' },
+  },
+  {
+    provider = function(self)
+      local icon = self.mode_icons[self.mode_id] or '󰙨'
+      return string.format(' %s %s ', icon, self.mode_name)
+    end,
+    hl = { bg = 'surface2', fg = 'blue', bold = true },
+  },
+  {
+    provider = sep.rounded_right,
+    hl = { fg = 'surface2', bg = 'surface1' },
+  },
+}
+
+local CodeCompanionAdapter = {
+  init = function(self)
+    local chat = require('codecompanion').buf_get_chat(0)
+    if chat and chat.adapter then
+      self.adapter_name = chat.adapter.formatted_name or chat.adapter.name or 'Unknown'
+    else
+      self.adapter_name = 'Unknown'
+    end
+  end,
+  {
+    provider = function(self)
+      return string.format('  %s ', self.adapter_name)
+    end,
+    hl = { bg = 'surface1', fg = 'cyan' },
+  },
+  {
+    provider = sep.rounded_right,
+    hl = { fg = 'surface1', bg = 'base' },
+  },
+}
+
+local CodeCompanionModel = {
+  init = function(self)
+    local chat = require('codecompanion').buf_get_chat(0)
+    if chat and chat.acp_connection and chat.acp_connection._models then
+      local models = chat.acp_connection._models
+      local current_model_id = models and models.currentModelId or 'Default'
+
+      -- Find the full model info
+      for _, model in ipairs(models and models.availableModels or {}) do
+        if model.modelId == current_model_id then
+          self.model_name = model.name
+          break
+        end
+      end
+    end
+
+    self.model_name = self.model_name or 'Default'
+  end,
+  {
+    provider = function(self)
+      return string.format(' 󰧑 %s ', self.model_name)
+    end,
+    hl = { bg = 'base', fg = 'green' },
+  },
+  {
+    provider = sep.rounded_right,
+    hl = { fg = 'base', bg = 'surface0' },
+  },
+}
+
+local CodeCompanionSpinner = {
+  static = {
+    spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+  },
+  {
+    condition = function()
+      return codecompanion_state.is_processing
+    end,
+    {
+      provider = function(self)
+        return string.format(' %s Processing... ', self.spinner_frames[codecompanion_state.spinner_idx])
+      end,
+      hl = { bg = 'surface0', fg = 'yellow', bold = true },
+    },
+  },
+}
+
+-- Setup autocmds to manage spinner state
+local function setup_codecompanion_autocmds()
+  local aug = vim.api.nvim_create_augroup('HeirlineCodeCompanion', { clear = true })
+
+  -- Start spinner on chat adapter request
+  vim.api.nvim_create_autocmd('User', {
+    group = aug,
+    pattern = 'CodeCompanionChatSubmitted',
+    callback = function()
+      codecompanion_state.is_processing = true
+
+      -- Start spinner timer if not already running
+      if not codecompanion_state.timer then
+        codecompanion_state.timer = vim.uv.new_timer()
+        codecompanion_state.timer:start(
+          0,
+          100,
+          vim.schedule_wrap(function()
+            codecompanion_state.spinner_idx = (codecompanion_state.spinner_idx % 10) + 1
+            vim.cmd('redrawstatus')
+          end)
+        )
+      end
+    end,
+  })
+
+  -- Stop spinner on chat completion
+  vim.api.nvim_create_autocmd('User', {
+    group = aug,
+    pattern = { 'CodeCompanionChatDone', 'CodeCompanionChatStopped' },
+    callback = function()
+      codecompanion_state.is_processing = false
+
+      -- Stop and cleanup timer
+      if codecompanion_state.timer then
+        codecompanion_state.timer:stop()
+        codecompanion_state.timer:close()
+        codecompanion_state.timer = nil
+      end
+
+      codecompanion_state.spinner_idx = 1
+      vim.cmd('redrawstatus')
+    end,
+  })
+end
+
+-- Initialize autocmds
+setup_codecompanion_autocmds()
+
+M.CodeCompanion = {
+  CodeCompanionMode,
+  CodeCompanionAdapter,
+  CodeCompanionModel,
+  CodeCompanionSpinner,
+}
+
 return M

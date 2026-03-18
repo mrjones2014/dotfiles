@@ -17,7 +17,10 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'franco-ruggeri/codecompanion-spinner.nvim',
-    'ravitemer/codecompanion-history.nvim',
+    -- TODO switch this back if/when the PR merges
+    -- https://github.com/ravitemer/codecompanion-history.nvim/pull/74
+    -- 'ravitemer/codecompanion-history.nvim',
+    { 'cenk1cenk2/codecompanion-history.nvim', branch = 'patch-1' },
     'folke/snacks.nvim',
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion' } },
     {
@@ -110,7 +113,8 @@ return {
           title_generation_opts = {
             adapter = 'copilot',
             model = 'gpt-4o',
-            refresh_every_n_prompts = 2,
+            -- otherwise it uses memory and doesn't generate good titles lol
+            refresh_every_n_prompts = 1,
             max_refreshes = 3,
           },
           summary = {

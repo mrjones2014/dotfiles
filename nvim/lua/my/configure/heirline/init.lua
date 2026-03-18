@@ -54,7 +54,8 @@ return {
           },
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
-            return conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
+            return vim.bo.filetype ~= 'codecompanion'
+              and (conditions.is_floating_window() or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0)))
           end,
         },
         statusline = { ---@diagnostic disable-line:missing-fields
@@ -73,13 +74,25 @@ return {
           sl.SpellCheckToggle,
         },
         winbar = { ---@diagnostic disable-line:missing-fields
-          shared.FileIcon('base'),
-          wb.UniqueFilename,
-          wb.Diagnostics,
-          shared.Trunc,
-          wb.Navic,
-          shared.Align,
-          wb.FilePosition,
+          fallthrough = false,
+          {
+            condition = function()
+              return vim.bo.filetype ~= 'codecompanion'
+            end,
+            shared.FileIcon('base'),
+            wb.UniqueFilename,
+            wb.Diagnostics,
+            shared.Trunc,
+            wb.Navic,
+            shared.Align,
+            wb.FilePosition,
+          },
+          {
+            condition = function()
+              return vim.bo.filetype == 'codecompanion'
+            end,
+            wb.CodeCompanion,
+          },
         },
       })
     end,
