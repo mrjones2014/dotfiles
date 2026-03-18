@@ -285,6 +285,7 @@ local codecompanion_state = {
   is_processing = false,
   spinner_idx = 1,
   timer = nil,
+  winid = nil,
 }
 
 local CodeCompanionMode = {
@@ -414,6 +415,7 @@ local function setup_codecompanion_autocmds()
     pattern = 'CodeCompanionChatSubmitted',
     callback = function()
       codecompanion_state.is_processing = true
+      codecompanion_state.winid = vim.api.nvim_get_current_win()
 
       -- Start spinner timer if not already running
       if not codecompanion_state.timer then
@@ -423,7 +425,11 @@ local function setup_codecompanion_autocmds()
           100,
           vim.schedule_wrap(function()
             codecompanion_state.spinner_idx = (codecompanion_state.spinner_idx % 10) + 1
-            vim.cmd('redrawstatus')
+            if codecompanion_state.winid and vim.api.nvim_win_is_valid(codecompanion_state.winid) then
+              vim.api.nvim_win_call(codecompanion_state.winid, function()
+                vim.cmd('redrawstatus')
+              end)
+            end
           end)
         )
       end
@@ -445,7 +451,12 @@ local function setup_codecompanion_autocmds()
       end
 
       codecompanion_state.spinner_idx = 1
-      vim.cmd('redrawstatus')
+      if codecompanion_state.winid and vim.api.nvim_win_is_valid(codecompanion_state.winid) then
+        vim.api.nvim_win_call(codecompanion_state.winid, function()
+          vim.cmd('redrawstatus')
+        end)
+      end
+      codecompanion_state.winid = nil
     end,
   })
 end
