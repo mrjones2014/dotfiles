@@ -8,19 +8,19 @@ return {
       options = {
         nixos = {
           expr = string.format(
-            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).nixosConfigurations.tower.options',
+            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).nixosConfigurations."edgerunner".options',
             vim.env.HOME
           ),
         },
         home_manager = {
           expr = string.format(
-            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).nixosConfigurations."tower".modules.home-manager',
+            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).nixosConfigurations."edgerunner".modules.home-manager',
             vim.env.HOME
           ),
         },
         nix_darwin = {
           expr = string.format(
-            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).darwinConfigurations."darwin".options',
+            '(builtins.getFlake ("git+file://" + toString %s/git/dotfiles/.)).darwinConfigurations."aldecaldo".options',
             vim.env.HOME
           ),
         },

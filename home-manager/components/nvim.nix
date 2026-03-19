@@ -2,7 +2,6 @@
   config,
   pkgs,
   isLinux,
-  isWorkMac,
   ...
 }:
 {
@@ -52,90 +51,76 @@
         [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]
     );
 
-    extraPackages =
-      with pkgs;
-      [
-        # for compiling Treesitter parsers
-        gcc
-        tree-sitter
+    extraPackages = with pkgs; [
+      # for compiling Treesitter parsers
+      gcc
+      tree-sitter
 
-        # debuggers
-        lldb # comes with lldb-vscode
+      # debuggers
+      lldb # comes with lldb-vscode
 
-        # formatters and linters
-        eslint_d
-        nixfmt
-        prettierd
-        rustfmt
-        selene
-        shfmt
-        statix
-        stylua
-        yamlfmt
+      # formatters and linters
+      eslint_d
+      nixfmt
+      prettierd
+      rustfmt
+      selene
+      shfmt
+      statix
+      stylua
+      yamlfmt
 
-        # LSP servers
-        bash-language-server
-        cargo # sometimes required for rust-analyzer to work
-        copilot-language-server
-        gopls
-        graphql-language-service-cli
-        just-lsp
-        llvmPackages.clang-tools
-        lua
-        lua-language-server
-        markdown-oxide
-        nil
-        nixd
-        nodePackages_latest.typescript-language-server
-        nodejs
-        rust-analyzer
-        shellcheck
-        taplo
-        vscode-langservers-extracted # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
-        yaml-language-server
+      # LSP servers
+      bash-language-server
+      cargo # sometimes required for rust-analyzer to work
+      copilot-language-server
+      gopls
+      graphql-language-service-cli
+      just-lsp
+      llvmPackages.clang-tools
+      lua
+      lua-language-server
+      markdown-oxide
+      nil
+      nixd
+      nodePackages_latest.typescript-language-server
+      nodejs
+      rust-analyzer
+      shellcheck
+      taplo
+      vscode-langservers-extracted # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
+      yaml-language-server
 
-        # other utils and plugin dependencies
-        cargo
-        cargo-nextest
-        clippy
-        curl
-        fd
-        fzf
-        gh
-        glow
-        gnumake
-        imagemagick
-        jq
-        lemmy-help
-        lsof
-        mariadb
-        openssl
-        ripgrep
-        sqlite
-        yq-go
+      # other utils and plugin dependencies
+      cargo
+      cargo-nextest
+      clippy
+      curl
+      fd
+      fzf
+      gh
+      glow
+      gnumake
+      imagemagick
+      jq
+      lemmy-help
+      lsof
+      mariadb
+      openssl
+      ripgrep
+      sqlite
+      yq-go
 
-        # TODO this can be dropped when renamed upstream
-        # package was renamed and codecompanion.nvim
-        # looks for the new path
-        (pkgs.symlinkJoin {
-          name = "claude-agent-acp";
-          paths = [ pkgs.claude-code-acp ];
-          postBuild = ''
-            ln -s ${pkgs.claude-code-acp}/bin/claude-code-acp $out/bin/claude-agent-acp
-          '';
-        })
-      ]
-      ++ lib.lists.optionals isWorkMac [
-        # TODO this can be dropped when renamed upstream
-        # package was renamed and codecompanion.nvim
-        # looks for the new path
-        (pkgs.symlinkJoin {
-          name = "agent";
-          paths = [ pkgs.cursor-cli ];
-          postBuild = ''
-            ln -s ${pkgs.cursor-cli}/bin/cursor-agent $out/bin/agent
-          '';
-        })
-      ];
+      # TODO this can be dropped when renamed upstream
+      # package was renamed and codecompanion.nvim
+      # looks for the new path
+      (pkgs.symlinkJoin {
+        name = "claude-agent-acp";
+        paths = [ pkgs.claude-code-acp ];
+        postBuild = ''
+          ln -s ${pkgs.claude-code-acp}/bin/claude-code-acp $out/bin/claude-agent-acp
+        '';
+      })
+    ];
   };
 }

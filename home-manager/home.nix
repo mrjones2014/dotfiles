@@ -62,9 +62,10 @@ in
   imports = [
     ./shared.nix
     ./components/_1password-shell.nix
+    ./components/claude-code.nix
+    ./components/cursor-cli.nix
     ./components/gnome
     ./components/opencode.nix
-    ./components/claude-code.nix
     ./components/recyclarr.nix
     ./components/terminal.nix
     ./components/vicinae.nix
