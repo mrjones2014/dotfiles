@@ -101,6 +101,14 @@ return {
             },
           })
         end,
+        cursor_cli = function()
+          return require('codecompanion.adapters').extend('cursor_cli', {
+            defaults = {
+              model = 'opus-4.6-thinking',
+              mode = 'plan',
+            },
+          })
+        end,
       },
     },
     extensions = {
@@ -135,10 +143,10 @@ return {
             modes = { n = 'gX' },
           },
         },
-        adapter = is_work_repo and 'opencode' or 'claude_code',
+        adapter = is_work_repo and 'cursor_cli' or 'claude_code',
       },
       inline = { adapter = 'copilot' },
-      cmd = { adapter = is_work_repo and 'opencode' or 'claude_code' },
+      cmd = { adapter = is_work_repo and 'cursor_cli' or 'claude_code' },
     },
   },
 }
