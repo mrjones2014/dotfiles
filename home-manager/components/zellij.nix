@@ -21,7 +21,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
       functions."_update_zellij_tab_name" = {
         onEvent = "fish_prompt";
         onVariable = "PWD";
-        body = ''
+        body = /* fish */ ''
           set -l cwd (pwd)
           if git rev-parse --is-inside-worktree >/dev/null 2>&1
               # just show basename if inside a git worktree
@@ -44,7 +44,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
   };
 
   xdg.configFile = {
-    "zellij/config.kdl".text = ''
+    "zellij/config.kdl".text = /* kdl */ ''
       theme "tokyo-night-dark"
       pane_frames false
       copy_on_select true
@@ -156,7 +156,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
         }
       }
     '';
-    "zellij/layouts/default.kdl".text = ''
+    "zellij/layouts/default.kdl".text = /* kdl */ ''
       layout {
         default_tab_template {
           pane {
