@@ -21,8 +21,15 @@ return {
       end))
 
       -- use autopairs to match bold, italic, etc. in markdown
-      npairs.add_rule(Rule('**', '**', 'markdown'):with_move())
-      npairs.add_rule(Rule('_', '_', 'markdown'):with_move())
+      local function md_pair_cond(pair_len)
+        return function(opts)
+          local prev = opts.col > pair_len and opts.line:sub(opts.col - pair_len, opts.col - pair_len) or ''
+          local next = opts.line:sub(opts.col, opts.col)
+          return (prev == '' or prev:match('%s') ~= nil) and (next == '' or next:match('%s') ~= nil)
+        end
+      end
+      npairs.add_rule(Rule('**', '**', 'markdown'):with_pair(md_pair_cond(2)):with_move())
+      npairs.add_rule(Rule('_', '_', 'markdown'):with_pair(md_pair_cond(1)):with_move())
     end,
   },
   {
