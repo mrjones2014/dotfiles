@@ -3,14 +3,8 @@ local vcs = require('my.utils.vcs')
 
 local is_work_repo = vcs.is_work_repo()
 
--- UI tweaks
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'CodeCompanionChatOpened',
-  callback = function()
-    vim.wo.signcolumn = 'no'
-    vim.wo.number = false
-  end,
-})
+-- Custom chat UI
+require('ccui').setup()
 
 return {
   'olimorris/codecompanion.nvim',
@@ -64,10 +58,16 @@ return {
     {
       '<leader>af',
       function()
-        for _, win in ipairs(vim.api.nvim_list_wins()) do
-          local buf = vim.api.nvim_win_get_buf(win)
-          if vim.bo[buf].filetype == 'codecompanion' and not window.is_floating_window(win) then
-            vim.api.nvim_set_current_win(win)
+        if require('ccui').is_visible() then
+          require('ccui').focus_input()
+        else
+          -- Fallback: find any CC window
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.bo[buf].filetype == 'codecompanion' and not window.is_floating_window(win) then
+              vim.api.nvim_set_current_win(win)
+              break
+            end
           end
         end
       end,
