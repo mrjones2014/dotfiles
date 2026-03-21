@@ -4,7 +4,11 @@ local M = {}
 
 local AUGROUP = 'ccui'
 
----Register all CodeCompanion autocmd handlers
+local is_processing = false
+local spinner_idx = 1
+---@type uv.uv_timer_t|nil
+local spinner_timer = nil
+
 function M.setup()
   local group = vim.api.nvim_create_augroup(AUGROUP, { clear = true })
 
@@ -70,8 +74,6 @@ function M.setup()
         return
       end
       M.stop_spinner(session)
-      require('ccui.winbar').refresh_metadata(session)
-      require('ccui.winbar').redraw(session)
     end,
   })
 
@@ -91,67 +93,41 @@ function M.setup()
   vim.api.nvim_create_autocmd('User', {
     group = group,
     pattern = 'CodeCompanionChatAdapter',
-    callback = function(args)
-      local data = args.data or {}
-      local session = data.id and State.get(data.id)
-      if not session then
-        return
-      end
-      if data.adapter then
-        session.adapter_name = data.adapter.formatted_name or data.adapter.name or session.adapter_name
-      end
-      require('ccui.winbar').redraw(session)
-    end,
+    callback = function() end,
   })
 
   vim.api.nvim_create_autocmd('User', {
     group = group,
     pattern = 'CodeCompanionChatModel',
-    callback = function(args)
-      local data = args.data or {}
-      local session = data.id and State.get(data.id)
-      if not session then
-        return
-      end
-      if data.model then
-        session.model_name = data.model
-      end
-      require('ccui.winbar').redraw(session)
-    end,
+    callback = function() end,
   })
 
   vim.api.nvim_create_autocmd('User', {
     group = group,
     pattern = 'CodeCompanionChatACPModeChanged',
-    callback = function()
-      local session = State.active()
-      if session then
-        require('ccui.winbar').refresh_metadata(session)
-        require('ccui.winbar').redraw(session)
-      end
-    end,
+    callback = function() end,
   })
 end
 
----Start the spinner animation for a session
----@param session ccui.Session
+---@param session CcuiSession
 function M.start_spinner(session)
-  session.is_processing = true
-  session.spinner_idx = 1
+  is_processing = true
+  spinner_idx = 1
 
-  if session.timer then
+  if spinner_timer then
     return
   end
 
-  session.timer = vim.uv.new_timer()
-  session.timer:start(
+  spinner_timer = assert(vim.uv.new_timer())
+  spinner_timer:start(
     0,
     100,
     vim.schedule_wrap(function()
-      if not session.is_processing then
+      if not is_processing then
         return
       end
-      session.spinner_idx = (session.spinner_idx % #State.spinner_frames) + 1
+      local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+      spinner_idx = (spinner_idx % #spinner_frames) + 1
       if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
         vim.api.nvim_win_call(session.input_winid, function()
           vim.cmd('redrawstatus')
@@ -161,16 +137,15 @@ function M.start_spinner(session)
   )
 end
 
----Stop the spinner animation for a session
----@param session ccui.Session
+---@param session CcuiSession
 function M.stop_spinner(session)
-  session.is_processing = false
-  session.spinner_idx = 1
+  is_processing = false
+  spinner_idx = 1
 
-  if session.timer then
-    session.timer:stop()
-    session.timer:close()
-    session.timer = nil
+  if spinner_timer then
+    spinner_timer:stop()
+    spinner_timer:close()
+    spinner_timer = nil
   end
 
   if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
@@ -178,6 +153,16 @@ function M.stop_spinner(session)
       vim.cmd('redrawstatus')
     end)
   end
+end
+
+---@return boolean
+function M.is_processing()
+  return is_processing
+end
+
+---@return number
+function M.get_spinner_idx()
+  return spinner_idx
 end
 
 return M

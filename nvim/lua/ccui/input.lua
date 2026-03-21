@@ -1,34 +1,36 @@
-local api = vim.api
-local NS_PLACEHOLDER = api.nvim_create_namespace('ccui_placeholder')
-
 local M = {}
 
----Create a new input buffer
----@return number buffer number
+local NS_PLACEHOLDER = vim.api.nvim_create_namespace('ccui_placeholder')
+
+---@return number
 function M.create_buf()
   vim.treesitter.language.register('markdown', 'codecompanion_input')
 
-  local buf = api.nvim_create_buf(false, true)
+  local buf = vim.api.nvim_create_buf(false, true)
   vim.bo[buf].buftype = 'nofile'
   vim.bo[buf].swapfile = false
   vim.bo[buf].filetype = 'codecompanion_input'
   return buf
 end
 
----Submit the input buffer contents to CodeCompanion
----@param session ccui.Session
+---@param session CcuiSession
 function M.submit(session)
-  if not session or not api.nvim_buf_is_valid(session.input_bufnr) then
+  if not session or not vim.api.nvim_buf_is_valid(session.input_bufnr) then
     return
   end
 
-  local lines = api.nvim_buf_get_lines(session.input_bufnr, 0, -1, false)
+  local events = require('ccui.events')
+  if events.is_processing() then
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(session.input_bufnr, 0, -1, false)
   local text = vim.trim(table.concat(lines, '\n'))
   if text == '' then
     return
   end
 
-  api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, { '' })
+  vim.api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, { '' })
   M.refresh_placeholder(session.input_bufnr)
 
   local cc = require('codecompanion')
@@ -38,103 +40,95 @@ function M.submit(session)
   end
 
   chat.ui:unlock_buf()
-  local lineCount = api.nvim_buf_line_count(chat.bufnr)
-  local textLines = vim.split(text, '\n', { plain = true })
-  api.nvim_buf_set_lines(chat.bufnr, lineCount, lineCount, false, textLines)
+  local line_count = vim.api.nvim_buf_line_count(chat.bufnr)
+  local text_lines = vim.split(text, '\n', { plain = true })
+  vim.api.nvim_buf_set_lines(chat.bufnr, line_count, line_count, false, text_lines)
+
+  local chat_lines = vim.api.nvim_buf_get_lines(chat.bufnr, 0, -1, false)
+  for i, line in ipairs(chat_lines) do
+    if line:match('^%s*$') or line:match('Enter prompt') then
+      vim.api.nvim_buf_clear_namespace(chat.bufnr, -1, i - 1, i)
+    end
+  end
+
+  -- Re-enable auto-scroll by resetting cursor tracking state
+  chat.ui.cursor.has_moved = false
+  chat.ui.cursor.pos = nil
 
   chat:submit()
 end
 
----Set up keymaps on the input buffer
----@param session ccui.Session
+---@param session CcuiSession
 function M.setup_keymaps(session)
   local buf = session.input_bufnr
-  local opts = { buffer = buf, silent = true }
 
-  vim.keymap.set('n', '<CR>', function()
-    M.submit(session)
-  end, opts)
-
-  vim.keymap.set({ 'n', 'i' }, '<C-s>', function()
-    M.submit(session)
-  end, opts)
-
-  vim.keymap.set({ 'n', 'i' }, '<C-c>', function()
-    local cc = require('codecompanion')
-    local chat = cc.buf_get_chat(session.chat_bufnr)
-    if chat then
-      chat:stop()
-    end
-  end, opts)
-
-  vim.keymap.set('n', 'q', function()
-    local cc = require('codecompanion')
-    local chat = cc.buf_get_chat(session.chat_bufnr)
-    if chat then
-      chat:stop()
-    end
-  end, opts)
-
-  vim.keymap.set('n', 'gh', function()
-    local cc = require('codecompanion')
-    local chat = cc.buf_get_chat(session.chat_bufnr)
-    if not chat then
-      return
-    end
-
-    local chatWinid = session.chat_winid
-    if chatWinid and vim.api.nvim_win_is_valid(chatWinid) then
-      vim.wo[chatWinid].winfixbuf = false
-    end
-
-    local config = require('codecompanion.config')
-    local keymaps = config.interactions.chat.keymaps
-    if keymaps and keymaps['Saved Chats'] and keymaps['Saved Chats'].callback then
-      keymaps['Saved Chats'].callback(chat)
-    end
-
-    vim.schedule(function()
-      if chatWinid and vim.api.nvim_win_is_valid(chatWinid) then
-        vim.wo[chatWinid].winfixbuf = true
-      end
-    end)
-  end, opts)
-end
-
----Set up autocmds for placeholder management
----@param bufnr number buffer number
-function M.setup_autocmds(bufnr)
-  local group = api.nvim_create_augroup('ccui_input_' .. bufnr, { clear = true })
-
-  api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
-    group = group,
-    buffer = bufnr,
-    callback = function()
-      M.refresh_placeholder(bufnr)
-    end,
-  })
-
-  api.nvim_create_autocmd('InsertEnter', {
-    group = group,
-    buffer = bufnr,
-    callback = function()
-      M.refresh_placeholder(bufnr)
-    end,
-  })
-end
-
----Show or hide the placeholder based on buffer content
----@param bufnr number buffer number
-function M.refresh_placeholder(bufnr)
-  if not api.nvim_buf_is_valid(bufnr) then
+  -- Apply codecompanion's chat keymaps to the input buffer
+  local cc = require('codecompanion')
+  local chat = cc.buf_get_chat(session.chat_bufnr)
+  if not chat then
     return
   end
 
-  api.nvim_buf_clear_namespace(bufnr, NS_PLACEHOLDER, 0, -1)
+  -- TODO this doesn't work
+  -- we override send keymap
+  -- local config = require('codecompanion.config')
+  -- local cc_keymaps = vim.deepcopy(config.interactions.chat.keymaps)
+  -- cc_keymaps.send = cc_keymaps.send or {}
+  -- cc_keymaps.send.modes = {}
+  -- local callbacks = {}
+  -- for name, callback in pairs(require('codecompanion.interactions.chat.keymaps')) do
+  --   if name ~= 'send' then
+  --     callbacks[name] = callback
+  --   end
+  -- end
 
-  local lines = api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  -- require('codecompanion.utils.keymaps')
+  --   .new({
+  --     bufnr = buf,
+  --     callbacks = callbacks,
+  --     data = chat,
+  --     keymaps = cc_keymaps,
+  --   })
+  --   :set()
+
+  -- Override submit keymaps to use our input buffer submission
+  vim.keymap.set('n', '<CR>', function()
+    M.submit(session)
+  end, { buffer = buf, silent = true })
+end
+
+---@param bufnr number
+function M.setup_autocmds(bufnr)
+  local group = vim.api.nvim_create_augroup('ccui_input_' .. bufnr, { clear = true })
+
+  vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+    group = group,
+    buffer = bufnr,
+    callback = function()
+      M.refresh_placeholder(bufnr)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('InsertEnter', {
+    group = group,
+    buffer = bufnr,
+    callback = function()
+      M.refresh_placeholder(bufnr)
+    end,
+  })
+end
+
+---@param bufnr number
+function M.refresh_placeholder(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
+  end
+
+  vim.api.nvim_buf_clear_namespace(bufnr, NS_PLACEHOLDER, 0, -1)
+
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   if #lines == 1 and lines[1] == '' then
-    api.nvim_buf_set_extmark(bufnr, NS_PLACEHOLDER, 0, 0, {
+    vim.api.nvim_buf_set_extmark(bufnr, NS_PLACEHOLDER, 0, 0, {
       virt_text = {
         { 'Type your message...', 'CcuiPlaceholder' },
       },
@@ -142,5 +136,1079 @@ function M.refresh_placeholder(bufnr)
     })
   end
 end
+
+-- local x = {
+--   can_send_code = 'fn',
+--   config = {
+--     ERROR_NS = 60,
+--     INFO_NS = 59,
+--     adapters = {
+--       acp = {
+--         auggie_cli = 'auggie_cli',
+--         cagent = 'cagent',
+--         claude_code = 'fn',
+--         codex = 'codex',
+--         copilot_acp = 'copilot_acp',
+--         cursor_cli = 'fn',
+--         gemini_cli = 'gemini_cli',
+--         goose = 'goose',
+--         kimi_cli = 'kimi_cli',
+--         kiro = 'kiro',
+--         mistral_vibe = 'mistral_vibe',
+--         opencode = 'opencode',
+--         opts = {
+--           show_presets = true,
+--         },
+--       },
+--       http = {
+--         anthropic = 'anthropic',
+--         azure_openai = 'azure_openai',
+--         copilot = 'copilot',
+--         deepseek = 'deepseek',
+--         gemini = 'gemini',
+--         githubmodels = 'githubmodels',
+--         huggingface = 'huggingface',
+--         jina = 'jina',
+--         mistral = 'mistral',
+--         novita = 'novita',
+--         ollama = 'ollama',
+--         openai = 'openai',
+--         openai_responses = 'openai_responses',
+--         opts = {
+--           allow_insecure = false,
+--           cache_models_for = 1800,
+--           show_model_choices = true,
+--           show_presets = true,
+--         },
+--         tavily = 'tavily',
+--         xai = 'xai',
+--       },
+--       opts = {
+--         cmd_timeout = 20000,
+--       },
+--     },
+--     constants = {
+--       LLM_ROLE = 'llm',
+--       SYSTEM_ROLE = 'system',
+--       USER_ROLE = 'user',
+--     },
+--     display = {
+--       action_palette = {
+--         height = 10,
+--         opts = {
+--           show_preset_actions = true,
+--           show_preset_prompts = true,
+--           show_preset_rules = true,
+--           title = 'CodeCompanion actions',
+--         },
+--         prompt = 'Prompt ',
+--         provider = 'snacks',
+--         width = 95,
+--       },
+--       chat = {
+--         auto_scroll = true,
+--         floating_window = {
+--           border = 'single',
+--           height = 0.8,
+--           opts = {},
+--           relative = 'editor',
+--           width = 0.9,
+--         },
+--         fold_context = false,
+--         fold_reasoning = true,
+--         icons = {
+--           buffer_sync_all = '󰪴 ',
+--           buffer_sync_diff = ' ',
+--           chat_fold = ' ',
+--           tool_failure = '  ',
+--           tool_in_progress = '  ',
+--           tool_pending = '  ',
+--           tool_success = '  ',
+--         },
+--         intro_message = 'Welcome to CodeCompanion ✨! Press ? for options',
+--         separator = '─',
+--         show_context = true,
+--         show_header_separator = false,
+--         show_reasoning = true,
+--         show_settings = false,
+--         show_token_count = true,
+--         show_tools_processing = true,
+--         start_in_insert_mode = false,
+--         token_count = 'fn',
+--         window = {
+--           border = 'single',
+--           buflisted = false,
+--           full_height = true,
+--           height = 0.8,
+--           layout = 'vertical',
+--           opts = {
+--             breakindent = true,
+--             linebreak = true,
+--             wrap = true,
+--           },
+--           relative = 'editor',
+--           sticky = false,
+--           width = 0.5,
+--         },
+--       },
+--       cli = {
+--         window = {
+--           opts = {
+--             list = false,
+--           },
+--         },
+--       },
+--       diff = {
+--         enabled = true,
+--         window = {
+--           opts = {},
+--         },
+--         word_highlights = {
+--           additions = true,
+--           deletions = true,
+--         },
+--       },
+--       icons = {
+--         warning = ' ',
+--       },
+--       inline = {
+--         layout = 'vertical',
+--       },
+--       input = {
+--         keymaps = {
+--           close = {
+--             description = 'Close',
+--             modes = {
+--               n = { 'q', '<Esc>' },
+--             },
+--           },
+--           send = {
+--             description = 'Send',
+--             modes = {
+--               i = '<C-s>',
+--               n = { '<CR>', '<C-s>' },
+--             },
+--           },
+--         },
+--         title = '󰅂 CodeCompanion Prompt',
+--         window = {
+--           border = 'single',
+--           col = 0,
+--           height = {
+--             max = 2,
+--             min = 1,
+--           },
+--           opts = {
+--             breakindent = true,
+--             foldcolumn = '0',
+--             linebreak = true,
+--             number = false,
+--             relativenumber = false,
+--             signcolumn = 'no',
+--             statuscolumn = '',
+--             wrap = true,
+--           },
+--           relative = 'cursor',
+--           row = 1,
+--           title_pos = 'left',
+--           width = {
+--             max = 60,
+--             min = 40,
+--           },
+--         },
+--       },
+--     },
+--     extensions = {
+--       history = {
+--         enabled = true,
+--         opts = {
+--           delete_on_clearing_chat = true,
+--           expiration_days = 7,
+--           picker = 'snacks',
+--           summary = {
+--             generation_opts = {
+--               adapter = 'copilot',
+--               model = 'gpt-4o',
+--             },
+--           },
+--           title_generation_opts = {
+--             adapter = 'copilot',
+--             max_refreshes = 3,
+--             model = 'gpt-4o',
+--             refresh_every_n_prompts = 2,
+--           },
+--         },
+--       },
+--     },
+--     interactions = {
+--       background = {
+--         adapter = {
+--           model = 'gpt-4.1',
+--           name = 'copilot',
+--         },
+--         chat = {
+--           callbacks = {
+--             on_ready = {
+--               actions = { 'interactions.background.builtin.chat_make_title' },
+--               enabled = true,
+--             },
+--           },
+--           opts = {
+--             enabled = false,
+--           },
+--         },
+--       },
+--       chat = {
+--         adapter = 'claude_code',
+--         keymaps = {
+--           ['Browse Summaries'] = {
+--             callback = 'fn',
+--             description = 'Browse Summaries',
+--             modes = {
+--               n = 'gbs',
+--             },
+--           },
+--           ['Generate Summary'] = {
+--             callback = 'fn',
+--             description = 'Generate Summary for Current Chat',
+--             modes = {
+--               n = 'gcs',
+--             },
+--           },
+--           ['Save Current Chat'] = {
+--             callback = 'fn',
+--             description = 'Save current chat',
+--             modes = {
+--               n = 'sc',
+--             },
+--           },
+--           ['Saved Chats'] = {
+--             callback = 'fn',
+--             description = 'Browse saved chats',
+--             modes = {
+--               n = 'gh',
+--             },
+--           },
+--           _acp_allow_always = {
+--             description = 'Allow Always',
+--             modes = {
+--               n = 'g1',
+--             },
+--           },
+--           _acp_allow_once = {
+--             description = 'Allow Once',
+--             modes = {
+--               n = 'g2',
+--             },
+--           },
+--           _acp_reject_always = {
+--             description = 'Reject Always',
+--             modes = {
+--               n = 'g4',
+--             },
+--           },
+--           _acp_reject_once = {
+--             description = 'Reject Once',
+--             modes = {
+--               n = 'g3',
+--             },
+--           },
+--           buffer_sync_all = {
+--             callback = 'keymaps.buffer_sync_all',
+--             description = '[Chat] Toggle buffer syncing',
+--             index = 9,
+--             modes = {
+--               n = 'gba',
+--             },
+--           },
+--           buffer_sync_diff = {
+--             callback = 'keymaps.buffer_sync_diff',
+--             description = '[Chat] Toggle buffer diff syncing',
+--             index = 10,
+--             modes = {
+--               n = 'gbd',
+--             },
+--           },
+--           change_adapter = {
+--             callback = 'keymaps.change_adapter',
+--             description = '[Adapter] Change adapter and model',
+--             index = 15,
+--             modes = {
+--               n = 'ga',
+--             },
+--           },
+--           clear = {
+--             callback = 'keymaps.clear',
+--             description = '[Chat] Clear',
+--             index = 6,
+--             modes = {
+--               n = 'gX',
+--             },
+--           },
+--           clear_approvals = {
+--             callback = 'keymaps.clear_approvals',
+--             description = '[Tools] Clear approvals',
+--             index = 19,
+--             modes = {
+--               n = 'gtx',
+--             },
+--           },
+--           close = {
+--             callback = 'keymaps.close',
+--             description = '[Chat] Close',
+--             index = 4,
+--             modes = {
+--               i = '<C-c>',
+--               n = '<C-c>',
+--             },
+--           },
+--           codeblock = {
+--             callback = 'keymaps.codeblock',
+--             description = '[Chat] Insert codeblock',
+--             index = 7,
+--             modes = {
+--               n = 'gc',
+--             },
+--           },
+--           completion = {
+--             callback = 'keymaps.completion',
+--             description = '[Chat] Completion menu',
+--             index = 1,
+--             modes = {
+--               i = '<C-_>',
+--             },
+--           },
+--           copilot_stats = {
+--             callback = 'keymaps.copilot_stats',
+--             description = '[Adapter] Copilot statistics',
+--             index = 22,
+--             modes = {
+--               n = 'gS',
+--             },
+--           },
+--           debug = {
+--             callback = 'keymaps.debug',
+--             description = '[Chat] View debug info',
+--             index = 16,
+--             modes = {
+--               n = 'gd',
+--             },
+--           },
+--           fold_code = {
+--             callback = 'keymaps.fold_code',
+--             description = '[Chat] Fold code',
+--             index = 15,
+--             modes = {
+--               n = 'gf',
+--             },
+--           },
+--           goto_file_under_cursor = {
+--             callback = 'keymaps.goto_file_under_cursor',
+--             description = '[Chat] Open file under cursor',
+--             index = 21,
+--             modes = {
+--               n = 'gR',
+--             },
+--           },
+--           next_chat = {
+--             callback = 'keymaps.next_chat',
+--             description = '[Nav] Next chat',
+--             index = 11,
+--             modes = {
+--               n = '}',
+--             },
+--           },
+--           next_header = {
+--             callback = 'keymaps.next_header',
+--             description = '[Nav] Next header',
+--             index = 13,
+--             modes = {
+--               n = ']]',
+--             },
+--           },
+--           options = {
+--             callback = 'keymaps.options',
+--             description = 'Options',
+--             hide = true,
+--             modes = {
+--               n = '?',
+--             },
+--           },
+--           previous_chat = {
+--             callback = 'keymaps.previous_chat',
+--             description = '[Nav] Previous chat',
+--             index = 12,
+--             modes = {
+--               n = '{',
+--             },
+--           },
+--           previous_header = {
+--             callback = 'keymaps.previous_header',
+--             description = '[Nav] Previous header',
+--             index = 14,
+--             modes = {
+--               n = '[[',
+--             },
+--           },
+--           regenerate = {
+--             callback = 'keymaps.regenerate',
+--             description = '[Request] Regenerate',
+--             index = 3,
+--             modes = {
+--               n = 'gr',
+--             },
+--           },
+--           rules = {
+--             callback = 'keymaps.clear_rules',
+--             description = '[Chat] Clear Rules',
+--             index = 18,
+--             modes = {
+--               n = 'gM',
+--             },
+--           },
+--           send = {
+--             callback = 'keymaps.send',
+--             description = '[Request] Send response',
+--             index = 2,
+--             modes = {
+--               i = '<C-s>',
+--               n = { '<CR>', '<C-s>' },
+--             },
+--           },
+--           stop = {
+--             callback = 'keymaps.stop',
+--             description = '[Request] Stop',
+--             index = 5,
+--             modes = {
+--               n = 'q',
+--             },
+--           },
+--           system_prompt = {
+--             callback = 'keymaps.toggle_system_prompt',
+--             description = '[Chat] Toggle system prompt',
+--             index = 17,
+--             modes = {
+--               n = 'gs',
+--             },
+--           },
+--           yank_code = {
+--             callback = 'keymaps.yank_code',
+--             description = '[Chat] Yank code',
+--             index = 8,
+--             modes = {
+--               n = 'gy',
+--             },
+--           },
+--           yolo_mode = {
+--             callback = 'keymaps.yolo_mode',
+--             description = '[Tools] Toggle YOLO mode',
+--             index = 20,
+--             modes = {
+--               n = 'gty',
+--             },
+--           },
+--         },
+--         opts = {
+--           acp_timeout_response = 'reject_once',
+--           blank_prompt = '',
+--           completion_provider = 'blink',
+--           debounce = 150,
+--           goto_file_action = 'fn',
+--           register = '+',
+--           system_prompt = 'fn',
+--           wait_timeout = 2000000,
+--           yank_jump_delay_ms = 400,
+--         },
+--         roles = {
+--           llm = 'fn',
+--           user = 'Me',
+--         },
+--         slash_commands = {
+--           buffer = {
+--             description = 'Insert open buffers',
+--             opts = {
+--               contains_code = true,
+--               default_params = 'diff',
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.buffer',
+--           },
+--           command = {
+--             description = 'Change the command used to start the ACP adapter',
+--             enabled = 'fn',
+--             opts = {
+--               contains_code = false,
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.command',
+--           },
+--           compact = {
+--             description = 'Clears some of the chat history, keeping a summary in context',
+--             enabled = 'fn',
+--             opts = {
+--               contains_code = false,
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.compact',
+--           },
+--           fetch = {
+--             description = 'Insert URL contents',
+--             opts = {
+--               adapter = 'jina',
+--               cache_path = '/home/mat/.local/share/nvim/codecompanion/urls',
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.fetch',
+--           },
+--           file = {
+--             description = 'Insert a file',
+--             opts = {
+--               contains_code = true,
+--               max_lines = 1000,
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.file',
+--           },
+--           help = {
+--             description = 'Insert content from help tags',
+--             opts = {
+--               contains_code = false,
+--               max_lines = 128,
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.help',
+--           },
+--           image = {
+--             description = 'Insert an image',
+--             enabled = 'fn',
+--             opts = {
+--               dirs = {},
+--               filetypes = { 'png', 'jpg', 'jpeg', 'gif', 'webp' },
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.image',
+--           },
+--           mcp = {
+--             description = 'Toggle MCP servers',
+--             opts = {
+--               contains_code = false,
+--               provider = 'default',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.mcp',
+--           },
+--           mode = {
+--             description = 'Change the ACP session mode',
+--             enabled = 'fn',
+--             opts = {
+--               contains_code = false,
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.mode',
+--           },
+--           now = {
+--             description = 'Insert the current date and time',
+--             opts = {
+--               contains_code = false,
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.now',
+--           },
+--           opts = {
+--             acp = {
+--               enabled = true,
+--             },
+--           },
+--           rules = {
+--             description = 'Insert rules into the chat buffer',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.rules',
+--           },
+--           symbols = {
+--             description = 'Insert symbols for a selected file',
+--             opts = {
+--               contains_code = true,
+--               provider = 'snacks',
+--             },
+--             path = 'interactions.chat.slash_commands.builtin.symbols',
+--           },
+--         },
+--         tools = {
+--           ask_questions = {
+--             description = 'Ask the user questions to clarify requirements or validate assumptions',
+--             path = 'interactions.chat.tools.builtin.ask_questions',
+--             visible = false,
+--           },
+--           create_file = {
+--             description = 'Create a file in the current working directory',
+--             opts = {
+--               require_approval_before = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.create_file',
+--           },
+--           delete_file = {
+--             description = 'Delete a file in the current working directory',
+--             opts = {
+--               allowed_in_yolo_mode = false,
+--               require_approval_before = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.delete_file',
+--           },
+--           fetch_webpage = {
+--             description = 'Fetches content from a webpage',
+--             opts = {
+--               adapter = 'jina',
+--             },
+--             path = 'interactions.chat.tools.builtin.fetch_webpage',
+--           },
+--           file_search = {
+--             description = 'Search for files in the current working directory by glob pattern',
+--             opts = {
+--               max_results = 500,
+--             },
+--             path = 'interactions.chat.tools.builtin.file_search',
+--           },
+--           get_changed_files = {
+--             description = 'Get git diffs of current file changes in a git repository',
+--             opts = {
+--               max_lines = 1000,
+--             },
+--             path = 'interactions.chat.tools.builtin.get_changed_files',
+--           },
+--           get_diagnostics = {
+--             description = 'Get LSP diagnostics for a given file',
+--             path = 'interactions.chat.tools.builtin.get_diagnostics',
+--           },
+--           grep_search = {
+--             description = 'Search for text in the current working directory',
+--             enabled = 'fn',
+--             opts = {
+--               max_results = 100,
+--               require_approval_before = true,
+--               respect_gitignore = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.grep_search',
+--           },
+--           groups = {
+--             agent = {
+--               description = 'Agent - Can run code, edit code and modify files on your behalf',
+--               opts = {
+--                 collapse_tools = true,
+--                 ignore_system_prompt = true,
+--                 ignore_tool_system_prompt = true,
+--               },
+--               system_prompt = 'fn',
+--               tools = {
+--                 'ask_questions',
+--                 'create_file',
+--                 'delete_file',
+--                 'file_search',
+--                 'get_changed_files',
+--                 'get_diagnostics',
+--                 'grep_search',
+--                 'insert_edit_into_file',
+--                 'read_file',
+--                 'run_command',
+--               },
+--             },
+--             files = {
+--               description = 'Tools related to creating, reading and editing files',
+--               opts = {
+--                 collapse_tools = true,
+--               },
+--               prompt = "I'm giving you access to ${tools} to help you perform file operations",
+--               tools = {
+--                 'create_file',
+--                 'delete_file',
+--                 'file_search',
+--                 'get_changed_files',
+--                 'grep_search',
+--                 'insert_edit_into_file',
+--                 'read_file',
+--               },
+--             },
+--           },
+--           insert_edit_into_file = {
+--             description = 'Robustly edit existing files with multiple automatic fallback interactions',
+--             opts = {
+--               file_size_limit_mb = 2,
+--               require_approval_before = {
+--                 buffer = false,
+--                 file = false,
+--               },
+--               require_confirmation_after = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.insert_edit_into_file',
+--           },
+--           memory = {
+--             description = 'The memory tool enables LLMs to store and retrieve information across conversations through a memory file directory',
+--             opts = {
+--               require_approval_before = true,
+--               whitelist = {},
+--             },
+--             path = 'interactions.chat.tools.builtin.memory',
+--           },
+--           opts = {
+--             auto_submit_errors = true,
+--             auto_submit_success = true,
+--             default_tools = {},
+--             folds = {
+--               enabled = true,
+--               failure_words = { 'cancelled', 'error', 'failed', 'incorrect', 'invalid', 'rejected' },
+--             },
+--             system_prompt = {
+--               enabled = true,
+--               prompt = 'fn',
+--               replace_main_system_prompt = false,
+--             },
+--             tool_replacement_message = 'the ${tool} tool',
+--           },
+--           read_file = {
+--             description = 'Read a file in the current working directory',
+--             opts = {
+--               require_approval_before = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.read_file',
+--           },
+--           run_command = {
+--             description = 'Run shell commands initiated by the LLM',
+--             opts = {
+--               allowed_in_yolo_mode = false,
+--               require_approval_before = true,
+--               require_cmd_approval = true,
+--             },
+--             path = 'interactions.chat.tools.builtin.run_command',
+--           },
+--           web_search = {
+--             description = 'Search the web for information',
+--             opts = {
+--               adapter = 'tavily',
+--               opts = {
+--                 chunks_per_source = 3,
+--                 max_results = 5,
+--                 search_depth = 'advanced',
+--                 topic = 'general',
+--               },
+--             },
+--             path = 'interactions.chat.tools.builtin.web_search',
+--           },
+--         },
+--       },
+--       cli = {
+--         agents = {},
+--         keymaps = {
+--           next_chat = {
+--             callback = 'keymaps.next_chat',
+--             description = '[Nav] Next interaction',
+--             modes = {
+--               n = '}',
+--             },
+--           },
+--           previous_chat = {
+--             callback = 'keymaps.previous_chat',
+--             description = '[Nav] Previous interaction',
+--             modes = {
+--               n = '{',
+--             },
+--           },
+--         },
+--         opts = {
+--           auto_insert = false,
+--         },
+--         providers = {
+--           terminal = {
+--             description = 'Terminal CLI provider',
+--             path = 'interactions.cli.providers.terminal',
+--           },
+--         },
+--       },
+--       cmd = {
+--         adapter = 'claude_code',
+--         opts = {
+--           system_prompt = "You are currently plugged in to the Neovim text editor on a user's machine. Your core task is to generate an command-line inputs that the user can run within Neovim. Below are some rules to adhere to:\n\n- Return plain text only\n- Do not wrap your response in a markdown block or backticks\n- Do not use any line breaks or newlines in you response\n- Do not provide any explanations\n- Generate an command that is valid and can be run in Neovim\n- Ensure the command is relevant to the user's request",
+--         },
+--       },
+--       inline = {
+--         adapter = 'copilot',
+--         editor_context = {
+--           buffer = {
+--             description = 'Share the current buffer with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.inline.editor_context.buffer',
+--           },
+--           chat = {
+--             description = 'Share the currently open chat buffer with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.inline.editor_context.chat',
+--           },
+--           clipboard = {
+--             description = 'Share the contents of the clipboard with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.inline.editor_context.clipboard',
+--           },
+--         },
+--         keymaps = {
+--           stop = {
+--             callback = 'keymaps.stop',
+--             description = 'Stop request',
+--             index = 4,
+--             modes = {
+--               n = 'q',
+--             },
+--           },
+--         },
+--       },
+--       opts = {
+--         date_format = '%A, %d %B %Y',
+--         watcher = {
+--           debounce = 500,
+--           enabled = true,
+--         },
+--       },
+--       shared = {
+--         editor_context = {
+--           buffer = {
+--             description = 'Share the current buffer with the LLM',
+--             opts = {
+--               contains_code = true,
+--               default_params = 'diff',
+--               has_params = true,
+--             },
+--             path = 'interactions.shared.editor_context.buffer',
+--           },
+--           buffers = {
+--             description = 'Share all open buffers with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.buffers',
+--           },
+--           diagnostics = {
+--             description = 'Share diagnostics and code for the current buffer',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.diagnostics',
+--           },
+--           diff = {
+--             description = 'Share the current git diff with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.diff',
+--           },
+--           messages = {
+--             description = "Share Neovim's message history with the LLM",
+--             path = 'interactions.shared.editor_context.messages',
+--           },
+--           opts = {
+--             excluded = {
+--               buftypes = { 'nofile', 'quickfix', 'prompt', 'popup' },
+--               fts = { 'codecompanion', 'help', 'terminal' },
+--             },
+--           },
+--           quickfix = {
+--             description = 'Share the quickfix list with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.quickfix',
+--           },
+--           selection = {
+--             description = 'Share the current visual selection with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.selection',
+--           },
+--           terminal = {
+--             description = 'Share the latest terminal output with the LLM',
+--             path = 'interactions.shared.editor_context.terminal',
+--           },
+--           this = {
+--             description = 'Smart context: visual selection if present, otherwise the current buffer (CLI only)',
+--             opts = {
+--               contains_code = true,
+--               interactions = { 'cli' },
+--             },
+--             path = 'interactions.shared.editor_context.this',
+--           },
+--           viewport = {
+--             description = 'Share the code that you see in Neovim with the LLM',
+--             opts = {
+--               contains_code = true,
+--             },
+--             path = 'interactions.shared.editor_context.viewport',
+--           },
+--         },
+--         keymaps = {
+--           accept_change = {
+--             callback = 'keymaps.accept_change',
+--             description = 'Accept change',
+--             index = 2,
+--             modes = {
+--               n = 'g2',
+--             },
+--             opts = {
+--               noremap = true,
+--               nowait = true,
+--             },
+--           },
+--           always_accept = {
+--             callback = 'keymaps.always_accept',
+--             description = 'Always accept changes in this buffer',
+--             index = 1,
+--             modes = {
+--               n = 'g1',
+--             },
+--             opts = {
+--               nowait = true,
+--             },
+--           },
+--           next_hunk = {
+--             callback = 'keymaps.next_hunk',
+--             description = 'Go to next hunk',
+--             modes = {
+--               n = '}',
+--             },
+--           },
+--           previous_hunk = {
+--             callback = 'keymaps.previous_hunk',
+--             description = 'Go to previous hunk',
+--             modes = {
+--               n = '{',
+--             },
+--           },
+--           reject_change = {
+--             callback = 'keymaps.reject_change',
+--             description = 'Reject change',
+--             index = 3,
+--             modes = {
+--               n = 'g3',
+--             },
+--             opts = {
+--               noremap = true,
+--               nowait = true,
+--             },
+--           },
+--         },
+--       },
+--     },
+--     mcp = {
+--       opts = {
+--         acp_enabled = true,
+--         default_servers = {},
+--         timeout = 30000,
+--       },
+--       servers = {},
+--     },
+--     opts = {
+--       language = 'English',
+--       log_level = 'ERROR',
+--       per_project_config = {
+--         enabled = true,
+--         files = {},
+--         paths = {},
+--       },
+--       send_code = true,
+--       submit_delay = 500,
+--       triggers = {
+--         acp_slash_commands = '\\',
+--         editor_context = '#',
+--         slash_commands = '/',
+--         tools = '@',
+--       },
+--     },
+--     prompt_library = {
+--       markdown = {
+--         dirs = { '~/git/dotfiles/prompts' },
+--       },
+--     },
+--     rules = {
+--       CodeCompanion = {
+--         description = 'CodeCompanion rules',
+--         enabled = 'fn',
+--         files = {
+--           acp = {
+--             description = 'The ACP implementation',
+--             files = { '.codecompanion/acp/acp.md' },
+--           },
+--           ['acp-json-rpc'] = {
+--             description = 'The JSON-RPC output for various ACP adapters',
+--             files = { '.codecompanion/acp/claude_code_acp.md' },
+--           },
+--           adapters = {
+--             description = 'The adapters implementation',
+--             files = { '.codecompanion/adapters/adapters.md' },
+--           },
+--           chat = {
+--             description = 'The chat buffer',
+--             files = { '.codecompanion/chat.md' },
+--           },
+--           tests = {
+--             description = 'Testing in the plugin',
+--             files = { '.codecompanion/tests/test.md' },
+--           },
+--           tools = {
+--             description = 'Tools implementation in the plugin',
+--             files = { '.codecompanion/tools.md' },
+--           },
+--           ui = {
+--             description = 'The chat UI implementation',
+--             files = { '.codecompanion/ui.md' },
+--           },
+--         },
+--         is_preset = true,
+--         parser = 'claude',
+--       },
+--       default = {
+--         description = 'Collection of common files for all projects',
+--         files = {
+--           '.clinerules',
+--           '.cursorrules',
+--           '.goosehints',
+--           '.rules',
+--           '.windsurfrules',
+--           '.github/copilot-instructions.md',
+--           'AGENT.md',
+--           'AGENTS.md',
+--           {
+--             parser = 'claude',
+--             path = 'CLAUDE.md',
+--           },
+--           {
+--             parser = 'claude',
+--             path = 'CLAUDE.local.md',
+--           },
+--           {
+--             parser = 'claude',
+--             path = '~/.claude/CLAUDE.md',
+--           },
+--         },
+--         is_preset = true,
+--       },
+--       opts = {
+--         chat = {
+--           autoload = 'default',
+--           default_params = 'diff',
+--           enabled = true,
+--         },
+--         show_presets = true,
+--       },
+--       parsers = {
+--         claude = 'claude',
+--         codecompanion = 'codecompanion',
+--         none = 'none',
+--       },
+--     },
+--   },
+--   setup = 'fn',
+--   metatable = {
+--     __index = 'fn',
+--   },
+-- }
 
 return M
