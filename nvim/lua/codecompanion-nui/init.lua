@@ -44,6 +44,7 @@ function M.setup(opts)
   })
 
   require('codecompanion-nui.events').setup()
+  require('codecompanion-nui.completion').setup()
 end
 
 function M.focus_input()

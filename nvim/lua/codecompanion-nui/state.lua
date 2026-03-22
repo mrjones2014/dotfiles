@@ -49,6 +49,17 @@ function M.get_by_bufnr(chat_bufnr)
   return nil
 end
 
+---@param input_bufnr number
+---@return CcuiSession|nil
+function M.get_by_input_bufnr(input_bufnr)
+  for _, session in pairs(M.sessions) do
+    if session.input_bufnr == input_bufnr then
+      return session
+    end
+  end
+  return nil
+end
+
 ---@return CcuiSession|nil
 function M.active()
   if M.active_session_id then
