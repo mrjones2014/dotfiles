@@ -4,7 +4,6 @@ local vcs = require('my.utils.vcs')
 local is_work_repo = vcs.is_work_repo()
 
 -- Custom chat UI
-require('codecompanion-nui').setup()
 
 return {
   'olimorris/codecompanion.nvim',
@@ -134,6 +133,7 @@ return {
           },
         },
       },
+      nui = { enabled = true },
     },
     interactions = {
       chat = {
