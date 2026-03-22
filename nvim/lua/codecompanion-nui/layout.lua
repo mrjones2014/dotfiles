@@ -37,6 +37,7 @@ local function setup_chat_win_opts(winid)
   vim.wo[winid].number = false
   vim.wo[winid].winfixheight = true
   vim.wo[winid].winfixwidth = true
+  vim.api.nvim_win_set_width(winid, math.floor(vim.o.columns * 0.35))
 end
 
 ---@param chat_bufnr number
