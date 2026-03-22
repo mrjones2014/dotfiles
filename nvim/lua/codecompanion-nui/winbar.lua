@@ -1,8 +1,8 @@
 local M = {}
 
 local mode_icons = {
-  default = '',
-  acceptEdits = '',
+  default = ' ',
+  acceptEdits = '󱐋',
   plan = '󰙬',
   dontAsk = '󱐋',
   bypassPermissions = '󰒃',
