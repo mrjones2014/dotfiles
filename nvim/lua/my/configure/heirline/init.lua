@@ -54,7 +54,7 @@ return {
           },
           disable_winbar_cb = function()
             local conditions = require('my.configure.heirline.conditions')
-            -- codecompanion winbar is handled by ccui
+            -- codecompanion winbar is handled by codecompanion-nui
             return vim.bo.filetype == 'codecompanion'
               or conditions.is_floating_window()
               or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))

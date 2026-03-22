@@ -15,7 +15,7 @@ end
 
 ---@return string
 function M.eval_input()
-  local state = require('ccui.state')
+  local state = require('codecompanion-nui.state')
   local session = state.active()
   if not session then
     return ''
@@ -84,7 +84,7 @@ function M.eval_input()
   end
 
   -- Spinner
-  local events = require('ccui.events')
+  local events = require('codecompanion-nui.events')
   if events.is_processing() then
     local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local idx = events.get_spinner_idx()
@@ -98,7 +98,7 @@ end
 ---@param winid number
 function M.set_input_winbar(winid)
   if vim.api.nvim_win_is_valid(winid) then
-    vim.wo[winid].winbar = "%{%v:lua.require('ccui.winbar').eval_input()%}"
+    vim.wo[winid].winbar = "%{%v:lua.require('codecompanion-nui.winbar').eval_input()%}"
   end
 end
 

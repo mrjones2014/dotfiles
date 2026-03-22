@@ -4,7 +4,7 @@ local vcs = require('my.utils.vcs')
 local is_work_repo = vcs.is_work_repo()
 
 -- Custom chat UI
-require('ccui').setup()
+require('codecompanion-nui').setup()
 
 return {
   'olimorris/codecompanion.nvim',
@@ -58,8 +58,8 @@ return {
     {
       '<leader>af',
       function()
-        if require('ccui').is_visible() then
-          require('ccui').focus_input()
+        if require('codecompanion-nui').is_visible() then
+          require('codecompanion-nui').focus_input()
         else
           -- Fallback: find any CC window
           for _, win in ipairs(vim.api.nvim_list_wins()) do

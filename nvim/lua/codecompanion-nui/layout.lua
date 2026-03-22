@@ -1,6 +1,6 @@
-local State = require('ccui.state')
-local Input = require('ccui.input')
-local Winbar = require('ccui.winbar')
+local State = require('codecompanion-nui.state')
+local Input = require('codecompanion-nui.input')
+local Winbar = require('codecompanion-nui.winbar')
 local Split = require('nui.split')
 
 local M = {}
@@ -100,7 +100,7 @@ function M.attach(chat_bufnr, chat_id)
 
   State.active_session_id = chat_id
 
-  local group = vim.api.nvim_create_augroup('ccui_session_' .. chat_id, { clear = true })
+  local group = vim.api.nvim_create_augroup('codecompanion-nui_session_' .. chat_id, { clear = true })
   local chat_at_bottom = true
 
   vim.api.nvim_create_autocmd('WinResized', {

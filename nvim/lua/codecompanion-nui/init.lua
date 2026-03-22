@@ -33,20 +33,20 @@ function M.setup(opts)
   setup_highlights()
 
   vim.api.nvim_create_autocmd('ColorScheme', {
-    group = vim.api.nvim_create_augroup('ccui_colors', { clear = true }),
+    group = vim.api.nvim_create_augroup('codecompanion-nui_colors', { clear = true }),
     callback = setup_highlights,
   })
 
-  require('ccui.events').setup()
+  require('codecompanion-nui.events').setup()
 end
 
 function M.focus_input()
-  require('ccui.layout').focus_input()
+  require('codecompanion-nui.layout').focus_input()
 end
 
 ---@return boolean
 function M.is_visible()
-  return require('ccui.layout').is_visible()
+  return require('codecompanion-nui.layout').is_visible()
 end
 
 return M

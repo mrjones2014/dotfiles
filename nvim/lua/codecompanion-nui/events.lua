@@ -1,8 +1,8 @@
-local State = require('ccui.state')
+local State = require('codecompanion-nui.state')
 
 local M = {}
 
-local AUGROUP = 'ccui'
+local AUGROUP = 'codecompanion-nui'
 
 local is_processing = false
 local spinner_idx = 1
@@ -21,7 +21,7 @@ function M.setup()
         return
       end
       vim.schedule(function()
-        require('ccui.layout').attach(data.bufnr, data.id)
+        require('codecompanion-nui.layout').attach(data.bufnr, data.id)
       end)
     end,
   })
@@ -34,7 +34,7 @@ function M.setup()
       if not data.id then
         return
       end
-      require('ccui.layout').detach(data.id)
+      require('codecompanion-nui.layout').detach(data.id)
     end,
   })
 
@@ -46,7 +46,7 @@ function M.setup()
       if not data.id then
         return
       end
-      require('ccui.layout').detach(data.id)
+      require('codecompanion-nui.layout').detach(data.id)
       State.remove(data.id)
     end,
   })

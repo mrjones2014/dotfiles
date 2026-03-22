@@ -1,6 +1,6 @@
 local M = {}
 
-local NS_PLACEHOLDER = vim.api.nvim_create_namespace('ccui_placeholder')
+local NS_PLACEHOLDER = vim.api.nvim_create_namespace('codecompanion-nui_placeholder')
 
 ---@return number
 function M.create_buf()
@@ -19,7 +19,7 @@ function M.submit(session)
     return
   end
 
-  local events = require('ccui.events')
+  local events = require('codecompanion-nui.events')
   if events.is_processing() then
     return
   end
@@ -131,7 +131,7 @@ end
 
 ---@param bufnr number
 function M.setup_autocmds(bufnr)
-  local group = vim.api.nvim_create_augroup('ccui_input_' .. bufnr, { clear = true })
+  local group = vim.api.nvim_create_augroup('codecompanion-nui_input_' .. bufnr, { clear = true })
 
   vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
     group = group,
