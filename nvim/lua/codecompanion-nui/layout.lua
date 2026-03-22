@@ -21,7 +21,7 @@ end
 ---@param winid number
 local function setup_input_win_opts(winid)
   vim.wo[winid].winfixheight = true
-  vim.wo[winid].winfixwidth = false
+  vim.wo[winid].winfixwidth = true
   vim.wo[winid].number = false
   vim.wo[winid].relativenumber = false
   vim.wo[winid].signcolumn = 'no'
@@ -35,7 +35,8 @@ end
 local function setup_chat_win_opts(winid)
   vim.wo[winid].signcolumn = 'no'
   vim.wo[winid].number = false
-  vim.wo[winid].winfixheight = false
+  vim.wo[winid].winfixheight = true
+  vim.wo[winid].winfixwidth = true
 end
 
 ---@param chat_bufnr number

@@ -87,24 +87,6 @@ function M.setup()
       M.stop_spinner(session)
     end,
   })
-
-  vim.api.nvim_create_autocmd('User', {
-    group = group,
-    pattern = 'CodeCompanionChatAdapter',
-    callback = function() end,
-  })
-
-  vim.api.nvim_create_autocmd('User', {
-    group = group,
-    pattern = 'CodeCompanionChatModel',
-    callback = function() end,
-  })
-
-  vim.api.nvim_create_autocmd('User', {
-    group = group,
-    pattern = 'CodeCompanionChatACPModeChanged',
-    callback = function() end,
-  })
 end
 
 ---@param session CcuiSession

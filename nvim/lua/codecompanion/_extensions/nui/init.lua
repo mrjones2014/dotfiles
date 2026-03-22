@@ -6,4 +6,13 @@ function NuiExtension.setup(opts)
   require('codecompanion-nui').setup()
 end
 
+NuiExtension.exports = {
+  focus_input = function()
+    require('codecompanion-nui').focus_input()
+  end,
+  is_visible = function()
+    return require('codecompanion-nui').is_visible()
+  end,
+}
+
 return NuiExtension
