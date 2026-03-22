@@ -20,9 +20,7 @@ function M.setup()
       if not data.bufnr or not data.id then
         return
       end
-      vim.schedule(function()
-        require('codecompanion-nui.layout').attach(data.bufnr, data.id)
-      end)
+      require('codecompanion-nui.layout').attach(data.bufnr, data.id)
     end,
   })
 

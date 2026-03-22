@@ -1,29 +1,35 @@
 local M = {}
 
 local function setup_highlights()
-  local ok, colors = pcall(function()
-    return require('tokyonight.colors').setup()
-  end)
-  if not ok then
-    return
+  local function hl_fg(name)
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    return hl.fg
   end
 
-  local bg_gutter = colors.fg_gutter
-  local bg_surface1 = colors.dark3
-  local bg_surface2 = colors.blue7
+  local function hl_bg(name)
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    return hl.bg
+  end
 
-  vim.api.nvim_set_hl(0, 'CcuiModeSep', { fg = bg_surface2, bg = bg_gutter })
-  vim.api.nvim_set_hl(0, 'CcuiMode', { fg = colors.blue, bg = bg_surface2, bold = true })
+  local statusline_bg = hl_bg('StatusLine')
+  local surface = hl_bg('Visual')
+  local accent = hl_fg('Function')
+  local cyan = hl_fg('Type')
+  local green = hl_fg('String')
+  local dimmed = hl_fg('Comment')
 
-  vim.api.nvim_set_hl(0, 'CcuiAdapter', { fg = colors.cyan, bg = bg_surface1 })
-  vim.api.nvim_set_hl(0, 'CcuiAdapterSep', { fg = bg_surface1, bg = bg_gutter })
+  vim.api.nvim_set_hl(0, 'CcuiModeSep', { fg = accent, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, 'CcuiMode', { fg = statusline_bg, bg = accent, bold = true })
 
-  vim.api.nvim_set_hl(0, 'CcuiModel', { fg = colors.green, bg = bg_gutter })
+  vim.api.nvim_set_hl(0, 'CcuiAdapter', { fg = cyan, bg = surface })
+  vim.api.nvim_set_hl(0, 'CcuiAdapterSep', { fg = surface, bg = statusline_bg })
 
-  vim.api.nvim_set_hl(0, 'CcuiSpinner', { fg = colors.dark5, bg = bg_gutter, bold = true })
+  vim.api.nvim_set_hl(0, 'CcuiModel', { fg = green, bg = statusline_bg })
 
-  vim.api.nvim_set_hl(0, 'CcuiPlaceholder', { fg = colors.dark5, italic = true })
-  vim.api.nvim_set_hl(0, 'CcuiPlaceholderKey', { fg = colors.blue, bold = true })
+  vim.api.nvim_set_hl(0, 'CcuiSpinner', { fg = dimmed, bg = statusline_bg, bold = true })
+
+  vim.api.nvim_set_hl(0, 'CcuiPlaceholder', { fg = dimmed, italic = true })
+  vim.api.nvim_set_hl(0, 'CcuiPlaceholderKey', { fg = accent, bold = true })
 end
 
 ---@param opts? table
