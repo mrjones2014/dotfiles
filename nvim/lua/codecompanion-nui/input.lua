@@ -69,13 +69,13 @@ function M.setup_keymaps(session)
     return
   end
 
-  -- we override send keymap
+  -- we override send and codeblock keymaps
   local config = require('codecompanion.config')
   local cc_keymaps = vim.deepcopy(config.interactions.chat.keymaps)
   local filtered_keymaps = {}
   for name, keymap in pairs(cc_keymaps) do
-    -- skip 'send' and 'special' keymaps for diff view
-    if name ~= 'send' and not vim.startswith(name, '_') then
+    -- skip 'send', 'codeblock', and 'special' keymaps
+    if name ~= 'send' and name ~= 'codeblock' and not vim.startswith(name, '_') then
       filtered_keymaps[name] = keymap
     end
   end
@@ -114,17 +114,41 @@ function M.setup_keymaps(session)
 
   -- map the `send` keymap to our custom submit function
   local send = vim.deepcopy(config.interactions.chat.keymaps.send)
-  if not send then
-    return
-  end
-  for mode, keys in pairs(send.modes) do
-    if type(keys) ~= 'table' then
-      keys = { keys }
+  if send then
+    for mode, keys in pairs(send.modes) do
+      if type(keys) ~= 'table' then
+        keys = { keys }
+      end
+      for _, key in ipairs(keys) do
+        vim.keymap.set(mode, key, function()
+          M.submit(session)
+        end, { buffer = input_buf, silent = true })
+      end
     end
-    for _, key in ipairs(keys) do
-      vim.keymap.set(mode, key, function()
-        M.submit(session)
-      end, { buffer = input_buf, silent = true })
+  end
+
+  -- map the `codeblock` keymap to insert into the input buffer
+  local codeblock = vim.deepcopy(config.interactions.chat.keymaps.codeblock)
+  if codeblock then
+    for mode, keys in pairs(codeblock.modes) do
+      if type(keys) ~= 'table' then
+        keys = { keys }
+      end
+      for _, key in ipairs(keys) do
+        vim.keymap.set(mode, key, function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local cursor_pos = vim.api.nvim_win_get_cursor(0)
+          local line = cursor_pos[1]
+          local ft = chat.buffer_context.filetype or ''
+          local block = {
+            '````' .. ft,
+            '',
+            '````',
+          }
+          vim.api.nvim_buf_set_lines(bufnr, line - 1, line, false, block)
+          vim.api.nvim_win_set_cursor(0, { line + 1, vim.fn.indent(line) })
+        end, { buffer = input_buf, silent = true })
+      end
     end
   end
 end
