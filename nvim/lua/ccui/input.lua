@@ -112,16 +112,20 @@ function M.setup_keymaps(session)
     })
     :set()
 
-  -- Override submit keymaps to use our input buffer submission
-  vim.keymap.set('n', '<CR>', function()
-    M.submit(session)
-  end, { buffer = input_buf, silent = true })
-
-  local history = require('codecompanion').extensions.history
-  if history then
-    vim.keymap.set('n', 'gh', function()
-      history.browse_chats()
-    end)
+  -- map the `send` keymap to our custom submit function
+  local send = vim.deepcopy(config.interactions.chat.keymaps.send)
+  if not send then
+    return
+  end
+  for mode, keys in pairs(send.modes) do
+    if type(keys) ~= 'table' then
+      keys = { keys }
+    end
+    for _, key in ipairs(keys) do
+      vim.keymap.set(mode, key, function()
+        M.submit(session)
+      end, { buffer = input_buf, silent = true })
+    end
   end
 end
 
