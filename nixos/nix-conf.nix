@@ -24,6 +24,11 @@ in
         experimental-features = "nix-command flakes";
         keep-derivations = true;
         keep-outputs = true;
+        substituters = [
+          "https://cache.nixos.org"
+          cachix-personal.url
+          cachix-nix-community.url
+        ];
         trusted-substituters = [
           cachix-personal.url
           cachix-nix-community.url
