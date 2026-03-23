@@ -1,9 +1,6 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}:
-{
+  home.sessionVariables.DISABLE_TELEMETRY = "1";
   home.packages = with pkgs; [
     ast-grep
     fd
@@ -13,21 +10,29 @@
     sd
     yq-go
   ];
-  programs.claude-code = lib.mkMerge [
-    {
-      enable = true;
-      settings = {
-        # do not ever commit anything on my behalf
-        includeGitInstructions = false;
-        attribution = {
-          commit = "";
-          pr = "";
-        };
-        spinnerTipsEnabled = false;
-        feedbackSurveyRate = 0;
-        permissions.defaultMode = "plan";
-        model = "opus";
+  programs.claude-code = {
+    enable = true;
+    # some settings are undocumented, refer to the schema
+    # https://www.schemastore.org/claude-code-settings.json
+    settings = {
+      # do not ever commit anything on my behalf
+      includeGitInstructions = false;
+      attribution = {
+        commit = "";
+        pr = "";
       };
-    }
-  ];
+      feedbackSurveyRate = 0;
+      permissions.defaultMode = "plan";
+      model = "opus";
+      spinnerTipsEnabled = false;
+      spinnerTipsOverride = {
+        excludeDefault = true;
+        tips = [ ];
+      };
+      spinnerVerbs = {
+        mode = "replace";
+        verbs = [ "Processing" ];
+      };
+    };
+  };
 }
