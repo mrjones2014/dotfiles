@@ -51,10 +51,6 @@ function M.submit(session)
     end
   end
 
-  -- Re-enable auto-scroll by resetting cursor tracking state
-  chat.ui.cursor.has_moved = false
-  chat.ui.cursor.pos = nil
-
   chat:submit()
 end
 
