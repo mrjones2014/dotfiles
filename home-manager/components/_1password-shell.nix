@@ -5,7 +5,7 @@
 { pkgs, ... }:
 let
   op_sudo_password_script = pkgs.writeShellScriptBin "opsudo" ''
-    PASSWORD="$(op read "op://Private/System Password/password" --account ZE3GMX56H5CV5J5IU5PLLFG4KQ)"
+    PASSWORD="$(op read "op://Private/System Password/password" --account 3UBYV6PWJZAS7HTEKHDSQ7HPUA)"
     if [[ -z "$PASSWORD" ]]; then
       echo "Failed to get password from 1Password."
       read -r -s -p "󰌾 Password: " PASSWORD
@@ -24,12 +24,12 @@ let
 
     # default to personal token
     token="op://Private/GitHub/token"
-    account_uuid="ZE3GMX56H5CV5J5IU5PLLFG4KQ"
+    account_uuid="3UBYV6PWJZAS7HTEKHDSQ7HPUA"
 
     url="$(git config --get remote.origin.url 2>/dev/null || true)"
     if [[ "$url" == *"github.com:agilebits-inc"* ]]; then
       token="op://Employee/1Password GitHub Token/credential"
-      account_uuid="S2EWWY7HCZDGFOQ7WOPBGAC2LY"
+      account_uuid="AKHM3DPGNZFUJOY7N4UAWAMLIE"
     fi
 
     GITHUB_TOKEN="$(op read --account "$account_uuid" "$token")" \
@@ -56,7 +56,7 @@ let
 
 
     export GLAB_CONFIG_DIR="$GLAB_TMP_DIR"
-    GITLAB_TOKEN="$(op read "op://Employee/GitLab Personal Access Token/token" --account S2EWWY7HCZDGFOQ7WOPBGAC2LY)" \
+    GITLAB_TOKEN="$(op read "op://Employee/GitLab Personal Access Token/token" --account AKHM3DPGNZFUJOY7N4UAWAMLIE)" \
       ${pkgs.glab}/bin/glab "$@"
   '';
 
