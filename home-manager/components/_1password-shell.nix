@@ -88,22 +88,8 @@ in
     hosts."gitlab.1password.io".api_protocol = "https";
   };
 
-  programs.fish = {
-    interactiveShellInit = /* bash */ ''
-      export SUDO_ASKPASS="${op_sudo_password_script}/bin/opsudo"
-      alias sudo="sudo -A"
-    '';
-    functions = {
-      # this ensures our wrappers are used even if the package is installed
-      # via a project's `devShell` or similar
-      gh = {
-        description = "Run GitHub CLI with token from 1Password";
-        body = "${gh}/bin/gh $argv";
-      };
-      glab = {
-        description = "Run GitLab CLI with token from 1Password";
-        body = "${glab}/bin/glab $argv";
-      };
-    };
-  };
+  programs.fish.interactiveShellInit = ''
+    export SUDO_ASKPASS="${op_sudo_password_script}/bin/opsudo"
+    alias sudo="sudo -A"
+  '';
 }
