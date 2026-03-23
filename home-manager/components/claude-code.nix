@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  isWorkMac,
   ...
 }:
 {
@@ -31,21 +30,5 @@
         };
       };
     }
-    (lib.mkIf isWorkMac {
-      mcpServers = {
-        jira = {
-          url = "https://mcp.atlassian.com/v1/mcp";
-          type = "http";
-        };
-        notion = {
-          url = "https://mcp.notion.com/mcp";
-          type = "http";
-        };
-        sourcegraph = {
-          url = "https://1password.sourcegraphcloud.com/.api/mcp";
-          type = "http";
-        };
-      };
-    })
   ];
 }

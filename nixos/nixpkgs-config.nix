@@ -2,7 +2,6 @@
   pkgs,
   lib,
   isServer,
-  isWorkMac,
   ...
 }:
 {
@@ -30,9 +29,6 @@
           "7zz"
           "discord"
           "claude-code"
-        ]
-        ++ lib.lists.optionals isWorkMac [
-          "cursor-cli"
         ]
       );
   };

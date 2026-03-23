@@ -64,7 +64,6 @@ in
     ./components/_1password-shell.nix
     ./components/agent-skills.nix
     ./components/claude-code.nix
-    ./components/cursor-cli.nix
     ./components/gnome
     ./components/recyclarr.nix
     ./components/terminal.nix

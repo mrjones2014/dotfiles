@@ -1,7 +1,5 @@
 local window = require('my.utils.window')
-local vcs = require('my.utils.vcs')
-
-local is_work_repo = vcs.is_work_repo()
+local hosts = require('my.utils.hosts')
 
 -- Custom chat UI
 
@@ -93,18 +91,19 @@ return {
           if not ok then
             error('op.nvim is not installed, claude_code adapter will not work', vim.log.levels.ERROR)
           end
+          local token = hosts.is_work_computer()
+              and assert(
+                op.get_secret('op://Employee/1Password Claude Token/password', 'ZE3GMX56H5CV5J5IU5PLLFG4KQ'),
+                'Failed to retrieve 1Password Claude Token'
+              )
+            or assert(
+              op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
+              'Failed to retrieve personal Claude token'
+            )
           return require('codecompanion.adapters').extend('claude_code', {
             defaults = { mode = 'plan', model = 'opus' },
             env = {
-              CLAUDE_CODE_OAUTH_TOKEN = op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
-            },
-          })
-        end,
-        cursor_cli = function()
-          return require('codecompanion.adapters').extend('cursor_cli', {
-            defaults = {
-              model = 'opus-4.6-thinking',
-              mode = 'plan',
+              CLAUDE_CODE_OAUTH_TOKEN = token,
             },
           })
         end,
@@ -143,10 +142,10 @@ return {
             modes = { n = 'gX' },
           },
         },
-        adapter = is_work_repo and 'cursor_cli' or 'claude_code',
+        adapter = 'claude_code',
       },
       inline = { adapter = 'copilot' },
-      cmd = { adapter = is_work_repo and 'cursor_cli' or 'claude_code' },
+      cmd = { adapter = 'claude_code' },
     },
   },
 }
