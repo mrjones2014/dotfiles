@@ -93,7 +93,7 @@ return {
           end
           local token = hosts.is_work_computer()
               and assert(
-                op.get_secret('op://Employee/1Password Claude Token/password', 'ZE3GMX56H5CV5J5IU5PLLFG4KQ'),
+                op.get_secret('op://Employee/1Password Claude Token/password', 'AKHM3DPGNZFUJOY7N4UAWAMLIE'),
                 'Failed to retrieve 1Password Claude Token'
               )
             or assert(
