@@ -25,9 +25,8 @@
         };
         spinnerTipsEnabled = false;
         feedbackSurveyRate = 0;
-        permissions = {
-          defaultMode = "plan";
-        };
+        permissions.defaultMode = "plan";
+        model = "opus";
       };
     }
   ];
