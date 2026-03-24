@@ -2,6 +2,8 @@ local conditions = require('heirline.conditions')
 local utils = require('heirline.utils')
 local my_conditions = require('my.configure.heirline.conditions')
 local sep = require('my.configure.heirline.separators')
+local clipboard = require('my.utils.clipboard')
+local path = require('my.utils.path')
 
 local special_filenames = { 'mod.rs', 'lib.rs', 'init.lua' }
 
@@ -78,25 +80,18 @@ end
 
 local M = {}
 
-local last_file_buf = -1
-
 M.UniqueFilename = {
   init = function(self)
-    self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(0))
-    -- if we're in a UI buffer without a filename, keep the last
-    -- file name there as long as its still open in another window
-    if vim.trim(self.bufname) == '' then
-      if
-        vim.iter(vim.api.nvim_list_wins()):find(function(win)
-          return vim.api.nvim_win_get_buf(win) == last_file_buf
-        end)
-      then
-        self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(last_file_buf))
-      end
-    else
-      last_file_buf = vim.api.nvim_get_current_buf()
-    end
+    self.bufnr = vim.api.nvim_get_current_buf()
+    self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(self.bufnr))
   end,
+  on_click = {
+    callback = function(self)
+      clipboard.copy(path.relative(vim.api.nvim_buf_get_name(self.bufnr)))
+      vim.notify('Relative filepath copied to clipboard')
+    end,
+    name = 'heirline_copy_filepath_winbar',
+  },
   {
     condition = function()
       return my_conditions.should_show_filename()

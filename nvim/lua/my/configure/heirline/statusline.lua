@@ -171,7 +171,7 @@ M.FileInfo = {
           clipboard.copy(path.relative(self.bufname))
           vim.notify('Relative filepath copied to clipboard')
         end,
-        name = 'heirline_copy_filepath',
+        name = 'heirline_copy_filepath_statusline',
       },
     },
   },
