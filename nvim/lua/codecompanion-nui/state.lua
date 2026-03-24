@@ -7,6 +7,7 @@ local M = {}
 ---@field input_bufnr number
 ---@field input_winid number
 ---@field input_split table|nil
+---@field chat_at_bottom boolean
 
 ---@type table<number, CcuiSession>
 M.sessions = {}
@@ -26,6 +27,7 @@ function M.create(id, chat_bufnr, chat_winid)
     input_bufnr = -1,
     input_winid = -1,
     input_split = nil,
+    chat_at_bottom = true,
   }
   M.sessions[id] = session
   M.active_session_id = id

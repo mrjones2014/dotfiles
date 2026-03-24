@@ -103,16 +103,36 @@ function M.attach(chat_bufnr, chat_id)
   State.active_session_id = chat_id
 
   local group = vim.api.nvim_create_augroup('codecompanion-nui_session_' .. chat_id, { clear = true })
-  local chat_at_bottom = true
+  local programmatic_scroll = false
 
-  vim.api.nvim_create_autocmd('WinResized', {
-    group = group,
-    callback = function()
-      if chat_at_bottom and vim.api.nvim_win_is_valid(chat_winid) then
-        vim.api.nvim_win_call(chat_winid, function()
-          vim.cmd('normal! G')
-        end)
+  vim.api.nvim_buf_attach(chat_bufnr, false, {
+    on_lines = function()
+      if not session.chat_at_bottom then
+        return
       end
+      if not vim.api.nvim_win_is_valid(chat_winid) then
+        return true -- detach
+      end
+
+      vim.schedule(function()
+        if not vim.api.nvim_win_is_valid(chat_winid) then
+          return
+        end
+        if not session.chat_at_bottom then
+          return
+        end
+
+        local line_count = vim.api.nvim_buf_line_count(chat_bufnr)
+        if line_count == 0 then
+          return
+        end
+
+        programmatic_scroll = true
+        pcall(vim.api.nvim_win_set_cursor, chat_winid, { line_count, 0 })
+        vim.schedule(function()
+          programmatic_scroll = false
+        end)
+      end)
     end,
   })
 
@@ -120,17 +140,18 @@ function M.attach(chat_bufnr, chat_id)
     group = group,
     buffer = chat_bufnr,
     callback = function()
+      if programmatic_scroll then
+        return
+      end
       if not vim.api.nvim_win_is_valid(chat_winid) then
         return
       end
 
-      local ok, cursor = pcall(vim.api.nvim_win_get_cursor, chat_winid)
-      if not ok then
-        return
-      end
-
+      local last_visible = vim.api.nvim_win_call(chat_winid, function()
+        return vim.fn.line('w$')
+      end)
       local line_count = vim.api.nvim_buf_line_count(chat_bufnr)
-      chat_at_bottom = cursor[1] >= line_count - 1
+      session.chat_at_bottom = last_visible >= line_count - 1
     end,
   })
 

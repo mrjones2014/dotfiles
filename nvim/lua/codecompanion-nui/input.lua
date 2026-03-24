@@ -51,6 +51,13 @@ function M.submit(session)
     end
   end
 
+  -- on submit, scroll the chat buffer to bottom and re-engage autoscroll
+  session.chat_at_bottom = true
+  if vim.api.nvim_win_is_valid(session.chat_winid) then
+    local chat_line_count = vim.api.nvim_buf_line_count(session.chat_bufnr)
+    pcall(vim.api.nvim_win_set_cursor, session.chat_winid, { chat_line_count, 0 })
+  end
+
   chat:submit()
 end
 
