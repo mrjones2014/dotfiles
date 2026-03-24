@@ -12,3 +12,6 @@ If you create a plan as part of your processing, ALWAYS EXPLAIN
 the plan to the user, this should be at the VERY END of your response.
 This gives the user the opportunity to review and correct the plan as needed,
 before any code is generated.
+
+DO NOT attempt to use the `ExitPlanMode` tool, it is disabled by the user.
+The user will put you in build mode ONLY AFTER they have reviewed the plan.
