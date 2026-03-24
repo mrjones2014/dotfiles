@@ -98,8 +98,8 @@ M.UniqueFilename = {
     end
   end,
   {
-    condition = function(self)
-      return my_conditions.should_show_filename(self.bufname)
+    condition = function()
+      return my_conditions.should_show_filename()
     end,
     provider = function(self)
       return string.format(' %s ', self.bufname)
@@ -268,23 +268,20 @@ M.Navic = {
 }
 
 M.FilePosition = {
-  init = function(self)
-    self.bufname = vim.api.nvim_buf_get_name(0)
-  end,
   static = {
     sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
   },
   provider = '',
   {
-    condition = function(self)
-      return my_conditions.should_show_filename(self.bufname)
+    condition = function()
+      return my_conditions.should_show_filename()
     end,
     provider = ' 󰉸 %l/%3L% ',
     hl = { bg = 'surface0' },
   },
   {
-    condition = function(self)
-      return my_conditions.should_show_filename(self.bufname)
+    condition = function()
+      return my_conditions.should_show_filename()
     end,
     provider = function(self)
       local curr_line = vim.api.nvim_win_get_cursor(0)[1]

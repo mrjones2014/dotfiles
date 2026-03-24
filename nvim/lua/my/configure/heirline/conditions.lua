@@ -1,6 +1,7 @@
 local M = {}
 
-function M.should_show_filename(bufname)
+function M.should_show_filename()
+  local bufname = vim.api.nvim_buf_get_name(0)
   local bt = vim.api.nvim_get_option_value('buftype', { buf = 0 })
   local ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
   return (not bt or bt == '')

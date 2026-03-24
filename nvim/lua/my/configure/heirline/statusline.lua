@@ -5,6 +5,7 @@ local sep = require('my.configure.heirline.separators')
 local path = require('my.utils.path')
 local clipboard = require('my.utils.clipboard')
 local editor = require('my.utils.editor')
+local shared = require('my.configure.heirline.shared')
 
 local M = {}
 
@@ -93,10 +94,88 @@ M.Branch = {
   },
 }
 
+local active_buffer_id = nil
+
 local function file_init(self)
-  self.bufname = vim.api.nvim_buf_get_name(0)
+  local cur_buf_name = vim.api.nvim_buf_get_name(0)
+  local is_file = vim.uv.fs_stat(cur_buf_name) ~= nil
+
+  if is_file then
+    active_buffer_id = vim.api.nvim_get_current_buf()
+  elseif
+    not (
+      active_buffer_id ~= nil
+      and vim.iter(vim.api.nvim_list_wins()):map(vim.api.nvim_win_get_buf):any(function(buf)
+        return buf == active_buffer_id
+      end)
+    )
+  then
+    active_buffer_id = nil
+  end
+  self.bufnr = active_buffer_id or vim.api.nvim_get_current_buf()
+  self.bufname = vim.api.nvim_buf_get_name(self.bufnr)
   self.temporary = self.bufname:find(vim.fn.stdpath('run')) ~= nil
 end
+
+M.FileInfo = {
+  init = function(self)
+    local cur_buf_name = vim.api.nvim_buf_get_name(0)
+    local is_file = vim.uv.fs_stat(cur_buf_name) ~= nil
+
+    if is_file then
+      active_buffer_id = vim.api.nvim_get_current_buf()
+    elseif
+      not (
+        active_buffer_id ~= nil
+        and vim.iter(vim.api.nvim_list_wins()):map(vim.api.nvim_win_get_buf):any(function(buf)
+          return buf == active_buffer_id
+        end)
+      )
+    then
+      active_buffer_id = nil
+    end
+    self.bufnr = active_buffer_id or vim.api.nvim_get_current_buf()
+    self.bufname = vim.api.nvim_buf_get_name(self.bufnr)
+    self.temporary = self.bufname:find(vim.fn.stdpath('run')) ~= nil
+  end,
+  {
+    hl = { bg = 'surface0' },
+    {
+      condition = function(self)
+        return self.temporary
+      end,
+      provider = ' 󰪺',
+    },
+  },
+  shared.FileIcon('surface0', function()
+    return active_buffer_id or 0
+  end, function()
+    return active_buffer_id ~= nil or my_conditions.should_show_filename()
+  end),
+  {
+    hl = { bg = 'surface0' },
+    provider = ' ',
+    {
+      condition = function()
+        return active_buffer_id ~= nil or my_conditions.should_show_filename()
+      end,
+      provider = function(self)
+        local filepath = self.bufname
+        if self.temporary then
+          filepath = path.filename(filepath)
+        end
+        return path.relative(filepath)
+      end,
+      on_click = {
+        callback = function(self)
+          clipboard.copy(path.relative(self.bufname))
+          vim.notify('Relative filepath copied to clipboard')
+        end,
+        name = 'heirline_copy_filepath',
+      },
+    },
+  },
+}
 
 M.IsTmpFile = {
   init = file_init,
@@ -114,19 +193,19 @@ M.FilePath = {
   hl = { bg = 'surface0' },
   provider = ' ',
   {
-    condition = function(self)
-      return my_conditions.should_show_filename(self.bufname)
+    condition = function()
+      return active_buffer_id ~= nil or my_conditions.should_show_filename()
     end,
     provider = function(self)
-      local filepath = vim.api.nvim_buf_get_name(0)
+      local filepath = self.bufname
       if self.temporary then
         filepath = path.filename(filepath)
       end
       return path.relative(filepath)
     end,
     on_click = {
-      callback = function()
-        clipboard.copy(path.relative(vim.api.nvim_buf_get_name(0)))
+      callback = function(self)
+        clipboard.copy(path.relative(self.bufname))
         vim.notify('Relative filepath copied to clipboard')
       end,
       name = 'heirline_copy_filepath',

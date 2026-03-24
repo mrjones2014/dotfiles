@@ -57,16 +57,14 @@ return {
             -- codecompanion winbar is handled by codecompanion-nui
             return vim.bo.filetype == 'codecompanion'
               or conditions.is_floating_window()
-              or not conditions.should_show_filename(vim.api.nvim_buf_get_name(0))
+              or not conditions.should_show_filename()
           end,
         },
         statusline = { ---@diagnostic disable-line:missing-fields
           sl.Tabs,
           sl.Mode,
           sl.Branch,
-          sl.IsTmpFile,
-          shared.FileIcon('surface0'),
-          sl.FilePath,
+          sl.FileInfo,
           shared.Align,
           sl.UnsavedChanges,
           shared.Align,
