@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
-  home.sessionVariables.DISABLE_TELEMETRY = "1";
+  home.sessionVariables = {
+    DISABLE_TELEMETRY = "1";
+    CLAUDE_CODE_ENABLE_TELEMETRY = "0";
+    OTEL_METRICS_EXPORTER = "";
+  };
   home.packages = with pkgs; [
     ast-grep
     fd
