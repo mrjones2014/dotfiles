@@ -62,7 +62,6 @@ in
   imports = [
     ./shared.nix
     ./components/_1password-shell.nix
-    ./components/agent-skills.nix
     ./components/claude-code.nix
     ./components/gnome
     ./components/recyclarr.nix
