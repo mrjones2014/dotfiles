@@ -14,6 +14,7 @@
     enable = true;
     package = pkgs.claude-code-bin;
     skillsDir = ../../agent/skills;
+    rulesDir = ../../agent/rules;
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
     settings = {
