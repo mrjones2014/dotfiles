@@ -21,6 +21,13 @@ function M.setup()
         return
       end
       require('codecompanion-nui.layout').attach(data.bufnr, data.id)
+      -- Backfill adapter cache for the newly created input buffer.
+      -- ChatAdapter fires before ChatOpened, so the input buffer didn't
+      -- exist when the adapter cache was originally populated.
+      local session = State.get(data.id)
+      if session then
+        require('codecompanion-nui.completion').backfill_adapter_cache(session)
+      end
     end,
   })
 
