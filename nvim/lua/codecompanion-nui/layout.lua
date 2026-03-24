@@ -143,6 +143,16 @@ function M.attach(chat_bufnr, chat_id)
     end,
   })
 
+  -- if the input window is closed manually,
+  -- also close the chat window
+  vim.api.nvim_create_autocmd('WinClosed', {
+    group = group,
+    pattern = tostring(session.input_winid),
+    callback = function()
+      vim.api.nvim_win_close(session.chat_winid, false)
+    end,
+  })
+
   vim.api.nvim_set_current_win(session.input_winid)
 end
 
