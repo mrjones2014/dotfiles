@@ -1,13 +1,8 @@
-local State = require('codecompanion-nui.state')
+local State = require('codecompanion-ui.state')
 
 local M = {}
 
-local AUGROUP = 'codecompanion-nui'
-
-local is_processing = false
-local spinner_idx = 1
----@type uv.uv_timer_t|nil
-local spinner_timer = nil
+local AUGROUP = 'codecompanion-ui'
 
 function M.setup()
   local group = vim.api.nvim_create_augroup(AUGROUP, { clear = true })
@@ -20,13 +15,13 @@ function M.setup()
       if not data.bufnr or not data.id then
         return
       end
-      require('codecompanion-nui.layout').attach(data.bufnr, data.id)
+      require('codecompanion-ui.layout').attach(data.bufnr, data.id)
       -- Backfill adapter cache for the newly created input buffer.
       -- ChatAdapter fires before ChatOpened, so the input buffer didn't
       -- exist when the adapter cache was originally populated.
       local session = State.get(data.id)
       if session then
-        require('codecompanion-nui.completion').backfill_adapter_cache(session)
+        require('codecompanion-ui.completion').backfill_adapter_cache(session)
       end
     end,
   })
@@ -39,7 +34,7 @@ function M.setup()
       if not data.id then
         return
       end
-      require('codecompanion-nui.layout').detach(data.id)
+      require('codecompanion-ui.layout').detach(data.id)
     end,
   })
 
@@ -51,7 +46,7 @@ function M.setup()
       if not data.id then
         return
       end
-      require('codecompanion-nui.layout').detach(data.id)
+      require('codecompanion-ui.layout').detach(data.id)
       State.remove(data.id)
     end,
   })
@@ -97,44 +92,7 @@ function M.setup()
 end
 
 ---@param session CcuiSession
-function M.start_spinner(session)
-  is_processing = true
-  spinner_idx = 1
-
-  if spinner_timer then
-    return
-  end
-
-  spinner_timer = assert(vim.uv.new_timer())
-  spinner_timer:start(
-    0,
-    100,
-    vim.schedule_wrap(function()
-      if not is_processing then
-        return
-      end
-      local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-      spinner_idx = (spinner_idx % #spinner_frames) + 1
-      if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
-        vim.api.nvim_win_call(session.input_winid, function()
-          vim.cmd('redrawstatus')
-        end)
-      end
-    end)
-  )
-end
-
----@param session CcuiSession
-function M.stop_spinner(session)
-  is_processing = false
-  spinner_idx = 1
-
-  if spinner_timer then
-    spinner_timer:stop()
-    spinner_timer:close()
-    spinner_timer = nil
-  end
-
+local function redraw_winbar(session)
   if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
     vim.api.nvim_win_call(session.input_winid, function()
       vim.cmd('redrawstatus')
@@ -142,14 +100,44 @@ function M.stop_spinner(session)
   end
 end
 
----@return boolean
-function M.is_processing()
-  return is_processing
+---@param session CcuiSession
+function M.start_spinner(session)
+  session.is_processing = true
+  session.spinner_idx = 1
+
+  if session.spinner_timer then
+    return
+  end
+
+  local config = require('codecompanion-ui.config')
+
+  session.spinner_timer = assert(vim.uv.new_timer())
+  session.spinner_timer:start(
+    0,
+    config.spinner.interval_ms,
+    vim.schedule_wrap(function()
+      if not session.is_processing then
+        return
+      end
+      local frames = config.spinner.frames
+      session.spinner_idx = (session.spinner_idx % #frames) + 1
+      redraw_winbar(session)
+    end)
+  )
 end
 
----@return number
-function M.get_spinner_idx()
-  return spinner_idx
+---@param session CcuiSession
+function M.stop_spinner(session)
+  session.is_processing = false
+  session.spinner_idx = 1
+
+  if session.spinner_timer then
+    session.spinner_timer:stop()
+    session.spinner_timer:close()
+    session.spinner_timer = nil
+  end
+
+  redraw_winbar(session)
 end
 
 return M

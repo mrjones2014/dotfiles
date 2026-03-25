@@ -4,10 +4,12 @@ local M = {}
 ---@field id number
 ---@field chat_bufnr number
 ---@field chat_winid number
----@field input_bufnr number
----@field input_winid number
----@field input_split table|nil
+---@field input_bufnr number|nil
+---@field input_winid number|nil
 ---@field chat_at_bottom boolean
+---@field is_processing boolean
+---@field spinner_idx number
+---@field spinner_timer uv.uv_timer_t|nil
 
 ---@type table<number, CcuiSession>
 M.sessions = {}
@@ -24,10 +26,12 @@ function M.create(id, chat_bufnr, chat_winid)
     id = id,
     chat_bufnr = chat_bufnr,
     chat_winid = chat_winid,
-    input_bufnr = -1,
-    input_winid = -1,
-    input_split = nil,
+    input_bufnr = nil,
+    input_winid = nil,
     chat_at_bottom = true,
+    is_processing = false,
+    spinner_idx = 1,
+    spinner_timer = nil,
   }
   M.sessions[id] = session
   M.active_session_id = id
@@ -72,6 +76,12 @@ end
 
 ---@param id number
 function M.remove(id)
+  local session = M.sessions[id]
+  if session and session.spinner_timer then
+    session.spinner_timer:stop()
+    session.spinner_timer:close()
+    session.spinner_timer = nil
+  end
   M.sessions[id] = nil
   if M.active_session_id == id then
     M.active_session_id = nil

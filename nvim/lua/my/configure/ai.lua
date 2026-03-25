@@ -55,8 +55,8 @@ return {
     {
       '<leader>af',
       function()
-        if require('codecompanion-nui').is_visible() then
-          require('codecompanion-nui').focus_input()
+        if require('codecompanion-ui').is_visible() then
+          require('codecompanion-ui').focus_input()
         else
           -- Fallback: find any CC window
           for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -132,7 +132,7 @@ return {
           },
         },
       },
-      nui = { enabled = true },
+      ui = { enabled = true },
     },
     interactions = {
       chat = {

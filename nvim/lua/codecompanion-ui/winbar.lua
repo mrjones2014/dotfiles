@@ -1,22 +1,11 @@
 local M = {}
 
-local mode_icons = {
-  default = ' ',
-  acceptEdits = '󱐋',
-  plan = '󰙬',
-  dontAsk = '󱐋',
-  bypassPermissions = '󰒃',
-}
-
----@return string
-function M.eval_chat()
-  return ''
-end
-
 ---@return string
 function M.eval_input()
-  local state = require('codecompanion-nui.state')
-  local session = state.active()
+  local State = require('codecompanion-ui.state')
+  local config = require('codecompanion-ui.config')
+
+  local session = State.active()
   if not session then
     return ''
   end
@@ -48,12 +37,12 @@ function M.eval_input()
     end
   end
 
-  if mode_name == 'Default' then
-    mode_name = 'Build Mode'
-    mode_id = 'default'
+  local display_name = config.mode_display_names[mode_name]
+  if display_name then
+    mode_name = display_name
   end
 
-  local icon = mode_icons[mode_id] or ''
+  local icon = config.mode_icons[mode_id] or ''
   table.insert(parts, string.format('%%#CcuiModeSep#%%#CcuiMode# %s %s %%#CcuiModeSep#', icon, mode_name))
 
   -- Adapter
@@ -84,11 +73,9 @@ function M.eval_input()
   end
 
   -- Spinner
-  local events = require('codecompanion-nui.events')
-  if events.is_processing() then
-    local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-    local idx = events.get_spinner_idx()
-    local frame = spinner_frames[idx] or '⠋'
+  if session.is_processing then
+    local frames = config.spinner.frames
+    local frame = frames[session.spinner_idx] or frames[1]
     table.insert(parts, string.format('%%#CcuiSpinner# %s Processing... ', frame))
   end
 
@@ -98,7 +85,7 @@ end
 ---@param winid number
 function M.set_input_winbar(winid)
   if vim.api.nvim_win_is_valid(winid) then
-    vim.wo[winid].winbar = "%{%v:lua.require('codecompanion-nui.winbar').eval_input()%}"
+    vim.wo[winid].winbar = "%{%v:lua.require('codecompanion-ui.winbar').eval_input()%}"
   end
 end
 

@@ -1,6 +1,11 @@
 local M = {}
 
-local NS_PLACEHOLDER = vim.api.nvim_create_namespace('codecompanion-nui_placeholder')
+local NS_PLACEHOLDER = vim.api.nvim_create_namespace('codecompanion-ui_placeholder')
+
+-- Namespace used by codecompanion for virtual text (e.g. the initial prompt hint).
+-- We clear this specifically rather than using namespace -1, which would wipe
+-- extmarks from all plugins (treesitter, render-markdown, diagnostics, etc.).
+local NS_CC_VIRTUAL_TEXT = vim.api.nvim_create_namespace('CodeCompanion-virtual_text')
 
 ---@return number
 function M.create_buf()
@@ -15,12 +20,11 @@ end
 
 ---@param session CcuiSession
 function M.submit(session)
-  if not session or not vim.api.nvim_buf_is_valid(session.input_bufnr) then
+  if not session or not session.input_bufnr or not vim.api.nvim_buf_is_valid(session.input_bufnr) then
     return
   end
 
-  local events = require('codecompanion-nui.events')
-  if events.is_processing() then
+  if session.is_processing then
     return
   end
 
@@ -30,54 +34,57 @@ function M.submit(session)
     return
   end
 
-  vim.api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, { '' })
-  M.refresh_placeholder(session.input_bufnr)
-
   local cc = require('codecompanion')
   local chat = cc.buf_get_chat(session.chat_bufnr)
   if not chat then
     return
   end
+
+  -- Clear input buffer before submitting
+  vim.api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, { '' })
+  M.refresh_placeholder(session.input_bufnr)
 
   chat.ui:unlock_buf()
   local line_count = vim.api.nvim_buf_line_count(chat.bufnr)
   local text_lines = vim.split(text, '\n', { plain = true })
   vim.api.nvim_buf_set_lines(chat.bufnr, line_count, line_count, false, text_lines)
 
-  local chat_lines = vim.api.nvim_buf_get_lines(chat.bufnr, 0, -1, false)
-  for i, line in ipairs(chat_lines) do
-    if line:match('^%s*$') or line:match('Enter prompt') then
-      vim.api.nvim_buf_clear_namespace(chat.bufnr, -1, i - 1, i)
-    end
-  end
+  -- Clear codecompanion's virtual text (e.g. initial prompt placeholder) from
+  -- blank lines in the chat buffer using the specific namespace.
+  vim.api.nvim_buf_clear_namespace(chat.bufnr, NS_CC_VIRTUAL_TEXT, 0, -1)
 
-  -- on submit, scroll the chat buffer to bottom and re-engage autoscroll
+  -- Scroll chat to bottom and re-engage autoscroll
   session.chat_at_bottom = true
   if vim.api.nvim_win_is_valid(session.chat_winid) then
     local chat_line_count = vim.api.nvim_buf_line_count(session.chat_bufnr)
     pcall(vim.api.nvim_win_set_cursor, session.chat_winid, { chat_line_count, 0 })
   end
 
-  chat:submit()
+  local ok, err = pcall(chat.submit, chat)
+  if not ok then
+    -- Restore the input buffer content so the user's message isn't lost
+    vim.api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, text_lines)
+    M.refresh_placeholder(session.input_bufnr)
+    vim.notify(string.format('codecompanion-ui: submit failed: %s', err), vim.log.levels.ERROR)
+  end
 end
 
 ---@param session CcuiSession
 function M.setup_keymaps(session)
   local input_buf = session.input_bufnr
 
-  -- Apply codecompanion's chat keymaps to the input buffer
   local cc = require('codecompanion')
   local chat = cc.buf_get_chat(session.chat_bufnr)
   if not chat then
     return
   end
 
-  -- we override send and codeblock keymaps
-  local config = require('codecompanion.config')
-  local cc_keymaps = vim.deepcopy(config.interactions.chat.keymaps)
+  -- Apply codecompanion's chat keymaps to the input buffer, except 'send' and
+  -- 'codeblock' which we override with our own implementations.
+  local cc_config = require('codecompanion.config')
+  local cc_keymaps = vim.deepcopy(cc_config.interactions.chat.keymaps)
   local filtered_keymaps = {}
   for name, keymap in pairs(cc_keymaps) do
-    -- skip 'send', 'codeblock', and 'special' keymaps
     if name ~= 'send' and name ~= 'codeblock' and not vim.startswith(name, '_') then
       filtered_keymaps[name] = keymap
     end
@@ -88,6 +95,7 @@ function M.setup_keymaps(session)
       callbacks[name] = function(...)
         if type(callback.callback) ~= 'function' then
           vim.notify(string.format('Callback for keymap %s is not a function', name), vim.log.levels.ERROR)
+          return
         end
         local cur_win = vim.api.nvim_get_current_win()
         local new_win
@@ -96,9 +104,8 @@ function M.setup_keymaps(session)
           callback.callback(unpack(args))
           new_win = vim.api.nvim_get_current_win()
         end)
-        -- if the keymap spawns a floating window or fuzzy finder etc.
-        -- the window switch doesn't work across the `nvim_buf_call`
-        -- boundary
+        -- If the keymap spawns a floating window or fuzzy finder, the window
+        -- switch doesn't propagate across the nvim_buf_call boundary.
         if new_win ~= cur_win then
           vim.api.nvim_set_current_win(new_win)
         end
@@ -115,8 +122,8 @@ function M.setup_keymaps(session)
     })
     :set()
 
-  -- map the `send` keymap to our custom submit function
-  local send = vim.deepcopy(config.interactions.chat.keymaps.send)
+  -- Map the 'send' keymap to our custom submit function
+  local send = vim.deepcopy(cc_config.interactions.chat.keymaps.send)
   if send then
     for mode, keys in pairs(send.modes) do
       if type(keys) ~= 'table' then
@@ -130,8 +137,10 @@ function M.setup_keymaps(session)
     end
   end
 
-  -- map the `codeblock` keymap to insert into the input buffer
-  local codeblock = vim.deepcopy(config.interactions.chat.keymaps.codeblock)
+  -- Map the 'codeblock' keymap to insert into the input buffer.
+  -- Uses 4 backticks so that code blocks containing triple backticks
+  -- (e.g. markdown examples) are correctly nested.
+  local codeblock = vim.deepcopy(cc_config.interactions.chat.keymaps.codeblock)
   if codeblock then
     for mode, keys in pairs(codeblock.modes) do
       if type(keys) ~= 'table' then
@@ -158,7 +167,7 @@ end
 
 ---@param bufnr number
 function M.setup_autocmds(bufnr)
-  local group = vim.api.nvim_create_augroup('codecompanion-nui_input_' .. bufnr, { clear = true })
+  local group = vim.api.nvim_create_augroup('codecompanion-ui_input_' .. bufnr, { clear = true })
 
   vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
     group = group,
@@ -187,9 +196,10 @@ function M.refresh_placeholder(bufnr)
 
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   if #lines == 1 and lines[1] == '' then
+    local config = require('codecompanion-ui.config')
     vim.api.nvim_buf_set_extmark(bufnr, NS_PLACEHOLDER, 0, 0, {
       virt_text = {
-        { 'Type your message...', 'CcuiPlaceholder' },
+        { config.input.placeholder, 'CcuiPlaceholder' },
       },
       virt_text_pos = 'overlay',
     })

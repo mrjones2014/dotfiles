@@ -1,11 +1,8 @@
-local State = require('codecompanion-nui.state')
-local Input = require('codecompanion-nui.input')
-local Winbar = require('codecompanion-nui.winbar')
-local Split = require('nui.split')
+local State = require('codecompanion-ui.state')
+local Input = require('codecompanion-ui.input')
+local Winbar = require('codecompanion-ui.winbar')
 
 local M = {}
-
-local INPUT_HEIGHT = 10
 
 ---@param bufnr number
 ---@return number|nil
@@ -33,18 +30,21 @@ end
 
 ---@param winid number
 local function setup_chat_win_opts(winid)
+  local config = require('codecompanion-ui.config')
   vim.wo[winid].signcolumn = 'no'
   vim.wo[winid].number = false
   vim.wo[winid].winfixheight = true
   vim.wo[winid].winfixwidth = true
-  vim.api.nvim_win_set_width(winid, math.floor(vim.o.columns * 0.35))
+  vim.api.nvim_win_set_width(winid, math.floor(vim.o.columns * config.chat.width))
 end
 
 ---@param chat_bufnr number
 ---@param chat_id number
 function M.attach(chat_bufnr, chat_id)
+  local config = require('codecompanion-ui.config')
+
   local existing = State.get(chat_id)
-  if existing and existing.input_split then
+  if existing and existing.input_winid then
     return
   end
 
@@ -59,33 +59,21 @@ function M.attach(chat_bufnr, chat_id)
   local input_bufnr = Input.create_buf()
   session.input_bufnr = input_bufnr
 
-  local input_split = Split({
-    relative = {
-      type = 'win',
-      winid = chat_winid,
-    },
-    position = 'bottom',
-    size = INPUT_HEIGHT,
-    buf_options = {
-      buftype = 'nofile',
-      swapfile = false,
-    },
-  })
+  -- Create the input split at the bottom of the chat window.
+  local input_winid
+  vim.api.nvim_win_call(chat_winid, function()
+    vim.cmd('belowright ' .. config.input.height .. 'split')
+    input_winid = vim.api.nvim_get_current_win()
+  end)
 
-  input_split:mount()
-
-  if not input_split.winid or not vim.api.nvim_win_is_valid(input_split.winid) then
-    pcall(function()
-      input_split:unmount()
-    end)
+  if not input_winid or not vim.api.nvim_win_is_valid(input_winid) then
     return
   end
 
-  vim.api.nvim_win_set_buf(input_split.winid, input_bufnr)
+  vim.api.nvim_win_set_buf(input_winid, input_bufnr)
   vim.b[input_bufnr].codecompanion_chat_bufnr = chat_bufnr
 
-  session.input_winid = input_split.winid
-  session.input_split = input_split
+  session.input_winid = input_winid
 
   setup_chat_win_opts(chat_winid)
   setup_input_win_opts(session.input_winid)
@@ -102,7 +90,7 @@ function M.attach(chat_bufnr, chat_id)
 
   State.active_session_id = chat_id
 
-  local group = vim.api.nvim_create_augroup('codecompanion-nui_session_' .. chat_id, { clear = true })
+  local group = vim.api.nvim_create_augroup('codecompanion-ui_session_' .. chat_id, { clear = true })
   local programmatic_scroll = false
 
   vim.api.nvim_buf_attach(chat_bufnr, false, {
@@ -164,13 +152,12 @@ function M.attach(chat_bufnr, chat_id)
     end,
   })
 
-  -- if the input window is closed manually,
-  -- also close the chat window
+  -- If the input window is closed manually, also close the chat window
   vim.api.nvim_create_autocmd('WinClosed', {
     group = group,
     pattern = tostring(session.input_winid),
     callback = function()
-      vim.api.nvim_win_close(session.chat_winid, false)
+      pcall(vim.api.nvim_win_close, session.chat_winid, false)
     end,
   })
 
@@ -184,20 +171,17 @@ function M.detach(chat_id)
     return
   end
 
-  if session.input_split then
-    pcall(function()
-      session.input_split:unmount()
-    end)
-    session.input_split = nil
+  if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
+    pcall(vim.api.nvim_win_close, session.input_winid, true)
   end
 
-  session.input_winid = -1
-  session.input_bufnr = -1
+  session.input_winid = nil
+  session.input_bufnr = nil
 end
 
 function M.focus_input()
   local session = State.active()
-  if session and session.input_winid > 0 and vim.api.nvim_win_is_valid(session.input_winid) then
+  if session and session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
     vim.api.nvim_set_current_win(session.input_winid)
   end
 end
@@ -215,7 +199,7 @@ function M.is_visible()
   if not session then
     return false
   end
-  return session.input_winid > 0 and vim.api.nvim_win_is_valid(session.input_winid)
+  return session.input_winid ~= nil and vim.api.nvim_win_is_valid(session.input_winid)
 end
 
 return M
