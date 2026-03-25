@@ -103,9 +103,14 @@ function M.attach(chat_bufnr, chat_id)
       end
 
       vim.schedule(function()
+        if not session.is_processing then
+          return
+        end
+
         if not vim.api.nvim_win_is_valid(chat_winid) then
           return
         end
+
         if not session.chat_at_bottom then
           return
         end
