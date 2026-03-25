@@ -137,6 +137,33 @@ function M.setup_keymaps(session)
     end
   end
 
+  -- Forward _acp_ keymaps (permission approve/reject) to the chat window.
+  -- These have no static callback; the upstream plugin binds them dynamically
+  -- on the chat buffer when a permission request arrives.  We replay the
+  -- keypress in the chat window so the user can respond from the input window.
+  for name, keymap in pairs(cc_keymaps) do
+    if vim.startswith(name, '_') and keymap.modes then
+      for mode, keys in pairs(keymap.modes) do
+        if type(keys) ~= 'table' then
+          keys = { keys }
+        end
+        for _, key in ipairs(keys) do
+          vim.keymap.set(mode, key, function()
+            if vim.api.nvim_win_is_valid(session.chat_winid) then
+              vim.api.nvim_win_call(session.chat_winid, function()
+                vim.api.nvim_feedkeys(
+                  vim.api.nvim_replace_termcodes(key, true, false, true),
+                  'mit',
+                  false
+                )
+              end)
+            end
+          end, { buffer = input_buf, silent = true, desc = keymap.description })
+        end
+      end
+    end
+  end
+
   -- Map the 'codeblock' keymap to insert into the input buffer.
   -- Uses 4 backticks so that code blocks containing triple backticks
   -- (e.g. markdown examples) are correctly nested.
