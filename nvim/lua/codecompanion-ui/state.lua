@@ -10,6 +10,7 @@ local M = {}
 ---@field is_processing boolean
 ---@field spinner_idx number
 ---@field spinner_timer uv.uv_timer_t|nil
+---@field approval_keymaps string[]|nil
 
 ---@type table<number, CcuiSession>
 M.sessions = {}

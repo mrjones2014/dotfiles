@@ -137,33 +137,6 @@ function M.setup_keymaps(session)
     end
   end
 
-  -- Forward _acp_ keymaps (permission approve/reject) to the chat window.
-  -- These have no static callback; the upstream plugin binds them dynamically
-  -- on the chat buffer when a permission request arrives.  We replay the
-  -- keypress in the chat window so the user can respond from the input window.
-  for name, keymap in pairs(cc_keymaps) do
-    if vim.startswith(name, '_') and keymap.modes then
-      for mode, keys in pairs(keymap.modes) do
-        if type(keys) ~= 'table' then
-          keys = { keys }
-        end
-        for _, key in ipairs(keys) do
-          vim.keymap.set(mode, key, function()
-            if vim.api.nvim_win_is_valid(session.chat_winid) then
-              vim.api.nvim_win_call(session.chat_winid, function()
-                vim.api.nvim_feedkeys(
-                  vim.api.nvim_replace_termcodes(key, true, false, true),
-                  'mit',
-                  false
-                )
-              end)
-            end
-          end, { buffer = input_buf, silent = true, desc = keymap.description })
-        end
-      end
-    end
-  end
-
   -- Map the 'codeblock' keymap to insert into the input buffer.
   -- Uses 4 backticks so that code blocks containing triple backticks
   -- (e.g. markdown examples) are correctly nested.
@@ -190,6 +163,82 @@ function M.setup_keymaps(session)
       end
     end
   end
+
+  -- Mirror approval prompt keymaps onto the input buffer. The approval prompt
+  -- sets keymaps only on the chat buffer, so they're unreachable when the user
+  -- is focused here. We forward each keypress to the chat buffer so the
+  -- original closures fire as normal.
+  local approval_group = vim.api.nvim_create_augroup('codecompanion-ui_approval_' .. input_buf, { clear = true })
+
+  vim.api.nvim_create_autocmd('User', {
+    group = approval_group,
+    pattern = 'CodeCompanionToolApprovalRequested',
+    callback = function(args)
+      local data = args.data or {}
+      if data.bufnr ~= session.chat_bufnr then
+        return
+      end
+
+      local shared_keymaps = cc_config.interactions.shared.keymaps
+      local chat_keymaps = cc_config.interactions.chat.keymaps
+      local keys = {}
+      for _, name in ipairs({ 'always_accept', 'accept_change', 'reject_change', 'cancel', 'view_diff' }) do
+        local km = chat_keymaps[name] or shared_keymaps[name]
+        if km and km.modes and km.modes.n then
+          table.insert(keys, km.modes.n)
+        end
+      end
+
+      for _, key in ipairs(keys) do
+        vim.keymap.set('n', key, function()
+          if not vim.api.nvim_win_is_valid(session.chat_winid) then
+            return
+          end
+          local orig_win = vim.api.nvim_get_current_win()
+          local new_win
+          vim.api.nvim_set_current_win(session.chat_winid)
+          vim.api.nvim_feedkeys(key, 'm', true)
+          vim.schedule(function()
+            new_win = vim.api.nvim_get_current_win()
+            -- if the new window is neither the chat buffer or input buffer,
+            -- its the "view diff" floating window
+            if new_win ~= session.chat_winid and new_win ~= orig_win then
+              -- stay in the floating window, and refocus input buffer on window close
+              vim.api.nvim_create_autocmd('WinClosed', {
+                group = approval_group,
+                pattern = tostring(new_win),
+                once = true,
+                callback = function()
+                  vim.api.nvim_set_current_win(session.input_winid)
+                end,
+              })
+              return
+            end
+            if vim.api.nvim_win_is_valid(orig_win) then
+              vim.api.nvim_set_current_win(orig_win)
+            end
+          end)
+        end, { buffer = input_buf, silent = true, nowait = true })
+      end
+
+      session.approval_keymaps = keys
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('User', {
+    group = approval_group,
+    pattern = 'CodeCompanionToolApprovalFinished',
+    callback = function(args)
+      local data = args.data or {}
+      if data.bufnr ~= session.chat_bufnr or not session.approval_keymaps then
+        return
+      end
+      for _, key in ipairs(session.approval_keymaps) do
+        pcall(vim.keymap.del, 'n', key, { buffer = input_buf })
+      end
+      session.approval_keymaps = nil
+    end,
+  })
 end
 
 ---@param bufnr number
