@@ -5,3 +5,8 @@ globals:
     any: true
   bit:
     any: true
+  # global debug helpers I add
+  dbg:
+    args:
+  dbg_schedule:
+    args:
