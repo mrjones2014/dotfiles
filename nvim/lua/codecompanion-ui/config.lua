@@ -10,6 +10,7 @@ local M = {}
 ---@class CcuiConfig.Input
 ---@field height number
 ---@field placeholder string
+---@field processing_blocked_message string
 
 ---@class CcuiConfig.Chat
 ---@field width number
@@ -23,6 +24,8 @@ local defaults = {
     height = 10,
     -- Placeholder shown when the input buffer is empty
     placeholder = 'Type your message...',
+    -- Message shown in winbar when user tries to submit while processing
+    processing_blocked_message = 'Please wait...',
   },
   chat = {
     -- Chat window width as a fraction of the screen (0.0–1.0)
@@ -31,6 +34,7 @@ local defaults = {
   spinner = {
     interval_ms = 100,
     frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+    text = 'Processing...',
   },
   -- Rename modes for display. Keys are the original mode name, values are the
   -- display name shown in the winbar.

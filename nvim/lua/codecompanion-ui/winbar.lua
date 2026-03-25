@@ -72,11 +72,15 @@ function M.eval_input()
     table.insert(parts, string.format('%%#CcuiModel# 󰧑 %s ', model_name))
   end
 
-  -- Spinner
   if session.is_processing then
     local frames = config.spinner.frames
     local frame = frames[session.spinner_idx] or frames[1]
-    table.insert(parts, string.format('%%#CcuiSpinner# %s Processing... ', frame))
+    table.insert(parts, string.format('%%#CcuiSpinner# %s %s ', frame, config.spinner.text))
+  end
+
+  -- Show processing blocked message right-aligned
+  if session.processing_blocked then
+    table.insert(parts, string.format('%%=%%#WarningMsg# %s ', config.input.processing_blocked_message))
   end
 
   return table.concat(parts)

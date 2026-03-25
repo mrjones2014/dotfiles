@@ -25,6 +25,14 @@ function M.submit(session)
   end
 
   if session.is_processing then
+    -- show a brief message in the winbar that we're still processing
+    session.processing_blocked = true
+    local Events = require('codecompanion-ui.events')
+    Events.redraw_winbar(session)
+    vim.defer_fn(function()
+      session.processing_blocked = false
+      Events.redraw_winbar(session)
+    end, 1500)
     return
   end
 

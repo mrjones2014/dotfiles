@@ -92,7 +92,7 @@ function M.setup()
 end
 
 ---@param session CcuiSession
-local function redraw_winbar(session)
+function M.redraw_winbar(session)
   if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
     vim.api.nvim_win_call(session.input_winid, function()
       vim.cmd('redrawstatus')
@@ -121,7 +121,7 @@ function M.start_spinner(session)
       end
       local frames = config.spinner.frames
       session.spinner_idx = (session.spinner_idx % #frames) + 1
-      redraw_winbar(session)
+      M.redraw_winbar(session)
     end)
   )
 end
@@ -137,7 +137,7 @@ function M.stop_spinner(session)
     session.spinner_timer = nil
   end
 
-  redraw_winbar(session)
+  M.redraw_winbar(session)
 end
 
 return M
