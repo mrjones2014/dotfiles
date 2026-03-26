@@ -13,6 +13,7 @@ return {
     -- https://github.com/ravitemer/codecompanion-history.nvim/pull/74
     -- 'ravitemer/codecompanion-history.nvim',
     { 'cenk1cenk2/codecompanion-history.nvim', branch = 'patch-1' },
+    { 'mrjones2014/codecompanion-ui.nvim', dev = true },
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion' } },
     {
       'zbirenbaum/copilot.lua',
