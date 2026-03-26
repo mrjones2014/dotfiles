@@ -111,7 +111,13 @@ function M.start_spinner(session)
 
   local config = require('codecompanion-ui.config')
 
-  session.spinner_timer = assert(vim.uv.new_timer())
+  local timer = vim.uv.new_timer()
+  if not timer then
+    vim.notify('codecompanion-ui: failed to create spinner timer', vim.log.levels.WARN)
+    return
+  end
+
+  session.spinner_timer = timer
   session.spinner_timer:start(
     0,
     config.spinner.interval_ms,

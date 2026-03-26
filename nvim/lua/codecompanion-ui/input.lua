@@ -30,8 +30,11 @@ function M.submit(session)
     local Events = require('codecompanion-ui.events')
     Events.redraw_winbar(session)
     vim.defer_fn(function()
-      session.processing_blocked = false
-      Events.redraw_winbar(session)
+      -- Check that session and buffer are still valid before updating
+      if session.input_bufnr and vim.api.nvim_buf_is_valid(session.input_bufnr) then
+        session.processing_blocked = false
+        Events.redraw_winbar(session)
+      end
     end, 1500)
     return
   end
@@ -73,6 +76,9 @@ function M.submit(session)
     -- Restore the input buffer content so the user's message isn't lost
     vim.api.nvim_buf_set_lines(session.input_bufnr, 0, -1, false, text_lines)
     M.refresh_placeholder(session.input_bufnr)
+    -- Stop spinner and clear processing state so user isn't stuck
+    local Events = require('codecompanion-ui.events')
+    Events.stop_spinner(session)
     vim.notify(string.format('codecompanion-ui: submit failed: %s', err), vim.log.levels.ERROR)
   end
 end
@@ -217,7 +223,9 @@ function M.setup_keymaps(session)
                 pattern = tostring(new_win),
                 once = true,
                 callback = function()
-                  vim.api.nvim_set_current_win(session.input_winid)
+                  if session.input_winid and vim.api.nvim_win_is_valid(session.input_winid) then
+                    vim.api.nvim_set_current_win(session.input_winid)
+                  end
                 end,
               })
               return
@@ -245,6 +253,20 @@ function M.setup_keymaps(session)
         pcall(vim.keymap.del, 'n', key, { buffer = input_buf })
       end
       session.approval_keymaps = nil
+    end,
+  })
+
+  -- Clean up approval keymaps if buffer is deleted before approval finishes
+  vim.api.nvim_create_autocmd('BufDelete', {
+    group = approval_group,
+    buffer = input_buf,
+    callback = function()
+      if session.approval_keymaps then
+        for _, key in ipairs(session.approval_keymaps) do
+          pcall(vim.keymap.del, 'n', key, { buffer = input_buf })
+        end
+        session.approval_keymaps = nil
+      end
     end,
   })
 end

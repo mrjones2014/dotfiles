@@ -54,6 +54,27 @@ M.config = vim.deepcopy(defaults)
 ---@param opts? CcuiConfig
 function M.setup(opts)
   M.config = vim.tbl_deep_extend('force', vim.deepcopy(defaults), opts or {})
+
+  -- Validate critical config values
+  if M.config.input.height <= 0 then
+    vim.notify('codecompanion-ui: input.height must be positive, using default', vim.log.levels.WARN)
+    M.config.input.height = defaults.input.height
+  end
+
+  if M.config.chat.width < 0.0 or M.config.chat.width > 1.0 then
+    vim.notify('codecompanion-ui: chat.width must be between 0.0 and 1.0, using default', vim.log.levels.WARN)
+    M.config.chat.width = defaults.chat.width
+  end
+
+  if M.config.spinner.interval_ms <= 0 then
+    vim.notify('codecompanion-ui: spinner.interval_ms must be positive, using default', vim.log.levels.WARN)
+    M.config.spinner.interval_ms = defaults.spinner.interval_ms
+  end
+
+  if not M.config.spinner.frames or #M.config.spinner.frames == 0 then
+    vim.notify('codecompanion-ui: spinner.frames must be non-empty, using default', vim.log.levels.WARN)
+    M.config.spinner.frames = defaults.spinner.frames
+  end
 end
 
 ---@type CcuiConfig|{setup: fun(opts?: CcuiConfig), config: CcuiConfig}
