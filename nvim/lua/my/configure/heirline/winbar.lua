@@ -86,8 +86,11 @@ M.UniqueFilename = {
     self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(self.bufnr))
   end,
   on_click = {
-    callback = function(self)
-      clipboard.copy(path.relative(vim.api.nvim_buf_get_name(self.bufnr)))
+    minwid = function()
+      return vim.api.nvim_get_current_win()
+    end,
+    callback = function(_, minwid)
+      clipboard.copy(path.relative(vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(minwid))))
       vim.notify('Relative filepath copied to clipboard')
     end,
     name = 'heirline_copy_filepath_winbar',
