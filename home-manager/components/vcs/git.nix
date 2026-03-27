@@ -27,6 +27,7 @@
       signing = {
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsT6GLG7sY8YKX7JM+jqS3EAti3YMzwHKWViveqkZvu";
         signByDefault = true;
+        format = "ssh";
       };
       settings = {
         user = {
