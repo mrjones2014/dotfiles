@@ -20,6 +20,7 @@
     theme_background = false;
   };
   # handle GTK themeing
+  gtk.gtk4.theme = config.gtk.theme;
   gtk = {
     enable = isLinux && !isServer;
     theme = {

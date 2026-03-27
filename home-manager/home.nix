@@ -58,7 +58,9 @@ in
       ]
       ++ lib.lists.optionals (!isWorkMac) [
         # just not work machine
-        stoat-desktop
+
+        # re-enable when its electron version is updated
+        # stoat-desktop
       ];
   };
   xdg.enable = true;
