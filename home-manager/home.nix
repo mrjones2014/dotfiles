@@ -55,6 +55,10 @@ in
         r2modman
         # sgdboop
         inputs.hytale-launcher.packages.${stdenv.hostPlatform.system}.default
+      ]
+      ++ lib.lists.optionals (!isWorkMac) [
+        # just not work machine
+        stoat-desktop
       ];
   };
   xdg.enable = true;
