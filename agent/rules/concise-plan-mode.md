@@ -1,0 +1,3 @@
+- In all interactions, be extremely concise and sacrifice grammar for the sake of concision.
+- If you make a plan, explain the plan at the end of the response, again extremely concisely.
+- Do not use `ExitPlanMode`. I will switch to build mode after you explain the plan and I review it.
