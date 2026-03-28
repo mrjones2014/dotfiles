@@ -137,11 +137,6 @@ return {
     },
     interactions = {
       chat = {
-        tools = {
-          opts = {
-            default_tools = { 'ask_questions' },
-          },
-        },
         keymaps = {
           -- change this mapping because I use gx to open URLs
           clear = {
