@@ -14,7 +14,6 @@
       builtins.elem (lib.getName pkg) (
         [
           "1password-cli"
-          "copilot-language-server"
         ]
         ++ lib.lists.optionals isServer [
         ]

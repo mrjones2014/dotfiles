@@ -9,34 +9,8 @@ return {
   dependencies = {
     'folke/snacks.nvim',
     'nvim-lua/plenary.nvim',
-    -- TODO switch this back if/when the PR merges
-    -- https://github.com/ravitemer/codecompanion-history.nvim/pull/74
-    -- 'ravitemer/codecompanion-history.nvim',
-    { 'cenk1cenk2/codecompanion-history.nvim', branch = 'patch-1' },
     { 'mrjones2014/codecompanion-ui.nvim', dev = true },
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion' } },
-    {
-      'zbirenbaum/copilot.lua',
-      event = 'LspAttach',
-      cmd = 'Copilot',
-      config = {
-        suggestion = {
-          auto_trigger = true,
-          keymap = {
-            accept = '<C-CR>',
-            accept_line = '<C-t>',
-            dismiss = '<C-d>',
-          },
-        },
-        server_opts_overrides = {
-          settings = {
-            telemetry = {
-              telemetryLevel = 'off',
-            },
-          },
-        },
-      },
-    },
   },
   version = false,
   cmd = {
@@ -111,42 +85,20 @@ return {
       },
     },
     extensions = {
-      history = {
-        enabled = true,
-        opts = {
-          picker = 'snacks',
-          expiration_days = 7,
-          -- this setting doesn't play nicely with ACP adapters
-          -- continue_last_chat = true,
-          delete_on_clearing_chat = true,
-          title_generation_opts = {
-            adapter = 'copilot',
-            model = 'gpt-4o',
-            refresh_every_n_prompts = 2,
-            max_refreshes = 3,
-          },
-          summary = {
-            generation_opts = {
-              adapter = 'copilot',
-              model = 'gpt-4o',
-            },
-          },
-        },
-      },
       ui = { enabled = true },
     },
     interactions = {
+      inline = { adapter = nil },
+      cmd = { adapter = 'claude_code' },
       chat = {
+        adapter = 'claude_code',
         keymaps = {
           -- change this mapping because I use gx to open URLs
           clear = {
             modes = { n = 'gX' },
           },
         },
-        adapter = 'claude_code',
       },
-      inline = { adapter = 'copilot' },
-      cmd = { adapter = 'claude_code' },
     },
   },
 }

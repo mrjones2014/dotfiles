@@ -73,7 +73,6 @@
       # LSP servers
       bash-language-server
       cargo # sometimes required for rust-analyzer to work
-      copilot-language-server
       gopls
       graphql-language-service-cli
       just-lsp
