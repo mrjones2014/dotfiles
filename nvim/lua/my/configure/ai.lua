@@ -10,7 +10,7 @@ return {
     'folke/snacks.nvim',
     'nvim-lua/plenary.nvim',
     { 'mrjones2014/codecompanion-ui.nvim', dev = true },
-    { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion' } },
+    { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'codecompanion', 'codecompanion_input' } },
   },
   version = false,
   cmd = {
