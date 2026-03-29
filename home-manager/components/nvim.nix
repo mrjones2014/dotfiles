@@ -28,6 +28,8 @@
 
   programs.neovim = {
     enable = true;
+    # TODO: Remove once neovim 0.12 is available in nixpkgs
+    package = pkgs.nvim-0_12;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
