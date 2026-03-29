@@ -60,15 +60,4 @@ return {
       end,
     },
   },
-  {
-    'esmuellert/vscode-diff.nvim',
-    branch = 'next',
-    cmd = { 'CodeDiff' },
-    keys = {
-      { '<leader>ct', desc = 'Choose theirs' },
-      { '<leader>cb', desc = 'Choose both' },
-      { '<leader>co', desc = 'Choose ours' },
-      { '<leader>cx', desc = 'Choose none' },
-    },
-  },
 }

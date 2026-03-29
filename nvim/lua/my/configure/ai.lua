@@ -87,7 +87,6 @@ return {
       ui = { enabled = true },
     },
     interactions = {
-      inline = { adapter = nil },
       cmd = { adapter = 'claude_code' },
       chat = {
         adapter = 'claude_code',
