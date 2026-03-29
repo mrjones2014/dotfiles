@@ -1,11 +1,10 @@
 local window = require('my.utils.window')
 local hosts = require('my.utils.hosts')
 
--- Custom chat UI
-
 return {
   'olimorris/codecompanion.nvim',
   dev = true,
+  enabled = not hosts.is_server(),
   dependencies = {
     'folke/snacks.nvim',
     'nvim-lua/plenary.nvim',
