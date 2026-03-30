@@ -14,7 +14,7 @@ let
     };
     aarch64-darwin = fetchurl {
       url = "https://github.com/neovim/neovim/releases/download/v0.12.0/nvim-macos-arm64.tar.gz";
-      hash = "TODO fix when I'm at a macOS machine";
+      hash = "sha256-zwE31pYXhcNJJvh5t6W1+gNxqw1uKVnjkOLwC0YWXOk=";
     };
   };
 in

@@ -82,12 +82,34 @@ return {
           })
         end,
       },
+      http = {
+        local_qwen = function()
+          return require('codecompanion.adapters').extend('openai_compatible', {
+            env = { url = vim.env.LLAMA_SERVER_ADDRESS },
+            schema = { model = { default = { vim.env.LLAMA_DEFAULT_MODEL } } },
+          })
+        end,
+      },
     },
     extensions = {
       ui = { enabled = true },
     },
     interactions = {
       cmd = { adapter = 'claude_code' },
+      background = {
+        adapter = 'local_qwen',
+        chat = {
+          opts = { enabled = true },
+          callbacks = {
+            on_ready = {
+              enabled = true,
+              actions = {
+                'interactions.background.builtin.chat_make_title',
+              },
+            },
+          },
+        },
+      },
       chat = {
         adapter = 'claude_code',
         keymaps = {

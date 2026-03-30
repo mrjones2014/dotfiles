@@ -5,6 +5,9 @@
   ...
 }:
 {
+  imports = [ ../modules/llama-server.nix ];
+  services.llama-server.enable = true;
+
   xdg.configFile = {
     ripgrep_ignore.text = ''
       .git/
