@@ -37,7 +37,6 @@ return {
   {
     'numToStr/Comment.nvim',
     event = 'BufRead',
-    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
     config = function()
       -- default mappings:
       -- {

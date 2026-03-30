@@ -23,13 +23,6 @@ return {
     dependencies = {
       'hiphish/rainbow-delimiters.nvim',
       {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        init = function()
-          vim.g.skip_ts_context_commentstring_module = true
-        end,
-        opts = {},
-      },
-      {
         'andymass/vim-matchup',
         init = function()
           vim.g.matchup_matchparen_offscreen = {
