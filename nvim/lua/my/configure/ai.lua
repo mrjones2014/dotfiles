@@ -84,10 +84,10 @@ return {
       },
       http = {
         local_qwen = function()
-          return require('codecompanion.adapters').extend('openai_compatible', {
-            env = { url = vim.env.LLAMA_SERVER_ADDRESS },
-            schema = { model = { default = { vim.env.LLAMA_DEFAULT_MODEL } } },
-          })
+          return require('codecompanion.adapters').extend(
+            'openai_compatible',
+            { env = { url = vim.env.LLAMA_SERVER_ADDRESS } }
+          )
         end,
       },
     },
