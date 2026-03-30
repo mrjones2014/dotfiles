@@ -194,7 +194,7 @@
     ]
     ++ lib.lists.optionals isLinux [ wl-clipboard ];
 
-  xdg.configFile."litecli/config".text = with import ./tokyonight_palette.nix { inherit lib; }; ''
+  xdg.configFile."litecli/config".text = with import ./tokyonight_palette.nix { inherit lib; }; /* toml */ ''
     [main]
     key_bindings = vi
     wider_completion_menu = True

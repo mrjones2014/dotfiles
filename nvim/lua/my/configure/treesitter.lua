@@ -6,13 +6,6 @@ end
 
 return {
   {
-    'calops/hmts.nvim',
-    version = '*',
-    ft = 'nix',
-    -- TODO this has a bunch of treesitter errors
-    enabled = false,
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
     lazy = false,
