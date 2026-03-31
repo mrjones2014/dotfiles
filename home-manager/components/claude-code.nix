@@ -2,8 +2,9 @@
 {
   home.sessionVariables = {
     DISABLE_TELEMETRY = "1";
-    CLAUDE_CODE_ENABLE_TELEMETRY = "0";
     OTEL_METRICS_EXPORTER = "";
+    CLAUDE_CODE_ENABLE_TELEMETRY = "0";
+    CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
   };
   home.packages = with pkgs; [
     ast-grep
