@@ -1,6 +1,8 @@
 local window = require('my.utils.window')
 local hosts = require('my.utils.hosts')
 
+local _claude_code
+
 return {
   'olimorris/codecompanion.nvim',
   dev = true,
@@ -61,6 +63,10 @@ return {
     adapters = {
       acp = {
         claude_code = function()
+          if _claude_code ~= nil then
+            return _claude_code
+          end
+
           local ok, op = pcall(require, 'op')
           if not ok then
             error('op.nvim is not installed, claude_code adapter will not work', vim.log.levels.ERROR)
@@ -74,12 +80,13 @@ return {
               op.get_secret('op://Private/Claude/token', '3UBYV6PWJZAS7HTEKHDSQ7HPUA'),
               'Failed to retrieve personal Claude token'
             )
-          return require('codecompanion.adapters').extend('claude_code', {
+          _claude_code = require('codecompanion.adapters').extend('claude_code', {
             defaults = { mode = 'plan', model = 'opus' },
             env = {
               CLAUDE_CODE_OAUTH_TOKEN = token,
             },
           })
+          return _claude_code
         end,
       },
       http = {
