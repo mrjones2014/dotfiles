@@ -98,6 +98,7 @@
       # other utils and plugin dependencies
       cargo
       cargo-nextest
+      claude-agent-acp
       clippy
       curl
       fd
@@ -110,11 +111,11 @@
       lemmy-help
       lsof
       mariadb
+      mermaid-cli
       openssl
       ripgrep
       sqlite
       yq-go
-      claude-agent-acp
     ];
   };
 }
