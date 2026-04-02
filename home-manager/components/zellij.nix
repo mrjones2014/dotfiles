@@ -15,13 +15,19 @@ with import ./tokyonight_palette.nix { inherit lib; };
       exitShellOnExit = true;
       attachExistingSession = true;
     };
-    fish = lib.mkIf config.programs.starship.enable {
-      # force the function to load so it starts watching PWD
-      interactiveShellInit = "_update_zellij_tab_name";
+    fish = {
+      # run it once on shell init to force it to start watching PWD
+      interactiveShellInit = /* fish */ ''
+        _update_zellij_tab_name
+      '';
       functions."_update_zellij_tab_name" = {
         onEvent = "fish_prompt";
         onVariable = "PWD";
         body = /* fish */ ''
+          set -l tab_id (zellij action list-panes --json 2>/dev/null | ${pkgs.jq}/bin/jq --arg pane "$ZELLIJ_PANE_ID" '.[] | select(.is_plugin == false) | select(.id == ($pane | tonumber)) | .tab_id' --raw-output)
+          if test -z "$tab_id"
+              return
+          end
           set -l cwd (pwd)
           if git rev-parse --is-inside-worktree >/dev/null 2>&1
               # just show basename if inside a git worktree
@@ -37,7 +43,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
               end
           end
           set -l title "$cwd"
-          command nohup zellij action rename-tab "$title" >/dev/null 2>&1
+          command nohup zellij action rename-tab "$title" --tab-id $tab_id >/dev/null 2>&1
         '';
       };
     };
@@ -50,6 +56,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
       copy_on_select true
       scroll_buffer_size 10000
       show_startup_tips false
+      mouse_hover_effects false
       ui {
           pane_frames {
               rounded_corners true
