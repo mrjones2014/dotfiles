@@ -64,4 +64,11 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FocusGained', {
+  callback = function()
+    _cache_valid = false
+    vim.schedule(vim.cmd.redrawstatus)
+  end,
+})
+
 return M
