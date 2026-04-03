@@ -87,7 +87,7 @@
       markdown-oxide
       nil
       nixd
-      nodePackages_latest.typescript-language-server
+      typescript-language-server
       nodejs
       rust-analyzer
       shellcheck
