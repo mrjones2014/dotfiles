@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, isWorkMac, ... }:
 {
   home.sessionVariables = {
     DISABLE_TELEMETRY = "1";
@@ -31,7 +31,7 @@
       };
       feedbackSurveyRate = 0;
       permissions.defaultMode = "plan";
-      model = "opus";
+      model = if isWorkMac then "opus[1m]" else "opus";
       spinnerTipsEnabled = false;
       spinnerTipsOverride = {
         excludeDefault = true;
