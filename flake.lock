@@ -25,6 +25,29 @@
         "type": "github"
       }
     },
+    "claude-code": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775174900,
+        "narHash": "sha256-Tb/CH58JcTv4hx7LFSLDHPpdEJLKXwoNM1yVOC2mh7k=",
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "rev": "9f95558d85c36bf37132889f4c5456284f7fe8e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -165,6 +188,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "claude-code": "claude-code",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hytale-launcher": "hytale-launcher",

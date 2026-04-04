@@ -1,4 +1,9 @@
-{ pkgs, isWorkMac, ... }:
+{
+  inputs,
+  pkgs,
+  isWorkMac,
+  ...
+}:
 {
   home.sessionVariables = {
     DISABLE_TELEMETRY = "1";
@@ -17,7 +22,8 @@
   ];
   programs.claude-code = {
     enable = true;
-    package = pkgs.claude-code-bin;
+    # TODO remove: https://nixpkgs-tracker.ocfox.me/?pr=505911
+    package = inputs.claude-code.packages.${pkgs.stdenv.system}.default;
     skillsDir = ../../agent/skills;
     rulesDir = ../../agent/rules;
     # some settings are undocumented, refer to the schema
