@@ -55,9 +55,13 @@ return {
     },
   },
   opts = {
-    prompt_library = {
-      markdown = {
-        dirs = { '~/git/dotfiles/prompts' },
+    rules = {
+      -- don't load rules by default,
+      -- the underlying Claude Code ACP adapter
+      -- will load them itself
+      default = {
+        files = {},
+        is_default = false,
       },
     },
     adapters = {
