@@ -88,8 +88,10 @@ in
     hosts."gitlab.1password.io".api_protocol = "https";
   };
 
-  programs.fish.interactiveShellInit = ''
-    export SUDO_ASKPASS="${op_sudo_password_script}/bin/opsudo"
-    alias sudo="sudo -A"
-  '';
+  home.sessionVariables = {
+    SUDO_ASKPASS = "${op_sudo_password_script}/bin/opsudo";
+    # for `programs.nh`: https://github.com/nix-community/nh#nh-specific
+    NH_SUDO_ASKPASS = "${op_sudo_password_script}/bin/opsudo";
+  };
+  programs.fish.shellAliases.sudo = "sudo -A";
 }
