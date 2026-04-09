@@ -4,8 +4,14 @@ let
   subdomainType = lib.types.submodule {
     options = {
       port = lib.mkOption {
-        type = lib.types.port;
+        type = lib.types.nullOr lib.types.port;
+        default = null;
         description = "Port to proxy to.";
+      };
+      redirectTo = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "If set, redirect all requests to this URL (301). Mutually exclusive with port.";
       };
       default = lib.mkOption {
         type = lib.types.bool;
@@ -61,6 +67,16 @@ in
         assertion = (lib.length (lib.attrNames defaultSubdomains)) <= 1;
         message = "Only one subdomain may have default = true.";
       }
+      {
+        assertion = lib.all (
+          name:
+          let
+            s = cfg.${name};
+          in
+          (s.port != null && s.redirectTo == null) || (s.port == null && s.redirectTo != null)
+        ) (lib.attrNames cfg);
+        message = "Each subdomain must set exactly one of 'port' or 'redirectTo'.";
+      }
     ];
 
     networking.firewall = {
@@ -87,27 +103,39 @@ in
 
       virtualHosts = lib.foldl' (
         acc: subdomain:
+        let
+          s = cfg.${subdomain};
+        in
         acc
         // {
           "${subdomain}.mjones.network" = {
-            inherit (cfg.${subdomain}) default;
+            inherit (s) default;
             forceSSL = true;
             useACMEHost = "mjones.network";
-            locations."/" = {
-              proxyPass = "http://${cfg.${subdomain}.address}:${toString cfg.${subdomain}.port}";
-              proxyWebsockets = true;
-              extraConfig =
-                (lib.optionalString cfg.${subdomain}.useLongerTimeout ''
-                  proxy_read_timeout 120s;
-                  proxy_connect_timeout 60s;
-                  proxy_send_timeout 60s;
-                '')
-                + (lib.optionalString cfg.${subdomain}.allowLargeUploads ''
-                  client_max_body_size 1G;
-                  proxy_request_buffering off;
-                '');
-            };
-          };
+          }
+          // (
+            if s.redirectTo != null then
+              {
+                locations."/".return = "301 ${s.redirectTo}$request_uri";
+              }
+            else
+              {
+                locations."/" = {
+                  proxyPass = "http://${s.address}:${toString s.port}";
+                  proxyWebsockets = true;
+                  extraConfig =
+                    (lib.optionalString s.useLongerTimeout ''
+                      proxy_read_timeout 120s;
+                      proxy_connect_timeout 60s;
+                      proxy_send_timeout 60s;
+                    '')
+                    + (lib.optionalString s.allowLargeUploads ''
+                      client_max_body_size 1G;
+                      proxy_request_buffering off;
+                    '');
+                };
+              }
+          );
         }
       ) { } (lib.attrNames cfg);
     };
