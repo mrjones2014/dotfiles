@@ -14,13 +14,7 @@ in
     settings = {
       templates.git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
       git.private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
-      experimental-advance-branches = {
-        enabled-branches = [ "glob:*" ];
-        disabled-branches = [
-          "master"
-          "main"
-        ];
-      };
+      revsets.bookmark-advance-to = "@-";
       revset-aliases = lib.mkDefault {
         # The `trunk().. &` bit is an optimization to scan for non-`mine()` commits
         # only among commits that are not in `trunk()`
