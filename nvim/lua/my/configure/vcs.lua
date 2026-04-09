@@ -60,4 +60,28 @@ return {
       end,
     },
   },
+  {
+    'yus-works/csc.nvim',
+    ft = 'jjdescription',
+    opts = {},
+    dependencies = {
+      'saghen/blink.cmp',
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
+      opts = {
+        sources = {
+          per_filetype = {
+            jjdescription = { 'csc' },
+          },
+          providers = {
+            csc = {
+              name = 'csc',
+              module = 'csc.blink-cmp',
+              score_offset = 100,
+            },
+          },
+        },
+      },
+    },
+  },
 }
