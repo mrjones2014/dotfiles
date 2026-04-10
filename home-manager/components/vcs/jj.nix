@@ -27,15 +27,6 @@ in
         "commit_id rest" = palette.dark3;
       };
       aliases = {
-        # https://shaddy.dev/notes/jj-tug/
-        tug = [
-          "bookmark"
-          "move"
-          "--from"
-          "heads(::@- & (bookmarks() ~ trunk()))"
-          "--to"
-          "@-"
-        ];
         pr = [
           "util"
           "exec"
