@@ -58,6 +58,7 @@
     "/export/fileshare" = {
       device = "/mnt/fileshare";
       options = [ "bind" ];
+      fsType = "ext4";
     };
     "/mnt/media1" = {
       device = "/dev/disk/by-label/media";
