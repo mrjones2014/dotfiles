@@ -3,6 +3,19 @@ let
   zwave_ui_port = 8998;
 in
 {
+  networking.firewall = {
+    # https://www.home-assistant.io/integrations/homekit/#firewall
+    # https://home.mjones.network/configure/integrations/homekit for port numbers for my devices
+    allowedTCPPorts = [
+      21065
+      21066
+    ];
+    allowedUDPPorts = [ 5353 ];
+  };
+  systemd.services.home-assistant = {
+    after = [ "zwave-js-ui.service" ];
+    wants = [ "zwave-js-ui.service" ];
+  };
   services = {
     nginx.subdomains = {
       home.port = config.services.home-assistant.config.http.server_port;
@@ -20,21 +33,23 @@ in
       enable = true;
       extraPackages =
         ps: with ps; [
+          base36
+          hap-python
+          homekit-audio-proxy
+          ical
+          isal
           psycopg2
           pyatv
-          universal-silabs-flasher
           pyipp
-          ical
-          hap-python
-          base36
+          universal-silabs-flasher
           zlib-ng
-          isal
         ];
       extraComponents = [
         "default_config"
         "met"
         "esphome"
         "ring"
+        "homekit"
         "homekit_controller"
         "apple_tv"
         "brother"
