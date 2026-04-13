@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   isWorkMac,
   ...
@@ -22,8 +21,6 @@
   ];
   programs.claude-code = {
     enable = true;
-    # TODO remove: https://nixpkgs-tracker.ocfox.me/?pr=505911
-    package = inputs.claude-code.packages.${pkgs.stdenv.system}.default;
     skillsDir = ../../agent/skills;
     rulesDir = ../../agent/rules;
     # some settings are undocumented, refer to the schema

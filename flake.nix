@@ -1,14 +1,6 @@
 {
   description = "My dotfiles managed with nix as a flake";
   inputs = {
-    # TODO remove: https://nixpkgs-tracker.ocfox.me/?pr=505911
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     tokyonight-nix.url = "github:mrjones2014/tokyonight.nix";
