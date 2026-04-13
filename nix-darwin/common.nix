@@ -28,7 +28,6 @@
       "zen"
       "alfred"
       "spotify"
-      "home-assistant"
     ];
   };
 }

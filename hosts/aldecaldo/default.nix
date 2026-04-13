@@ -11,8 +11,6 @@
     "signal"
     "vesktop"
     "unifi-identity-endpoint"
-    "proton-mail"
-    "proton-drive"
     "todoist-app"
   ];
 }
