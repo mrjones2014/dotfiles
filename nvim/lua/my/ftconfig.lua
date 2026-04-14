@@ -44,7 +44,7 @@ M.config = {
   },
   yaml = {
     treesitter = { 'yaml' },
-    formatter = { 'yamlfmt' },
+    formatter = 'yamlfmt',
   },
   vim = {
     treesitter = { 'vim' },
@@ -52,7 +52,9 @@ M.config = {
   graphql = {
     treesitter = { 'graphql', 'http' },
   },
-  toml = {},
+  toml = {
+    formatter = 'taplo',
+  },
 }
 
 M.filetypes = vim.tbl_keys(M.config)
