@@ -29,15 +29,10 @@ return {
         default_settings = {
           ['rust-analyzer'] = {
             cargo = { targetDir = true },
-            check = {
-              allTargets = true,
-              command = 'clippy',
-            },
-            diagnostics = {
-              disabled = { 'inactive-code', 'unresolved-proc-macro' },
-            },
+            check = { allTargets = true, command = 'clippy' },
+            diagnostics = { disabled = { 'inactive-code', 'unresolved-proc-macro' } },
             procMacro = { enable = true },
-            flags = { exit_timeout = 100 },
+            imports = { group = { enable = false } },
             files = {
               excludeDirs = {
                 'target',
