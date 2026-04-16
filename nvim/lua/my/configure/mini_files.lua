@@ -1,44 +1,14 @@
-local filter_gitignore = true
+local show_ignored = false
+local dim_ignored = true
 
-local function sort_filter_gitignore(entries)
-  if not filter_gitignore then
-    return require('mini.files').default_sort(entries)
-  end
-  -- technically can filter entries here too, and checking gitignore for _every entry individually_
-  -- like I would have to in `content.filter` above is too slow. Here we can give it _all_ the entries
-  -- at once, which is much more performant.
-  local all_paths = table.concat(
-    vim
-      .iter(entries)
-      :map(function(entry)
-        return entry.path
-      end)
-      :totable(),
-    '\n'
-  )
-  local output_lines = {}
-  local job_id = vim.fn.jobstart({ 'git', 'check-ignore', '--stdin' }, {
-    stdout_buffered = true,
-    on_stdout = function(_, data)
-      output_lines = data
-    end,
-  })
+local never_show = {
+  ['.DS_Store'] = true,
+  ['.git'] = true,
+  ['.jj'] = true,
+}
 
-  -- command failed to run
-  if job_id < 1 then
-    return entries
-  end
-
-  -- send paths via STDIN
-  vim.fn.chansend(job_id, all_paths)
-  vim.fn.chanclose(job_id, 'stdin')
-  vim.fn.jobwait({ job_id })
-  return require('mini.files').default_sort(vim
-    .iter(entries)
-    :filter(function(entry)
-      return not vim.tbl_contains(output_lines, entry.path)
-    end)
-    :totable())
+local filter_entry = function(fs_entry)
+  return not never_show[fs_entry.name]
 end
 
 return {
@@ -50,54 +20,6 @@ return {
       opts = { rename = { enabled = false } },
     },
   },
-  init = function()
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'MiniFilesActionRename',
-      callback = function(event)
-        -- LSP rename files when renamed via mini.files
-        require('snacks.rename').on_rename_file(event.data.from, event.data.to)
-      end,
-    })
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'MiniFilesBufferCreate',
-      callback = function(args)
-        local minifiles = require('mini.files')
-        local buf = args.data.buf_id
-
-        -- close with <ESC> as well as q
-        vim.keymap.set('n', '<ESC>', function()
-          minifiles.close()
-        end, { buffer = buf })
-
-        -- toggle .gitignore filtering with <leader>gi
-        vim.keymap.set('n', '<leader>gi', function()
-          filter_gitignore = not filter_gitignore
-          minifiles.refresh({
-            content = { sort = filter_gitignore and sort_filter_gitignore or minifiles.default_sort },
-          })
-        end, { buffer = buf, desc = 'Toggle .gitignore filtering' })
-
-        -- set up ability to confirm changes with :w
-        vim.api.nvim_set_option_value('buftype', 'acwrite', { buf = buf })
-        vim.api.nvim_buf_set_name(buf, string.format('mini.files-%s', vim.uv.hrtime()))
-        vim.api.nvim_create_autocmd('BufWriteCmd', {
-          buffer = buf,
-          callback = function()
-            minifiles.synchronize()
-          end,
-        })
-
-        -- ctrl+v to open selected buffer in a split
-        vim.keymap.set('n', '<C-v>', function()
-          vim.api.nvim_win_call(minifiles.get_explorer_state().target_window, function()
-            vim.cmd.vsp()
-            minifiles.set_target_window(vim.api.nvim_get_current_win())
-          end)
-          minifiles.go_in({ close_on_file = true })
-        end, { desc = 'Open file in split window', buffer = buf })
-      end,
-    })
-  end,
   keys = {
     {
       '<F3>',
@@ -117,10 +39,23 @@ return {
   },
   opts = {
     content = {
-      filter = function(entry)
-        return entry.name ~= '.DS_Store' and entry.name ~= '.git' and entry.name ~= '.direnv' and entry.name ~= '.jj'
+      filter = filter_entry,
+      sort = function(fs_entries)
+        local minifiles = require('mini.files')
+        return minifiles.gitignore:sort_entries(fs_entries)
       end,
-      sort = sort_filter_gitignore,
+      highlight = function(fs_entry)
+        local minifiles = require('mini.files')
+        if not dim_ignored then
+          return minifiles.default_highlight(fs_entry)
+        end
+        local path = fs_entry.path
+        local dir = vim.fs.dirname(path)
+        if minifiles.gitignore and minifiles.gitignore:is_file_ignored(dir, path) then
+          return 'Comment'
+        end
+        return minifiles.default_highlight(fs_entry)
+      end,
     },
     mappings = {
       go_in_plus = '<CR>',
@@ -129,5 +64,78 @@ return {
       preview = true,
       width_preview = 120,
     },
+    options = { permanent_delete = false },
+    gitignore = {
+      max_cache_size = 200,
+      max_concurrent_jobs = 10,
+      prefetch_depth = 1,
+    },
   },
+  config = function(_, opts)
+    local minifiles = require('mini.files')
+    minifiles.setup(opts)
+    minifiles.gitignore = require('my.mini_files_gitignore').new(opts, opts.gitignore)
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesActionRename',
+      callback = function(event)
+        require('snacks.rename').on_rename_file(event.data.from, event.data.to)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesExplorerOpen',
+      callback = function()
+        minifiles.gitignore.state = show_ignored
+        minifiles.gitignore:force_refresh()
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesBufferCreate',
+      callback = function(args)
+        local buf = args.data.buf_id
+
+        vim.keymap.set('n', '<ESC>', function()
+          minifiles.close()
+        end, { buffer = buf })
+
+        vim.keymap.set('n', '<leader>gi', function()
+          show_ignored = not show_ignored
+          minifiles.gitignore.state = show_ignored
+          minifiles.gitignore:force_refresh()
+        end, { buffer = buf, desc = 'Toggle gitignore filtering' })
+
+        vim.keymap.set('n', '<leader>gd', function()
+          dim_ignored = not dim_ignored
+          minifiles.refresh({ content = { force = true } })
+        end, { buffer = buf, desc = 'Toggle dim ignored files' })
+
+        vim.api.nvim_set_option_value('buftype', 'acwrite', { buf = buf })
+        vim.api.nvim_buf_set_name(buf, string.format('mini.files-%s', vim.uv.hrtime()))
+        vim.api.nvim_create_autocmd('BufWriteCmd', {
+          buffer = buf,
+          callback = function()
+            minifiles.synchronize()
+          end,
+        })
+
+        vim.keymap.set('n', '<C-v>', function()
+          vim.api.nvim_win_call(minifiles.get_explorer_state().target_window, function()
+            vim.cmd.vsp()
+            minifiles.set_target_window(vim.api.nvim_get_current_win())
+          end)
+          minifiles.go_in({ close_on_file = true })
+        end, { desc = 'Open file in split window', buffer = buf })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('VimLeavePre', {
+      callback = function()
+        if minifiles.gitignore then
+          minifiles.gitignore:cleanup()
+        end
+      end,
+    })
+  end,
 }
