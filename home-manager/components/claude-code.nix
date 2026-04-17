@@ -21,7 +21,7 @@
   ];
   programs.claude-code = {
     enable = true;
-    skillsDir = ../../agent/skills;
+    skills = ../../agent/skills;
     rulesDir = ../../agent/rules;
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
