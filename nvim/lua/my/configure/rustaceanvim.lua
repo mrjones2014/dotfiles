@@ -33,6 +33,15 @@ return {
             diagnostics = { disabled = { 'inactive-code', 'unresolved-proc-macro' } },
             procMacro = { enable = true },
             imports = { group = { enable = false } },
+            lens = {
+              implementations = { enable = true },
+              references = {
+                enable = true,
+                adt = { enable = true },
+                enumVariant = { enable = true },
+                trait = { enable = true },
+              },
+            },
             files = {
               excludeDirs = {
                 'target',
