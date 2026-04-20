@@ -19,9 +19,12 @@ function M.on_attach(callback)
 end
 
 function M.on_attach_default(client, bufnr)
-  -- if current nvim version supports inlay hints, enable them
-  if vim.lsp['inlay_hint'] ~= nil and client:supports_method(Methods.textDocument_inlayHint) then
-    vim.lsp.inlay_hint.enable(true)
+  if client:supports_method(Methods.textDocument_inlayHint) then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
+  if client:supports_method(Methods.textDocument_codeLens) then
+    vim.lsp.codelens.enable(true, { bufnr = bufnr })
   end
 
   -- Run eslint fixes before writing
