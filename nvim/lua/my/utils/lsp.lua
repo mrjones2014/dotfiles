@@ -23,10 +23,6 @@ function M.on_attach_default(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
-  if client:supports_method(Methods.textDocument_codeLens) then
-    vim.lsp.codelens.enable(true, { bufnr = bufnr })
-  end
-
   -- Run eslint fixes before writing
   if client.name == 'eslint' then
     vim.api.nvim_create_autocmd('BufWritePre', {

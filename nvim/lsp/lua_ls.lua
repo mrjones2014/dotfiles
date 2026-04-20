@@ -14,9 +14,6 @@ return {
   ---@type lsp.lua_ls
   settings = {
     Lua = {
-      codeLens = {
-        enable = true,
-      },
       completion = {
         autoRequire = true,
       },
