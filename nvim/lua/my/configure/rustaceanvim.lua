@@ -7,6 +7,8 @@ return {
       server = {
         cmd = { vim.env.NVIM_RUST_ANALYZER },
         on_attach = function()
+          -- this semantic token has way too many false positives when working with macros
+          vim.cmd.hi('clear @lsp.type.unresolvedReference.rust')
           require('which-key').add({
             {
               '<leader>rd',
