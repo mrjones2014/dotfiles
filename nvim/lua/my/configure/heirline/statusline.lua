@@ -1,4 +1,3 @@
-local conditions = require('heirline.conditions')
 local my_conditions = require('my.configure.heirline.conditions')
 local utils = require('heirline.utils')
 local sep = require('my.configure.heirline.separators')
