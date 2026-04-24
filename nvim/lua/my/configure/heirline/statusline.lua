@@ -53,44 +53,8 @@ M.Mode = {
     provider = sep.rounded_right,
     hl = function(self)
       local mode = self.mode:sub(1, 1)
-      if conditions.is_git_repo() or vim.fs.root(assert(vim.uv.cwd()), '.git') then
-        return { fg = self.mode_colors[mode], bg = 'gray' }
-      else
-        return { fg = self.mode_colors[mode], bg = 'surface0' }
-      end
+      return { fg = self.mode_colors[mode], bg = 'surface0' }
     end,
-  },
-}
-
-M.Branch = {
-  init = function(self)
-    local vcs = require('my.utils.vcs')
-    local url = vcs.git_remote() or ''
-    if string.find(url, 'github.com') then
-      self.icon = ' '
-    elseif string.find(url, 'gitlab') then
-      self.icon = '󰮠 '
-    else
-      self.icon = ' '
-    end
-    self.branch = vcs.jj_bookmark_or_git_branch()
-  end,
-  {
-    condition = function(self)
-      return self.branch ~= nil and self.branch ~= ''
-    end,
-    {
-      {
-        provider = function(self)
-          return string.format(' %s %s', self.icon, self.branch)
-        end,
-        hl = { fg = 'green', bg = 'gray' },
-      },
-      {
-        provider = sep.rounded_right,
-        hl = { fg = 'gray', bg = 'surface0' },
-      },
-    },
   },
 }
 

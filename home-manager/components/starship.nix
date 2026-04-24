@@ -3,7 +3,6 @@ let
   palette = import ./tokyonight_palette.nix { inherit lib; };
 
   git_bg = palette.fg_gutter;
-  git_bg_ansi = palette.hexToAnsiRgb git_bg;
   git_fg = palette.fg;
   dir_bg = palette.dark5;
   server_bg = palette.teal;
@@ -28,9 +27,6 @@ with palette;
         "\${env_var.IN_NIX_SHELL}"
         "\${custom.dir_sep_no_git}"
         "\${custom.git_server_icon}"
-        "$git_branch"
-        "\${custom.jj_log}"
-        "$git_status"
         "$line_break"
         "$shlvl"
         "[❯](bg:${bg_dark} fg:${green}) "
@@ -56,31 +52,7 @@ with palette;
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bg:${dir_bg} fg:${green})";
       env_var.IN_NIX_SHELL.format = "[ ](bg:${dir_bg})[](bg:${dir_bg} fg:${blue5})[ ](bg:${dir_bg})";
-      git_status.format = "[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
-      git_branch = {
-        format = "([ ](bg:${git_bg})[$branch](bg:${git_bg} fg:${git_fg})[ ](bg:${git_bg}))";
-        # detatched HEAD mode means probably we're using jj
-        ignore_branches = [ "HEAD" ];
-      };
       custom = {
-        jj_log = {
-          description = "Show info from jj about current change set";
-          when = true;
-          require_repo = true;
-          # NB: --ignore-working-copy, do not snapshot the repo when generating status for prompt, its too slow and not necessary;
-          # all my git operations/changes will be from manually run jj commands which will snapshot the repo at that time
-          # The `sed` part is to modify the ANSI color codes so that the background color matches
-          # I'll need to update this
-          command = ''jj log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id_with_change_offset(self), self.bookmarks())" | sed "s/\x1b\[\([0-9;]*\)m/\x1b[\1;48;2;${git_bg_ansi}m/g"'';
-          # Render ANSI colors directly from the `jj log` output
-          unsafe_no_escape = true;
-          format = "([ ](bg:${git_bg})[$output](bg:${git_bg})[ ](bg:${git_bg}))";
-          shell = [
-            "bash"
-            "--noprofile"
-            "--norc"
-          ];
-        };
         git_server_icon = {
           description = "Show a GitLab or GitHub icon depending on current git remote";
           when = "git rev-parse --is-inside-work-tree 2> /dev/null";

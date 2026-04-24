@@ -63,7 +63,6 @@ return {
         statusline = { ---@diagnostic disable-line:missing-fields
           sl.Tabs,
           sl.Mode,
-          sl.Branch,
           sl.FileInfo,
           shared.Align,
           sl.UnsavedChanges,

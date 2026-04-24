@@ -20,13 +20,35 @@ in
         # only among commits that are not in `trunk()`
         # This prevents me from mutating any commit that isn't authored by me
         "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())";
-      };
-      colors = {
-        # lighten these up a bit for statusline integration
-        "change_id rest" = palette.dark3;
-        "commit_id rest" = palette.dark3;
+        # Returns the closest merge commit to `to` (used for megamerge workflow)
+        "closest_merge(to)" = "heads(::to & merges())";
       };
       aliases = {
+        # megamerge aliases
+        # takes a revset and rebases it between trunk() and the megamerge (makes it a parent of the megamerge)
+        stack = [
+          "rebase"
+          "--after"
+          "trunk()"
+          "--before"
+          "closest_merge(@)"
+          "--revision"
+        ];
+        # rebase all mutable branch roots onto latest trunk (cascades up through megamerge automatically)
+        restack = [
+          "rebase"
+          "--onto"
+          "trunk()"
+          "--source"
+          "roots(trunk()..) & mutable()"
+          "--simplify-parents"
+        ];
+        # like `stack` but automatically targets all non-empty commits above the megamerge
+        stage = [
+          "stack"
+          "closest_merge(@)+:: ~ empty()"
+        ];
+
         pr = [
           "util"
           "exec"
@@ -126,47 +148,6 @@ in
             ''
             ""
           ];
-        sync = [
-          "util"
-          "exec"
-          "--"
-          "bash"
-          "-c"
-          /* bash */ ''
-            set -euo pipefail
-
-            # Detect which trunk branch exists (master or main)
-            if jj --ignore-working-copy bookmark list -r 'master@origin' &>/dev/null; then
-              trunk="master"
-            elif jj --ignore-working-copy bookmark list -r 'main@origin' &>/dev/null; then
-              trunk="main"
-            else
-              echo "Error: Could not detect trunk branch (master or main)" >&2
-              exit 1
-            fi
-
-            # Get the bookmark at @-
-            parent_bookmark=$(jj --ignore-working-copy bookmark list -r @- --no-pager -T 'self.name() ++ "\n"' 2>/dev/null | head -n 1)
-
-            if [ -n "''${1:-}" ]; then
-              # Argument provided
-              input="''$1"
-              target="$input@origin"
-              jj git fetch && jj rebase -d "$target"
-            elif [ "$parent_bookmark" = "master" ] || [ "$parent_bookmark" = "main" ]; then
-              # fetch and rebase to bookmark
-              jj git fetch && jj rebase -d "$parent_bookmark@origin"
-            else
-              # fetch and rebase to trunk
-              jj git fetch && jj rebase -d "$trunk@origin"
-            fi
-          ''
-          # From jj docs:
-          # > This last empty string will become "$0" in bash, so your actual arguments
-          # > are all included in "$@" and start at "$1" as expected.
-          # https://docs.jj-vcs.dev/latest/config/#aliases
-          ""
-        ];
       };
       # https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-13902914
       diff.tool = "${pkgs.delta}/bin/delta";
