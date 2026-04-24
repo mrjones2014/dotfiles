@@ -27,6 +27,7 @@ with palette;
         "\${env_var.IN_NIX_SHELL}"
         "\${custom.dir_sep_no_git}"
         "\${custom.git_server_icon}"
+        "$git_status"
         "$line_break"
         "$shlvl"
         "[❯](bg:${bg_dark} fg:${green}) "
@@ -52,6 +53,7 @@ with palette;
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bg:${dir_bg} fg:${green})";
       env_var.IN_NIX_SHELL.format = "[ ](bg:${dir_bg})[](bg:${dir_bg} fg:${blue5})[ ](bg:${dir_bg})";
+      git_status.format = "[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
       custom = {
         git_server_icon = {
           description = "Show a GitLab or GitHub icon depending on current git remote";
