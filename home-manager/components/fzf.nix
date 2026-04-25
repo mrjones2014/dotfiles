@@ -141,7 +141,7 @@ in
 
             set_color --bold cyan
             echo -n "$argv[1]"
-            echo -n " $(  $repo)"
+            echo -n " "
             set_color --bold f74e27
             if test -n "$branch"
                 echo "  $branch"
