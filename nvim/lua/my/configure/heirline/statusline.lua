@@ -8,6 +8,18 @@ local shared = require('my.configure.heirline.shared')
 
 local M = {}
 
+M.NixShell = {
+  provider = sep.rounded_left,
+  hl = { fg = 'blue', bg = 'surface0' },
+  condition = function()
+    return (vim.env.IN_NIX_SHELL or '') ~= ''
+  end,
+  {
+    provider = '   ',
+    hl = { bg = 'blue', fg = 'surface0' },
+  },
+}
+
 M.Mode = {
   init = function(self)
     self.mode = vim.fn.mode(0):lower()

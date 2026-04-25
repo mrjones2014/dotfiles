@@ -70,6 +70,7 @@ return {
           sl.RecordingMacro,
           sl.LspFormatToggle,
           sl.SpellCheckToggle,
+          sl.NixShell,
         },
         winbar = { ---@diagnostic disable-line:missing-fields
           shared.FileIcon('base'),
