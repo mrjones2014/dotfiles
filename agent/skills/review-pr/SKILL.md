@@ -1,7 +1,7 @@
 ---
 name: review-pr
-description: Review a GitLab MR or GitHub PR
-argument-hint: <MR/PR number>
+description: Review a GitHub PR
+argument-hint: <PR number>
 ---
 
 You are a senior developer who excels at reviewing others' code. You are highly technical and extremely passionate about code quality, efficiency, being idiomatic, and concise.
@@ -12,18 +12,7 @@ You are a senior developer who excels at reviewing others' code. You are highly 
 - Do not use Python, Node, Ruby, or any scripting languages other than bash for data processing. Use `jq` for JSON processing.
 - Do not create temporary scripts or files.
 
-## Platform Detection
-
-Run `git config --get remote.origin.url` to determine the platform:
-
-- Contains `github.com` → GitHub PR workflow (use `gh-1p`)
-- Contains `gitlab` → GitLab MR workflow (use `glab-1p`)
-
-`gh-1p` and `glab-1p` are wrapper scripts around the `gh` and `glab` CLIs, respectively, that use 1Password CLI to authenticate automatically.
-
-## GitHub PR Workflow
-
-Use the `gh-1p` CLI for all GitHub interactions. Authentication is handled automatically by the wrapper.
+Use the `gh-1p` CLI (wrapper script around `gh` with 1Passworc CLI for auth) for all GitHub interactions.
 
 ### 1. Parse Input
 
@@ -80,55 +69,6 @@ Read all context before writing the review. Pay attention to:
 - Existing review comments — avoid duplicating feedback, build on observations
 - Commit messages — they reveal progression and rationale
 - CI failures — note failing checks related to the changes
-
----
-
-## GitLab MR Workflow
-
-Use the `glab-1p` CLI for all GitLab interactions. Authentication is handled automatically by the wrapper.
-
-### 1. Parse Input
-
-The MR number is: $ARGUMENTS
-
-### 2. Gather Context
-
-Fetch everything before starting the review:
-
-```bash
-# MR metadata
-glab-1p mr view $ARGUMENTS
-
-# Full diff
-glab-1p mr diff $ARGUMENTS
-
-# unfortunately `glab` doesn't support listing comments unless you use the beta CLI,
-# so ignore comments for gitlab
-```
-
-### 3. Compute Effective Range
-
-Always compute and review the effective range as `MERGE_BASE..HEAD`. Do not use `target-branch-tip..head` directly.
-
-```bash
-MR_JSON=$(glab-1p mr view $ARGUMENTS --output json)
-BASE_SHA=$(echo "$MR_JSON" | jq -r '.diff_refs.base_sha')
-HEAD_SHA=$(echo "$MR_JSON" | jq -r '.sha')
-git fetch origin "$BASE_SHA" "$HEAD_SHA"
-MERGE_BASE=$(git merge-base "$BASE_SHA" "$HEAD_SHA")
-git diff "$MERGE_BASE..$HEAD_SHA"
-```
-
-Only report regressions present in this effective range. Do not flag unchanged historical lines.
-
-### 4. Review
-
-Read all context before writing the review. Pay attention to:
-
-- The MR description — it explains intent and may contain testing instructions
-- Existing discussion threads — avoid duplicating feedback, build on observations
-- System notes — they reveal force-pushes, rebases, and approval history
-- Existing comments - they may provide insight you would otherwise miss
 
 ---
 

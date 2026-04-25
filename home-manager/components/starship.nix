@@ -2,8 +2,8 @@
 let
   palette = import ./tokyonight_palette.nix { inherit lib; };
 
+  fg = palette.fg;
   git_bg = palette.fg_gutter;
-  git_fg = palette.fg;
   dir_bg = palette.dark5;
   server_bg = palette.teal;
   server_sep = color: if isServer then "[](fg:${server_bg} bg:${color})" else "";
@@ -26,7 +26,7 @@ with palette;
         "$directory"
         "\${env_var.IN_NIX_SHELL}"
         "\${custom.dir_sep_no_git}"
-        "\${custom.git_server_icon}"
+        "\${custom.dir_sep_git}"
         "$git_status"
         "$line_break"
         "$shlvl"
@@ -53,23 +53,22 @@ with palette;
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bg:${dir_bg} fg:${green})";
       env_var.IN_NIX_SHELL.format = "[ ](bg:${dir_bg})[](bg:${dir_bg} fg:${blue5})[ ](bg:${dir_bg})";
-      git_status.format = "[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
+      git_status.format = "[  ](bg:${git_bg} fg:${fg})[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
       custom = {
-        git_server_icon = {
-          description = "Show a GitLab or GitHub icon depending on current git remote";
-          when = "git rev-parse --is-inside-work-tree 2> /dev/null";
-          command = ''GIT_REMOTE=$(git ls-remote --get-url 2> /dev/null); if [[ "$GIT_REMOTE" =~ "github" ]]; then printf ""; elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then echo "󰮠"; else echo "󰊢"; fi'';
+        dir_sep_no_git = {
+          description = "Show rounded separator when not in a git repo";
+          format = "[](fg:${dir_bg} bg:${bg_dark})";
+          when = "! git rev-parse --is-inside-work-tree 2> /dev/null";
           shell = [
             "bash"
             "--noprofile"
             "--norc"
           ];
-          format = "([](fg:${dir_bg} bg:${git_bg})[ ](bg:${git_bg})[$output](bg:${git_bg} fg:${git_fg})[ ](bg:${git_bg}))";
         };
-        dir_sep_no_git = {
-          description = "Show rounded separator when not in a git repo";
-          format = "[](fg:${dir_bg} bg:${bg_dark})";
-          when = "! git rev-parse --is-inside-work-tree 2> /dev/null";
+        dir_sep_git = {
+          description = "Show rounded separator when in a git repo";
+          format = "[](fg:${dir_bg} bg:${git_bg})";
+          when = "git rev-parse --is-inside-work-tree 2> /dev/null";
           shell = [
             "bash"
             "--noprofile"

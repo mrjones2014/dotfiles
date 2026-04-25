@@ -107,13 +107,12 @@ in
       end
     '';
     functions = {
-
-      fzf-history-widget-wrapped = ''
+      fzf-history-widget-wrapped = /* fish */ ''
         history merge # make FZF search history from all sessions
         fzf-history-widget
         _prompt_move_to_bottom
       '';
-      fzf-oldfiles-widget = ''
+      fzf-oldfiles-widget = /* fish */ ''
         set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview-window 'right,70%' --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
         if test -n "$result"
             commandline -it -- (string escape -- $result)
@@ -121,7 +120,7 @@ in
         commandline -f repaint
         _prompt_move_to_bottom
       '';
-      fzf-vim-widget = ''
+      fzf-vim-widget = /* fish */ ''
         set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview-window 'right,70%' --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
         commandline -f repaint
         _prompt_move_to_bottom
@@ -129,21 +128,7 @@ in
             $EDITOR $result
         end
       '';
-      fzf-project-widget = ''
-        function _project_jump_get_icon
-            set -l remote "$(git --work-tree $argv[1] --git-dir $argv[1]/.git ls-remote --get-url 2> /dev/null)"
-            if string match -r "github.com" "$remote" >/dev/null
-                set_color --bold normal
-                echo -n 
-            else if string match -r gitlab "$remote" >/dev/null
-                set_color --bold FC6D26
-                echo -n 
-            else
-                set_color --bold F74E27
-                echo -n 󰊢
-            end
-        end
-
+      fzf-project-widget = /* fish */ ''
         function _project_jump_format_project
             set -l repo "$HOME/git/$argv[1]"
             set -l branch ""
@@ -156,7 +141,7 @@ in
 
             set_color --bold cyan
             echo -n "$argv[1]"
-            echo -n " $(_project_jump_get_icon $repo)"
+            echo -n " $(  $repo)"
             set_color --bold f74e27
             if test -n "$branch"
                 echo "  $branch"

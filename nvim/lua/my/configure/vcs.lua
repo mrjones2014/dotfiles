@@ -24,12 +24,6 @@ return {
             permalink = '/blob/{commit}/{file}#L{line_start}-L{line_end}',
             commit = '/commit/{commit}',
           },
-          ['gitlab%.1password%.io'] = {
-            branch = '/-/tree/{branch}',
-            file = '/-/blob/{branch}/{file}#L{line_start}-L{line_end}',
-            permalink = '/-/blob/{commit}/{file}#L{line_start}-L{line_end}',
-            commit = '/-/commit/{commit}',
-          },
         },
       },
     },

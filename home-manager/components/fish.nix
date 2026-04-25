@@ -126,20 +126,6 @@
             command nix-shell $argv --run "exec fish"
           '';
         };
-        mr = /* fish */ ''
-          set -l GITLAB_BASE_URL "https://gitlab.1password.io"
-          set -l PROJECT_PATH (git config --get remote.origin.url | sed 's/^ssh.*@[^/]*\(\/.*\).git/\1/g')
-          set -l GIT_BRANCH (git branch --show-current)
-          if test -z "$GIT_BRANCH"
-              set GIT_BRANCH (jj --ignore-working-copy log -r @- --no-graph --no-pager -T 'self.bookmarks()')
-          end
-          if test -z "$GIT_BRANCH"
-              echo "Error: not a git repo"
-              return 1
-          end
-          set -l GITLAB_MR_URL "$GITLAB_BASE_URL$PROJECT_PATH/-/merge_requests/new?merge_request%5Bsource_branch%5D=$GIT_BRANCH"
-          ${if isLinux then "xdg-open" else "open"} "$GITLAB_MR_URL"
-        '';
         pr = /* fish */ ''
           function __pr_parse_gh_path
               set -l url $argv[1]

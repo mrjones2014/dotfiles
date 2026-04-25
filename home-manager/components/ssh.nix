@@ -31,7 +31,6 @@ in
       };
     }
     // lib.optionalAttrs isWorkMac {
-      "gitlab.1password.io".port = 2227;
       # host alias to disambiguate work from personal projects;
       "github-enterprise" = {
         hostname = "github.com";

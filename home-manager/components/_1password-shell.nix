@@ -36,57 +36,16 @@ let
       exec ${pkgs.gh}/bin/gh "$@"
   '';
 
-  glab = pkgs.writeShellScriptBin "glab" ''
-    # glab requires config file to have 600 permissions, but nix store files are 444
-    # copy config to a temp dir with correct permissions
-    # see https://gitlab.com/gitlab-org/cli/-/work_items/7850
-    GLAB_TMP_DIR="$(mktemp -d)"
-    trap "rm -rf '$GLAB_TMP_DIR'" EXIT
-
-    mkdir -p "$GLAB_TMP_DIR"
-    cp "$HOME/.config/glab-cli/config.yml" "$GLAB_TMP_DIR/config.yml" 2>/dev/null || true
-    chmod 600 "$GLAB_TMP_DIR/config.yml" 2>/dev/null || true
-
-    # pass through commands that don't need auth
-    case "''${1:-}" in
-      --help|-h|--version|help|version|"")
-        exec ${pkgs.glab}/bin/glab "$@"
-        ;;
-    esac
-
-
-    export GLAB_CONFIG_DIR="$GLAB_TMP_DIR"
-    GITLAB_TOKEN="$(op read "op://Employee/GitLab Personal Access Token/token" --account AKHM3DPGNZFUJOY7N4UAWAMLIE)" \
-      ${pkgs.glab}/bin/glab "$@"
-  '';
-
   # Explicit -1p variants for use in automation/skills where PATH shadowing doesn't work
   gh-1p = pkgs.writeShellScriptBin "gh-1p" ''
     exec ${gh}/bin/gh "$@"
-  '';
-
-  glab-1p = pkgs.writeShellScriptBin "glab-1p" ''
-    exec ${glab}/bin/glab "$@"
   '';
 in
 {
   home.packages = [
     gh
-    glab
     gh-1p
-    glab-1p
   ];
-
-  # yaml is a superset of json so this is fine
-  xdg.configFile."glab-cli/config.yml".text = builtins.toJSON {
-    git_protocol = "ssh";
-    glamour_style = "dark";
-    check_update = false;
-    host = "gitlab.1password.io";
-    no_prompt = false;
-    telemetry = false;
-    hosts."gitlab.1password.io".api_protocol = "https";
-  };
 
   home.sessionVariables = {
     SUDO_ASKPASS = "${op_sudo_password_script}/bin/opsudo";

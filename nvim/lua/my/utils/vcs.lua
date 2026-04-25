@@ -19,7 +19,7 @@ function M.is_work_repo()
   if not remote or remote == '' then
     return false
   end
-  return remote:find('gitlab.1password.io', 1, true) ~= nil or remote:find('agilebits-inc', 1, true) ~= nil
+  return remote:find('agilebits-inc', 1, true) ~= nil
 end
 
 return M
