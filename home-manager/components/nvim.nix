@@ -23,10 +23,7 @@
       wget-log.*
       /vendor
     '';
-    nvim = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
-      recursive = true;
-    };
+    nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
   };
 
   programs.neovim = {
@@ -39,6 +36,7 @@
     withPython3 = false;
     defaultEditor = true;
     coc.enable = false;
+    sideloadInitLua = true;
 
     extraWrapperArgs = [
       "--set"
