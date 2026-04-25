@@ -70,7 +70,7 @@ in
     ./components/_1password-shell.nix
     ./components/claude-code.nix
     ./components/gnome
-    ./components/recyclarr.nix
+    # ./components/recyclarr.nix
     ./components/terminal.nix
     ./components/vicinae.nix
     ./components/zen.nix
