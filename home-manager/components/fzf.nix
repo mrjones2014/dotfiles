@@ -165,7 +165,7 @@ in
                 return
             end
 
-            set -l dir $(string trim "$(string match -r ".*(?=\s*󰊢||)" "$selected")")
+            set -l dir $(string match -r "^\S+" "$selected")
             echo "$HOME/git/$dir"
         end
 
