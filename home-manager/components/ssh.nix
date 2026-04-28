@@ -47,6 +47,9 @@ in
   };
   programs.git.settings.url = lib.optionalAttrs isWorkMac {
     "git@github-enterprise:agilebits-inc/".insteadOf = "git@github.com:agilebits-inc/";
+    "ssh://git@github-enterprise/agilebits-inc/".insteadOf = "ssh://git@github.com/agilebits-inc/";
     "git@github-enterprise:agilebits-tst-EMU/".insteadOf = "git@github.com:agilebits-tst-EMU/";
+    "ssh://git@github-enterprise/agilebits-tst-EMU/".insteadOf =
+      "ssh://git@github.com/agilebits-tst-EMU/";
   };
 }
