@@ -13,15 +13,17 @@ in
     enable = true;
     settings = {
       templates.git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
-      git.private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
+      git.private-commits = config.programs.jujutsu.settings.revset-aliases."private()";
       revsets.bookmark-advance-to = "@-";
-      revset-aliases = lib.mkDefault {
+      revset-aliases = {
         # The `trunk().. &` bit is an optimization to scan for non-`mine()` commits
         # only among commits that are not in `trunk()`
         # This prevents me from mutating any commit that isn't authored by me
         "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())";
-        # Returns the closest merge commit to `to` (used for megamerge workflow)
-        "closest_merge(to)" = "heads(::to & merges())";
+        "private()" = ''description(glob:"wip:*") | description(glob:"private:*")'';
+        # Returns the closest private commit to `to` (used for megamerge workflow)
+        "closest_merge(to)" = "heads(::to & private() & mutable())";
+
       };
       aliases = {
         # megamerge aliases
