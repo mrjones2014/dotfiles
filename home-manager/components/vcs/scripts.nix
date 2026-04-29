@@ -11,11 +11,6 @@ let
     url="$(git remote get-url origin)"
 
     repo_name="$(basename "$(pwd)")"
-    if [[ "$repo_name" == "dotfiles" ]]; then
-      jj config set --repo experimental-advance-branches.enabled-branches "[\"glob:*\"]"
-      jj config set --repo experimental-advance-branches.disabled-branches []
-      jj bookmark track master@origin
-    fi
 
     if [[ "$large_repo" == true ]]; then
       git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
