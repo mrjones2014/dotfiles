@@ -134,7 +134,8 @@
 
           set -l branch (git branch --show-current 2>/dev/null)
           if test -z "$branch"
-              set branch (jj --ignore-working-copy log -r @- --no-graph --no-pager -T 'self.bookmarks()')
+              set -l rev (if set -q argv[1]; echo $argv[1]; else; echo '@-'; end)
+              set branch (jj --ignore-working-copy log -r $rev --no-graph --no-pager -T 'self.bookmarks()')
           end
           if test -z "$branch"
               echo "Error: no bookmark or branch found for current HEAD"
