@@ -81,9 +81,8 @@
         # https://git-scm.com/docs/protocol-v2
         protocol.version = 2;
         # Use HTTPS for cargo updates
-        url."https://github.com/rust-lang/crates.io-index" = {
-          insteadOf = "https://github.com/rust-lang/crates.io-index";
-        };
+        url."https://github.com/rust-lang/crates.io-index".insteadOf =
+          "https://github.com/rust-lang/crates.io-index";
       };
     };
   };
