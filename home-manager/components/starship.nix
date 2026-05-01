@@ -2,7 +2,7 @@
 let
   palette = import ./tokyonight_palette.nix { inherit lib; };
 
-  fg = palette.fg;
+  inherit (palette) fg;
   git_bg = palette.fg_gutter;
   dir_bg = palette.dark5;
   server_bg = palette.teal;
