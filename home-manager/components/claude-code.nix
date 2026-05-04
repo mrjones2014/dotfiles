@@ -23,14 +23,6 @@
     enable = true;
     skills = ../../agent/skills;
     rulesDir = ../../agent/rules;
-    plugins = [
-      (pkgs.fetchFromGitHub {
-        owner = "JuliusBrussee";
-        repo = "caveman";
-        rev = "v1.6.0";
-        sha256 = "sha256-m7HhCW4fXU5pIYRWVP6cvSYUkDHt8R90D9UI3tT7euk=";
-      })
-    ];
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
     settings = {
