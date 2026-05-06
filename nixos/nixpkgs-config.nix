@@ -14,6 +14,7 @@
       builtins.elem (lib.getName pkg) (
         [
           "1password-cli"
+          "claude-code"
         ]
         ++ lib.lists.optionals isServer [
         ]
@@ -27,7 +28,6 @@
           "parsec-bin"
           "7zz"
           "discord"
-          "claude-code"
         ]
       );
   };
