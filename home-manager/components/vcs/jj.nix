@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  isDarwin,
   isServer,
   ...
 }:
@@ -51,7 +52,137 @@ in
           "closest_merge(@)+:: ~ empty()"
         ];
 
-        pr = [
+        pr =
+          let
+            yq = "${pkgs.yq-go}/bin/yq";
+            open = if isDarwin then "open" else "xdg-open";
+            copy = if isDarwin then "pbcopy" else "wl-copy";
+          in
+          [
+            "util"
+            "exec"
+            "--"
+            "bash"
+            "-c"
+            /* bash */ ''
+              set -euo pipefail
+
+              use_editor=0
+              rev=""
+              for a in "$@"; do
+                case "$a" in
+                  -e) use_editor=1 ;;
+                  -*) echo "Unknown flag: $a" >&2; exit 2 ;;
+                  *)
+                    if [ -z "$rev" ]; then
+                      rev="$a"
+                    else
+                      echo "Usage: jj pr [-e] <rev>" >&2
+                      exit 2
+                    fi
+                    ;;
+                esac
+              done
+              if [ -z "$rev" ]; then
+                echo "Usage: jj pr [-e] <rev>" >&2
+                exit 2
+              fi
+
+              get_branch() {
+                jj --ignore-working-copy log -r "$rev" --no-graph --no-pager \
+                  -T 'self.bookmarks()' | awk '{print $1}'
+              }
+              rev_commit=$(jj --ignore-working-copy log -r "$rev" --no-graph --no-pager -T 'commit_id')
+
+              branch=$(get_branch)
+              needs_push=1
+              if [ -n "$branch" ]; then
+                remote_commit=$(git rev-parse "refs/remotes/origin/$branch" 2>/dev/null || true)
+                if [ "$rev_commit" = "$remote_commit" ]; then
+                  needs_push=0
+                  echo "Already pushed: $branch"
+                fi
+              fi
+
+              if [ "$needs_push" -eq 1 ]; then
+                jj git push -c "$rev"
+                branch=$(get_branch)
+              fi
+              if [ -z "$branch" ]; then
+                echo "Error: no bookmark found on $rev" >&2
+                exit 1
+              fi
+
+              default_branch=main
+              if git show-ref --verify --quiet refs/remotes/origin/master 2>/dev/null; then
+                default_branch=master
+              fi
+
+              parse_path() {
+                echo "$1" | sed -E 's#^git@github\.com:##; s#^https://github\.com/##; s#\.git$##'
+              }
+              origin_path=$(parse_path "$(git config --get remote.origin.url)")
+              upstream_url=$(git config --get remote.upstream.url 2>/dev/null || true)
+
+              if [ -n "$upstream_url" ]; then
+                upstream_path=$(parse_path "$upstream_url")
+                target_repo="$upstream_path"
+                origin_owner="''${origin_path%%/*}"
+                origin_repo="''${origin_path##*/}"
+                head_spec="$origin_owner:$branch"
+                compare_url="https://github.com/$upstream_path/compare/$default_branch...$origin_owner:$origin_repo:$branch"
+              else
+                target_repo="$origin_path"
+                head_spec="$branch"
+                compare_url="https://github.com/$origin_path/compare/$default_branch...$branch"
+              fi
+
+              if [ "$use_editor" -eq 0 ]; then
+                ${open} "$compare_url"
+                exit 0
+              fi
+
+              default_title=$(jj --ignore-working-copy log -r "roots(trunk()..($rev))" \
+                --no-graph --no-pager -T 'description.first_line()' | head -n1)
+
+              tmpfile=$(mktemp "''${TMPDIR:-/tmp}/jj-pr.XXXXXXXX.md")
+              trap 'rm -f "$tmpfile"' EXIT
+
+              escaped_title=$(printf '%s' "$default_title" | sed 's/\\/\\\\/g; s/"/\\"/g')
+              {
+                echo '---'
+                echo "title: \"$escaped_title\""
+                echo 'labels: []'
+                echo '---'
+                echo
+                echo
+              } > "$tmpfile"
+
+              "''${EDITOR:-nvim}" + "$tmpfile"
+
+              title=$(${yq} --front-matter=extract '.title // ""' "$tmpfile")
+              labels=$(${yq} --front-matter=extract '.labels // [] | join(",")' "$tmpfile")
+              body=$(awk 'BEGIN{n=0} n<2 && /^---$/{n++; next} n>=2{print}' "$tmpfile")
+
+              if [ -z "$title" ] || [ "$title" = "null" ]; then
+                echo "Error: empty title; aborting" >&2
+                exit 1
+              fi
+
+              gh_args=(pr create -R "$target_repo" -H "$head_spec" -B "$default_branch" \
+                --title "$title" --body "$body")
+              if [ -n "$labels" ]; then
+                gh_args+=(--label "$labels")
+              fi
+
+              url=$(gh "''${gh_args[@]}")
+              echo "$url"
+              printf '%s' "$url" | ${copy}
+            ''
+            ""
+          ];
+
+        checkout-pr = [
           "util"
           "exec"
           "--"
