@@ -123,43 +123,6 @@
             command nix-shell $argv --run "exec fish"
           '';
         };
-        pr = /* fish */ ''
-          function __pr_parse_gh_path
-              set -l url $argv[1]
-              string replace -r '^git@github\.com:' "" $url | string replace -r '^https://github\.com/' "" | string replace -r '\.git$' ""
-          end
-
-          set -l branch (git branch --show-current 2>/dev/null)
-          if test -z "$branch"
-              set -l rev (if set -q argv[1]; echo $argv[1]; else; echo '@-'; end)
-              set branch (jj --ignore-working-copy log -r $rev --no-graph --no-pager -T 'self.bookmarks()')
-          end
-          if test -z "$branch"
-              echo "Error: no bookmark or branch found for current HEAD"
-              return 1
-          end
-
-          set -l default_branch main
-          if git show-ref --verify --quiet refs/remotes/origin/master 2>/dev/null
-              set default_branch master
-          end
-
-          set -l upstream_url (git config --get remote.upstream.url 2>/dev/null)
-          if test -n "$upstream_url"
-              set -l upstream_path (__pr_parse_gh_path $upstream_url)
-              set -l origin_path (__pr_parse_gh_path (git config --get remote.origin.url))
-              set -l origin_owner (string split "/" $origin_path)[1]
-              set -l origin_repo (string split "/" $origin_path)[2]
-              ${
-                if isLinux then "xdg-open" else "open"
-              } "https://github.com/$upstream_path/compare/$default_branch...$origin_owner:$origin_repo:$branch"
-          else
-              set -l project_path (__pr_parse_gh_path (git config --get remote.origin.url))
-              ${
-                if isLinux then "xdg-open" else "open"
-              } "https://github.com/$project_path/compare/$default_branch...$branch"
-          end
-        '';
       };
     };
   };
