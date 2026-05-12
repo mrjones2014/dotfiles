@@ -190,8 +190,7 @@ in
                 gh_args+=(--label "$labels")
               fi
 
-              # gh-1p comes from ../_1password-shell.nix
-              url=$(gh-1p "''${gh_args[@]}")
+              url=$(${pkgs.gh-1p}/bin/gh-1p "''${gh_args[@]}")
               echo "$url"
               printf '%s' "$url" | ${copy}
             ''
