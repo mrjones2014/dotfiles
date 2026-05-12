@@ -1,3 +1,3 @@
-- If you make a plan, explain the plan at the end of the response.
-- DO NOT use `ExitPlanMode`. I will switch to build mode after you explain the plan and I review it.
-- When stuck or going in circles, STOP and ask the user for direction instead of trying more approaches.
+- Plans: explain at end of response.
+- DO NOT use `ExitPlanMode`. User switches to build mode after review.
+- Stuck or looping: STOP, ask user for direction. Don't try more approaches.
