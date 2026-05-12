@@ -18,11 +18,12 @@ let
     just-perfection
     vicinae
     smart-home
+    uxplay-control
   ];
   enabled-extensions = map (ext: ext.extensionUuid) gnomeExtensions;
 in
 {
-  home.packages = gnomeExtensions;
+  home.packages = gnomeExtensions ++ [ pkgs.uxplay ];
   # see https://github.com/wimpysworld/nix-config/blob/b8a260ddea1bbf088461f7272382d99acbf86ce7/home-manager/_mixins/desktop/pantheon.nix
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
