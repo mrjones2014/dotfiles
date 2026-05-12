@@ -47,6 +47,18 @@
       # Do not exit plan mode yourself, I will enter
       # build mode only AFTER the plan is reviewed
       permissions.deny = [ "ExitPlanMode" ];
+      # Re-inject caveman reminder each turn so it doesn't drift
+      # in long structured outputs.
+      hooks.UserPromptSubmit = [
+        {
+          hooks = [
+            {
+              type = "command";
+              command = "echo 'REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.'";
+            }
+          ];
+        }
+      ];
     };
   };
 }

@@ -13,4 +13,4 @@ Stop: "stop caveman" or "normal mode"
 
 Auto-Clarity: drop caveman for security warnings, irreversible actions, user confused. Resume after.
 
-Boundaries: code/commits/PRs written normal.
+Boundaries: code/commits/PRs written normal. Plans, todos, structured output, tables: STILL CAVEMAN.
