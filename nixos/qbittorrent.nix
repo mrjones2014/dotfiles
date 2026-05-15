@@ -85,9 +85,15 @@ in
         message = "systemd service 'qbittorrent' not found - the qbittorrent service name may have changed";
       }
     ];
-    systemd.services.qbittorrent.vpnConfinement = {
-      enable = true;
-      vpnNamespace = network_namespace;
+    systemd.services.qbittorrent = {
+      vpnConfinement = {
+        enable = true;
+        vpnNamespace = network_namespace;
+      };
+      serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
     };
   }
   (lib.optionalAttrs isServer {
