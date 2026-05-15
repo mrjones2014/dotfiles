@@ -60,7 +60,6 @@
     winetricks
     steamtinkerlaunch
     parsec-bin
-    mullvad-vpn
     prismlauncher
     protonup-qt
     godot
@@ -72,7 +71,6 @@
 
   services = {
     xserver.enable = true;
-    mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
   # services.udev.packages = [ pkgs.dolphinEmu ];

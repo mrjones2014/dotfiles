@@ -11,7 +11,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXHRx83f5MWdhcEHXduTINyUu6yqd2eOgZHE0XNYFlO root@homelab"
   ];
   secrets = [
-    "secrets/mullvad_wireguard.age"
+    "secrets/proton_wireguard_conf_server.age"
     "secrets/homarr_env.age"
     "secrets/cloudflare_certbot_token.age"
     "secrets/gatus_discord_webhook_env.age"
@@ -29,7 +29,7 @@ in
 ))
 // {
   # Secrets for desktop PC, not server
-  "secrets/mullvad_wireguard_desktop.age".publicKeys = [
+  "secrets/proton_wireguard_conf_desktop.age".publicKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8nnsz9p+mUYkyY1LXwvEoql74kFLA36EkUtDAWhkBV mat@nixos-pc"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDIUVIPYhK2pYTVroHvCqChkc0JL7YGfes4teME5Vb1 root@nixos-pc"
   ];

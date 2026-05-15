@@ -36,7 +36,6 @@
       user = config.users.users.mat.name;
     };
     xserver.enable = true;
-    mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
 

@@ -4,8 +4,9 @@
 # sudo ip netns identify <PID> # it should output qbt-wg
 #
 # verify that the network namespace is behind the VPN with
+# the following command and ensure 2 different IPs are printed.
 #
-# sudo ip netns exec qbt-wg curl https://am.i.mullvad.net/connected
+# curl ip.me && sudo ip netns exec qbt-wg curl ip.me
 {
   config,
   lib,
@@ -19,8 +20,11 @@ let
   network_namespace = "qbt-wg";
   namespace_address = if isServer then "192.168.15.1" else "192.168.15.2";
   namespace_address_v6 = if isServer then "fd93:9701:1d00::2" else "fd93:9701:1d00::3";
-  mullvad_secret_file =
-    if isServer then ../secrets/mullvad_wireguard.age else ../secrets/mullvad_wireguard_desktop.age;
+  wireguard_conf =
+    if isServer then
+      ../secrets/proton_wireguard_conf_server.age
+    else
+      ../secrets/proton_wireguard_conf_desktop.age;
 in
 {
 
@@ -28,10 +32,10 @@ in
 }
 // lib.mkMerge [
   {
-    age.secrets.mullvad_wireguard.file = mullvad_secret_file;
+    age.secrets.wireguard_conf.file = wireguard_conf;
     vpnNamespaces.${network_namespace} = {
       enable = true;
-      wireguardConfigFile = config.age.secrets.mullvad_wireguard.path;
+      wireguardConfigFile = config.age.secrets.wireguard_conf.path;
       namespaceAddress = namespace_address;
       namespaceAddressIPv6 = namespace_address_v6;
       accessibleFrom = [
