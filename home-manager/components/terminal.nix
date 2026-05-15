@@ -3,6 +3,7 @@
   config,
   isThinkpad,
   isDarwin,
+  isWorkMac,
   ...
 }:
 {
@@ -35,7 +36,7 @@
       window-decoration = "server";
       # NB: workaround for zellij not having the right PATH on macOS
       command = ''env EDITOR="nvim" PATH="$PATH:/etc/profiles/per-user/${config.home.username}/bin" ${pkgs.zellij}/bin/zellij'';
-      maximize = isThinkpad;
+      maximize = isThinkpad || (isDarwin && !isWorkMac);
       keybind = [
         "super+q=quit"
         "super+v=paste_from_clipboard"
