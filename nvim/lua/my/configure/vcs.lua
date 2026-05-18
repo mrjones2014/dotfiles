@@ -65,8 +65,13 @@ return {
       opts = {
         sources = {
           per_filetype = {
-            -- the `csc` provider registers itself
-            jjdescription = { 'csc' },
+            jjdescription = { 'csc_jj' },
+          },
+          providers = {
+            csc_jj = {
+              name = 'csc',
+              module = 'csc.blink-cmp',
+            },
           },
         },
       },
