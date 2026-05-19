@@ -55,6 +55,7 @@ in
         pr =
           let
             yq = "${pkgs.yq-go}/bin/yq";
+            gh = "${pkgs.gh-1p}/bin/gh-1p";
             copy = if isDarwin then "pbcopy" else "wl-copy";
           in
           [
@@ -102,7 +103,7 @@ in
                 -T 'self.bookmarks().map(|b| b.name()).join("\n") ++ "\n"' \
                 2>/dev/null | awk 'NF' | head -n1)
               if [ -n "$ancestor_bookmark" ]; then
-                if op plugin run -- gh pr list -H "$ancestor_bookmark" -s open \
+                if ${gh} pr list -H "$ancestor_bookmark" -s open \
                      --json number -q '.[0].number' 2>/dev/null | grep -q .; then
                   default_base="$ancestor_bookmark"
                 fi
@@ -186,7 +187,7 @@ in
                 gh_args+=(--label "$labels")
               fi
 
-              url=$(${pkgs.gh-1p}/bin/gh-1p "''${gh_args[@]}")
+              url=$(${gh} "''${gh_args[@]}")
               echo "$url"
               printf '%s' "$url" | ${copy}
             ''
