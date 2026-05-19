@@ -55,7 +55,6 @@ in
         pr =
           let
             yq = "${pkgs.yq-go}/bin/yq";
-            open = if isDarwin then "open" else "xdg-open";
             copy = if isDarwin then "pbcopy" else "wl-copy";
           in
           [
@@ -67,26 +66,11 @@ in
             /* bash */ ''
               set -euo pipefail
 
-              use_editor=0
-              rev=""
-              for a in "$@"; do
-                case "$a" in
-                  -e) use_editor=1 ;;
-                  -*) echo "Unknown flag: $a" >&2; exit 2 ;;
-                  *)
-                    if [ -z "$rev" ]; then
-                      rev="$a"
-                    else
-                      echo "Usage: jj pr [-e] <rev>" >&2
-                      exit 2
-                    fi
-                    ;;
-                esac
-              done
-              if [ -z "$rev" ]; then
-                echo "Usage: jj pr [-e] <rev>" >&2
+              if [ $# -ne 1 ]; then
+                echo "Usage: jj pr <rev>" >&2
                 exit 2
               fi
+              rev="$1"
 
               get_branch() {
                 jj --ignore-working-copy log -r "$rev" --no-graph --no-pager \
@@ -107,6 +91,21 @@ in
               default_branch=main
               if git show-ref --verify --quiet refs/remotes/origin/master 2>/dev/null; then
                 default_branch=master
+              fi
+
+              # default base is `trunk()`, but if there is an ancestor bookmark with an
+              # open PR, use that instead (stacked PRs).
+              default_base="$default_branch"
+              ancestor_bookmark=$(jj --ignore-working-copy log \
+                -r 'heads(::'"$rev"'- & bookmarks()) ~ ::trunk()' \
+                --no-graph --no-pager \
+                -T 'self.bookmarks().map(|b| b.name()).join("\n") ++ "\n"' \
+                2>/dev/null | awk 'NF' | head -n1)
+              if [ -n "$ancestor_bookmark" ]; then
+                if op plugin run -- gh pr list -H "$ancestor_bookmark" -s open \
+                     --json number -q '.[0].number' 2>/dev/null | grep -q .; then
+                  default_base="$ancestor_bookmark"
+                fi
               fi
 
               parse_path() {
@@ -134,20 +133,11 @@ in
                   origin_owner="''${origin_path%%/*}"
                   origin_repo="''${origin_path##*/}"
                   head_spec="$origin_owner:$branch"
-                  compare_url="https://github.com/$upstream_path/compare/$default_branch...$origin_owner:$origin_repo:$branch"
                 else
                   target_repo="$origin_path"
                   head_spec="$branch"
-                  compare_url="https://github.com/$origin_path/compare/$default_branch...$branch"
                 fi
               }
-
-              if [ "$use_editor" -eq 0 ]; then
-                push_if_needed
-                build_urls
-                ${open} "$compare_url"
-                exit 0
-              fi
 
               default_title=$(jj --ignore-working-copy log -r "roots(trunk()..($rev))" \
                 --no-graph --no-pager -T 'description.first_line()' | head -n1)
@@ -156,9 +146,11 @@ in
               trap 'rm -f "$tmpfile"' EXIT
 
               escaped_title=$(printf '%s' "$default_title" | sed 's/\\/\\\\/g; s/"/\\"/g')
+              escaped_base=$(printf '%s' "$default_base" | sed 's/\\/\\\\/g; s/"/\\"/g')
               {
                 echo '---'
                 echo "title: \"$escaped_title\""
+                echo "base: \"$escaped_base\""
                 echo 'labels: []'
                 echo '---'
                 echo
@@ -170,6 +162,10 @@ in
 
               title=$(${yq} --front-matter=extract '.title // ""' "$tmpfile")
               labels=$(${yq} --front-matter=extract '.labels // [] | join(",")' "$tmpfile")
+              base=$(${yq} --front-matter=extract '.base // ""' "$tmpfile")
+              if [ -z "$base" ] || [ "$base" = "null" ]; then
+                base="$default_base"
+              fi
               body=$(awk 'BEGIN{n=0} n<2 && /^---$/{n++; next} n>=2{print}' "$tmpfile")
 
               shopt -s extglob
@@ -184,7 +180,7 @@ in
               push_if_needed
               build_urls
 
-              gh_args=(pr create -R "$target_repo" -H "$head_spec" -B "$default_branch" \
+              gh_args=(pr create -R "$target_repo" -H "$head_spec" -B "$base" \
                 --title "$title" --body "$body")
               if [ -n "$labels" ]; then
                 gh_args+=(--label "$labels")
