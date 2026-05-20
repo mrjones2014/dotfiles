@@ -143,6 +143,20 @@ in
               default_title=$(jj --ignore-working-copy log -r "roots(trunk()..($rev))" \
                 --no-graph --no-pager -T 'description.first_line()' | head -n1)
 
+              shopt -s extglob
+              template_file=""
+              if [ -n "''${JJ_PR_TEMPLATE:-}" ] && [ -f "$JJ_PR_TEMPLATE" ]; then
+                template_file="$JJ_PR_TEMPLATE"
+              elif [ -f ".github/PULL_REQUEST_TEMPLATE.md" ]; then
+                template_file=".github/PULL_REQUEST_TEMPLATE.md"
+              fi
+              template_content=""
+              if [ -n "$template_file" ]; then
+                template_content=$(cat "$template_file")
+                template_content="''${template_content##+([[:space:]])}"
+                template_content="''${template_content%%+([[:space:]])}"
+              fi
+
               tmpfile=$(mktemp "''${TMPDIR:-/tmp}/jj-pr.XXXXXXXX.md")
               trap 'rm -f "$tmpfile"' EXIT
 
@@ -155,11 +169,13 @@ in
                 echo 'labels: []'
                 echo '---'
                 echo
-                echo
+                if [ -n "$template_file" ]; then
+                  cat "$template_file"
+                fi
               } > "$tmpfile"
 
-              # + to open at last line of the file
-              nvim + "$tmpfile"
+              # +7 to place cursor on first body line (after frontmatter + blank line)
+              nvim +7 "$tmpfile"
 
               title=$(${yq} --front-matter=extract '.title // ""' "$tmpfile")
               labels=$(${yq} --front-matter=extract '.labels // [] | join(",")' "$tmpfile")
@@ -169,12 +185,16 @@ in
               fi
               body=$(awk 'BEGIN{n=0} n<2 && /^---$/{n++; next} n>=2{print}' "$tmpfile")
 
-              shopt -s extglob
               body="''${body##+([[:space:]])}"
               body="''${body%%+([[:space:]])}"
 
               if [ -z "$title" ] || [ "$title" = "null" ] || [ -z "$body" ]; then
                 echo "Error: empty body or title; aborting" >&2
+                exit 1
+              fi
+
+              if [ -n "$template_content" ] && [ "$body" = "$template_content" ]; then
+                echo "Error: PR body unchanged from template; aborting" >&2
                 exit 1
               fi
 
@@ -287,7 +307,7 @@ in
                 # extract PR number from selection
                 pr_num=$(echo "$selected" | sed -n 's/.*#\([0-9]*\) .*/\1/p')
                 if [ -n "$pr_num" ]; then
-                  jj pr "$pr_num"
+                  jj checkout-pr "$pr_num"
                 fi
               fi
             ''
