@@ -140,10 +140,12 @@ in
                 fi
               }
 
-              if [ "$default_base" = "$default_branch" ]; then
-                title_base_revset="trunk()"
+              # title should be the commit message of the first commit
+              # _in this specific PR,_ so if stacked, account for that
+              if [ -n "$ancestor_bookmark" ]; then
+                title_base_revset="$ancestor_bookmark"
               else
-                title_base_revset="$default_base"
+                title_base_revset="trunk()"
               fi
               default_title=$(jj --ignore-working-copy log -r "roots($title_base_revset..($rev))" \
                 --no-graph --no-pager -T 'description.first_line()' | head -n1)
