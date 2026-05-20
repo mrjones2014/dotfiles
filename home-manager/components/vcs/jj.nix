@@ -140,7 +140,12 @@ in
                 fi
               }
 
-              default_title=$(jj --ignore-working-copy log -r "roots(trunk()..($rev))" \
+              if [ "$default_base" = "$default_branch" ]; then
+                title_base_revset="trunk()"
+              else
+                title_base_revset="$default_base"
+              fi
+              default_title=$(jj --ignore-working-copy log -r "roots($title_base_revset..($rev))" \
                 --no-graph --no-pager -T 'description.first_line()' | head -n1)
 
               shopt -s extglob
