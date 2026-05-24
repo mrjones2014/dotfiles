@@ -25,6 +25,21 @@
         "type": "github"
       }
     },
+    "crane": {
+      "locked": {
+        "lastModified": 1779130139,
+        "narHash": "sha256-BLrtr42azquO7MdGFU5a7KiMl3YpFlTeIXqy1fT5GlQ=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "edb38893982a3338972bb4a2ec7ce7c29ba10fd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -105,6 +120,34 @@
         "type": "github"
       }
     },
+    "jj-gh": {
+      "inputs": {
+        "crane": "crane",
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay",
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779581885,
+        "narHash": "sha256-U8OhU7vC0g3mVic4idgyu078gM8918MCjrRdZ4KWQJE=",
+        "owner": "mrjones2014",
+        "repo": "jj-gh",
+        "rev": "620c021a906cf5abccc4ec67a8cbc30bf25f935a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrjones2014",
+        "repo": "jj-gh",
+        "type": "github"
+      }
+    },
     "nix-auto-follow": {
       "inputs": {
         "nixpkgs": [
@@ -168,6 +211,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hytale-launcher": "hytale-launcher",
+        "jj-gh": "jj-gh",
         "nix-auto-follow": "nix-auto-follow",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
@@ -175,6 +219,26 @@
         "treefmt-nix": "treefmt-nix",
         "vpn-confinement": "vpn-confinement",
         "zen-browser": "zen-browser"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779419951,
+        "narHash": "sha256-dMX0PUslUHPajP6o8FEoRdFv9afq/dec4POR0vVfjK4=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "5b5c521d6cae9ef4aa32f888eb2c0ce595c9be52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {
