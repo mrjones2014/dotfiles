@@ -15,11 +15,17 @@ in
     enable = true;
     gh = {
       enable = true;
-      settings.gh_askpass = [
-        "op"
-        "read"
-        "op://Private/GitHub/token"
-      ];
+      settings = {
+        gh_askpass = [
+          "op"
+          "read"
+          "op://Private/GitHub/token"
+        ];
+        editor = [
+          "nvim"
+          "+9"
+        ];
+      };
     };
     settings = {
       templates.git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
