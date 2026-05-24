@@ -51,6 +51,7 @@ M.config = {
     treesitter = { 'vim' },
   },
   graphql = {
+    formatter = { 'prettierd' },
     treesitter = { 'graphql', 'http' },
   },
   toml = {
