@@ -80,6 +80,18 @@
         "type": "github"
       }
     },
+    "github-graphql-schema": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-yqeZRMfUZtwGgjJJAPl5h2ZB0D3Ifbjt/saeWoxiZAo=",
+        "type": "file",
+        "url": "https://docs.github.com/public/fpt/schema.docs.graphql"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://docs.github.com/public/fpt/schema.docs.graphql"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -126,6 +138,7 @@
         "flake-utils": [
           "flake-utils"
         ],
+        "github-graphql-schema": "github-graphql-schema",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -135,11 +148,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779581885,
-        "narHash": "sha256-U8OhU7vC0g3mVic4idgyu078gM8918MCjrRdZ4KWQJE=",
+        "lastModified": 1779644942,
+        "narHash": "sha256-DfXbm0JIZ0otTkl+30AWstGx/QpymdxwYQV4BXsp98g=",
         "owner": "mrjones2014",
         "repo": "jj-gh",
-        "rev": "620c021a906cf5abccc4ec67a8cbc30bf25f935a",
+        "rev": "648cc285c558c297dce1cf8bdaa40b76928ff974",
         "type": "github"
       },
       "original": {
