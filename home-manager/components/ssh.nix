@@ -19,7 +19,7 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false; # defaults are going away, this is suggested by a build warning
-    matchBlocks = {
+    settings = {
       "*" = {
         forwardAgent = true;
         addKeysToAgent = "no";
@@ -27,7 +27,7 @@ in
       }
       // lib.optionalAttrs (!isServer) {
         # allow SSH_AUTH_SOCK to be forwarded on server from SSH client
-        extraOptions.IdentityAgent = ''"${sshAuthSock}"'';
+        IdentityAgent = ''"${sshAuthSock}"'';
       };
     }
     // lib.optionalAttrs isWorkMac {
