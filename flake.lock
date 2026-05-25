@@ -148,11 +148,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779650355,
-        "narHash": "sha256-8p7bNkkAFVBkEnNFCp0bYr0ECH9eQpSf46WisNjhKfU=",
+        "lastModified": 1779679058,
+        "narHash": "sha256-FHqiI8k9wywsV37ZpJvWOnSEUkHk0jZak3Zx2IIgXqs=",
         "owner": "mrjones2014",
         "repo": "jj-gh",
-        "rev": "b39f0d6b047c142f64139b6dded1c78354378e80",
+        "rev": "d8e029fc132467d0374344a6489c9425eea82d1c",
         "type": "github"
       },
       "original": {
