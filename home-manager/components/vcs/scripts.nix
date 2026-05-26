@@ -27,7 +27,7 @@ let
       git config --local user.signingKey "$work_signing_key"
       jj config set --repo user.email "$work_email" 2>/dev/null
       jj config set --repo signing.key "$work_signing_key"
-      jj config set --repo "jj-gh.gh_askpass" '["op", "read", "op://Employee/1Password GitHub Token/credential"]'
+      jj config set --repo "jj-gh.gh_askpass" '["op", "read", "op://Employee/1Password GitHub Token/credential", "--account", "AKHM3DPGNZFUJOY7N4UAWAMLIE"]'
       # we just changed the author config and I configure jj to configure non-mine commits as immutable
       jj metaedit --update-author @ --ignore-immutable
       echo "Updated repo-local configs to use work email and signing key"

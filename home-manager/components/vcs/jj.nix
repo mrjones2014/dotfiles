@@ -20,6 +20,8 @@ in
           "op"
           "read"
           "op://Private/GitHub/token"
+          "--account"
+          "3UBYV6PWJZAS7HTEKHDSQ7HPUA"
         ];
         editor = [
           "nvim"
