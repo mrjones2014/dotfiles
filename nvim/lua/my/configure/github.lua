@@ -83,12 +83,16 @@ return {
                   github = {
                     pull_request = { enable = false },
                     issue = {
-                      enable = true,
+                      enable = function()
+                        return vim.b.jj_gh_file == true
+                      end,
                       get_token = get_github_token,
                       get_command = 'curl',
                     },
                     mention = {
-                      enable = true,
+                      enable = function()
+                        return vim.b.jj_gh_file == true
+                      end,
                       get_token = get_github_token,
                       get_command = 'curl',
                       get_documentation = function(item)
