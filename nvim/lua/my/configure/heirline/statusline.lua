@@ -89,7 +89,7 @@ local function file_init(self)
   end
   self.bufnr = active_buffer_id or vim.api.nvim_get_current_buf()
   self.bufname = vim.api.nvim_buf_get_name(self.bufnr)
-  self.temporary = self.bufname:find(vim.fn.stdpath('run')) ~= nil
+  self.temporary = require('my.utils.path').is_tempfile(self.bufnr)
 end
 
 M.FileInfo = {

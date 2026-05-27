@@ -22,4 +22,12 @@ function M.filename(path)
   return vim.fn.fnamemodify(path, ':t')
 end
 
+---@param bufnr integer
+function M.is_tempfile(bufnr)
+  local name = vim.api.nvim_buf_get_name(bufnr)
+  return vim.startswith(name, '/tmp')
+    or vim.startswith(name, '/var/folders/')
+    or vim.startswith(name, '/private/var/folders/')
+end
+
 return M
