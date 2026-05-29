@@ -137,6 +137,9 @@ askubuntu.com##.js-consent-banner
 ####             GitHub                 ####
 ############################################
 
+! Block the "Agents" tab in repositories
+github.com##li:has(> a[data-tab-item="agents"])
+
 ! Block "Mention @copilot in a comment to make changes to this PR" on PR views
 github.com##div.Stack:has-text("Mention @copilot in a comment")
 
