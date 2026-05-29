@@ -72,8 +72,8 @@ return {
               module = 'blink-cmp-git',
               name = 'Git',
               enabled = function()
-                -- set by ftplugin/markdown
-                return vim.b.jj_gh_file == true
+                -- enable only on jj-gh files
+                return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
               end,
               ---@module 'blink-cmp-git'
               ---@type blink-cmp-git.Options
@@ -84,14 +84,16 @@ return {
                     pull_request = { enable = false },
                     issue = {
                       enable = function()
-                        return vim.b.jj_gh_file == true
+                        -- enable only on jj-gh files
+                        return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
                       end,
                       get_token = get_github_token,
                       get_command = 'curl',
                     },
                     mention = {
                       enable = function()
-                        return vim.b.jj_gh_file == true
+                        -- enable only on jj-gh files
+                        return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
                       end,
                       get_token = get_github_token,
                       get_command = 'curl',

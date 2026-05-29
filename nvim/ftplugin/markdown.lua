@@ -13,7 +13,3 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     end
   end,
 })
-
-if require('my.utils.path').is_tempfile(0) then
-  vim.b.jj_gh_file = true
-end

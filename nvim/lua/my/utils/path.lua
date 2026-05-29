@@ -26,6 +26,7 @@ end
 function M.is_tempfile(bufnr)
   local name = vim.api.nvim_buf_get_name(bufnr)
   return vim.startswith(name, '/tmp')
+    or vim.startswith(name, '/private/tmp')
     or vim.startswith(name, '/var/folders/')
     or vim.startswith(name, '/private/var/folders/')
 end
