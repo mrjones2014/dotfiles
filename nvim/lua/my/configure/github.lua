@@ -22,34 +22,36 @@ local function get_github_token()
 end
 
 return {
-  'pwntester/octo.nvim',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'folke/snacks.nvim',
-    'mrjones2014/op.nvim',
-  },
-  cmd = 'Octo',
-  keys = {
-    {
-      '<leader>pr',
-      '<CMD>Octo pr list<CR>',
-      desc = 'List GitHub PullRequests',
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'folke/snacks.nvim',
+      'mrjones2014/op.nvim',
     },
-    {
-      '<leader>ps',
-      function()
-        require('octo.utils').create_base_search_command({ include_current_repo = true })
+    cmd = 'Octo',
+    keys = {
+      {
+        '<leader>pr',
+        '<CMD>Octo pr list<CR>',
+        desc = 'List GitHub PullRequests',
+      },
+      {
+        '<leader>ps',
+        function()
+          require('octo.utils').create_base_search_command({ include_current_repo = true })
+        end,
+        desc = 'Search GitHub',
+      },
+    },
+    opts = {
+      picker = 'snacks',
+      enable_builtin = true,
+      ssh_aliases = { ['github-enterprise'] = 'github.com' },
+      gh_env = function()
+        return { GITHUB_TOKEN = get_github_token() }
       end,
-      desc = 'Search GitHub',
     },
-  },
-  opts = {
-    picker = 'snacks',
-    enable_builtin = true,
-    ssh_aliases = { ['github-enterprise'] = 'github.com' },
-    gh_env = function()
-      return { GITHUB_TOKEN = get_github_token() }
-    end,
   },
   {
     -- this is lazy-loaded by `ftplugin/markdown.lua`
