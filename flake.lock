@@ -80,23 +80,6 @@
         "type": "github"
       }
     },
-    "github-graphql-schema": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1763995306,
-        "narHash": "sha256-3T5Rv7N+0lPqsRomSaf+GphP1A6Ft+Lu8gOYvZGxaD8=",
-        "owner": "octokit",
-        "repo": "graphql-schema",
-        "rev": "5f014c99da1fe346ac8d69fd20d8ddb84277d65b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "octokit",
-        "ref": "v15.26.1",
-        "repo": "graphql-schema",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -143,7 +126,6 @@
         "flake-utils": [
           "flake-utils"
         ],
-        "github-graphql-schema": "github-graphql-schema",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -153,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780324671,
-        "narHash": "sha256-vq8yxRFWE2ecK+PaEScjLOda1N6/zzE/Gw0aTLLNjDo=",
+        "lastModified": 1780335279,
+        "narHash": "sha256-oPdFtJbO0s7snQlLDM6L/rW26UjXGXsz8BO4wuOaftU=",
         "owner": "mrjones2014",
         "repo": "jj-gh",
-        "rev": "64982b149a0b110e7e18b4d2cbecaeb8fa9a54af",
+        "rev": "46e5a038bd75f8ad20c2d6ec6f8cd2334677bd3a",
         "type": "github"
       },
       "original": {
