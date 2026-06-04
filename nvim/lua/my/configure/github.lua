@@ -99,6 +99,15 @@ return {
                       end,
                       get_token = get_github_token,
                       get_command = 'curl',
+                      get_command_args = function(command, token)
+                        -- increase default page size
+                        local args = require('blink-cmp-git.default.github').mention.get_command_args(command, token)
+                        local utils = require('blink-cmp-git.utils')
+                        args[#args] = 'https://api.github.com/repos/'
+                          .. utils.get_repo_owner_and_repo()
+                          .. '/contributors?per_page=100'
+                        return args
+                      end,
                       get_documentation = function(item)
                         local default = require('blink-cmp-git.default.github').mention.get_documentation(item)
                         default.get_token = get_github_token
