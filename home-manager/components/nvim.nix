@@ -94,6 +94,7 @@
       # other utils and plugin dependencies
       cargo
       cargo-nextest
+      codex-acp
       claude-agent-acp
       clippy
       curl

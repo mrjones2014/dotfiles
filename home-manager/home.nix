@@ -65,7 +65,7 @@ in
   imports = [
     ./shared.nix
     ./components/_1password-shell.nix
-    ./components/claude-code.nix
+    ./components/agents.nix
     ./components/gnome
     # ./components/recyclarr.nix
     ./components/terminal.nix

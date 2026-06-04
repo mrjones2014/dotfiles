@@ -66,6 +66,14 @@ return {
     },
     adapters = {
       acp = {
+        codex = function()
+          return require('codecompanion.adapters').extend('codex', {
+            defaults = {
+              auth_method = 'chatgpt',
+              model = 'gpt-5.5',
+            },
+          })
+        end,
         claude_code = function()
           if _claude_code ~= nil then
             return _claude_code
@@ -106,7 +114,7 @@ return {
       ui = { enabled = true },
     },
     interactions = {
-      cmd = { adapter = 'claude_code' },
+      cmd = { adapter = 'codex' },
       background = {
         adapter = 'local_qwen',
         chat = {
@@ -122,7 +130,7 @@ return {
         },
       },
       chat = {
-        adapter = 'claude_code',
+        adapter = 'codex',
         keymaps = {
           -- change this mapping because I use gx to open URLs
           clear = {

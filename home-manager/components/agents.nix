@@ -3,6 +3,32 @@
   isWorkMac,
   ...
 }:
+let
+  rulesDir = ../../agent/rules;
+  mkRules =
+    dir:
+    pkgs.lib.mapAttrs'
+      (name: _: pkgs.lib.nameValuePair (pkgs.lib.removeSuffix ".md" name) (dir + "/${name}"))
+      (pkgs.lib.filterAttrs (n: t: t == "regular" && pkgs.lib.hasSuffix ".md" n) (builtins.readDir dir));
+  hooks = {
+    UserPromptSubmit = [
+      {
+        type = "command";
+        command = "echo 'REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.'";
+      }
+    ];
+    SessionStart = [
+      {
+        hooks = [
+          {
+            type = "command";
+            command = "awk '/^---$/{c++;next} c>=2' ${../../agent/skills/caveman/SKILL.md}";
+          }
+        ];
+      }
+    ];
+  };
+in
 {
   home.sessionVariables = {
     DISABLE_TELEMETRY = "1";
@@ -19,13 +45,27 @@
     sd
     yq-go
   ];
+  programs.codex = {
+    enable = true;
+    enableMcpIntegration = true;
+    skills = ../../agent/skills;
+    rules = mkRules rulesDir;
+    settings = {
+      inherit hooks;
+      feedback.enabled = false;
+      features.codex_git_commit = false;
+      analytics.enabled = false;
+    };
+  };
   programs.claude-code = {
     enable = true;
+    enableMcpIntegration = true;
+    inherit rulesDir;
     skills = ../../agent/skills;
-    rulesDir = ../../agent/rules;
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
     settings = {
+      inherit hooks;
       # do not ever commit anything on my behalf
       includeGitInstructions = false;
       attribution = {
@@ -47,31 +87,6 @@
       # Do not exit plan mode yourself, I will enter
       # build mode only AFTER the plan is reviewed
       permissions.deny = [ "ExitPlanMode" ];
-      hooks = {
-        # Inject caveman skill at session start (frontmatter stripped).
-        SessionStart = [
-          {
-            hooks = [
-              {
-                type = "command";
-                command = "awk '/^---$/{c++;next} c>=2' ${../../agent/skills/caveman/SKILL.md}";
-              }
-            ];
-          }
-        ];
-        # Re-inject caveman reminder each turn so it doesn't drift
-        # in long structured outputs.
-        UserPromptSubmit = [
-          {
-            hooks = [
-              {
-                type = "command";
-                command = "echo 'REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.'";
-              }
-            ];
-          }
-        ];
-      };
     };
   };
 }
