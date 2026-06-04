@@ -4,12 +4,6 @@
   ...
 }:
 let
-  rulesDir = ../../agent/rules;
-  mkRules =
-    dir:
-    pkgs.lib.mapAttrs'
-      (name: _: pkgs.lib.nameValuePair (pkgs.lib.removeSuffix ".md" name) (dir + "/${name}"))
-      (pkgs.lib.filterAttrs (n: t: t == "regular" && pkgs.lib.hasSuffix ".md" n) (builtins.readDir dir));
   hooks = {
     UserPromptSubmit = [
       {
@@ -49,7 +43,7 @@ in
     enable = true;
     enableMcpIntegration = true;
     skills = ../../agent/skills;
-    rules = mkRules rulesDir;
+    context = ../../agent/rules/git-repos.md;
     settings = {
       inherit hooks;
       feedback.enabled = false;
@@ -60,7 +54,7 @@ in
   programs.claude-code = {
     enable = true;
     enableMcpIntegration = true;
-    inherit rulesDir;
+    rulesDir = ../../agent/rules;
     skills = ../../agent/skills;
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
