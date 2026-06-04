@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
-  home.sessionVariables = {
-    MANPAGER = "nvim -c 'Man!' -o -";
-    PAGER = "less -FRX";
+  home = {
+    preferXdgDirectories = true;
+    sessionVariables = {
+      MANPAGER = "nvim -c 'Man!' -o -";
+      PAGER = "less -FRX";
+    };
   };
-  home.packages = [ pkgs.nix-search-cli ];
   programs.nh = {
     enable = true;
     flake = "${config.home.homeDirectory}/git/dotfiles/";
