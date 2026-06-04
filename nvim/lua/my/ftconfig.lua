@@ -95,6 +95,7 @@ M.treesitter_parsers = (function()
   table.insert(result, 'just')
   table.insert(result, 'kdl')
   table.insert(result, 'jjdescription')
+  table.insert(result, 'diff')
 
   return result
 end)()
