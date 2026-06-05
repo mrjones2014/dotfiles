@@ -40,9 +40,20 @@ let
   ];
   wrapCodexPackage =
     package: binary:
-    pkgs.writeShellScriptBin binary ''
+    let
+      version = lib.getVersion package;
+    in
+    (pkgs.writeShellScriptBin binary ''
       exec ${package}/bin/${binary} ${lib.escapeShellArgs codexConfigArgs} "$@"
-    '';
+    '').overrideAttrs
+      (old: {
+        inherit version;
+        name = "${binary}-${version}";
+        meta = package.meta or { };
+        passthru = (old.passthru or { }) // {
+          unwrapped = package;
+        };
+      });
 in
 {
   home.sessionVariables = {
