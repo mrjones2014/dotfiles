@@ -95,6 +95,14 @@ return {
         end,
         desc = 'Dismiss notifications',
       },
+      {
+        '<leader>yp',
+        function()
+          local path = require('my.utils.path')
+          local clipboard = require('my.utils.clipboard')
+          clipboard.copy(path.relative(vim.api.nvim_buf_get_name(0)))
+        end,
+      },
       -- allow moving the cursor through wrapped lines using j and k,
       -- note that I have line wrapping turned off but turned on only for Markdown
       { 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', expr = true, mode = { 'n', 'v' }, hidden = true },
