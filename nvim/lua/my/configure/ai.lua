@@ -55,6 +55,9 @@ return {
     },
   },
   opts = {
+    opts = {
+      log_level = 'DEBUG',
+    },
     rules = {
       -- don't load rules by default,
       -- the underlying Claude Code ACP adapter
@@ -71,6 +74,7 @@ return {
             defaults = {
               auth_method = 'chatgpt',
               model = 'gpt-5.5',
+              mode = 'read-only', -- start in plan mode
             },
           })
         end,

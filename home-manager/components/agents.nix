@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   isWorkMac,
   ...
@@ -22,6 +23,26 @@ let
       }
     ];
   };
+  skillPreambleScript = pkgs.writeShellScript "skill-preamble" ''
+    awk '/^---$/{c++;next} c>=2' ${../../agent/skills/caveman/SKILL.md}
+  '';
+  codexConfigArgs = [
+    "--config"
+    "hooks.UserPromptSubmit=[{hooks=[{type=\"command\",command=\"echo REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.\"}]}]"
+    "--config"
+    "hooks.SessionStart=[{hooks=[{type=\"command\",command=\"${skillPreambleScript}\"}]}]"
+    "--config"
+    "feedback.enabled=false"
+    "--config"
+    "features.codex_git_commit=false"
+    "--config"
+    "analytics.enabled=false"
+  ];
+  wrapCodexPackage =
+    package: binary:
+    pkgs.writeShellScriptBin binary ''
+      exec ${package}/bin/${binary} ${lib.escapeShellArgs codexConfigArgs} "$@"
+    '';
 in
 {
   home.sessionVariables = {
@@ -32,6 +53,7 @@ in
   };
   home.packages = with pkgs; [
     ast-grep
+    (wrapCodexPackage codex-acp "codex-acp")
     fd
     jq
     parallel
@@ -41,15 +63,11 @@ in
   ];
   programs.codex = {
     enable = true;
+    package = wrapCodexPackage pkgs.codex "codex";
     enableMcpIntegration = true;
     skills = ../../agent/skills;
     context = ../../agent/rules/git-repos.md;
-    settings = {
-      inherit hooks;
-      feedback.enabled = false;
-      features.codex_git_commit = false;
-      analytics.enabled = false;
-    };
+    settings = { };
   };
   programs.claude-code = {
     enable = true;
