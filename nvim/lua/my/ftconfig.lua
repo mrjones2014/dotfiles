@@ -3,7 +3,7 @@ local M = {}
 M.config = {
   json = {
     treesitter = { 'json' },
-    formatter = 'jq',
+    formatter = 'prettierd',
   },
   typescript = {
     linter = 'eslint_d',
