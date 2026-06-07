@@ -135,6 +135,9 @@ M.FileInfo = {
         return active_buffer_id ~= nil or my_conditions.should_show_filename()
       end,
       provider = function(self)
+        if vim.env.JJ_GH == '1' then
+          return 'Pull Request'
+        end
         local filepath = self.bufname
         if self.temporary then
           filepath = path.filename(filepath)

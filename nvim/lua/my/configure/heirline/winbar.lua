@@ -82,6 +82,9 @@ local M = {}
 
 M.UniqueFilename = {
   init = function(self)
+    if vim.env.JJ_GH == '1' then
+      return
+    end
     self.bufnr = vim.api.nvim_get_current_buf()
     self.bufname = get_unique_filename(vim.api.nvim_buf_get_name(self.bufnr))
   end,
@@ -100,6 +103,9 @@ M.UniqueFilename = {
       return my_conditions.should_show_filename()
     end,
     provider = function(self)
+      if vim.env.JJ_GH == '1' then
+        return string.format(' %s ', 'Pull Request')
+      end
       return string.format(' %s ', self.bufname)
     end,
     hl = { bg = 'base' },
