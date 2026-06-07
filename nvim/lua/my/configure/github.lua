@@ -1,3 +1,5 @@
+local is_jj_gh = vim.env.JJ_GH == '1'
+
 local _cached_gh_token = nil
 local function get_github_token()
   if _cached_gh_token ~= nil then
@@ -54,8 +56,6 @@ return {
     },
   },
   {
-    -- this is lazy-loaded by `ftplugin/markdown.lua`
-    -- because I only really want to use it for `jj-gh` integration
     'Kaiser-Yang/blink-cmp-git',
     ---@module 'blink-cmp-git'
     ---@type blink-cmp-git.Options
@@ -65,7 +65,6 @@ return {
       ---@type blink.cmp.Config
       opts = {
         sources = {
-          -- add 'git' to the list
           per_filetype = {
             markdown = { inherit_defaults = true, 'git' },
           },
@@ -74,8 +73,7 @@ return {
               module = 'blink-cmp-git',
               name = 'Git',
               enabled = function()
-                -- enable only on jj-gh files
-                return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
+                return is_jj_gh
               end,
               ---@module 'blink-cmp-git'
               ---@type blink-cmp-git.Options
@@ -86,16 +84,14 @@ return {
                     pull_request = { enable = false },
                     issue = {
                       enable = function()
-                        -- enable only on jj-gh files
-                        return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
+                        return is_jj_gh
                       end,
                       get_token = get_github_token,
                       get_command = 'curl',
                     },
                     mention = {
                       enable = function()
-                        -- enable only on jj-gh files
-                        return require('my.utils.path').is_tempfile(0) and vim.bo.ft == 'markdown'
+                        return is_jj_gh
                       end,
                       get_token = get_github_token,
                       get_command = 'curl',

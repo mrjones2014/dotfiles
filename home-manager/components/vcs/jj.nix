@@ -24,6 +24,8 @@ in
           "3UBYV6PWJZAS7HTEKHDSQ7HPUA"
         ];
         editor = [
+          "env"
+          "JJ_GH=1"
           "nvim"
           "+10"
         ];
