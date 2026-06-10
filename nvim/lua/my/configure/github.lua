@@ -1,19 +1,21 @@
+local vcs = require('my.utils.vcs')
+
 local is_jj_gh = vim.env.JJ_GH == '1'
+local is_work_repo = vcs.is_work_repo()
 
 local _cached_gh_token = nil
 local function get_github_token()
   if _cached_gh_token ~= nil then
     return _cached_gh_token
   end
-  -- use 1Password to get GitHub token, check git remote
-  -- to figure out which token we should use
+
+  if vcs.is_work_repo() then
+    -- work uses OAuth tokens now
+    return nil
+  end
+
   local account = '3UBYV6PWJZAS7HTEKHDSQ7HPUA'
   local ref = 'op://Private/GitHub/token'
-  local vcs = require('my.utils.vcs')
-  if vcs.is_work_repo() then
-    account = 'AKHM3DPGNZFUJOY7N4UAWAMLIE'
-    ref = 'op://Employee/1Password GitHub Token/credential'
-  end
   local secret, stderr = require('op').get_secret(ref, account)
   if stderr then
     vim.notify('Failed to get GitHub token from 1Password: ' .. stderr, vim.log.levels.ERROR)
@@ -50,7 +52,7 @@ return {
       picker = 'snacks',
       enable_builtin = true,
       ssh_aliases = { ['github-enterprise'] = 'github.com' },
-      gh_env = function()
+      gh_env = is_work_repo and {} or function()
         return { GITHUB_TOKEN = get_github_token() }
       end,
     },
@@ -86,15 +88,15 @@ return {
                       enable = function()
                         return is_jj_gh
                       end,
-                      get_token = get_github_token,
-                      get_command = 'curl',
+                      get_token = (not is_work_repo) and get_github_token or nil,
+                      get_command = (not is_work_repo) and 'curl' or nil,
                     },
                     mention = {
                       enable = function()
                         return is_jj_gh
                       end,
-                      get_token = get_github_token,
-                      get_command = 'curl',
+                      get_token = (not is_work_repo) and get_github_token or nil,
+                      get_command = (not is_work_repo) and 'curl' or nil,
                       get_command_args = function(command, token)
                         -- increase default page size
                         local args = require('blink-cmp-git.default.github').mention.get_command_args(command, token)
@@ -106,8 +108,8 @@ return {
                       end,
                       get_documentation = function(item)
                         local default = require('blink-cmp-git.default.github').mention.get_documentation(item)
-                        default.get_token = get_github_token
-                        default.get_command = 'curl'
+                        default.get_token = (not is_work_repo) and get_github_token or default.get_token
+                        default.get_command = (not is_work_repo) and 'curl' or default.get_command
                         return default
                       end,
                     },
