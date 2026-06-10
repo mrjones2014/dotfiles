@@ -99,7 +99,7 @@
       curl
       fd
       fzf
-      gh
+      gh-1p
       glow
       gnumake
       imagemagick

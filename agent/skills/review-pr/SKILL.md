@@ -12,7 +12,7 @@ You are a senior developer who excels at reviewing others' code. You are highly 
 - Do not use Python, Node, Ruby, or any scripting languages other than bash for data processing. Use `jq` for JSON processing.
 - Do not create temporary scripts or files.
 
-Use the `gh-1p` CLI (wrapper script around `gh` with 1Passworc CLI for auth) for all GitHub interactions.
+Use the `gh` CLI for all GitHub interactions.
 
 ### 1. Parse Input
 
@@ -26,25 +26,25 @@ For example, if `git config --get remote.origin.url` outputs `git@github.com:som
 
 ```bash
 # PR metadata
-gh-1p pr view $ARGUMENTS --json title,body,state,baseRefName,headRefName,author,additions,deletions,changedFiles,url
+gh pr view $ARGUMENTS --json title,body,state,baseRefName,headRefName,author,additions,deletions,changedFiles,url
 
 # Full diff
-gh-1p pr diff $ARGUMENTS
+gh pr diff $ARGUMENTS
 
 # Commits
-gh-1p pr view $ARGUMENTS --json commits --jq '.commits[] | "\(.oid[:8]) \(.messageHeadline)"'
+gh pr view $ARGUMENTS --json commits --jq '.commits[] | "\(.oid[:8]) \(.messageHeadline)"'
 
 # Existing review comments
-gh-1p pr view $ARGUMENTS --json reviews --jq '.reviews[] | "\(.author.login) (\(.state)): \(.body)"'
+gh pr view $ARGUMENTS --json reviews --jq '.reviews[] | "\(.author.login) (\(.state)): \(.body)"'
 
 # Inline comments
-gh-1p api repos/{owner}/{repo}/pulls/$ARGUMENTS/comments
+gh api repos/{owner}/{repo}/pulls/$ARGUMENTS/comments
 
 # Conversation comments
-gh-1p api repos/{owner}/{repo}/issues/$ARGUMENTS/comments
+gh api repos/{owner}/{repo}/issues/$ARGUMENTS/comments
 
 # CI status
-gh-1p pr checks $ARGUMENTS
+gh pr checks $ARGUMENTS
 ```
 
 ### 3. Compute Effective Range
@@ -52,8 +52,8 @@ gh-1p pr checks $ARGUMENTS
 Always compute and review the effective range as `MERGE_BASE..HEAD`. Do not use `base-tip..head` directly.
 
 ```bash
-BASE_REF=$(gh-1p pr view $ARGUMENTS --json baseRefName --jq '.baseRefName')
-HEAD_SHA=$(gh-1p pr view $ARGUMENTS --json headRefOid --jq '.headRefOid')
+BASE_REF=$(gh pr view $ARGUMENTS --json baseRefName --jq '.baseRefName')
+HEAD_SHA=$(gh pr view $ARGUMENTS --json headRefOid --jq '.headRefOid')
 git fetch origin "$BASE_REF"
 MERGE_BASE=$(git merge-base "origin/$BASE_REF" "$HEAD_SHA")
 git diff "$MERGE_BASE..$HEAD_SHA"

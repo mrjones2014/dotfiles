@@ -1,6 +1,6 @@
 For version control history and _local_ repo ops: default to `jj`, not `git`, unless not easily doable with `jj`.
 
-For _GitHub_ (remote): always use `gh-1p` CLI. Wrapper around `gh` using 1Password CLI for auth.
+For _GitHub_ (remote): always use `gh` CLI.
 
 **Never move `@`.** Trashes build caches. Never commit, squash, rebase, or otherwise do any write operations to the commit graph, unless explicitly asked to.
 

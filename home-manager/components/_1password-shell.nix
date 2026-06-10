@@ -9,11 +9,6 @@ let
 
     echo "$PASSWORD"
   '';
-
-  # alias `gh` to `gh-1p`
-  gh = pkgs.writeShellScriptBin "gh" ''
-    exec ${pkgs.gh-1p}/bin/gh-1p "$@"
-  '';
 in
 {
   # If we install `op` via `home.packages`, on Linux it will not
@@ -27,7 +22,6 @@ in
   ];
 
   home.packages = [
-    gh
     pkgs.gh-1p
   ];
 
