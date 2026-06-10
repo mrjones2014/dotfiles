@@ -8,8 +8,12 @@ let
   hooks = {
     UserPromptSubmit = [
       {
-        type = "command";
-        command = "echo 'REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.'";
+        hooks = [
+          {
+            type = "command";
+            command = "echo 'REMEMBER: caveman mode active. Plans, todos, tables, prose all caveman. Only code blocks normal.'";
+          }
+        ];
       }
     ];
     SessionStart = [

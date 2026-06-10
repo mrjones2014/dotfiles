@@ -1,6 +1,8 @@
 local window = require('my.utils.window')
 local hosts = require('my.utils.hosts')
 
+local default_provider = hosts.is_work_computer() and 'claude_code' or 'codex'
+
 local _claude_code
 
 return {
@@ -118,7 +120,7 @@ return {
       ui = { enabled = true },
     },
     interactions = {
-      cmd = { adapter = 'codex' },
+      cmd = { adapter = default_provider },
       background = {
         adapter = 'local_qwen',
         chat = {
@@ -134,7 +136,7 @@ return {
         },
       },
       chat = {
-        adapter = 'codex',
+        adapter = default_provider,
         keymaps = {
           -- change this mapping because I use gx to open URLs
           clear = {
