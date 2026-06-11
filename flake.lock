@@ -217,6 +217,7 @@
         "nixpkgs": "nixpkgs",
         "tokyonight-nix": "tokyonight-nix",
         "treefmt-nix": "treefmt-nix",
+        "vicinae": "vicinae",
         "vpn-confinement": "vpn-confinement",
         "zen-browser": "zen-browser"
       }
@@ -339,6 +340,30 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vicinae": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "flake-utils",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781056798,
+        "narHash": "sha256-6Mxw4vJDRB6bdmjbXoGqotmBavOVwrigbdiDJ2wrnjw=",
+        "owner": "vicinaehq",
+        "repo": "vicinae",
+        "rev": "0337cb670dcd113b35151f8f0fcfc22900937284",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vicinaehq",
+        "repo": "vicinae",
         "type": "github"
       }
     },
