@@ -21,7 +21,7 @@
     ./components/fish.nix
     ./components/nvim.nix
     ./components/ssh.nix
-    ./components/starship.nix
+    ./components/tide.nix
     ./components/vcs
     ./components/fzf.nix
   ];
