@@ -21,7 +21,10 @@ with import ./tokyonight_palette.nix { inherit lib; };
         _update_zellij_tab_name
       '';
       functions."_update_zellij_tab_name" = {
-        onEvent = "fish_prompt";
+        # Only refresh on cwd change. Firing on every fish_prompt spawned
+        # `zellij list-panes` + jq + `git rev-parse` + `zellij rename-tab` after
+        # every command, even when the directory hadn't changed. The
+        # interactiveShellInit call above seeds the name once at shell start.
         onVariable = "PWD";
         body = /* fish */ ''
           set -l tab_id (zellij action list-panes --json 2>/dev/null | ${pkgs.jq}/bin/jq --arg pane "$ZELLIJ_PANE_ID" '.[] | select(.is_plugin == false) | select(.id == ($pane | tonumber)) | .tab_id' --raw-output)

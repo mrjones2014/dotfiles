@@ -77,7 +77,7 @@
         fish_greeting = "";
         _prompt_move_to_bottom = {
           onEvent = "fish_postexec";
-          body = "tput cup $LINES";
+          body = ''printf '\e[%dH' $LINES'';
         };
         spc = {
           description = "Print a separator to help visually separate long outputs.";

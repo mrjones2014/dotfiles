@@ -26,7 +26,6 @@ with palette;
         "$directory"
         "\${env_var.IN_NIX_SHELL}"
         "\${custom.dir_sep_no_git}"
-        "\${custom.dir_sep_git}"
         "$git_status"
         "$line_break"
         "$shlvl"
@@ -53,22 +52,12 @@ with palette;
       cmd_duration.format = "[ $duration](bold ${dark3})";
       directory.format = "[ ](bg:${dir_bg})[$path](bg:${dir_bg} fg:${green})";
       env_var.IN_NIX_SHELL.format = "[ ](bg:${dir_bg})[](bg:${dir_bg} fg:${blue5})[ ](bg:${dir_bg})";
-      git_status.format = "[  ](bg:${git_bg} fg:${fg})[$all_status$ahead_behind](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
+      git_status.format = "[](fg:${dir_bg} bg:${git_bg})[  ](bg:${git_bg} fg:${fg})[$all_status](bg:${git_bg} fg:${yellow})[](fg:${git_bg} bg:${bg_dark})";
       custom = {
         dir_sep_no_git = {
-          description = "Show rounded separator when not in a git repo";
+          description = "Rounded separator after the directory when NOT in a git repo (the in-git separator is folded into git_status.format)";
           format = "[](fg:${dir_bg} bg:${bg_dark})";
           when = "! git rev-parse --is-inside-work-tree 2> /dev/null";
-          shell = [
-            "bash"
-            "--noprofile"
-            "--norc"
-          ];
-        };
-        dir_sep_git = {
-          description = "Show rounded separator when in a git repo";
-          format = "[](fg:${dir_bg} bg:${git_bg})";
-          when = "git rev-parse --is-inside-work-tree 2> /dev/null";
           shell = [
             "bash"
             "--noprofile"
