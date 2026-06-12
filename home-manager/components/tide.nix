@@ -63,6 +63,7 @@ with palette;
       set -g tide_git_color_untracked ${fishColor yellow}
       set -g tide_git_color_upstream ${fishColor yellow}
       set -g tide_git_icon 
+      set -g tide_jj_megamerge_icon 󱁉
 
       set -g tide_character_color ${fishColor green}
       set -g tide_character_color_failure ${fishColor green}
@@ -84,23 +85,23 @@ with palette;
         set -l workspace_root repo_root
 
         if jj workspace root --ignore-working-copy 2>/dev/null | read workspace_root
-          path resolve $workspace_root/.jj/repo 2>/dev/null | read -l jj_repo_store
-          path dirname (path dirname $jj_repo_store) | read repo_root
+            path resolve $workspace_root/.jj/repo 2>/dev/null | read -l jj_repo_store
+            path dirname (path dirname $jj_repo_store) | read repo_root
         else if git rev-parse --show-toplevel 2>/dev/null | read workspace_root
-          git rev-parse --path-format=absolute --git-common-dir 2>/dev/null | read -l git_common_dir
-          path dirname $git_common_dir | read repo_root
+            git rev-parse --path-format=absolute --git-common-dir 2>/dev/null | read -l git_common_dir
+            path dirname $git_common_dir | read repo_root
         end
 
         if test -n "$repo_root"
-          set rendered_pwd (path basename $repo_root)
-          if test "$workspace_root" != "$repo_root"
-            set -l workspace_name (path basename $workspace_root)
-            set rendered_pwd $rendered_pwd/$workspace_name
-          end
-          if test "$PWD" != "$workspace_root"
-            string replace "$workspace_root/" "" $PWD | read -l relative_pwd
-            set rendered_pwd $rendered_pwd/$relative_pwd
-          end
+            set rendered_pwd (path basename $repo_root)
+            if test "$workspace_root" != "$repo_root"
+                set -l workspace_name (path basename $workspace_root)
+                set rendered_pwd $rendered_pwd/$workspace_name
+            end
+            if test "$PWD" != "$workspace_root"
+                string replace "$workspace_root/" "" $PWD | read -l relative_pwd
+                set rendered_pwd $rendered_pwd/$relative_pwd
+            end
         end
 
         _tide_print_item repo_pwd $rendered_pwd
@@ -138,40 +139,45 @@ with palette;
 
       _tide_item_git = /* fish */ ''
         git rev-parse --git-dir --is-inside-git-dir 2>/dev/null | read -fL gdir in_gdir || return
+        set -l git_icon $tide_git_icon
+
+        if jj log --ignore-working-copy -r '::@ & description(glob:"wip: megamerge*") & merges()' --no-graph -T '"active"' 2>/dev/null | string match -q active
+            set git_icon "$git_icon $tide_jj_megamerge_icon"
+        end
 
         if test -d $gdir/rebase-merge
-          if not path is -v $gdir/rebase-merge/{msgnum,end}
-            read -f step <$gdir/rebase-merge/msgnum
-            read -f total_steps <$gdir/rebase-merge/end
-          end
-          test -f $gdir/rebase-merge/interactive && set -f operation rebase-i || set -f operation rebase-m
+            if not path is -v $gdir/rebase-merge/{msgnum,end}
+                read -f step <$gdir/rebase-merge/msgnum
+                read -f total_steps <$gdir/rebase-merge/end
+            end
+            test -f $gdir/rebase-merge/interactive && set -f operation rebase-i || set -f operation rebase-m
         else if test -d $gdir/rebase-apply
-          if not path is -v $gdir/rebase-apply/{next,last}
-            read -f step <$gdir/rebase-apply/next
-            read -f total_steps <$gdir/rebase-apply/last
-          end
-          if test -f $gdir/rebase-apply/rebasing
-            set -f operation rebase
-          else if test -f $gdir/rebase-apply/applying
-            set -f operation am
-          else
-            set -f operation am/rebase
-          end
+            if not path is -v $gdir/rebase-apply/{next,last}
+                read -f step <$gdir/rebase-apply/next
+                read -f total_steps <$gdir/rebase-apply/last
+            end
+            if test -f $gdir/rebase-apply/rebasing
+                set -f operation rebase
+            else if test -f $gdir/rebase-apply/applying
+                set -f operation am
+            else
+                set -f operation am/rebase
+            end
         else if test -f $gdir/MERGE_HEAD
-          set -f operation merge
+            set -f operation merge
         else if test -f $gdir/CHERRY_PICK_HEAD
-          set -f operation cherry-pick
+            set -f operation cherry-pick
         else if test -f $gdir/REVERT_HEAD
-          set -f operation revert
+            set -f operation revert
         else if test -f $gdir/BISECT_LOG
-          set -f operation bisect
+            set -f operation bisect
         end
 
         test $in_gdir = true && set -l git_dir_opt -C $gdir/..
         set -l stat (git $git_dir_opt --no-optional-locks status --porcelain 2>/dev/null)
         string match -qr '(0|(?<stash>.*))\n(0|(?<conflicted>.*))\n(0|(?<staged>.*))
         (0|(?<dirty>.*))\n(0|(?<untracked>.*))(\n(0|(?<behind>.*))\t(0|(?<ahead>.*)))?' \
-          "$(git $git_dir_opt stash list 2>/dev/null | count
+            "$(git $git_dir_opt stash list 2>/dev/null | count
           string match -r ^UU $stat | count
           string match -r ^[ADMR] $stat | count
           string match -r ^.[ADMR] $stat | count
@@ -179,12 +185,12 @@ with palette;
           git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
 
         if test -n "$operation$conflicted"
-          set -g tide_git_bg_color $tide_git_bg_color_urgent
+            set -g tide_git_bg_color $tide_git_bg_color_urgent
         else if test -n "$staged$dirty$untracked"
-          set -g tide_git_bg_color $tide_git_bg_color_unstable
+            set -g tide_git_bg_color $tide_git_bg_color_unstable
         end
 
-        _tide_print_item git $tide_git_icon (set_color $tide_git_color_operation
+        _tide_print_item git $git_icon (set_color $tide_git_color_operation
           echo -ns ' '$operation ' '$step/$total_steps
           set_color $tide_git_color_upstream
           echo -ns ' ⇣'$behind ' ⇡'$ahead
@@ -202,8 +208,8 @@ with palette;
 
       _tide_item_shell_depth = /* fish */ ''
         if test $SHLVL -gt 1
-          set_color ${fishColor green}
-          string repeat -Nn (math $SHLVL - 1) ❯
+            set_color ${fishColor green}
+            string repeat -Nn (math $SHLVL - 1) ❯
         end
       '';
     };
