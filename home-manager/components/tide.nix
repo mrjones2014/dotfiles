@@ -19,7 +19,7 @@ with palette;
     ];
 
     shellInit = /* fish */ ''
-      set -g tide_left_prompt_items ${lib.optionalString isServer "server "}prompt_mode pwd nix_indicator git newline shell_depth character
+      set -g tide_left_prompt_items ${lib.optionalString isServer "server "}prompt_mode repo_pwd nix_indicator git newline shell_depth character
       set -g tide_right_prompt_items cmd_duration
 
       set -g tide_left_prompt_prefix ""
@@ -45,8 +45,8 @@ with palette;
       set -g tide_prompt_mode_bg_color_visual ${fishColor yellow}
       set -g tide_prompt_mode_color ${fishColor bg_dark}
 
-      set -g tide_pwd_bg_color ${fishColor dark5}
-      set -g tide_pwd_color ${fishColor green}
+      set -g tide_repo_pwd_bg_color ${fishColor dark5}
+      set -g tide_repo_pwd_color ${fishColor green}
 
       set -g tide_nix_indicator_bg_color ${fishColor dark5}
       set -g tide_nix_indicator_color ${fishColor blue5}
@@ -79,10 +79,31 @@ with palette;
     '';
 
     functions = {
-      _tide_pwd = /* fish */ ''
-        prompt_pwd | read -l rendered_pwd
-        string length -V $rendered_pwd | read -g _tide_pwd_len
-        echo $rendered_pwd
+      _tide_item_repo_pwd = /* fish */ ''
+        set -l rendered_pwd (prompt_pwd)
+        set -l workspace_root repo_root
+
+        if jj workspace root --ignore-working-copy 2>/dev/null | read workspace_root
+          path resolve $workspace_root/.jj/repo 2>/dev/null | read -l jj_repo_store
+          path dirname (path dirname $jj_repo_store) | read repo_root
+        else if git rev-parse --show-toplevel 2>/dev/null | read workspace_root
+          git rev-parse --path-format=absolute --git-common-dir 2>/dev/null | read -l git_common_dir
+          path dirname $git_common_dir | read repo_root
+        end
+
+        if test -n "$repo_root"
+          set rendered_pwd (path basename $repo_root)
+          if test "$workspace_root" != "$repo_root"
+            set -l workspace_name (path basename $workspace_root)
+            set rendered_pwd $rendered_pwd/$workspace_name
+          end
+          if test "$PWD" != "$workspace_root"
+            string replace "$workspace_root/" "" $PWD | read -l relative_pwd
+            set rendered_pwd $rendered_pwd/$relative_pwd
+          end
+        end
+
+        _tide_print_item repo_pwd $rendered_pwd
       '';
 
       _tide_item_server = "_tide_print_item server ";
