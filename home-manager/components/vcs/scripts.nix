@@ -1,5 +1,12 @@
 { pkgs, ... }:
 let
+  workRepoCheck = /* bash */ ''
+    work_repo=false
+    if [[ "$url" == *"github.com:agilebits"* ]] || [[ "$url" == *"github-enterprise:agilebits"* ]]; then
+      work_repo=true
+    fi
+  '';
+
   repo-config = pkgs.writeShellScriptBin "repo-config" ''
     set -euo pipefail
 
@@ -10,16 +17,17 @@ let
 
     url="$(git remote get-url origin)"
 
+    ${workRepoCheck}
     repo_name="$(basename "$(pwd)")"
 
-    if [[ "$large_repo" == true ]]; then
+    if [[ "$large_repo" == true ]] || [[ "$work_repo" == true ]]; then
       git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
       git config --local --add remote.origin.fetch "+refs/heads/mrj/*:refs/remotes/origin/mrj/*"
       git config --local remote.origin.tagOpt "--no-tags"
       echo "Configured optimized refspec for large repository"
     fi
 
-    if [[ "$url" == *"github.com:agilebits"* ]] || [[ "$url" == *"github-enterprise:agilebits"* ]]; then
+    if [[ "$work_repo" == true ]]; then
       work_email="mat.jones@agilebits.com"
       work_signing_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAjOfOY+u3Ei+idMfwQ/KD/X1S+JNrsc7ffN/NY8kqX"
 
@@ -27,7 +35,7 @@ let
       git config --local user.signingKey "$work_signing_key"
       jj config set --repo user.email "$work_email" 2>/dev/null
       jj config set --repo signing.key "$work_signing_key"
-      jj config set --repo "jj-gh.gh_askpass" '["gh", "auth", "token"]'
+      jj config set --repo jj-gh.gh_askpass '["gh", "auth", "token"]'
       # we just changed the author config and I configure jj to configure non-mine commits as immutable
       jj metaedit --update-author @ --ignore-immutable
       echo "Updated repo-local configs to use work email and signing key"
@@ -69,6 +77,7 @@ let
       exit 1
     }
 
+    ${workRepoCheck}
     repo_name="$(basename "$url" .git)"
     repo_path="$HOME/git/$repo_name"
     if [[ -d "$repo_path" ]]; then
@@ -79,7 +88,7 @@ let
     cd "$repo_path"
     echo "Setting up repository in ~/git/$repo_name"
 
-    if [[ "$large_repo" == true ]]; then
+    if [[ "$large_repo" == true ]] || [[ "$work_repo" == true ]]; then
       git init
       git remote add origin "$url"
       jj git init --colocate
