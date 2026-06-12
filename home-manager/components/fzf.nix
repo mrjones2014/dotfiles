@@ -79,6 +79,29 @@ let
     	io.stdout:write(out[i], "\n")
     end
   '';
+  project_format_script = pkgs.writeText "project-format.fish" /* fish */ ''
+    set -l name $argv[1]
+    set -l repo "$HOME/git/$name"
+    test -d "$repo"; or exit 0
+
+    set -l branch ""
+    if test -d "$repo/.jj"
+        set branch (jj -R $repo log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id_with_change_offset(self), self.bookmarks())" 2>/dev/null)
+    else if test -d "$repo/.git"
+        set branch (git --work-tree $repo --git-dir $repo/.git branch --show-current 2>/dev/null)
+    end
+
+    set_color --bold cyan
+    echo -n "$name"
+    set_color --bold white
+    echo -n "  "
+    set_color --bold f74e27
+    if test -n "$branch"
+        echo " $branch"
+    else
+        echo
+    end
+  '';
 in
 {
   programs.fzf = {
@@ -129,27 +152,6 @@ in
         end
       '';
       fzf-project-widget = /* fish */ ''
-        function _project_jump_format_project
-            set -l repo "$HOME/git/$argv[1]"
-            set -l branch ""
-
-            if test -d "$repo/.jj"
-                set branch (jj -R $repo log --ignore-working-copy -r @- -n 1 --no-graph --no-pager --color always -T "separate(' ', format_short_change_id_with_change_offset(self), self.bookmarks())" 2>/dev/null)
-            else if test -d "$repo/.git"
-                set branch (git --work-tree $repo --git-dir $repo/.git branch --show-current 2>/dev/null)
-            end
-
-            set_color --bold cyan
-            echo -n "$argv[1]"
-            echo -n " "
-            set_color --bold f74e27
-            if test -n "$branch"
-                echo "  $branch"
-            else
-                echo
-            end
-        end
-
         function _project_jump_parse_project
             # check args
             set -f selected $argv[1]
@@ -170,12 +172,13 @@ in
         end
 
         function _project_jump_get_projects
-            # make sure to use built-in ls, not exa
-            for dir in $(command ls "$HOME/git")
-                if test -d "$HOME/git/$dir"
-                    echo "$(_project_jump_format_project $dir)"
-                end
-            end
+            # Format each project concurrently (one process per repo) so the
+            # per-repo jj/git branch lookups don't run serially -- otherwise the
+            # fzf list dribbled in one row at a time. -j0 runs all at once;
+            # output streams as each finishes (order doesn't matter here).
+            # NB: built-in ls, not the lsd alias. fish --no-config keeps the
+            # worker startup cheap -- it only needs PATH for jj/git.
+            command ls "$HOME/git" | ${pkgs.parallel}/bin/parallel --will-cite -j0 ${pkgs.fish}/bin/fish --no-config ${project_format_script} {}
         end
 
         function _project_jump_get_readme
