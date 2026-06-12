@@ -19,7 +19,7 @@ with palette;
     ];
 
     shellInit = /* fish */ ''
-      set -g tide_left_prompt_items ${lib.optionalString isServer "server "}prompt_mode repo_pwd nix_indicator git newline shell_depth character
+      set -g tide_left_prompt_items ${lib.optionalString isServer "server "}prompt_mode repo_pwd git newline shell_depth character
       set -g tide_right_prompt_items cmd_duration
 
       set -g tide_left_prompt_prefix ""
@@ -47,9 +47,6 @@ with palette;
 
       set -g tide_repo_pwd_bg_color ${fishColor dark5}
       set -g tide_repo_pwd_color ${fishColor green}
-
-      set -g tide_nix_indicator_bg_color ${fishColor dark5}
-      set -g tide_nix_indicator_color ${fishColor blue5}
 
       set -g tide_git_bg_color ${fishColor fg_gutter}
       set -g tide_git_bg_color_unstable ${fishColor fg_gutter}
@@ -104,6 +101,7 @@ with palette;
             end
         end
 
+        set -q IN_NIX_SHELL && set -a rendered_pwd (set_color ${fishColor blue5})' '
         _tide_print_item repo_pwd $rendered_pwd
       '';
 
@@ -131,10 +129,6 @@ with palette;
         end
 
         tide_prompt_mode_bg_color=$bg_color _tide_print_item prompt_mode $icon
-      '';
-
-      _tide_item_nix_indicator = /* fish */ ''
-        set -q IN_NIX_SHELL && _tide_print_item nix_indicator 
       '';
 
       _tide_item_git = /* fish */ ''
