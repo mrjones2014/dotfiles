@@ -21,14 +21,14 @@ let
         hooks = [
           {
             type = "command";
-            command = "awk '/^---$/{c++;next} c>=2' ${../../agent/skills/caveman/SKILL.md}";
+            command = "awk '/^---$/{c++;next} c>=2' ${./skills/caveman/SKILL.md}";
           }
         ];
       }
     ];
   };
   skillPreambleScript = pkgs.writeShellScript "skill-preamble" ''
-    awk '/^---$/{c++;next} c>=2' ${../../agent/skills/caveman/SKILL.md}
+    awk '/^---$/{c++;next} c>=2' ${./skills/caveman/SKILL.md}
   '';
   codexConfigArgs = [
     "--config"
@@ -80,15 +80,15 @@ in
     enable = true;
     package = wrapCodexPackage pkgs.codex "codex";
     enableMcpIntegration = true;
-    skills = ../../agent/skills;
-    context = ../../agent/rules/git-repos.md;
+    skills = ./skills;
+    context = ./rules/git-repos.md;
     settings = { };
   };
   programs.claude-code = {
     enable = true;
     enableMcpIntegration = true;
-    rulesDir = ../../agent/rules;
-    skills = ../../agent/skills;
+    rulesDir = ./rules;
+    skills = ./skills;
     # some settings are undocumented, refer to the schema
     # https://www.schemastore.org/claude-code-settings.json
     settings = {
