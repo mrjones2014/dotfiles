@@ -20,7 +20,7 @@ with palette;
 
     shellInit = /* fish */ ''
       set -g tide_left_prompt_items ${lib.optionalString isServer "server "}prompt_mode repo_pwd git newline shell_depth character
-      set -g tide_right_prompt_items cmd_duration
+      set -g tide_right_prompt_items newline cmd_duration
 
       set -g tide_left_prompt_prefix ""
       set -g tide_left_prompt_separator_diff_color 
