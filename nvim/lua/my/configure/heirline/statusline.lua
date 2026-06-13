@@ -138,6 +138,9 @@ M.FileInfo = {
         if vim.env.JJ_GH == '1' then
           return 'Pull Request'
         end
+        if vim.bo.ft == 'jjdescription' then
+          return 'JJ Commit'
+        end
         local filepath = self.bufname
         if self.temporary then
           filepath = path.filename(filepath)
