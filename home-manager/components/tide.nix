@@ -61,6 +61,7 @@ with palette;
       set -g tide_git_color_upstream ${fishColor yellow}
       set -g tide_git_icon 
       set -g tide_jj_megamerge_icon 󱁉
+      set -g tide_jj_unsynced_bookmark_icon '*'
 
       set -g tide_character_color ${fishColor green}
       set -g tide_character_color_failure ${fishColor green}
@@ -135,8 +136,15 @@ with palette;
         git rev-parse --git-dir --is-inside-git-dir 2>/dev/null | read -fL gdir in_gdir || return
         set -l git_icon $tide_git_icon
 
-        if jj log --ignore-working-copy -r '::@ & description(glob:"wip: megamerge*") & merges()' --no-graph -T '"active"' 2>/dev/null | string match -q active
+        set -l jj_indicators (jj log --ignore-working-copy -r 'bookmarks() | (::@ & description(glob:"wip: megamerge*"))' --no-graph -T \
+            'if(self.contained_in("description(glob:\"wip: megamerge*\")"), "megamerge\n") ++ if(bookmarks.any(|bookmark| !bookmark.remote() && !bookmark.synced()), "unsynced_bookmark\n")' 2>/dev/null)
+
+        if contains megamerge $jj_indicators
             set git_icon "$git_icon $tide_jj_megamerge_icon"
+        end
+
+        if contains unsynced_bookmark $jj_indicators
+            set git_icon "$git_icon $tide_jj_unsynced_bookmark_icon"
         end
 
         if test -d $gdir/rebase-merge
