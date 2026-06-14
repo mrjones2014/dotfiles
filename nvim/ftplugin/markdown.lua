@@ -13,3 +13,8 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     end
   end,
 })
+
+if vim.env.JJ_GH == '1' then
+  -- 72 is the default max commit message length
+  vim.wo.colorcolumn = '72'
+end
