@@ -16,6 +16,7 @@ in
     gh = {
       enable = true;
       settings = {
+        pr_create_template = ''if(description, "---\n" ++ description.trim_end() ++ "\n\n")'';
         gh_askpass = [
           "op"
           "read"
