@@ -34,6 +34,7 @@
       shellAliases = {
         ":q" = "exit";
         ":Q" = "exit";
+        ":qa" = "exit";
         ":e" = "nvim";
         ":vsp" = "zellij action new-pane --direction right";
         ":sp" = "zellij action new-pane --direction down";
