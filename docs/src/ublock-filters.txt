@@ -2,6 +2,9 @@
 ####              YouTube               ####
 ############################################
 
+! "Ask YouTube" button
+www.youtube.com##button[aria-label="Ask YouTube"]
+
 ! the frosted glass header that covers the top of video thumbnails...
 www.youtube.com###frosted-glass
 
