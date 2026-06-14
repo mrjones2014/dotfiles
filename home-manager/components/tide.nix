@@ -77,7 +77,18 @@ with palette;
       set -g tide_cmd_duration_threshold 2000
     '';
 
+    interactiveShellInit = /* fish */ ''
+      # Avoid direnv printing before Tide can collapse the current prompt.
+      set -g direnv_fish_mode eval_after_arrow
+    '';
+
     functions = {
+      _prompt_enter_transient = /* fish */ ''
+        set -g _tide_transient
+        set -g _tide_repaint
+        commandline -f repaint
+      '';
+
       _tide_pwd = /* fish */ ''
         set -l rendered_pwd
 

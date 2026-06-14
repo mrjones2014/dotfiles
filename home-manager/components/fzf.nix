@@ -199,6 +199,7 @@ in
         else
             set -l selected $(_project_jump_get_projects | fzf --ansi --preview-window 'right,70%' --preview "fzf-project-widget --format {}")
             if test -n "$selected"
+                _prompt_enter_transient
                 cd $(_project_jump_parse_project "$selected")
             end
             commandline -f repaint
