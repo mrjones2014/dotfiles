@@ -77,18 +77,7 @@ with palette;
       set -g tide_cmd_duration_threshold 2000
     '';
 
-    interactiveShellInit = /* fish */ ''
-      # Avoid direnv printing before Tide can collapse the current prompt.
-      set -g direnv_fish_mode eval_after_arrow
-    '';
-
     functions = {
-      _prompt_enter_transient = /* fish */ ''
-        set -g _tide_transient
-        set -g _tide_repaint
-        commandline -f repaint
-      '';
-
       _tide_pwd = /* fish */ ''
         set -l rendered_pwd
 
@@ -138,8 +127,8 @@ with palette;
         git rev-parse --git-dir --is-inside-git-dir 2>/dev/null | read -fL gdir in_gdir || return
         set -l git_icon $tide_git_icon
 
-        set -l jj_indicators (jj log --ignore-working-copy -r 'bookmarks() | (::@ & description(glob:"wip: megamerge*"))' --no-graph -T \
-            'if(self.contained_in("description(glob:\"wip: megamerge*\")"), "megamerge\n") ++ if(bookmarks.any(|bookmark| !bookmark.remote() && !bookmark.synced()), "unsynced_bookmark\n")' 2>/dev/null)
+        set -l jj_indicators (jj log --ignore-working-copy -r 'bookmarks() | (ancestors(@, 50) & description(glob:"wip: megamerge*"))' --no-graph -T \
+            'if(self.contained_in("ancestors(@, 50) & description(glob:\"wip: megamerge*\")"), "megamerge\n") ++ if(bookmarks.any(|bookmark| !bookmark.remote() && !bookmark.synced()), "unsynced_bookmark\n")' 2>/dev/null)
 
         if contains megamerge $jj_indicators
             set git_icon "$git_icon $tide_jj_megamerge_icon"
@@ -178,7 +167,7 @@ with palette;
         end
 
         test $in_gdir = true && set -l git_dir_opt -C $gdir/..
-        set -l stat (git $git_dir_opt --no-optional-locks status --porcelain 2>/dev/null)
+        set -l stat (git $git_dir_opt status --porcelain 2>/dev/null)
         string match -qr '(0|(?<stash>.*))\n(0|(?<conflicted>.*))\n(0|(?<staged>.*))
         (0|(?<dirty>.*))\n(0|(?<untracked>.*))(\n(0|(?<behind>.*))\t(0|(?<ahead>.*)))?' \
             "$(git $git_dir_opt stash list 2>/dev/null | count
