@@ -102,6 +102,7 @@ return {
           local clipboard = require('my.utils.clipboard')
           clipboard.copy(path.relative(vim.api.nvim_buf_get_name(0)))
         end,
+        desc = "Copy buffer's relative file path",
       },
       -- allow moving the cursor through wrapped lines using j and k,
       -- note that I have line wrapping turned off but turned on only for Markdown
