@@ -30,4 +30,4 @@ jobs:
           branch: "automation/update-flake-dependencies"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable PR auto-merge on CI success
-        run: GH_TOKEN="${{ secrets.UPDATE_FLAKE_TOKEN }}" gh pr merge --squash --delete-branch --auto ${{ steps.create-pr.outputs.pull-request-number }}
+        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" gh pr merge --squash --delete-branch --auto ${{ steps.create-pr.outputs.pull-request-number }}
