@@ -117,7 +117,7 @@ in
       move-to-monitor-down = [ "<Shift><Control><Alt>j" ];
     };
     "org/gnome/desktop/peripherals/touchpad".send-events = "enabled";
-    "org/gnome/mutter".overlay-key = "F11";
+    "org/gnome/mutter".overlay-key = "Super_R";
     "org/gnome/mutter/keybindings" = {
       switch-monitor = [ ]; # disable stupid ass default <Super>+p defautl shortcut
       # disable Super+Space default keybind, I use that for search-light

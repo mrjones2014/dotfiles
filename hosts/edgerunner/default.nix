@@ -23,9 +23,14 @@
       enable = true;
       enable32Bit = true;
     };
-
-    # setup udev rules for ZSA keyboard firmware flashing
-    keyboard.zsa.enable = true;
+    keyboard = {
+      # setup udev rules for keyboard firmware flashing
+      zsa.enable = true;
+      qmk = {
+        enable = true;
+        keychronSupport = true;
+      };
+    };
 
     # logitech mouse support
     logitech.wireless = {
