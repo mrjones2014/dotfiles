@@ -51,7 +51,7 @@ in
         "com.mitchellh.ghostty.desktop"
         "1password.desktop"
         "signal.desktop"
-        "vesktop.desktop"
+        "discord.desktop"
       ]
       ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
       inherit enabled-extensions;

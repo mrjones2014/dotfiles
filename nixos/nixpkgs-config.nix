@@ -19,14 +19,15 @@
         ++ lib.lists.optionals isServer [
         ]
         ++ lib.lists.optionals (!isServer) [
-          "spotify"
           "1password"
-          "steam"
-          "steam-run"
-          "steam-original"
-          "steam-unwrapped"
-          "parsec-bin"
           "7zz"
+          "discord"
+          "parsec-bin"
+          "spotify"
+          "steam"
+          "steam-original"
+          "steam-run"
+          "steam-unwrapped"
         ]
       );
   };
