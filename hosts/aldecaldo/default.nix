@@ -9,6 +9,7 @@
   system.stateVersion = 6;
   homebrew.casks = [
     "proton-mail-bridge"
+    "rectangle-pro"
     "signal"
     "todoist-app"
     "unifi-identity-endpoint"
