@@ -13,7 +13,6 @@ with import ./tokyonight_palette.nix { inherit lib; };
       enable = true;
       enableFishIntegration = true;
       exitShellOnExit = true;
-      attachExistingSession = true;
     };
     fish = {
       # run it once on shell init to force it to start watching PWD
@@ -60,6 +59,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
       scroll_buffer_size 10000
       show_startup_tips false
       mouse_hover_effects false
+      session_serialization false
       ui {
           pane_frames {
               rounded_corners true
