@@ -8,8 +8,6 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
     kernelParams = [
-      "amdgpu.gpu_recovery=1"
-      "amdgpu.ppfeaturemask=0xfffd3fff"
       "split_lock_detect=off"
     ];
     initrd.availableKernelModules = [
@@ -73,7 +71,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = "performance";
 
-  services.lact.enable = true;
   hardware = {
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
