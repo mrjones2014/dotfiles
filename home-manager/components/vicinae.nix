@@ -9,7 +9,7 @@
 {
   imports = [ inputs.vicinae.homeManagerModules.default ];
   config = lib.mkIf isLinux {
-    services.vicinae = {
+    programs.vicinae = {
       enable = true;
       # Use nixpkgs version; the project's flake provides a better
       # home-manager module though
