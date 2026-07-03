@@ -23,9 +23,10 @@ in
           "map to guest" = "Bad User";
           "load printers" = "no";
           "printcap name" = "/dev/null";
+          # Needed to load PS2 games with OPL
+          "server min protocol" = "NT1";
+          "ntlm auth" = "yes";
         };
-      };
-      settings = {
         fileshare = {
           path = "/export/fileshare";
         }
