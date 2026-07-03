@@ -60,6 +60,11 @@
       options = [ "bind" ];
       fsType = "ext4";
     };
+    "/export/PS2_Games" = {
+      device = "/mnt/fileshare/Games/PS2";
+      options = [ "bind" ];
+      fsType = "ext4";
+    };
     "/mnt/media1" = {
       device = "/dev/disk/by-label/media";
       fsType = "ext4";

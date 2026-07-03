@@ -1,3 +1,14 @@
+let
+  share_settings = {
+    browseable = "yes";
+    writable = "yes";
+    public = "yes";
+    "read only" = "no";
+    "force user" = "nobody";
+    "force group" = "users";
+    "force directory mode" = "2770";
+  };
+in
 {
   # these are NOT exposed to the internet
   services = {
@@ -17,13 +28,10 @@
       settings = {
         fileshare = {
           path = "/export/fileshare";
-          browseable = "yes";
-          writable = "yes";
-          public = "yes";
-          "read only" = "no";
-          "force user" = "nobody";
-          "force group" = "users";
-          "force directory mode" = "2770";
+        }
+        // share_settings;
+        PS2_Games = {
+          path = "/export/PS2_Games";
         };
       };
     };
