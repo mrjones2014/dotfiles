@@ -32,7 +32,8 @@ in
         // share_settings;
         PS2_Games = {
           path = "/export/PS2_Games";
-        };
+        }
+        // share_settings;
       };
     };
     samba-wsdd = {
