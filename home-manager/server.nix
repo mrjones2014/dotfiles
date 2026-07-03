@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   home = {
     username = "mat";
     homeDirectory = "/home/mat";
@@ -14,6 +14,7 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     stateVersion = "22.11";
+    packages = [ pkgs._7zip-zstd ];
   };
   xdg.enable = true;
   imports = [
