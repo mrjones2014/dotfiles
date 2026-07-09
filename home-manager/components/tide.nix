@@ -124,79 +124,24 @@ with palette;
       '';
 
       _tide_item_git = /* fish */ ''
-        git rev-parse --git-dir --is-inside-git-dir 2>/dev/null | read -fL gdir in_gdir || return
+        # bail if not inside a repo worktree
+        git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return
         set -l git_icon $tide_git_icon
 
+        # indicators for megamerge workflow active and unsynced local bookmarks
         set -l jj_indicators (jj log --ignore-working-copy -r 'bookmarks() | (ancestors(@, 50) & description(glob:"wip: megamerge*"))' --no-graph -T \
             'if(self.contained_in("ancestors(@, 50) & description(glob:\"wip: megamerge*\")"), "megamerge\n") ++ if(bookmarks.any(|bookmark| !bookmark.remote() && !bookmark.synced()), "unsynced_bookmark\n")' 2>/dev/null)
 
-        if contains megamerge $jj_indicators
-            set git_icon "$git_icon $tide_jj_megamerge_icon"
+        contains megamerge $jj_indicators && set git_icon "$git_icon $tide_jj_megamerge_icon"
+        contains unsynced_bookmark $jj_indicators && set git_icon "$git_icon $tide_jj_unsynced_bookmark_icon"
+
+        # indicator for `@` having changes (dirty)
+        set -l stat (git status --porcelain 2>/dev/null)
+        if test -n "$stat"
+            _tide_print_item git $git_icon (set_color $tide_git_color_dirty)' ●'
+        else
+            _tide_print_item git $git_icon
         end
-
-        if contains unsynced_bookmark $jj_indicators
-            set git_icon "$git_icon $tide_jj_unsynced_bookmark_icon"
-        end
-
-        if test -d $gdir/rebase-merge
-            if not path is -v $gdir/rebase-merge/{msgnum,end}
-                read -f step <$gdir/rebase-merge/msgnum
-                read -f total_steps <$gdir/rebase-merge/end
-            end
-            test -f $gdir/rebase-merge/interactive && set -f operation rebase-i || set -f operation rebase-m
-        else if test -d $gdir/rebase-apply
-            if not path is -v $gdir/rebase-apply/{next,last}
-                read -f step <$gdir/rebase-apply/next
-                read -f total_steps <$gdir/rebase-apply/last
-            end
-            if test -f $gdir/rebase-apply/rebasing
-                set -f operation rebase
-            else if test -f $gdir/rebase-apply/applying
-                set -f operation am
-            else
-                set -f operation am/rebase
-            end
-        else if test -f $gdir/MERGE_HEAD
-            set -f operation merge
-        else if test -f $gdir/CHERRY_PICK_HEAD
-            set -f operation cherry-pick
-        else if test -f $gdir/REVERT_HEAD
-            set -f operation revert
-        else if test -f $gdir/BISECT_LOG
-            set -f operation bisect
-        end
-
-        test $in_gdir = true && set -l git_dir_opt -C $gdir/..
-        set -l stat (git $git_dir_opt status --porcelain 2>/dev/null)
-        string match -qr '(0|(?<stash>.*))\n(0|(?<conflicted>.*))\n(0|(?<staged>.*))
-        (0|(?<dirty>.*))\n(0|(?<untracked>.*))(\n(0|(?<behind>.*))\t(0|(?<ahead>.*)))?' \
-            "$(git $git_dir_opt stash list 2>/dev/null | count
-          string match -r ^UU $stat | count
-          string match -r ^[ADMR] $stat | count
-          string match -r ^.[ADMR] $stat | count
-          string match -r '^\?\?' $stat | count
-          git rev-list --count --left-right @{upstream}...HEAD 2>/dev/null)"
-
-        if test -n "$operation$conflicted"
-            set -g tide_git_bg_color $tide_git_bg_color_urgent
-        else if test -n "$staged$dirty$untracked"
-            set -g tide_git_bg_color $tide_git_bg_color_unstable
-        end
-
-        _tide_print_item git $git_icon (set_color $tide_git_color_operation
-          echo -ns ' '$operation ' '$step/$total_steps
-          set_color $tide_git_color_upstream
-          echo -ns ' ⇣'$behind ' ⇡'$ahead
-          set_color $tide_git_color_stash
-          echo -ns ' *'$stash
-          set_color $tide_git_color_conflicted
-          echo -ns ' ~'$conflicted
-          set_color $tide_git_color_staged
-          echo -ns ' +'$staged
-          set_color $tide_git_color_dirty
-          echo -ns ' !'$dirty
-          set_color $tide_git_color_untracked
-          echo -ns ' ?'$untracked)
       '';
 
       _tide_item_shell_depth = /* fish */ ''
