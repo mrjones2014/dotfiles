@@ -114,12 +114,15 @@ in
       # this keybind should match the telescope ones in nvim config
       ''--bind="ctrl-d:preview-down,ctrl-f:preview-up"''
     ];
-    fileWidgetCommand = "${pkgs.ripgrep}/bin/rg --files";
-    fileWidgetOptions = [
-      # Preview files with bat
-      "--preview '${pkgs.bat}/bin/bat --color=always {}'"
-      "--layout default"
-    ];
+    fileWidget = {
+      command = "${pkgs.ripgrep}/bin/rg --files";
+      options = [
+        # Preview files with bat
+        "--preview '${pkgs.bat}/bin/bat --color=always {}'"
+        "--layout default"
+      ];
+    };
+
   };
   programs.fish = {
     interactiveShellInit = ''
