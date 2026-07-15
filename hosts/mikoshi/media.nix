@@ -68,5 +68,10 @@ in
       PGID = toString config.users.groups.cleanuparr.gid;
       TZ = "Etc/UTC";
     };
+
+    extraOptions = [
+      "--add-host=sonarr.mjones.network:192.168.1.6"
+      "--add-host=radarr.mjones.network:192.168.1.6"
+    ];
   };
 }
