@@ -3,6 +3,7 @@ let
   cleanuparr_port = 11011;
   cleanuparr_data_dir = "/var/lib/cleanuparr";
   cleanuparr_guid = 1432;
+  ip = import ./ip.nix;
 in
 {
   imports = [ ../../nixos/qbittorrent.nix ];
@@ -70,8 +71,9 @@ in
     };
 
     extraOptions = [
-      "--add-host=sonarr.mjones.network:192.168.1.6"
-      "--add-host=radarr.mjones.network:192.168.1.6"
+      "--add-host=sonarr.mjones.network:${ip}"
+      "--add-host=radarr.mjones.network:${ip}"
+      "--add-host=qbittorrent.mjones.network:${ip}"
     ];
   };
 }
