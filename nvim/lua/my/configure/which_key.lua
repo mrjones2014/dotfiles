@@ -100,7 +100,9 @@ return {
         function()
           local path = require('my.utils.path')
           local clipboard = require('my.utils.clipboard')
-          clipboard.copy(path.relative(vim.api.nvim_buf_get_name(0)))
+          local relpath = path.relative(vim.api.nvim_buf_get_name(0))
+          clipboard.copy(relpath)
+          vim.notify(('Copied %s'):format(relpath))
         end,
         desc = "Copy buffer's relative file path",
       },
