@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   zwave_ui_port = 8998;
 in
@@ -58,6 +58,19 @@ in
         "nanoleaf"
         "api"
         "zwave_js"
+      ];
+      customComponents = [
+        (pkgs.buildHomeAssistantComponent rec {
+          owner = "jcwillox";
+          domain = "climate_template";
+          version = "1.4.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "jcwillox";
+            repo = "hass-template-climate";
+            rev = "v${version}";
+            hash = "sha256-InS4GUkQ6qoSdSkxz/V1LpMSNh0fsOefOFXCBOs6pXk=";
+          };
+        })
       ];
       config = {
         default_config = { };
