@@ -86,6 +86,53 @@ in
         "automation ui" = "!include automations.yaml";
         "scene ui" = "!include scenes.yaml";
         "script ui" = "!include scripts.yaml";
+
+        climate = [
+          {
+            platform = "climate_template";
+            name = "Window AC";
+            unique_id = "window_ac_climate";
+            modes = [
+              "off"
+              "cool"
+            ];
+            fan_modes = [
+              "1"
+              "2"
+              "3"
+            ];
+            min_temp = 61;
+            max_temp = 86;
+            temp_step = 1;
+
+            # --- read state from the ESPHome entities ---
+            hvac_mode_template = "{{ 'cool' if is_state('switch.office_lamp_ac_power', 'on') else 'off' }}";
+            target_temperature_template = "{{ states('number.office_lamp_ac_temperature') | float(70) }}";
+            fan_mode_template = "{{ states('select.office_lamp_ac_fan_speed') }}";
+
+            # --- write actions to the ESPHome entities ---
+            set_hvac_mode = [
+              {
+                service = "{{ 'switch.turn_on' if hvac_mode == 'cool' else 'switch.turn_off' }}";
+                target.entity_id = "switch.office_lamp_ac_power";
+              }
+            ];
+            set_temperature = [
+              {
+                service = "number.set_value";
+                target.entity_id = "number.office_lamp_ac_temperature";
+                data.value = "{{ temperature }}";
+              }
+            ];
+            set_fan_mode = [
+              {
+                service = "select.select_option";
+                target.entity_id = "select.office_lamp_ac_fan_speed";
+                data.option = "{{ fan_mode }}";
+              }
+            ];
+          }
+        ];
       };
     };
     postgresql = {
