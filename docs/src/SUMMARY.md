@@ -5,4 +5,5 @@
 - [Useful uBlock Origin Filters](./ublock-filters.md)
 - [Home Assistant](./home_assistant/README.md)
   - [Z Wave](./home_assistant/z_wave.md)
+  - [ESPHome](./home_assistant/esphome.md)
 - [Steam Quirks](./steam_quirks.md)
