@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Useful uBlock Origin Filters - mjones.network</title>
+        <title>ESPHome - mjones.network</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="./src/custom.css">
+        <link rel="stylesheet" href=".././src/custom.css">
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-ddc000a8.js";
+            window.path_to_searchindex_js = "../searchindex-ddc000a8.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-32ed9b28.js"></script>
+        <script src="../toc-32ed9b28.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -105,7 +105,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -171,252 +171,147 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="useful-ublock-origin-filters"><a class="header" href="#useful-ublock-origin-filters">Useful uBlock Origin Filters</a></h1>
-<p>Have some useful filters you’d like to contribute? Please <a href="https://github.com/mrjones2014/dotfiles/blob/master/docs/src/ublock-filters.txt">add them here</a>!</p>
-<p>Add the full list as a filter list in uBlock Origin by the following URL: <a href="https://mjones.network/ublock-filters.txt">ublock-filters.txt</a></p>
-<pre><code class="language-adblock">############################################
-####              YouTube               ####
-############################################
-
-! "Ask YouTube" button
-www.youtube.com##button[aria-label="Ask YouTube"]
-
-! the frosted glass header that covers the top of video thumbnails...
-www.youtube.com###frosted-glass
-
-! AI generated video summary
-www.youtube.com###expandable-metadata&gt;ytd-expandable-metadata-renderer[has-video-summary]
-
-! Ask AI for videos taking up a whole grid row
-www.youtube.com##.ytdTalkToRecsFlowRendererFlowContent
-
-! youtube begging me to pay for premium and youtube TV
-www.youtube.com##.yt-mealbar-promo-renderer
-
-! block YouTube Shorts
-www.youtube.com##.ytdRichGridGroupHost
-
-! block "Join" button
-www.youtube.com##div#sponsor-button
-
-! Google sometimes adds an artifical 5 second delay on youtube
-! for Firefox users...
-www.youtube.com##+js(nano-stb, resolve(1), *, 0.001)
-
-! Block "Members Only" videos
-www.youtube.com##ytd-rich-item-renderer.ytd-rich-grid-renderer:has(.badge-style-type-members-only)
-
-! Block "ambient mode" garbage
-youtube.com###cinematics.ytd-watch-flexy:remove()
-
-! Block YouTube's cringe gigantic banner ads on the home screen
-www.youtube.com##ytd-statement-banner-renderer
-www.youtube.com##.ytd-brand-video-shelf-renderer
-
-! Block YouTube's definitely totally unbiased "misinformation" banners, I can think for myself
-www.youtube.com##.ytd-clarification-renderer
-www.youtube.com###clarify-box
-
-! Copied from https://raw.githubusercontent.com/mchangrh/yt-neuter/main/yt-neuter.txt
-
-! voice search button
-youtube.com###voice-search-button
-
-! create button
-youtube.com##ytd-topbar-menu-button-renderer:has(button[aria-label=Create])
-
-! block image/animations from being fetched (falls back to normal logo)
-||www.gstatic.com/youtube/img/promos/*$image
-
-! block child elements of yoodle
-youtube.com##.ytd-yoodle-renderer
-
-!! surveys (#24)
-! survey answer card/ thanks
-youtube.com##yt-survey-answer-card-renderer
-
-! checkbox survey?
-youtube.com##.ytd-checkbox-survey-renderer
-
-! feedback survey?
-youtube.com##ytd-feedback-survey-renderer
-youtube.com##.ytd-feedback-survey-renderer
-
-! follow up survey?
-youtube.com##.ytd-survey-follow-up-renderer
-youtube.com##ytd-survey-follow-up-renderer
-
-! generic surveys
-youtube.com##ytd-inline-survey-renderer
-youtube.com##.ytd-inline-survey-renderer
-
-! multistage survey?
-youtube.com##.ytd-multi-stage-survey-renderer
-youtube.com##ytd-multi-stage-survey-renderer
-
-! ratings survey?
-youtube.com##ytd-rating-survey-renderer
-youtube.com##.ytd-rating-survey-renderer
-
-! RED exit survey
-youtube.com##.ytd-red-cancel-survey-renderer
-youtube.com##ytd-red-cancel-survey-renderer
-
-! "how are your recommendations" survey
-youtube.com##ytd-single-option-survey-renderer
-youtube.com##.ytd-single-option-survey-renderer
-
-! shelves (#15)
-! game shelf
-youtube.com##ytd-rich-shelf-renderer[has-rounded-box-art-thumbnail-style]
-
-! free movies (targets movies channelID
-youtube.com##ytd-rich-shelf-renderer:has(a[href="/channel/UClgRkhTL3_hImCAmdLfDE4g"])
-
-! community posts
-youtube.com##ytd-rich-shelf-renderer:has(ytd-rich-item-renderer[is-post])
-
-! breaking news shelf
-youtube.com##ytd-rich-shelf-renderer:has(#title:has-text(Breaking news))
-m.youtube.com##ytm-rich-section-renderer:has(.rich-shelf-title:has-text(Breaking news))
-
-! brand featured banner/ shelf #40
-youtube.com##ytd-rich-shelf-renderer:has(ytd-badge-supported-renderer#featured-badge)
-youtube.com##ytd-statement-banner-renderer
-youtube.com##ytd-brand-video-singleton-renderer
-youtube.com##ytd-brand-video-shelf-renderer
-youtube.com##.ytd-brand-video-shelf-renderer
-
-! mixes
-youtube.com##ytd-rich-item-renderer:has(ytd-thumbnail-overlay-bottom-panel-renderer)
-
-! movies free with ads
-youtube.com##ytd-rich-item-renderer:has(.badge-style-type-ypc&gt; span:has-text(Free with Ads))
-
-! "new to you" (#2)
-youtube.com##ytd-rich-item-renderer.style-scope:has(&gt;.ytd-feed-nudge-renderer)
-youtube.com##.ytd-rich-item-renderer:has(&gt;.ytd-feed-nudge-renderer)
-
-! explore categories
-youtube.com##ytd-feed-filter-chip-bar-renderer:has(yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER])
-
-! youtube shorts in sidebar on video player page
-youtube.com##ytd-reel-shelf-renderer
-
-############################################
-####         Stack Overflow             ####
-############################################
-
-! Block the cookie banner that covers the entire bottom left corner even with JS disabled
-stackexchange.com##.js-consent-banner
-stackoverflow.com##.js-consent-banner
-askubuntu.com##.js-consent-banner
-
-############################################
-####             GitHub                 ####
-############################################
-
-! Block the "Agents" tab in repositories
-github.com##li:has(&gt; a[data-tab-item="agents"])
-
-! Block "Mention @copilot in a comment to make changes to this PR" on PR views
-github.com##div.Stack:has-text("Mention @copilot in a comment")
-
-! Block "Try the new experience" on GitHub home page
-github.com##form[action="/feature_preview/dashboard_universe_2025/toggle"]
-
-! Block Copilot PR reviewer suggestion
-github.com##p:has(span[data-hovercard-url="/copilot/hovercard?bot=copilot-pull-request-reviewer"])
-
-! Block "Ask Copilot" header
-github.com##.news&gt;.copilotPreview__container
-
-! Block GitHub's cringe algorithmic social media style feed
-github.com###feed-next
-github.com##[aria-labelledby="feed-next"]
-
-! Block the corporate changelog above the "Explore Repositories" section
-github.com##.dashboard-changelog
-
-! Block GitHub's ads above the corporate changelog
-github.com##.js-notice
-
-! Block "achievements"
-github.com##.d-block:has(a[href*="?tab=achievements"])
-github.com##.d-md-block:has(a[href*="?tab=achievements"])
-
-! Block "Groups by Copilot" on PR sidebar
-github.com##[class*="GroupsList-module__GroupsListContainer"]
-
-############################################
-####            Glassdoor               ####
-############################################
-
-! Block the "hard sell" overlay that tries to force you to pay money just to read a review
-www.glassdoor.com##.hardsellOverlay
-
-############################################
-####             PayPal                 ####
-############################################
-
-! Block the cookie banner, same as rejecting cookies
-www.paypal.com##.ccpaCookieBanner_container-custom.ccpaCookieBanner_container
-
-############################################
-####            Discord                 ####
-############################################
-
-! Block "Add super reaction" button
-discord.com##div[aria-label="Add Super Reaction"]
-
-! Block Nitro stuff in user settings
-discord.com##div[class*="premiumTab"]
-discord.com##div[class*="premiumFeatureBorder"]
-discord.com##div[class*="birthdayFeatureBorder"]
-
-! Block "Super" reactions, paid emojis lmao
-discord.com##div[class*="reactionInner"][aria-label*="super"]
-
-! Block "Download Apps" button
-discord.com##div[aria-label*="Download Apps"]:upward(div[class*="listItem"])
-
-! Block "Buy Boosts" bar
-discord.com##div[aria-label*="Buy Boosts to help unlock"]
-
-! Block "Discord's Birthday" crap
-discord.com##li[role="listitem"]:has-text("Discord's Birthday")
-
-! Block "Start an Activity" button
-discord.com##button[aria-label="Start an Activity"]
-
-############################################
-####           Wikipedia                ####
-############################################
-
-wikipedia.org##.nag-trigger
-wikipedia.org###centralNotice
-wikipedia.org##[id$=“banner-nag”]
-wikipedia.org##.cn-fundraising
-wikipedia.org###frb-inline
-
-############################################
-####           Self Hosted              ####
-############################################
-
-! Allow my own self hosted things to be iframe'd into each other
-! e.g. for homarr dashboard
-@@||mjones.network^$ipaddress=lan
+                        <h1 id="esphome-is-very-cool"><a class="header" href="#esphome-is-very-cool">ESPHome is very cool</a></h1>
+<p>I have this <a href="https://www.amazon.com/dp/B0CDGF12NR/">cheap Amazon lamp</a>. I wanted it to be a smart lamp so I could control it in sync with the rest of the lights in my home office. It comes with a 433MHz RF remote, so the whole job is capturing what the remote transmits and replaying it.</p>
+<p>ESPHome is the perfect tool for that. I purchased <a href="https://www.athom.tech/blank-1/esphome-rf433-ir-remote-controller">this ESPHome RF/IR remote</a>, which has RF and IR transmitters and receivers on an ESP32, pre-flashed with ESPHome. <a href="https://github.com/xtai/py-rf-lights">xtai/py-rf-lights</a> reverse engineered the same family of lamp and was a big help.</p>
+<h2 id="capturing-the-codes"><a class="header" href="#capturing-the-codes">Capturing the codes</a></h2>
+<p>The Athom firmware ships with <code>dump: all</code> on the receivers. Open the device logs, press buttons on the remote, and the codes fall out:</p>
+<pre><code>[remote.rc_switch] Received RCSwitch Raw: protocol=6 data='001101000110110100000001'
 </code></pre>
+<p>Each button is a 24-bit code. The first 20 bits are the remote’s address (the lamp is paired to this) and the last 4 identify the button:</p>
+<pre><code>001101000110110100000001  power toggle
+001101000110110100001001  cycle color temp
+001101000110110100000100  brightness up
+001101000110110100001000  brightness down
+</code></pre>
+<p>Brightness works by holding the button, and “holding” over RF just means the remote repeats the frame for as long as you press. The lamp steps through its brightness levels while frames keep arriving. So setting a brightness from software means sending the up or down code N times.</p>
+<h2 id="dont-trust-the-protocol-label"><a class="header" href="#dont-trust-the-protocol-label">Don’t trust the protocol label</a></h2>
+<p>The obvious next step is <code>remote_transmitter.transmit_rc_switch_raw</code> with <code>protocol: 6</code>, since that’s what the receiver labeled it. The lamp ignores that entirely. The receive-side decoder is tolerant and will stamp “protocol 6” on anything with roughly the right shape, but ESPHome transmits protocol 6 with a 450µs pulse at a 1:2 ratio, and this remote actually sends ~232/760µs at a 1:3 ratio. The chip in the lamp only accepts the real thing.</p>
+<p>So capture the actual waveform instead. Set the receiver to dump raw timings (the <code>!extend</code> reaches into Athom’s packaged config):</p>
+<pre><code class="language-yaml">remote_receiver:
+  - id: !extend rf_receiver
+    dump: raw
+    idle: 60ms
+</code></pre>
+<p>Press a button on the remote once and you get the microsecond-level mark/space durations of the real signal:</p>
+<pre><code>[remote.raw] Received Raw: ... -232, 760, -712, 286, ... 229, -7617, ...
+</code></pre>
+<p>Two gotchas when reading these dumps:</p>
+<ol>
+<li>The Athom’s receiver pin is configured <code>inverted: true</code>, which flips the signs. What prints as negative is actually carrier-on. If you replay the dump literally you transmit the waveform upside down. I verified polarity by transmitting and capturing my own signal next to the remote’s (the receiver hears the transmitter from 2cm away, which makes a decent free logic analyzer) and diffing them.</li>
+<li>The remote’s frame ends with a stubby ~230µs pulse before the long silence. That’s not noise. It’s the pilot of the HT6P20B-style encoder these remotes use: one short pulse and ~23 pulse-widths of silence that arms the receiving chip before the data bits. Leave it out and the lamp discards everything that follows, no matter how perfect the bits are. This cost me days.</li>
+</ol>
+<p>The complete frame, repeated ~6 times per press (the real remote sends 5, and the first frame always gets mangled by receiver gain settling, so redundancy is part of the protocol):</p>
+<pre><code>PILOT                    24 DATA BITS
+┌─┐                      ┌─┐    ┌────┐
+│ │                      │ │    │    │
+┘ └──────────────────────┘ └────┘    └── ...
+232µs ON, 7600µs OFF     bit 0: 232µs ON + 760µs OFF
+                         bit 1: 712µs ON + 286µs OFF
+</code></pre>
+<p>One more warning: if you build frames in a lambda, make sure the timing values strictly alternate positive and negative. Static YAML arrays are validated for this, lambda output is not, and a malformed array goes straight to the RMT driver and hard-crashes the ESP32 with <code>IllegalInstruction</code>. A crash-looping ESP takes its receivers down too, which makes everything else confusing to debug.</p>
+<h2 id="the-config"><a class="header" href="#the-config">The config</a></h2>
+<p>This exposes the lamp as a dimmable light in Home Assistant, and through the HomeKit bridge Siri can control it. RF is one-way, so the config tracks assumed state in globals and translates state changes into button presses. Power is a toggle, dimming is emulated button-holding (my lamp has about 4 brightness levels), and if the physical remote or foot switch desyncs things, you put the lamp at a known state and press the Resync button.</p>
+<pre><code class="language-yaml"># Floor Light (hanaking)
+# Paste at the bottom of the device YAML (after your WiFi configs and such).
+globals:
+  - id: floor_light_power
+    type: bool
+    restore_value: true
+    initial_value: "true"
+  - id: floor_light_bri # assumed brightness percent
+    type: int
+    restore_value: true
+    initial_value: "100"
+script:
+  - id: floor_light_send
+    mode: queued
+    parameters:
+      code: string
+      times: int
+    then:
+      - remote_transmitter.transmit_raw:
+          transmitter_id: rf_transmitter
+          code: !lambda |-
+            std::vector&lt;int32_t&gt; t;
+            t.reserve(2 + code.size() * 2);
+            t.push_back(232);      // pilot pulse
+            t.push_back(-7600);    // pilot silence
+            for (char c : code) {
+              if (c == '1') { t.push_back(712); t.push_back(-286); }
+              else          { t.push_back(232); t.push_back(-760); }
+            }
+            return t;
+          repeat:
+            times: !lambda "return times;"
+            wait_time: 0s
+output:
+  - platform: template
+    id: floor_light_bri_out
+    type: float
+    write_action:
+      - lambda: |-
+          static const char *PWR = "001101000110110100000001";
+          static const char *UP  = "001101000110110100000100";
+          static const char *DN  = "001101000110110100001000";
+          bool t_power = state &gt; 0.005f;
+          int t_bri = (int) roundf(state * 100.0f);
+          if (t_power &amp;&amp; t_bri &lt; 10) t_bri = 10;   // lamp floor is 10%
+          int c_bri = id(floor_light_bri);
+          if (id(floor_light_power) &amp;&amp; !t_power) {
+            id(floor_light_send)-&gt;execute(PWR, 6);
+            id(floor_light_power) = false;
+            return;
+          }
+          if (!t_power) return;
+          if (!id(floor_light_power)) {
+            id(floor_light_send)-&gt;execute(PWR, 6);
+            id(floor_light_power) = true;
+          }
+          // Dimming: scale hold-frames to the size of the change.
+          // Calibrate FRAMES_PER_PCT to your lamp: if HA's 50% lands
+          // too dim, lower it; too bright, raise it.
+          const float FRAMES_PER_PCT = 1.0f;
+          int delta = t_bri - c_bri;
+          if (delta != 0) {
+            int n = (int) roundf(fabsf((float) delta) * FRAMES_PER_PCT);
+            if (n &lt; 4) n = 4;                      // minimum visible nudge
+            id(floor_light_send)-&gt;execute(delta &gt; 0 ? UP : DN, n);
+          }
+          id(floor_light_bri) = t_bri;
+light:
+  - platform: monochromatic
+    name: "Floor Light"
+    output: floor_light_bri_out
+    gamma_correct: 1.0
+    default_transition_length: 0s
+button:
+  - platform: template
+    name: "Floor Light Cycle Color Temp"
+    on_press:
+      - script.execute:
+          id: floor_light_send
+          code: "001101000110110100001001"
+          times: 6
+  # Put the lamp at a known state (on, full brightness), then press this
+  - platform: template
+    name: "Floor Light Resync"
+    on_press:
+      - lambda: |-
+          id(floor_light_power) = true;
+          id(floor_light_bri) = 100;
+</code></pre>
+<p>If you have a different unit of the same lamp, the codes won’t match yours. The 20-bit address is per-remote. Capture your own with <code>dump: all</code> and swap the four code strings; the timings and pilot should carry over.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="my-dotfiles.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../home_assistant/z_wave.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="home_assistant/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../steam_quirks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -426,11 +321,11 @@ wikipedia.org###frb-inline
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="my-dotfiles.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../home_assistant/z_wave.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="home_assistant/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../steam_quirks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -450,13 +345,13 @@ wikipedia.org###frb-inline
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
