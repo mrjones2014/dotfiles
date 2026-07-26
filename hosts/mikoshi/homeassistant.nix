@@ -97,9 +97,9 @@ in
               "cool"
             ];
             fan_modes = [
-              "1"
-              "2"
-              "3"
+              "low"
+              "medium"
+              "high"
             ];
             min_temp = 61;
             max_temp = 86;
@@ -108,7 +108,7 @@ in
             # --- read state from the ESPHome entities ---
             hvac_mode_template = "{{ 'cool' if is_state('switch.office_lamp_ac_power', 'on') else 'off' }}";
             target_temperature_template = "{{ states('number.office_lamp_ac_temperature') | float(70) }}";
-            fan_mode_template = "{{ states('select.office_lamp_ac_fan_speed') }}";
+            fan_mode_template = "{{ {'1': 'low', '2': 'medium', '3': 'high'}.get(states('select.office_lamp_ac_fan_speed'), 'low') }}";
 
             # --- write actions to the ESPHome entities ---
             set_hvac_mode = [
@@ -128,7 +128,7 @@ in
               {
                 service = "select.select_option";
                 target.entity_id = "select.office_lamp_ac_fan_speed";
-                data.option = "{{ fan_mode }}";
+                data.option = "{{ {'low': '1', 'medium': '2', 'high': '3'}[fan_mode] }}";
               }
             ];
           }
