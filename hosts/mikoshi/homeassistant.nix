@@ -114,6 +114,12 @@ in
 
             # write actions to the ESPHome entities
             set_hvac_mode = [
+              # capture pre-action state
+              {
+                variables = {
+                  was_off = "{{ is_state('switch.office_lamp_ac_power', 'off') }}";
+                };
+              }
               {
                 service = "{{ 'switch.turn_off' if hvac_mode == 'off' else 'switch.turn_on' }}";
                 target.entity_id = "switch.office_lamp_ac_power";
@@ -123,9 +129,15 @@ in
                 condition = "template";
                 value_template = "{{ hvac_mode != 'off' }}";
               }
-              # give the power-on sequence (power + 1.5s boot + mode-to-cool press)
-              # time to finish before we walk the mode cycle from a known state
-              { delay = "00:00:04"; }
+              # wait for the power-on normalization ONLY if we actually powered on
+              {
+                choose = [
+                  {
+                    conditions = "{{ was_off }}";
+                    sequence = [ { delay = "00:00:04"; } ];
+                  }
+                ];
+              }
               {
                 service = "select.select_option";
                 target.entity_id = "select.office_lamp_ac_mode";
