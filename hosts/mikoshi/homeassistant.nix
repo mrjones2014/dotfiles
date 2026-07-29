@@ -11,6 +11,13 @@ in
       21066
     ];
     allowedUDPPorts = [ 5353 ];
+    allowedUDPPortRanges = [
+      # HomeKit camera SRTP
+      {
+        from = 40000;
+        to = 48000;
+      }
+    ];
   };
   systemd.services.home-assistant = {
     after = [ "zwave-js-ui.service" ];
