@@ -9,6 +9,7 @@
   services.llama-server.enable = true;
 
   xdg.configFile = {
+    nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
     ripgrep_ignore.text = ''
       .git/
       yarn.lock
@@ -23,7 +24,11 @@
       wget-log.*
       /vendor
     '';
-    nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
+    "tombi.toml".text = /* toml */ ''
+      [[schemas]]
+      path = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+      include = ["**/jj/**/config.toml", "**/jj/config.toml"]
+    '';
   };
 
   programs.neovim = {
@@ -87,7 +92,7 @@
       nodejs
       rust-analyzer
       shellcheck
-      taplo
+      tombi
       vscode-langservers-extracted # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       yaml-language-server
 

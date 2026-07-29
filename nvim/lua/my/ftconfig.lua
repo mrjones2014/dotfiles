@@ -55,7 +55,7 @@ M.config = {
     treesitter = { 'graphql', 'http' },
   },
   toml = {
-    formatter = 'taplo',
+    formatter = 'tombi',
   },
 }
 
