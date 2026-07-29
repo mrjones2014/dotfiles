@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 let
   zwave_ui_port = 8998;
 in
@@ -11,13 +15,6 @@ in
       21066
     ];
     allowedUDPPorts = [ 5353 ];
-    allowedUDPPortRanges = [
-      # HomeKit camera SRTP
-      {
-        from = 40000;
-        to = 48000;
-      }
-    ];
   };
   systemd.services.home-assistant = {
     after = [ "zwave-js-ui.service" ];
@@ -36,7 +33,6 @@ in
         trustProxy = "true";
       };
     };
-    go2rtc.enable = true;
     home-assistant = {
       enable = true;
       extraPackages =
@@ -59,7 +55,6 @@ in
         "brother"
         "default_config"
         "esphome"
-        "go2rtc"
         "homekit"
         "homekit_controller"
         "met"
@@ -83,7 +78,6 @@ in
       ];
       config = {
         default_config = { };
-        go2rtc.url = "http://localhost${config.services.go2rtc.settings.api.listen}";
         recorder.db_url = "postgresql://@/hass";
         homeassistant = {
           unit_system = "us_customary";
