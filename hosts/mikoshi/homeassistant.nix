@@ -94,7 +94,6 @@ in
             unique_id = "window_ac_climate";
             modes = [
               "off"
-              "auto"
               "cool"
               "fan_only"
               "dry"
