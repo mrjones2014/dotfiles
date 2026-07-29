@@ -29,6 +29,7 @@ in
         trustProxy = "true";
       };
     };
+    go2rtc.enable = true;
     home-assistant = {
       enable = true;
       extraPackages =
@@ -45,18 +46,19 @@ in
           zlib-ng
         ];
       extraComponents = [
-        "default_config"
-        "met"
-        "esphome"
-        "ring"
-        "homekit"
-        "homekit_controller"
+        "adguard"
+        "api"
         "apple_tv"
         "brother"
-        "adguard"
-        "sonos"
+        "default_config"
+        "esphome"
+        "go2rtc"
+        "homekit"
+        "homekit_controller"
+        "met"
         "nanoleaf"
-        "api"
+        "ring"
+        "sonos"
         "zwave_js"
       ];
       customComponents = [
@@ -74,6 +76,7 @@ in
       ];
       config = {
         default_config = { };
+        go2rtc.url = "http://localhost${config.services.go2rtc.settings.api.listen}";
         recorder.db_url = "postgresql://@/hass";
         homeassistant = {
           unit_system = "us_customary";
