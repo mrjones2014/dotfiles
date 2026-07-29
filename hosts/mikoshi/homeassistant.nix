@@ -94,7 +94,10 @@ in
             unique_id = "window_ac_climate";
             modes = [
               "off"
+              "auto"
               "cool"
+              "fan_only"
+              "dry"
             ];
             fan_modes = [
               "low"
@@ -105,16 +108,29 @@ in
             max_temp = 86;
             temp_step = 1;
 
-            # --- read state from the ESPHome entities ---
-            hvac_mode_template = "{{ 'cool' if is_state('switch.office_lamp_ac_power', 'on') else 'off' }}";
+            # read state from the ESPHome entities
+            hvac_mode_template = "{{ 'off' if is_state('switch.office_lamp_ac_power', 'off') else {'e-save': 'auto', 'cool': 'cool', 'fan': 'fan_only', 'dry': 'dry'}.get(states('select.office_lamp_ac_mode'), 'cool') }}";
             target_temperature_template = "{{ states('number.office_lamp_ac_temperature') | float(70) }}";
             fan_mode_template = "{{ {'1': 'low', '2': 'medium', '3': 'high'}.get(states('select.office_lamp_ac_fan_speed'), 'low') }}";
 
-            # --- write actions to the ESPHome entities ---
+            # write actions to the ESPHome entities
             set_hvac_mode = [
               {
-                service = "{{ 'switch.turn_on' if hvac_mode == 'cool' else 'switch.turn_off' }}";
+                service = "{{ 'switch.turn_off' if hvac_mode == 'off' else 'switch.turn_on' }}";
                 target.entity_id = "switch.office_lamp_ac_power";
+              }
+              # stop here when turning off
+              {
+                condition = "template";
+                value_template = "{{ hvac_mode != 'off' }}";
+              }
+              # give the power-on sequence (power + 1.5s boot + mode-to-cool press)
+              # time to finish before we walk the mode cycle from a known state
+              { delay = "00:00:04"; }
+              {
+                service = "select.select_option";
+                target.entity_id = "select.office_lamp_ac_mode";
+                data.option = "{{ {'auto': 'e-save', 'cool': 'cool', 'fan_only': 'fan', 'dry': 'dry'}[hvac_mode] }}";
               }
             ];
             set_temperature = [
@@ -128,7 +144,7 @@ in
               {
                 service = "select.select_option";
                 target.entity_id = "select.office_lamp_ac_fan_speed";
-                data.option = "{{ {'low': '1', 'medium': '2', 'high': '3'}[fan_mode] }}";
+                data.option = "{{ {'low': '1', 'medium': '2', 'high': '3'}.get(fan_mode, '1') }}";
               }
             ];
           }

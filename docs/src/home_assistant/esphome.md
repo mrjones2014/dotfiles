@@ -104,9 +104,26 @@ levels), and if the physical remote or foot switch desyncs things, you put the
 lamp at a known state and press the Resync button.
 
 ```yaml
-# Floor Light (hanaking)
 # Paste at the bottom of the device YAML (after your WiFi configs and such).
+# remove the default climate device, its Coolix NEC so we
+# can't use it for our window AC, we emulate a climate device
+# on the HASS side. Remove this if you do have a Coolix NEC device
+# you want to control.
+climate: !remove
+
+# =============================================================================
+# Athom RF/IR Remote — full device config
+#   1. Athom base (packages)
+#   2. Floor Light  — hanaking lamp via 433MHz RF (rf_transmitter, GPIO18)
+#   3. Window AC    — NEC IR remote clone     (ir_transmitter, GPIO25)
+# Both are one-way remotes: state is ASSUMED and tracked in globals.
+# Resync buttons fix drift (they update beliefs only, transmit nothing).
+# =============================================================================
+# =============================================================================
+# Assumed-state tracking
+# =============================================================================
 globals:
+  # --- Floor Light ---
   - id: floor_light_power
     type: bool
     restore_value: true
@@ -115,7 +132,31 @@ globals:
     type: int
     restore_value: true
     initial_value: "100"
+  # --- Window AC ---
+  - id: ac_power_assumed # assumed power; makes turn_on/turn_off idempotent
+    type: bool
+    restore_value: true
+    initial_value: "false"
+  - id: ac_setpoint # assumed setpoint °F (AC remembers its own across off/on)
+    type: int
+    restore_value: true
+    initial_value: "70"
+  - id: ac_fan # assumed fan speed 1..3
+    type: int
+    restore_value: true
+    initial_value: "1"
+  - id: ac_mode # assumed mode index: 0=e-save, 1=cool, 2=fan, 3=dry
+    type: int # (hardware cycles in that order; always wakes in e-save)
+    restore_value: true
+    initial_value: "1"
+# =============================================================================
+# Transmit scripts (mode: queued serializes bursts on each medium)
+# =============================================================================
 script:
+  # Floor Light frame: PILOT (232us on, 7600us off) + 24 PWM bits
+  #   bit 0 = 232us on / 760us off,  bit 1 = 712us on / 286us off
+  # Repeats chain so every frame is preceded by a pilot. The pilot is
+  # mandatory: the lamp's decoder ignores frames without it.
   - id: floor_light_send
     mode: queued
     parameters:
@@ -137,6 +178,44 @@ script:
           repeat:
             times: !lambda "return times;"
             wait_time: 0s
+  # Window AC: plain NEC presses, address 0x6681
+  #   power 0x7E81 | temp down 0x758A | temp up 0x7A85 | fan 0x6699 | mode 0x649B
+  - id: ac_press
+    mode: queued
+    parameters:
+      command: int
+      count: int
+    then:
+      - repeat:
+          count: !lambda "return count;"
+          then:
+            - remote_transmitter.transmit_nec:
+                transmitter_id: ir_transmitter
+                address: 0x6681
+                command: !lambda "return command;"
+                command_repeats: 1
+            - delay: 350ms # gap between presses; raise if the AC misses some
+  # Walk the mode cycle (e-save -> cool -> fan -> dry -> e-save) from the
+  # assumed mode to `target`, pressing MODE the right number of times.
+  - id: ac_set_mode
+    mode: queued
+    parameters:
+      target: int
+    then:
+      - lambda: |-
+          static const char *NAMES[] = {"e-save", "cool", "fan", "dry"};
+          if (!id(ac_power_assumed)) {
+            // AC off: don't transmit, keep the select showing assumed mode
+            id(ac_mode_sel).publish_state(NAMES[id(ac_mode)]);
+            return;
+          }
+          int presses = (target - id(ac_mode) + 4) % 4;
+          if (presses > 0) id(ac_press)->execute(0x649B, presses);
+          id(ac_mode) = target;
+          id(ac_mode_sel).publish_state(NAMES[target]);
+# =============================================================================
+# Floor Light entity (dimmable light)
+# =============================================================================
 output:
   - platform: template
     id: floor_light_bri_out
@@ -146,23 +225,26 @@ output:
           static const char *PWR = "001101000110110100000001";
           static const char *UP  = "001101000110110100000100";
           static const char *DN  = "001101000110110100001000";
+
           bool t_power = state > 0.005f;
           int t_bri = (int) roundf(state * 100.0f);
           if (t_power && t_bri < 10) t_bri = 10;   // lamp floor is 10%
           int c_bri = id(floor_light_bri);
+
           if (id(floor_light_power) && !t_power) {
             id(floor_light_send)->execute(PWR, 6);
             id(floor_light_power) = false;
             return;
           }
           if (!t_power) return;
+
           if (!id(floor_light_power)) {
             id(floor_light_send)->execute(PWR, 6);
             id(floor_light_power) = true;
           }
-          // Dimming: scale hold-frames to the size of the change.
-          // Calibrate FRAMES_PER_PCT to your lamp: if HA's 50% lands
-          // too dim, lower it; too bright, raise it.
+
+          // Dimming = emulated button-holding, scaled to the size of the change.
+          // Calibrate FRAMES_PER_PCT: HA's 50% too dim -> lower, too bright -> raise.
           const float FRAMES_PER_PCT = 1.0f;
           int delta = t_bri - c_bri;
           if (delta != 0) {
@@ -177,7 +259,111 @@ light:
     output: floor_light_bri_out
     gamma_correct: 1.0
     default_transition_length: 0s
+# =============================================================================
+# Window AC entities (switch + number + selects)
+# Power-on quirk: unit always wakes in e-save mode, so turn-on sends POWER,
+# waits for boot, resets the assumed mode to e-save, then walks the mode
+# cycle to COOL (my preferred default). All modes are also exposed via the
+# "AC Mode" select; the climate wrapper on the HASS side maps them to
+# hvac modes (e-save -> auto, fan -> fan_only, dry -> dry).
+# turn_on/turn_off are idempotent (guarded by ac_power_assumed) so HA can
+# safely call turn_on before every mode change without toggling the AC off.
+# =============================================================================
+switch:
+  - platform: template
+    name: "AC Power"
+    id: ac_power
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: mdi:air-conditioner
+    turn_on_action:
+      - if:
+          condition:
+            lambda: "return !id(ac_power_assumed);"
+          then:
+            - lambda: "id(ac_power_assumed) = true;"
+            - script.execute: {id: ac_press, command: 0x7E81, count: 1} # power
+            - delay: 1500ms # let it boot into e-save; tune if mode press is missed
+            - lambda: "id(ac_mode) = 0;" # hardware reality: woke up in e-save
+            - script.execute: {id: ac_set_mode, target: 1} # default to cool
+    turn_off_action:
+      - if:
+          condition:
+            lambda: "return id(ac_power_assumed);"
+          then:
+            - lambda: "id(ac_power_assumed) = false;"
+            - script.execute: {id: ac_press, command: 0x7E81, count: 1} # power
+number:
+  - platform: template
+    name: "AC Temperature"
+    id: ac_temp
+    min_value: 61 # set these to your unit's actual display range
+    max_value: 86
+    step: 1
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+    lambda: "return id(ac_setpoint);"
+    update_interval: 60s
+    set_action:
+      - lambda: |-
+          int target = (int) roundf(x);
+          int cur = id(ac_setpoint);
+          if (!id(ac_power_assumed)) {
+            // AC is off: don't transmit, snap the slider back to assumed state
+            id(ac_temp).publish_state(cur);
+            return;
+          }
+          int delta = target - cur;
+          if (delta > 0)      id(ac_press)->execute(0x7A85, delta);    // temp up
+          else if (delta < 0) id(ac_press)->execute(0x758A, -delta);   // temp down
+          id(ac_setpoint) = target;
+          id(ac_temp).publish_state(target);
+select:
+  - platform: template
+    name: "AC Fan Speed"
+    id: ac_fan_sel
+    options: ["1", "2", "3"]
+    lambda: "return to_string(id(ac_fan));"
+    update_interval: 60s
+    set_action:
+      - lambda: |-
+          int target = std::stoi(x);
+          if (!id(ac_power_assumed)) {
+            id(ac_fan_sel).publish_state(to_string(id(ac_fan)));
+            return;
+          }
+          // fan cycles 1 -> 2 -> 3 -> 1; send however many presses close the gap
+          int presses = (target - id(ac_fan) + 3) % 3;
+          if (presses > 0) id(ac_press)->execute(0x6699, presses);
+          id(ac_fan) = target;
+          id(ac_fan_sel).publish_state(to_string(target));
+  - platform: template
+    name: "AC Mode"
+    id: ac_mode_sel
+    options: ["e-save", "cool", "fan", "dry"]
+    lambda: |-
+      static const char *NAMES[] = {"e-save", "cool", "fan", "dry"};
+      return std::string(NAMES[id(ac_mode)]);
+    update_interval: 60s
+    set_action:
+      - lambda: |-
+          int target = 1; // default cool
+          if (x == "e-save")    target = 0;
+          else if (x == "cool") target = 1;
+          else if (x == "fan")  target = 2;
+          else if (x == "dry")  target = 3;
+          id(ac_set_mode)->execute(target);
+# =============================================================================
+# Resync buttons (update assumed state only; transmit nothing)
+# =============================================================================
 button:
+  # Put the lamp at ON / full brightness with the real remote, then press this
+  - platform: template
+    name: "Floor Light Resync"
+    on_press:
+      - lambda: |-
+          id(floor_light_power) = true;
+          id(floor_light_bri) = 100;
   - platform: template
     name: "Floor Light Cycle Color Temp"
     on_press:
@@ -185,13 +371,21 @@ button:
           id: floor_light_send
           code: "001101000110110100001001"
           times: 6
-  # Put the lamp at a known state (on, full brightness), then press this
+  # Put the AC at ON / COOL / 70°F / fan 1 with the real remote, then press this
   - platform: template
-    name: "Floor Light Resync"
+    name: "AC Resync"
     on_press:
       - lambda: |-
-          id(floor_light_power) = true;
-          id(floor_light_bri) = 100;
+          id(ac_power_assumed) = true;
+          id(ac_setpoint) = 70;
+          id(ac_fan) = 1;
+          id(ac_mode) = 1; // cool
+          id(ac_temp).publish_state(70);
+          id(ac_fan_sel).publish_state("1");
+          id(ac_mode_sel).publish_state("cool");
+      - switch.template.publish:
+          id: ac_power
+          state: ON
 ```
 
 If you have a different unit of the same lamp, the codes won't match yours. The
@@ -366,7 +560,10 @@ looks like this:
       unique_id = "window_ac_climate";
       modes = [
         "off"
+        "auto"
         "cool"
+        "fan_only"
+        "dry"
       ];
       fan_modes = [
         "low"
@@ -377,17 +574,29 @@ looks like this:
       max_temp = 86;
       temp_step = 1;
 
-      # Read state from the ESPHome entities.
-      hvac_mode_template = "{{ 'cool' if is_state('switch.office_ac_power', 'on') else 'off' }}";
+      # --- read state from the ESPHome entities ---
+      hvac_mode_template = "{{ 'off' if is_state('switch.office_ac_power', 'off') else {'e-save': 'auto', 'cool': 'cool', 'fan': 'fan_only', 'dry': 'dry'}.get(states('select.office_ac_mode'), 'cool') }}";
       target_temperature_template = "{{ states('number.office_ac_temperature') | float(70) }}";
-      # Apple Home only recognizes fan speed low/medium/high not 1/2/3
       fan_mode_template = "{{ {'1': 'low', '2': 'medium', '3': 'high'}.get(states('select.office_ac_fan_speed'), 'low') }}";
 
-      # Write state back to the ESPHome entities.
+      # --- write actions to the ESPHome entities ---
       set_hvac_mode = [
         {
-          service = "{{ 'switch.turn_on' if hvac_mode == 'cool' else 'switch.turn_off' }}";
+          service = "{{ 'switch.turn_off' if hvac_mode == 'off' else 'switch.turn_on' }}";
           target.entity_id = "switch.office_ac_power";
+        }
+        # stop here when turning off
+        {
+          condition = "template";
+          value_template = "{{ hvac_mode != 'off' }}";
+        }
+        # give the power-on sequence (power + 1.5s boot + mode-to-cool press)
+        # time to finish before we walk the mode cycle from a known state
+        { delay = "00:00:04"; }
+        {
+          service = "select.select_option";
+          target.entity_id = "select.office_ac_mode";
+          data.option = "{{ {'auto': 'e-save', 'cool': 'cool', 'fan_only': 'fan', 'dry': 'dry'}[hvac_mode] }}";
         }
       ];
       set_temperature = [
@@ -401,7 +610,7 @@ looks like this:
         {
           service = "select.select_option";
           target.entity_id = "select.office_ac_fan_speed";
-          data.option = "{{ {'low': '1', 'medium': '2', 'high': '3'}[fan_mode] }}";
+          data.option = "{{ {'low': '1', 'medium': '2', 'high': '3'}.get(fan_mode, '1') }}";
         }
       ];
     }
