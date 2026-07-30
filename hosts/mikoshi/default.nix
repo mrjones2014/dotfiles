@@ -26,6 +26,7 @@
     ./paperless.nix
     ./adguard.nix
     ./homeassistant.nix
+    ./scrypted.nix
     ../../nixos/ssh-server.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix

@@ -37,6 +37,7 @@ in
       enable = true;
       extraPackages =
         ps: with ps; [
+          aiohttp
           base36
           hap-python
           homekit-audio-proxy
