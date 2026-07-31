@@ -33,9 +33,17 @@
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
+
+  # ipv6 stuff for Matter over Thread
+  networking.enableIPv6 = true;
   boot = {
-    # less aggressive swap usage
-    kernel.sysctl."vm.swappiness" = 25;
+    kernel.sysctl = {
+      # ipv6 stuff for Matter over Thread
+      "net.ipv6.conf.enp0s31f6.accept_ra" = 2;
+      "net.ipv6.conf.enp0s31f6.accept_ra_rt_info_max_plen" = 64;
+      # less aggressive swap usage
+      "vm.swappiness" = 25;
+    };
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
