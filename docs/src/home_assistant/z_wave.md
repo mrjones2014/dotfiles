@@ -43,4 +43,5 @@ Putting the device into "add" mode or "interview" mode varies by device. Here's 
 | Minoston Z-Wave Outdoor Smart Plug | Triple click button                             |
 | Zooz ZAC38 Range Extender          | Triple click button                             |
 | Zooz ZEN04 Smart Plug              | Triple click button                             |
+| Zooz ZEN37 Wall Remote             | Click top button 6 times                        |
 | Shelly Wave Plug                   | Press and hold till blue light, then click once |
