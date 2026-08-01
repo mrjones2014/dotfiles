@@ -101,7 +101,7 @@
         };
       };
     }
-    // flake-utils.lib.eachDefaultSystem (
+    // flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-darwin" ] (
       system:
       let
         inherit (nixpkgs) lib;

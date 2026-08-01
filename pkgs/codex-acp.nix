@@ -17,10 +17,6 @@ let
       name = "aarch64-unknown-linux-gnu";
       hash = "sha256-y3KCD1PJGmOYKoBL1qslG95RvJNx2OY4lG8C19eFgLU=";
     };
-    x86_64-darwin = {
-      name = "x86_64-apple-darwin";
-      hash = "sha256-IS+vz5ccdc1PUGC+LVlRvDIvccSQKNvSUxkxSUwzx4Q=";
-    };
     x86_64-linux = {
       name = "x86_64-unknown-linux-gnu";
       hash = "sha256-CprWwx7Jsrh9zLfp2j+vXTh+dEcNJNvO11oWDteyLQY=";
