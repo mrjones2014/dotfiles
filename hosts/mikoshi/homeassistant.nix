@@ -65,6 +65,7 @@ in
         "zwave_js"
       ];
       customComponents = [
+        pkgs.home-assistant-custom-components.ha_mcp_tools
         (pkgs.buildHomeAssistantComponent rec {
           owner = "jcwillox";
           domain = "climate_template";
