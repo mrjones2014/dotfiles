@@ -5,6 +5,44 @@
 }:
 let
   zwave_ui_port = 8998;
+  ha-mcp = rec {
+    version = "7.14.2";
+    src = pkgs.fetchFromGitHub {
+      owner = "homeassistant-ai";
+      repo = "ha-mcp";
+      rev = "v${version}";
+      hash = "sha256-OWExvNsNwVZNM+jF2zOQnb7mTL4xu5JWm3Cd2BNL43g=";
+    };
+  };
+  mkHaMcp =
+    ps:
+    ps.buildPythonPackage {
+      pname = "ha-mcp";
+      inherit (ha-mcp) version src;
+      pyproject = true;
+
+      build-system = [ ps.setuptools ];
+      pythonRelaxDeps = true;
+
+      dependencies =
+        with ps;
+        [
+          cryptography
+          fastmcp
+          httpx
+          packaging
+          pydantic
+          pydantic-monty
+          python-dotenv
+          truststore
+          tzdata
+          websockets
+        ]
+        ++ httpx.optional-dependencies.socks;
+
+      doCheck = false;
+      pythonImportsCheck = [ "ha_mcp" ];
+    };
 in
 {
   networking.firewall = {
@@ -13,6 +51,7 @@ in
     allowedTCPPorts = [
       21065
       21066
+      9584
     ];
     allowedUDPPorts = [ 5353 ];
   };
@@ -37,6 +76,7 @@ in
       enable = true;
       extraPackages =
         ps: with ps; [
+          (mkHaMcp ps)
           aiohttp
           base36
           hap-python
@@ -47,6 +87,7 @@ in
           pyatv
           pyipp
           universal-silabs-flasher
+          uv
           zlib-ng
         ];
       extraComponents = [
@@ -65,7 +106,13 @@ in
         "zwave_js"
       ];
       customComponents = [
-        pkgs.home-assistant-custom-components.ha_mcp_tools
+        (pkgs.home-assistant-custom-components.ha_mcp_tools.overrideAttrs (
+          oldAttrs:
+          ha-mcp
+          // {
+            patches = (oldAttrs.patches or [ ]) ++ [ ./ha-mcp-tools-nix-managed-package.patch ];
+          }
+        ))
         (pkgs.buildHomeAssistantComponent rec {
           owner = "jcwillox";
           domain = "climate_template";

@@ -1,0 +1,32 @@
+diff --git a/custom_components/ha_mcp_tools/embedded_server.py b/custom_components/ha_mcp_tools/embedded_server.py
+--- a/custom_components/ha_mcp_tools/embedded_server.py
++++ b/custom_components/ha_mcp_tools/embedded_server.py
+@@ -677,6 +677,15 @@ class EmbeddedServerManager:
+         installed_version = await self._hass.async_add_executor_job(
+             _installed_ha_mcp_version
+         )
++        if installed_version is not None and _is_compatible_embedded_version(
++            installed_version
++        ):
++            _LOGGER.info(
++                "Using Nix-managed HA-MCP in-process server package (version %s)",
++                installed_version,
++            )
++            return installed_version
++
+ 
+         pending_version = self._pending_install_version(defer_mutations)
+         target_dist = dist_for_channel(self._channel)
+diff --git a/custom_components/ha_mcp_tools/manifest.json b/custom_components/ha_mcp_tools/manifest.json
+--- a/custom_components/ha_mcp_tools/manifest.json
++++ b/custom_components/ha_mcp_tools/manifest.json
+@@ -19,9 +19,6 @@
+     ],
+     "documentation": "https://github.com/homeassistant-ai/ha-mcp",
+     "iot_class": "local_push",
+     "issue_tracker": "https://github.com/homeassistant-ai/ha-mcp/issues",
+-    "requirements": [
+-        "ruamel.yaml>=0.18.0"
+-    ],
+     "version": "1.2.3"
+ }
