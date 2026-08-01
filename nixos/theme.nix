@@ -23,13 +23,13 @@
   gtk.gtk4.theme = config.gtk.theme;
   gtk = {
     enable = isLinux && !isServer;
-    theme = {
-      package = pkgs.tokyonight-gtk-theme.override {
-        # macos style window buttons
-        tweakVariants = [ "macos" ];
-      };
-      name = "Tokyonight-Dark";
-    };
+    # theme = {
+    #   package = pkgs.tokyonight-gtk-theme.override {
+    #     # macos style window buttons
+    #     tweakVariants = [ "macos" ];
+    #   };
+    #   name = "Tokyonight-Dark";
+    # };
   };
 
   dconf.settings."org/gnome/shell/extensions/user-theme".name = "Tokyonight-Dark";
