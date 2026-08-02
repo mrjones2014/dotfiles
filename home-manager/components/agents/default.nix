@@ -127,8 +127,11 @@ in
       settings = lib.mkMerge [
         {
           default_agent = "plan";
-          enabled_providers = [ "ollama" ];
-          model = "ollama/qwen3.5:4b-mlx";
+          enabled_providers = [
+            "ollama"
+            "opencode-go"
+          ];
+          model = "opencode-go/qwen3.7-plus";
           provider.ollama = {
             name = "Ollama";
             npm = "@ai-sdk/openai-compatible";
