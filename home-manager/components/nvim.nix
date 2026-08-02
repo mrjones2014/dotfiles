@@ -5,8 +5,8 @@
   ...
 }:
 {
-  imports = [ ../modules/llama-server.nix ];
-  services.llama-server.enable = true;
+  imports = [ ../modules/ollama-server.nix ];
+  services.ollama-server.enable = true;
 
   xdg.configFile = {
     nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";

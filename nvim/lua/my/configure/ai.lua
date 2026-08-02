@@ -108,11 +108,17 @@ return {
         end,
       },
       http = {
-        local_qwen = function()
-          return require('codecompanion.adapters').extend(
-            'openai_compatible',
-            { env = { url = vim.env.LLAMA_SERVER_ADDRESS } }
-          )
+        local_ollama = function()
+          return require('codecompanion.adapters').extend('ollama', {
+            env = {
+              url = vim.env.OLLAMA_SERVER_ADDRESS,
+            },
+            schema = {
+              model = {
+                default = vim.env.OLLAMA_DEFAULT_MODEL,
+              },
+            },
+          })
         end,
       },
     },
@@ -122,7 +128,7 @@ return {
     interactions = {
       cmd = { adapter = default_provider },
       background = {
-        adapter = 'local_qwen',
+        adapter = 'local_ollama',
         chat = {
           opts = { enabled = true },
           callbacks = {
