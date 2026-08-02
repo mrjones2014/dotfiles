@@ -131,8 +131,8 @@ in
           model = "ollama/qwen3.5:4b-mlx";
           provider.ollama = {
             name = "Ollama";
-            npm = "@opencode-ai/ai/providers/openai-compatible";
-            options.baseURL = "http://${config.services.ollama-server.host}:${toString config.services.ollama-server.port}/v1";
+            npm = "@ai-sdk/openai-compatible";
+            api = "http://${config.services.ollama-server.host}:${toString config.services.ollama-server.port}/v1";
             models = builtins.listToAttrs (
               map (model: {
                 name = model;
@@ -144,10 +144,10 @@ in
             );
           };
           mcp.home-assistant = {
-            enabled = true;
+            enabled = !isWorkMac;
             type = "remote";
             url = "https://home.mjones.network/api/webhook/mcp_38cd7e716437ce6812d3571a1be9c7f7";
-            oauth = true;
+            oauth = false;
           };
         }
       ];
