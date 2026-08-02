@@ -7,7 +7,7 @@
 let
   cfg = config.services.ollama-server;
   ollamaHost = "${cfg.host}:${toString cfg.port}";
-  ollama = if pkgs.stdenv.isDarwin then ollamaApp else "${pkgs.ollama}/bin/ollama";
+  ollama = if pkgs.stdenv.isDarwin then "${ollamaApp}" else "${pkgs.ollama}/bin/ollama";
   ollamaApp = pkgs.writeShellScript "ollama-app" ''
     if [ -x /Applications/Ollama.app/Contents/Resources/ollama ]; then
       exec /Applications/Ollama.app/Contents/Resources/ollama "$@"
