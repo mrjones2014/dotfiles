@@ -7,9 +7,18 @@
 let
   cfg = config.services.ollama-server;
   ollamaHost = "${cfg.host}:${toString cfg.port}";
+  ollama = if pkgs.stdenv.isDarwin then ollamaApp else "${pkgs.ollama}/bin/ollama";
+  ollamaApp = pkgs.writeShellScript "ollama-app" ''
+    if [ -x /Applications/Ollama.app/Contents/Resources/ollama ]; then
+      exec /Applications/Ollama.app/Contents/Resources/ollama "$@"
+    fi
+
+    echo "Ollama.app is required for MLX models on Darwin" >&2
+    exit 127
+  '';
 
   serverArgs = [
-    "${pkgs.ollama}/bin/ollama"
+    ollama
     "serve"
   ];
 
@@ -20,7 +29,7 @@ let
 
     ready=false
     for _ in $(seq 1 30); do
-      if ${pkgs.ollama}/bin/ollama list >/dev/null 2>&1; then
+      if ${ollama} list >/dev/null 2>&1; then
         ready=true
         break
       fi
@@ -33,7 +42,7 @@ let
     fi
 
     for model in ${lib.escapeShellArgs cfg.models}; do
-      ${pkgs.ollama}/bin/ollama pull "$model"
+      ${ollama} pull "$model"
     done
   '';
 in
@@ -80,7 +89,8 @@ in
         ];
 
         home = {
-          packages = [ pkgs.ollama ];
+          # install the homebrew cask on darwin, nixpkgs version is missing a dependency
+          packages = lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.ollama ];
           sessionVariables = {
             OLLAMA_HOST = ollamaHost;
             OLLAMA_SERVER_ADDRESS = "http://${ollamaHost}";

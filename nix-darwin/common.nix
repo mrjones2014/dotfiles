@@ -28,6 +28,7 @@
       "ghostty"
       "zen"
       "alfred"
+      "ollama"
       "spotify"
     ];
   };
