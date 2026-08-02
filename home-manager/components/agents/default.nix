@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   isWorkMac,
@@ -76,44 +77,80 @@ in
     sd
     yq-go
   ];
-  programs.codex = {
-    enable = true;
-    package = wrapCodexPackage pkgs.codex "codex";
-    enableMcpIntegration = true;
-    skills = ./skills;
-    context = ./rules/git-repos.md;
-    settings = { };
-  };
-  programs.claude-code = {
-    enable = true;
-    enableMcpIntegration = true;
-    rulesDir = ./rules;
-    skills = ./skills;
-    # some settings are undocumented, refer to the schema
-    # https://www.schemastore.org/claude-code-settings.json
-    settings = {
-      inherit hooks;
-      # do not ever commit anything on my behalf
-      includeGitInstructions = false;
-      attribution = {
-        commit = "";
-        pr = "";
+  programs = {
+    codex = {
+      enable = true;
+      package = wrapCodexPackage pkgs.codex "codex";
+      enableMcpIntegration = true;
+      skills = ./skills;
+      context = ./rules/git-repos.md;
+      settings = { };
+    };
+    claude-code = {
+      enable = true;
+      enableMcpIntegration = true;
+      rulesDir = ./rules;
+      skills = ./skills;
+      # some settings are undocumented, refer to the schema
+      # https://www.schemastore.org/claude-code-settings.json
+      settings = {
+        inherit hooks;
+        # do not ever commit anything on my behalf
+        includeGitInstructions = false;
+        attribution = {
+          commit = "";
+          pr = "";
+        };
+        feedbackSurveyRate = 0;
+        permissions.defaultMode = "plan";
+        model = if isWorkMac then "opus[1m]" else "opus";
+        spinnerTipsEnabled = false;
+        spinnerTipsOverride = {
+          excludeDefault = true;
+          tips = [ ];
+        };
+        spinnerVerbs = {
+          mode = "replace";
+          verbs = [ "Processing" ];
+        };
+        # Do not exit plan mode yourself, I will enter
+        # build mode only AFTER the plan is reviewed
+        permissions.deny = [ "ExitPlanMode" ];
       };
-      feedbackSurveyRate = 0;
-      permissions.defaultMode = "plan";
-      model = if isWorkMac then "opus[1m]" else "opus";
-      spinnerTipsEnabled = false;
-      spinnerTipsOverride = {
-        excludeDefault = true;
-        tips = [ ];
-      };
-      spinnerVerbs = {
-        mode = "replace";
-        verbs = [ "Processing" ];
-      };
-      # Do not exit plan mode yourself, I will enter
-      # build mode only AFTER the plan is reviewed
-      permissions.deny = [ "ExitPlanMode" ];
+    };
+    opencode = {
+      enable = !isWorkMac;
+      enableMcpIntegration = true;
+      context = ./rules/git-repos.md;
+      skills = ./skills;
+      tui.theme = "tokyonight";
+      settings = lib.mkMerge [
+        {
+          default_agent = "plan";
+          enabled_providers = [ "ollama" ];
+          model = "ollama/qwen3.5:4b-mlx";
+          provider.ollama = {
+            name = "Ollama";
+            npm = "@opencode-ai/ai/providers/openai-compatible";
+            options.baseURL = "http://${config.services.ollama-server.host}:${toString config.services.ollama-server.port}/v1";
+            models = builtins.listToAttrs (
+              map (model: {
+                name = model;
+                value = {
+                  id = model;
+                  name = model;
+                };
+              }) config.services.ollama-server.models
+            );
+          };
+          mcp.home-assistant = {
+            enabled = true;
+            type = "remote";
+            url = "https://home.mjones.network/api/webhook/mcp_38cd7e716437ce6812d3571a1be9c7f7";
+            oauth = true;
+          };
+        }
+      ];
     };
   };
 }
