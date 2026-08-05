@@ -78,6 +78,7 @@ in
         ps: with ps; [
           (mkHaMcp ps)
           aiohttp
+          aiohttp-sse
           base36
           hap-python
           homekit-audio-proxy
