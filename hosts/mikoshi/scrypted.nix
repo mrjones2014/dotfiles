@@ -1,4 +1,5 @@
 # based on https://github.com/eh8/chenglab/blob/6cafec44a07459cf2b666f8a3ff5f34773348bc1/services/scrypted.nix
+{ pkgs, ... }:
 let
   port = 11080;
 in
@@ -27,4 +28,19 @@ in
 
   services.nginx.subdomains.scrypted.port = port;
   systemd.tmpfiles.rules = [ "d /var/lib/scrypted 0755 root root" ];
+
+  services.home-assistant.customComponents = [
+    pkgs.buildHomeAssistantComponent
+    rec {
+      owner = "koush";
+      domain = "scrypted";
+      version = "d97c417843c33341d0eb2ddd5326c6ebf58d36b4";
+      src = pkgs.fetchFromGitHub {
+        owner = "koush";
+        repo = "ha_scrypted";
+        rev = version;
+        hash = "";
+      };
+    }
+  ];
 }
