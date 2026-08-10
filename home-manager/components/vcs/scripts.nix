@@ -24,6 +24,9 @@ let
       git config --local remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"
       git config --local --add remote.origin.fetch "+refs/heads/mrj/*:refs/remotes/origin/mrj/*"
       git config --local remote.origin.tagOpt "--no-tags"
+      # the above line is not respected in newer jj versions, do this instead/in addition
+      jj config set remotes.origin.fetch-tags = '~*'
+      jj config set remotes.upstream.fetch-tags = '~*'
       echo "Configured optimized refspec for large repository"
     fi
 
