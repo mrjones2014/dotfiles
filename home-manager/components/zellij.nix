@@ -60,6 +60,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
       show_startup_tips false
       mouse_hover_effects false
       session_serialization false
+      osc8_hyperlinks true
       ui {
           pane_frames {
               rounded_corners true
