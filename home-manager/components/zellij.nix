@@ -61,7 +61,6 @@ with import ./tokyonight_palette.nix { inherit lib; };
       mouse_hover_effects false
       session_serialization false
       osc8_hyperlinks true
-      mouse_mode false // interferes with OSC8 hyperlinks
       ui {
           pane_frames {
               rounded_corners true
