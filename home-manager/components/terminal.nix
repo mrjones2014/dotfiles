@@ -33,6 +33,7 @@
       shell-integration-features = "no-cursor";
       mouse-hide-while-typing = true;
       link-url = true;
+      link-previews = true;
       window-decoration = "server";
       # NB: workaround for zellij not having the right PATH on macOS
       command = ''env EDITOR="nvim" PATH="$PATH:/etc/profiles/per-user/${config.home.username}/bin" ${pkgs.zellij}/bin/zellij'';
