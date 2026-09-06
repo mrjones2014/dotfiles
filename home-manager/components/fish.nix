@@ -63,6 +63,11 @@
         # https://github.com/fish-shell/fish-shell/issues/11327
         bind -M insert -m insert ctrl-c cancel-commandline
 
+        # unbind ctrl+d so it doesn't exit the shell when I press it expecting to scroll down in a pager
+        # that never opened because the output was too short
+        bind -M insert ctrl-d ""
+        bind -M default ctrl-d ""
+
         set fish_cursor_default block
         set fish_cursor_insert block
         set fish_cursor_replace_one underscore
