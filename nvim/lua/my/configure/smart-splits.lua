@@ -8,7 +8,8 @@ return {
   'mrjones2014/smart-splits.nvim',
   dev = true,
   lazy = false,
-  opts = { ignored_buftypes = { 'nofile' }, cursor_follows_swapped_bufs = true },
+  branch = 'v3',
+  opts = { ignored_buftypes = { 'nofile' }, swap = { move_cursor = true } },
   keys = {
     { '<C-h>', lazymap('smart-splits', 'move_cursor_left'), desc = 'Move to left window' },
     { '<C-j>', lazymap('smart-splits', 'move_cursor_down'), desc = 'Move to downward window' },
