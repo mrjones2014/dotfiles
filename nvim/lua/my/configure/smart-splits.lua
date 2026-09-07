@@ -9,7 +9,11 @@ return {
   dev = true,
   lazy = false,
   branch = 'v3',
-  opts = { ignored_buftypes = { 'nofile' }, swap = { move_cursor = true } },
+  opts = {
+    ignored_buftypes = { 'nofile' },
+    swap = { move_cursor = true },
+    diagnostic = { enabled = true },
+  },
   keys = {
     { '<C-h>', lazymap('smart-splits', 'move_cursor_left'), desc = 'Move to left window' },
     { '<C-j>', lazymap('smart-splits', 'move_cursor_down'), desc = 'Move to downward window' },
