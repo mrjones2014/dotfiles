@@ -66,6 +66,7 @@ in
     OTEL_METRICS_EXPORTER = "";
     CLAUDE_CODE_ENABLE_TELEMETRY = "0";
     CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
+    OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
   };
   home.packages = with pkgs; [
     ast-grep
@@ -126,6 +127,7 @@ in
       tui.theme = "tokyonight";
       settings = lib.mkMerge [
         {
+          lsp = true;
           default_agent = "plan";
           enabled_providers = [
             "ollama"
