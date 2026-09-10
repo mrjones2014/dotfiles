@@ -5,11 +5,13 @@ local function lazymap(module, fn)
 end
 
 return {
-  'mrjones2014/smart-splits.nvim',
+  'smart-splits-nvim/smart-splits.nvim',
+  dependencies = { 'smart-splits-nvim/backend-zellij', main = 'smart-splits-backend-zellij' },
   dev = true,
   lazy = false,
   branch = 'v3',
   opts = {
+    mux = { backend = 'smart-splits-backend-zellij' },
     ignored_buftypes = { 'nofile' },
     swap = { move_cursor = true },
     diagnostic = { enabled = true },
