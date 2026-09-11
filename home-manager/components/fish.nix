@@ -36,9 +36,6 @@
         ":Q" = "exit";
         ":qa" = "exit";
         ":e" = "nvim";
-        ":vsp" = "zellij action new-pane --direction right";
-        ":sp" = "zellij action new-pane --direction down";
-
         copy = if isDarwin then "pbcopy" else "wl-copy";
         paste = if isDarwin then "pbpaste" else "wl-paste";
         cat = "bat";

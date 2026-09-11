@@ -6,12 +6,13 @@ end
 
 return {
   'smart-splits-nvim/smart-splits.nvim',
-  dependencies = { 'smart-splits-nvim/backend-zellij', main = 'smart-splits-backend-zellij' },
+  dependencies = { 'smart-splits-nvim/backend-ghostty', main = 'smart-splits-backend-ghostty' },
   dev = true,
   lazy = false,
   branch = 'v3',
   opts = {
-    mux = { backend = 'smart-splits-backend-zellij' },
+    mux = { backend = 'smart-splits-backend-ghostty' },
+    move = { at_edge = 'stop' },
     ignored_buftypes = { 'nofile' },
     swap = { move_cursor = true },
     diagnostic = { enabled = true },

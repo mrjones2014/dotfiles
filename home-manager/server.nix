@@ -22,6 +22,5 @@
   xdg.enable = true;
   imports = [
     ./shared.nix
-    ./components/zellij.nix
   ];
 }
