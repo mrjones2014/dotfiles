@@ -110,49 +110,49 @@ with import ./tokyonight_palette.nix { inherit lib; };
 
           shared_except "locked" {
               bind "Ctrl h" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "move_focus";
                       payload "left";
                   };
               }
               bind "Ctrl j" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "move_focus";
                       payload "down";
                   };
               }
               bind "Ctrl k" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "move_focus";
                       payload "up";
                   };
               }
               bind "Ctrl l" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "move_focus";
                       payload "right";
                   };
               }
               bind "Alt h" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "resize";
                       payload "left";
                   };
               }
               bind "Alt j" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "resize";
                       payload "down";
                   };
               }
               bind "Alt k" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "resize";
                       payload "up";
                   };
               }
               bind "Alt l" {
-                  MessagePlugin "file:${pkgs.vim-zellij-navigator}/bin/vim-zellij-navigator.wasm" {
+                  MessagePlugin "file:${lib.getExe pkgs.zellijPlugins.vim-zellij-navigator}" {
                       name "resize";
                       payload "right";
                   };
@@ -160,7 +160,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
           }
       }
       load_plugins {
-        "file:${pkgs.zjstatus}/bin/zjframes.wasm" {
+        "file:${lib.getExe pkgs.zellijPlugins.zjstatus}" {
           hide_frame_except_for_search     "true"
           hide_frame_except_for_scroll     "true"
           hide_frame_except_for_fullscreen "true"
@@ -174,7 +174,7 @@ with import ./tokyonight_palette.nix { inherit lib; };
             cwd "${config.home.homeDirectory}"
           }
           pane size=1 borderless=true {
-              plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
+              plugin location="file:${lib.getExe pkgs.zellijPlugins.zjstatus}" {
                   format_left   "#[bg=${bg}]{tabs}"
                   format_center "{notifications}"
                   format_right  "{mode}${

@@ -1,7 +1,7 @@
 local window = require('my.utils.window')
 local hosts = require('my.utils.hosts')
 
-local default_provider = hosts.is_work_computer() and 'claude_code' or 'codex'
+local default_provider = 'claude_code'
 
 local _claude_code
 
@@ -71,15 +71,6 @@ return {
     },
     adapters = {
       acp = {
-        codex = function()
-          return require('codecompanion.adapters').extend('codex', {
-            defaults = {
-              auth_method = 'chatgpt',
-              model = 'gpt-5.5',
-              mode = 'read-only', -- start in plan mode
-            },
-          })
-        end,
         claude_code = function()
           if _claude_code ~= nil then
             return _claude_code
