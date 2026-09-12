@@ -47,9 +47,6 @@ return {
     config = function()
       -- if Neovim is crashing, it might be due to corrupted parsers;
       -- uninstall via `nvim +'TSUninstall all'` then restart nvim.
-      if vim.fn.executable('tree-sitter') ~= 1 then
-        error('tree-sitter CLI is not installed!')
-      end
       require('nvim-treesitter').install(require('my.ftconfig').treesitter_parsers)
       -- don't fold anything by default
       vim.opt.foldlevelstart = 99
