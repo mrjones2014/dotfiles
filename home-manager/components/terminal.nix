@@ -24,6 +24,7 @@
         "ss06"
       ];
       font-size = "16";
+      copy-on-select = "clipboard";
       cursor-style = "block";
       cursor-style-blink = false;
       macos-option-as-alt = true;
