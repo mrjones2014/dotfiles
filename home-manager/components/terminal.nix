@@ -40,18 +40,6 @@
         "super+c=copy_to_clipboard"
         "super+n=new_window"
 
-        # Split navigation (performable: delegate to Neovim first via smart-splits)
-        "performable:ctrl+h=goto_split:left"
-        "performable:ctrl+j=goto_split:down"
-        "performable:ctrl+k=goto_split:up"
-        "performable:ctrl+l=goto_split:right"
-
-        # Split resize
-        "performable:alt+h=resize_split:left,30"
-        "performable:alt+j=resize_split:down,30"
-        "performable:alt+k=resize_split:up,30"
-        "performable:alt+l=resize_split:right,30"
-
         # New splits
         "super+h=new_split:left"
         "super+l=new_split:right"
@@ -62,6 +50,34 @@
         "alt+n=new_tab"
         "alt+left=previous_tab"
         "alt+right=next_tab"
+
+        # see https://github.com/smart-splits-nvim/backend-ghostty#ghostty-configuration
+        # Outside Neovim.
+        # Move
+        "performable:ctrl+h=goto_split:left"
+        "performable:ctrl+j=goto_split:down"
+        "performable:ctrl+k=goto_split:up"
+        "performable:ctrl+l=goto_split:right"
+
+        # Resize
+        "performable:alt+h=resize_split:left,30"
+        "performable:alt+j=resize_split:down,30"
+        "performable:alt+k=resize_split:up,30"
+        "performable:alt+l=resize_split:right,30"
+
+        # Inside Neovim.
+        "nvim/"
+        # Move
+        "nvim/ctrl+h=text:\\x08"
+        "nvim/ctrl+j=text:\\x0a"
+        "nvim/ctrl+k=text:\\x0b"
+        "nvim/ctrl+l=text:\\x0c"
+
+        # Resize
+        "nvim/alt+h=esc:h"
+        "nvim/alt+j=esc:j"
+        "nvim/alt+k=esc:k"
+        "nvim/alt+l=esc:l"
       ];
     };
   };
