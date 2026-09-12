@@ -51,6 +51,8 @@
         "alt+left=previous_tab"
         "alt+right=next_tab"
 
+        "super+p=toggle_command_palette"
+
         # see https://github.com/smart-splits-nvim/backend-ghostty#ghostty-configuration
         # Outside Neovim.
         # Move

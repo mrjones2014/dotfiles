@@ -12,7 +12,7 @@ return {
   branch = 'v3',
   opts = {
     mux = { backend = 'smart-splits-backend-ghostty' },
-    move = { at_edge = 'stop' },
+    move = { at_edge = 'split' },
     ignored_buftypes = { 'nofile' },
     swap = { move_cursor = true },
     diagnostic = { enabled = true },
