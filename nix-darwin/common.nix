@@ -28,7 +28,7 @@
       "ghostty"
       "zen"
       "alfred"
-      "ollama"
+      "ollama-app"
       "spotify"
     ];
   };

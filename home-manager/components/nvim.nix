@@ -8,8 +8,12 @@
   imports = [ ../modules/ollama-server.nix ];
   services.ollama-server.enable = true;
 
+  # trialing AstroNvim side-by-side; launch it with `avim`
+  programs.fish.shellAliases.avim = "env NVIM_APPNAME=nvim-astro nvim";
+
   xdg.configFile = {
     nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
+    nvim-astro.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim-astro";
     ripgrep_ignore.text = ''
       .git/
       yarn.lock

@@ -1,0 +1,8 @@
+std = "vim"
+
+[lints]
+mixed_table = "allow"
+global_usage = "allow"
+if_same_then_else = "allow"
+incorrect_standard_library_use = "allow"
+multiple_statements = "allow"
