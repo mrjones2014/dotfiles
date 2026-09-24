@@ -1,15 +1,3 @@
--- `pack.rust` hardcodes a codelldb DAP adapter by probing mason-registry. With Mason
--- disabled that probe fails and it falls back to `get_codelldb_adapter()` with no
--- arguments, which resolves `command` to nil and fails validation:
---
---   rustaceanvim: Invalid config: rustaceanvim.dap.adapter.executable.command
---   [server]: expected string, got nil
---
--- rustaceanvim's *own* default already falls through to lldb-dap, which nix provides
--- via the `lldb` package, so that's what's restored here.
---
--- The pack's `config` does `extend_tbl(opts, vim.g.rustaceanvim)`, i.e. anything set
--- on `vim.g.rustaceanvim` beats the pack. That's why this is an `init`.
 ---@type LazySpec
 return {
   { import = 'astrocommunity.pack.rust' },

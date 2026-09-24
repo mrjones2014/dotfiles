@@ -1,7 +1,3 @@
--- Provider config on top of `astrocommunity.ai.codecompanion-nvim`.
--- The pack supplies the <Leader>A mappings, the statusline spinner and the icon;
--- everything here is the adapter/interaction setup ported from my old config.
-
 local DEFAULT_PROVIDER = 'claude_code'
 
 local function hostname()
@@ -80,15 +76,7 @@ return {
     cmd = { 'CodeCompanionClear' },
     keys = {
       {
-        '<leader>aa',
-        function()
-          require('codecompanion').chat()
-        end,
-        desc = 'codecompanion: chat',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>af',
+        '<leader>Af',
         function()
           if require('codecompanion-ui').is_visible() then
             require('codecompanion-ui').focus_input()
@@ -103,14 +91,14 @@ return {
             end
           end
         end,
-        desc = 'codecompanion: focus',
+        desc = 'Focus Codecompanion window',
       },
       {
-        '<leader>at',
+        '<leader>An',
         function()
-          require('codecompanion').toggle()
+          require('codecompanion').chat()
         end,
-        desc = 'codecompanion: toggle',
+        desc = 'New session',
       },
     },
     opts = {

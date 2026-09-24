@@ -1,13 +1,7 @@
--- Highlight overrides carried over from my old colorscheme.lua.
---
--- NOTE: deliberately NOT reusing the SnacksPicker* groups for the noice cmdline.
--- The `recipes.picker-nvchad-theme` import owns those via astroui highlights, which
--- are applied after the colorscheme, so anything set here would just lose.
 ---@type LazySpec
 return {
   { import = 'astrocommunity.colorscheme.tokyonight-nvim' },
   {
-    -- the pack only registers the plugin lazily; AstroNvim still has to be told to use it
     'AstroNvim/astroui',
     ---@type AstroUIOpts
     opts = { colorscheme = 'tokyonight-night' },

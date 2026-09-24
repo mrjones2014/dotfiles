@@ -7,10 +7,9 @@
 return {
   'AstroNvim/astrolsp',
   dependencies = {
-    -- merges .vscode/settings.json into LSP settings; wired up via
-    -- `config['*'].before_init` below
     {
       'mrjones2014/codesettings.nvim',
+      lazy = true,
       dev = true,
       cmd = 'Codesettings',
       ft = { 'json', 'jsonc', 'lua' },
@@ -19,7 +18,8 @@ return {
   ---@type AstroLSPOpts
   opts = {
     features = {
-      inlay_hints = true, -- AstroNvim defaults this off
+      inlay_hints = true,
+      codelens = false,
     },
     servers = {
       'ast_grep',
@@ -39,9 +39,17 @@ return {
     mappings = {
       n = {
         -- AstroNvim puts signature help on gK and implementation on gI,
-        -- which I don't prefer
+        -- which I don't prefer. Hover moves off of K (Neovim's LSP default)
+        -- to gh so that K is free for mini.move (see plugins/mini-move.lua).
         gK = false,
         gh = {
+          function()
+            vim.lsp.buf.hover()
+          end,
+          desc = 'Show LSP hover menu',
+          cond = 'textDocument/hover',
+        },
+        gs = {
           function()
             vim.lsp.buf.signature_help()
           end,

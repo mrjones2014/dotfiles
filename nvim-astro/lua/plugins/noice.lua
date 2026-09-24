@@ -5,8 +5,6 @@ return {
     'folke/noice.nvim',
     opts = {
       presets = {
-        -- the pack turns this on; it routes search_up/search_down to the thin
-        -- `cmdline` view instead of the full-height `cmdline_popup` bar
         bottom_search = false,
         command_palette = false,
       },

@@ -4,11 +4,9 @@ require('lazy').setup({
     version = '^6',
     import = 'astronvim.plugins',
     opts = {
-      -- must be set here, before lazy.nvim is set up
       mapleader = ' ',
       maplocalleader = ';',
       icons_enabled = true,
-      pin_plugins = nil,
       update_notifications = true,
     },
   },

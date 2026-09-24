@@ -3,8 +3,6 @@ return {
   { import = 'astrocommunity.file-explorer.mini-files' },
   {
     'echasnovski/mini.files',
-    -- the pack declares it with no trigger, so lazy loads it eagerly. The
-    -- <Leader>e mapping below require()s it, which lazy's module hook picks up.
     lazy = true,
     opts = {
       mappings = {
@@ -23,8 +21,6 @@ return {
     opts = {
       mappings = {
         n = {
-          -- the pack's <Leader>e just calls `open()`, which lands on the cwd root.
-          -- Open on the current file instead so the tree is already focused there.
           ['<Leader>e'] = {
             function()
               local minifiles = require('mini.files')

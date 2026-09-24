@@ -20,20 +20,4 @@ return {
   -- other language-pack extras
   { 'olexsmir/gopher.nvim', enabled = false },
   { 'Civitasv/cmake-tools.nvim', enabled = false },
-
-  -- cmp-dap ships `after/plugin/cmp_dap.lua` containing a bare
-  -- `require('cmp').register_source(...)`. nvim-cmp isn't installed (AstroNvim v6
-  -- uses blink.cmp), so the moment anything packadds it — e.g. rustaceanvim asking
-  -- nvim-dap for debuggables — it throws `module 'cmp' not found`. AstroNvim does
-  -- route it through blink.compat, but that can't stop the after/plugin file from
-  -- running, so the plugin is simply unusable without nvim-cmp. astrocommunity's own
-  -- non-cmp completion packs (mini-completion, coq_nvim, coc-nvim) disable it the
-  -- same way.
-  --
-  -- Consequence: blink won't complete inside dap-repl / dapui_watches / dapui_hover
-  -- buffers, since AstroNvim gates that on `is_available "cmp-dap"` (blink.lua:82).
-  { 'rcarriga/cmp-dap', enabled = false },
-
-  -- only consumer was cmp-dap's blink bridge, which is now disabled too
-  { 'saghen/blink.compat', enabled = false },
 }

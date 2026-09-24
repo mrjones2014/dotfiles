@@ -1,9 +1,4 @@
--- AstroCommunity modules I take as-is.
---
--- Anything I *override* is colocated with its override in `lua/plugins/<name>.lua`
--- instead of being listed here. Note that `{ import = ..., specs = { ... } }` does
--- not work: lazy's importer only reads `name`/`cond`/`enabled`/`import` off an import
--- spec and silently drops everything else. Sibling entries in the same file do work.
+--- Community modules without any config overrides lumped together here
 
 ---@type LazySpec
 return {
@@ -12,6 +7,7 @@ return {
   -- language packs
   { import = 'astrocommunity.pack.bash' },
   { import = 'astrocommunity.pack.cpp' },
+  { import = 'astrocommunity.pack.fish' },
   { import = 'astrocommunity.pack.go' },
   { import = 'astrocommunity.pack.jj' },
   { import = 'astrocommunity.pack.json' },
@@ -27,11 +23,12 @@ return {
   -- default formatting setup depends on mason.nvim,
   -- use conform.nvim instead
   { import = 'astrocommunity.editing-support.conform-nvim' },
-  { import = 'astrocommunity.lsp.nvim-lint' },
+  { import = 'astrocommunity.editing-support.mini-splitjoin' },
 
-  -- tooling I already used
-  { import = 'astrocommunity.git.octo-nvim' },
-  { import = 'astrocommunity.search.grug-far-nvim' },
+  -- UI/UX
   { import = 'astrocommunity.diagnostics.trouble-nvim' },
+  { import = 'astrocommunity.git.octo-nvim' },
   { import = 'astrocommunity.motion.flash-nvim' },
+  { import = 'astrocommunity.neovim-lua-development.helpview-nvim' },
+  { import = 'astrocommunity.search.grug-far-nvim' },
 }

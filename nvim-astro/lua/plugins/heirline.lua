@@ -42,7 +42,7 @@ local function toggle_chip(icon, label, check_fn, toggle_fn, id)
     hl = { bg = 'surface0' },
     on_click = { callback = toggle_fn, name = 'heirline_toggle_' .. id },
     provider = function()
-      return string.format(' %s %s %s ', check_fn() and '' or '', icon, label)
+      return string.format(' %s %s %s ', check_fn() and ' ' or ' ', icon, label)
     end,
   }
 end
@@ -55,9 +55,6 @@ return {
     opts = {
       status = {
         winbar = {
-          -- NOTE: no `enabled` block. astroui checks `enabled` first and returns early
-          -- on a match, which would force the winbar on for every normal-buftype buffer
-          -- and make the `disabled` list below dead code (jjdescription, help, ...).
           disabled = {
             filetype = {
               'codecompanion', -- codecompanion draws its own winbar
@@ -95,13 +92,10 @@ return {
       opts.opts.colors = vim.tbl_deep_extend('force', opts.opts.colors or {}, {
         black = tn.bg_dark,
         gray = tn.dark5,
-        -- statusline text. The old config set no root fg, so it inherited `StatusLine`,
-        -- which tokyonight sets to fg_dark. Matching that exactly.
         text = tn.fg_dark,
         green = tn.green,
         blue = tn.blue,
         cyan = tn.cyan,
-        -- the old config referenced orange/purple without defining them
         orange = tn.orange,
         purple = tn.purple,
         yellow = tn.terminal.yellow_bright,
