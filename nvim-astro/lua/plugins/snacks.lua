@@ -5,6 +5,7 @@ return {
   {
     'folke/snacks.nvim',
     opts = {
+      dashboard = { preset = { keys = {} } },
       picker = {
         layout = { preset = 'telescope' },
         sources = {
@@ -38,7 +39,7 @@ return {
       end or original --[[@as function]]
       opts.highlights.init = require('astrocore').patch_func(init_fn, function(orig, colors_name)
         local hl = orig and orig(colors_name) or {}
-        local c = require('tokyonight.colors').setup({ style = 'night' })
+        local c = require('tokyonight.colors').setup()
         local prompt = '#2d3149'
         hl.SnacksPickerInput = { bg = prompt, fg = c.fg_dark }
         hl.SnacksPickerInputBorder = { bg = prompt, fg = prompt }

@@ -16,10 +16,16 @@ local function is_work_repo()
   return remote:find('agilebits-inc', 1, true) ~= nil
 end
 
+---@type LazySpec
 return {
   'saecki/crates.nvim',
-  -- at work we use `package.path = "..."` syntax in Cargo.toml
-  -- a lot, and this breaks the parser
-  enabled = not is_work_repo(),
   event = { 'BufRead Cargo.toml' },
+  config = function(_, opts)
+    -- at work we use `package.path = "..."` syntax in Cargo.toml
+    -- a lot, and this breaks the parser
+    if is_work_repo() then
+      return
+    end
+    require('crates').setup(opts)
+  end,
 }
