@@ -14,7 +14,7 @@
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {
-      adjust-cell-height = "6%";
+      adjust-cell-height = "2%";
       font-family = "Victor Mono Semibold";
       font-family-italic = "Victor Mono Medium Oblique";
       font-family-bold-italic = "Victor Mono Bold Oblique";
@@ -28,11 +28,15 @@
       cursor-style = "block";
       cursor-style-blink = false;
       macos-option-as-alt = true;
+      macos-titlebar-style = "tabs";
       shell-integration-features = "no-cursor";
       mouse-hide-while-typing = true;
       link-url = true;
       link-previews = true;
       window-decoration = "server";
+      window-padding-balance = true;
+      window-padding-x = 0;
+      window-padding-y = 0;
       maximize = isThinkpad || (isDarwin && !isWorkMac);
       keybind = [
         # Window
