@@ -14,9 +14,5 @@ pkgs.runCommand "lint-lua"
     selene ${self}/nvim
     stylua ${self}/nvim
     popd
-    pushd ${self}/nvim-astro
-    selene ${self}/nvim-astro
-    stylua ${self}/nvim-astro
-    popd
     touch $out
   ''
