@@ -1,8 +1,0 @@
-{
-  "plugins": {
-    "lazy.nvim": {
-      "rev": "306a05526ada86a7b30af95c5cc81ffba93fef97",
-      "src": "https://github.com/folke/lazy.nvim.git"
-    }
-  }
-}
