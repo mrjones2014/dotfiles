@@ -89,11 +89,7 @@ in
         {
           lsp = true;
           default_agent = "plan";
-          enabled_providers = [
-            "ollama"
-            "opencode-go"
-          ];
-          model = "opencode-go/qwen3.7-plus";
+          model = "opencode/big-pickle";
           provider.ollama = {
             name = "Ollama";
             npm = "@ai-sdk/openai-compatible";
