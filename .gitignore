@@ -1,8 +1,6 @@
 .DS_Store
 .netrwhist
 result
-# I know I'm supposed to commit this file but I don't really care about it, I've never used it
-nvim/lazy-lock.json
 book/
 # mdbook theme, only used at build time in CI
 docs/theme/
