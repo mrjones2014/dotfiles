@@ -5,6 +5,7 @@
 }:
 let
   zwave_ui_port = 8998;
+  has_port = 8123;
   ha-mcp = rec {
     version = "7.14.2";
     src = pkgs.fetchFromGitHub {
@@ -128,6 +129,7 @@ in
       ];
       config = {
         default_config = { };
+        http.server_port = has_port;
         recorder.db_url = "postgresql://@/hass";
         homeassistant = {
           unit_system = "us_customary";
