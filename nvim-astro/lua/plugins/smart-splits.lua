@@ -1,3 +1,29 @@
+local dirs = {
+  h = 'left',
+  j = 'down',
+  k = 'up',
+  l = 'right',
+}
+
+local function mappings()
+  local keymaps = {}
+  for key, dir in pairs(dirs) do
+    keymaps[('<A-%s>'):format(key)] = {
+      function()
+        require('smart-splits')[('resize_%s'):format(dir)]()
+      end,
+      desc = ('Resize split %s'):format(dir),
+    }
+    keymaps[('<leader><leader>%s'):format(key)] = {
+      function()
+        require('smart-splits')[('swap_buf_%s'):format(dir)]()
+      end,
+      desc = ('Resize split %s'):format(dir),
+    }
+  end
+  return keymaps
+end
+
 ---@type LazySpec
 return {
   {
@@ -20,57 +46,7 @@ return {
         opts = {
           -- the rest of the mappings are predefined in the AstroNvim defaults
           mappings = {
-            n = {
-              -- alt-hjkl resize, alongside AstroNvim's <C-arrow> bindings
-              ['<A-h>'] = {
-                function()
-                  require('smart-splits').resize_left()
-                end,
-                desc = 'Resize split left',
-              },
-              ['<A-j>'] = {
-                function()
-                  require('smart-splits').resize_down()
-                end,
-                desc = 'Resize split down',
-              },
-              ['<A-k>'] = {
-                function()
-                  require('smart-splits').resize_up()
-                end,
-                desc = 'Resize split up',
-              },
-              ['<A-l>'] = {
-                function()
-                  require('smart-splits').resize_right()
-                end,
-                desc = 'Resize split right',
-              },
-              ['<Leader><Leader>h'] = {
-                function()
-                  require('smart-splits').swap_buf_left()
-                end,
-                desc = 'Swap buffer left',
-              },
-              ['<Leader><Leader>j'] = {
-                function()
-                  require('smart-splits').swap_buf_down()
-                end,
-                desc = 'Swap buffer down',
-              },
-              ['<Leader><Leader>k'] = {
-                function()
-                  require('smart-splits').swap_buf_up()
-                end,
-                desc = 'Swap buffer up',
-              },
-              ['<Leader><Leader>l'] = {
-                function()
-                  require('smart-splits').swap_buf_right()
-                end,
-                desc = 'Swap buffer right',
-              },
-            },
+            n = mappings(),
           },
         },
       },
