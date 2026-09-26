@@ -12,7 +12,6 @@
   environment = {
     # don't install GNOME crap like Contacts, Photos, etc.
     gnome.excludePackages = with pkgs; [
-      gnome-photos
       gnome-tour
       cheese # webcam tool
       epiphany # web browser
