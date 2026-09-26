@@ -3,7 +3,6 @@
   lib,
   isDarwin,
   isLinux,
-  isThinkpad,
   isWorkMac,
   inputs,
   ...
@@ -48,9 +47,7 @@ in
           withVencord = true;
         })
       ]
-      ++ lib.lists.optionals isThinkpad [ ]
-      ++ lib.lists.optionals (isLinux && (!isThinkpad)) [
-        # desktop only packages
+      ++ lib.lists.optionals isLinux [
         obs-studio
         r2modman
         # sgdboop

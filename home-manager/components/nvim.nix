@@ -14,20 +14,6 @@
   xdg.configFile = {
     nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim";
     nvim-astro.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/nvim-astro";
-    ripgrep_ignore.text = ''
-      .git/
-      yarn.lock
-      package-lock.json
-      packer_compiled.lua
-      .DS_Store
-      .netrwhist
-      dist/
-      node_modules/
-      **/node_modules/
-      wget-log
-      wget-log.*
-      /vendor
-    '';
     "tombi.toml".text = /* toml */ ''
       [[schemas]]
       path = "https://jj-vcs.github.io/jj/latest/config-schema.json"

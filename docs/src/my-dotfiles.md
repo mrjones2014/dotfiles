@@ -14,7 +14,6 @@ jj git init --colocate # if you use Jujutsu
 | ------------ | ----- | -------------------- |
 | `mikoshi`    | NixOS | Homelab server       |
 | `edgerunner` | NixOS | Desktop PC           |
-| `kabuki`     | NixOS | Thinkpad laptop      |
 | `corpo`      | macOS | Work MacBook Pro     |
 | `aldecaldo`  | macOS | Personal MacBook Air |
 

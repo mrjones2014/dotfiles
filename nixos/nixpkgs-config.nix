@@ -48,6 +48,7 @@
           "1password"
           "7zz"
           "discord"
+          "discord-unwrapped"
           "parsec-bin"
           "spotify"
           "steam"

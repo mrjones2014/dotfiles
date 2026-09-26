@@ -1,6 +1,5 @@
 {
   pkgs,
-  isThinkpad,
   isDarwin,
   isWorkMac,
   ...
@@ -37,7 +36,7 @@
       window-padding-balance = true;
       window-padding-x = 0;
       window-padding-y = 0;
-      maximize = isThinkpad || (isDarwin && !isWorkMac);
+      maximize = isDarwin && !isWorkMac;
       keybind = [
         # Window
         "super+q=quit"

@@ -12,7 +12,6 @@ rec {
       inherit inputs;
       isServer = false;
       isDarwin = false;
-      isThinkpad = false;
       isLinux = false;
       isWorkMac = false;
     }
@@ -22,12 +21,11 @@ rec {
     {
       name,
       isServer ? false,
-      isThinkpad ? false,
       homePath ? ../home-manager/home.nix,
     }:
     let
       specialArgs = mkSpecialArgs {
-        inherit isServer isThinkpad;
+        inherit isServer;
         isLinux = true;
       };
     in

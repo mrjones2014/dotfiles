@@ -2,7 +2,6 @@
   inputs,
   lib,
   pkgs,
-  isThinkpad,
   isLinux,
   ...
 }:
@@ -45,7 +44,7 @@
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         name = "Vicinae";
-        binding = if isThinkpad then "<Alt>space" else "<Super>space";
+        binding = "<Super>space";
         command = "xdg-open vicinae://toggle";
       };
     };

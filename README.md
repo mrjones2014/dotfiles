@@ -11,7 +11,6 @@ These Nix configs currently manage:
 
 - My homelab server (`.#mikoshi`)
 - My desktop PC (`.#edgerunner`)
-- My Thinkpad laptop (`.#kabuki`)
 
 **`nix-darwin` + `home-manager`:**
 

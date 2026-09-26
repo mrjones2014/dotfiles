@@ -86,10 +86,6 @@
         edgerunner = mkHost {
           name = "edgerunner";
         };
-        kabuki = mkHost {
-          name = "kabuki";
-          isThinkpad = true;
-        };
       };
       darwinConfigurations = {
         corpo = mkDarwinHost {

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  isThinkpad,
   ...
 }:
 let
@@ -52,8 +51,7 @@ in
         "1password.desktop"
         "signal.desktop"
         "discord.desktop"
-      ]
-      ++ lib.lists.optionals (!isThinkpad) [ "steam.desktop" ];
+      ];
       inherit enabled-extensions;
     };
     "org/gnome/desktop/interface" = {
@@ -129,12 +127,6 @@ in
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      name = "Vicinae";
-      binding = if isThinkpad then "<Alt>space" else "<Super>space";
-      command = "xdg-open vicinae://toggle";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       name = "1Password Quick Access";
