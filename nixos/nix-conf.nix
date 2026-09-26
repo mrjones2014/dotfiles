@@ -25,7 +25,7 @@ in
     settings =
       { }
       // lib.optionalAttrs (!isHomeManager) {
-        experimental-features = "nix-command flakes";
+        experimental-features = [ "nix-command flakes" ];
         keep-derivations = true;
         keep-outputs = true;
         substituters = [
