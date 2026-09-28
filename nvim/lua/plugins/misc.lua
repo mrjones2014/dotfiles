@@ -22,7 +22,4 @@ return {
     },
     opts = { sidebar = { side = 'left' } },
   },
-
-  -- jj commit-message completion
-  { 'yus-works/csc.nvim', ft = 'jjdescription', opts = {} },
 }

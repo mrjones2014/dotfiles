@@ -1,6 +1,18 @@
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
+  specs = {
+    {
+      'yus-works/csc.nvim',
+      ft = 'jjdescription',
+      opts = {},
+      config = function(_, opts)
+        require('csc').setup(opts)
+        -- upstream only registers the source for `gitcommit`
+        require('blink.cmp').add_filetype_source('jjdescription', 'csc')
+      end,
+    },
+  },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
