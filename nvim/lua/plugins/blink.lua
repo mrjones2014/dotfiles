@@ -29,10 +29,12 @@ return {
     },
     {
       'Kaiser-Yang/blink-cmp-git',
-      cond = vim.env.JJ_GH == '1',
       ft = 'markdown',
       opts = {},
       config = function()
+        if vim.env.JJ_GH ~= '1' then
+          return
+        end
         require('blink.cmp').add_source_provider('github', {
           module = 'blink-cmp-git',
           name = 'Git',
@@ -66,7 +68,10 @@ return {
     },
     signature = { window = { border = 'none' } },
     cmdline = {
-      completion = { menu = { auto_show = true } },
+      completion = {
+        menu = { auto_show = true },
+        list = { selection = { preselect = false } },
+      },
     },
   },
 }

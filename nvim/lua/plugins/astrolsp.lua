@@ -1,8 +1,3 @@
--- The language packs in lua/community.lua normally rely on mason-lspconfig to both
--- install *and* enable servers. Mason is disabled (see lua/plugins/mason.lua), so the
--- servers the packs don't register themselves are listed here. All of them come from
--- `programs.neovim.extraPackages` in home-manager/components/nvim.nix.
-
 ---@type LazySpec
 return {
   'AstroNvim/astrolsp',
@@ -21,6 +16,7 @@ return {
       inlay_hints = true,
       codelens = false,
     },
+    -- list servers manually since I don't use mason/mason-lspconfig
     servers = {
       'ast_grep',
       'bashls',

@@ -40,6 +40,7 @@ return {
   'AstroNvim/astrocore',
   ---@type AstroCoreOpts
   opts = {
+    on_keys = { auto_hlsearch = false },
     options = {
       opt = {
         showtabline = 0,
@@ -48,6 +49,7 @@ return {
     },
     mappings = {
       n = {
+        ['<Esc>'] = { vim.cmd.noh, desc = 'Clear search highlights' },
         ['<Tab>'] = { vim.cmd.bnext, desc = 'Move to next buffer' },
         ['<S-Tab>'] = { vim.cmd.bprevious, desc = 'Move to previous buffer' },
         -- AstroNvim maps these to `:split` / `:vsplit`; I don't want them
