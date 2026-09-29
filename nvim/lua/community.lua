@@ -29,6 +29,7 @@ return {
   { import = 'astrocommunity.diagnostics.trouble-nvim' },
   { import = 'astrocommunity.git.octo-nvim' },
   { import = 'astrocommunity.motion.flash-nvim' },
+  { import = 'astrocommunity.motion.nvim-spider' },
   { import = 'astrocommunity.neovim-lua-development.helpview-nvim' },
   { import = 'astrocommunity.search.grug-far-nvim' },
 }
