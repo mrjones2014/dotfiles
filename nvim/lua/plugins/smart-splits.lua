@@ -28,12 +28,12 @@ end
 return {
   {
     'mrjones2014/smart-splits.nvim',
-    dependencies = { 'smart-splits-nvim/backend-ghostty', main = 'smart-splits-backend-ghostty' },
+    dependencies = { 'smart-splits-nvim/backend-tmux', main = 'smart-splits-backend-ghostty', dev = true },
     dev = true,
     lazy = false,
     branch = 'v3',
     opts = {
-      mux = { backend = 'smart-splits-backend-ghostty' },
+      mux = { backend = 'smart-splits-backend-tmux' },
       move = { at_edge = 'split' },
       ignored_buftypes = { 'nofile' },
       swap = { move_cursor = true },

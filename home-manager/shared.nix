@@ -22,6 +22,7 @@
     ./components/nvim.nix
     ./components/ssh.nix
     ./components/tide.nix
+    ./components/tmux.nix
     ./components/vcs
     ./components/fzf.nix
   ];

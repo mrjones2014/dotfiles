@@ -13,7 +13,7 @@
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {
-      adjust-cell-height = "2%";
+      adjust-cell-height = "4%";
       font-family = "Victor Mono Semibold";
       font-family-italic = "Victor Mono Medium Oblique";
       font-family-bold-italic = "Victor Mono Bold Oblique";
@@ -27,7 +27,6 @@
       cursor-style = "block";
       cursor-style-blink = false;
       macos-option-as-alt = true;
-      macos-titlebar-style = "tabs";
       shell-integration-features = "no-cursor";
       mouse-hide-while-typing = true;
       link-url = true;
@@ -37,53 +36,13 @@
       window-padding-x = 0;
       window-padding-y = 0;
       maximize = isDarwin && !isWorkMac;
+      # tmux owns tabs and splits; this is a single window that runs it. Notably
+      # absent is `super+n=new_window`: a second Ghostty window would attach a
+      # mirrored client to the same tmux session, clamped to the smaller size.
       keybind = [
-        # Window
         "super+q=quit"
         "super+v=paste_from_clipboard"
         "super+c=copy_to_clipboard"
-        "super+n=new_window"
-
-        # New splits
-        "super+h=new_split:left"
-        "super+l=new_split:right"
-        "super+j=new_split:down"
-        "super+k=new_split:up"
-
-        # Tabs
-        "alt+n=new_tab"
-        "alt+left=previous_tab"
-        "alt+right=next_tab"
-
-        "super+p=toggle_command_palette"
-
-        # see https://github.com/smart-splits-nvim/backend-ghostty#ghostty-configuration
-        # Outside Neovim.
-        # Move
-        "performable:ctrl+h=goto_split:left"
-        "performable:ctrl+j=goto_split:down"
-        "performable:ctrl+k=goto_split:up"
-        "performable:ctrl+l=goto_split:right"
-
-        # Resize
-        "performable:alt+h=resize_split:left,30"
-        "performable:alt+j=resize_split:down,30"
-        "performable:alt+k=resize_split:up,30"
-        "performable:alt+l=resize_split:right,30"
-
-        # Inside Neovim.
-        "nvim/"
-        # Move
-        "nvim/ctrl+h=text:\\x08"
-        "nvim/ctrl+j=text:\\x0a"
-        "nvim/ctrl+k=text:\\x0b"
-        "nvim/ctrl+l=text:\\x0c"
-
-        # Resize
-        "nvim/alt+h=esc:h"
-        "nvim/alt+j=esc:j"
-        "nvim/alt+k=esc:k"
-        "nvim/alt+l=esc:l"
       ];
     };
   };
