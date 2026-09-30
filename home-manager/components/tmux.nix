@@ -81,7 +81,7 @@ in
       extraConfig = /* bash */ ''
         set -as terminal-features ',*:RGB'
         set -as terminal-features ',*:hyperlinks'
-        set -ga terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+        set -as terminal-features ',*:usstyle'
         set -g set-clipboard on
         set -g renumber-windows on
 
