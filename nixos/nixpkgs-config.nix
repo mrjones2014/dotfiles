@@ -10,7 +10,7 @@
       (_: _: (import ../pkgs { inherit pkgs; }))
       (
         _: prev:
-        lib.optionalAttrs prev.stdenv.isDarwin {
+        lib.optionalAttrs prev.stdenv.hostPlatform.isDarwin {
           nixos-render-docs = prev.writeShellScriptBin "nixos-render-docs" ''
             args=()
             while [ "$#" -gt 0 ]; do

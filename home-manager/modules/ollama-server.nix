@@ -7,7 +7,7 @@
 let
   cfg = config.services.ollama-server;
   ollamaHost = "${cfg.host}:${toString cfg.port}";
-  ollama = if pkgs.stdenv.isDarwin then "${ollamaApp}" else "${pkgs.ollama}/bin/ollama";
+  ollama = if pkgs.stdenv.hostPlatform.isDarwin then "${ollamaApp}" else "${pkgs.ollama}/bin/ollama";
   ollamaApp = pkgs.writeShellScript "ollama-app" ''
     if [ -x /Applications/Ollama.app/Contents/Resources/ollama ]; then
       exec /Applications/Ollama.app/Contents/Resources/ollama "$@"
@@ -90,7 +90,7 @@ in
 
         home = {
           # install the homebrew cask on darwin, nixpkgs version is missing a dependency
-          packages = lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.ollama ];
+          packages = lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [ pkgs.ollama ];
           sessionVariables = {
             OLLAMA_HOST = ollamaHost;
             OLLAMA_SERVER_ADDRESS = "http://${ollamaHost}";
@@ -99,7 +99,7 @@ in
         };
       }
 
-      (lib.mkIf pkgs.stdenv.isLinux {
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         systemd.user.services = {
           ollama-server = {
             Unit = {
@@ -130,7 +130,7 @@ in
         };
       })
 
-      (lib.mkIf pkgs.stdenv.isDarwin {
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         launchd.agents = {
           ollama-server = {
             enable = true;
