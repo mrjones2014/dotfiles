@@ -18,6 +18,10 @@ local function is_tempfile(bufnr)
     or vim.startswith(name, '/private/var/folders/')
 end
 
+local function is_real_file(bufnr)
+  return vim.bo[bufnr].buftype == '' and vim.api.nvim_buf_get_name(bufnr) ~= ''
+end
+
 local function copy_to_clipboard(str)
   vim.fn.setreg('+', str)
   vim.notify(('Copied %s'):format(str))
@@ -161,9 +165,9 @@ return {
 
       local FileInfo = {
         init = function(self)
-          local is_file = vim.uv.fs_stat(vim.api.nvim_buf_get_name(0)) ~= nil
-          if is_file then
-            active_buffer_id = vim.api.nvim_get_current_buf()
+          local current = vim.api.nvim_get_current_buf()
+          if is_real_file(current) then
+            active_buffer_id = current
           elseif
             not (
               active_buffer_id ~= nil
@@ -174,48 +178,53 @@ return {
           then
             active_buffer_id = nil
           end
-          self.bufnr = active_buffer_id or vim.api.nvim_get_current_buf()
-          self.bufname = vim.api.nvim_buf_get_name(self.bufnr)
-          self.temporary = is_tempfile(self.bufnr)
+          self.bufnr = active_buffer_id
+          self.bufname = self.bufnr and vim.api.nvim_buf_get_name(self.bufnr) or ''
+          self.temporary = self.bufnr ~= nil and is_tempfile(self.bufnr)
         end,
         {
-          hl = { bg = 'surface0' },
+          condition = function(self)
+            return self.bufnr ~= nil
+          end,
           {
-            condition = function(self)
-              return self.temporary
-            end,
-            provider = ' 󰪺',
-          },
-        },
-        status.component.file_info({
-          filetype = false,
-          filename = false,
-          file_modified = false,
-          file_read_only = false,
-          -- right = 0: the separate ' ' provider below supplies the gap, otherwise
-          -- the icon and the path end up two spaces apart
-          file_icon = { padding = { left = 1, right = 0 } },
-          surround = false,
-          hl = { bg = 'surface0' },
-        }),
-        {
-          hl = { bg = 'surface0' },
-          provider = ' ',
-          {
-            provider = function(self)
-              if vim.env.JJ_GH == '1' then
-                return 'Pull Request'
-              end
-              if vim.bo.ft == 'jjdescription' then
-                return 'JJ Commit'
-              end
-              return relpath(self.temporary and vim.fn.fnamemodify(self.bufname, ':t') or self.bufname)
-            end,
-            on_click = {
-              callback = function(self)
-                copy_to_clipboard(relpath(self.bufname))
+            hl = { bg = 'surface0' },
+            {
+              condition = function(self)
+                return self.temporary
               end,
-              name = 'heirline_copy_filepath_statusline',
+              provider = ' 󰪺',
+            },
+          },
+          status.component.file_info({
+            filetype = false,
+            filename = false,
+            file_modified = false,
+            file_read_only = false,
+            -- right = 0: the separate ' ' provider below supplies the gap, otherwise
+            -- the icon and the path end up two spaces apart
+            file_icon = { padding = { left = 1, right = 0 } },
+            surround = false,
+            hl = { bg = 'surface0' },
+          }),
+          {
+            hl = { bg = 'surface0' },
+            provider = ' ',
+            {
+              provider = function(self)
+                if vim.env.JJ_GH == '1' then
+                  return 'Pull Request'
+                end
+                if vim.bo[self.bufnr].ft == 'jjdescription' then
+                  return 'JJ Commit'
+                end
+                return relpath(self.temporary and vim.fn.fnamemodify(self.bufname, ':t') or self.bufname)
+              end,
+              on_click = {
+                callback = function(self)
+                  copy_to_clipboard(relpath(self.bufname))
+                end,
+                name = 'heirline_copy_filepath_statusline',
+              },
             },
           },
         },
