@@ -5,5 +5,7 @@ return {
     -- I run two LSPs for Nix; nixd handles these features
     client.server_capabilities.documentSymbolProvider = false
     client.server_capabilities.renameProvider = false
+    client.server_capabilities.definitionProvider = false
+    client.server_capabilities.referencesProvider = false
   end,
 }
