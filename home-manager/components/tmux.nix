@@ -84,6 +84,7 @@ in
         set -as terminal-features ',*:usstyle'
         set -g set-clipboard on
         set -g renumber-windows on
+        set -g display-time 4000
 
         # `#{b:pane_current_path}` renders $HOME as the username, but `M-n`
         # opens new windows there, so special-case it back to `~`.
@@ -128,6 +129,7 @@ in
         bind l swap-window -d -t +1
 
         bind e copy-mode
+        bind R source-file ${config.xdg.configHome}/tmux/tmux.conf \; display "tmux config reloaded"
 
         bind -n M-n     new-window -c "${config.home.homeDirectory}"
         bind -n M-Left  previous-window
