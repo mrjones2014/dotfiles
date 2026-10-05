@@ -46,7 +46,7 @@ return {
                   ['rust-analyzer'] = {
                     cargo = { targetDir = true },
                     check = { allTargets = true, command = 'clippy' },
-                    diagnostics = { disabled = { 'inactive-code', 'unresolved-proc-macro' } },
+                    diagnostics = { disabled = { 'inactive_code', 'unresolved_proc_macro' } },
                     procMacro = { enable = true },
                     imports = { group = { enable = false } },
                     files = {
