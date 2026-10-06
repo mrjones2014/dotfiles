@@ -33,7 +33,10 @@ in
       };
     };
     settings = {
-      templates.git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
+      templates = {
+        git_push_bookmark = ''"mrj/push-" ++ change_id.short()'';
+        draft_commit_description = "builtin_draft_commit_description_with_diff";
+      };
       git.private-commits = config.programs.jujutsu.settings.revset-aliases."private()";
       revsets.bookmark-advance-to = "@-";
       revset-aliases = {
