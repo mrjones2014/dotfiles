@@ -39,26 +39,20 @@ return {
         -- to gh so that K is free for mini.move (see plugins/mini-move.lua).
         gK = false,
         gh = {
-          function()
-            vim.lsp.buf.hover()
-          end,
+          vim.lsp.buf.hover,
           desc = 'Show LSP hover menu',
-          cond = 'textDocument/hover',
+          cond = vim.lsp.protocol.Methods.textDocument_hover,
         },
         gs = {
-          function()
-            vim.lsp.buf.signature_help()
-          end,
+          vim.lsp.buf.signature_help,
           desc = 'Signature help',
-          cond = 'textDocument/signatureHelp',
+          cond = vim.lsp.protocol.Methods.textDocument_signatureHelp,
         },
         gI = false,
         gi = {
-          function()
-            vim.lsp.buf.implementation()
-          end,
+          vim.lsp.buf.implementation,
           desc = 'Implementation of current symbol',
-          cond = 'textDocument/implementation',
+          cond = vim.lsp.protocol.Methods.textDocument_implementation,
         },
       },
     },

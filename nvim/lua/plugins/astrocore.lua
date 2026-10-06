@@ -45,6 +45,7 @@ return {
       opt = {
         showtabline = 0,
         relativenumber = false,
+        whichwrap = 'b,s,h,l',
       },
     },
     mappings = {
