@@ -82,6 +82,9 @@ in
         set -as terminal-features ',*:RGB'
         set -as terminal-features ',*:hyperlinks'
         set -as terminal-features ',*:usstyle'
+        set -as terminal-features ',*:extkeys'
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
         set -g set-clipboard on
         set -g renumber-windows on
         set -g display-time 4000
