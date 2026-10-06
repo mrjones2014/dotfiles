@@ -133,7 +133,7 @@ return {
                 'Failed to retrieve personal Claude token'
               )
             _claude_code = require('codecompanion.adapters').extend('claude_code', {
-              defaults = { mode = 'plan', model = is_work_computer() and 'opus[1m]' or 'opus' },
+              defaults = { mode = 'plan', model = is_work_computer() and 'claude-fable-5[1m]' or 'opus' },
               env = {
                 CLAUDE_CODE_OAUTH_TOKEN = token,
               },
