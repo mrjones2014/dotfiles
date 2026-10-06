@@ -9,11 +9,15 @@
 }:
 {
   home.sessionVariables = {
-    DOTNET_CLI_TELEMETRY_OPTOUT = "1";
-    HOMEBREW_NO_ANALYTICS = "1";
     CARGO_NET_GIT_FETCH_WITH_CLI = "true";
     GIT_MERGE_AUTOEDIT = "no";
+
+    DOTNET_CLI_TELEMETRY_OPTOUT = "1";
+    DO_NOT_TRACK = "1";
+    GH_TELEMETRY = "false";
+    HOMEBREW_NO_ANALYTICS = "1";
     NEXT_TELEMETRY_DISABLED = "1";
+    NO_TELEMETRY = "1";
   };
   programs = {
     btop.enable = true;

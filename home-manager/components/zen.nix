@@ -28,6 +28,9 @@
         "browser.search.searchEnginesURL" = "";
         "browser.urlbar.placeholderName" = "Kagi";
         "browser.urlbar.placeholderName.private" = "Kagi";
+        "datareporting.healthreport.uploadEnabled" = false;
+        "datareporting.policy.dataSubmissionEnabled" = false;
+        "toolkit.telemetry.enabled" = false;
         # honestly this feature is so so dumb, I am not sure
         # who would ever want this behavior...
         # https://github.com/zen-browser/desktop/discussions/12025
