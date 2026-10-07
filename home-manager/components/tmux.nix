@@ -1,7 +1,6 @@
 {
   osConfig,
   config,
-  pkgs,
   lib,
   isServer,
   ...
@@ -11,22 +10,12 @@ let
   tmux = lib.getExe config.programs.tmux.package;
 
   icons = {
-    normal = "";
-    prefix = "";
-    copy = "";
-    zoom = "";
-    server = "";
+    normal = " ";
+    prefix = " ";
+    copy = " ";
+    zoom = " ";
+    server = " ";
   };
-
-  statusToggle = pkgs.writeShellScript "tmux-toggle-status" ''
-    ${tmux} list-sessions -F '#{session_windows} #{session_name}' | while read -r count name; do
-      if [ "$count" -gt 1 ]; then
-        ${tmux} set-option -t "$name" status on
-      else
-        ${tmux} set-option -t "$name" status off
-      fi
-    done
-  '';
 
   directions = {
     h = {
@@ -95,7 +84,6 @@ in
         set -g allow-rename off
         set -g automatic-rename-format '#{?#{==:#{pane_current_path},${config.home.homeDirectory}},~,#{b:pane_current_path}}'
 
-        set -g status off
         set -g status-position bottom
         set -g status-justify left
         set -g status-style "bg=${bg},fg=${fg}"
@@ -108,13 +96,6 @@ in
         set -g mode-style    "bg=${blue0},fg=${fg}"
 
         set -g status-right "#{?pane_in_mode,#[bg=${orange}#,fg=${bg}] ${icons.copy} ,#{?client_prefix,#[bg=${purple}#,fg=${bg}] ${icons.prefix} ,#[bg=${green}#,fg=${bg}] ${icons.normal} }}${lib.optionalString isServer "#[bg=${green},fg=${bg}] ${icons.server} mat@${osConfig.networking.hostName}.local "}#[bg=${bg}]"
-
-        # Only show the bar once there is more than one window to show.
-        set-hook -g session-created[0]        'run-shell -b ${statusToggle}'
-        set-hook -g window-linked[0]          'run-shell -b ${statusToggle}'
-        set-hook -g window-unlinked[0]        'run-shell -b ${statusToggle}'
-        set-hook -g client-attached[0]        'run-shell -b ${statusToggle}'
-        set-hook -g client-session-changed[0] 'run-shell -b ${statusToggle}'
 
         set -g pane-border-lines single
         set -g pane-border-status off
