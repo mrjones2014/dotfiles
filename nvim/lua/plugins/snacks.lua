@@ -9,6 +9,10 @@ return {
       picker = {
         layout = { preset = 'telescope' },
         sources = {
+          grep = {
+            hidden = true,
+            exclude = { '.git', '.jj', '.direnv' },
+          },
           -- only offer recent files under the current project
           recent = {
             filter = {
