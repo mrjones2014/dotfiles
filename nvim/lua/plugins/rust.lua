@@ -52,7 +52,7 @@ return {
                     procMacro = { enable = true },
                     imports = { group = { enable = false } },
                     files = {
-                      excludeDirs = { 'target', 'node_modules', '.direnv', '.git' },
+                      excludeDirs = { 'target', 'node_modules', '.direnv', '.git', '.jj' },
                     },
                   },
                 },
