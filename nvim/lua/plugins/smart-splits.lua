@@ -31,7 +31,6 @@ return {
     dependencies = { 'smart-splits-nvim/backend-tmux', main = 'smart-splits-backend-ghostty', dev = true },
     dev = true,
     lazy = false,
-    branch = 'v3',
     opts = {
       mux = { backend = 'smart-splits-backend-tmux' },
       move = { at_edge = 'split' },
