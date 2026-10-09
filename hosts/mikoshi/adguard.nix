@@ -63,6 +63,8 @@ in
         "||telemetry.affine.run^"
         "||data.1passwordservices.com^"
         "||telemetry.1passwordservices.com^"
+        "||core-sentry.1passwordservices.com^"
+        "||b5x-sentry.1passwordservices.com^"
       ];
     };
   };
