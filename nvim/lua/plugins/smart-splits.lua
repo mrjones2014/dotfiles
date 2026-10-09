@@ -33,7 +33,7 @@ return {
     lazy = false,
     opts = {
       mux = { backend = 'smart-splits-backend-tmux' },
-      move = { at_edge = 'split' },
+      move = { at_edge = 'wrap' },
       ignored_buftypes = { 'nofile' },
       swap = { move_cursor = true },
       diagnostic = { enabled = true },

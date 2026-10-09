@@ -18,40 +18,23 @@ let
   };
 
   directions = {
-    h = {
-      letter = "L";
-      atEdge = "pane_at_left";
-      split = "split-window -hb";
-    };
-    j = {
-      letter = "D";
-      atEdge = "pane_at_bottom";
-      split = "split-window -v";
-    };
-    k = {
-      letter = "U";
-      atEdge = "pane_at_top";
-      split = "split-window -vb";
-    };
-    l = {
-      letter = "R";
-      atEdge = "pane_at_right";
-      split = "split-window -h";
-    };
+    h = "L";
+    j = "D";
+    k = "U";
+    l = "R";
   };
 
   ifVim =
     key: fallback: "bind -n ${key} if -F '#{@pane-is-vim}' { send-keys ${key} } { ${fallback} }";
 
-  moveBinds = lib.mapAttrsToList (
-    key: d:
-    ifVim "C-${key}" ''if -F '#{${d.atEdge}}' { ${d.split} -c "#{pane_current_path}" } { select-pane -${d.letter} }''
+  moveBinds = lib.mapAttrsToList (key: letter: ifVim "C-${key}" "select-pane -${letter}") directions;
+
+  resizeBinds = lib.mapAttrsToList (
+    key: letter: ifVim "M-${key}" "resize-pane -${letter} 3"
   ) directions;
 
-  resizeBinds = lib.mapAttrsToList (key: d: ifVim "M-${key}" "resize-pane -${d.letter} 3") directions;
-
   copyModeNavBinds = lib.mapAttrsToList (
-    key: d: "bind -T copy-mode-vi C-${key} select-pane -${d.letter}"
+    key: letter: "bind -T copy-mode-vi C-${key} select-pane -${letter}"
   ) directions;
 in
 {
