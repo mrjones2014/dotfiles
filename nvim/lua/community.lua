@@ -23,6 +23,7 @@ return {
   -- default formatting setup depends on mason.nvim,
   -- use conform.nvim instead
   { import = 'astrocommunity.editing-support.conform-nvim' },
+  { import = 'astrocommunity.editing-support.dial-nvim' },
   { import = 'astrocommunity.editing-support.mini-splitjoin' },
 
   -- UI/UX
