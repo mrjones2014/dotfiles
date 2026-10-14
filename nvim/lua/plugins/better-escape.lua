@@ -5,8 +5,15 @@ return {
     timeout = 300,
     default_mappings = false,
     mappings = {
-      -- do not map `jj` because I type that to use jujutsu
-      i = { j = { k = '<Esc>', j = false } },
+      i = {
+        j = {
+          k = '<Esc>',
+          -- do not map `jj` because I type that to use jujutsu
+          j = false,
+        },
+        -- map `kj` as well as `jk`
+        k = { j = '<Esc>' },
+      },
     },
   },
 }
