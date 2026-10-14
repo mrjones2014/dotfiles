@@ -56,16 +56,18 @@ return {
         },
       },
     },
-    config = {
-      ['*'] = {
-        before_init = function(_, config)
-          -- merge .vscode/settings.json into LSP settings
-          local ok, codesettings = pcall(require, 'codesettings')
-          if ok then
-            config = codesettings.with_local_settings(config.name, config)
-          end
-        end,
-      },
+    handlers = {
+      ['*'] = function(server)
+        vim.lsp.config(server, {
+          before_init = require('astrocore').patch_func(
+            vim.lsp.config[server].before_init,
+            function(orig, params, config)
+              require('codesettings').with_local_settings(config.name, config)
+              return orig(params, config)
+            end
+          ),
+        })
+      end,
     },
   },
 }
