@@ -35,8 +35,6 @@ in
     set -g @catppuccin_window_current_text " #W"
     # Ghostty widens Nerd Font icons into the trailing space; pad an extra
     # cell so the right side matches the rounded cap on the left
-    set -g @catppuccin_cpu_icon "  "
-    set -g @catppuccin_ram_icon "  "
     set -g @catppuccin_host_icon "󰒋  "
     # repurpose the session module as a mode indicator
     set -g @catppuccin_session_icon "#{?client_prefix,,#{?pane_in_mode,,}}  "
@@ -80,8 +78,6 @@ in
         set -g status-right-length 100
         set -g status-right ""
         set -ag status-right "#{E:@catppuccin_status_session}"
-        set -agF status-right "#{E:@catppuccin_status_cpu}"
-        set -agF status-right "#{E:@catppuccin_status_ram}"
         ${lib.optionalString isServer ''set -ag status-right "#{E:@catppuccin_status_host}"''}
 
         set -g pane-border-lines single
