@@ -28,6 +28,7 @@ return {
       'lua_ls',
       'marksman',
       'nil_ls',
+      'nixd',
       'tombi',
       'ts_ls',
       'yamlls',
@@ -67,6 +68,7 @@ return {
             end
           ),
         })
+        vim.lsp.enable(server)
       end,
     },
   },
