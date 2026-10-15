@@ -1,14 +1,14 @@
 {
+  inputs,
   lib,
   pkgs,
   isServer,
   ...
 }:
 let
-  palette = import ./tokyonight_palette.nix { inherit lib; };
-  fishColor = lib.removePrefix "#";
+  palette = (lib.importJSON "${inputs.catppuccin-palette}/palette.json").mocha.colors;
+  fishColor = color: lib.removePrefix "#" palette.${color}.hex;
 in
-with palette;
 {
   programs.fish = {
     plugins = [
@@ -35,43 +35,43 @@ with palette;
       set -g tide_prompt_pad_items true
       set -g tide_prompt_transient_enabled true
 
-      set -g tide_server_bg_color ${fishColor teal}
-      set -g tide_server_color ${fishColor bg_dark}
+      set -g tide_server_bg_color ${fishColor "teal"}
+      set -g tide_server_color ${fishColor "crust"}
 
-      set -g tide_prompt_mode_bg_color_insert ${fishColor green}
-      set -g tide_prompt_mode_bg_color_failure ${fishColor red}
-      set -g tide_prompt_mode_bg_color_default ${fishColor blue}
-      set -g tide_prompt_mode_bg_color_replace ${fishColor purple}
-      set -g tide_prompt_mode_bg_color_visual ${fishColor yellow}
-      set -g tide_prompt_mode_color ${fishColor bg_dark}
+      set -g tide_prompt_mode_bg_color_insert ${fishColor "green"}
+      set -g tide_prompt_mode_bg_color_failure ${fishColor "red"}
+      set -g tide_prompt_mode_bg_color_default ${fishColor "blue"}
+      set -g tide_prompt_mode_bg_color_replace ${fishColor "mauve"}
+      set -g tide_prompt_mode_bg_color_visual ${fishColor "yellow"}
+      set -g tide_prompt_mode_color ${fishColor "crust"}
 
-      set -g tide_repo_pwd_bg_color ${fishColor dark5}
-      set -g tide_repo_pwd_color ${fishColor green}
+      set -g tide_repo_pwd_bg_color ${fishColor "surface2"}
+      set -g tide_repo_pwd_color ${fishColor "green"}
 
-      set -g tide_git_bg_color ${fishColor fg_gutter}
-      set -g tide_git_bg_color_unstable ${fishColor fg_gutter}
-      set -g tide_git_bg_color_urgent ${fishColor fg_gutter}
-      set -g tide_git_color ${fishColor fg}
-      set -g tide_git_color_conflicted ${fishColor yellow}
-      set -g tide_git_color_dirty ${fishColor yellow}
-      set -g tide_git_color_operation ${fishColor yellow}
-      set -g tide_git_color_staged ${fishColor yellow}
-      set -g tide_git_color_stash ${fishColor yellow}
-      set -g tide_git_color_untracked ${fishColor yellow}
-      set -g tide_git_color_upstream ${fishColor yellow}
+      set -g tide_git_bg_color ${fishColor "surface1"}
+      set -g tide_git_bg_color_unstable ${fishColor "surface1"}
+      set -g tide_git_bg_color_urgent ${fishColor "surface1"}
+      set -g tide_git_color ${fishColor "text"}
+      set -g tide_git_color_conflicted ${fishColor "yellow"}
+      set -g tide_git_color_dirty ${fishColor "yellow"}
+      set -g tide_git_color_operation ${fishColor "yellow"}
+      set -g tide_git_color_staged ${fishColor "yellow"}
+      set -g tide_git_color_stash ${fishColor "yellow"}
+      set -g tide_git_color_untracked ${fishColor "yellow"}
+      set -g tide_git_color_upstream ${fishColor "yellow"}
       set -g tide_git_icon 
       set -g tide_jj_megamerge_icon 󱁉
       set -g tide_jj_unsynced_bookmark_icon '*'
 
-      set -g tide_character_color ${fishColor green}
-      set -g tide_character_color_failure ${fishColor green}
+      set -g tide_character_color ${fishColor "green"}
+      set -g tide_character_color_failure ${fishColor "green"}
       set -g tide_character_icon ❯
       set -g tide_character_vi_icon_default ❯
       set -g tide_character_vi_icon_replace ❯
       set -g tide_character_vi_icon_visual ❯
 
       set -g tide_cmd_duration_bg_color normal
-      set -g tide_cmd_duration_color ${fishColor dark3}
+      set -g tide_cmd_duration_color ${fishColor "surface0"}
       set -g tide_cmd_duration_decimals 0
       set -g tide_cmd_duration_icon 
       set -g tide_cmd_duration_threshold 2000
@@ -93,7 +93,7 @@ with palette;
 
       _tide_item_repo_pwd = /* fish */ ''
         set -l rendered_pwd @PWD@
-        set -q IN_NIX_SHELL && set -a rendered_pwd (set_color ${fishColor blue5})' '
+        set -q IN_NIX_SHELL && set -a rendered_pwd (set_color ${fishColor "sapphire"})' '
         _tide_print_item repo_pwd $rendered_pwd
       '';
 
@@ -146,7 +146,7 @@ with palette;
 
       _tide_item_shell_depth = /* fish */ ''
         if test $SHLVL -gt 1
-            set_color ${fishColor green}
+            set_color ${fishColor "green"}
             string repeat -Nn (math $SHLVL - 1) ❯
         end
       '';

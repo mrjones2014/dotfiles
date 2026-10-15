@@ -1,21 +1,12 @@
 {
-  osConfig,
   config,
   lib,
+  pkgs,
   isServer,
   ...
 }:
-with import ./tokyonight_palette.nix { inherit lib; };
 let
   tmux = lib.getExe config.programs.tmux.package;
-
-  icons = {
-    normal = " ";
-    prefix = " ";
-    copy = " ";
-    zoom = " ";
-    server = " ";
-  };
 
   directions = {
     h = "L";
@@ -38,6 +29,21 @@ let
   ) directions;
 in
 {
+  catppuccin.tmux.extraConfig = /* bash */ ''
+    set -g @catppuccin_window_status_style "rounded"
+    set -g @catppuccin_window_text " #W"
+    set -g @catppuccin_window_current_text " #W"
+    # Ghostty widens Nerd Font icons into the trailing space; pad an extra
+    # cell so the right side matches the rounded cap on the left
+    set -g @catppuccin_cpu_icon "  "
+    set -g @catppuccin_ram_icon "  "
+    set -g @catppuccin_host_icon "󰒋  "
+    # repurpose the session module as a mode indicator
+    set -g @catppuccin_session_icon "#{?client_prefix,,#{?pane_in_mode,,}}  "
+    set -g @catppuccin_session_color "#{?client_prefix,#{E:@thm_mauve},#{?pane_in_mode,#{E:@thm_peach},#{E:@thm_green}}}"
+    set -g @catppuccin_session_text " #{?client_prefix,PREFIX,#{?pane_in_mode,COPY,NORMAL}}"
+  '';
+
   programs = {
     tmux = {
       enable = true;
@@ -69,25 +75,19 @@ in
 
         set -g status-position bottom
         set -g status-justify left
-        set -g status-style "bg=${bg},fg=${fg}"
         set -g status-left ""
         set -g status-left-length 0
-        set -g window-status-separator " "
-        set -g window-status-format         "#[bg=${terminal_black},fg=${fg_dark}] #I #W#{?window_zoomed_flag, ${icons.zoom} ,}#{?pane_synchronized,  ,} "
-        set -g window-status-current-format "#[bg=${bg_dark},fg=${blue}] #I #W#{?window_zoomed_flag, ${icons.zoom} ,}#{?pane_synchronized,  ,} "
-        set -g message-style "bg=${bg_highlight},fg=${fg}"
-        set -g mode-style    "bg=${blue0},fg=${fg}"
-
-        set -g status-right "#{?pane_in_mode,#[bg=${orange}#,fg=${bg}] ${icons.copy} ,#{?client_prefix,#[bg=${purple}#,fg=${bg}] ${icons.prefix} ,#[bg=${green}#,fg=${bg}] ${icons.normal} }}${lib.optionalString isServer "#[bg=${green},fg=${bg}] ${icons.server} mat@${osConfig.networking.hostName}.local "}#[bg=${bg}]"
+        set -g status-right-length 100
+        set -g status-right ""
+        set -ag status-right "#{E:@catppuccin_status_session}"
+        set -agF status-right "#{E:@catppuccin_status_cpu}"
+        set -agF status-right "#{E:@catppuccin_status_ram}"
+        ${lib.optionalString isServer ''set -ag status-right "#{E:@catppuccin_status_host}"''}
 
         set -g pane-border-lines single
         set -g pane-border-status off
         set -g pane-border-indicators off
-        set -g pane-border-style        "fg=${comment}"
-        set -g pane-active-border-style "fg=${comment}"
         set -g popup-border-lines rounded
-        set -g popup-style        "bg=${bg_dark}"
-        set -g popup-border-style "fg=${blue}"
 
         bind '\' split-window -h -c "#{pane_current_path}"
         bind -   split-window -v -c "#{pane_current_path}"
@@ -122,6 +122,9 @@ in
         ${lib.concatStringsSep "\n" resizeBinds}
 
         ${lib.concatStringsSep "\n" copyModeNavBinds}
+
+        # must run after status-right is set; it interpolates `#{cpu_*}`/`#{ram_*}` there
+        run-shell ${pkgs.tmuxPlugins.cpu.rtp}
       '';
     };
 

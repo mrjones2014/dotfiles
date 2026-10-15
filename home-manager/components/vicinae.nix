@@ -24,7 +24,6 @@
       settings = {
         close_on_focus_loss = true;
         pop_to_root_on_close = true;
-        theme.name = "tokyo-night";
         faviconService = "twenty";
         providers = {
           core.entrypoints.sponsor.enabled = false;

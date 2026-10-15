@@ -15,7 +15,7 @@ require('lazy').setup({
 } --[[@as LazySpec]], {
   -- local checkouts of my own plugins take priority over the GitHub copy
   dev = { path = '~/git', fallback = true },
-  install = { colorscheme = { 'tokyonight', 'astrotheme', 'habamax' } },
+  install = { colorscheme = { 'catppuccin-mocha', 'astrotheme', 'habamax' } },
   ui = { backdrop = 100 },
   performance = {
     rtp = {

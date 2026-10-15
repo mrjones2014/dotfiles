@@ -3,7 +3,14 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    tokyonight-nix.url = "github:mrjones2014/tokyonight.nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin-palette = {
+      url = "github:catppuccin/palette";
+      flake = false;
+    };
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     agenix = {
       url = "github:ryantm/agenix";

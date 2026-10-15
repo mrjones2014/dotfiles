@@ -20,6 +20,42 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791795517,
+        "narHash": "sha256-hmF0FVrUW6UKQ74qyGJSepMYadnIqzVe2h7TQtZdbmo=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "2e605f61db52a45a7ff1db414df395ef566565a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
+    "catppuccin-palette": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774131488,
+        "narHash": "sha256-hsy+GhuM4MSjnwGq1YJSLBFIbVm67SSdPRgObP00mxw=",
+        "owner": "catppuccin",
+        "repo": "palette",
+        "rev": "07d02aa110ef9eb7e7427afca5c73ba9cf7f8ebd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "palette",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1789760033,
@@ -219,6 +255,8 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "catppuccin": "catppuccin",
+        "catppuccin-palette": "catppuccin-palette",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hytale-launcher": "hytale-launcher",
@@ -226,7 +264,6 @@
         "nix-auto-follow": "nix-auto-follow",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "tokyonight-nix": "tokyonight-nix",
         "treefmt-nix": "treefmt-nix",
         "vicinae": "vicinae",
         "vpn-confinement": "vpn-confinement",
@@ -287,57 +324,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tokyonight": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718132322,
-        "narHash": "sha256-KaGzxJGiNGziDT8vLZcLjU26//OcL3/tmmu5dYB6w1c=",
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
-        "rev": "024621763d91bb48f2b486df529c7aaeb8d6d355",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "tokyonight.nvim",
-        "type": "github"
-      }
-    },
-    "tokyonight-nix": {
-      "inputs": {
-        "tokyonight": "tokyonight",
-        "tokyonight-rofi": "tokyonight-rofi"
-      },
-      "locked": {
-        "lastModified": 1786625950,
-        "narHash": "sha256-oLg8la3o5gUUgauw6i3bAM/AP4hSgOguNV9x/iIsLBE=",
-        "owner": "mrjones2014",
-        "repo": "tokyonight.nix",
-        "rev": "68d557a015b9ac55a7b7f3a13e6341fac8873f48",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mrjones2014",
-        "repo": "tokyonight.nix",
-        "type": "github"
-      }
-    },
-    "tokyonight-rofi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710787931,
-        "narHash": "sha256-bgRt1TEMSju4NzFu7jtLzGNBtKE7HHS+mscGYHK0xBM=",
-        "owner": "w8ste",
-        "repo": "Tokyonight-rofi-theme",
-        "rev": "7400f6c3cc1ae5fa6c21c3dfce2421e6ee94322c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "w8ste",
-        "repo": "Tokyonight-rofi-theme",
         "type": "github"
       }
     },

@@ -28,7 +28,7 @@ return {
   },
   {
     -- Picker colour tweaks from my old colorscheme.lua. These have to be applied at
-    -- the astroui `highlights` layer, not tokyonight's `on_highlights`: the nvchad
+    -- the astroui `highlights` layer, not catppuccin's `custom_highlights`: the nvchad
     -- recipe above also writes these groups through astroui, and astroui highlights
     -- run after the colorscheme. Patching in the same layer, after the recipe, wins.
     'AstroNvim/astroui',
@@ -43,15 +43,15 @@ return {
       end or original --[[@as function]]
       opts.highlights.init = require('astrocore').patch_func(init_fn, function(orig, colors_name)
         local hl = orig and orig(colors_name) or {}
-        local c = require('tokyonight.colors').setup()
-        local prompt = '#2d3149'
-        hl.SnacksPickerInput = { bg = prompt, fg = c.fg_dark }
+        local c = require('catppuccin.palettes').get_palette('mocha')
+        local prompt = c.surface0
+        hl.SnacksPickerInput = { bg = prompt, fg = c.subtext0 }
         hl.SnacksPickerInputBorder = { bg = prompt, fg = prompt }
         hl.SnacksPickerPrompt = { bg = prompt }
-        hl.NormalFloat = { bg = c.bg }
+        hl.NormalFloat = { bg = c.base }
         hl.SnacksPickerBoxTitle = { bg = prompt, fg = prompt }
         hl.SnacksPickerBoxBorder = hl.SnacksPickerBoxTitle
-        hl.SnacksPickerBorder = { bg = c.bg, fg = c.bg }
+        hl.SnacksPickerBorder = { bg = c.base, fg = c.base }
         hl.SnacksPickerPreviewTitle = hl.SnacksPickerBorder
         hl.SnacksPickerResultsTitle = hl.SnacksPickerBorder
         hl.SnacksPickerListTitle = hl.SnacksPickerBorder

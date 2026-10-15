@@ -89,7 +89,6 @@ in
       enableMcpIntegration = true;
       context = ./rules/git-repos.md;
       skills = ./skills;
-      tui.theme = "tokyonight";
       settings = lib.mkMerge [
         {
           lsp = true;

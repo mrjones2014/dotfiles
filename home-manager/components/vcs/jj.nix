@@ -7,7 +7,7 @@
   ...
 }:
 let
-  palette = import ../tokyonight_palette.nix { inherit lib; };
+  palette = (lib.importJSON "${inputs.catppuccin-palette}/palette.json").mocha.colors;
 in
 {
   imports = [ inputs.jj-gh.homeManagerModules.default ];
@@ -79,12 +79,12 @@ in
           let
             jq = "${pkgs.jq}/bin/jq";
             fzf = "${pkgs.fzf}/bin/fzf";
-            esc = color: "\\e[38;2;${palette.hexToAnsiRgb color}m";
-            cyan = esc palette.cyan;
-            magenta = esc palette.magenta;
-            yellow = esc palette.orange;
+            esc = color: "\\e[38;2;${toString color.rgb.r};${toString color.rgb.g};${toString color.rgb.b}m";
+            cyan = esc palette.sky;
+            magenta = esc palette.pink;
+            yellow = esc palette.peach;
             green = esc palette.green;
-            dim = esc palette.comment;
+            dim = esc palette.overlay0;
             reset = "\\e[0m";
           in
           [

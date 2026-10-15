@@ -81,7 +81,7 @@ return {
     opts = function(_, opts)
       local status = require('astroui.status')
       local conditions = require('heirline.conditions')
-      local tn = require('tokyonight.colors').setup()
+      local cp = require('catppuccin.palettes').get_palette('mocha')
 
       opts.opts = opts.opts or {}
 
@@ -94,19 +94,19 @@ return {
       end
 
       opts.opts.colors = vim.tbl_deep_extend('force', opts.opts.colors or {}, {
-        black = tn.bg_dark,
-        gray = tn.dark5,
-        text = tn.fg_dark,
-        green = tn.green,
-        blue = tn.blue,
-        cyan = tn.cyan,
-        orange = tn.orange,
-        purple = tn.purple,
-        yellow = tn.terminal.yellow_bright,
-        base = tn.bg,
-        surface0 = tn.fg_gutter,
-        surface1 = tn.dark3,
-        surface2 = tn.blue7,
+        black = cp.crust,
+        gray = cp.overlay1,
+        text = cp.subtext0,
+        green = cp.green,
+        blue = cp.blue,
+        cyan = cp.sky,
+        orange = cp.peach,
+        purple = cp.mauve,
+        yellow = cp.yellow,
+        base = cp.base,
+        surface0 = cp.surface0,
+        surface1 = cp.surface1,
+        surface2 = cp.surface2,
       })
 
       local Align = { provider = '%=', hl = { bg = 'surface0' } }
