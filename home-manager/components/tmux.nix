@@ -38,8 +38,10 @@ in
     set -g @catppuccin_host_icon "󰒋  "
     # repurpose the session module as a mode indicator
     set -g @catppuccin_session_icon "#{?client_prefix,,#{?pane_in_mode,,}}  "
-    set -g @catppuccin_session_color "#{?client_prefix,#{E:@thm_mauve},#{?pane_in_mode,#{E:@thm_peach},#{E:@thm_green}}}"
-    set -g @catppuccin_session_text " #{?client_prefix,PREFIX,#{?pane_in_mode,COPY,NORMAL}}"
+    # colors match nvim heirline mode_colors: normal=green, copy=visual=yellow, prefix=cmd=peach
+    set -g @catppuccin_session_color "#{?client_prefix,#{E:@thm_peach},#{?pane_in_mode,#{E:@thm_yellow},#{E:@thm_green}}}"
+    set -g @catppuccin_session_text ""
+    set -g @catppuccin_status_session_text_bg "#{?client_prefix,#{E:@thm_peach},#{?pane_in_mode,#{E:@thm_yellow},#{E:@thm_green}}}"
   '';
 
   programs = {
