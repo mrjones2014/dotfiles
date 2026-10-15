@@ -52,6 +52,7 @@
       lldb # comes with lldb-vscode
 
       # formatters and linters
+      deadnix
       eslint_d
       nixfmt
       prettierd
@@ -74,11 +75,11 @@
       marksman
       nil
       nixd
-      typescript-language-server
       nodejs
       rust-analyzer
       shellcheck
       tombi
+      typescript-language-server
       vscode-langservers-extracted # this includes css-lsp, html-lsp, json-lsp, eslint-lsp
       yaml-language-server
 

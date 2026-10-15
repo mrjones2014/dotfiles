@@ -11,6 +11,6 @@ pkgs.runCommand "lint-nix"
   }
   ''
     statix check ${self}
-    deadnix --fail -L ${self}
+    deadnix --fail ${self}
     touch $out
   ''
