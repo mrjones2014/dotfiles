@@ -26,13 +26,20 @@ in
       useLongerTimeout = true;
     };
     bazarr = {
-      port = config.services.bazarr.listenPort;
+      port = config.services.bazarr.settings.general.port;
       useLongerTimeout = true;
     };
     cleanuparr.port = cleanuparr_port;
   };
   services = {
-    jellyfin.enable = true;
+    jellyfin = {
+      enable = true;
+      hardwareAcceleration = {
+        enable = true;
+        type = "vaapi";
+      };
+
+    };
     seerr.enable = true;
     prowlarr.enable = true;
     sonarr.enable = true;
