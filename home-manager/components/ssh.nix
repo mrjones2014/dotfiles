@@ -31,25 +31,31 @@ in
       };
     }
     // lib.optionalAttrs isWorkMac {
-      # host alias to disambiguate work from personal projects;
-      "github-enterprise" = {
-        hostname = "github.com";
+      # Exactly one key per connection: ssh offers agent keys in the agent's
+      # order, so listing both lets the personal key win in work repos.
+      # Work repos tag the connection via `core.sshCommand` below.
+      "Match host github.com tagged work" = {
         user = "git";
         identityFile = "${work_public_key}";
         identitiesOnly = true;
       };
-      "github.com" = {
+      "Match host github.com !tagged work" = {
         user = "git";
         identityFile = "${personal_public_key}";
         identitiesOnly = true;
       };
     };
   };
-  programs.git.settings.url = lib.optionalAttrs isWorkMac {
-    "git@github-enterprise:agilebits-inc/".insteadOf = [
-      "git@github.com:agilebits-inc/"
-      "https://github.com/agilebits-inc/"
-    ];
-    "ssh://git@github-enterprise/agilebits-inc/".insteadOf = "ssh://git@github.com/agilebits-inc/";
-  };
+  programs.git.includes = lib.optionals isWorkMac (
+    map
+      (pattern: {
+        condition = "hasconfig:remote.*.url:${pattern}";
+        contents.core.sshCommand = "ssh -P work";
+      })
+      [
+        "git@github.com:agilebits-inc/**"
+        "ssh://git@github.com/agilebits-inc/**"
+        "https://github.com/agilebits-inc/**"
+      ]
+  );
 }

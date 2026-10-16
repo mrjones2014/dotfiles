@@ -2,7 +2,7 @@
 let
   workRepoCheck = /* bash */ ''
     work_repo=false
-    if [[ "$url" == *"github.com:agilebits"* ]] || [[ "$url" == *"github-enterprise:agilebits"* ]]; then
+    if [[ "$url" == *"github.com:agilebits"* ]]; then
       work_repo=true
     fi
   '';
