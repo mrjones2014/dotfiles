@@ -37,7 +37,7 @@ in
     # cell so the right side matches the rounded cap on the left
     set -g @catppuccin_host_icon "󰒋  "
     # repurpose the session module as a mode indicator
-    set -g @catppuccin_session_icon "#{?client_prefix,,#{?pane_in_mode,,}}  "
+    set -g @catppuccin_session_icon "#{?client_prefix,,#{?pane_in_mode,,}} "
     # colors match nvim heirline mode_colors: normal=green, copy=visual=yellow, prefix=cmd=peach
     set -g @catppuccin_session_color "#{?client_prefix,#{E:@thm_peach},#{?pane_in_mode,#{E:@thm_yellow},#{E:@thm_green}}}"
     set -g @catppuccin_session_text ""
