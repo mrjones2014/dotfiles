@@ -17,13 +17,13 @@
   };
   imports = [
     (import ../nixos/nix-conf.nix { isHomeManager = true; })
-    ../nixos/theme.nix
+    ./components/theme.nix
     ./components/fish.nix
+    ./components/fzf.nix
     ./components/nvim.nix
     ./components/ssh.nix
     ./components/tide.nix
     ./components/tmux.nix
     ./components/vcs
-    ./components/fzf.nix
   ];
 }
