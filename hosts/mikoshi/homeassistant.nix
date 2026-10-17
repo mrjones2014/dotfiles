@@ -118,12 +118,12 @@ in
         (pkgs.buildHomeAssistantComponent rec {
           owner = "jcwillox";
           domain = "climate_template";
-          version = "1.4.0";
+          version = "1.4.2";
           src = pkgs.fetchFromGitHub {
             owner = "jcwillox";
             repo = "hass-template-climate";
             rev = "v${version}";
-            hash = "sha256-InS4GUkQ6qoSdSkxz/V1LpMSNh0fsOefOFXCBOs6pXk=";
+            hash = "sha256-ffUgXuEJZcxNlRQg2yhZW6kCpVeGI0iHD8EtxhcUACw=";
           };
         })
       ];
