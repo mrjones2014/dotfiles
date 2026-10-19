@@ -31,31 +31,19 @@ in
       };
     }
     // lib.optionalAttrs isWorkMac {
-      # Exactly one key per connection: ssh offers agent keys in the agent's
-      # order, so listing both lets the personal key win in work repos.
-      # Work repos tag the connection via `core.sshCommand` below.
-      "Match host github.com tagged work" = {
+      "Match host github.com command \"*agilebits-inc/*\"" = {
         user = "git";
         identityFile = "${work_public_key}";
         identitiesOnly = true;
       };
-      "Match host github.com !tagged work" = {
+      "Match host github.com !command \"*agilebits-inc/*\"" = {
         user = "git";
         identityFile = "${personal_public_key}";
         identitiesOnly = true;
       };
     };
   };
-  programs.git.includes = lib.optionals isWorkMac (
-    map
-      (pattern: {
-        condition = "hasconfig:remote.*.url:${pattern}";
-        contents.core.sshCommand = "ssh -P work";
-      })
-      [
-        "git@github.com:agilebits-inc/**"
-        "ssh://git@github.com/agilebits-inc/**"
-        "https://github.com/agilebits-inc/**"
-      ]
-  );
+  programs.git.settings.url = lib.optionalAttrs isWorkMac {
+    "git@github.com:agilebits-inc/".insteadOf = "https://github.com/agilebits-inc/";
+  };
 }
