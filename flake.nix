@@ -26,15 +26,6 @@
     };
     jj-gh = {
       url = "github:mrjones2014/jj-gh";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-    nix-auto-follow = {
-      url = "github:fzakaria/nix-auto-follow";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
@@ -68,7 +59,6 @@
       nix-darwin,
       home-manager,
       agenix,
-      nix-auto-follow,
       ...
     }:
     let
@@ -125,11 +115,7 @@
             formatting = treefmtEval.config.build.check self;
             lint-nix = pkgs.callPackage ./checks/lint-nix.nix { inherit pkgs self; };
             lint-lua = pkgs.callPackage ./checks/lint-lua.nix { inherit pkgs self; };
-            nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix {
-              inherit lib;
-              inherit (pkgs) stdenv;
-              nix-auto-follow = nix-auto-follow.packages.${system}.default;
-            };
+            nix-flake-inputs = pkgs.callPackage ./checks/flake-inputs.nix { };
           };
 
         devShells = {
@@ -137,13 +123,11 @@
             packages = [
               formatter
               pkgs.mdbook
-              nix-auto-follow.packages.${system}.default
             ];
           };
           ci = pkgs.mkShell {
             packages = [
               pkgs.nix-fast-build
-              nix-auto-follow.packages.${system}.default
             ];
           };
         };
