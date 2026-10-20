@@ -6,18 +6,26 @@
   ...
 }:
 let
-  cachix-personal = {
-    url = "https://mrjones2014-dotfiles.cachix.org";
-    public-key = "mrjones2014-dotfiles.cachix.org-1:c66wfzthG6KZEWnltlzW/EjhlH9FwUVi5jM4rVD1Rw4=";
-  };
-  cachix-jj-gh = {
-    url = "https://jj-gh.cachix.org";
-    public-key = "jj-gh.cachix.org-1:N1uFBMDd9znlhDa68BRqLSXYzXXJ2+WHVuwxpGxCtDo=";
-  };
-  cachix-nix-community = {
-    url = "https://nix-community.cachix.org";
-    public-key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-  };
+  caches = [
+    {
+      url = "https://mrjones2014-dotfiles.cachix.org";
+      public-key = "mrjones2014-dotfiles.cachix.org-1:c66wfzthG6KZEWnltlzW/EjhlH9FwUVi5jM4rVD1Rw4=";
+    }
+    {
+      url = "https://jj-gh.cachix.org";
+      public-key = "jj-gh.cachix.org-1:N1uFBMDd9znlhDa68BRqLSXYzXXJ2+WHVuwxpGxCtDo=";
+    }
+    {
+      url = "https://nix-community.cachix.org";
+      public-key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+    }
+    {
+      url = "https://catppuccin.cachix.org";
+      public-key = "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU=";
+    }
+  ];
+  cache-urls = lib.map (c: c.url) caches;
+  cache-pubkeys = lib.map (c: c.public-key) caches;
 in
 {
   nix = {
@@ -28,22 +36,9 @@ in
         experimental-features = [ "nix-command flakes" ];
         keep-derivations = true;
         keep-outputs = true;
-        substituters = [
-          "https://cache.nixos.org"
-          cachix-personal.url
-          cachix-jj-gh.url
-          cachix-nix-community.url
-        ];
-        trusted-substituters = [
-          cachix-personal.url
-          cachix-jj-gh.url
-          cachix-nix-community.url
-        ];
-        trusted-public-keys = [
-          cachix-personal.public-key
-          cachix-jj-gh.public-key
-          cachix-nix-community.public-key
-        ];
+        extra-substituters = cache-urls;
+        extra-trusted-substituters = cache-urls;
+        extra-trusted-public-keys = cache-pubkeys;
       };
     # enable `nix-shell -p nixpkgs#something` without using channels
     # also use the exact version of nixpkgs from the flake the system is built from
