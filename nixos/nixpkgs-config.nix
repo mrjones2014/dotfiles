@@ -50,6 +50,7 @@
           "discord"
           "discord-unwrapped"
           "parsec-bin"
+          "rectangle-pro"
           "spotify"
           "steam"
           "steam-original"

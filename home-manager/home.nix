@@ -23,7 +23,7 @@ in
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = "22.11";
+    stateVersion = "26.11";
     packages =
       with pkgs;
       [
@@ -33,31 +33,27 @@ in
       ++ lib.lists.optionals isDarwin [
         # put macOS specific packages here
         bash # macOS ships with a very old version of bash for whatever reason
+        rectangle-pro
       ]
       ++ lib.lists.optionals isLinux [
         # put Linux specific packages here
-        signal-desktop
         parsec-bin
         (ungoogled-chromium.override {
           # Crashes on native wayland, use x11 backend
           commandLineArgs = [ "--ozone-platform=x11" ];
         })
-        # vesktop
-        (discord.override {
-          withVencord = true;
-        })
+      ]
+      ++ lib.lists.optionals (isDarwin && !isWorkMac) [
       ]
       ++ lib.lists.optionals isLinux [
         obs-studio
         r2modman
         # sgdboop
-        inputs.hytale-launcher.packages.${stdenv.hostPlatform.system}.default
       ]
       ++ lib.lists.optionals (!isWorkMac) [
         # just not work machine
-
-        # re-enable when its electron version is updated
-        # stoat-desktop
+        vesktop
+        signal-desktop
       ];
   };
   xdg.enable = true;

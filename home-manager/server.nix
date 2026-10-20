@@ -13,7 +13,7 @@
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    stateVersion = "22.11";
+    stateVersion = "26.11";
     packages = [
       pkgs._7zip-zstd
       pkgs.mymcplus

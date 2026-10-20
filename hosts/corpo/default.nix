@@ -8,7 +8,6 @@
   # Work-specific homebrew casks
   homebrew.casks = [
     "waterfox"
-    "rectangle-pro"
     "xcodes-app"
     "docker-desktop"
   ];

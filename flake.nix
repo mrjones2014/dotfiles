@@ -20,10 +20,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hytale-launcher = {
-      url = "github:JPyke3/hytale-launcher-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     jj-gh = {
       url = "github:mrjones2014/jj-gh";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -127,6 +123,7 @@
           };
           ci = pkgs.mkShell {
             packages = [
+              pkgs.nix-eval-jobs
               pkgs.nix-fast-build
             ];
           };

@@ -19,8 +19,8 @@ in
   services.nginx.subdomains.adguard.port = webuiPort;
   services.adguardhome = {
     enable = true;
-    port = webuiPort;
     settings = {
+      http.address = "0.0.0.0:${toString webuiPort}";
       users = [
         {
           name = "mat";

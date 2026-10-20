@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   isDarwin,
   isWorkMac,
   ...
@@ -8,8 +9,8 @@
   home.packages = [ pkgs.victor-mono ];
   programs.ghostty = {
     enable = true;
-    # GUI apps are installed via nix-darwin brew on macOS
-    package = if isDarwin then null else pkgs.ghostty;
+    # nixpkgs `ghostty` is Linux-only, use the prebuilt upstream app on macOS
+    package = lib.mkIf isDarwin pkgs.ghostty-bin;
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {

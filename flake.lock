@@ -109,26 +109,6 @@
         "type": "github"
       }
     },
-    "hytale-launcher": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792011798,
-        "narHash": "sha256-gLIz9KH5t8SWTkzeQPEgQQHf1L061M3tSs4IW2Xa+go=",
-        "owner": "JPyke3",
-        "repo": "hytale-launcher-nix",
-        "rev": "30eb0515625a7f03e1fdc61009933d83759fffde",
-        "type": "github"
-      },
-      "original": {
-        "owner": "JPyke3",
-        "repo": "hytale-launcher-nix",
-        "type": "github"
-      }
-    },
     "jj-gh": {
       "inputs": {
         "crane": "crane",
@@ -232,7 +212,6 @@
         "catppuccin-palette": "catppuccin-palette",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "hytale-launcher": "hytale-launcher",
         "jj-gh": "jj-gh",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",

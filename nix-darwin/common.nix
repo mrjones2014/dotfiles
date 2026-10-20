@@ -25,11 +25,8 @@
       upgrade = true;
     };
     casks = [
-      "ghostty"
-      "zen"
       "alfred"
       "ollama-app"
-      "spotify"
     ];
   };
 }
