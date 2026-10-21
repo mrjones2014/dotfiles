@@ -37,6 +37,15 @@ return {
           return
         end
         local blink = require('blink.cmp')
+        ---@type blink-cmp-git.GCSCompletionOptions
+        local completer_opts = { enable = true, get_command = 'curl' }
+        if require('my-utils').is_work_repo() then
+          completer_opts = {
+            enable = true,
+            get_command = 'gh',
+            get_token = get_github_token,
+          }
+        end
         blink.add_source_provider('github', {
           module = 'blink-cmp-git',
           name = 'Git',
@@ -46,9 +55,9 @@ return {
             commit = { enable = false },
             git_centers = {
               github = {
-                mention = { enable = true, get_token = get_github_token },
-                issue = { enable = true, get_token = get_github_token },
-                pull_request = { enable = true, get_token = get_github_token },
+                mention = completer_opts,
+                issue = completer_opts,
+                pull_request = completer_opts,
               },
             },
           },
