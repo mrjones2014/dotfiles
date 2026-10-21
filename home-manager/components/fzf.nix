@@ -124,7 +124,10 @@ in
         _prompt_move_to_bottom
       '';
       fzf-vim-widget = /* fish */ ''
-        set -l result (nvim -l ${nvim_oldfiles_script} | fzf --preview-window 'right,70%' --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
+        set -l result (begin
+                nvim -l ${nvim_oldfiles_script}
+                ${pkgs.ripgrep}/bin/rg --files
+            end | awk '!seen[$0]++' | fzf --tiebreak=index --preview-window 'right,70%' --preview 'bat --style=numbers --color=always {} | head -100' | string collect)
         commandline -f repaint
         _prompt_move_to_bottom
         if test -n "$result"
