@@ -29,13 +29,15 @@ return {
     },
     {
       'Kaiser-Yang/blink-cmp-git',
-      ft = 'markdown',
+      ft = { 'markdown', 'gitcommit', 'jjdescription' },
       opts = {},
       config = function()
-        if vim.env.JJ_GH ~= '1' then
+        -- only load on markdown if its because I'm editing a PR with jj-gh
+        if vim.o.ft == 'markdown' and vim.env.JJ_GH ~= '1' then
           return
         end
-        require('blink.cmp').add_source_provider('github', {
+        local blink = require('blink.cmp')
+        blink.add_source_provider('github', {
           module = 'blink-cmp-git',
           name = 'Git',
           ---@module 'blink-cmp-git'
@@ -51,7 +53,9 @@ return {
             },
           },
         })
-        require('blink.cmp').add_filetype_source('markdown', 'github')
+        blink.add_filetype_source('markdown', 'github')
+        blink.add_filetype_source('gitcommit', 'github')
+        blink.add_filetype_source('jjdescription', 'github')
       end,
     },
   },
