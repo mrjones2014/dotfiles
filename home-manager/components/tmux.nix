@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  isServer,
   ...
 }:
 let
@@ -80,7 +79,7 @@ in
         set -g status-right-length 100
         set -g status-right ""
         set -ag status-right "#{E:@catppuccin_status_session}"
-        ${lib.optionalString isServer ''set -ag status-right "#{E:@catppuccin_status_host}"''}
+        ${lib.optionalString config.dotfiles.headless ''set -ag status-right "#{E:@catppuccin_status_host}"''}
 
         set -g pane-border-lines single
         set -g pane-border-status off

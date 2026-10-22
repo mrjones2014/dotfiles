@@ -16,7 +16,7 @@ let
   applyOverrides =
     overrides: subdomain:
     if lib.hasAttr subdomain overrides then overrides.${subdomain} else toTitleCase subdomain;
-  nginxSubdomains = config.services.nginx.subdomains;
+  nginxSubdomains = config.dotfiles.nginx.subdomains;
   subdomainOverrides = {
     # By default it will just capitalize the first letter
     # of the subdomain. Customize subdomain -> Title mapping here.
@@ -53,16 +53,16 @@ let
   ) nginxSubdomains;
 in
 {
-  services = {
-    nginx.subdomains = {
-      uptime.port = gatusPort;
-      dashdot.port = dashdotPort;
-      glances.port = config.services.glances.port;
-      homarr = {
-        port = homarrPort;
-        default = true;
-      };
+  dotfiles.nginx.subdomains = {
+    uptime.port = gatusPort;
+    dashdot.port = dashdotPort;
+    glances.port = config.services.glances.port;
+    homarr = {
+      port = homarrPort;
+      default = true;
     };
+  };
+  services = {
 
     gatus = {
       enable = true;

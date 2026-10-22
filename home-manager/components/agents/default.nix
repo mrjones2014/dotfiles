@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  isWorkMac,
   ...
 }:
 let
@@ -69,7 +68,7 @@ in
         };
         feedbackSurveyRate = 0;
         permissions.defaultMode = "plan";
-        model = if isWorkMac then "opus[1m]" else "opus";
+        model = "claude-fable-5[1m]";
         spinnerTipsEnabled = false;
         spinnerTipsOverride = {
           excludeDefault = true;
@@ -85,7 +84,7 @@ in
       };
     };
     opencode = {
-      enable = !isWorkMac;
+      enable = !config.dotfiles.work;
       enableMcpIntegration = true;
       context = ./rules/git-repos.md;
       skills = ./skills;
@@ -109,7 +108,7 @@ in
             );
           };
           mcp.home-assistant = {
-            enabled = !isWorkMac;
+            enabled = true;
             type = "remote";
             url = "https://home.mjones.network/api/webhook/mcp_38cd7e716437ce6812d3571a1be9c7f7";
             oauth = false;

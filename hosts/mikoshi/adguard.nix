@@ -16,7 +16,7 @@ in
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
   };
-  services.nginx.subdomains.adguard.port = webuiPort;
+  dotfiles.nginx.subdomains.adguard.port = webuiPort;
   services.adguardhome = {
     enable = true;
     settings = {

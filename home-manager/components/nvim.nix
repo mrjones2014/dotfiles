@@ -1,11 +1,9 @@
 {
   config,
   pkgs,
-  isLinux,
   ...
 }:
 {
-  imports = [ ../modules/ollama-server.nix ];
   services.ollama-server.enable = true;
 
   xdg.configFile = {
@@ -37,7 +35,7 @@
       "LIBSQLITE"
     ]
     ++ (
-      if isLinux then
+      if pkgs.stdenv.hostPlatform.isLinux then
         [ "${pkgs.sqlite.out}/lib/libsqlite3.so" ]
       else
         [ "${pkgs.sqlite.out}/lib/libsqlite3.dylib" ]

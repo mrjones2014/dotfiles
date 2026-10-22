@@ -72,7 +72,6 @@
       nixosConfigurations = {
         mikoshi = mkHost {
           name = "mikoshi";
-          isServer = true;
           homePath = ./home-manager/server.nix;
         };
         edgerunner = mkHost {
@@ -82,7 +81,6 @@
       darwinConfigurations = {
         corpo = mkDarwinHost {
           name = "corpo";
-          isWorkMac = true;
         };
         aldecaldo = mkDarwinHost {
           name = "aldecaldo";

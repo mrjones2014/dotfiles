@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  isServer,
   ...
 }:
 {
@@ -35,28 +34,5 @@
         }
       )
     ];
-    config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) (
-        [
-          "1password-cli"
-          "claude-code"
-        ]
-        ++ lib.lists.optionals isServer [
-        ]
-        ++ lib.lists.optionals (!isServer) [
-          "1password"
-          "7zz"
-          "discord"
-          "discord-unwrapped"
-          "parsec-bin"
-          "rectangle-pro"
-          "spotify"
-          "steam"
-          "steam-original"
-          "steam-run"
-          "steam-unwrapped"
-        ]
-      );
   };
 }

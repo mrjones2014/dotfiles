@@ -6,8 +6,24 @@ let
   ip = import ./ip.nix;
 in
 {
-  imports = [ ../../nixos/qbittorrent.nix ];
-  services.nginx.subdomains = {
+  dotfiles.qbittorrent = {
+    enable = true;
+    dataDir = "/mnt/jellyfin";
+    namespaceAddress = "192.168.15.1";
+    namespaceAddressIPv6 = "fd93:9701:1d00::2";
+    wireguardConfigFile = ../../secrets/proton_wireguard_conf_server.age;
+    sessionSettings = {
+      GlobalMaxSeedingMinutes = -1;
+      MaxActiveTorrents = -1;
+      MaxActiveDownloads = 8;
+      MaxActiveUploads = -1;
+    };
+  };
+  dotfiles.nginx.subdomains = {
+    qbittorrent = {
+      address = config.dotfiles.qbittorrent.namespaceAddress;
+      port = config.dotfiles.qbittorrent.webuiPort;
+    };
     # jellyfin doesn't let you configure port via Nix, so just use the default value here
     # see: https://jellyfin.org/docs/general/networking/index.html
     jellyfin.port = 8096;

@@ -11,40 +11,59 @@
   config,
   lib,
   inputs,
-  isServer,
   ...
 }:
 let
-  data_dir = if isServer then "/mnt/jellyfin" else "/mnt/storage/downloads";
-  qbittorrent_port = 8080;
+  cfg = config.dotfiles.qbittorrent;
   network_namespace = "qbt-wg";
-  namespace_address = if isServer then "192.168.15.1" else "192.168.15.2";
-  namespace_address_v6 = if isServer then "fd93:9701:1d00::2" else "fd93:9701:1d00::3";
-  wireguard_conf =
-    if isServer then
-      ../secrets/proton_wireguard_conf_server.age
-    else
-      ../secrets/proton_wireguard_conf_desktop.age;
 in
 {
-
   imports = [ inputs.vpn-confinement.nixosModules.default ];
-}
-// lib.mkMerge [
-  {
-    age.secrets.wireguard_conf.file = wireguard_conf;
+
+  options.dotfiles.qbittorrent = {
+    enable = lib.mkEnableOption "qBittorrent confined to a VPN network namespace";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      description = "Directory downloads are saved under (media/ and incomplete/).";
+    };
+    namespaceAddress = lib.mkOption {
+      type = lib.types.str;
+      description = "IPv4 address of the VPN network namespace.";
+    };
+    namespaceAddressIPv6 = lib.mkOption {
+      type = lib.types.str;
+      description = "IPv6 address of the VPN network namespace.";
+    };
+    wireguardConfigFile = lib.mkOption {
+      type = lib.types.path;
+      description = "agenix-encrypted wireguard config for the VPN namespace.";
+    };
+    webuiPort = lib.mkOption {
+      type = lib.types.port;
+      default = 8080;
+      description = "qBittorrent WebUI port.";
+    };
+    sessionSettings = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      description = "Extra settings merged into BitTorrent.Session.";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    age.secrets.wireguard_conf.file = cfg.wireguardConfigFile;
     vpnNamespaces.${network_namespace} = {
       enable = true;
       wireguardConfigFile = config.age.secrets.wireguard_conf.path;
-      namespaceAddress = namespace_address;
-      namespaceAddressIPv6 = namespace_address_v6;
+      inherit (cfg) namespaceAddress;
+      inherit (cfg) namespaceAddressIPv6;
       accessibleFrom = [
         "192.168.1.0/24"
       ];
       portMappings = [
         {
-          from = qbittorrent_port;
-          to = qbittorrent_port;
+          from = cfg.webuiPort;
+          to = cfg.webuiPort;
           protocol = "tcp";
         }
       ];
@@ -52,7 +71,7 @@ in
     services.qbittorrent = {
       enable = true;
       openFirewall = false;
-      webuiPort = qbittorrent_port;
+      inherit (cfg) webuiPort;
       serverConfig = {
         Core.AutoDeleteAddedTorrentFile = "Never";
         Preferences.WebUI = {
@@ -63,17 +82,12 @@ in
         };
         BitTorrent.Session = lib.mkMerge [
           {
-            DefaultSavePath = "${data_dir}/media";
-            TempPath = "${data_dir}/incomplete";
+            DefaultSavePath = "${cfg.dataDir}/media";
+            TempPath = "${cfg.dataDir}/incomplete";
             TempPathEnabled = true;
             AnonymousModeEnabled = true;
-            GlobalMaxSeedingMinutes = if isServer then -1 else 0;
           }
-          (lib.optionalAttrs isServer {
-            MaxActiveTorrents = -1;
-            MaxActiveDownloads = 8;
-            MaxActiveUploads = -1;
-          })
+          cfg.sessionSettings
         ];
       };
     };
@@ -95,16 +109,5 @@ in
         RestartSec = 5;
       };
     };
-  }
-  (lib.optionalAttrs isServer {
-    services.nginx.subdomains.qbittorrent = {
-      address = config.vpnNamespaces.${network_namespace}.namespaceAddress;
-      port = qbittorrent_port;
-    };
-  })
-  (lib.optionalAttrs (!isServer) {
-    networking.hosts."${config.vpnNamespaces.${network_namespace}.namespaceAddress}" = [
-      "qbittorrent.lan"
-    ];
-  })
-]
+  };
+}

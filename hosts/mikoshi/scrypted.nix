@@ -26,7 +26,7 @@ in
     ];
   };
 
-  services.nginx.subdomains.scrypted.port = port;
+  dotfiles.nginx.subdomains.scrypted.port = port;
   systemd.tmpfiles.rules = [ "d /var/lib/scrypted 0755 root root" ];
 
   services.home-assistant.customComponents = [

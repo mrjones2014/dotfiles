@@ -36,13 +36,13 @@ let
     };
   };
 
-  cfg = config.services.nginx.subdomains;
+  cfg = config.dotfiles.nginx.subdomains;
 
   # Get all subdomain names where default = true
   defaultSubdomains = lib.filterAttrs (_: v: v.default) cfg;
 in
 {
-  options.services.nginx.subdomains = lib.mkOption {
+  options.dotfiles.nginx.subdomains = lib.mkOption {
     type = lib.types.attrsOf subdomainType;
     description = ''
       Proxy the given subdomain to the specified port.
@@ -89,7 +89,7 @@ in
         443
       ];
     };
-    age.secrets.cloudflare_certbot_token.file = ../../../secrets/cloudflare_certbot_token.age;
+    age.secrets.cloudflare_certbot_token.file = ../../secrets/cloudflare_certbot_token.age;
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;

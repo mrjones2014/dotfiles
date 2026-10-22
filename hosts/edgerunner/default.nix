@@ -1,14 +1,40 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../../nixos/desktop_environment.nix
-    ../../nixos/_1password.nix
     ../../nixos/nixpkgs-config.nix
     ../../nixos/ssh-server.nix
     ../../nixos/containers.nix
-    ../../nixos/qbittorrent.nix
     ./hardware-configuration.nix
   ];
+
+  dotfiles = {
+    _1password.enable = true;
+    unfree.packageNames = [
+      "1password-cli"
+      "claude-code"
+      "7zz"
+      "discord"
+      "discord-unwrapped"
+      "parsec-bin"
+      "rectangle-pro"
+      "spotify"
+      "steam"
+      "steam-original"
+      "steam-run"
+      "steam-unwrapped"
+    ];
+    qbittorrent = {
+      enable = true;
+      dataDir = "/mnt/storage/downloads";
+      namespaceAddress = "192.168.15.2";
+      namespaceAddressIPv6 = "fd93:9701:1d00::3";
+      wireguardConfigFile = ../../secrets/proton_wireguard_conf_desktop.age;
+      sessionSettings.GlobalMaxSeedingMinutes = 0;
+    };
+  };
+
+  networking.hosts."${config.dotfiles.qbittorrent.namespaceAddress}" = [ "qbittorrent.lan" ];
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # ensure latest kernel for hardware support
     loader.efi.efiSysMountPoint = "/boot";

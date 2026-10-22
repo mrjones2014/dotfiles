@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  services.nginx.subdomains.paperless = {
+  dotfiles.nginx.subdomains.paperless = {
     inherit (config.services.paperless) port;
     allowLargeUploads = true;
   };

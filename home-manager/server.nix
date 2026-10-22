@@ -19,6 +19,7 @@
       pkgs.mymcplus
     ];
   };
+  dotfiles.headless = true;
   xdg.enable = true;
   imports = [
     ./shared.nix

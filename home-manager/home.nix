@@ -1,20 +1,14 @@
 {
   pkgs,
   lib,
-  isDarwin,
-  isLinux,
-  isWorkMac,
-  inputs,
+  config,
+  osConfig,
   ...
 }:
-let
-  username = if isWorkMac then "mat.jones" else "mat"; # username is set by MDM on work machine :/
-  homePrefix = if isLinux then "/home" else "/Users";
-in
 {
   home = {
-    inherit username;
-    homeDirectory = "${homePrefix}/${username}";
+    username = osConfig.users.users.mat.name;
+    homeDirectory = osConfig.users.users.mat.home;
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
@@ -30,27 +24,23 @@ in
         spotify
         gnumake
       ]
-      ++ lib.lists.optionals isDarwin [
+      ++ lib.lists.optionals pkgs.stdenv.hostPlatform.isDarwin [
         # put macOS specific packages here
         bash # macOS ships with a very old version of bash for whatever reason
         rectangle-pro
       ]
-      ++ lib.lists.optionals isLinux [
+      ++ lib.lists.optionals pkgs.stdenv.hostPlatform.isLinux [
         # put Linux specific packages here
         parsec-bin
         (ungoogled-chromium.override {
           # Crashes on native wayland, use x11 backend
           commandLineArgs = [ "--ozone-platform=x11" ];
         })
-      ]
-      ++ lib.lists.optionals (isDarwin && !isWorkMac) [
-      ]
-      ++ lib.lists.optionals isLinux [
         obs-studio
         r2modman
         # sgdboop
       ]
-      ++ lib.lists.optionals (!isWorkMac) [
+      ++ lib.lists.optionals (!config.dotfiles.work) [
         # just not work machine
         vesktop
         signal-desktop
@@ -63,7 +53,6 @@ in
     ./components/_1password-shell.nix
     ./components/agents
     ./components/gnome
-    # ./components/recyclarr.nix
     ./components/terminal.nix
     ./components/vicinae.nix
     ./components/zen.nix

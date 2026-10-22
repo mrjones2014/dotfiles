@@ -3,7 +3,6 @@
   config,
   pkgs,
   lib,
-  isServer,
   ...
 }:
 let
@@ -159,7 +158,7 @@ in
         behavior = "force";
         backend = "ssh";
       }
-      // lib.optionalAttrs (!isServer) {
+      // lib.optionalAttrs config.dotfiles._1password.enable {
         backends.ssh.program = config.programs.git.settings.gpg.ssh.program;
       };
     };

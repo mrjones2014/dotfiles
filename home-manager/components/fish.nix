@@ -2,9 +2,6 @@
   config,
   pkgs,
   lib,
-  isDarwin,
-  isLinux,
-  isServer,
   ...
 }:
 {
@@ -40,8 +37,8 @@
         ":Q" = "exit";
         ":qa" = "exit";
         ":e" = "nvim";
-        copy = if isDarwin then "pbcopy" else "wl-copy";
-        paste = if isDarwin then "pbpaste" else "wl-paste";
+        copy = if pkgs.stdenv.hostPlatform.isDarwin then "pbcopy" else "wl-copy";
+        paste = if pkgs.stdenv.hostPlatform.isDarwin then "pbpaste" else "wl-paste";
         cat = "bat";
         "!!" = "eval \\$history[1]";
         clear = "clear && _prompt_move_to_bottom";
@@ -79,7 +76,9 @@
         # me move my eyes from the bottom back to the top of the screen;
         # keep the prompt consistently at the bottom
         # Ghostty reflows on resize, so Fish's own resize repaint races this handler.
-        ${lib.optionalString (config.programs.ghostty.enable or isServer) "set -g fish_handle_reflow 0"}
+        ${lib.optionalString (
+          config.programs.ghostty.enable || config.dotfiles.headless
+        ) "set -g fish_handle_reflow 0"}
         # Call the resize handler manually since event handlers don't get autoloaded.
         # This also loads _prompt_move_to_bottom and registers its postexec handler.
         _prompt_move_to_bottom_on_resize
@@ -154,5 +153,5 @@
       gnused
       tree
     ]
-    ++ lib.lists.optionals isLinux [ wl-clipboard ];
+    ++ lib.lists.optionals pkgs.stdenv.hostPlatform.isLinux [ wl-clipboard ];
 }

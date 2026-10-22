@@ -11,6 +11,7 @@
     "xcodes-app"
     "docker-desktop"
   ];
+  home-manager.users.mat.dotfiles.work = true;
   system.primaryUser = config.users.users.mat.name;
   system.stateVersion = 6;
 }

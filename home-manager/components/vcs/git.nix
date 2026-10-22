@@ -1,7 +1,6 @@
 {
+  config,
   pkgs,
-  isServer,
-  isLinux,
   ...
 }:
 {
@@ -42,10 +41,10 @@
         gpg = {
           format = "ssh";
         }
-        // pkgs.lib.optionalAttrs (!isServer) {
+        // pkgs.lib.optionalAttrs config.dotfiles._1password.enable {
           ssh = {
             program =
-              if isLinux then
+              if pkgs.stdenv.hostPlatform.isLinux then
                 "/run/current-system/sw/bin/op-ssh-sign"
               else
                 "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";

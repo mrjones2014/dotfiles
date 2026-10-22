@@ -60,11 +60,11 @@ in
     after = [ "zwave-js-ui.service" ];
     wants = [ "zwave-js-ui.service" ];
   };
+  dotfiles.nginx.subdomains = {
+    home.port = config.services.home-assistant.config.http.server_port;
+    zwave.port = zwave_ui_port;
+  };
   services = {
-    nginx.subdomains = {
-      home.port = config.services.home-assistant.config.http.server_port;
-      zwave.port = zwave_ui_port;
-    };
     zwave-js-ui = {
       enable = true;
       serialPort = "/dev/ttyACM0";

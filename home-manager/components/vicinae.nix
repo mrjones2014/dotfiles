@@ -2,12 +2,11 @@
   inputs,
   lib,
   pkgs,
-  isLinux,
   ...
 }:
 {
   imports = [ inputs.vicinae.homeManagerModules.default ];
-  config = lib.mkIf isLinux {
+  config = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     programs.vicinae = {
       enable = true;
       # Use nixpkgs version; the project's flake provides a better

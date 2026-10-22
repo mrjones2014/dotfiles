@@ -19,7 +19,6 @@
 
   imports = [
     ./hardware-configuration.nix
-    ./nixosModules/nginx.nix
     ./media.nix
     ./nas.nix
     ./observability.nix
@@ -30,6 +29,11 @@
     ../../nixos/ssh-server.nix
     ../../nixos/containers.nix
     ../../nixos/nixpkgs-config.nix
+  ];
+
+  dotfiles.unfree.packageNames = [
+    "1password-cli" # paperless backup uploads (paperless.nix)
+    "claude-code" # dependency of claude-agent-acp in the shared nvim config
   ];
 
   powerManagement.cpuFreqGovernor = "performance";

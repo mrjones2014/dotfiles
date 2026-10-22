@@ -17,6 +17,7 @@
   };
   imports = [
     (import ../nixos/nix-conf.nix { isHomeManager = true; })
+    ./modules
     ./components/theme.nix
     ./components/fish.nix
     ./components/fzf.nix

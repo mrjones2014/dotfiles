@@ -1,8 +1,7 @@
 {
+  config,
   pkgs,
   lib,
-  isDarwin,
-  isWorkMac,
   ...
 }:
 {
@@ -10,7 +9,7 @@
   programs.ghostty = {
     enable = true;
     # nixpkgs `ghostty` is Linux-only, use the prebuilt upstream app on macOS
-    package = lib.mkIf isDarwin pkgs.ghostty-bin;
+    package = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin pkgs.ghostty-bin;
     installBatSyntax = false;
     clearDefaultKeybinds = true;
     settings = {
@@ -36,7 +35,7 @@
       window-padding-balance = true;
       window-padding-x = 0;
       window-padding-y = 0;
-      maximize = isDarwin && !isWorkMac;
+      maximize = pkgs.stdenv.hostPlatform.isDarwin && !config.dotfiles.work;
       # tmux owns tabs and splits; this is a single window that runs it. Notably
       # absent is `super+n=new_window`: a second Ghostty window would attach a
       # mirrored client to the same tmux session, clamped to the smaller size.

@@ -1,11 +1,12 @@
 {
   pkgs,
-  lib,
-  isServer,
   ...
 }:
 {
-  imports = [ (import ../nixos/nix-conf.nix { isHomeManager = false; }) ];
+  imports = [
+    ./modules
+    (import ./nix-conf.nix { isHomeManager = false; })
+  ];
   i18n = {
     # for unicode input
     inputMethod = {
@@ -45,47 +46,18 @@
       allowPing = true;
     };
   };
-  services = lib.mkMerge [
-    {
-      # enable mDNS for stuff like NAS and SSH
-      avahi = {
+  services = {
+    # enable mDNS for stuff like NAS and SSH
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
         enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-        publish = {
-          enable = true;
-          userServices = true;
-        };
+        userServices = true;
       };
-    }
-    (lib.mkIf (!isServer) {
-      # going to use pipewire instead
-      pulseaudio.enable = false;
-
-      # Configure keymap in X11
-      xserver = {
-        xkb = {
-          layout = "us";
-          variant = "";
-        };
-      };
-
-      # Enable CUPS to print documents.
-      printing.enable = true;
-      pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
-
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-      };
-    })
-  ];
+    };
+  };
 
   boot = {
     loader = {

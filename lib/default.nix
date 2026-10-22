@@ -5,29 +5,15 @@
   nix-darwin,
   inputs,
 }:
-rec {
-  mkSpecialArgs =
-    overrides:
-    {
-      inherit inputs;
-      isServer = false;
-      isDarwin = false;
-      isLinux = false;
-      isWorkMac = false;
-    }
-    // overrides;
+{
 
   mkHost =
     {
       name,
-      isServer ? false,
       homePath ? ../home-manager/home.nix,
     }:
     let
-      specialArgs = mkSpecialArgs {
-        inherit isServer;
-        isLinux = true;
-      };
+      specialArgs = { inherit inputs; };
     in
     nixpkgs.lib.nixosSystem {
       inherit specialArgs;
@@ -56,13 +42,9 @@ rec {
     {
       name,
       homePath ? ../home-manager/home.nix,
-      isWorkMac ? false,
     }:
     let
-      specialArgs = mkSpecialArgs {
-        isDarwin = true;
-        inherit isWorkMac;
-      };
+      specialArgs = { inherit inputs; };
     in
     nix-darwin.lib.darwinSystem {
       inherit specialArgs;
