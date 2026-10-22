@@ -55,6 +55,14 @@ return {
           desc = 'Implementation of current symbol',
           cond = vim.lsp.protocol.Methods.textDocument_implementation,
         },
+        -- use Snacks picker for workspace symbols
+        ['<Leader>lG'] = {
+          function()
+            require('snacks').picker.lsp_workspace_symbols()
+          end,
+          desc = 'Search workspace symbols',
+          cond = vim.lsp.protocol.Methods.workspace_symbol,
+        },
       },
     },
     handlers = {
