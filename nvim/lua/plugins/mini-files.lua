@@ -46,8 +46,18 @@ return {
               for _, key in ipairs({ 'q', '<Esc>' }) do
                 vim.keymap.set('n', key, function()
                   require('mini.files').close()
-                end, { buffer = args.data.buf_id, desc = 'Close mini.files' })
+                end, { buf = args.data.buf_id, desc = 'Close mini.files' })
               end
+              vim.keymap.set('n', '<C-v>', function()
+                local MiniFiles = require('mini.files')
+                local cur_target = MiniFiles.get_explorer_state().target_window
+                local new_target = vim.api.nvim_win_call(cur_target, function()
+                  vim.cmd.vsp()
+                  return vim.api.nvim_get_current_win()
+                end)
+                MiniFiles.set_target_window(new_target)
+                MiniFiles.go_in({ close_on_file = true })
+              end, { buf = args.data.buf_id, desc = 'Open in split window' })
             end,
           },
         },
