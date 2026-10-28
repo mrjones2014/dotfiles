@@ -84,14 +84,20 @@ return {
       local cp = require('catppuccin.palettes').get_palette('mocha')
 
       opts.opts = opts.opts or {}
-
-      local astro_disable_winbar_cb = opts.opts.disable_winbar_cb
-      opts.opts.disable_winbar_cb = function(args)
+      opts.opts.disable_winbar_cb = require('astrocore').patch_func(opts.opts.disable_winbar_cb, function(orig, args)
         if vim.api.nvim_win_get_config(0).relative ~= '' then
           return true
         end
-        return astro_disable_winbar_cb and astro_disable_winbar_cb(args) or false
-      end
+        -- mini.files displays a freshly created buffer in the target window before
+        -- marking it buflisted, so astro's buffer validity check rejects it and no
+        -- later event re-attaches the winbar once it is listed. Accept normal file
+        -- buffers regardless of buflisted, still honoring the disabled list above.
+        if is_real_file(args.buf) and not vim.bo[args.buf].buflisted then
+          local disabled = vim.tbl_get(require('astroui').config, 'status', 'winbar', 'disabled')
+          return disabled ~= nil and status.condition.buffer_matches(disabled, args.buf)
+        end
+        return orig(args) or false
+      end)
 
       opts.opts.colors = vim.tbl_deep_extend('force', opts.opts.colors or {}, {
         black = cp.crust,
