@@ -25,6 +25,7 @@ return {
   { import = 'astrocommunity.editing-support.conform-nvim' },
   { import = 'astrocommunity.editing-support.dial-nvim' },
   { import = 'astrocommunity.editing-support.mini-splitjoin' },
+  { import = 'astrocommunity.git.diffview-plus-nvim' },
 
   -- UI/UX
   { import = 'astrocommunity.diagnostics.trouble-nvim' },
