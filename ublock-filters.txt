@@ -140,6 +140,9 @@ askubuntu.com##.js-consent-banner
 ####             GitHub                 ####
 ############################################
 
+! Block the "Copilot can watch this pull request" shit
+github.com##section:has(h3:has-text(/^Copilot can(not)? watch this pull request$/))
+
 ! Block the "Agents" tab in repositories
 github.com##li:has(> a[data-tab-item="agents"])
 

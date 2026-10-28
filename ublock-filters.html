@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-3301837d.js";
+            window.path_to_searchindex_js = "searchindex-22194c00.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-c3dddd98.js"></script>
@@ -315,6 +315,9 @@ askubuntu.com##.js-consent-banner
 ############################################
 ####             GitHub                 ####
 ############################################
+
+! Block the "Copilot can watch this pull request" shit
+github.com##section:has(h3:has-text(/^Copilot can(not)? watch this pull request$/))
 
 ! Block the "Agents" tab in repositories
 github.com##li:has(&gt; a[data-tab-item="agents"])
