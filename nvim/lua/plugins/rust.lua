@@ -25,6 +25,8 @@ return {
                   vim.api.nvim_set_hl(0, '@lsp.type.unresolvedReference.rust', {})
                   require('astrocore').set_mappings({
                     n = {
+                      -- group title for which-key
+                      ['<Leader>r'] = { desc = 'Rust LSP', buffer = 0 },
                       ['<Leader>rd'] = {
                         function()
                           vim.cmd.RustLsp('relatedDiagnostics')
