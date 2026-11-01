@@ -12,15 +12,8 @@
   boot = {
     initrd = {
       luks.devices = {
-        "cryptroot" = {
-          device = "/dev/disk/by-partlabel/root"; # Use partition label, not filesystem label
-          preLVM = true;
-        };
-
-        "cryptswap" = {
-          device = "/dev/disk/by-partlabel/swap"; # Partition label for swap
-          preLVM = true;
-        };
+        "cryptroot".device = "/dev/disk/by-partlabel/root";
+        "cryptswap".device = "/dev/disk/by-partlabel/swap";
       };
 
       availableKernelModules = [
