@@ -7,7 +7,7 @@ jobs:
   build-and-cache:
     runs-on: ubuntu-latest
     steps:
-      - uses: wimpysworld/nothing-but-nix@main
+      - uses: wimpysworld/nothing-but-nix@v11
       - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
         with:
