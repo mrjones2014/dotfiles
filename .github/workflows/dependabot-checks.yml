@@ -1,0 +1,24 @@
+name: Dependabot checks
+on:
+  pull_request:
+    branches: [master]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  nix-flake-inputs:
+    name: Nix flake inputs
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - name: Check for duplicate flake inputs
+        run: nix build .#checks.x86_64-linux.nix-flake-inputs --print-build-logs
+      - name: Approve and enable auto-merge
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr review --approve "$PR_URL"
+          gh pr merge --squash --delete-branch --auto "$PR_URL"

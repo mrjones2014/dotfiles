@@ -1,12 +1,32 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: /
     schedule:
       interval: weekly
-      time: '00:00'
-      timezone: UTC
+      day: friday
+    cooldown:
+      default-days: 14
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "chore"
-      include: "scope"
+      prefix: chore
+      include: scope
+    groups:
+      actions-minor-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: weekly
+      day: friday
+    cooldown:
+      default-days: 14
+      exclude:
+        - nixpkgs
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      flake-inputs:
+        patterns: ["*"]
