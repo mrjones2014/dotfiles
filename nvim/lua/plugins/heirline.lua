@@ -428,7 +428,18 @@ return {
         -- diagnostic counts on `surface1`, rounded off into `surface0`
         {
           condition = conditions.has_diagnostics,
-          status.component.diagnostics({ surround = false, hl = { bg = 'surface1' } }),
+          status.component.diagnostics({
+            surround = false,
+            hl = { bg = 'surface1' },
+            -- heirline's update events only invalidate the cache; force the winbar to redraw
+            update = {
+              'DiagnosticChanged',
+              'BufEnter',
+              callback = vim.schedule_wrap(function()
+                vim.cmd.redrawstatus({ bang = true })
+              end),
+            },
+          }),
           { provider = ROUNDED_RIGHT, hl = { fg = 'surface1', bg = 'surface0' } },
         },
         { provider = '%<' },
