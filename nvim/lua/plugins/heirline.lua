@@ -238,15 +238,17 @@ return {
 
       local UnsavedChanges = {
         init = function(self)
+          -- getbufinfo() filters in C. Reading vim.bo on a buffer that isn't in the
+          -- current window switches window context (and calls getcwd) per read, so
+          -- only do that for the handful of modified+listed buffers, never all of them.
           self.unsaved = #vim
-            .iter(vim.api.nvim_list_bufs())
-            :filter(function(buf)
-              return vim.bo[buf].ft ~= 'minifiles'
-                and vim.bo[buf].ft ~= 'dap-repl'
-                and vim.bo[buf].bt ~= 'acwrite'
-                and vim.bo[buf].modifiable
-                and vim.bo[buf].modified
-                and vim.bo[buf].buflisted
+            .iter(vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1 }))
+            :filter(function(info)
+              local bo = vim.bo[info.bufnr]
+              return bo.modifiable
+                and bo.bt ~= 'acwrite'
+                and bo.ft ~= 'minifiles'
+                and bo.ft ~= 'dap-repl'
             end)
             :totable()
         end,
