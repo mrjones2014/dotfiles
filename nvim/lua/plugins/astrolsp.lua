@@ -16,6 +16,18 @@ return {
       inlay_hints = true,
       codelens = false,
     },
+    config = {
+      tombi = {
+        capabilities = {
+          workspace = {
+            -- tombi registers a `**/*.toml` watcher; Neovim's recursive fs_event watcher
+            -- then hands it every write under target/ in big monorepos. Scoped to tombi
+            -- because servers like gopls rely on client watching to see external edits.
+            didChangeWatchedFiles = { dynamicRegistration = false },
+          },
+        },
+      },
+    },
     -- list servers manually since I don't use mason/mason-lspconfig
     servers = {
       'ast_grep',

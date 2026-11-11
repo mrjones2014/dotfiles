@@ -50,11 +50,16 @@ return {
                   ['rust-analyzer'] = {
                     cargo = { targetDir = true },
                     check = { allTargets = true, command = 'clippy' },
+                    -- don't saturate every core while indexing huge workspaces
+                    cachePriming = { numThreads = 'physical' },
                     diagnostics = { disabled = { 'inactive_code', 'unresolved_proc_macro' } },
                     procMacro = { enable = true },
                     imports = { group = { enable = false } },
                     files = {
-                      excludeDirs = { 'target', 'node_modules', '.direnv', '.git', '.jj' },
+                      -- rust-analyzer's own watcher honours `exclude`; Neovim's recursive
+                      -- fs_event watcher would hand it every write under target/
+                      watcher = 'server',
+                      exclude = { 'target', 'node_modules', '.direnv', '.git', '.jj' },
                     },
                   },
                 },
