@@ -68,7 +68,7 @@ in
         };
         feedbackSurveyRate = 0;
         permissions.defaultMode = "plan";
-        model = "claude-fable-5[1m]";
+        model = "fable";
         spinnerTipsEnabled = false;
         spinnerTipsOverride = {
           excludeDefault = true;
