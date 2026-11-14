@@ -56,14 +56,12 @@ in
   dotfiles.nginx.subdomains = {
     uptime.port = gatusPort;
     dashdot.port = dashdotPort;
-    glances.port = config.services.glances.port;
     homarr = {
       port = homarrPort;
       default = true;
     };
   };
   services = {
-
     gatus = {
       enable = true;
       environmentFile = config.age.secrets.gatus_discord_webhook_env.path;
@@ -73,8 +71,6 @@ in
         alerting.discord.webhook-url = "\${DISCORD_WEBHOOK_URL}";
       };
     };
-
-    glances.enable = true;
   };
 
   age.secrets.gatus_discord_webhook_env.file = ../../secrets/gatus_discord_webhook_env.age;
@@ -84,7 +80,7 @@ in
   virtualisation.oci-containers.containers.homarr = {
     autoStart = true;
     image = "ghcr.io/homarr-labs/homarr:latest";
-    ports = [ "${builtins.toString homarrPort}:7575" ];
+    ports = [ "${toString homarrPort}:7575" ];
     volumes = [ "${homarrStateDir}:/appdata" ];
     environment.DEFAULT_COLOR_SCHEME = "dark";
     environmentFiles = [ config.age.secrets.homarr_env.path ];
@@ -92,7 +88,7 @@ in
 
   virtualisation.oci-containers.containers.dashdot = {
     image = "mauricenino/dashdot";
-    ports = [ "${builtins.toString dashdotPort}:3001" ];
+    ports = [ "${toString dashdotPort}:3001" ];
     volumes = [ "/:/mnt/host:ro" ];
     extraOptions = [ "--privileged=true" ];
     environment = {
