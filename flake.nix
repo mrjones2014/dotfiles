@@ -97,9 +97,52 @@
           lib.attrsets.filterAttrs (_: p: p.system == system) (lib.attrsets.mapAttrs (_: extract) configs);
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
         formatter = treefmtEval.config.build.wrapper;
+        agenix-edit = pkgs.writeShellApplication {
+          name = "agenix-edit";
+          runtimeInputs = [ agenix.packages.${system}.default ];
+          text = ''
+            if [[ $# -eq 1 && ( "$1" == --help || "$1" == -h ) ]]; then
+              echo "Usage: agenix-edit NAME[.age] (or secrets/NAME.age)"
+              exit 0
+            fi
+            if [[ $# -ne 1 ]]; then
+              echo "Usage: agenix-edit NAME[.age] (or secrets/NAME.age)" >&2
+              exit 1
+            fi
+            if [[ ! -t 0 ]]; then
+              echo "agenix-edit requires an interactive terminal; refusing to replace a secret from stdin" >&2
+              exit 1
+            fi
+
+            root="$PWD"
+            while [[ ! -f "$root/agenix-rules.nix" ]]; do
+              if [[ "$root" == / ]]; then
+                echo "Could not find agenix-rules.nix in this directory or its parents" >&2
+                exit 1
+              fi
+              root="$(dirname "$root")"
+            done
+
+            name="''${1#secrets/}"
+            if [[ ! "$name" =~ ^[[:alnum:]_-]+(\.age)?$ ]]; then
+              echo "Expected a secret name or secrets/NAME.age" >&2
+              exit 1
+            fi
+            [[ "$name" == *.age ]] || name="$name.age"
+            if [[ ! -f "$root/secrets/master.age" ]]; then
+              echo "Missing $root/secrets/master.age" >&2
+              exit 1
+            fi
+
+            cd "$root"
+            export AGENIX_RULES="$root/agenix-rules.nix"
+            exec agenix -e "secrets/$name" -i "$root/secrets/master.age"
+          '';
+        };
       in
       {
         packages.book = pkgs.callPackage ./docs { };
+        packages.agenix-edit = agenix-edit;
 
         inherit formatter;
         checks =
@@ -119,6 +162,7 @@
               pkgs.mdbook
               pkgs.age
               agenix.packages.${system}.default
+              agenix-edit
             ];
           };
           ci = pkgs.mkShell {
