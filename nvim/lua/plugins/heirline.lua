@@ -245,10 +245,7 @@ return {
             .iter(vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1 }))
             :filter(function(info)
               local bo = vim.bo[info.bufnr]
-              return bo.modifiable
-                and bo.bt ~= 'acwrite'
-                and bo.ft ~= 'minifiles'
-                and bo.ft ~= 'dap-repl'
+              return bo.modifiable and bo.bt ~= 'acwrite' and bo.ft ~= 'minifiles' and bo.ft ~= 'dap-repl'
             end)
             :totable()
         end,
