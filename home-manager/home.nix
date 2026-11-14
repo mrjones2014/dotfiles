@@ -62,13 +62,5 @@
     nix-index.enable = true;
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-    # Direnv integration for flakes
-    direnv = {
-      enable = true;
-      # TODO remove when the tests are fixed
-      package = pkgs.direnv.overrideAttrs { doCheck = false; };
-      config.hide_env_diff = true;
-      nix-direnv.enable = true;
-    };
   };
 }

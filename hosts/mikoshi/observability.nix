@@ -64,7 +64,7 @@ in
   services = {
     gatus = {
       enable = true;
-      environmentFile = config.age.secrets.gatus_discord_webhook_env.path;
+      environmentFile = config.age.secrets.discord_webhook_env.path;
       settings = {
         web.port = gatusPort;
         endpoints = gatusEndpoints;
@@ -73,7 +73,7 @@ in
     };
   };
 
-  age.secrets.gatus_discord_webhook_env.rekeyFile = ../../secrets/gatus_discord_webhook_env.age;
+  age.secrets.discord_webhook_env.rekeyFile = ../../secrets/discord_webhook_env.age;
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
   age.secrets.homarr_env.rekeyFile = ../../secrets/homarr_env.age;

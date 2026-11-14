@@ -7,14 +7,23 @@
       PAGER = "less -FRX";
     };
   };
-  programs.nh = {
-    enable = true;
-    flake = "${config.home.homeDirectory}/git/dotfiles/";
-    clean = {
+  programs = {
+    nh = {
       enable = true;
-      extraArgs = "--keep 3";
+      flake = "${config.home.homeDirectory}/git/dotfiles/";
+      clean = {
+        enable = true;
+        extraArgs = "--keep 3";
+      };
+    };
+    # Direnv integration for flakes
+    direnv = {
+      enable = true;
+      config.hide_env_diff = true;
+      nix-direnv.enable = true;
     };
   };
+
   imports = [
     (import ../nixos/nix-conf.nix { isHomeManager = true; })
     ./modules
