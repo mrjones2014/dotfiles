@@ -27,10 +27,9 @@ Nix configuration. Do not deploy the migration until all required files have
 been generated successfully. If an existing secret cannot be decrypted, abort
 rather than selecting a dummy value. See recovery below.
 
-The old `agenix-rules.nix` is retained temporarily for recovery, but is not
-used by the new `agenix` commands or NixOS configurations. The existing source
-secrets may still include the old SSH recipients; migrating the Nix config does
-not remove those recipients or change old ciphertext in Git history.
+The existing source secrets may still include the old SSH recipients; migrating
+the Nix config does not remove those recipients or change old ciphertext in Git
+history.
 
 ## Editing and deploying
 
@@ -69,6 +68,13 @@ master passphrase for activation.
 If the host public key is initially unknown, agenix-rekey supports a dummy key
 for bootstrapping, but secrets will not decrypt until the actual public key is
 configured and the files are rekeyed and deployed again.
+
+For `edgerunner`, qBittorrent is temporarily disabled because its old
+WireGuard secret could not be decrypted. On reinstall, create a new Proton
+WireGuard config and encrypt it with
+`agenix edit secrets/proton_wireguard_conf_desktop.age`, update the host public
+key, and restore the qBittorrent settings in `hosts/edgerunner/default.nix`
+before rekeying. Keep the plaintext config out of the repo and Nix store.
 
 ## Recovery and rotation
 

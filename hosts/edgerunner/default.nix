@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  # TODO: replace with the new SSH host public key when reinstalling NixOS.
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDIUVIPYhK2pYTVroHvCqChkc0JL7YGfes4teME5Vb1 root@nixos-pc";
 
   imports = [
@@ -27,11 +28,13 @@
       "steam-unwrapped"
     ];
     qbittorrent = {
-      enable = true;
+      # TODO: recreate secrets/proton_wireguard_conf_desktop.age with
+      # `agenix edit`, set wireguardConfigFile, and re-enable on reinstall.
+      enable = false;
       dataDir = "/mnt/storage/downloads";
       namespaceAddress = "192.168.15.2";
       namespaceAddressIPv6 = "fd93:9701:1d00::3";
-      wireguardConfigFile = ../../secrets/proton_wireguard_conf_desktop.age;
+      # wireguardConfigFile = ../../secrets/proton_wireguard_conf_desktop.age;
       sessionSettings.GlobalMaxSeedingMinutes = 0;
     };
   };
