@@ -117,6 +117,8 @@
             packages = [
               formatter
               pkgs.mdbook
+              pkgs.age
+              agenix.packages.${system}.default
             ];
           };
           ci = pkgs.mkShell {
