@@ -1,12 +1,13 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
   nixpkgs = {
     overlays = [
-      (_: _: (import ../pkgs { inherit pkgs; }))
+      (_: _: (import ../pkgs { inherit pkgs inputs; }))
       (
         _: prev:
         lib.optionalAttrs prev.stdenv.hostPlatform.isDarwin {

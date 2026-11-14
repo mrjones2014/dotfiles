@@ -20,8 +20,19 @@
       system = "x86_64-linux";
       modules = [
         agenix.nixosModules.default
+        inputs.agenix-rekey.nixosModules.default
         {
-          environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+          environment.systemPackages = [ inputs.agenix-rekey.packages.x86_64-linux.default ];
+          age.rekey = {
+            storageMode = "local";
+            localStorageDir = ../. + "/secrets/rekeyed/${name}";
+            masterIdentities = [
+              {
+                identity = ../secrets/master.age;
+                pubkey = ../secrets/master.pub;
+              }
+            ];
+          };
         }
         ../nixos/common.nix
         ../hosts/${name}

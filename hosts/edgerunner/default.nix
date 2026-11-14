@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDIUVIPYhK2pYTVroHvCqChkc0JL7YGfes4teME5Vb1 root@nixos-pc";
+
   imports = [
     ../../nixos/desktop_environment.nix
     ../../nixos/nixpkgs-config.nix

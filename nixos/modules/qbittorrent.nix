@@ -51,7 +51,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets.wireguard_conf.file = cfg.wireguardConfigFile;
+    age.secrets.wireguard_conf.rekeyFile = cfg.wireguardConfigFile;
     vpnNamespaces.${network_namespace} = {
       enable = true;
       wireguardConfigFile = config.age.secrets.wireguard_conf.path;

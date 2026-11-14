@@ -5,8 +5,8 @@
     allowLargeUploads = true;
   };
   age.secrets = {
-    paperless_admin_pw.file = ../../secrets/paperless_admin_pw.age;
-    paperless_backups_1password_token_env.file = ../../secrets/paperless_backups_1password_token_env.age;
+    paperless_admin_pw.rekeyFile = ../../secrets/paperless_admin_pw.age;
+    paperless_backups_1password_token_env.rekeyFile = ../../secrets/paperless_backups_1password_token_env.age;
   };
   services.paperless = {
     enable = true;

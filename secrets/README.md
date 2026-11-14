@@ -1,116 +1,83 @@
 # Secrets
 
-Real secrets live in `secrets/*.age`. They are encrypted to:
+Secrets in `secrets/*.age` are managed by agenix-rekey. The master identity is
+`secrets/master.age`, encrypted with a passphrase; its public key is in
+`secrets/master.pub`. Keep the passphrase outside the repository. Never put an
+unencrypted private key in the repo or the Nix store.
 
-- `secrets/master.pub` — the public half of a passphrase-protected age
-  identity stored at `secrets/master.age`. Use this for editing from any
-  machine.
-- per-host SSH host keys — used by agenix during activation, so servers can
-  decrypt unattended.
+The NixOS `age.secrets.<name>.rekeyFile` declarations determine which secrets
+each host needs. Each host's `age.rekey.hostPubkey` is configured in
+`hosts/<hostname>/default.nix`. The `local` storage mode stores host-encrypted
+copies in `secrets/rekeyed/<hostname>/`, so those files can be committed and CI
+can build without the master passphrase. Only generated files should go in
+those directories: agenix-rekey removes files it considers orphaned.
 
-`agenix-rules.nix` is **not** imported by the NixOS/nix-darwin config. It is only
-used by the `agenix` CLI to decide which recipients to encrypt to.
+## Initial migration
 
-## One-time setup: create the master key
-
-This must be done by you and the plaintext key must never be committed.
-`age` and `agenix` are in the default dev shell, so run `direnv allow` (or
-`nix develop`) in the repo first.
+The existing master identity and encrypted secrets are reused. From the repo
+root in `nix develop` (or after `direnv allow`):
 
 ```bash
-cd ~/git/dotfiles
-umask 077
-
-# Generate and immediately encrypt the private identity. Copy the public key
-# printed by age-keygen into secrets/master.pub; never copy the private key.
-age-keygen | age -p -a -o secrets/master.age
+agenix rekey -a
 ```
 
-When `age -p` prompts, either enter a strong passphrase or press Enter to let
-`age` generate one. Store the passphrase in 1Password. `secrets/master.age` is
-safe to commit; `secrets/master.pub` is public.
+Enter the master passphrase when prompted. This creates the host-encrypted
+files and adds them to Git; inspect the changes and commit them along with the
+Nix configuration. Do not deploy the migration until all required files have
+been generated successfully. If an existing secret cannot be decrypted, abort
+rather than selecting a dummy value. See recovery below.
 
-Do **not** add `secrets/master.age` as a secret in `agenix-rules.nix` —
-it is passphrase-only, not encrypted to recipients.
+The old `agenix-rules.nix` is retained temporarily for recovery, but is not
+used by the new `agenix` commands or NixOS configurations. The existing source
+secrets may still include the old SSH recipients; migrating the Nix config does
+not remove those recipients or change old ciphertext in Git history.
 
-## Editing a secret
+## Editing and deploying
+
+From the repo root, enter the default dev shell and edit a secret:
 
 ```bash
+agenix edit secrets/homarr_env.age
+# Or use the convenience wrapper from the repo or a subdirectory:
 agenix-edit homarr_env
 ```
 
-Run this from the repo (or a subdirectory) in the default dev shell. You can
-also pass `secrets/homarr_env.age`. It prompts for the master passphrase; the
-re-encrypted file uses the recipients in `agenix-rules.nix`, including the host
-keys. The wrapper requires an interactive terminal to avoid accidentally
-replacing a secret with piped input.
-
-## Rekeying after changing recipients
-
-`agenix` must decrypt a secret with an existing recipient before it can add a
-new recipient. Changing `agenix-rules.nix` alone does not change existing files.
-Commit and sync the rules and `secrets/master.pub` to `mikoshi`, then confirm
-its `/etc/ssh/ssh_host_ed25519_key.pub` matches the server host key in the
-rules. From the repo on `mikoshi`, with `agenix` available:
+Then generate the affected host-encrypted files:
 
 ```bash
-for f in secrets/cloudflare_certbot_token.age \
-  secrets/gatus_discord_webhook_env.age \
-  secrets/homarr_env.age \
-  secrets/paperless_admin_pw.age \
-  secrets/paperless_backups_1password_token_env.age \
-  secrets/proton_wireguard_conf_server.age; do
-  sudo env EDITOR=: "$(command -v agenix)" -e "$f" -i /etc/ssh/ssh_host_ed25519_key || break
-  sudo chown "$(id -u):$(id -g)" "$f" || break
-done
+agenix rekey -a
 ```
 
-If any command fails, stop and investigate rather than assuming all files were
-rekeyed. Sync the resulting ciphertext back through version control, then test
-each file with `secrets/master.age`. The desktop secret is separate: its old
-host or user private key is needed for its initial rekey. If neither remains,
-recreate its WireGuard configuration from the provider. See recovery below.
+The command may prompt for the passphrase once per changed secret and host.
+Commit the source and generated encrypted files, push, pull on the target, and
+run `nh os switch`. Normal rebuilds don't need rekeying if the encrypted inputs
+and host public key haven't changed.
 
-## Verify the master key
+The editor sees plaintext. Disable editor swap, backup, undo history, and other
+plugins or integrations that might persist or upload secrets. The
+agenix-rekey editor command also disables unsafe options for Vim and Neovim.
 
-```bash
-agenix -d -i secrets/master.age secrets/homarr_env.age >/dev/null
-```
+## Installing or reinstalling a host
 
-`agenix -c` is not useful here because it only understands SSH recipient tags,
-not native age recipients. Verify with `agenix -d` instead.
+Generate or preserve the host's SSH key on the target, and set
+`age.rekey.hostPubkey` to its **public** key in the corresponding host's
+`default.nix`. Run `agenix rekey -a` from the repo root on a machine with the
+master passphrase, commit the updated host-encrypted files, and deploy. The
+host decrypts its copy using its private SSH host key; it does not need the
+master passphrase for activation.
 
-That should prompt for the passphrase and succeed. Verify every secret
-individually; during migration the desktop file will fail until it has been
-rekeyed or recreated:
-
-```bash
-for f in secrets/*.age; do
-  [[ $f == secrets/master.age ]] && continue
-  agenix -d -i secrets/master.age "$f" >/dev/null || echo "FAILED: $f"
-done
-```
-
-## Removing the old user keys
-
-`agenix-rules.nix` currently keeps `mat@homelab` and `mat@nixos-pc` as a
-break-glass path. Once the master key works from every machine, remove those
-entries and rekey again. The host keys stay: they are what lets each machine
-decrypt without a human at boot.
+If the host public key is initially unknown, agenix-rekey supports a dummy key
+for bootstrapping, but secrets will not decrypt until the actual public key is
+configured and the files are rekeyed and deployed again.
 
 ## Recovery and rotation
 
-- **Forgot the master passphrase:** generate a new master identity, add its
-  public key to `agenix-rules.nix`, and rekey each secret using a private key that
-  can already decrypt it. A server key cannot recover desktop-only secrets.
-- **Reinstalled a host:** a newly generated host key cannot decrypt existing
-  ciphertext. If the master can decrypt the secret, update the host public key
-  in `agenix-rules.nix`, rekey the secret with the master, and deploy it before
-  activation. Otherwise recover an old recipient private key or recreate the
-  secret. Retaining the old host key also preserves access.
-- **Rotating the master:** add the new public key alongside the old one,
-  rekey with the old identity, remove the old public key, then rekey with the
-  new one.
+- **Master passphrase lost:** any old recipient private keys may still decrypt
+  source files that were encrypted to them. Otherwise recover from another
+  backup or recreate the secret. Host-encrypted copies in
+  `secrets/rekeyed/<hostname>/` can also be decrypted using that host's key.
+- **Host key replaced:** update the host public key, then run `agenix rekey -a`
+  and deploy the resulting files before relying on secret activation.
 - **Revoking a key:** removing a recipient only affects future ciphertext.
-  Old versions in git history remain decryptable with the old key. If a key
-  was actually compromised, also rotate the secret values.
+  Old versions in Git history remain decryptable with the old key. If a key
+  was compromised, rotate the secret values as well.

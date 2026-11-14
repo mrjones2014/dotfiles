@@ -73,10 +73,10 @@ in
     };
   };
 
-  age.secrets.gatus_discord_webhook_env.file = ../../secrets/gatus_discord_webhook_env.age;
+  age.secrets.gatus_discord_webhook_env.rekeyFile = ../../secrets/gatus_discord_webhook_env.age;
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
-  age.secrets.homarr_env.file = ../../secrets/homarr_env.age;
+  age.secrets.homarr_env.rekeyFile = ../../secrets/homarr_env.age;
   virtualisation.oci-containers.containers.homarr = {
     autoStart = true;
     image = "ghcr.io/homarr-labs/homarr:latest";
