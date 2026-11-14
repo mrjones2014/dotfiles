@@ -89,7 +89,10 @@ in
         443
       ];
     };
-    age.secrets.cloudflare_certbot_token.rekeyFile = ../../secrets/cloudflare_certbot_token.age;
+    age.secrets.cloudflare_certbot_token = {
+      rekeyFile = ../../secrets/cloudflare_certbot_token.age;
+      owner = "acme";
+    };
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;

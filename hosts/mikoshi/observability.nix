@@ -73,7 +73,10 @@ in
     };
   };
 
-  age.secrets.discord_webhook_env.rekeyFile = ../../secrets/discord_webhook_env.age;
+  age.secrets.discord_webhook_env = {
+    rekeyFile = ../../secrets/discord_webhook_env.age;
+    owner = config.services.paperless.user;
+  };
 
   systemd.tmpfiles.rules = [ "d ${homarrStateDir} 0750 root root -" ];
   age.secrets.homarr_env.rekeyFile = ../../secrets/homarr_env.age;

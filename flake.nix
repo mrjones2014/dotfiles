@@ -18,9 +18,11 @@
     };
     agenix-rekey = {
       url = "github:oddlama/agenix-rekey";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.follows = "treefmt-nix";
-      inputs.pre-commit-hooks.inputs.flake-compat.follows = "agenix-rekey/flake-compat";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+        pre-commit-hooks.inputs.flake-compat.follows = "agenix-rekey/flake-compat";
+      };
     };
     home-manager = {
       url = "github:nix-community/home-manager";

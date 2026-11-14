@@ -34,7 +34,6 @@
   ];
 
   dotfiles.unfree.packageNames = [
-    "1password-cli" # paperless backup uploads (paperless.nix)
     "claude-code" # dependency of claude-agent-acp in the shared nvim config
   ];
 
