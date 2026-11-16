@@ -53,7 +53,6 @@ in
         path = with pkgs; [
           coreutils
           proton-drive-cli
-          zip
           gnupg
           pass
           util-linux
@@ -81,19 +80,16 @@ in
           flock -n 9
           exporter_state="$(systemctl show --property=ActiveState --value paperless-exporter.service)"
           if [[ "$exporter_state" != inactive ]]; then
-            echo "Paperless exporter is $exporter_state; refusing to archive its output." >&2
+            echo "Paperless exporter is $exporter_state; refusing to upload its output." >&2
             exit 1
           fi
           EXPORTS_DIR="${config.services.paperless.exporter.directory}"
-          BACKUP_DIR="$HOME/backups"
-          mkdir -p "$BACKUP_DIR/Paperless"
           test -s "$EXPORTS_DIR/manifest.json"
-          temporary_dir="$(mktemp -d "$BACKUP_DIR/.archive.XXXXXXXX")"
-          trap 'rm -rf -- "$temporary_dir"' EXIT
-          (cd "$(dirname "$EXPORTS_DIR")" && zip -qr "$temporary_dir/paperless-backup.zip" "$(basename "$EXPORTS_DIR")")
-          mv -f "$temporary_dir/paperless-backup.zip" "$BACKUP_DIR/Paperless/paperless-backup.zip"
 
-          proton-drive filesystem upload "$BACKUP_DIR/Paperless" /my-files \
+          if ! proton-drive filesystem info /my-files/Paperless --json >/dev/null 2>&1; then
+            proton-drive filesystem create-folder /my-files Paperless --json
+          fi
+          proton-drive filesystem upload "$EXPORTS_DIR" /my-files/Paperless \
             --folder-conflict-strategy merge \
             --file-conflict-strategy create-new-revision --json
           echo "Paperless Proton Drive backup completed successfully."
