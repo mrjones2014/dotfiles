@@ -44,6 +44,7 @@
         clear = "clear && _prompt_move_to_bottom";
         # inspect $PATH
         pinspect = ''echo "$PATH" | tr ":" "\n"'';
+        jq = "${pkgs.jaq}/bin/jaq";
       };
 
       shellInit = /* fish */ ''
@@ -148,7 +149,7 @@
       nix-output-monitor
       tealdeer
       tokei
-      jq
+      jaq
       ripgrep
       gnused
       tree

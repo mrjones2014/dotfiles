@@ -100,7 +100,6 @@
       openssl
       ripgrep
       sqlite
-      yq-go
     ];
   };
 }

@@ -44,11 +44,10 @@ in
   home.packages = with pkgs; [
     ast-grep
     fd
-    jq
+    jaq
     parallel
     ripgrep
     sd
-    yq-go
   ];
   programs = {
     claude-code = {

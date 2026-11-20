@@ -8,14 +8,7 @@ local function sgconfig_path(root)
 end
 
 local function has_custom_languages(path)
-  local f = io.open(path, 'rb')
-  if not f then
-    return false
-  end
-  local s = f:read('*a')
-  f:close()
-  -- top-level key only (no leading indentation)
-  return ('\n' .. s):find('\ncustomLanguages%s*:') ~= nil
+  return vim.system({ 'jaq', '-e', 'has("customLanguages")', path }):wait().code == 0
 end
 
 return {

@@ -76,7 +76,7 @@ in
 
         prs =
           let
-            jq = "${pkgs.jq}/bin/jq";
+            jq = "${pkgs.jaq}/bin/jaq";
             fzf = "${pkgs.fzf}/bin/fzf";
             esc = color: "\\e[38;2;${toString color.rgb.r};${toString color.rgb.g};${toString color.rgb.b}m";
             cyan = esc palette.sky;
