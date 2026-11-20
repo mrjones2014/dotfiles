@@ -18,7 +18,7 @@ local function mappings()
       function()
         require('smart-splits')[('swap_buf_%s'):format(dir)]()
       end,
-      desc = ('Resize split %s'):format(dir),
+      desc = ('Swap buffer %s'):format(dir),
     }
   end
   return keymaps
@@ -28,13 +28,11 @@ end
 return {
   {
     'mrjones2014/smart-splits.nvim',
-    dependencies = { 'smart-splits-nvim/backend-tmux', main = 'smart-splits-backend-ghostty', dev = true },
+    dependencies = { 'smart-splits-nvim/backend-tmux', main = 'smart-splits-backend-tmux', dev = true },
     dev = true,
     lazy = false,
     opts = {
       mux = { backend = 'smart-splits-backend-tmux' },
-      move = { at_edge = 'wrap' },
-      ignored_buftypes = { 'nofile' },
       swap = { move_cursor = true },
       diagnostic = { enabled = true },
     },

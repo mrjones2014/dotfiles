@@ -41,13 +41,11 @@ return {
           {
             event = 'User',
             pattern = 'MiniFilesBufferCreate',
-            desc = 'Close mini.files with q or <Esc>',
+            desc = 'Close mini.files with <Esc>',
             callback = function(args)
-              for _, key in ipairs({ 'q', '<Esc>' }) do
-                vim.keymap.set('n', key, function()
-                  require('mini.files').close()
-                end, { buf = args.data.buf_id, desc = 'Close mini.files' })
-              end
+              vim.keymap.set('n', '<Esc>', function()
+                require('mini.files').close()
+              end, { buf = args.data.buf_id, desc = 'Close mini.files' })
               vim.keymap.set('n', '<C-v>', function()
                 local MiniFiles = require('mini.files')
                 local cur_target = MiniFiles.get_explorer_state().target_window

@@ -1,6 +1,5 @@
 return {
   'folke/todo-comments.nvim',
-  event = 'BufRead',
   opts = {
     -- See result with below comments
     -- TODO a todo message

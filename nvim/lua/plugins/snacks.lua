@@ -6,6 +6,7 @@ return {
     'folke/snacks.nvim',
     opts = {
       dashboard = { preset = { keys = {} } },
+      ---@type snacks.picker.Config
       picker = {
         layout = { preset = 'telescope' },
         sources = {
@@ -16,10 +17,10 @@ return {
           -- only offer recent files under the current project
           recent = {
             filter = {
-              paths = {
-                [vim.uv.cwd()] = true,
-                [string.format('%s/.git/COMMIT_EDITMSG', vim.uv.cwd())] = false,
-              },
+              cwd = true,
+              filter = function(item)
+                return not item.file:find('COMMIT_EDITMSG', 1, true)
+              end,
             },
           },
         },

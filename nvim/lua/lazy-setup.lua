@@ -3,12 +3,7 @@ require('lazy').setup({
     'AstroNvim/AstroNvim',
     version = '^6',
     import = 'astronvim.plugins',
-    opts = {
-      mapleader = ' ',
-      maplocalleader = ';',
-      icons_enabled = true,
-      update_notifications = true,
-    },
+    opts = { maplocalleader = ';' },
   },
   { import = 'community' },
   { import = 'plugins' },

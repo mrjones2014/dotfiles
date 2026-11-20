@@ -7,7 +7,7 @@ function M.git_remote()
     return _cached_git_remote
   end
   local result = vim.system({ 'git', 'config', '--get', 'remote.origin.url' }, { text = true }):wait()
-  if result.signal ~= 0 or result.stdout == '' then
+  if result.code ~= 0 or result.stdout == '' then
     return ''
   end
   _cached_git_remote = vim.trim(result.stdout)
