@@ -140,6 +140,9 @@ askubuntu.com##.js-consent-banner
 ####             GitHub                 ####
 ############################################
 
+! Block "Groups by Copilot"
+github.com##div[class^="GroupsListContainer"]
+
 ! Block the "Copilot can watch this pull request" shit
 github.com##section:has(h3:has-text(/^Copilot can(not)? watch this pull request$/))
 
