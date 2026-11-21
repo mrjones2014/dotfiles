@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-d47ecd60.js";
+            window.path_to_searchindex_js = "searchindex-1c5bff30.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-a1d18e44.js"></script>
@@ -212,7 +212,7 @@ and <code>journalctl -u &lt;name&gt;-backup-notify</code> for details.</p>
 <h2 id="paperless-on-mikoshi"><a class="header" href="#paperless-on-mikoshi">Paperless on mikoshi</a></h2>
 <p>The Paperless job uploads the latest existing export to
 <code>/my-files/Paperless/export</code> every day at 02:00. It does not create an export;
-the Paperless exporter normally runs daily at 01:30. If the export is still
+the Paperless exporter normally runs daily at 00:30. If the export is still
 running at 02:00, the upload fails and sends an alert. To generate a fresh
 export and then upload it on demand:</p>
 <pre><code class="language-bash"># This temporarily stops Paperless while the export runs.
