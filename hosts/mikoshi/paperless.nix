@@ -13,7 +13,10 @@
     passwordFile = config.age.secrets.paperless_admin_pw.path;
     database.createLocally = true;
     domain = "paperless.mjones.network";
-    exporter.enable = true;
+    exporter = {
+      enable = true;
+      onCalendar = "00:30:00";
+    };
   };
 
   dotfiles.proton-backup.jobs.paperless = {

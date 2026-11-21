@@ -47,7 +47,7 @@ and `journalctl -u <name>-backup-notify` for details.
 
 The Paperless job uploads the latest existing export to
 `/my-files/Paperless/export` every day at 02:00. It does not create an export;
-the Paperless exporter normally runs daily at 01:30. If the export is still
+the Paperless exporter normally runs daily at 00:30. If the export is still
 running at 02:00, the upload fails and sends an alert. To generate a fresh
 export and then upload it on demand:
 
