@@ -3,10 +3,11 @@
   user,
   home,
   sudo,
+  name,
 }:
 let
   login = pkgs.writeShellApplication {
-    name = "paperless-proton-login-internal";
+    name = "${name}-proton-login-internal";
     runtimeInputs = with pkgs; [
       coreutils
       findutils
@@ -33,7 +34,7 @@ let
       chmod 700 "$GNUPGHOME" "$PASSWORD_STORE_DIR"
       exec 9>"$HOME/.lock"
       if ! flock -n 9; then
-        echo "A Paperless Proton backup or login is already running." >&2
+        echo "A Proton backup or login is already running for ${name}." >&2
         exit 1
       fi
 
@@ -50,7 +51,7 @@ let
         if [[ ''${#fingerprints[@]} -eq 0 ]]; then
           echo "Creating a dedicated GPG key without a passphrase for unattended backups."
           gpg --batch --pinentry-mode loopback --passphrase "" \
-            --quick-generate-key "Paperless Proton Drive backup" default default never
+            --quick-generate-key ${pkgs.lib.escapeShellArg "${name} Proton Drive backup"} default default never
           key_listing="$(gpg --batch --with-colons --list-secret-keys)"
           mapfile -t fingerprints < <(printf '%s\n' "$key_listing" | awk -F: '
             $1 == "sec" { primary = 1; next }
@@ -69,16 +70,16 @@ let
   };
 in
 pkgs.writeShellApplication {
-  name = "paperless-proton-login";
+  name = "${name}-proton-login";
   text = ''
     if [[ $# -ne 0 ]]; then
-      echo "Usage: paperless-proton-login" >&2
+      echo "Usage: ${name}-proton-login" >&2
       exit 1
     fi
     if [[ ! -t 0 ]]; then
       echo "An interactive terminal is required." >&2
       exit 1
     fi
-    exec ${sudo} -u ${pkgs.lib.escapeShellArg user} -- ${login}/bin/paperless-proton-login-internal
+    exec ${sudo} -u ${pkgs.lib.escapeShellArg user} -- ${login}/bin/${name}-proton-login-internal
   '';
 }

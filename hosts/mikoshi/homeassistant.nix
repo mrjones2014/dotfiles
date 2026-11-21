@@ -64,6 +64,29 @@ in
     home.port = config.services.home-assistant.config.http.server_port;
     zwave.port = zwave_ui_port;
   };
+  dotfiles.proton-backup.jobs.home-assistant = {
+    user = config.systemd.services.home-assistant.serviceConfig.User;
+    group = config.systemd.services.home-assistant.serviceConfig.Group;
+    remoteFolder = "HomeAssistant";
+    schedule = "Sun 02:00:00";
+    discordEnvironmentFile = config.age.secrets.discord_webhook_env.path;
+    sourcePaths = [ "${config.services.home-assistant.configDir}/backups" ];
+    prepare = ''
+      backup_dir=${pkgs.lib.escapeShellArg "${config.services.home-assistant.configDir}/backups"}
+      if [[ ! -d "$backup_dir" ]]; then
+        echo "No local Home Assistant backups found; enable automatic local backups in Home Assistant." >&2
+        exit 1
+      fi
+      if [[ -z "$(find "$backup_dir" -maxdepth 1 -type f -name '*.tar' -size +0c -mmin +10 -mmin -4320 -print -quit)" ]]; then
+        echo "No recent Home Assistant backup found; check its automatic backup settings." >&2
+        exit 1
+      fi
+      if [[ -n "$(find "$backup_dir" -maxdepth 1 -type f -name '*.tar' -mmin -10 -print -quit)" ]]; then
+        echo "A Home Assistant backup was modified recently; try again after it finishes." >&2
+        exit 1
+      fi
+    '';
+  };
   services = {
     zwave-js-ui = {
       enable = true;

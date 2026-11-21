@@ -2,6 +2,7 @@
 
 - [README.md](./README.md)
 - [My Dotfiles](./my-dotfiles.md)
+- [Proton Drive Backups](./proton-backups.md)
 - [Useful uBlock Origin Filters](./ublock-filters.md)
 - [Home Assistant](./home_assistant/README.md)
   - [Z Wave](./home_assistant/z_wave.md)
